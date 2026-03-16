@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "460.0.0";
+const VERSION = "470.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -86,6 +86,7 @@ ${BOLD()}Scanning:${RESET()}
   ${CYAN()}scan${RESET()}            Scan project (no document generation)
   ${CYAN()}scan-all${RESET()}        Scan all projects under a directory
   ${CYAN()}check${RESET()}           Quick compliance pass/fail check
+  ${CYAN()}ci${RESET()}              CI/CD: scan + check in one step (exit 0/1)
   ${CYAN()}count${RESET()}           Quick stats: services, documents, score
   ${CYAN()}stats${RESET()}           Alias for count (supports --detailed)
   ${CYAN()}lint${RESET()}            Check existing docs for completeness
@@ -285,6 +286,25 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant check${RESET()}                    Check current project
   ${CYAN()}codepliant check --json${RESET()}              JSON output for CI
   ${CYAN()}codepliant check -o ./docs${RESET()}           Check a custom output dir
+`,
+
+  ci: `${BOLD()}codepliant ci${RESET()} [path] [options]
+
+One command for CI/CD pipelines: scan + generate + check in one step.
+Returns exit code 0 if compliant, exit code 1 if not.
+Shows minimal output by default.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output results as JSON
+  ${DIM()}--quiet, -q${RESET()}           Suppress all output except pass/fail
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant ci${RESET()}                        Scan + check current project
+  ${CYAN()}codepliant ci ./my-app${RESET()}                Scan + check a specific project
+  ${CYAN()}codepliant ci --json${RESET()}                  JSON output for CI scripts
+  ${CYAN()}codepliant ci -q${RESET()}                      Silent mode (exit code only)
 `,
 
   lint: `${BOLD()}codepliant lint${RESET()} [path] [options]
@@ -1393,6 +1413,11 @@ function main() {
       return;
     }
 
+    if (command === "ci") {
+      runCi(absProjectPath, absOutputDir, quiet, jsonOutput);
+      return;
+    }
+
     if (command === "count") {
       runCount(absProjectPath, absOutputDir, jsonOutput, detailedFlag);
       return;
@@ -1952,6 +1977,45 @@ function runScanAndGenerate(
   console.log(
     `${DIM()}⚠ These documents are generated from code analysis. Review and customize them for your specific use case.${RESET()}\n`
   );
+
+  // "What to do next" — 3 actionable items based on what was generated
+  if (!quiet && !jsonOutput) {
+    const generatedNames = new Set(docs.map(d => d.filename));
+    const nextSteps: string[] = [];
+
+    // Step 1: always recommend legal review of the most important docs
+    if (generatedNames.has("PRIVACY_POLICY.md") || generatedNames.has("TERMS_OF_SERVICE.md")) {
+      nextSteps.push(`Have legal counsel review ${CYAN()}PRIVACY_POLICY.md${RESET()} and ${CYAN()}TERMS_OF_SERVICE.md${RESET()} before publishing`);
+    } else {
+      nextSteps.push(`Review all generated documents in ${CYAN()}${path.relative(absProjectPath, absOutputDir)}/${RESET()} and customize for your use case`);
+    }
+
+    // Step 2: based on what was generated
+    if (generatedNames.has("AI_DISCLOSURE.md")) {
+      nextSteps.push(`Review ${CYAN()}AI_DISCLOSURE.md${RESET()} for EU AI Act Art. 50 compliance — deadline August 2, 2026`);
+    } else if (generatedNames.has("COOKIE_POLICY.md")) {
+      nextSteps.push(`Set up a cookie consent banner using ${CYAN()}COOKIE_POLICY.md${RESET()} and ${CYAN()}COOKIE_CONSENT_CONFIG.md${RESET()}`);
+    } else if (generatedNames.has("DATA_PROCESSING_AGREEMENT.md")) {
+      nextSteps.push(`Send ${CYAN()}DATA_PROCESSING_AGREEMENT.md${RESET()} to your sub-processors for countersigning`);
+    } else {
+      nextSteps.push(`Run ${CYAN()}codepliant check${RESET()} in your CI pipeline to enforce compliance on every commit`);
+    }
+
+    // Step 3: always recommend ongoing monitoring
+    if (generatedNames.has("COMPLIANCE_DIGEST.md")) {
+      nextSteps.push(`Share ${CYAN()}COMPLIANCE_DIGEST.md${RESET()} with your team via Slack or email for periodic compliance updates`);
+    } else {
+      nextSteps.push(`Run ${CYAN()}codepliant dashboard${RESET()} to monitor your compliance posture over time`);
+    }
+
+    console.log(`${CYAN()}${"─".repeat(50)}${RESET()}`);
+    console.log(`${CYAN()}${BOLD()}What to do next${RESET()}`);
+    console.log(`${CYAN()}${"─".repeat(50)}${RESET()}\n`);
+    for (let i = 0; i < nextSteps.length; i++) {
+      console.log(`  ${BOLD()}${i + 1}.${RESET()} ${nextSteps[i]}`);
+    }
+    console.log();
+  }
 
   return result;
 }
@@ -2856,6 +2920,91 @@ function runCheck(
     const missing = checks.filter(c => c.required && !c.exists).map(c => c.document);
     console.log(`${RED()}${BOLD()}FAIL${RESET()} Missing required document(s): ${missing.join(", ")}`);
     console.log(`${DIM()}Run ${CYAN()}codepliant go${RESET()}${DIM()} to generate them.${RESET()}\n`);
+  }
+
+  process.exit(allPass ? 0 : 1);
+}
+
+// --- `codepliant ci` command ---
+// One command for CI/CD pipelines: scan + check in one step.
+// Returns exit 0 if compliant, exit 1 if not.
+// Minimal output by default; use --json for machine-readable output.
+
+function runCi(
+  absProjectPath: string,
+  absOutputDir: string,
+  quiet: boolean,
+  jsonOutput: boolean,
+) {
+  const config = loadConfig(absProjectPath);
+  const result = scan(absProjectPath);
+
+  // Generate documents to determine what should exist
+  const docs = generateDocuments(result, config);
+
+  // Write documents so check can find them
+  const writtenFiles = writeDocuments(docs, absOutputDir);
+
+  // Now run the compliance check
+  const docFileMap: Record<string, string[]> = {
+    "Privacy Policy": ["PRIVACY_POLICY.md", "PRIVACY_POLICY.html"],
+    "Terms of Service": ["TERMS_OF_SERVICE.md", "TERMS_OF_SERVICE.html"],
+    "AI Disclosure": ["AI_DISCLOSURE.md", "AI_DISCLOSURE.html"],
+    "Cookie Policy": ["COOKIE_POLICY.md", "COOKIE_POLICY.html"],
+    "Data Processing Agreement": ["DATA_PROCESSING_AGREEMENT.md", "DATA_PROCESSING_AGREEMENT.html"],
+  };
+
+  interface CiCheckResult {
+    document: string;
+    required: boolean;
+    exists: boolean;
+  }
+
+  const checks: CiCheckResult[] = [];
+  let allPass = true;
+
+  for (const need of result.complianceNeeds) {
+    const filenames = docFileMap[need.document];
+    if (!filenames) continue;
+    const exists = filenames.some(f => fs.existsSync(path.join(absOutputDir, f)));
+    checks.push({
+      document: need.document,
+      required: need.priority === "required",
+      exists,
+    });
+    if (need.priority === "required" && !exists) {
+      allPass = false;
+    }
+  }
+
+  if (jsonOutput) {
+    console.log(JSON.stringify({
+      pass: allPass,
+      services: result.services.length,
+      documents: writtenFiles.length,
+      checks,
+    }, null, 2));
+    process.exit(allPass ? 0 : 1);
+  }
+
+  // Minimal output by default
+  if (!quiet) {
+    console.log(`${BOLD()}codepliant ci${RESET()} — scan + check`);
+    console.log(`  Services: ${result.services.length}`);
+    console.log(`  Documents: ${writtenFiles.length} generated`);
+  }
+
+  if (allPass) {
+    if (!quiet) {
+      console.log(`${GREEN()}${BOLD()}PASS${RESET()} Compliant.`);
+    }
+  } else {
+    const missing = checks.filter(c => c.required && !c.exists).map(c => c.document);
+    if (!quiet) {
+      console.log(`${RED()}${BOLD()}FAIL${RESET()} Missing: ${missing.join(", ")}`);
+    } else {
+      console.log(`FAIL`);
+    }
   }
 
   process.exit(allPass ? 0 : 1);

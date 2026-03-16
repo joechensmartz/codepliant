@@ -134,6 +134,8 @@ import { generateCompliancePolicyIndex } from "./compliance-policy-index.js";
 import { generateAISupplyChainRisk } from "./ai-supply-chain-risk.js";
 import { generateComplianceOnboardingGuide } from "./compliance-onboarding-guide.js";
 import { generateDataProcessingInventory } from "./data-processing-inventory.js";
+import { generateComplianceDigest } from "./compliance-digest.js";
+import { generatePrivacyNoticeApp } from "./privacy-notice-app.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1366,6 +1368,26 @@ export function generateDocuments(
       name: "Compliance Policy Index",
       filename: "COMPLIANCE_POLICY_INDEX.md",
       content: compliancePolicyIndex,
+    });
+  }
+
+  // Compliance Digest — weekly/monthly digest for team Slack/email distribution
+  const complianceDigest = generateComplianceDigest(docScan, ctx, docs);
+  if (complianceDigest) {
+    docs.push({
+      name: "Compliance Digest",
+      filename: "COMPLIANCE_DIGEST.md",
+      content: complianceDigest,
+    });
+  }
+
+  // Privacy Notice (App) — in-app privacy notice with plain language and links
+  const privacyNoticeApp = generatePrivacyNoticeApp(docScan, ctx);
+  if (privacyNoticeApp) {
+    docs.push({
+      name: "Privacy Notice (App)",
+      filename: "PRIVACY_NOTICE_APP.md",
+      content: privacyNoticeApp,
     });
   }
 
