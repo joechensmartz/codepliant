@@ -142,6 +142,8 @@ import { generateComplianceBoardReport } from "./compliance-board-report.js";
 import { generateComplianceCalendar } from "./compliance-calendar.js";
 import { generateDataMinimizationChecklist } from "./data-minimization-checklist.js";
 import { generatePrivacyNoticeMultilingual } from "./privacy-notice-multilingual.js";
+import { generatePrivacyEngineeringGuide } from "./privacy-engineering-guide.js";
+import { generateComplianceTestingPlan } from "./compliance-testing-plan.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1448,6 +1450,26 @@ export function generateDocuments(
   const multilingualNotices = generatePrivacyNoticeMultilingual(docScan, ctx);
   for (const notice of multilingualNotices) {
     docs.push(notice);
+  }
+
+  // Privacy Engineering Guide — technical privacy-by-design guide for developers
+  const privacyEngineeringGuide = generatePrivacyEngineeringGuide(docScan, ctx);
+  if (privacyEngineeringGuide) {
+    docs.push({
+      name: "Privacy Engineering Guide",
+      filename: "PRIVACY_ENGINEERING_GUIDE.md",
+      content: privacyEngineeringGuide,
+    });
+  }
+
+  // Compliance Testing Plan — test cases for consent, deletion, access controls, breach notification
+  const complianceTestingPlan = generateComplianceTestingPlan(docScan, ctx);
+  if (complianceTestingPlan) {
+    docs.push({
+      name: "Compliance Testing Plan",
+      filename: "COMPLIANCE_TESTING_PLAN.md",
+      content: complianceTestingPlan,
+    });
   }
 
   // Compliance Certificate — self-attestation certificate (generated after all other docs)

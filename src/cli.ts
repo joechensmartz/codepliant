@@ -37,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "510.0.0";
+const VERSION = "520.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -355,6 +355,7 @@ Compares current documents on disk with freshly generated versions.
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Document directory to compare (default: ./legal)
   ${DIM()}--since <date>${RESET()}        Show changelog entries since a date (YYYY-MM-DD)
+  ${DIM()}--pr${RESET()}                  Output as GitHub PR comment (Markdown)
   ${DIM()}--json${RESET()}                Output diff as JSON
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--no-color${RESET()}            Disable colored output
@@ -362,6 +363,7 @@ ${BOLD()}Options:${RESET()}
 ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant diff${RESET()}                     Show pending changes
   ${CYAN()}codepliant diff --json${RESET()}               JSON output for scripts
+  ${CYAN()}codepliant diff --pr${RESET()}                 GitHub PR comment format
   ${CYAN()}codepliant diff --since 2025-01-01${RESET()}   Show changes since a date
 `,
 
@@ -1250,6 +1252,7 @@ function main() {
   let emailFlag = false;
   let slackFlag = false;
   let githubPagesFlag = false;
+  let prFlag = false;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1279,6 +1282,8 @@ function main() {
       apiFlag = true;
     } else if (arg === "--github-pages") {
       githubPagesFlag = true;
+    } else if (arg === "--pr") {
+      prFlag = true;
     } else if (arg === "--frequency") {
       const freq = args[++i];
       if (freq === "daily" || freq === "weekly" || freq === "monthly") {
@@ -1469,7 +1474,7 @@ function main() {
     }
 
     if (command === "diff") {
-      runDiff(absProjectPath, absOutputDir, quiet, jsonOutput, formatFlag, sinceFlag);
+      runDiff(absProjectPath, absOutputDir, quiet, jsonOutput, formatFlag, sinceFlag, prFlag);
       return;
     }
 
@@ -3506,6 +3511,7 @@ function runDiff(
   jsonOutput: boolean,
   _formatFlag?: OutputFormat,
   sinceDate?: string,
+  prOutput: boolean = false,
 ) {
   // --since mode: show changelog entries since a given date
   if (sinceDate) {
@@ -3586,6 +3592,91 @@ function runDiff(
       timestamp: diff.timestamp,
       changes: diff.changes,
     }, null, 2));
+    process.exit(diff.hasChanges ? 1 : 0);
+  }
+
+  // --pr: GitHub PR comment Markdown output
+  if (prOutput) {
+    const lines: string[] = [];
+    lines.push("## Codepliant Compliance Diff");
+    lines.push("");
+
+    if (!diff.hasChanges) {
+      lines.push("> **All compliance documents are up to date.** No changes detected.");
+      lines.push("");
+      lines.push(`*Generated at ${diff.timestamp}*`);
+      console.log(lines.join("\n"));
+      process.exit(0);
+    }
+
+    const added = diff.changes.filter(c => c.type === "added");
+    const updated = diff.changes.filter(c => c.type === "updated");
+    const removed = diff.changes.filter(c => c.type === "removed");
+
+    // Summary line
+    const parts: string[] = [];
+    if (added.length > 0) parts.push(`**${added.length}** added`);
+    if (updated.length > 0) parts.push(`**${updated.length}** updated`);
+    if (removed.length > 0) parts.push(`**${removed.length}** removed`);
+    lines.push(`> ${parts.join(" | ")} | **${docs.length}** total documents`);
+    lines.push("");
+
+    if (added.length > 0) {
+      lines.push("### Added");
+      lines.push("");
+      for (const change of added) {
+        lines.push(`- \`${change.filename}\` — ${change.document}`);
+        for (const detail of change.details) {
+          lines.push(`  - ${detail}`);
+        }
+      }
+      lines.push("");
+    }
+
+    if (updated.length > 0) {
+      lines.push("### Updated");
+      lines.push("");
+      for (const change of updated) {
+        lines.push(`- \`${change.filename}\` — ${change.document}`);
+        for (const detail of change.details) {
+          lines.push(`  - ${detail}`);
+        }
+      }
+      lines.push("");
+    }
+
+    if (removed.length > 0) {
+      lines.push("### Removed");
+      lines.push("");
+      for (const change of removed) {
+        lines.push(`- ~~\`${change.filename}\`~~ — ${change.document}`);
+        for (const detail of change.details) {
+          lines.push(`  - ${detail}`);
+        }
+      }
+      lines.push("");
+    }
+
+    // Unchanged summary
+    const unchangedCount = docs.length - diff.changes.filter(c => c.type !== "removed").length;
+    if (unchangedCount > 0) {
+      lines.push(`<details><summary>${unchangedCount} unchanged document(s)</summary>`);
+      lines.push("");
+      const changedFilenames = new Set(diff.changes.map(c => c.filename));
+      for (const doc of docs) {
+        if (!changedFilenames.has(doc.filename)) {
+          lines.push(`- \`${doc.filename}\``);
+        }
+      }
+      lines.push("");
+      lines.push("</details>");
+      lines.push("");
+    }
+
+    lines.push("---");
+    lines.push(`*Codepliant compliance diff at ${diff.timestamp}. Run \`codepliant go\` to regenerate.*`);
+
+    console.log(lines.join("\n"));
     process.exit(diff.hasChanges ? 1 : 0);
   }
 
