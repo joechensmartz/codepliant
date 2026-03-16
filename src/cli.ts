@@ -37,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "500.0.0";
+const VERSION = "510.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -227,6 +227,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
   ${DIM()}--executive-summary${RESET()}   Also generate a one-page EXECUTIVE_SUMMARY.md (Pro)
   ${DIM()}--email${RESET()}               Also generate email-friendly HTML (inline CSS, copy-pasteable)
+  ${DIM()}--slack${RESET()}               Also generate Slack-compatible markdown (ready to paste)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--no-color${RESET()}            Disable colored output
@@ -1247,6 +1248,7 @@ function main() {
   let ecosystemFlag: string | undefined;
   let sinceFlag: string | undefined;
   let emailFlag = false;
+  let slackFlag = false;
   let githubPagesFlag = false;
 
   for (let i = 1; i < args.length; i++) {
@@ -1271,6 +1273,8 @@ function main() {
       executiveSummaryFlag = true;
     } else if (arg === "--email") {
       emailFlag = true;
+    } else if (arg === "--slack") {
+      slackFlag = true;
     } else if (arg === "--api") {
       apiFlag = true;
     } else if (arg === "--github-pages") {
@@ -1410,7 +1414,7 @@ function main() {
     }
 
     if (command === "report") {
-      runReport(absProjectPath, absOutputDir, quiet, verbose, executiveSummaryFlag, emailFlag);
+      runReport(absProjectPath, absOutputDir, quiet, verbose, executiveSummaryFlag, emailFlag, slackFlag);
       return;
     }
 
@@ -2770,6 +2774,124 @@ ${body}
 </html>`;
 }
 
+/**
+ * Convert a markdown compliance report to Slack-compatible markdown (mrkdwn).
+ * Slack uses its own formatting syntax:
+ *   - *bold* instead of **bold**
+ *   - _italic_ instead of *italic*
+ *   - No # headers — use *bold* text on its own line
+ *   - Tables become aligned text blocks
+ *   - Links: <url|text> instead of [text](url)
+ *   - Code: `backticks` work, but ``` code blocks use different indentation
+ *   - Blockquotes: > works in Slack
+ *   - Checkboxes rendered as emoji
+ */
+function convertReportToSlackMarkdown(markdown: string, title: string): string {
+  const lines = markdown.split("\n");
+  const slackLines: string[] = [];
+
+  slackLines.push(`*${title} — Compliance Report*`);
+  slackLines.push("");
+
+  let inTable = false;
+  let tableHeaders: string[] = [];
+  let tableWidths: number[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
+    // Skip table separator rows
+    if (line.match(/^\|[\s-:|]+\|$/)) {
+      continue;
+    }
+
+    // Table rows
+    if (line.startsWith("|")) {
+      const cells = line.split("|").filter(Boolean).map((c) => c.trim());
+
+      if (!inTable) {
+        // First row is header
+        inTable = true;
+        tableHeaders = cells;
+        tableWidths = cells.map((c) => Math.max(c.length, 10));
+        // Output header as bold
+        const headerLine = cells.map((c) => `*${c}*`).join("  |  ");
+        slackLines.push(headerLine);
+        slackLines.push("—".repeat(headerLine.length));
+        continue;
+      }
+
+      // Data row
+      const formatted = cells
+        .map((c) =>
+          c
+            .replace(/\*\*(.+?)\*\*/g, "*$1*")
+            .replace(/\[(.+?)\]\((.+?)\)/g, "<$2|$1>")
+        )
+        .join("  |  ");
+      slackLines.push(formatted);
+      continue;
+    } else if (inTable) {
+      inTable = false;
+      tableHeaders = [];
+      tableWidths = [];
+      slackLines.push("");
+    }
+
+    // Headers — convert to bold text
+    if (line.startsWith("# ")) {
+      slackLines.push("");
+      slackLines.push(`*${line.slice(2)}*`);
+      slackLines.push("");
+      continue;
+    }
+    if (line.startsWith("## ")) {
+      slackLines.push("");
+      slackLines.push(`*${line.slice(3)}*`);
+      slackLines.push("");
+      continue;
+    }
+    if (line.startsWith("### ")) {
+      slackLines.push(`*${line.slice(4)}*`);
+      continue;
+    }
+
+    // Horizontal rule
+    if (line === "---") {
+      slackLines.push("———");
+      continue;
+    }
+
+    // Blockquote — Slack supports >
+    if (line.startsWith("> ")) {
+      const content = line
+        .slice(2)
+        .replace(/\*\*(.+?)\*\*/g, "*$1*")
+        .replace(/\[(.+?)\]\((.+?)\)/g, "<$2|$1>");
+      slackLines.push(`> ${content}`);
+      continue;
+    }
+
+    // Checkboxes
+    line = line.replace(/- \[ \] /g, ":white_square: ");
+    line = line.replace(/- \[x\] /g, ":white_check_mark: ");
+
+    // Convert markdown bold to Slack bold
+    line = line.replace(/\*\*(.+?)\*\*/g, "*$1*");
+
+    // Convert markdown links to Slack links
+    line = line.replace(/\[(.+?)\]\((.+?)\)/g, "<$2|$1>");
+
+    // Convert markdown italic (single *) to Slack italic (_)
+    // Only match single asterisks that are not part of bold
+    line = line.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "_$1_");
+
+    slackLines.push(line);
+  }
+
+  return slackLines.join("\n");
+}
+
 // --- `codepliant report` command ---
 
 function runReport(
@@ -2779,6 +2901,7 @@ function runReport(
   verbose: boolean,
   executiveSummary: boolean = false,
   email: boolean = false,
+  slack: boolean = false,
 ) {
   if (!quiet) printBanner();
 
@@ -2855,6 +2978,19 @@ function runReport(
     const emailSize = Buffer.byteLength(emailHtml, "utf-8");
     const emailLines = countLines(emailHtml);
     console.log(`  ${GREEN()}✓${RESET()} ${emailRelative} ${DIM()}(${formatFileSize(emailSize)}, ${emailLines} lines — email-ready HTML)${RESET()}`);
+  }
+
+  // Slack-compatible markdown version
+  if (slack) {
+    const slackContent = convertReportToSlackMarkdown(content, config?.companyName || result.projectName);
+    const slackFilename = "COMPLIANCE_REPORT_SLACK.md";
+    const slackPath = path.join(absOutputDir, slackFilename);
+    fs.mkdirSync(absOutputDir, { recursive: true });
+    fs.writeFileSync(slackPath, slackContent, "utf-8");
+    const slackRelative = path.relative(absProjectPath, slackPath);
+    const slackSize = Buffer.byteLength(slackContent, "utf-8");
+    const slackLines = countLines(slackContent);
+    console.log(`  ${GREEN()}✓${RESET()} ${slackRelative} ${DIM()}(${formatFileSize(slackSize)}, ${slackLines} lines — Slack-ready markdown)${RESET()}`);
   }
 
   console.log(

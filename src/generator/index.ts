@@ -139,6 +139,8 @@ import { generatePrivacyNoticeApp } from "./privacy-notice-app.js";
 import { generateComplianceMaturityAssessment } from "./compliance-maturity-assessment.js";
 import { generateRegulatoryMappingMatrix } from "./regulatory-mapping-matrix.js";
 import { generateComplianceBoardReport } from "./compliance-board-report.js";
+import { generateComplianceCalendar } from "./compliance-calendar.js";
+import { generateDataMinimizationChecklist } from "./data-minimization-checklist.js";
 import { generatePrivacyNoticeMultilingual } from "./privacy-notice-multilingual.js";
 
 export interface GeneratedDocument {
@@ -1412,6 +1414,26 @@ export function generateDocuments(
       name: "Regulatory Mapping Matrix",
       filename: "REGULATORY_MAPPING_MATRIX.md",
       content: regulatoryMappingMatrix,
+    });
+  }
+
+  // Compliance Calendar — 12-month calendar view of all compliance activities
+  const complianceCalendar = generateComplianceCalendar(docScan, ctx);
+  if (complianceCalendar) {
+    docs.push({
+      name: "Compliance Calendar",
+      filename: "COMPLIANCE_CALENDAR.md",
+      content: complianceCalendar,
+    });
+  }
+
+  // Data Minimization Checklist — per-service data necessity assessment (GDPR Art. 5(1)(c))
+  const dataMinimizationChecklist = generateDataMinimizationChecklist(docScan, ctx);
+  if (dataMinimizationChecklist) {
+    docs.push({
+      name: "Data Minimization Checklist",
+      filename: "DATA_MINIMIZATION_CHECKLIST.md",
+      content: dataMinimizationChecklist,
     });
   }
 
