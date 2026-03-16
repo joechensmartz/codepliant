@@ -118,41 +118,93 @@ docker-compose:  postgres, redis          → Data persistence infrastructure
 
 Supports: JavaScript/TypeScript, Python, Go, Ruby, Elixir, PHP, Rust, Java, .NET, Django — and frameworks like Rails, Laravel, Express, FastAPI.
 
-## What it generates
+## What it generates — and why you need each one
 
-**Legal** — Privacy Policy (GDPR Art. 13), Terms of Service, Cookie Policy, Data Processing Agreement, API Terms of Use, Refund Policy, SLA
+### Documents your users will see
 
-**AI Compliance** — AI Disclosure (EU AI Act Art. 50), AI Model Card (Art. 53), AI Act Checklist, AI Governance Framework, Acceptable AI Use Policy, AI Ethics Statement, AI Training Data Notice, AI Impact Assessment, AI Red Team Guide, AI Supply Chain Risk
+These go on your website. Users, regulators, and partners will read them.
 
-**Security** — Security Policy, Incident Response Plan, Vulnerability Scan, Access Control Policy, Change Management Policy, Responsible Disclosure Policy, Encryption Policy, Backup Policy, Disaster Recovery, Penetration Test Scope, Incident Severity Matrix
+| Document | Why you need it | Where to put it |
+|----------|----------------|-----------------|
+| **Privacy Policy** | **Legally required** if you collect any user data (GDPR Art. 13, CCPA). Without one, you can't list on app stores, run Google Ads, or pass due diligence. | `/privacy` on your website |
+| **Terms of Service** | Limits your liability and defines the rules of using your product. Without it, users can sue you in any jurisdiction for any reason. | `/terms` on your website |
+| **Cookie Policy** | **Required by ePrivacy Directive** if you use any analytics, tracking, or auth cookies. Google, PostHog, Supabase Auth — they all set cookies. | `/cookies` or linked from your cookie banner |
+| **AI Disclosure** | **Required by EU AI Act Art. 50** (effective Aug 2, 2026). If your app uses OpenAI, Anthropic, or any AI model, you must disclose this to users. Fines up to EUR 35M. | `/ai-disclosure` on your website |
+| **Refund Policy** | Required by consumer protection laws in most jurisdictions if you accept payments. Stripe/PayPal require you to have one. | `/refund` or within your Terms |
 
-**Privacy** — DSAR Handling Guide, Consent Management Guide, Data Retention Policy, Data Dictionary, Privacy by Design Checklist, Cookie Inventory, Data Subject Categories, Lawful Basis Assessment, Data Deletion Procedures, Privacy Risk Matrix, Data Mapping Register, Multilingual Privacy Notices (DE/FR/ES)
+### Documents for B2B / enterprise sales
 
-**Operations** — Open Source Notice, License Compliance, Sub-Processor List, Vendor Contacts, Data Flow Map, Record of Processing, Transfer Impact Assessment, Regulatory Updates, Audit Log Policy
+Enterprise customers and partners will ask for these before signing a contract.
 
-**Audit** — SOC 2 Checklist, ISO 27001 Checklist, Privacy Impact Assessment, Third-Party Risk Assessment, Data Classification, Risk Register, Compliance Certificate, Annual Review Checklist, Compliance Maturity Model, Compliance Gap Analysis
+| Document | Why you need it | When you'll need it |
+|----------|----------------|---------------------|
+| **Data Processing Agreement (DPA)** | **Required by GDPR Art. 28** if you process data on behalf of customers. Every B2B SaaS customer in Europe will ask for this. | When an enterprise prospect says "send us your DPA" |
+| **Sub-Processor List** | Part of your DPA obligations — you must list every third-party that touches customer data (Stripe, Sentry, AWS, etc.). | Attached to your DPA, updated when you add new services |
+| **SLA (Service Level Agreement)** | Defines uptime commitments, support response times, and remedies. Enterprise customers require this before procurement. | Negotiated during enterprise sales |
+| **API Terms of Use** | If you offer an API, this governs rate limits, auth requirements, acceptable use, and liability. | `/api-terms` or in your developer docs |
+| **Security Policy** | Shows prospects your security posture — encryption, access controls, incident handling. Required for SOC 2 and vendor security reviews. | Shared during security questionnaires |
+| **Third-Party Risk Assessment** | Documents what third-party services you use and the risk each one poses. Buyers use this to evaluate your vendor risk. | Shared during procurement / due diligence |
 
-**Governance** — Privacy Program Charter, DPO Handbook, Compliance Oath, Regulatory Correspondence Log, Third-Party Due Diligence, Key Person Risk, Whistleblower Policy, Compliance KPI Dashboard
+### Documents for compliance audits
 
-**Executive** — Executive Dashboard, Executive Briefing, Compliance Board Report, Compliance Summary Email, Compliance Roadmap, Transparency Report, Regulatory Readiness Scorecard
+Auditors (SOC 2, ISO 27001, GDPR) will ask for these. Having them pre-generated saves weeks.
 
-**HR/Training** — Employee Privacy Notice, Employee Handbook Privacy, Training Record, Security Awareness Program
+| Document | Why you need it | Which audit |
+|----------|----------------|-------------|
+| **SOC 2 Checklist** | Maps your practices to SOC 2 Trust Service Criteria. Your auditor will ask for evidence against each control. | SOC 2 Type I / Type II |
+| **ISO 27001 Checklist** | Maps to Annex A controls. Required if you pursue ISO certification or if enterprise customers require it. | ISO 27001 certification |
+| **Privacy Impact Assessment (PIA)** | **Required by GDPR Art. 35** for high-risk data processing (AI, profiling, large-scale monitoring). | GDPR compliance, new feature launches |
+| **Data Dictionary** | Catalogs every data field you store, its sensitivity level, and retention period. Auditors need this to verify data handling. | Any privacy or security audit |
+| **Risk Register** | Lists identified risks, their likelihood, impact, and mitigation. Required for most security frameworks. | SOC 2, ISO 27001, any risk assessment |
+| **Record of Processing (ROPA)** | **Required by GDPR Art. 30**. Documents all processing activities, purposes, and legal bases. | GDPR compliance review |
+| **Incident Response Plan** | Defines who does what within the **72-hour GDPR breach notification window**. Without this, a breach becomes a crisis. | SOC 2, ISO 27001, GDPR |
+| **Compliance Certificate** | Summarizes your compliance posture for partners. `codepliant certify` generates one with a unique ID. | Vendor questionnaires, partnership agreements |
 
-**Incident** — Data Breach Notification Templates, Incident Communication Templates, Data Breach Response Drill
+### AI-specific documents (EU AI Act)
 
-**Privacy UX** — Privacy Notice (Short) for in-app display, Cookie Consent Config (JSON) for CMP integration (OneTrust, CookieYes, Cookiebot)
+If your app uses any AI/ML service, these are becoming mandatory.
 
-**Output formats** — Markdown, HTML, PDF (with preview via `codepliant pdf <doc>`), JSON, Notion, Confluence, DOCX, GitHub Pages, cookie consent banner, embeddable widget, 13+ formats total
+| Document | Why you need it | Regulatory basis |
+|----------|----------------|-----------------|
+| **AI Model Card** | Documents each AI model you use — its purpose, limitations, and risks. Required for transparency under Art. 53. | EU AI Act Art. 53 |
+| **AI Governance Framework** | Defines how your org manages AI risk — oversight, monitoring, human review. | EU AI Act, emerging US state laws |
+| **AI Impact Assessment** | Evaluates the impact of your AI systems on users. Similar to a PIA but AI-specific. | EU AI Act, Canada's AIDA |
+| **AI Ethics Statement** | Public-facing statement about your AI principles. Increasingly expected by users and investors. | Best practice / trust signal |
+| **Acceptable AI Use Policy** | Internal policy for how employees should use AI tools. Prevents data leaks to ChatGPT/Copilot. | Internal governance |
+
+### Internal operations docs
+
+For your team. These keep you organized and audit-ready.
+
+| Document | What it does |
+|----------|-------------|
+| **Access Control Policy** | Defines who has access to what, password requirements, MFA rules. |
+| **Change Management Policy** | Code review, deployment, and rollback procedures. |
+| **Data Retention Policy** | How long you keep each type of data and when you delete it. |
+| **Backup & Disaster Recovery** | Recovery procedures if something goes wrong. |
+| **Encryption Policy** | What's encrypted at rest vs in transit and with what algorithms. |
+| **Audit Log Policy** | What events you log, how long you retain them, who can access them. |
+| **Responsible Disclosure Policy** | Bug bounty scope, safe harbor, response timeline for security researchers. |
+| **Data Deletion Procedures** | Step-by-step guide for handling "delete my data" requests (GDPR Art. 17). |
+| **Employee Privacy Notice** | **Required** to tell employees what data you collect about them. |
+| **Data Breach Notification Templates** | Pre-written templates so you're not drafting emails during an active incident. |
+| **Open Source Notice** | Attribution for open-source licenses in your project. Some licenses (MIT, Apache) require this. |
+
+### Output formats
+
+Every document can be exported in the format your team actually uses.
+
+| Format | Use case | Command |
+|--------|----------|---------|
+| **Markdown** | Default. Works in GitHub, Notion, anywhere. | `codepliant go` |
+| **HTML** | Host on your website with Apple-style formatting. | `codepliant go --format html` |
+| **PDF** | Send to lawyers, attach to contracts, print. | `codepliant pdf <doc>` |
+| **JSON** | Feed into CI/CD, dashboards, or custom tooling. | `codepliant go --format json` |
+| **DOCX** | For legal teams who live in Word. | `codepliant go --format docx` |
+| **Notion / Confluence** | Export directly to your team's wiki. | `codepliant go --format notion` |
+| **GitHub Pages** | Static compliance site with card-based navigation. | `codepliant go --format ghpages` |
 
 [See example output from a real SaaS project →](./examples/sample-output/)
-
-Browse all output formats on GitHub:
-- [Markdown](./examples/sample-output/) — default, works everywhere
-- [HTML](./examples/sample-output/) — Apple-style compliance page with navigation
-- [PDF](./examples/sample-output/) — print-ready, single-document via `codepliant pdf <doc>`
-- [JSON](./examples/sample-output/) — machine-readable for integrations
-- [Notion / Confluence / Wiki](./examples/sample-output/) — export to your team's docs platform
-- [GitHub Pages](./examples/sample-output/) — static site with card-based navigation
 
 ---
 
