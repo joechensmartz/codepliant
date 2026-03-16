@@ -126,6 +126,8 @@ import { generateComplianceCommunicationPlan } from "./compliance-communication-
 import { generateExecutiveBriefing } from "./executive-briefing.js";
 import { generateComplianceFAQ } from "./compliance-faq.js";
 import { generatePrivacyRoadmap } from "./privacy-roadmap.js";
+import { generateComplianceGlossary } from "./compliance-glossary.js";
+import { generateVendorRiskTierAssessment } from "./vendor-risk-tier.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1247,6 +1249,26 @@ export function generateDocuments(
       name: "Compliance Communication Plan",
       filename: "COMPLIANCE_COMMUNICATION_PLAN.md",
       content: complianceCommunicationPlan,
+    });
+  }
+
+  // Compliance Glossary — auto-generated glossary of compliance terms used in generated docs
+  const complianceGlossary = generateComplianceGlossary(docScan, ctx);
+  if (complianceGlossary) {
+    docs.push({
+      name: "Compliance Glossary",
+      filename: "COMPLIANCE_GLOSSARY.md",
+      content: complianceGlossary,
+    });
+  }
+
+  // Vendor Risk Tier Assessment — tier each detected vendor: Critical/High/Medium/Low
+  const vendorRiskTier = generateVendorRiskTierAssessment(docScan, ctx);
+  if (vendorRiskTier) {
+    docs.push({
+      name: "Vendor Risk Tier Assessment",
+      filename: "VENDOR_RISK_TIER_ASSESSMENT.md",
+      content: vendorRiskTier,
     });
   }
 

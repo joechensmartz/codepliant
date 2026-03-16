@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "410.0.0";
+const VERSION = "420.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -93,6 +93,7 @@ ${BOLD()}Scanning:${RESET()}
   ${CYAN()}diff${RESET()}            Show changes since last generation
   ${CYAN()}dashboard${RESET()}       Show compliance status dashboard
   ${CYAN()}status${RESET()}          Alias for dashboard
+  ${CYAN()}metrics${RESET()}         All compliance metrics in one view (for standup reporting)
   ${CYAN()}summary${RESET()}         One-paragraph plain English compliance summary
   ${CYAN()}quickstart${RESET()}      Show quick start guide based on scan results
   ${CYAN()}completeness${RESET()}    Show percentage of recommended docs that exist
@@ -1438,6 +1439,11 @@ function main() {
 
     if (command === "dashboard") {
       runDashboard(absProjectPath, absOutputDir, quiet, jsonOutput);
+      return;
+    }
+
+    if (command === "metrics") {
+      runMetrics(absProjectPath, absOutputDir, quiet, jsonOutput);
       return;
     }
 
@@ -3591,6 +3597,231 @@ function runDashboard(
     }
     console.log();
   }
+
+  process.exit(0);
+}
+
+// --- `codepliant metrics` command ---
+
+function runMetrics(
+  absProjectPath: string,
+  absOutputDir: string,
+  quiet: boolean,
+  jsonOutput: boolean,
+) {
+  const config = loadConfig(absProjectPath);
+  const result = scan(absProjectPath);
+  const docs = generateDocuments(result, config);
+  const diff = diffDocuments(docs, absOutputDir);
+
+  // Compute full compliance score
+  const scoreInput: ScoreInput = {
+    scanResult: result,
+    docs,
+    config,
+    outputDir: absOutputDir,
+  };
+  const fullScore = computeFullComplianceScore(scoreInput);
+
+  // Count existing docs on disk
+  let existingDocCount = 0;
+  try {
+    if (fs.existsSync(absOutputDir)) {
+      const entries = fs.readdirSync(absOutputDir);
+      existingDocCount = entries.filter((e) => e.endsWith(".md") || e.endsWith(".html") || e.endsWith(".json")).length;
+    }
+  } catch { /* ignore */ }
+
+  // Document freshness: how old is the newest file in output dir
+  let freshnessLabel = "N/A";
+  let freshnessMs = 0;
+  if (fs.existsSync(absOutputDir)) {
+    try {
+      const entries = fs.readdirSync(absOutputDir);
+      let latestMtime = 0;
+      for (const entry of entries) {
+        const stat = fs.statSync(path.join(absOutputDir, entry));
+        if (stat.mtimeMs > latestMtime) latestMtime = stat.mtimeMs;
+      }
+      if (latestMtime > 0) {
+        freshnessMs = Date.now() - latestMtime;
+        if (freshnessMs < 60_000) freshnessLabel = "just now";
+        else if (freshnessMs < 3_600_000) freshnessLabel = `${Math.round(freshnessMs / 60_000)}m ago`;
+        else if (freshnessMs < 86_400_000) freshnessLabel = `${Math.round(freshnessMs / 3_600_000)}h ago`;
+        else freshnessLabel = `${Math.round(freshnessMs / 86_400_000)}d ago`;
+      }
+    } catch { /* ignore */ }
+  }
+
+  // Stale count
+  const staleCount = diff.changes.filter((c) => c.type === "updated").length;
+
+  // Score trend from history
+  let trend: "improving" | "declining" | "stable" | "unknown" = "unknown";
+  let previousScore = 0;
+  const scoresFile = path.join(absProjectPath, ".codepliant-scores.json");
+  try {
+    if (fs.existsSync(scoresFile)) {
+      const raw = fs.readFileSync(scoresFile, "utf-8");
+      const history: { date: string; score: number }[] = JSON.parse(raw);
+      if (history.length > 0) {
+        previousScore = history[history.length - 1].score;
+        if (fullScore.total > previousScore) trend = "improving";
+        else if (fullScore.total < previousScore) trend = "declining";
+        else trend = "stable";
+      }
+    }
+  } catch { /* ignore */ }
+
+  // Categories breakdown
+  const categoryMap = new Map<string, number>();
+  for (const service of result.services) {
+    categoryMap.set(service.category, (categoryMap.get(service.category) || 0) + 1);
+  }
+  const categories = [...categoryMap.entries()].sort((a, b) => b[1] - a[1]);
+
+  // JSON output
+  if (jsonOutput) {
+    console.log(JSON.stringify({
+      project: result.projectName,
+      score: fullScore.total,
+      grade: fullScore.grade,
+      previousScore,
+      trend,
+      serviceCount: result.services.length,
+      serviceCategories: Object.fromEntries(categories),
+      documentCount: docs.length,
+      existingDocCount,
+      staleDocCount: staleCount,
+      freshness: freshnessLabel,
+      freshnessMs,
+      regulations: fullScore.regulationScores?.map((r: RegulationScore) => ({
+        regulation: r.regulation,
+        score: r.score,
+        maxPoints: r.maxPoints,
+      })) || [],
+      recommendations: fullScore.recommendations?.slice(0, 5).map((r: Recommendation) => r.title) || [],
+    }, null, 2));
+    process.exit(0);
+  }
+
+  // Pretty terminal output — designed for weekly standup
+  if (!quiet) printBanner();
+
+  const BOX_WIDTH = 60;
+  const innerWidth = BOX_WIDTH - 4;
+
+  function pad(text: string, width: number): string {
+    const stripped = text.replace(/\x1b\[[0-9;]*m/g, "");
+    const padding = Math.max(0, width - stripped.length);
+    return text + " ".repeat(padding);
+  }
+
+  function mline(content: string): string {
+    return `${CYAN()}│${RESET()}  ${pad(content, innerWidth)}${CYAN()}│${RESET()}`;
+  }
+
+  function memptyLine(): string {
+    return `${CYAN()}│${RESET()}${" ".repeat(BOX_WIDTH - 2)}${CYAN()}│${RESET()}`;
+  }
+
+  const topBorder = `${CYAN()}┌─ COMPLIANCE METRICS ${"─".repeat(BOX_WIDTH - 23)}┐${RESET()}`;
+  const sectionBorder = `${CYAN()}├${"─".repeat(BOX_WIDTH - 2)}┤${RESET()}`;
+  const bottomBorder = `${CYAN()}└${"─".repeat(BOX_WIDTH - 2)}┘${RESET()}`;
+
+  // Score bar
+  const filledBlocks = Math.round(fullScore.total / 5);
+  const emptyBlocks = 20 - filledBlocks;
+  let barColor = RED();
+  if (fullScore.total > 80) barColor = GREEN();
+  else if (fullScore.total > 60) barColor = YELLOW();
+  const progressBar = `${barColor}${"█".repeat(filledBlocks)}${DIM()}${"░".repeat(emptyBlocks)}${RESET()}`;
+
+  // Trend indicator
+  let trendIcon = `${DIM()}?${RESET()}`;
+  if (trend === "improving") trendIcon = `${GREEN()}▲${RESET()}`;
+  else if (trend === "declining") trendIcon = `${RED()}▼${RESET()}`;
+  else if (trend === "stable") trendIcon = `${DIM()}━${RESET()}`;
+
+  const lines: string[] = [];
+  lines.push(topBorder);
+  lines.push(memptyLine());
+  lines.push(mline(`${BOLD()}Project:${RESET()} ${result.projectName}`));
+  lines.push(mline(`${BOLD()}Date:${RESET()}    ${new Date().toISOString().split("T")[0]}`));
+  lines.push(memptyLine());
+
+  // ── Score Section ──
+  lines.push(sectionBorder);
+  lines.push(mline(`${BOLD()}COMPLIANCE SCORE${RESET()}`));
+  lines.push(memptyLine());
+  lines.push(mline(`${progressBar} ${barColor}${BOLD()}${fullScore.total}%${RESET()} (${fullScore.grade}) ${trendIcon}`));
+  if (trend !== "unknown") {
+    const delta = fullScore.total - previousScore;
+    const deltaStr = delta >= 0 ? `+${delta}` : `${delta}`;
+    lines.push(mline(`${DIM()}Previous: ${previousScore}%  Change: ${deltaStr}  Trend: ${trend}${RESET()}`));
+  }
+  lines.push(memptyLine());
+
+  // ── Documents Section ──
+  lines.push(sectionBorder);
+  lines.push(mline(`${BOLD()}DOCUMENTS${RESET()}`));
+  lines.push(memptyLine());
+  lines.push(mline(`Generated:  ${BOLD()}${docs.length}${RESET()} types available`));
+  lines.push(mline(`On disk:    ${BOLD()}${existingDocCount}${RESET()} files`));
+  if (staleCount > 0) {
+    lines.push(mline(`Stale:      ${YELLOW()}${BOLD()}${staleCount}${RESET()}${YELLOW()} need regeneration${RESET()}`));
+  } else {
+    lines.push(mline(`Stale:      ${GREEN()}0${RESET()} ${DIM()}(all current)${RESET()}`));
+  }
+  lines.push(mline(`Freshness:  ${freshnessLabel}`));
+  lines.push(memptyLine());
+
+  // ── Services Section ──
+  lines.push(sectionBorder);
+  lines.push(mline(`${BOLD()}SERVICES${RESET()}`));
+  lines.push(memptyLine());
+  lines.push(mline(`Total:      ${BOLD()}${result.services.length}${RESET()} detected`));
+  for (const [cat, count] of categories) {
+    lines.push(mline(`  ${cat.padEnd(14)} ${count}`));
+  }
+  lines.push(memptyLine());
+
+  // ── Regulation Scores Section (if available) ──
+  if (fullScore.regulationScores && fullScore.regulationScores.length > 0) {
+    lines.push(sectionBorder);
+    lines.push(mline(`${BOLD()}REGULATION SCORES${RESET()}`));
+    lines.push(memptyLine());
+    for (const reg of fullScore.regulationScores) {
+      const regPct = reg.maxPoints > 0 ? Math.round((reg.score / reg.maxPoints) * 100) : 0;
+      let regColor = RED();
+      if (regPct > 80) regColor = GREEN();
+      else if (regPct > 60) regColor = YELLOW();
+      lines.push(mline(`  ${reg.regulation.padEnd(20)} ${regColor}${regPct}%${RESET()} (${reg.score}/${reg.maxPoints})`));
+    }
+    lines.push(memptyLine());
+  }
+
+  // ── Recommendations (top 3) ──
+  if (fullScore.recommendations && fullScore.recommendations.length > 0) {
+    lines.push(sectionBorder);
+    lines.push(mline(`${BOLD()}TOP RECOMMENDATIONS${RESET()}`));
+    lines.push(memptyLine());
+    for (const rec of fullScore.recommendations.slice(0, 3)) {
+      lines.push(mline(`${YELLOW()}→${RESET()} ${rec.title.slice(0, innerWidth - 4)}`));
+    }
+    if (fullScore.recommendations.length > 3) {
+      lines.push(mline(`${DIM()}...and ${fullScore.recommendations.length - 3} more${RESET()}`));
+    }
+    lines.push(memptyLine());
+  }
+
+  lines.push(bottomBorder);
+
+  console.log();
+  for (const l of lines) {
+    console.log(`  ${l}`);
+  }
+  console.log();
 
   process.exit(0);
 }
