@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://codepliant.dev/schema/codepliantrc.json",
+  "$id": "./config-schema.json",
   "title": "Codepliant Configuration",
   "description": "Configuration file for Codepliant — the compliance document generator.",
   "type": "object",

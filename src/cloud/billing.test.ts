@@ -108,7 +108,7 @@ describe("openBillingPortal", () => {
   it("returns portal URL", () => {
     const result = openBillingPortal();
     assert.ok(result.url);
-    assert.ok(result.url.includes("codepliant.dev"));
+    assert.ok(result.url.includes("github.com/joechensmartz/codepliant"));
     assert.equal(result.opened, true);
   });
 });

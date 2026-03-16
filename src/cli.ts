@@ -992,7 +992,7 @@ function classifyDocCategory(docName: string): string {
 
 // --- Actionable error messages ---
 
-// Error codes — searchable in docs at https://codepliant.dev/errors
+// Error codes — searchable in docs at https://github.com/joechensmartz/codepliant
 // CP001: Permission denied
 // CP002: Disk full
 // CP003: Read-only filesystem

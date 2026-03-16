@@ -51,7 +51,7 @@ export const PLAN_DETAILS: Record<PlanName, PlanDetails> = {
   },
 };
 
-const CHECKOUT_BASE = "https://codepliant.dev/checkout";
+const CHECKOUT_BASE = "https://github.com/joechensmartz/codepliant";
 const LICENSE_DIR = path.join(os.homedir(), ".codepliant");
 const LICENSE_FILE = path.join(LICENSE_DIR, "license.json");
 

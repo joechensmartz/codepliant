@@ -64,7 +64,7 @@ const TEAM_FEATURES = new Set<LicensedFeature>([
 /** Maximum document types on the free tier. */
 export const FREE_DOC_TYPE_LIMIT = 5;
 
-const PRICING_URL = "https://codepliant.dev/pricing";
+const PRICING_URL = "https://github.com/joechensmartz/codepliant";
 
 /**
  * Resolve the license key from environment or config.
