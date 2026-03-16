@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "470.0.0";
+const VERSION = "480.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -158,6 +158,7 @@ ${BOLD()}Diagnostics:${RESET()}
   ${CYAN()}health${RESET()}          Quick health check of compliance setup
   ${CYAN()}preview${RESET()}         Preview a specific document in terminal (paged output)
   ${CYAN()}reset${RESET()}           Reset all codepliant state (scores, usage, todo)
+  ${CYAN()}snapshot${RESET()}        Save compliance state as a timestamped snapshot
   ${CYAN()}archive${RESET()}         Archive current legal/ directory with timestamp
   ${CYAN()}clean${RESET()}           Remove all generated files in legal/
   ${CYAN()}certify${RESET()}         Generate a dated compliance certificate for sharing
@@ -1745,6 +1746,11 @@ function main() {
 
     if (command === "certify") {
       runCertify(absProjectPath, absOutputDir, quiet, jsonOutput);
+      return;
+    }
+
+    if (command === "snapshot") {
+      runSnapshot(absProjectPath, absOutputDir, quiet, jsonOutput, args);
       return;
     }
 
@@ -8801,6 +8807,233 @@ ${BOLD()}Quick Start:${RESET()}
   ${CYAN()}npx codepliant scan${RESET()}        Scan without generating
   ${CYAN()}npx codepliant help${RESET()}        See all commands
 `);
+}
+
+// --- `codepliant snapshot` command ---
+
+function runSnapshot(
+  absProjectPath: string,
+  absOutputDir: string,
+  quiet: boolean,
+  jsonOutput: boolean,
+  args: string[],
+) {
+  if (!quiet) printBanner();
+
+  const snapshotsDir = path.join(absProjectPath, ".codepliant", "snapshots");
+
+  // Sub-commands: list, compare <id>
+  const subCommand = args[1]; // args[0] is "snapshot"
+
+  if (subCommand === "list") {
+    if (!fs.existsSync(snapshotsDir)) {
+      if (jsonOutput) {
+        console.log(JSON.stringify({ snapshots: [] }));
+      } else {
+        console.log(`${YELLOW()}No snapshots found.${RESET()} Run ${CYAN()}codepliant snapshot${RESET()} to create one.`);
+      }
+      process.exit(0);
+    }
+
+    const entries = fs.readdirSync(snapshotsDir)
+      .filter((e: string) => fs.statSync(path.join(snapshotsDir, e)).isDirectory())
+      .sort()
+      .reverse();
+
+    if (entries.length === 0) {
+      if (jsonOutput) {
+        console.log(JSON.stringify({ snapshots: [] }));
+      } else {
+        console.log(`${YELLOW()}No snapshots found.${RESET()} Run ${CYAN()}codepliant snapshot${RESET()} to create one.`);
+      }
+      process.exit(0);
+    }
+
+    if (jsonOutput) {
+      const snapshots = entries.map((e: string) => {
+        const metaPath = path.join(snapshotsDir, e, "snapshot.json");
+        let meta: Record<string, unknown> = {};
+        if (fs.existsSync(metaPath)) {
+          try { meta = JSON.parse(fs.readFileSync(metaPath, "utf-8")); } catch { /* ignore */ }
+        }
+        return { id: e, ...meta };
+      });
+      console.log(JSON.stringify({ snapshots }, null, 2));
+      process.exit(0);
+    }
+
+    console.log(`${BOLD()}Compliance Snapshots${RESET()}\n`);
+    console.log(`${DIM()}Location: ${snapshotsDir}${RESET()}\n`);
+
+    for (const entry of entries) {
+      const metaPath = path.join(snapshotsDir, entry, "snapshot.json");
+      let docCount = 0;
+      let services = 0;
+      if (fs.existsSync(metaPath)) {
+        try {
+          const meta = JSON.parse(fs.readFileSync(metaPath, "utf-8"));
+          docCount = meta.documentCount || 0;
+          services = meta.serviceCount || 0;
+        } catch { /* ignore */ }
+      }
+      console.log(`  ${CYAN()}${entry}${RESET()} — ${docCount} docs, ${services} services`);
+    }
+    console.log(`\n${DIM()}Use ${CYAN()}codepliant snapshot compare <id>${RESET()}${DIM()} to compare with current state.${RESET()}\n`);
+    process.exit(0);
+  }
+
+  if (subCommand === "compare") {
+    const snapshotId = args[2];
+    if (!snapshotId) {
+      console.error(`${RED()}Usage: codepliant snapshot compare <snapshot-id>${RESET()}`);
+      console.error(`${DIM()}Run ${CYAN()}codepliant snapshot list${RESET()}${DIM()} to see available snapshots.${RESET()}`);
+      process.exit(1);
+    }
+
+    const snapshotDir = path.join(snapshotsDir, snapshotId);
+    if (!fs.existsSync(snapshotDir)) {
+      console.error(`${RED()}Snapshot "${snapshotId}" not found.${RESET()}`);
+      console.error(`${DIM()}Run ${CYAN()}codepliant snapshot list${RESET()}${DIM()} to see available snapshots.${RESET()}`);
+      process.exit(1);
+    }
+
+    if (!fs.existsSync(absOutputDir)) {
+      console.error(`${RED()}Output directory "${absOutputDir}" does not exist.${RESET()}`);
+      console.error(`${DIM()}Run ${CYAN()}codepliant go${RESET()}${DIM()} first to generate documents.${RESET()}`);
+      process.exit(1);
+    }
+
+    const snapshotFiles = fs.readdirSync(snapshotDir).filter((f: string) => f.endsWith(".md") || f.endsWith(".json"));
+    const currentFiles = fs.readdirSync(absOutputDir).filter((f: string) => f.endsWith(".md") || f.endsWith(".json"));
+
+    const snapshotSet = new Set(snapshotFiles);
+    const currentSet = new Set(currentFiles);
+
+    const added = currentFiles.filter((f: string) => !snapshotSet.has(f));
+    const removed = snapshotFiles.filter((f: string) => !currentSet.has(f));
+    const common = currentFiles.filter((f: string) => snapshotSet.has(f));
+
+    let changed = 0;
+    let unchanged = 0;
+    const changedFiles: string[] = [];
+
+    for (const file of common) {
+      const snapshotContent = fs.readFileSync(path.join(snapshotDir, file), "utf-8");
+      const currentContent = fs.readFileSync(path.join(absOutputDir, file), "utf-8");
+      if (snapshotContent !== currentContent) {
+        changed++;
+        changedFiles.push(file);
+      } else {
+        unchanged++;
+      }
+    }
+
+    if (jsonOutput) {
+      console.log(JSON.stringify({
+        snapshotId,
+        comparison: {
+          added,
+          removed,
+          changed: changedFiles,
+          unchanged,
+          totalSnapshot: snapshotFiles.length,
+          totalCurrent: currentFiles.length,
+        },
+      }, null, 2));
+      process.exit(0);
+    }
+
+    console.log(`${BOLD()}Snapshot Comparison${RESET()}\n`);
+    console.log(`${DIM()}Comparing:${RESET()} ${CYAN()}${snapshotId}${RESET()} vs ${CYAN()}current${RESET()}\n`);
+
+    console.log(`  ${GREEN()}+ Added:${RESET()}     ${added.length} document(s)`);
+    for (const f of added) {
+      console.log(`    ${GREEN()}+ ${f}${RESET()}`);
+    }
+    console.log(`  ${RED()}- Removed:${RESET()}   ${removed.length} document(s)`);
+    for (const f of removed) {
+      console.log(`    ${RED()}- ${f}${RESET()}`);
+    }
+    console.log(`  ${YELLOW()}~ Changed:${RESET()}   ${changed} document(s)`);
+    for (const f of changedFiles) {
+      console.log(`    ${YELLOW()}~ ${f}${RESET()}`);
+    }
+    console.log(`  ${DIM()}= Unchanged:${RESET()} ${unchanged} document(s)`);
+    console.log();
+    console.log(
+      `${DIM()}Summary: ${snapshotFiles.length} docs in snapshot, ${currentFiles.length} docs now ` +
+      `(+${added.length} -${removed.length} ~${changed})${RESET()}\n`
+    );
+    process.exit(0);
+  }
+
+  // Default: create a new snapshot
+  if (!fs.existsSync(absOutputDir)) {
+    console.error(`${RED()}[CP006] Error: Output directory "${absOutputDir}" does not exist.${RESET()}`);
+    console.error(`${DIM()}Run ${CYAN()}codepliant go${RESET()}${DIM()} first to generate documents.${RESET()}`);
+    process.exit(1);
+  }
+
+  const files = fs.readdirSync(absOutputDir);
+  const generatedFiles = files.filter((f: string) => f.endsWith(".md") || f.endsWith(".json") || f.endsWith(".html"));
+
+  if (generatedFiles.length === 0) {
+    console.log(`${YELLOW()}No generated files found in ${absOutputDir}.${RESET()}`);
+    process.exit(0);
+  }
+
+  // Create snapshot directory with timestamp
+  const now = new Date();
+  const timestamp = now.toISOString().replace(/[:.]/g, "-").replace("T", "_").slice(0, 19);
+  const snapshotName = `snapshot-${timestamp}`;
+  const snapshotDir = path.join(snapshotsDir, snapshotName);
+
+  fs.mkdirSync(snapshotDir, { recursive: true });
+
+  // Copy all generated files
+  let copied = 0;
+  for (const file of generatedFiles) {
+    const src = path.join(absOutputDir, file);
+    const dest = path.join(snapshotDir, file);
+    fs.copyFileSync(src, dest);
+    copied++;
+  }
+
+  // Write metadata
+  const meta = {
+    id: snapshotName,
+    createdAt: now.toISOString(),
+    documentCount: copied,
+    serviceCount: 0,
+    files: generatedFiles,
+  };
+
+  // Try to get service count from a scan
+  try {
+    const result = scan(absProjectPath);
+    meta.serviceCount = result.services.length;
+  } catch { /* ignore — service count will be 0 */ }
+
+  fs.writeFileSync(path.join(snapshotDir, "snapshot.json"), JSON.stringify(meta, null, 2), "utf-8");
+
+  if (jsonOutput) {
+    console.log(JSON.stringify(meta, null, 2));
+    process.exit(0);
+  }
+
+  if (!quiet) {
+    const relativePath = path.relative(absProjectPath, snapshotDir);
+    console.log(`${GREEN()}${BOLD()}Snapshot saved!${RESET()} ${copied} file(s) captured.\n`);
+    console.log(`  ${CYAN()}ID:${RESET()}       ${snapshotName}`);
+    console.log(`  ${CYAN()}Location:${RESET()} ${relativePath}/`);
+    console.log(`  ${CYAN()}Files:${RESET()}    ${copied}`);
+    console.log();
+    console.log(`${DIM()}Commands:${RESET()}`);
+    console.log(`  ${CYAN()}codepliant snapshot list${RESET()}              — View all snapshots`);
+    console.log(`  ${CYAN()}codepliant snapshot compare ${snapshotName}${RESET()} — Compare with current\n`);
+  }
+
+  process.exit(0);
 }
 
 main();

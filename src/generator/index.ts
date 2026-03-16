@@ -136,6 +136,8 @@ import { generateComplianceOnboardingGuide } from "./compliance-onboarding-guide
 import { generateDataProcessingInventory } from "./data-processing-inventory.js";
 import { generateComplianceDigest } from "./compliance-digest.js";
 import { generatePrivacyNoticeApp } from "./privacy-notice-app.js";
+import { generateComplianceMaturityAssessment } from "./compliance-maturity-assessment.js";
+import { generateRegulatoryMappingMatrix } from "./regulatory-mapping-matrix.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1388,6 +1390,26 @@ export function generateDocuments(
       name: "Privacy Notice (App)",
       filename: "PRIVACY_NOTICE_APP.md",
       content: privacyNoticeApp,
+    });
+  }
+
+  // Compliance Maturity Assessment — 50-question self-assessment questionnaire, auto-pre-filled
+  const complianceMaturityAssessment = generateComplianceMaturityAssessment(docScan, ctx);
+  if (complianceMaturityAssessment) {
+    docs.push({
+      name: "Compliance Maturity Assessment",
+      filename: "COMPLIANCE_MATURITY_ASSESSMENT.md",
+      content: complianceMaturityAssessment,
+    });
+  }
+
+  // Regulatory Mapping Matrix — maps each detected service to all applicable regulations
+  const regulatoryMappingMatrix = generateRegulatoryMappingMatrix(docScan, ctx);
+  if (regulatoryMappingMatrix) {
+    docs.push({
+      name: "Regulatory Mapping Matrix",
+      filename: "REGULATORY_MAPPING_MATRIX.md",
+      content: regulatoryMappingMatrix,
     });
   }
 
