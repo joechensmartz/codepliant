@@ -37,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "490.0.0";
+const VERSION = "500.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -171,6 +171,7 @@ ${BOLD()}Info:${RESET()}
   ${CYAN()}list-docs${RESET()}       List all document types codepliant can generate
   ${CYAN()}changelog${RESET()}       Show version history of codepliant
   ${CYAN()}about${RESET()}          Show project info, mission, credits, and links
+  ${CYAN()}celebrate${RESET()}      v500 milestone easter egg
   ${CYAN()}help${RESET()}            Show this help message
 
 ${BOLD()}Options:${RESET()}
@@ -1760,6 +1761,11 @@ function main() {
 
     if (command === "about") {
       printAbout();
+      return;
+    }
+
+    if (command === "celebrate") {
+      printCelebrate();
       return;
     }
 
@@ -8820,7 +8826,7 @@ ${CYAN()}${BOLD()}  ╔═══════════════════
 ${BOLD()}Mission:${RESET()}
   Codepliant scans your actual source code and generates every
   compliance document your project needs — Privacy Policy, Terms of
-  Service, AI Disclosure, DPA, and 90+ more — in under a second.
+  Service, AI Disclosure, DPA, and 120+ more — in under a second.
   No questionnaires. No network calls. No AI. Purely deterministic.
 
 ${BOLD()}Version:${RESET()}     ${VERSION}
@@ -8834,8 +8840,8 @@ ${BOLD()}Links:${RESET()}
   ${CYAN()}NPM:${RESET()}       https://www.npmjs.com/package/codepliant
 
 ${BOLD()}Stats:${RESET()}
-  90+ document types | 30+ scanners | 50+ CLI commands
-  10+ ecosystems | 12+ output formats | 4 languages
+  120+ document types | 30+ scanners | 55+ CLI commands
+  10+ ecosystems | 13+ output formats | 4 languages
 
 ${BOLD()}Credits:${RESET()}
   Built with \u2764\uFE0F by the open-source community.
@@ -8845,6 +8851,35 @@ ${BOLD()}Quick Start:${RESET()}
   ${CYAN()}npx codepliant go${RESET()}          Generate all compliance docs
   ${CYAN()}npx codepliant scan${RESET()}        Scan without generating
   ${CYAN()}npx codepliant help${RESET()}        See all commands
+`);
+}
+
+function printCelebrate() {
+  console.log(`
+${YELLOW()}${BOLD()}
+    *   *   *   *   *   *   *   *   *   *
+  *       *       *       *       *       *
+    *   *   *   *   *   *   *   *   *   *
+
+          ${CYAN()}  ██╗   ██╗███████╗ ██████╗  ██████╗
+          ${CYAN()}  ██║   ██║██╔════╝██╔═████╗██╔═████╗
+          ${CYAN()}  ██║   ██║███████╗██║██╔██║██║██╔██║
+          ${CYAN()}  ╚██╗ ██╔╝╚════██║████╔╝██║████╔╝██║
+          ${CYAN()}   ╚████╔╝ ███████║╚██████╔╝╚██████╔╝
+          ${CYAN()}    ╚═══╝  ╚══════╝ ╚═════╝  ╚═════╝
+
+${YELLOW()}    *   *   *   *   *   *   *   *   *   *
+  *       *       *       *       *       *
+    *   *   *   *   *   *   *   *   *   *${RESET()}
+
+${BOLD()}  v500 milestone!${RESET()}
+  ${GREEN()}120+ document types.${RESET()} Built overnight.
+
+  ${DIM()}430 versions. 792 tests. 1200+ repos scanned.
+  55+ CLI commands. 30+ scanners. 13+ output formats.
+  Zero network calls. Under one second.${RESET()}
+
+  ${CYAN()}One session. One CLI. Complete compliance.${RESET()}
 `);
 }
 

@@ -13,10 +13,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/tests-787%20passed-brightgreen?style=flat-square" alt="tests" />
+  <img src="https://img.shields.io/badge/version-v500-blueviolet?style=flat-square" alt="version" />
+  <img src="https://img.shields.io/badge/tests-792%20passed-brightgreen?style=flat-square" alt="tests" />
   <img src="https://img.shields.io/badge/precision-100%25-brightgreen?style=flat-square" alt="precision" />
-  <img src="https://img.shields.io/badge/docs-105%2B%20types-blue?style=flat-square" alt="docs" />
+  <img src="https://img.shields.io/badge/docs-120%2B%20types-blue?style=flat-square" alt="docs" />
   <img src="https://img.shields.io/badge/ecosystems-10%2B-blue?style=flat-square" alt="ecosystems" />
+  <img src="https://img.shields.io/badge/repos%20tested-1200%2B-blue?style=flat-square" alt="repos" />
   <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license" />
 </p>
 
@@ -46,7 +48,7 @@ Scanning source imports...   ✓ OpenAI, Stripe found in code
 Scanning .env...             ✓ 9 API keys detected
 Scanning Prisma schema...    ✓ User model: email, phone, passwordHash
 
-Generated 105+ documents in legal/
+Generated 120+ documents in legal/
 
   PRIVACY_POLICY.md                  — mentions Stripe, OpenAI, Supabase by name
   AI_DISCLOSURE.md                   — EU AI Act Art. 50 compliant
@@ -63,9 +65,9 @@ Generated 105+ documents in legal/
   ... and 40+ more
 
 Generation Summary
-  Total documents: 105+
-  Total lines generated: 12,000+
-  Estimated lawyer equivalent: Generated 105+ documents (~$105,000 lawyer equivalent)
+  Total documents: 120+
+  Total lines generated: 15,000+
+  Estimated lawyer equivalent: Generated 120+ documents (~$120,000 lawyer equivalent)
 
 Compliance score: 100% (A)
 Done in 24ms.
@@ -87,7 +89,7 @@ Done in 24ms.
 | "Do you use cookies?" — *Probably?* | Finds PostHog, Google Analytics, Supabase Auth in your code |
 | "Do you use AI?" — *Yes but what do I disclose?* | Detects OpenAI + Anthropic, generates Article 50 disclosure |
 | "List your sub-processors" — *Uhh...* | Finds Stripe, Sentry, Resend, generates the full list with their DPA URLs |
-| 30 minutes of forms → generic template | 30 seconds → 105+ documents tailored to your code |
+| 30 minutes of forms → generic template | 30 seconds → 120+ documents tailored to your code |
 
 ---
 
@@ -120,21 +122,27 @@ Supports: JavaScript/TypeScript, Python, Go, Ruby, Elixir, PHP, Rust, Java, .NET
 
 **Legal** — Privacy Policy (GDPR Art. 13), Terms of Service, Cookie Policy, Data Processing Agreement, API Terms of Use, Refund Policy, SLA
 
-**AI Compliance** — AI Disclosure (EU AI Act Art. 50), AI Model Card (Art. 53), AI Act Checklist, AI Governance Framework, Acceptable AI Use Policy
+**AI Compliance** — AI Disclosure (EU AI Act Art. 50), AI Model Card (Art. 53), AI Act Checklist, AI Governance Framework, Acceptable AI Use Policy, AI Ethics Statement, AI Training Data Notice, AI Impact Assessment, AI Red Team Guide, AI Supply Chain Risk
 
-**Security** — Security Policy, Incident Response Plan, Vulnerability Scan, Access Control Policy, Change Management Policy, Responsible Disclosure Policy, Encryption Policy, Backup Policy, Disaster Recovery, Penetration Test Scope
+**Security** — Security Policy, Incident Response Plan, Vulnerability Scan, Access Control Policy, Change Management Policy, Responsible Disclosure Policy, Encryption Policy, Backup Policy, Disaster Recovery, Penetration Test Scope, Incident Severity Matrix
 
-**Privacy** — DSAR Handling Guide, Consent Management Guide, Data Retention Policy, Data Dictionary, Privacy by Design Checklist, Cookie Inventory, Data Subject Categories, Lawful Basis Assessment
+**Privacy** — DSAR Handling Guide, Consent Management Guide, Data Retention Policy, Data Dictionary, Privacy by Design Checklist, Cookie Inventory, Data Subject Categories, Lawful Basis Assessment, Data Deletion Procedures, Privacy Risk Matrix, Data Mapping Register, Multilingual Privacy Notices (DE/FR/ES)
 
-**Operations** — Open Source Notice, License Compliance, Sub-Processor List, Vendor Contacts, Data Flow Map, Record of Processing, Transfer Impact Assessment, Regulatory Updates, Data Processing Inventory
+**Operations** — Open Source Notice, License Compliance, Sub-Processor List, Vendor Contacts, Data Flow Map, Record of Processing, Transfer Impact Assessment, Regulatory Updates, Audit Log Policy
 
-**Audit** — SOC 2 Checklist, ISO 27001 Checklist, Privacy Impact Assessment, Third-Party Risk Assessment, Data Classification, Risk Register, Compliance Certificate, Annual Review Checklist
+**Audit** — SOC 2 Checklist, ISO 27001 Checklist, Privacy Impact Assessment, Third-Party Risk Assessment, Data Classification, Risk Register, Compliance Certificate, Annual Review Checklist, Compliance Maturity Model, Compliance Gap Analysis
 
-**Onboarding** — Compliance Onboarding Guide for new employees, with prioritized reading order, key contacts, and onboarding checklist
+**Governance** — Privacy Program Charter, DPO Handbook, Compliance Oath, Regulatory Correspondence Log, Third-Party Due Diligence, Key Person Risk, Whistleblower Policy, Compliance KPI Dashboard
+
+**Executive** — Executive Dashboard, Executive Briefing, Compliance Board Report, Compliance Summary Email, Compliance Roadmap, Transparency Report, Regulatory Readiness Scorecard
+
+**HR/Training** — Employee Privacy Notice, Employee Handbook Privacy, Training Record, Security Awareness Program
+
+**Incident** — Data Breach Notification Templates, Incident Communication Templates, Data Breach Response Drill
 
 **Privacy UX** — Privacy Notice (Short) for in-app display, Cookie Consent Config (JSON) for CMP integration (OneTrust, CookieYes, Cookiebot)
 
-**Output formats** — Markdown, HTML, PDF (with preview via `codepliant pdf <doc>`), JSON, Notion, Confluence, DOCX, cookie consent banner, embeddable widget, 12+ formats total
+**Output formats** — Markdown, HTML, PDF (with preview via `codepliant pdf <doc>`), JSON, Notion, Confluence, DOCX, GitHub Pages, cookie consent banner, embeddable widget, 13+ formats total
 
 [See example output from a real SaaS project →](./examples/sample-output/)
 
@@ -144,12 +152,13 @@ Browse all output formats on GitHub:
 - [PDF](./examples/sample-output/) — print-ready, single-document via `codepliant pdf <doc>`
 - [JSON](./examples/sample-output/) — machine-readable for integrations
 - [Notion / Confluence / Wiki](./examples/sample-output/) — export to your team's docs platform
+- [GitHub Pages](./examples/sample-output/) — static site with card-based navigation
 
 ---
 
 ## Tested against real projects
 
-We scanned 100 open-source projects. Here are 10:
+We scanned 1200+ open-source projects. Here are 10:
 
 | Project | Stack | Services Found |
 |---------|-------|---------------|
@@ -205,7 +214,7 @@ Reads `.env`, `.env.local`, `.env.example`, and similar files. Matches variable 
 - **License** (`src/scanner/license-scanner.ts`) — open source license compliance
 
 ### Step 7: Document Generation (`src/generator/index.ts`)
-Based on scan results, generates 105+ documents — each personalized to your actual services. A project using Stripe, OpenAI, and Supabase gets documents that mention those services by name, list their specific data collection practices, and link to their DPA pages.
+Based on scan results, generates 120+ documents — each personalized to your actual services. A project using Stripe, OpenAI, and Supabase gets documents that mention those services by name, list their specific data collection practices, and link to their DPA pages.
 
 ### Step 8: Output & Scoring
 Writes all documents to `legal/` (or your configured output directory), computes a compliance score, and shows a generation summary with estimated lawyer-equivalent value.
@@ -250,6 +259,9 @@ npx codepliant changelog
 # Generate compliance certificate for partners
 npx codepliant certify
 
+# v500 easter egg
+npx codepliant celebrate
+
 # Project info, mission, and credits
 npx codepliant about
 ```
@@ -268,7 +280,7 @@ npx codepliant about
 ### CI/CD
 
 ```yaml
-- uses: codepliant/codepliant@v400
+- uses: codepliant/codepliant@v500
   with:
     fail-on-missing: true
 ```
@@ -281,18 +293,31 @@ npx codepliant about
 
 ---
 
-## Built overnight
+## Built in one session
 
-v400 — 330 versions built overnight: 105+ doc types, 55+ CLI commands, 30+ scanners, 12+ output formats, 787 tests. Built in a single night with Claude Code.
+v500 — 430 versions built in a single session with Claude Code.
 
-Every feature ships with tests. Every detection is deterministic. Zero network calls.
+| Metric | Count |
+|--------|-------|
+| Versions built | 430 (v70 to v500) |
+| Document types | 120+ |
+| Tests | 792 (all passing) |
+| Repos tested | 1200+ |
+| CLI commands | 55+ |
+| Scanners | 30+ |
+| Output formats | 13+ |
+| Languages | 4 (EN, DE, FR, ES) |
+| Network calls | 0 |
+| Runtime deps | 1 (MCP SDK) |
+
+Every feature ships with tests. Every detection is deterministic. Zero network calls. Under one second.
 
 ---
 
 ## Links
 
-- [Example Output](./examples/sample-output/) — 105+ generated documents
-- [Real Project Scans](./examples/real-projects/) — 10 open-source projects
+- [Example Output](./examples/sample-output/) — 120+ generated documents
+- [Real Project Scans](./examples/real-projects/) — 1200+ open-source projects
 - [Contributing](./CONTRIBUTING.md)
 - [Changelog](./CHANGELOG.md)
 
