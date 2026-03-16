@@ -6,7 +6,7 @@ Thanks for your interest in contributing. This guide covers the main extension p
 
 ```bash
 # Clone the repo
-git clone https://github.com/codepliant/codepliant.git
+git clone https://github.com/joechensmartz/codepliant.git
 cd codepliant
 
 # Install dependencies
