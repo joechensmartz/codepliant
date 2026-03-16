@@ -128,6 +128,8 @@ import { generateComplianceFAQ } from "./compliance-faq.js";
 import { generatePrivacyRoadmap } from "./privacy-roadmap.js";
 import { generateComplianceGlossary } from "./compliance-glossary.js";
 import { generateVendorRiskTierAssessment } from "./vendor-risk-tier.js";
+import { generateComplianceScorecardVisual } from "./compliance-scorecard-visual.js";
+import { generateDataSubjectRequestLog } from "./data-subject-request-log.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1269,6 +1271,26 @@ export function generateDocuments(
       name: "Vendor Risk Tier Assessment",
       filename: "VENDOR_RISK_TIER_ASSESSMENT.md",
       content: vendorRiskTier,
+    });
+  }
+
+  // Compliance Scorecard — visual ASCII scorecard with letter grades per area
+  const complianceScorecard = generateComplianceScorecardVisual(docScan, ctx);
+  if (complianceScorecard) {
+    docs.push({
+      name: "Compliance Scorecard",
+      filename: "COMPLIANCE_SCORECARD.md",
+      content: complianceScorecard,
+    });
+  }
+
+  // DSAR Log Template — spreadsheet-style template for logging data subject requests (GDPR Art. 12(5))
+  const dsarLogTemplate = generateDataSubjectRequestLog(docScan, ctx);
+  if (dsarLogTemplate) {
+    docs.push({
+      name: "DSAR Log Template",
+      filename: "DSAR_LOG_TEMPLATE.md",
+      content: dsarLogTemplate,
     });
   }
 

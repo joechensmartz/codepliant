@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "420.0.0";
+const VERSION = "430.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -132,6 +132,7 @@ ${BOLD()}Setup:${RESET()}
   ${CYAN()}hook${RESET()}            Install/uninstall pre-commit hook
   ${CYAN()}template${RESET()}        Manage custom document templates
   ${CYAN()}config show${RESET()}     Pretty-print current configuration
+  ${CYAN()}check-config${RESET()}    Validate config against schema, show completeness
 
 ${BOLD()}Account:${RESET()}
   ${CYAN()}upgrade${RESET()}         Upgrade to Pro or Team plan
@@ -1450,6 +1451,11 @@ function main() {
     if (command === "notify") {
       runNotify(absProjectPath, absOutputDir, quiet, jsonOutput, verbose);
       return;
+    }
+
+    if (command === "check-config") {
+      runCheckConfig(absProjectPath, quiet, jsonOutput);
+      process.exit(0);
     }
 
     if (command === "config") {
@@ -5337,6 +5343,144 @@ function runConfigShow(absProjectPath: string) {
   }
 
   console.log();
+}
+
+function runCheckConfig(absProjectPath: string, quiet: boolean, jsonOutput: boolean) {
+  if (!quiet) printBanner();
+
+  const exists = configExists(absProjectPath);
+
+  if (!exists) {
+    if (jsonOutput) {
+      console.log(JSON.stringify({ valid: false, completeness: 0, missing: ["config file"], warnings: [], suggestions: ["Run 'codepliant init' to create a configuration file."] }));
+      return;
+    }
+    console.log(`${RED()}${BOLD()}No .codepliantrc.json found.${RESET()}`);
+    console.log(`\n${DIM()}Run 'codepliant init' to create a configuration file.${RESET()}\n`);
+    return;
+  }
+
+  const config = loadConfig(absProjectPath);
+  const warnings = validateConfig(config);
+
+  // Define all fields with their importance for completeness scoring
+  const allFields: Array<{ key: keyof CodepliantConfig; label: string; weight: number; suggestion: string }> = [
+    { key: "companyName", label: "Company Name", weight: 15, suggestion: "Set your company name for personalized documents" },
+    { key: "contactEmail", label: "Contact Email", weight: 15, suggestion: "Set a valid contact email for privacy inquiries" },
+    { key: "website", label: "Website", weight: 5, suggestion: "Set your website URL for document references" },
+    { key: "jurisdictions", label: "Jurisdictions", weight: 10, suggestion: "Define applicable jurisdictions (e.g. [\"gdpr\", \"ccpa\"])" },
+    { key: "dpoName", label: "DPO Name", weight: 8, suggestion: "Appoint and name your Data Protection Officer" },
+    { key: "dpoEmail", label: "DPO Email", weight: 8, suggestion: "Set the DPO's contact email" },
+    { key: "securityEmail", label: "Security Email", weight: 5, suggestion: "Set a security contact for vulnerability reports" },
+    { key: "companyLocation", label: "Company Location", weight: 4, suggestion: "Set your company location for jurisdiction mapping" },
+    { key: "dataRetentionDays", label: "Data Retention Days", weight: 5, suggestion: "Define your data retention period in days" },
+    { key: "aiRiskLevel", label: "AI Risk Level", weight: 5, suggestion: "Classify AI risk level: minimal, limited, or high" },
+    { key: "outputDir", label: "Output Directory", weight: 3, suggestion: "Set custom output directory (default: legal)" },
+    { key: "language", label: "Language", weight: 3, suggestion: "Set document language (en, de, fr, es)" },
+    { key: "tollFreeNumber", label: "Toll-Free Number", weight: 4, suggestion: "CCPA requires a toll-free number for consumer requests" },
+    { key: "euRepresentative", label: "EU Representative", weight: 4, suggestion: "GDPR Art. 27 requires an EU representative for non-EU companies" },
+    { key: "bugBountyUrl", label: "Bug Bounty URL", weight: 3, suggestion: "Link to your vulnerability disclosure program" },
+    { key: "aiUsageDescription", label: "AI Usage Description", weight: 3, suggestion: "Describe how AI is used in your product for disclosures" },
+  ];
+
+  // Check which fields are set and not placeholders
+  const PLACEHOLDER_RE = [/^\[.*\]$/, /^your[- ]/i, /example\.com$/i, /^TODO/i, /^CHANGEME/i, /^PLACEHOLDER/i];
+  function isFieldSet(key: keyof CodepliantConfig): boolean {
+    const v = config[key];
+    if (v === undefined || v === null) return false;
+    if (typeof v === "string") {
+      if (v.trim().length === 0) return false;
+      if (PLACEHOLDER_RE.some((re) => re.test(v))) return false;
+    }
+    if (Array.isArray(v) && v.length === 0) return false;
+    return true;
+  }
+
+  let totalWeight = 0;
+  let earnedWeight = 0;
+  const missing: string[] = [];
+  const suggestions: string[] = [];
+
+  for (const field of allFields) {
+    totalWeight += field.weight;
+    if (isFieldSet(field.key)) {
+      earnedWeight += field.weight;
+    } else {
+      missing.push(field.label);
+      suggestions.push(field.suggestion);
+    }
+  }
+
+  const completeness = Math.round((earnedWeight / totalWeight) * 100);
+
+  if (jsonOutput) {
+    console.log(JSON.stringify({
+      valid: warnings.length === 0,
+      completeness,
+      missing,
+      warnings: warnings.map((w) => ({ field: w.field, message: w.message })),
+      suggestions,
+    }, null, 2));
+    return;
+  }
+
+  // Visual output
+  console.log(`${BOLD()}Config Validation Results${RESET()}\n`);
+  console.log(`${BOLD()}File:${RESET()} ${path.join(absProjectPath, ".codepliantrc.json")}\n`);
+
+  // Completeness bar
+  const barLength = 20;
+  const filled = Math.round((completeness / 100) * barLength);
+  const empty = barLength - filled;
+  const barColor = completeness >= 80 ? GREEN() : completeness >= 50 ? YELLOW() : RED();
+  console.log(`${BOLD()}Completeness:${RESET()} ${barColor}${"█".repeat(filled)}${"░".repeat(empty)}${RESET()} ${BOLD()}${completeness}%${RESET()}`);
+  console.log(``);
+
+  // Field status
+  console.log(`${BOLD()}Field Status:${RESET()}`);
+  const warningFields = new Set(warnings.map((w) => w.field));
+  for (const field of allFields) {
+    const set = isFieldSet(field.key);
+    const hasWarning = warningFields.has(field.key);
+    if (set && !hasWarning) {
+      console.log(`  ${GREEN()}✓${RESET()} ${field.label}`);
+    } else if (set && hasWarning) {
+      console.log(`  ${YELLOW()}⚠${RESET()} ${field.label} ${YELLOW()}(warning)${RESET()}`);
+    } else {
+      console.log(`  ${DIM()}○${RESET()} ${field.label} ${DIM()}(not set)${RESET()}`);
+    }
+  }
+  console.log(``);
+
+  // Warnings
+  if (warnings.length > 0) {
+    console.log(`${YELLOW()}${BOLD()}Warnings (${warnings.length}):${RESET()}`);
+    for (const w of warnings) {
+      console.log(`  ${YELLOW()}⚠${RESET()} ${w.field}: ${w.message}`);
+    }
+    console.log(``);
+  }
+
+  // Missing fields with suggestions
+  if (missing.length > 0) {
+    console.log(`${CYAN()}${BOLD()}Missing Fields (${missing.length}):${RESET()}`);
+    for (let i = 0; i < missing.length; i++) {
+      console.log(`  ${CYAN()}+${RESET()} ${missing[i]}: ${DIM()}${suggestions[i]}${RESET()}`);
+    }
+    console.log(``);
+  }
+
+  // Summary message
+  if (completeness >= 90) {
+    console.log(`${GREEN()}${BOLD()}Your config is ${completeness}% complete. Excellent!${RESET()}`);
+  } else if (completeness >= 70) {
+    console.log(`${GREEN()}Your config is ${completeness}% complete.${RESET()} ${DIM()}Missing: ${missing.slice(0, 3).join(", ")}${missing.length > 3 ? ` (+${missing.length - 3} more)` : ""}${RESET()}`);
+  } else if (completeness >= 50) {
+    console.log(`${YELLOW()}Your config is ${completeness}% complete.${RESET()} ${DIM()}Missing: ${missing.slice(0, 3).join(", ")}${missing.length > 3 ? ` (+${missing.length - 3} more)` : ""}${RESET()}`);
+  } else {
+    console.log(`${RED()}Your config is ${completeness}% complete.${RESET()} ${DIM()}Missing: ${missing.slice(0, 3).join(", ")}${missing.length > 3 ? ` (+${missing.length - 3} more)` : ""}${RESET()}`);
+  }
+  console.log(`\n${DIM()}Run 'codepliant init' or edit .codepliantrc.json to improve completeness.${RESET()}\n`);
 }
 
 function maskValue(value: string): string {

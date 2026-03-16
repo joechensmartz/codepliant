@@ -1,6 +1,6 @@
 {
   "name": "codepliant",
-  "version": "420.0.0",
+  "version": "430.0.0",
   "description": "Scan your codebase, generate compliance documents. Privacy Policy, Terms of Service, AI Disclosure, Cookie Policy, DPA — all from your actual code.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
