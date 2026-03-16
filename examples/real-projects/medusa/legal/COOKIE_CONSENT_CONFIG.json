@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-03-16T19:00:30.513Z",
+  "project": "root",
+  "company": "[Your Company Name]",
+  "consent_settings": {
+    "require_explicit_consent": true,
+    "show_on_first_visit": true,
+    "respect_dnt": true,
+    "cookie_name": "cookie_consent",
+    "cookie_duration_days": 365,
+    "position": "bottom"
+  },
+  "categories": [
+    {
+      "id": "strictly_necessary",
+      "name": "Strictly Necessary",
+      "description": "Essential cookies required for the website to function. These cannot be disabled.",
+      "required": true,
+      "default_state": "enabled"
+    },
+    {
+      "id": "functional",
+      "name": "Functional",
+      "description": "Cookies that enable enhanced functionality like live chat, error tracking, and personalization.",
+      "required": false,
+      "default_state": "disabled"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics",
+      "description": "Cookies that help us understand how visitors interact with our website by collecting anonymous usage data.",
+      "required": false,
+      "default_state": "disabled"
+    },
+    {
+      "id": "advertising",
+      "name": "Advertising",
+      "description": "Cookies used to deliver relevant advertisements and track ad campaign performance.",
+      "required": false,
+      "default_state": "disabled"
+    }
+  ],
+  "providers": [
+    {
+      "name": "posthog",
+      "category_id": "analytics",
+      "provider": "PostHog Inc",
+      "purpose": "Product analytics, session recording, and feature flags",
+      "cookies": [
+        "ph_*",
+        "distinct_id"
+      ],
+      "duration": "Up to 1 year",
+      "privacy_policy_url": "https://posthog.com/privacy"
+    },
+    {
+      "name": "stripe",
+      "category_id": "strictly_necessary",
+      "provider": "Stripe Inc",
+      "purpose": "Payment processing (required for transactions)",
+      "cookies": [
+        "__stripe_mid",
+        "__stripe_sid"
+      ],
+      "duration": "Up to 1 year",
+      "privacy_policy_url": "https://stripe.com/privacy"
+    }
+  ],
+  "cmp_integration": {
+    "onetrust": {
+      "category_mapping": {
+        "strictly_necessary": "C0001",
+        "functional": "C0003",
+        "analytics": "C0002",
+        "advertising": "C0004"
+      }
+    },
+    "cookieyes": {
+      "category_mapping": {
+        "strictly_necessary": "necessary",
+        "functional": "functional",
+        "analytics": "analytics",
+        "advertising": "advertisement"
+      }
+    },
+    "cookiebot": {
+      "category_mapping": {
+        "strictly_necessary": "necessary",
+        "functional": "preferences",
+        "analytics": "statistics",
+        "advertising": "marketing"
+      }
+    }
+  }
+}

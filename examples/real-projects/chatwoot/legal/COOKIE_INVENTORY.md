@@ -1,0 +1,114 @@
+# Cookie Inventory
+
+> **Document Version:** 1.0  
+> **Document Owner:** [Your Company Name]  
+> **Next Review Date:** 2027-03-16
+
+
+**Last updated:** 2026-03-16
+
+**Project:** @chatwoot/chatwoot
+**Organization:** [Your Company Name]
+
+## Related Documents
+
+- Cookie Policy (`COOKIE_POLICY.md`)
+- Consent Management Guide (`CONSENT_MANAGEMENT_GUIDE.md`)
+
+---
+
+This document provides a complete inventory of all cookies and similar tracking technologies used by this application. This inventory is required by the ePrivacy Directive (Directive 2002/58/EC, as amended by Directive 2009/136/EC) and supports GDPR transparency requirements.
+
+## Summary
+
+| Category | Count | Consent Required |
+|----------|-------|-----------------|
+| Strictly Necessary | 4 | No (exempt under ePrivacy Directive Art. 5(3)) |
+| Analytics | 2 | Yes |
+| Advertising | 3 | Yes |
+| **Total** | **9** | |
+
+## Strictly Necessary Cookies
+
+These cookies are essential for the application to function and cannot be disabled. They do not require user consent under Article 5(3) of the ePrivacy Directive.
+
+| Cookie Name | Purpose | Duration | Provider |
+|-------------|---------|----------|----------|
+| `session_id / connect.sid` | Maintains authenticated user session on the server | Session or configured expiry | First-party |
+| `auth_token / jwt` | Stores authentication token for API authorization | Varies (typically 1 hour to 30 days) | First-party |
+| `csrf_token / XSRF-TOKEN` | Prevents cross-site request forgery attacks | Session | First-party |
+| `refresh_token` | Enables silent re-authentication when access token expires | 30-90 days (varies) | First-party |
+
+## Analytics Cookies
+
+These cookies collect information about how visitors use the application. They require explicit user consent before being set.
+
+| Cookie Name | Purpose | Duration | Provider | Service |
+|-------------|---------|----------|----------|---------|
+| `amp_*` | Identifies users and tracks events for product analytics | 10 years | Amplitude Inc | @amplitude/analytics-browser |
+| `AMP_*` | Stores device and session identifiers for analytics | 10 years | Amplitude Inc | @amplitude/analytics-browser |
+
+## Advertising Cookies
+
+These cookies are used for advertising, retargeting, and conversion tracking. They require explicit user consent and must be blocked until consent is obtained.
+
+| Cookie Name | Purpose | Duration | Provider | Service |
+|-------------|---------|----------|----------|---------|
+| `_fbp` | Identifies browsers for advertising and site analytics | 3 months | Meta Platforms Inc | Meta Pixel |
+| `_fbc` | Stores last visit information for Facebook ad attribution | 3 months | Meta Platforms Inc | Meta Pixel |
+| `fr` | Delivers and measures advertising relevance | 3 months | Meta Platforms Inc | Meta Pixel |
+
+## Detected Services
+
+The following services were detected in the codebase that set or use cookies:
+
+### Authentication Services
+
+- **devise** — detected in `Gemfile`
+- **omniauth** — detected in `Gemfile`, `Gemfile`
+- **pundit** — detected in `Gemfile`
+- **rails-sessions** — detected in `(framework-implicit)`
+
+### Analytics & Advertising Services
+
+- **@amplitude/analytics-browser** — detected in `package.json`, `app/javascript/dashboard/helper/AnalyticsHelper/index.js`
+- **Meta Pixel** — detected in `app/javascript/dashboard/routes/dashboard/settings/inbox/channels/Facebook.vue`, `app/javascript/dashboard/routes/dashboard/settings/inbox/facebook/Reauthorize.vue`
+
+## Legal Requirements
+
+### ePrivacy Directive (EU)
+
+Under Article 5(3) of the ePrivacy Directive:
+
+- **Strictly necessary cookies** may be set without consent (e.g., session cookies, CSRF tokens)
+- **All other cookies** require informed, specific, and freely given consent before being set
+- Users must be able to **withdraw consent** as easily as they gave it
+- Consent must be obtained **before** cookies are placed (no implied consent)
+
+### GDPR (EU)
+
+- Cookie consent constitutes processing of personal data under GDPR Article 6(1)(a)
+- Users have the right to know what cookies are used (this inventory)
+- Data collected via cookies is subject to all GDPR rights (access, erasure, portability)
+
+### CCPA/CPRA (California)
+
+- Users must be informed about categories of personal information collected via cookies
+- "Do Not Sell or Share My Personal Information" link must be provided if advertising cookies are used
+- Global Privacy Control (GPC) signals must be honored
+
+## Inventory Maintenance
+
+This cookie inventory should be reviewed and updated:
+
+- [ ] When adding or removing third-party services
+- [ ] When changing authentication providers
+- [ ] When adding new tracking or analytics tools
+- [ ] At minimum quarterly, or after any significant application change
+- [ ] After any audit finding related to cookies or tracking
+
+For questions about this cookie inventory, contact **[your-email@example.com]**.
+
+---
+
+*This cookie inventory was generated by [Codepliant](https://github.com/joechensmartz/codepliant) based on an automated scan of the **@chatwoot/chatwoot** codebase. It should be reviewed by your legal team to ensure completeness and accuracy. Additional cookies may be set by third-party scripts loaded at runtime that are not detectable through static code analysis.*

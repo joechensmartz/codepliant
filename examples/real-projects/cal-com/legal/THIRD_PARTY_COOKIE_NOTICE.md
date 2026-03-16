@@ -1,0 +1,120 @@
+# Third-Party Cookie Notice
+
+> **Document Version:** 1.0  
+> **Document Owner:** [Your Company Name]  
+> **Next Review Date:** 2027-03-16
+
+
+**Last updated:** 2026-03-16
+
+**Project:** calcom-monorepo
+**Organization:** [Your Company Name]
+
+---
+
+This notice describes the third-party cookies and similar tracking technologies used by this application. Each provider is listed with the specific cookies they set, their purposes, retention periods, and instructions for opting out.
+
+Under the ePrivacy Directive (Art. 5(3)) and GDPR (Art. 6(1)(a)), non-essential cookies require explicit, informed consent before being placed on your device.
+
+## Provider Summary
+
+| Provider | Cookies | Category | Opt-Out Available |
+|----------|---------|----------|-------------------|
+| Google LLC | 4 | Analytics | [Yes](https://tools.google.com/dlpage/gaoptout) |
+| First-party (NextAuth.js) | 3 | Authentication | [Yes](N/A (first-party authentication)) |
+| PostHog Inc | 2 | Analytics | [Yes](https://posthog.com/docs/libraries/js#opt-users-out) |
+
+## Google LLC
+
+**Service:** Google Analytics
+**Privacy Policy:** [https://policies.google.com/privacy](https://policies.google.com/privacy)
+**Opt-Out URL:** [https://tools.google.com/dlpage/gaoptout](https://tools.google.com/dlpage/gaoptout)
+
+### Cookies Set
+
+| Cookie Name | Purpose | Duration |
+|-------------|---------|----------|
+| `_ga` | Distinguishes unique users by assigning a randomly generated number | 2 years |
+| `_ga_*` | Persists session state across page requests | 2 years |
+| `_gid` | Distinguishes users for analytics aggregation | 24 hours |
+| `_gat` | Throttles request rate to Google Analytics | 1 minute |
+
+### How to Opt Out
+
+To opt out of Google LLC cookies:
+
+1. Visit the opt-out page: [https://tools.google.com/dlpage/gaoptout](https://tools.google.com/dlpage/gaoptout)
+2. Use your browser's cookie management settings to block cookies from Google LLC
+3. Use the cookie consent banner on our application to decline non-essential cookies
+4. Enable Global Privacy Control (GPC) in your browser to signal opt-out automatically
+
+## First-party (NextAuth.js)
+
+**Service:** next-auth
+**Privacy Policy:** [https://next-auth.js.org/](https://next-auth.js.org/)
+**Opt-Out URL:** [N/A (first-party authentication)](N/A (first-party authentication))
+
+### Cookies Set
+
+| Cookie Name | Purpose | Duration |
+|-------------|---------|----------|
+| `next-auth.session-token` | Stores encrypted session data | 30 days |
+| `next-auth.csrf-token` | CSRF protection for sign-in/sign-out | Session |
+| `next-auth.callback-url` | Stores the callback URL for OAuth redirect | Session |
+
+### How to Opt Out
+
+This is a first-party authentication service. These cookies are strictly necessary for the application to function and cannot be opted out of without losing access to authenticated features.
+
+## PostHog Inc
+
+**Service:** posthog
+**Privacy Policy:** [https://posthog.com/privacy](https://posthog.com/privacy)
+**Opt-Out URL:** [https://posthog.com/docs/libraries/js#opt-users-out](https://posthog.com/docs/libraries/js#opt-users-out)
+
+### Cookies Set
+
+| Cookie Name | Purpose | Duration |
+|-------------|---------|----------|
+| `ph_*` | Identifies unique users for product analytics and session recording | 1 year |
+| `distinct_id` | Identifies users across sessions for analytics continuity | 1 year |
+
+### How to Opt Out
+
+To opt out of PostHog Inc cookies:
+
+1. Visit the opt-out page: [https://posthog.com/docs/libraries/js#opt-users-out](https://posthog.com/docs/libraries/js#opt-users-out)
+2. Use your browser's cookie management settings to block cookies from PostHog Inc
+3. Use the cookie consent banner on our application to decline non-essential cookies
+4. Enable Global Privacy Control (GPC) in your browser to signal opt-out automatically
+
+## Your Rights
+
+Under applicable data protection laws, you have the right to:
+
+- **Withdraw consent** at any time for non-essential cookies
+- **Access** information about what data third-party cookies collect about you
+- **Request deletion** of data collected via cookies
+- **Object** to processing based on legitimate interest
+- **Port** your data collected via cookies to another controller (GDPR Art. 20)
+
+### Browser-Level Controls
+
+You can manage cookies through your browser settings:
+
+- **Chrome:** Settings > Privacy and Security > Cookies and other site data
+- **Firefox:** Settings > Privacy & Security > Cookies and Site Data
+- **Safari:** Settings > Privacy > Manage Website Data
+- **Edge:** Settings > Privacy, search, and services > Cookies and site permissions
+
+### Global Privacy Control (GPC)
+
+This application honors Global Privacy Control signals. When GPC is enabled in your browser, we treat it as a valid opt-out of non-essential cookies and tracking.
+
+## Contact
+
+If you have questions about third-party cookies used by this application, contact us at **[your-email@example.com]**.
+
+---
+
+*This third-party cookie notice was generated by [Codepliant](https://github.com/joechensmartz/codepliant) based on an automated scan of the **calcom-monorepo** codebase. It should be reviewed by your legal team to ensure completeness and accuracy. Additional cookies may be set by third-party scripts loaded at runtime that are not detectable through static code analysis.*

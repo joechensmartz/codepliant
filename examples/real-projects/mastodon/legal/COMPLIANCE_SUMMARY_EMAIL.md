@@ -1,0 +1,176 @@
+# Compliance Summary — [Your Company Name]
+
+> **Document Version:** 1.0  
+> **Document Owner:** [Your Company Name]  
+> **Next Review Date:** 2027-03-16
+
+
+**Date:** 2026-03-16
+**Prepared by:** [Data Protection Officer Name] ([dpo@example.com])
+**Contact:** [your-email@example.com]
+**Report type:** Periodic Compliance Status Update
+
+---
+
+> **This document is formatted as an email-ready compliance summary for distribution to stakeholders, board members, and executive leadership.**
+
+---
+
+## Executive Summary
+
+[Your Company Name] currently operates **22 third-party service(s)** that process user data. A total of **72 compliance document(s)** have been generated covering all applicable regulatory requirements.
+
+| Metric | Value |
+|--------|-------|
+| Overall Compliance Grade | **A** (Green) |
+| Critical Document Coverage | 100% |
+| Services Detected | 22 |
+| Documents Generated | 72 |
+| Applicable Jurisdictions | GDPR, CCPA (default) |
+
+---
+
+## Service Inventory
+
+| Category | Count | Services |
+|----------|-------|----------|
+| Auth | 4 | devise, omniauth, pundit, rails-sessions |
+| Database | 8 | ActiveRecord, ioredis, pg, PostgreSQL, PostgreSQL (env), rails-activerecord, redis, Redis |
+| Email | 2 | ActionMailer, rails-actionmailer |
+| Other | 5 | ActionCable, ActionController::Cookies, rack-attack, sidekiq, ws (WebSocket) |
+| Storage | 3 | Active Storage, ActiveStorage, aws-sdk-s3 |
+
+---
+
+## Key Risks
+
+1. **High Service Count** (22 services): Large attack surface increases data breach risk. Sub-processor management is critical.
+
+---
+
+## Action Items
+
+- [ ] Review all generated compliance documents for accuracy
+- [ ] Have legal counsel approve Privacy Policy and Terms of Service
+- [ ] Schedule quarterly compliance review cadence
+- [ ] Distribute this summary to all stakeholders and board members
+
+---
+
+## Regulatory Coverage
+
+| Regulation | Status | Key Documents |
+|-----------|--------|---------------|
+| GDPR (EU) | Covered | Privacy Policy, DPA, DSAR Guide, Record of Processing |
+| CCPA (California) | Covered | Privacy Policy (CCPA section), Data Deletion Procedures |
+| EU AI Act | N/A | No AI services detected |
+| ePrivacy (Cookies) | Covered | Cookie Policy, Cookie Inventory, Consent Guide |
+| PCI DSS | N/A | No payment processing detected |
+
+---
+
+## Document Inventory
+
+The following compliance documents have been generated:
+
+- Privacy Policy (`PRIVACY_POLICY.md`)
+- Terms of Service (`TERMS_OF_SERVICE.md`)
+- Security Policy (`SECURITY.md`)
+- Incident Response Plan (`INCIDENT_RESPONSE_PLAN.md`)
+- Cookie Policy (`COOKIE_POLICY.md`)
+- Data Processing Agreement (`DATA_PROCESSING_AGREEMENT.md`)
+- Sub-Processor List (`SUBPROCESSOR_LIST.md`)
+- Data Retention Policy (`DATA_RETENTION_POLICY.md`)
+- DSAR Handling Guide (`DSAR_HANDLING_GUIDE.md`)
+- Vendor Contacts Directory (`VENDOR_CONTACTS.md`)
+- Data Flow Map (`DATA_FLOW_MAP.md`)
+- Compliance Notes (`COMPLIANCE_NOTES.md`)
+- Compliance Timeline (`COMPLIANCE_TIMELINE.md`)
+- SOC 2 Readiness Checklist (`SOC2_READINESS_CHECKLIST.md`)
+- ISO 27001 Compliance Checklist (`ISO_27001_CHECKLIST.md`)
+- Third-Party Risk Assessment (`THIRD_PARTY_RISK_ASSESSMENT.md`)
+- Environment Variable Audit (`ENV_AUDIT.md`)
+- Data Classification Report (`DATA_CLASSIFICATION.md`)
+- Dependency Vulnerability Scan (`VULNERABILITY_SCAN.md`)
+- Regulatory Updates (`REGULATORY_UPDATES.md`)
+- Transparency Report (`TRANSPARENCY_REPORT.md`)
+- Acceptable Use Policy (`ACCEPTABLE_USE_POLICY.md`)
+- Data Flow Diagram (`DATA_FLOW_DIAGRAM.md`)
+- Audit Log Policy (`AUDIT_LOG_POLICY.md`)
+- Risk Register (`RISK_REGISTER.md`)
+- License Compliance Report (`LICENSE_COMPLIANCE.md`)
+- Record of Processing Activities (`RECORD_OF_PROCESSING_ACTIVITIES.md`)
+- Data Dictionary (`DATA_DICTIONARY.md`)
+- Access Control Policy (`ACCESS_CONTROL_POLICY.md`)
+- Change Management Policy (`CHANGE_MANAGEMENT_POLICY.md`)
+- Data Breach Notification Templates (`DATA_BREACH_NOTIFICATION_TEMPLATE.md`)
+- Vendor Security Questionnaire (`VENDOR_SECURITY_QUESTIONNAIRE.md`)
+- API Privacy Documentation (`API_PRIVACY_DOCUMENTATION.md`)
+- Supplier Code of Conduct (`SUPPLIER_CODE_OF_CONDUCT.md`)
+- Privacy by Design Checklist (`PRIVACY_BY_DESIGN_CHECKLIST.md`)
+- Penetration Test Scope (`PENTEST_SCOPE.md`)
+- Cookie Inventory (`COOKIE_INVENTORY.md`)
+- Business Continuity Plan (`BUSINESS_CONTINUITY_PLAN.md`)
+- Encryption Policy (`ENCRYPTION_POLICY.md`)
+- Backup Policy (`BACKUP_POLICY.md`)
+- Disaster Recovery Plan (`DISASTER_RECOVERY_PLAN.md`)
+- Information Security Policy (`INFORMATION_SECURITY_POLICY.md`)
+- Data Subject Categories (`DATA_SUBJECT_CATEGORIES.md`)
+- Lawful Basis Assessment (`LAWFUL_BASIS_ASSESSMENT.md`)
+- Annual Review Checklist (`ANNUAL_REVIEW_CHECKLIST.md`)
+- Sub-Processor Change Notification (`SUBPROCESSOR_CHANGE_NOTIFICATION.md`)
+- Data Protection Policy (`DATA_PROTECTION_POLICY.md`)
+- Media Consent Form (`MEDIA_CONSENT_FORM.md`)
+- Responsible Disclosure Policy (`RESPONSIBLE_DISCLOSURE_POLICY.md`)
+- Open Source Notice (`OPEN_SOURCE_NOTICE.md`)
+- Employee Handbook Privacy Section (`EMPLOYEE_HANDBOOK_PRIVACY_SECTION.md`)
+- Vendor Onboarding Checklist (`VENDOR_ONBOARDING_CHECKLIST.md`)
+- Executive Dashboard (`EXECUTIVE_DASHBOARD.md`)
+- Privacy Notice (Short) (`PRIVACY_NOTICE_SHORT.md`)
+- Cookie Consent Configuration (`COOKIE_CONSENT_CONFIG.json`)
+- Quick Start Compliance Guide (`QUICK_START_COMPLIANCE_GUIDE.md`)
+- Compliance Roadmap (`COMPLIANCE_ROADMAP.md`)
+- Privacy Dashboard Configuration (`PRIVACY_DASHBOARD_CONFIG.json`)
+- DPO Handbook (`DPO_HANDBOOK.md`)
+- Incident Communication Templates (`INCIDENT_COMMUNICATION_TEMPLATES.md`)
+- Training Record (`TRAINING_RECORD.md`)
+- Consent Record Template (`CONSENT_RECORD_TEMPLATE.md`)
+- Data Deletion Procedures (`DATA_DELETION_PROCEDURES.md`)
+- Security Awareness Program (`SECURITY_AWARENESS_PROGRAM.md`)
+- Privacy Risk Matrix (`PRIVACY_RISK_MATRIX.md`)
+- Data Mapping Register (`DATA_MAPPING_REGISTER.md`)
+- Data Breach Response Drill Template (`DATA_BREACH_DRILL_TEMPLATE.md`)
+- Regulatory Correspondence Log (`REGULATORY_CORRESPONDENCE_LOG.md`)
+- Privacy Policy Changelog (`PRIVACY_POLICY_CHANGELOG.md`)
+- Privacy Program Charter (`PRIVACY_PROGRAM_CHARTER.md`)
+- Third-Party Due Diligence Template (`THIRD_PARTY_DUE_DILIGENCE_TEMPLATE.md`)
+- Compliance Maturity Model (`COMPLIANCE_MATURITY_MODEL.md`)
+
+---
+
+## Next Steps
+
+1. **Immediate (this week):** Review and approve critical documents (Privacy Policy, Terms of Service, Security Policy)
+2. **Short-term (30 days):** Complete legal review of all generated documents
+3. **Medium-term (90 days):** Implement consent management, DSAR handling procedures, and incident response testing
+4. **Ongoing:** Schedule quarterly compliance reviews and document updates
+
+---
+
+## Distribution List
+
+This summary should be distributed to:
+
+- [ ] CEO / Founder
+- [ ] CTO / VP Engineering
+- [ ] General Counsel / Legal
+- [ ] Data Protection Officer
+- [ ] Board of Directors
+- [ ] CISO / Security Lead
+- [ ] VP Product
+
+---
+
+*Generated by [Codepliant](https://github.com/joechensmartz/codepliant) on 2026-03-16. This is an automated compliance summary based on code analysis. It should be reviewed by qualified legal counsel before distribution.*
+
+*Report generated from analysis of 22 service(s) across 5 categories.*

@@ -1,0 +1,236 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-03-16T19:00:50.307Z",
+  "project": "calcom-monorepo",
+  "company": "[Your Company Name]",
+  "contact_email": "[your-email@example.com]",
+  "dpo": {
+    "name": "[Data Protection Officer]",
+    "email": "[dpo@example.com]"
+  },
+  "dashboard_settings": {
+    "title": "[Your Company Name] — My Data",
+    "description": "View, export, and manage your personal data at [Your Company Name].",
+    "show_data_categories": true,
+    "show_consent_management": true,
+    "show_data_export": true,
+    "show_data_deletion": true,
+    "show_processing_history": true
+  },
+  "data_categories": [
+    {
+      "id": "communications",
+      "name": "Communication Data",
+      "description": "Email addresses and communication preferences used to send transactional and marketing messages.",
+      "legal_basis": "Consent / Legitimate interest",
+      "retention_period": "Until unsubscribe + 30 days",
+      "user_can_delete": true,
+      "user_can_export": true,
+      "sources": [
+        "@sendgrid/mail",
+        "nodemailer"
+      ]
+    },
+    {
+      "id": "technical",
+      "name": "Technical Data",
+      "description": "Error logs, performance metrics, and diagnostic data collected to maintain and improve service reliability.",
+      "legal_basis": "Legitimate interest (Art. 6(1)(f) GDPR)",
+      "retention_period": "90 days",
+      "user_can_delete": false,
+      "user_can_export": false,
+      "sources": [
+        "@sentry/nextjs"
+      ]
+    },
+    {
+      "id": "stored_data",
+      "name": "Stored Data",
+      "description": "Structured data stored in databases as part of service operation.",
+      "legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",
+      "retention_period": "Duration of account + 30 days",
+      "user_can_delete": true,
+      "user_can_export": true,
+      "sources": [
+        "@upstash/redis",
+        "ioredis",
+        "PostgreSQL",
+        "PostgreSQL (env)",
+        "prisma",
+        "Redis",
+        "Redis (env)"
+      ]
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Data",
+      "description": "Usage data collected to understand how you interact with our service, including page views, clicks, and session duration.",
+      "legal_basis": "Legitimate interest (Art. 6(1)(f) GDPR)",
+      "retention_period": "26 months",
+      "user_can_delete": true,
+      "user_can_export": true,
+      "sources": [
+        "Google Analytics",
+        "Google Tag Manager",
+        "Plausible Analytics",
+        "posthog"
+      ]
+    },
+    {
+      "id": "account",
+      "name": "Account Data",
+      "description": "Information you provide when creating and managing your account, including email address, name, and authentication credentials.",
+      "legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",
+      "retention_period": "Duration of account + 30 days",
+      "user_can_delete": true,
+      "user_can_export": true,
+      "sources": [
+        "google-auth-library",
+        "next-auth",
+        "passport"
+      ]
+    },
+    {
+      "id": "payment",
+      "name": "Payment Data",
+      "description": "Billing and transaction information processed for purchases, including payment method details (handled by our payment processor).",
+      "legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",
+      "retention_period": "7 years (legal requirement)",
+      "user_can_delete": false,
+      "user_can_export": true,
+      "sources": [
+        "stripe"
+      ]
+    }
+  ],
+  "consent_options": [
+    {
+      "id": "essential_consent",
+      "name": "Essential Services",
+      "description": "Required for the service to function. Cannot be disabled.",
+      "required": true,
+      "default_state": "opted_in",
+      "category_ids": [
+        "account",
+        "payment",
+        "stored_data"
+      ]
+    },
+    {
+      "id": "analytics_consent",
+      "name": "Analytics",
+      "description": "Allow us to collect anonymous usage data to improve our service.",
+      "required": false,
+      "default_state": "opted_out",
+      "category_ids": [
+        "analytics"
+      ]
+    },
+    {
+      "id": "marketing_consent",
+      "name": "Marketing Communications",
+      "description": "Receive product updates, tips, and promotional offers via email.",
+      "required": false,
+      "default_state": "opted_out",
+      "category_ids": [
+        "communications"
+      ]
+    }
+  ],
+  "data_endpoints": [
+    {
+      "action": "export",
+      "method": "POST",
+      "path": "/api/privacy/export",
+      "description": "Request a full export of your personal data in machine-readable format (JSON/CSV).",
+      "requires_auth": true
+    },
+    {
+      "action": "delete",
+      "method": "POST",
+      "path": "/api/privacy/delete",
+      "description": "Request deletion of your account and all associated personal data.",
+      "requires_auth": true
+    },
+    {
+      "action": "consent",
+      "method": "PUT",
+      "path": "/api/privacy/consent",
+      "description": "Update your consent preferences for optional data processing.",
+      "requires_auth": true
+    },
+    {
+      "action": "access",
+      "method": "GET",
+      "path": "/api/privacy/data",
+      "description": "View a summary of all personal data we hold about you.",
+      "requires_auth": true
+    },
+    {
+      "action": "rectify",
+      "method": "PUT",
+      "path": "/api/privacy/rectify",
+      "description": "Request correction of inaccurate personal data.",
+      "requires_auth": true
+    },
+    {
+      "action": "restrict",
+      "method": "POST",
+      "path": "/api/privacy/restrict",
+      "description": "Request restriction of processing for specific data categories.",
+      "requires_auth": true
+    }
+  ],
+  "rights": [
+    {
+      "id": "right_access",
+      "name": "Right of Access",
+      "description": "You can request a copy of all personal data we hold about you.",
+      "regulation": "GDPR Art. 15 / CCPA Sec. 1798.100",
+      "endpoint": "/api/privacy/data"
+    },
+    {
+      "id": "right_rectification",
+      "name": "Right to Rectification",
+      "description": "You can request correction of inaccurate personal data.",
+      "regulation": "GDPR Art. 16",
+      "endpoint": "/api/privacy/rectify"
+    },
+    {
+      "id": "right_erasure",
+      "name": "Right to Erasure",
+      "description": "You can request deletion of your personal data (right to be forgotten).",
+      "regulation": "GDPR Art. 17 / CCPA Sec. 1798.105",
+      "endpoint": "/api/privacy/delete"
+    },
+    {
+      "id": "right_portability",
+      "name": "Right to Data Portability",
+      "description": "You can request your data in a structured, machine-readable format.",
+      "regulation": "GDPR Art. 20",
+      "endpoint": "/api/privacy/export"
+    },
+    {
+      "id": "right_restriction",
+      "name": "Right to Restrict Processing",
+      "description": "You can request that we limit how we process your data.",
+      "regulation": "GDPR Art. 18",
+      "endpoint": "/api/privacy/restrict"
+    },
+    {
+      "id": "right_object",
+      "name": "Right to Object",
+      "description": "You can object to processing based on legitimate interest or direct marketing.",
+      "regulation": "GDPR Art. 21",
+      "endpoint": "/api/privacy/consent"
+    }
+  ]
+}
+
+## Related Documents
+
+- Privacy Policy (`PRIVACY_POLICY.md`)
+- DSAR Handling Guide (`DSAR_HANDLING_GUIDE.md`)
+- Consent Management Guide (`CONSENT_MANAGEMENT_GUIDE.md`)
+- Cookie Consent Configuration (`COOKIE_CONSENT_CONFIG.json`)
+- Data Portability Guide (`DATA_PORTABILITY_GUIDE.md`)

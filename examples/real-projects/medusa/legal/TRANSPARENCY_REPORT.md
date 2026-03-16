@@ -1,0 +1,138 @@
+# Transparency Report — 2026
+
+> **Document Version:** 1.0  
+> **Document Owner:** [Your Company Name]  
+> **Next Review Date:** 2027-03-16
+
+
+**[Your Company Name]**
+**Reporting Period:** January 1, 2026 – December 31, 2026
+**Published:** [Publication Date]
+
+> This transparency report provides information about government and authority requests for user data, content removal requests, and our compliance metrics. We publish this report annually to maintain accountability and build trust with our users.
+
+## Executive Summary
+
+[Your Company Name] is committed to transparency about how we handle data requests from governments and authorities. This report covers the period from January 1 to December 31, 2026.
+
+| Metric | Count |
+|--------|-------|
+| Total government data requests | [NUMBER] |
+| Requests fully complied with | [NUMBER] |
+| Requests partially complied with | [NUMBER] |
+| Requests challenged or denied | [NUMBER] |
+| Content removal requests | [NUMBER] |
+| User accounts affected | [NUMBER] |
+
+## Government & Authority Data Requests
+
+### Overview
+
+We receive requests for user data from law enforcement agencies, regulatory bodies, and other government authorities. We review each request for legal validity before responding.
+
+### Requests by Type
+
+| Request Type | Received | Complied | Partial | Challenged |
+|-------------|----------|----------|---------|------------|
+| Subpoena | [N] | [N] | [N] | [N] |
+| Court Order | [N] | [N] | [N] | [N] |
+| Search Warrant | [N] | [N] | [N] | [N] |
+| National Security Letter | [N] | [N] | [N] | [N] |
+| Emergency Disclosure | [N] | [N] | [N] | [N] |
+| International (MLAT) | [N] | [N] | [N] | [N] |
+| Regulatory Inquiry | [N] | [N] | [N] | [N] |
+| Other | [N] | [N] | [N] | [N] |
+
+### Requests by Jurisdiction
+
+| Jurisdiction | Requests Received |
+|-------------|------------------|
+| Other | [N] |
+
+### How We Process Requests
+
+1. **Receipt & logging** — All requests are logged and assigned a tracking number.
+2. **Legal review** — Our legal team reviews each request for validity and scope.
+3. **Narrowing** — We challenge overly broad requests and seek to narrow their scope.
+4. **User notification** — Where legally permitted, we notify affected users before disclosing data.
+5. **Compliance** — We produce only the data strictly required by the valid legal process.
+6. **Documentation** — All responses are documented for audit purposes.
+
+## Content Removal Requests
+
+| Source | Requests | Content Removed | Declined |
+|--------|----------|----------------|----------|
+| Government / Court Order | [N] | [N] | [N] |
+| DMCA / Copyright | [N] | [N] | [N] |
+| Community Reports | [N] | [N] | [N] |
+| Other | [N] | [N] | [N] |
+
+## Data Subject Requests (DSAR)
+
+| Request Type | Received | Completed | Average Response Time |
+|-------------|----------|-----------|----------------------|
+| Access (Right to Know) | [N] | [N] | [N] days |
+| Deletion (Right to Erasure) | [N] | [N] | [N] days |
+| Portability | [N] | [N] | [N] days |
+| Rectification | [N] | [N] | [N] days |
+| Opt-Out of Sale | [N] | [N] | [N] days |
+
+## Compliance Metrics
+
+### Third-Party Service Oversight
+
+| Metric | Value |
+|--------|-------|
+| Third-party services in use | 11 |
+| Service categories | storage, analytics, email, other, database, ai, payment |
+| DPA agreements in place | [N] / 11 |
+| Vendor security reviews completed | [N] / 11 |
+
+### Security & Incidents
+
+| Metric | Value |
+|--------|-------|
+| Data breaches reported | [N] |
+| Security incidents (total) | [N] |
+| Mean time to detect (MTTD) | [N] hours |
+| Mean time to respond (MTTR) | [N] hours |
+| Breach notification compliance rate | [N]% |
+
+### Privacy Program
+
+| Metric | Value |
+|--------|-------|
+| Privacy impact assessments conducted | [N] |
+| Employee privacy training completion | [N]% |
+| Policy reviews completed | [N] |
+| Consent collection compliance rate | [N]% |
+
+## Warrant Canary
+
+As of the date of this report, [Your Company Name] has not received:
+
+- Any National Security Letters with gag orders
+- Any orders under the Foreign Intelligence Surveillance Act (FISA)
+- Any requests to install backdoors in our products
+
+_If this section is removed in a future report, users should draw their own conclusions._
+
+## Methodology
+
+This report covers the calendar year stated above. All figures are aggregated and do not identify individual users. Our legal team reviews all data for accuracy before publication.
+
+Request counts include only formal legal process requests, not informal inquiries or public record requests.
+
+## Contact
+
+For questions about this transparency report, contact: [your-email@example.com]
+
+## Related Documents
+
+- Privacy Policy (`PRIVACY_POLICY.md`)
+- DSAR Handling Guide (`DSAR_HANDLING_GUIDE.md`)
+- Annual Review Checklist (`ANNUAL_REVIEW_CHECKLIST.md`)
+
+---
+
+*This transparency report was generated by Codepliant on 2026-03-16. The template includes placeholder values marked with [N] or [NUMBER] that must be filled in with actual data before publication. This document should be reviewed by legal counsel before publication.*
