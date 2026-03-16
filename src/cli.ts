@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "430.0.0";
+const VERSION = "440.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -221,6 +221,7 @@ Designed for CTO/CISO review, investor due diligence, and audit trail.
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
   ${DIM()}--executive-summary${RESET()}   Also generate a one-page EXECUTIVE_SUMMARY.md (Pro)
+  ${DIM()}--email${RESET()}               Also generate email-friendly HTML (inline CSS, copy-pasteable)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--no-color${RESET()}            Disable colored output
@@ -229,6 +230,7 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant report${RESET()}                    Generate report for current directory
   ${CYAN()}codepliant report ./my-app${RESET()}            Report for a specific project
   ${CYAN()}codepliant report -o ./audit${RESET()}          Output to ./audit
+  ${CYAN()}codepliant report --email${RESET()}             Generate + email-friendly HTML version
 `,
 
   scan: `${BOLD()}codepliant scan${RESET()} [path] [options]
@@ -1220,6 +1222,7 @@ function main() {
   let detailedFlag = false;
   let ecosystemFlag: string | undefined;
   let sinceFlag: string | undefined;
+  let emailFlag = false;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1241,6 +1244,8 @@ function main() {
       detailedFlag = true;
     } else if (arg === "--executive-summary") {
       executiveSummaryFlag = true;
+    } else if (arg === "--email") {
+      emailFlag = true;
     } else if (arg === "--api") {
       apiFlag = true;
     } else if (arg === "--frequency") {
@@ -1364,7 +1369,7 @@ function main() {
     }
 
     if (command === "report") {
-      runReport(absProjectPath, absOutputDir, quiet, verbose, executiveSummaryFlag);
+      runReport(absProjectPath, absOutputDir, quiet, verbose, executiveSummaryFlag, emailFlag);
       return;
     }
 
@@ -2420,6 +2425,167 @@ function runBadge(
   process.exit(0);
 }
 
+// --- Email HTML converter (no external deps, inline CSS) ---
+
+function convertReportToEmailHtml(markdown: string, title: string): string {
+  // Convert markdown to email-safe HTML with all CSS inlined.
+  // No external stylesheets, images, or scripts — copy-pasteable into any email client.
+
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  const lines = markdown.split("\n");
+  const htmlLines: string[] = [];
+  let inTable = false;
+  let inList = false;
+  let inBlockquote = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Blockquote
+    if (line.startsWith("> ")) {
+      if (!inBlockquote) {
+        htmlLines.push('<div style="border-left:4px solid #3b82f6;padding:12px 16px;margin:16px 0;background:#eff6ff;color:#1e40af;font-size:14px;">');
+        inBlockquote = true;
+      }
+      const content = line.slice(2).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      htmlLines.push(`<p style="margin:4px 0;">${content}</p>`);
+      continue;
+    } else if (inBlockquote) {
+      htmlLines.push('</div>');
+      inBlockquote = false;
+    }
+
+    // Close list if needed
+    if (inList && !line.startsWith("- ") && !line.match(/^\d+\.\s/)) {
+      htmlLines.push('</ul>');
+      inList = false;
+    }
+
+    // Horizontal rule
+    if (line === "---") {
+      htmlLines.push('<hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">');
+      continue;
+    }
+
+    // Headers
+    if (line.startsWith("# ")) {
+      htmlLines.push(`<h1 style="font-size:24px;font-weight:700;color:#111827;margin:32px 0 16px;border-bottom:2px solid #3b82f6;padding-bottom:8px;">${escapeHtml(line.slice(2))}</h1>`);
+      continue;
+    }
+    if (line.startsWith("## ")) {
+      htmlLines.push(`<h2 style="font-size:20px;font-weight:600;color:#1f2937;margin:28px 0 12px;">${escapeHtml(line.slice(3))}</h2>`);
+      continue;
+    }
+    if (line.startsWith("### ")) {
+      htmlLines.push(`<h3 style="font-size:16px;font-weight:600;color:#374151;margin:20px 0 8px;">${escapeHtml(line.slice(4))}</h3>`);
+      continue;
+    }
+
+    // Table
+    if (line.startsWith("|")) {
+      const cells = line.split("|").filter(Boolean).map(c => c.trim());
+
+      // Check if this is a separator row
+      if (cells.every(c => /^[-:]+$/.test(c))) continue;
+
+      if (!inTable) {
+        htmlLines.push('<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;">');
+        // First row is header
+        htmlLines.push('<tr>');
+        for (const cell of cells) {
+          const formatted = cell.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/`(.+?)`/g, '<code style="background:#f3f4f6;padding:2px 6px;border-radius:3px;font-size:13px;">$1</code>');
+          htmlLines.push(`<th style="padding:10px 12px;text-align:left;border:1px solid #d1d5db;background:#f9fafb;font-weight:600;color:#374151;">${formatted}</th>`);
+        }
+        htmlLines.push('</tr>');
+        inTable = true;
+        continue;
+      }
+
+      htmlLines.push('<tr>');
+      for (const cell of cells) {
+        const formatted = cell.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/`(.+?)`/g, '<code style="background:#f3f4f6;padding:2px 6px;border-radius:3px;font-size:13px;">$1</code>');
+        htmlLines.push(`<td style="padding:8px 12px;border:1px solid #d1d5db;color:#4b5563;">${formatted}</td>`);
+      }
+      htmlLines.push('</tr>');
+      continue;
+    } else if (inTable) {
+      htmlLines.push('</table>');
+      inTable = false;
+    }
+
+    // Unordered list
+    if (line.startsWith("- ")) {
+      if (!inList) {
+        htmlLines.push('<ul style="padding-left:24px;margin:8px 0;">');
+        inList = true;
+      }
+      const content = line.slice(2)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.+?)`/g, '<code style="background:#f3f4f6;padding:2px 6px;border-radius:3px;font-size:13px;">$1</code>')
+        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:#3b82f6;">$1</a>');
+      // Handle checkbox
+      const checkbox = content.startsWith("[ ] ")
+        ? '<span style="color:#9ca3af;">&#9744;</span> ' + content.slice(4)
+        : content.startsWith("[x] ")
+          ? '<span style="color:#22c55e;">&#9745;</span> ' + content.slice(4)
+          : content;
+      htmlLines.push(`<li style="margin:4px 0;color:#4b5563;font-size:14px;">${checkbox}</li>`);
+      continue;
+    }
+
+    // Ordered list
+    const orderedMatch = line.match(/^(\d+)\.\s(.+)/);
+    if (orderedMatch) {
+      if (!inList) {
+        htmlLines.push('<ul style="padding-left:24px;margin:8px 0;list-style-type:decimal;">');
+        inList = true;
+      }
+      const content = orderedMatch[2]
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.+?)`/g, '<code style="background:#f3f4f6;padding:2px 6px;border-radius:3px;font-size:13px;">$1</code>');
+      htmlLines.push(`<li style="margin:4px 0;color:#4b5563;font-size:14px;">${content}</li>`);
+      continue;
+    }
+
+    // Empty line
+    if (line.trim() === "") {
+      continue;
+    }
+
+    // Bold, code, links inline
+    const formatted = escapeHtml(line)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/`(.+?)`/g, '<code style="background:#f3f4f6;padding:2px 6px;border-radius:3px;font-size:13px;">$1</code>')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:#3b82f6;">$1</a>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    htmlLines.push(`<p style="margin:8px 0;color:#4b5563;font-size:14px;line-height:1.6;">${formatted}</p>`);
+  }
+
+  // Close any open elements
+  if (inBlockquote) htmlLines.push('</div>');
+  if (inTable) htmlLines.push('</table>');
+  if (inList) htmlLines.push('</ul>');
+
+  const body = htmlLines.join("\n");
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>${escapeHtml(title)} — Compliance Report</title>
+</head>
+<body style="margin:0;padding:0;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+<div style="max-width:680px;margin:0 auto;padding:32px 24px;background:#ffffff;">
+${body}
+</div>
+</body>
+</html>`;
+}
+
 // --- `codepliant report` command ---
 
 function runReport(
@@ -2428,6 +2594,7 @@ function runReport(
   quiet: boolean,
   verbose: boolean,
   executiveSummary: boolean = false,
+  email: boolean = false,
 ) {
   if (!quiet) printBanner();
 
@@ -2491,6 +2658,19 @@ function runReport(
     const summaryLines = countLines(summaryContent);
 
     console.log(`  ${GREEN()}✓${RESET()} ${summaryRelative} ${DIM()}(${formatFileSize(summarySize)}, ${summaryLines} lines)${RESET()}`);
+  }
+
+  // Email-friendly HTML version
+  if (email) {
+    const emailHtml = convertReportToEmailHtml(content, config?.companyName || result.projectName);
+    const emailFilename = "COMPLIANCE_REPORT_EMAIL.html";
+    const emailPath = path.join(absOutputDir, emailFilename);
+    fs.mkdirSync(absOutputDir, { recursive: true });
+    fs.writeFileSync(emailPath, emailHtml, "utf-8");
+    const emailRelative = path.relative(absProjectPath, emailPath);
+    const emailSize = Buffer.byteLength(emailHtml, "utf-8");
+    const emailLines = countLines(emailHtml);
+    console.log(`  ${GREEN()}✓${RESET()} ${emailRelative} ${DIM()}(${formatFileSize(emailSize)}, ${emailLines} lines — email-ready HTML)${RESET()}`);
   }
 
   console.log(

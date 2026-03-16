@@ -130,6 +130,8 @@ import { generateComplianceGlossary } from "./compliance-glossary.js";
 import { generateVendorRiskTierAssessment } from "./vendor-risk-tier.js";
 import { generateComplianceScorecardVisual } from "./compliance-scorecard-visual.js";
 import { generateDataSubjectRequestLog } from "./data-subject-request-log.js";
+import { generateCompliancePolicyIndex } from "./compliance-policy-index.js";
+import { generateAISupplyChainRisk } from "./ai-supply-chain-risk.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1322,6 +1324,26 @@ export function generateDocuments(
       name: "Executive Briefing",
       filename: "EXECUTIVE_BRIEFING.md",
       content: executiveBriefing,
+    });
+  }
+
+  // AI Supply Chain Risk Assessment — when AI services detected, assess provider dependency risks
+  const aiSupplyChainRisk = generateAISupplyChainRisk(docScan, ctx);
+  if (aiSupplyChainRisk) {
+    docs.push({
+      name: "AI Supply Chain Risk Assessment",
+      filename: "AI_SUPPLY_CHAIN_RISK.md",
+      content: aiSupplyChainRisk,
+    });
+  }
+
+  // Compliance Policy Index — master index of ALL generated documents (generated near-last)
+  const compliancePolicyIndex = generateCompliancePolicyIndex(docScan, ctx, docs);
+  if (compliancePolicyIndex) {
+    docs.push({
+      name: "Compliance Policy Index",
+      filename: "COMPLIANCE_POLICY_INDEX.md",
+      content: compliancePolicyIndex,
     });
   }
 
