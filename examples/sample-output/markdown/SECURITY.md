@@ -1,5 +1,10 @@
 # Security Policy
 
+> **Document Version:** 1.0  
+> **Document Owner:** Acme SaaS Inc.  
+> **Next Review Date:** 2027-03-16
+
+
 **Last updated:** 2026-03-16
 
 Acme SaaS Inc. takes the security of our software and services seriously. If you believe you have found a security vulnerability, we encourage you to report it responsibly.
@@ -21,7 +26,7 @@ If you are using an older version, please upgrade to the latest release to recei
 
 Instead, please report them via email:
 
-- **Email:** [privacy@acme-saas.com](mailto:privacy@acme-saas.com)
+- **Email:** [privacy@acme.com](mailto:privacy@acme.com)
 
 Please include the following information in your report:
 
@@ -95,7 +100,31 @@ We follow a coordinated disclosure process. We ask that you:
 
 ## Contact
 
-For security-related inquiries, contact us at [privacy@acme-saas.com](mailto:privacy@acme-saas.com).
+For security-related inquiries, contact us at [privacy@acme.com](mailto:privacy@acme.com).
+
+## Review Notes
+
+### What a lawyer should check
+
+- Verify security measures described match actual implementation
+- Confirm responsible disclosure process is operational
+- Check that response timelines are achievable
+- Ensure contact information is current and monitored
+
+### Auto-generated vs. needs human input
+
+| Section | Status | Confidence |
+|---------|--------|------------|
+| Security practices | Template — needs verification | Medium |
+| Reporting process | Standard template | Medium |
+| Contact information | From config file | High |
+## Related Documents
+
+- Incident Response Plan (`INCIDENT_RESPONSE_PLAN.md`)
+- Access Control Policy (`ACCESS_CONTROL_POLICY.md`)
+- Encryption Policy (`ENCRYPTION_POLICY.md`)
+- Penetration Test Scope (`PENTEST_SCOPE.md`)
+- Information Security Policy (`INFORMATION_SECURITY_POLICY.md`)
 
 ---
 

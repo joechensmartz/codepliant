@@ -2,26 +2,67 @@
 <p><em>Acme SaaS Inc. — Last updated: 2026-03-16</em></p>
 <hr />
 <h1>Privacy Policy</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme SaaS Inc.</p>
+<p><strong>Next Review Date:</strong> 2027-03-16</p>
+</ac:rich-text-body>
+</ac:structured-macro>
 <p><strong>Effective Date:</strong> 2026-03-16</p>
 <p><strong>Last Updated:</strong> 2026-03-16</p>
 <p><strong>Previous Version:</strong> <a href="[previous-version-url]">View previous version</a></p>
 <p><strong>Project:</strong> acme-saas</p>
+<h2>Review Notes</h2>
+<h3>What a lawyer should check</h3>
+<ul>
+<li><p>Verify all data collection practices are accurately described</p></li>
+<li><p>Confirm legal basis selections for each processing purpose</p></li>
+<li><p>Check international transfer safeguards are properly documented</p></li>
+<li><p>Ensure CCPA/CPRA sections are complete if California residents are served</p></li>
+<li><p>Validate data retention periods against applicable laws</p></li>
+<li><p>Confirm DPO contact information is correct</p></li>
+</ul>
+<h3>Auto-generated vs. needs human input</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Section</p></th><th><p>Status</p></th><th><p>Confidence</p></th></tr>
+<tr><td><p>Third-party services list</p></td><td><p>Auto-detected from code</p></td><td><p>High</p></td></tr>
+<tr><td><p>Data categories</p></td><td><p>Auto-detected from service types</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Legal basis table</p></td><td><p>Auto-assigned defaults</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Retention periods</p></td><td><p>Template defaults</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Contact information</p></td><td><p>From config file</p></td><td><p>High</p></td></tr>
+<tr><td><p>CCPA rights section</p></td><td><p>Auto-generated if applicable</p></td><td><p>Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Cookie Policy (<code>COOKIE_POLICY.md</code>)</p></li>
+<li><p>Data Processing Agreement (<code>DATA<em>PROCESSING</em>AGREEMENT.md</code>)</p></li>
+<li><p>DSAR Handling Guide (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</p></li>
+<li><p>Sub-Processor List (<code>SUBPROCESSOR_LIST.md</code>)</p></li>
+<li><p>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</p></li>
+<li><p>Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</p></li>
+</ul>
 <hr />
 <h2>1. Introduction</h2>
 <p>This Privacy Policy ("Policy") describes how Acme SaaS Inc. ("we", "us", or "our") collects, uses, discloses, and otherwise processes your personal data when you access or use our services. This Policy applies to all personal data processed in connection with our websites, applications, and related services (collectively, the "Service").</p>
 <p>We are committed to protecting your personal data in accordance with the General Data Protection Regulation (EU) 2016/679 ("GDPR"), the California Consumer Privacy Act as amended by the California Privacy Rights Act ("CCPA/CPRA"), and other applicable data protection legislation.</p>
 <p><strong>Data Controller:</strong> Acme SaaS Inc.</p>
-<p><strong>Contact Email:</strong> privacy@acme-saas.com</p>
+<p><strong>Contact Email:</strong> privacy@acme.com</p>
 <h2>2. Data Protection Officer</h2>
 <p>Our designated Data Protection Officer (DPO), appointed pursuant to GDPR Art. 37, can be contacted at:</p>
 <ul>
-<li><p><strong>Email:</strong> dpo@acme-saas.com</p></li>
+<li><p><strong>Email:</strong> dpo@acme.com</p></li>
 </ul>
 <h2>3. Information We Collect</h2>
 <p>In accordance with GDPR Art. 13(1)(e) and Art. 14(1)(d), we collect the following categories of personal data:</p>
 <h3>Personal Identity Data</h3>
-<p>Email addresses, names, profile pictures, and account credentials collected through authentication. names detected in Prisma schema fields: User.name.</p>
-<p><strong>Collected through:</strong> @supabase/supabase-js, User.name</p>
+<p>Email addresses, names, profile pictures, and account credentials collected through authentication.</p>
+<p><strong>Collected through:</strong> @supabase/supabase-js</p>
 <h3>Financial Data</h3>
 <p>Payment card information, billing addresses, and transaction history processed through payment providers.</p>
 <p><strong>Collected through:</strong> stripe</p>
@@ -30,38 +71,24 @@
 <p><strong>Collected through:</strong> posthog</p>
 <h3>AI Interaction Data</h3>
 <p>User prompts, conversation history, and AI-generated content processed through third-party AI services.</p>
-<p><strong>Collected through:</strong> openai, @anthropic-ai/sdk</p>
+<p><strong>Collected through:</strong> openai</p>
 <h3>Communication Data</h3>
 <p>Email addresses and email content processed through email service providers.</p>
 <p><strong>Collected through:</strong> resend</p>
 <h3>Technical & Diagnostic Data</h3>
 <p>Error reports, stack traces, performance data, and user context collected through monitoring tools.</p>
 <p><strong>Collected through:</strong> @sentry/node</p>
-<h3>Contact Information</h3>
-<p>email addresses, phone numbers detected in Prisma schema fields: User.email, User.phone.</p>
-<p><strong>Collected through:</strong> User.email, User.phone</p>
-<h3>Authentication Data</h3>
-<p>password hashes detected in Prisma schema fields: User.passwordHash.</p>
-<p><strong>Collected through:</strong> User.passwordHash</p>
 <h3>How Your Data Flows Through Our Service</h3>
 <p>The following summarizes how personal data moves through our application:</p>
 <p><strong>Data Collection:</strong></p>
 <ul>
-<li><p>AI-powered feature usage → user prompts, conversation history, generated content (via @anthropic-ai/sdk)</p></li>
 <li><p>User registration/login → email, password hash, session data, user metadata (via @supabase/supabase-js)</p></li>
 <li><p>AI-powered feature usage → user prompts, conversation history, generated content (via openai)</p></li>
 <li><p>Email subscription/contact forms → email addresses, email content (via resend)</p></li>
 <li><p>Payment checkout → payment information, billing address, email, transaction history (via stripe)</p></li>
 </ul>
-<p><strong>Data Storage:</strong></p>
-<ul>
-<li><p>Database schema (Personal Identity Data): @supabase/supabase-js, User.name</p></li>
-<li><p>Database schema (Contact Information): User.email, User.phone</p></li>
-<li><p>Database schema (Authentication Data): User.passwordHash</p></li>
-</ul>
 <p><strong>Third-Party Data Sharing:</strong></p>
 <ul>
-<li><p>@anthropic-ai/sdk: user prompts, conversation history, generated content</p></li>
 <li><p>@sentry/node: error data, stack traces, user context, device information, IP address</p></li>
 <li><p>openai: user prompts, conversation history, generated content</p></li>
 <li><p>posthog: user behavior, session recordings, feature flag usage, device information</p></li>
@@ -75,9 +102,9 @@
 <table><tbody>
 <tr><th><p>Sensitivity Level</p></th><th><p>Fields Detected</p></th><th><p>Protection Standard</p></th></tr>
 <tr><td><p>Special Category (Art. 9)</p></td><td><p>2</p></td><td><p>Explicit consent, DPIA, encryption, DPO oversight</p></td></tr>
-<tr><td><p>High</p></td><td><p>8</p></td><td><p>Encryption, tokenization, access control, audit logging</p></td></tr>
-<tr><td><p>Medium</p></td><td><p>7</p></td><td><p>Encryption in transit, consent, user access rights</p></td></tr>
-<tr><td><p>Low</p></td><td><p>27</p></td><td><p>Encryption in transit, anonymization where possible</p></td></tr>
+<tr><td><p>High</p></td><td><p>6</p></td><td><p>Encryption, tokenization, access control, audit logging</p></td></tr>
+<tr><td><p>Medium</p></td><td><p>5</p></td><td><p>Encryption in transit, consent, user access rights</p></td></tr>
+<tr><td><p>Low</p></td><td><p>21</p></td><td><p>Encryption in transit, anonymization where possible</p></td></tr>
 </tbody></table>
 </ac:rich-text-body>
 </ac:structured-macro>
@@ -85,7 +112,6 @@
 <h2>4. Third-Party Services and Data Recipients</h2>
 <p>Pursuant to GDPR Art. 13(1)(e), we disclose your personal data to the following categories of recipients and third-party data processors:</p>
 <ul>
-<li><p><strong>@anthropic-ai/sdk</strong> (AI Service): Processes user prompts, conversation history, generated content</p></li>
 <li><p><strong>@sentry/node</strong> (Error Monitoring): Processes error data, stack traces, user context, device information, IP address</p></li>
 <li><p><strong>@supabase/supabase-js</strong> (Authentication): Processes email, password hash, session data, user metadata</p></li>
 <li><p><strong>openai</strong> (AI Service): Processes user prompts, conversation history, generated content</p></li>
@@ -100,9 +126,9 @@
 <ac:rich-text-body>
 <table><tbody>
 <tr><th><p>Purpose</p></th><th><p>Legal Basis</p></th><th><p>GDPR Article</p></th><th><p>Details</p></th></tr>
-<tr><td><p>AI Service</p></td><td><p>Consent</p></td><td><p>Art. 6(1)(a)</p></td><td><p>Only with your opt-in consent; or Contract (Art. 6(1)(b)) if integral to the service</p></td></tr>
 <tr><td><p>Error Monitoring</p></td><td><p>Legitimate Interest</p></td><td><p>Art. 6(1)(f)</p></td><td><p>Protecting our service, detecting errors, and ensuring security</p></td></tr>
 <tr><td><p>Authentication</p></td><td><p>Contract</p></td><td><p>Art. 6(1)(b)</p></td><td><p>Necessary to fulfill our agreement with you</p></td></tr>
+<tr><td><p>AI Service</p></td><td><p>Consent</p></td><td><p>Art. 6(1)(a)</p></td><td><p>Only with your opt-in consent; or Contract (Art. 6(1)(b)) if integral to the service</p></td></tr>
 <tr><td><p>Analytics</p></td><td><p>Consent</p></td><td><p>Art. 6(1)(a)</p></td><td><p>Only with your opt-in consent</p></td></tr>
 <tr><td><p>Email Service</p></td><td><p>Legitimate Interest</p></td><td><p>Art. 6(1)(f)</p></td><td><p>Communicating service-related information to you</p></td></tr>
 <tr><td><p>Payment Processing</p></td><td><p>Contract</p></td><td><p>Art. 6(1)(b)</p></td><td><p>Necessary to fulfill our agreement with you</p></td></tr>
@@ -118,7 +144,6 @@
 <h2>6. Artificial Intelligence</h2>
 <p>This application uses AI-powered features provided by third-party services:</p>
 <ul>
-<li><p><strong>@anthropic-ai/sdk</strong>: user prompts, conversation history, generated content</p></li>
 <li><p><strong>openai</strong>: user prompts, conversation history, generated content</p></li>
 </ul>
 <h3>How We Use AI</h3>
@@ -136,7 +161,6 @@
 <h2>7. International Data Transfers</h2>
 <p>Pursuant to GDPR Art. 13(1)(f), we inform you that your personal data may be transferred to and processed in countries outside the European Economic Area (EEA) that may not provide an equivalent level of data protection. The following services involve such transfers:</p>
 <ul>
-<li><p><strong>@anthropic-ai/sdk</strong> (AI Service)</p></li>
 <li><p><strong>@sentry/node</strong> (Error Monitoring)</p></li>
 <li><p><strong>openai</strong> (AI Service)</p></li>
 <li><p><strong>posthog</strong> (Analytics)</p></li>
@@ -149,16 +173,16 @@
 <li><p>Standard Contractual Clauses (SCCs) approved by the European Commission</p></li>
 <li><p>EU-US Data Privacy Framework certification (where applicable)</p></li>
 </ul>
-<p>You may request a copy of the applicable safeguards by contacting us at privacy@acme-saas.com.</p>
+<p>You may request a copy of the applicable safeguards by contacting us at privacy@acme.com.</p>
 <h2>8. Data Retention</h2>
 <p>In accordance with the data minimisation principle (GDPR Art. 5(1)(e)), we retain your personal data only for as long as necessary to fulfill the purposes for which it was collected, unless a longer retention period is required or permitted by applicable law.</p>
 <ac:structured-macro ac:name="table">
 <ac:rich-text-body>
 <table><tbody>
 <tr><th><p>Data Type</p></th><th><p>Retention Period</p></th></tr>
-<tr><td><p>AI Service</p></td><td><p>AI interaction data retained for up to 90 days</p></td></tr>
 <tr><td><p>Error Monitoring</p></td><td><p>Error and performance data retained for up to 90 days</p></td></tr>
 <tr><td><p>Authentication</p></td><td><p>Account data retained until you delete your account</p></td></tr>
+<tr><td><p>AI Service</p></td><td><p>AI interaction data retained for up to 90 days</p></td></tr>
 <tr><td><p>Analytics</p></td><td><p>Analytics data retained for up to 26 months</p></td></tr>
 <tr><td><p>Email Service</p></td><td><p>Email communication records retained for up to 3 years</p></td></tr>
 <tr><td><p>Payment Processing</p></td><td><p>Transaction records retained for 7 years (tax and legal compliance)</p></td></tr>
@@ -181,9 +205,9 @@
 <p>Under the California Consumer Privacy Act and California Privacy Rights Act:</p>
 <h4>Categories of Personal Information Collected</h4>
 <ul>
-<li><p>Inferences drawn from personal information (AI-generated profiles and predictions)</p></li>
 <li><p>Internet or other electronic network activity (device info, error reports, IP address)</p></li>
 <li><p>Identifiers (name, email address, account credentials)</p></li>
+<li><p>Inferences drawn from personal information (AI-generated profiles and predictions)</p></li>
 <li><p>Internet or other electronic network activity (browsing history, interactions with website)</p></li>
 <li><p>Identifiers (email address, communication records)</p></li>
 <li><p>Financial information (payment card details, billing address, transaction history)</p></li>
@@ -191,10 +215,10 @@
 <h4>Categories of Sources</h4>
 <p>We collect personal information from the following categories of sources:</p>
 <ul>
-<li><p>Directly from you (inputs to AI-powered features)</p></li>
-<li><p>From third parties (AI service providers)</p></li>
 <li><p>Automatically (error reports, device information, IP address)</p></li>
 <li><p>Directly from you (account registration, login forms)</p></li>
+<li><p>Directly from you (inputs to AI-powered features)</p></li>
+<li><p>From third parties (AI service providers)</p></li>
 <li><p>Automatically (cookies, web beacons, analytics tools)</p></li>
 <li><p>Directly from you (email address provided at signup or contact)</p></li>
 <li><p>Directly from you (checkout and billing forms)</p></li>
@@ -203,9 +227,9 @@
 <h4>Business or Commercial Purpose for Collection</h4>
 <p>We collect and use personal information for the following business or commercial purposes:</p>
 <ul>
-<li><p><strong>AI Service:</strong> Performing services: Providing AI-powered features and functionality integral to the service</p></li>
 <li><p><strong>Error Monitoring:</strong> Debugging: Identifying and repairing errors that impair intended functionality; Security: Detecting security incidents and protecting against malicious or illegal activity</p></li>
 <li><p><strong>Authentication:</strong> Performing services: Providing account creation, authentication, and access control</p></li>
+<li><p><strong>AI Service:</strong> Performing services: Providing AI-powered features and functionality integral to the service</p></li>
 <li><p><strong>Analytics:</strong> Auditing: Counting ad impressions, verifying positioning, and auditing compliance; Short-term transient use: Contextualizing and customizing content shown to you</p></li>
 <li><p><strong>Email Service:</strong> Performing services: Sending transactional and service-related communications</p></li>
 <li><p><strong>Payment Processing:</strong> Performing services: Processing transactions, billing, and fulfilling orders</p></li>
@@ -220,11 +244,11 @@
 <li><p>Right to Non-Discrimination</p></li>
 </ul>
 <h4>Do Not Sell or Share My Personal Information</h4>
-<p>We do not sell your personal information. We share personal information with analytics providers for cross-context behavioral advertising. You may opt out by contacting us at privacy@acme-saas.com or using our opt-out mechanism.</p>
+<p>We do not sell your personal information. We share personal information with analytics providers for cross-context behavioral advertising. You may opt out by contacting us at privacy@acme.com or using our opt-out mechanism.</p>
 <h4>How to Submit a Request</h4>
 <p>You may submit a request to exercise your CCPA rights through the following methods:</p>
 <ul>
-<li><p><strong>Email:</strong> privacy@acme-saas.com</p></li>
+<li><p><strong>Email:</strong> privacy@acme.com</p></li>
 <li><p><strong>Toll-Free Telephone Number:</strong> [1-800-XXX-XXXX] <em>(update with your toll-free number)</em></p></li>
 </ul>
 <p>We will respond to verifiable consumer requests within 45 days.</p>
@@ -240,13 +264,13 @@
 <p>You can withdraw your consent by:</p>
 <ul>
 <li><p>Adjusting your preferences in your account settings</p></li>
-<li><p>Contacting us at privacy@acme-saas.com</p></li>
+<li><p>Contacting us at privacy@acme.com</p></li>
 </ul>
 <p>Upon withdrawal, we will cease the relevant processing activities, though some data already collected may be retained where we have another lawful basis for doing so.</p>
 <h2>11. Automated Decision-Making (Art. 22)</h2>
 <p>Pursuant to GDPR Art. 13(2)(f), this application uses automated processing, including AI-powered features, as described in the Artificial Intelligence section above.</p>
 <h3>Meaningful Information About the Logic Involved</h3>
-<p>Our automated processing uses AI models provided by third-party services (@anthropic-ai/sdk, openai). These models analyse the inputs you provide and generate outputs based on statistical patterns learned during training. The processing involves:</p>
+<p>Our automated processing uses AI models provided by third-party services (openai). These models analyse the inputs you provide and generate outputs based on statistical patterns learned during training. The processing involves:</p>
 <ul>
 <li><p>Receiving your input data (text, queries, or other content you submit)</p></li>
 <li><p>Processing it through the AI model to generate a response or result</p></li>
@@ -266,22 +290,49 @@
 <li><p>Express your point of view regarding automated decisions</p></li>
 <li><p>Contest any automated decision that affects you</p></li>
 </ul>
-<p>To exercise these rights, contact us at privacy@acme-saas.com.</p>
+<p>To exercise these rights, contact us at privacy@acme.com.</p>
 <h2>12. Necessity of Data Provision (Art. 13(2)(e))</h2>
 <p>Pursuant to GDPR Art. 13(2)(e), we inform you whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, and the possible consequences of failure to provide such data.</p>
 <ul>
 <li><p><strong>Required data (contractual necessity):</strong> Data necessary for account creation, authentication, and core service functionality. The provision of this data is a requirement necessary to enter into and perform our contract with you. Failure to provide this data will result in our inability to provide you with the Service.</p></li>
 <li><p><strong>Optional data (consent-based):</strong> Data collected for analytics, personalisation, and service improvement. The provision of this data is voluntary and not a contractual requirement. You may decline to provide this data without any impact on your ability to use the core Service.</p></li>
 </ul>
-<h2>13. Changes to This Policy</h2>
+<h2>13. How We Protect Your Data</h2>
+<p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.</p>
+<h3>Encryption</h3>
+<ul>
+<li><p>All data transmitted between your browser and our servers is encrypted using TLS 1.2 or higher</p></li>
+<li><p>Sensitive data (such as payment information and credentials) is encrypted at rest using industry-standard encryption algorithms</p></li>
+<li><p>Encryption keys are managed through secure key management practices with regular rotation</p></li>
+</ul>
+<h3>Access Controls</h3>
+<ul>
+<li><p>Access to personal data is restricted to authorized personnel on a need-to-know basis</p></li>
+<li><p>We implement role-based access control (RBAC) to limit data access by job function</p></li>
+<li><p>Multi-factor authentication is required for administrative access to systems containing personal data</p></li>
+<li><p>Access permissions are reviewed regularly and revoked promptly when no longer needed</p></li>
+</ul>
+<h3>Monitoring and Incident Detection</h3>
+<ul>
+<li><p>We use error tracking and performance monitoring (@sentry/node) to detect anomalies and potential security incidents</p></li>
+<li><p>Automated alerts are configured for suspicious activity and system errors</p></li>
+<li><p>Security events are logged and reviewed to identify potential threats</p></li>
+</ul>
+<h3>Security Assessments</h3>
+<ul>
+<li><p>Regular security reviews and vulnerability assessments are conducted</p></li>
+<li><p>Third-party services are evaluated for security before integration</p></li>
+<li><p>We maintain an incident response plan for handling data breaches (see <code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</p></li>
+</ul>
+<h2>14. Changes to This Policy</h2>
 <p>We may revise this Policy from time to time to reflect changes in our data processing practices, applicable law, or regulatory guidance. Where we make material changes, we will notify you by reasonable means, such as a prominent notice on the Service or by email to the address associated with your account, at least thirty (30) days prior to the changes taking effect.</p>
 <p>We will not reduce your rights under this Policy without your explicit consent. Each version of this Policy will be identified by its effective date, and we will maintain an archive of prior versions available upon request.</p>
 <p>Your continued use of the Service after the effective date of any revised Policy constitutes your acceptance of the revised terms. If you do not agree with the revised Policy, you must discontinue use of the Service.</p>
-<h2>14. Contact</h2>
+<h2>15. Contact</h2>
 <p>If you have questions about this Policy or wish to exercise your data protection rights, please contact us at:</p>
 <ul>
-<li><p><strong>Email:</strong> privacy@acme-saas.com</p></li>
-<li><p><strong>Data Protection Officer:</strong> dpo@acme-saas.com</p></li>
+<li><p><strong>Email:</strong> privacy@acme.com</p></li>
+<li><p><strong>Data Protection Officer:</strong> dpo@acme.com</p></li>
 </ul>
 <hr />
 <p><em>This Policy was generated by <a href="https://github.com/codepliant/codepliant">Codepliant</a> based on automated code analysis. This document is provided as a template and does not constitute legal advice. You should have this Policy reviewed by qualified legal counsel before publication.</em></p>

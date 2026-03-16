@@ -1,10 +1,21 @@
 # Data Flow Map
 
+> **Document Version:** 1.0  
+> **Document Owner:** Acme SaaS Inc.  
+> **Next Review Date:** 2027-03-16
+
+
 **Last updated:** 2026-03-16
 
 **Project:** acme-saas
 
 **Company:** Acme SaaS Inc.
+
+## Related Documents
+
+- Data Flow Diagram (`DATA_FLOW_DIAGRAM.md`)
+- Data Dictionary (`DATA_DICTIONARY.md`)
+- Privacy Policy (`PRIVACY_POLICY.md`)
 
 ---
 
@@ -16,7 +27,6 @@ The following entry points collect personal data from users:
 
 | Source | Data Collected | Mechanism |
 |--------|---------------|-----------|
-| AI-powered feature usage | user prompts, conversation history, generated content | via @anthropic-ai/sdk |
 | User registration/login | email, password hash, session data, user metadata | via @supabase/supabase-js |
 | AI-powered feature usage | user prompts, conversation history, generated content | via openai |
 | Email subscription/contact forms | email addresses, email content | via resend |
@@ -26,11 +36,7 @@ The following entry points collect personal data from users:
 
 The following services and systems store personal data:
 
-| Storage System | Category | Data Stored |
-|---------------|----------|-------------|
-| Database schema | Personal Identity Data | @supabase/supabase-js, User.name |
-| Database schema | Contact Information | User.email, User.phone |
-| Database schema | Authentication Data | User.passwordHash |
+No data storage services were detected.
 
 ## Third-Party Data Sharing
 
@@ -38,7 +44,6 @@ The following third-party services receive personal data:
 
 | Third Party | Category | Data Shared |
 |------------|----------|-------------|
-| @anthropic-ai/sdk | AI Service | user prompts, conversation history, generated content |
 | @sentry/node | Error Monitoring | error data, stack traces, user context, device information, IP address |
 | openai | AI Service | user prompts, conversation history, generated content |
 | posthog | Analytics | user behavior, session recordings, feature flag usage, device information |
@@ -50,19 +55,15 @@ The following third-party services receive personal data:
 Data Flow Summary:
 
 COLLECTION:
-- AI-powered feature usage → user prompts, conversation history, generated content (via @anthropic-ai/sdk)
 - User registration/login → email, password hash, session data, user metadata (via @supabase/supabase-js)
 - AI-powered feature usage → user prompts, conversation history, generated content (via openai)
 - Email subscription/contact forms → email addresses, email content (via resend)
 - Payment checkout → payment information, billing address, email, transaction history (via stripe)
 
 STORAGE:
-- Database schema (Personal Identity Data) → @supabase/supabase-js, User.name
-- Database schema (Contact Information) → User.email, User.phone
-- Database schema (Authentication Data) → User.passwordHash
+- No data storage services detected
 
 SHARING (Third Parties):
-- @anthropic-ai/sdk → user prompts, conversation history, generated content
 - @sentry/node → error data, stack traces, user context, device information, IP address
 - openai → user prompts, conversation history, generated content
 - posthog → user behavior, session recordings, feature flag usage, device information

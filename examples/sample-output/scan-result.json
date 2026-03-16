@@ -1,34 +1,8 @@
 {
   "projectName": "acme-saas",
-  "projectPath": "/tmp/full-demo",
-  "scannedAt": "2026-03-16T03:38:46.667Z",
+  "projectPath": "/tmp/example-full",
+  "scannedAt": "2026-03-16T15:49:58.459Z",
   "services": [
-    {
-      "name": "@anthropic-ai/sdk",
-      "category": "ai",
-      "evidence": [
-        {
-          "type": "dependency",
-          "file": "package.json",
-          "detail": "@anthropic-ai/sdk@^0.30"
-        },
-        {
-          "type": "import",
-          "file": "src/app.ts",
-          "detail": "import Anthropic from \"@anthropic-ai/sdk\""
-        },
-        {
-          "type": "env_var",
-          "file": ".env.example",
-          "detail": "ANTHROPIC_API_KEY=***"
-        }
-      ],
-      "dataCollected": [
-        "user prompts",
-        "conversation history",
-        "generated content"
-      ]
-    },
     {
       "name": "@sentry/node",
       "category": "monitoring",
@@ -60,11 +34,6 @@
           "type": "dependency",
           "file": "package.json",
           "detail": "@supabase/supabase-js@^2.0"
-        },
-        {
-          "type": "env_var",
-          "file": ".env.example",
-          "detail": "SUPABASE_URL=***"
         }
       ],
       "dataCollected": [
@@ -147,11 +116,6 @@
           "detail": "stripe@^14.0"
         },
         {
-          "type": "import",
-          "file": "src/app/api/checkout.ts",
-          "detail": "import Stripe from \"stripe\""
-        },
-        {
           "type": "env_var",
           "file": ".env.example",
           "detail": "STRIPE_SECRET_KEY=***"
@@ -168,10 +132,9 @@
   "dataCategories": [
     {
       "category": "Personal Identity Data",
-      "description": "Email addresses, names, profile pictures, and account credentials collected through authentication. names detected in Prisma schema fields: User.name.",
+      "description": "Email addresses, names, profile pictures, and account credentials collected through authentication.",
       "sources": [
-        "@supabase/supabase-js",
-        "User.name"
+        "@supabase/supabase-js"
       ]
     },
     {
@@ -192,8 +155,7 @@
       "category": "AI Interaction Data",
       "description": "User prompts, conversation history, and AI-generated content processed through third-party AI services.",
       "sources": [
-        "openai",
-        "@anthropic-ai/sdk"
+        "openai"
       ]
     },
     {
@@ -209,27 +171,12 @@
       "sources": [
         "@sentry/node"
       ]
-    },
-    {
-      "category": "Contact Information",
-      "description": "email addresses, phone numbers detected in Prisma schema fields: User.email, User.phone.",
-      "sources": [
-        "User.email",
-        "User.phone"
-      ]
-    },
-    {
-      "category": "Authentication Data",
-      "description": "password hashes detected in Prisma schema fields: User.passwordHash.",
-      "sources": [
-        "User.passwordHash"
-      ]
     }
   ],
   "complianceNeeds": [
     {
       "document": "Privacy Policy",
-      "reason": "Your application collects user data through 7 detected service(s). A privacy policy is legally required in most jurisdictions (GDPR, CCPA, etc.).",
+      "reason": "Your application collects user data through 6 detected service(s). A privacy policy is legally required in most jurisdictions (GDPR, CCPA, etc.).",
       "priority": "required"
     },
     {

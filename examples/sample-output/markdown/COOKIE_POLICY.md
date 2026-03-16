@@ -1,8 +1,19 @@
 # Cookie Policy
 
+> **Document Version:** 1.0  
+> **Document Owner:** Acme SaaS Inc.  
+> **Next Review Date:** 2027-03-16
+
+
 **Last Updated:** 2026-03-16
 
 **Project:** acme-saas
+
+## Related Documents
+
+- Privacy Policy (`PRIVACY_POLICY.md`)
+- Cookie Inventory (`COOKIE_INVENTORY.md`)
+- Consent Management Guide (`CONSENT_MANAGEMENT_GUIDE.md`)
 
 ---
 
@@ -37,7 +48,7 @@ In accordance with Article 5(3) of the ePrivacy Directive and the GDPR, Acme Saa
 **Withdrawing consent:** You can withdraw or change your cookie consent at any time by:
 - Clicking the "Cookie Preferences" link in our website footer
 - Adjusting your browser settings to block or delete cookies
-- Contacting us at privacy@acme-saas.com
+- Contacting us at privacy@acme.com
 
 Withdrawal of consent is as easy as giving consent. Upon withdrawal, we will cease using the relevant cookies, though some data already collected may be retained as described in our Privacy Policy.
 
@@ -99,7 +110,7 @@ We may update this Cookie Policy from time to time. Changes will be posted on th
 
 For questions about our use of cookies, please contact:
 
-- **Email:** privacy@acme-saas.com
+- **Email:** privacy@acme.com
 
 ---
 

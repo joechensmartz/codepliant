@@ -1,9 +1,39 @@
 # Terms of Service
 
+> **Document Version:** 1.0  
+> **Document Owner:** Acme SaaS Inc.  
+> **Next Review Date:** 2027-03-16
+
+
 **Effective Date:** 2026-03-16
 **Last Modified:** 2026-03-16
 
 **Project:** acme-saas
+
+## Review Notes
+
+### What a lawyer should check
+
+- Review limitation of liability clauses for enforceability
+- Confirm governing law and jurisdiction are correct
+- Check that service description matches actual offering
+- Verify termination provisions are fair and clear
+- Ensure dispute resolution mechanism is appropriate
+
+### Auto-generated vs. needs human input
+
+| Section | Status | Confidence |
+|---------|--------|------------|
+| Service description | Template — needs customization | Low |
+| Liability limitations | Standard template language | Medium |
+| User obligations | Standard template language | Medium |
+| Governing law | From config if provided | Medium |
+## Related Documents
+
+- Privacy Policy (`PRIVACY_POLICY.md`)
+- Acceptable Use Policy (`ACCEPTABLE_USE_POLICY.md`)
+- Refund Policy (`REFUND_POLICY.md`)
+- Service Level Agreement (`SERVICE_LEVEL_AGREEMENT.md`)
 
 ---
 
@@ -126,7 +156,7 @@ These Terms are governed by the laws of [Your Jurisdiction]. Any disputes not su
 
 If you have questions about these Terms, please contact us at:
 
-- **Email:** privacy@acme-saas.com
+- **Email:** privacy@acme.com
 
 ---
 

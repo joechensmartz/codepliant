@@ -1,1 +1,0 @@
-{"name":"acme-saas","version":"1.0.0","dependencies":{"openai":"^4.0","@anthropic-ai/sdk":"^0.30","stripe":"^14.0","@supabase/supabase-js":"^2.0","posthog-js":"^1.0","@sentry/nextjs":"^8.0","resend":"^3.0"}}

@@ -1,8 +1,21 @@
 # AI Disclosure Statement
 
+> **Document Version:** 1.0  
+> **Document Owner:** Acme SaaS Inc.  
+> **Next Review Date:** 2027-03-16
+
+
 **Last updated:** 2026-03-16
 
 **Project:** acme-saas
+
+## Related Documents
+
+- AI Act Compliance Checklist (`AI_ACT_CHECKLIST.md`)
+- AI Model Card (`AI_MODEL_CARD.md`)
+- Acceptable AI Use Policy (`ACCEPTABLE_AI_USE_POLICY.md`)
+- AI Governance Framework (`AI_GOVERNANCE_FRAMEWORK.md`)
+- Privacy Policy (`PRIVACY_POLICY.md`)
 
 ---
 
@@ -18,7 +31,6 @@ This application integrates the following AI systems:
 
 | AI Service | Provider | Data Processed | Purpose |
 |-----------|----------|---------------|---------|
-| @anthropic-ai/sdk | Anthropic | user prompts, conversation history, generated content | Natural language processing, content generation |
 | openai | OpenAI | user prompts, conversation history, generated content | Natural language processing, content generation |
 
 ## 3. Risk Classification
@@ -85,9 +97,9 @@ The following data may be sent to third-party AI service providers for processin
 
 | Data Type | AI Providers Receiving Data |
 |-----------|-----------------------------|
-| user prompts | Anthropic, OpenAI |
-| conversation history | Anthropic, OpenAI |
-| generated content | Anthropic, OpenAI |
+| user prompts | OpenAI |
+| conversation history | OpenAI |
+| generated content | OpenAI |
 
 ### 6.2 Data Retention
 
@@ -112,7 +124,7 @@ In accordance with the EU AI Act's requirements for human oversight of AI system
 
 If an AI-powered feature of this application produces a decision or output that affects you, you have the right to request that a human reviews the decision. To request human review:
 
-- Contact us at privacy@acme-saas.com
+- Contact us at privacy@acme.com
 - Describe the AI-assisted decision or output in question
 - We will have a qualified person review the matter and respond within a reasonable timeframe
 
@@ -128,7 +140,7 @@ Under the EU AI Act and applicable data protection laws, you have the right to:
 - **Contest** AI-generated decisions and express your point of view
 - **Lodge complaints** with your local data protection authority or the relevant national AI supervisory authority
 
-To exercise any of these rights, contact us at privacy@acme-saas.com.
+To exercise any of these rights, contact us at privacy@acme.com.
 
 ## 9. AI Provider Policies
 
@@ -136,7 +148,6 @@ The following AI providers process data on behalf of this application. We encour
 
 | Provider | Privacy Policy |
 |----------|---------------|
-| Anthropic | [Privacy & Data Policy](https://www.anthropic.com/privacy) |
 | OpenAI | [Privacy & Data Policy](https://openai.com/policies/privacy-policy) |
 
 ## 10. Compliance Checklist
@@ -169,8 +180,8 @@ The following checklist summarises key EU AI Act compliance actions for this app
 
 For questions about our use of AI systems or to exercise your rights under the EU AI Act, please contact:
 
-- **Email:** privacy@acme-saas.com
-- **Data Protection Officer:** dpo@acme-saas.com
+- **Email:** privacy@acme.com
+- **Data Protection Officer:** dpo@acme.com
 
 For complaints regarding AI systems, you may also contact your national supervisory authority responsible for the enforcement of the EU AI Act.
 
