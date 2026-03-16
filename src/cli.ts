@@ -130,7 +130,7 @@ ${BOLD()}Server:${RESET()}
   ${CYAN()}publish${RESET()}         Generate API spec or GitHub Pages site
 
 ${BOLD()}Setup:${RESET()}
-  ${CYAN()}init${RESET()}            Interactive setup wizard
+  ${CYAN()}init${RESET()}            Interactive setup wizard (use --from-env for CI/CD)
   ${CYAN()}wizard${RESET()}          Step-by-step compliance wizard
   ${CYAN()}hook${RESET()}            Install/uninstall pre-commit hook
   ${CYAN()}template${RESET()}        Manage custom document templates
@@ -1257,6 +1257,7 @@ function main() {
   let githubPagesFlag = false;
   let prFlag = false;
   let scanOutputFile: string | undefined;
+  let fromEnvFlag = false;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1288,6 +1289,8 @@ function main() {
       githubPagesFlag = true;
     } else if (arg === "--pr") {
       prFlag = true;
+    } else if (arg === "--from-env") {
+      fromEnvFlag = true;
     } else if (arg === "--frequency") {
       const freq = args[++i];
       if (freq === "daily" || freq === "weekly" || freq === "monthly") {
@@ -1578,10 +1581,17 @@ function main() {
 
     if (command === "init") {
       printBanner();
-      runInit(absProjectPath).then(() => process.exit(0)).catch((err) => {
-        console.error(`${RED()}[CP011] Error during init: ${formatError(err)}${RESET()}`);
-        process.exit(1);
-      });
+      if (fromEnvFlag) {
+        runInitFromEnv(absProjectPath).then(() => process.exit(0)).catch((err) => {
+          console.error(`${RED()}[CP011] Error during init --from-env: ${formatError(err)}${RESET()}`);
+          process.exit(1);
+        });
+      } else {
+        runInit(absProjectPath).then(() => process.exit(0)).catch((err) => {
+          console.error(`${RED()}[CP011] Error during init: ${formatError(err)}${RESET()}`);
+          process.exit(1);
+        });
+      }
       return;
     }
 
@@ -2412,6 +2422,110 @@ async function runInit(projectPath: string) {
   }
 
   console.log();
+}
+
+// --- `codepliant init --from-env` — auto-configure from environment variables ---
+
+async function runInitFromEnv(projectPath: string) {
+  console.log(`${CYAN()}${BOLD()}Initializing from environment variables...${RESET()}\n`);
+
+  const envMap: Record<string, { configKey: keyof CodepliantConfig; transform?: (v: string) => unknown }> = {
+    CODEPLIANT_COMPANY: { configKey: "companyName" },
+    CODEPLIANT_EMAIL: { configKey: "contactEmail" },
+    CODEPLIANT_WEBSITE: { configKey: "website" },
+    CODEPLIANT_JURISDICTION: { configKey: "jurisdiction" },
+    CODEPLIANT_DPO: { configKey: "dpoName" },
+    CODEPLIANT_DPO_EMAIL: { configKey: "dpoEmail" },
+    CODEPLIANT_EU_REP: { configKey: "euRepresentative" },
+    CODEPLIANT_OUTPUT_DIR: { configKey: "outputDir" },
+    CODEPLIANT_OUTPUT_FORMAT: { configKey: "outputFormat" },
+    CODEPLIANT_LANGUAGE: { configKey: "language" },
+    CODEPLIANT_SECURITY_EMAIL: { configKey: "securityEmail" },
+    CODEPLIANT_TOLL_FREE: { configKey: "tollFreeNumber" },
+    CODEPLIANT_BUG_BOUNTY_URL: { configKey: "bugBountyUrl" },
+    CODEPLIANT_COMPANY_LOCATION: { configKey: "companyLocation" },
+    CODEPLIANT_DATA_RETENTION_DAYS: {
+      configKey: "dataRetentionDays",
+      transform: (v: string) => {
+        const n = parseInt(v, 10);
+        return isNaN(n) ? undefined : n;
+      },
+    },
+    CODEPLIANT_AI_RISK_LEVEL: { configKey: "aiRiskLevel" },
+    CODEPLIANT_JURISDICTIONS: {
+      configKey: "jurisdictions",
+      transform: (v: string) => v.split(",").map((j) => j.trim()).filter(Boolean),
+    },
+  };
+
+  const current = loadConfig(projectPath);
+  const config: Record<string, unknown> = { ...current };
+  let foundCount = 0;
+
+  for (const [envVar, { configKey, transform }] of Object.entries(envMap)) {
+    const value = process.env[envVar];
+    if (value !== undefined && value.trim().length > 0) {
+      const resolved = transform ? transform(value.trim()) : value.trim();
+      if (resolved !== undefined) {
+        config[configKey] = resolved;
+        console.log(`  ${GREEN()}✓${RESET()} ${envVar} → ${configKey}: ${typeof resolved === "object" ? JSON.stringify(resolved) : resolved}`);
+        foundCount++;
+      }
+    }
+  }
+
+  if (foundCount === 0) {
+    console.log(`${YELLOW()}No CODEPLIANT_* environment variables found.${RESET()}\n`);
+    console.log(`${BOLD()}Supported environment variables:${RESET()}\n`);
+    console.log(`  ${CYAN()}CODEPLIANT_COMPANY${RESET()}           Company name`);
+    console.log(`  ${CYAN()}CODEPLIANT_EMAIL${RESET()}             Contact email`);
+    console.log(`  ${CYAN()}CODEPLIANT_WEBSITE${RESET()}           Website URL`);
+    console.log(`  ${CYAN()}CODEPLIANT_JURISDICTION${RESET()}      Primary legal jurisdiction`);
+    console.log(`  ${CYAN()}CODEPLIANT_DPO${RESET()}               DPO name`);
+    console.log(`  ${CYAN()}CODEPLIANT_DPO_EMAIL${RESET()}         DPO email`);
+    console.log(`  ${CYAN()}CODEPLIANT_EU_REP${RESET()}            EU representative`);
+    console.log(`  ${CYAN()}CODEPLIANT_OUTPUT_DIR${RESET()}        Output directory`);
+    console.log(`  ${CYAN()}CODEPLIANT_OUTPUT_FORMAT${RESET()}     Output format (markdown, html, pdf, json, all)`);
+    console.log(`  ${CYAN()}CODEPLIANT_LANGUAGE${RESET()}          Language (en, de, fr, es)`);
+    console.log(`  ${CYAN()}CODEPLIANT_SECURITY_EMAIL${RESET()}    Security team email`);
+    console.log(`  ${CYAN()}CODEPLIANT_TOLL_FREE${RESET()}         Toll-free number`);
+    console.log(`  ${CYAN()}CODEPLIANT_BUG_BOUNTY_URL${RESET()}    Bug bounty URL`);
+    console.log(`  ${CYAN()}CODEPLIANT_COMPANY_LOCATION${RESET()}  Company location`);
+    console.log(`  ${CYAN()}CODEPLIANT_DATA_RETENTION_DAYS${RESET()} Data retention period (days)`);
+    console.log(`  ${CYAN()}CODEPLIANT_AI_RISK_LEVEL${RESET()}     AI risk level (minimal, limited, high)`);
+    console.log(`  ${CYAN()}CODEPLIANT_JURISDICTIONS${RESET()}     Comma-separated: GDPR,CCPA,UK GDPR`);
+    console.log(`\n${DIM()}Example (CI/CD):${RESET()}`);
+    console.log(`  ${DIM()}CODEPLIANT_COMPANY="Acme Inc" CODEPLIANT_EMAIL="legal@acme.com" codepliant init --from-env${RESET()}\n`);
+    process.exit(1);
+  }
+
+  // Save config
+  const typedConfig = config as unknown as CodepliantConfig;
+  const configPath = saveConfig(projectPath, typedConfig);
+  const relativePath = path.relative(projectPath, configPath);
+  console.log(`\n${GREEN()}${BOLD()}✓${RESET()} Config saved to ${relativePath} (${foundCount} value(s) from environment)\n`);
+
+  // Auto-run scan + generate
+  console.log(`${CYAN()}${BOLD()}Running scan & generate...${RESET()}\n`);
+
+  const absProjectPath = path.resolve(projectPath);
+  const outputDir = typedConfig.outputDir || "legal";
+  const absOutputDir = path.resolve(absProjectPath, outputDir);
+  const format = (typedConfig.outputFormat as OutputFormat) || "markdown";
+
+  const { result, durationMs } = scanWithProgress(absProjectPath, false);
+  console.log(`\n  ${DIM()}Scanned in ${formatDuration(durationMs)}${RESET()}\n`);
+
+  const reloadedConfig = loadConfig(absProjectPath);
+  const docs = generateDocuments(result, reloadedConfig);
+  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, format, reloadedConfig, result);
+
+  for (const file of writtenFiles) {
+    const relPath = path.relative(absProjectPath, file);
+    console.log(`  ${GREEN()}✓${RESET()} ${relPath}`);
+  }
+
+  console.log(`\n${GREEN()}${BOLD()}Generated ${writtenFiles.length} document(s).${RESET()}\n`);
 }
 
 // --- `codepliant format` command ---

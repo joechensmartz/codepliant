@@ -146,6 +146,8 @@ import { generatePrivacyEngineeringGuide } from "./privacy-engineering-guide.js"
 import { generateComplianceTestingPlan } from "./compliance-testing-plan.js";
 import { generateComplianceInvestmentCase } from "./compliance-investment-case.js";
 import { generatePrivacyNoticeChildren } from "./privacy-notice-children.js";
+import { generateVendorComplianceTracker } from "./vendor-compliance-tracker.js";
+import { generatePrivacyMetricsDashboard } from "./privacy-metrics-dashboard.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1491,6 +1493,26 @@ export function generateDocuments(
       name: "Privacy Notice (Children)",
       filename: "PRIVACY_NOTICE_CHILDREN.md",
       content: privacyNoticeChildren,
+    });
+  }
+
+  // Vendor Compliance Tracker — DPA status, review dates, risk tiers per vendor
+  const vendorComplianceTracker = generateVendorComplianceTracker(docScan, ctx);
+  if (vendorComplianceTracker) {
+    docs.push({
+      name: "Vendor Compliance Tracker",
+      filename: "VENDOR_COMPLIANCE_TRACKER.md",
+      content: vendorComplianceTracker,
+    });
+  }
+
+  // Privacy Metrics Dashboard — KPI dashboard for privacy program measurement
+  const privacyMetricsDashboard = generatePrivacyMetricsDashboard(docScan, ctx);
+  if (privacyMetricsDashboard) {
+    docs.push({
+      name: "Privacy Metrics Dashboard",
+      filename: "PRIVACY_METRICS_DASHBOARD.md",
+      content: privacyMetricsDashboard,
     });
   }
 
