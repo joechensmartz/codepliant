@@ -45,6 +45,7 @@ export function readExistingDocuments(outputDir: string, format?: OutputFormat):
     extensions = [".md", ".html"];
   }
 
+  // Scan both flat files and categorized subdirectories
   let entries: string[];
   try {
     entries = fs.readdirSync(outputDir);
@@ -52,16 +53,39 @@ export function readExistingDocuments(outputDir: string, format?: OutputFormat):
     return existing;
   }
 
-  for (const entry of entries) {
-    if (extensions.some(ext => entry.endsWith(ext))) {
-      // Skip the changelog itself
-      if (entry === "DOCUMENT_CHANGELOG.md") continue;
-      try {
-        const content = fs.readFileSync(path.join(outputDir, entry), "utf-8");
-        existing.set(entry, content);
-      } catch {
-        // skip unreadable files
+  const readDir = (dir: string) => {
+    let items: string[];
+    try {
+      items = fs.readdirSync(dir);
+    } catch {
+      return;
+    }
+    for (const entry of items) {
+      const fullPath = path.join(dir, entry);
+      if (extensions.some(ext => entry.endsWith(ext))) {
+        if (entry === "DOCUMENT_CHANGELOG.md") continue;
+        try {
+          const content = fs.readFileSync(fullPath, "utf-8");
+          existing.set(entry, content);
+        } catch {
+          // skip unreadable files
+        }
       }
+    }
+  };
+
+  // Read flat files
+  readDir(outputDir);
+
+  // Read categorized subdirectories
+  for (const entry of entries) {
+    const subDir = path.join(outputDir, entry);
+    try {
+      if (fs.statSync(subDir).isDirectory() && entry !== "node_modules") {
+        readDir(subDir);
+      }
+    } catch {
+      // skip
     }
   }
 
@@ -256,7 +280,11 @@ export function appendChangelog(outputDir: string, diff: DiffResult): string | n
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const changelogPath = path.join(outputDir, "DOCUMENT_CHANGELOG.md");
+  // Write to guides/ subdirectory if it exists, otherwise fall back to flat layout
+  const guidesDir = path.join(outputDir, "guides");
+  const changelogPath = fs.existsSync(guidesDir)
+    ? path.join(guidesDir, "DOCUMENT_CHANGELOG.md")
+    : path.join(outputDir, "DOCUMENT_CHANGELOG.md");
   let existing = "";
 
   if (fs.existsSync(changelogPath)) {

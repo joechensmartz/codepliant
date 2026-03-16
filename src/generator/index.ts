@@ -155,6 +155,179 @@ export interface GeneratedDocument {
   name: string;
   filename: string;
   content: string;
+  category?: string;
+}
+
+/**
+ * Maps filenames to output subdirectory categories.
+ * Documents not listed here go into the root output directory.
+ */
+const DOCUMENT_CATEGORIES: Record<string, string> = {
+  // Legal — user-facing documents for your website
+  "PRIVACY_POLICY.md": "legal",
+  "TERMS_OF_SERVICE.md": "legal",
+  "COOKIE_POLICY.md": "legal",
+  "ACCEPTABLE_USE_POLICY.md": "legal",
+  "REFUND_POLICY.md": "legal",
+  "API_TERMS_OF_USE.md": "legal",
+  "SERVICE_LEVEL_AGREEMENT.md": "legal",
+  "DATA_PROCESSING_AGREEMENT.md": "legal",
+  "PRIVACY_NOTICE_SHORT.md": "legal",
+  "PRIVACY_NOTICE_APP.md": "legal",
+  "PRIVACY_NOTICE_CHILDREN.md": "legal",
+  "PRIVACY_NOTICE_DE.md": "legal",
+  "PRIVACY_NOTICE_FR.md": "legal",
+  "PRIVACY_NOTICE_ES.md": "legal",
+  "THIRD_PARTY_COOKIE_NOTICE.md": "legal",
+  "OPEN_SOURCE_NOTICE.md": "legal",
+  "LICENSE_COMPLIANCE.md": "legal",
+
+  // AI — EU AI Act and AI governance
+  "AI_DISCLOSURE.md": "ai",
+  "AI_ACT_CHECKLIST.md": "ai",
+  "AI_MODEL_CARD.md": "ai",
+  "AI_GOVERNANCE_FRAMEWORK.md": "ai",
+  "ACCEPTABLE_AI_USE_POLICY.md": "ai",
+  "AI_ETHICS_STATEMENT.md": "ai",
+  "AI_TRAINING_DATA_NOTICE.md": "ai",
+  "AI_IMPACT_ASSESSMENT.md": "ai",
+  "AI_RED_TEAM_GUIDE.md": "ai",
+  "AI_SUPPLY_CHAIN_RISK.md": "ai",
+
+  // Security — policies and procedures
+  "SECURITY.md": "security",
+  "INCIDENT_RESPONSE_PLAN.md": "security",
+  "INCIDENT_SEVERITY_MATRIX.md": "security",
+  "INCIDENT_COMMUNICATION_TEMPLATES.md": "security",
+  "DATA_BREACH_NOTIFICATION_TEMPLATE.md": "security",
+  "DATA_BREACH_DRILL_TEMPLATE.md": "security",
+  "ACCESS_CONTROL_POLICY.md": "security",
+  "ENCRYPTION_POLICY.md": "security",
+  "BACKUP_POLICY.md": "security",
+  "DISASTER_RECOVERY_PLAN.md": "security",
+  "BUSINESS_CONTINUITY_PLAN.md": "security",
+  "CHANGE_MANAGEMENT_POLICY.md": "security",
+  "RESPONSIBLE_DISCLOSURE_POLICY.md": "security",
+  "PENTEST_SCOPE.md": "security",
+  "VULNERABILITY_SCAN.md": "security",
+  "INFORMATION_SECURITY_POLICY.md": "security",
+  "SECURITY_AWARENESS_PROGRAM.md": "security",
+  "AUDIT_LOG_POLICY.md": "security",
+
+  // Privacy — GDPR and data protection
+  "PRIVACY_IMPACT_ASSESSMENT.md": "privacy",
+  "PRIVACY_IMPACT_REGISTER.md": "privacy",
+  "PRIVACY_IMPACT_SCREENING.md": "privacy",
+  "PRIVACY_BY_DESIGN_CHECKLIST.md": "privacy",
+  "PRIVACY_RISK_MATRIX.md": "privacy",
+  "PRIVACY_ENGINEERING_GUIDE.md": "privacy",
+  "PRIVACY_PROGRAM_CHARTER.md": "privacy",
+  "PRIVACY_ROADMAP.md": "privacy",
+  "PRIVACY_POLICY_CHANGELOG.md": "privacy",
+  "PRIVACY_POLICY_COMPARISON.md": "privacy",
+  "PRIVACY_METRICS_DASHBOARD.md": "privacy",
+  "DATA_PROTECTION_POLICY.md": "privacy",
+  "DATA_DICTIONARY.md": "privacy",
+  "DATA_CLASSIFICATION.md": "privacy",
+  "DATA_MAPPING_REGISTER.md": "privacy",
+  "DATA_FLOW_MAP.md": "privacy",
+  "DATA_FLOW_DIAGRAM.md": "privacy",
+  "DATA_LIFECYCLE_DIAGRAM.md": "privacy",
+  "DATA_RETENTION_POLICY.md": "privacy",
+  "DATA_RETENTION_SCHEDULE_VISUAL.md": "privacy",
+  "DATA_SUBJECT_CATEGORIES.md": "privacy",
+  "DATA_SUBJECT_RIGHTS_PORTAL.md": "privacy",
+  "DATA_DELETION_PROCEDURES.md": "privacy",
+  "DATA_PORTABILITY_GUIDE.md": "privacy",
+  "DATA_MINIMIZATION_CHECKLIST.md": "privacy",
+  "DATA_PROCESSING_INVENTORY.md": "privacy",
+  "DSAR_HANDLING_GUIDE.md": "privacy",
+  "DSAR_LOG_TEMPLATE.md": "privacy",
+  "DPO_HANDBOOK.md": "privacy",
+  "RECORD_OF_PROCESSING_ACTIVITIES.md": "privacy",
+  "LAWFUL_BASIS_ASSESSMENT.md": "privacy",
+  "CONSENT_MANAGEMENT_GUIDE.md": "privacy",
+  "CONSENT_RECORD_TEMPLATE.md": "privacy",
+  "CROSS_BORDER_TRANSFER_MAP.md": "privacy",
+  "TRANSFER_IMPACT_ASSESSMENT.md": "privacy",
+  "COOKIE_INVENTORY.md": "privacy",
+  "MEDIA_CONSENT_FORM.md": "privacy",
+
+  // Vendor — third-party management
+  "SUBPROCESSOR_LIST.md": "vendor",
+  "SUBPROCESSOR_CHANGE_NOTIFICATION.md": "vendor",
+  "VENDOR_CONTACTS.md": "vendor",
+  "VENDOR_SECURITY_QUESTIONNAIRE.md": "vendor",
+  "VENDOR_ONBOARDING_CHECKLIST.md": "vendor",
+  "VENDOR_RISK_TIER_ASSESSMENT.md": "vendor",
+  "VENDOR_COMPLIANCE_TRACKER.md": "vendor",
+  "VENDOR_EXIT_PLAN.md": "vendor",
+  "SUPPLIER_CODE_OF_CONDUCT.md": "vendor",
+  "THIRD_PARTY_RISK_ASSESSMENT.md": "vendor",
+  "THIRD_PARTY_DUE_DILIGENCE_TEMPLATE.md": "vendor",
+
+  // Audit — compliance frameworks and assessments
+  "SOC2_READINESS_CHECKLIST.md": "audit",
+  "ISO_27001_CHECKLIST.md": "audit",
+  "COMPLIANCE_CERTIFICATE.md": "audit",
+  "COMPLIANCE_GAP_ANALYSIS.md": "audit",
+  "COMPLIANCE_MATURITY_MODEL.md": "audit",
+  "COMPLIANCE_MATURITY_ASSESSMENT.md": "audit",
+  "COMPLIANCE_EVIDENCE_LOG.md": "audit",
+  "COMPLIANCE_SCORECARD.md": "audit",
+  "COMPLIANCE_TESTING_PLAN.md": "audit",
+  "RISK_REGISTER.md": "audit",
+  "REGULATORY_MAPPING_MATRIX.md": "audit",
+  "REGULATORY_READINESS_SCORECARD.md": "audit",
+  "ANNUAL_REVIEW_CHECKLIST.md": "audit",
+  "ENV_AUDIT.md": "audit",
+
+  // Governance — program management and executive
+  "EXECUTIVE_DASHBOARD.md": "governance",
+  "EXECUTIVE_BRIEFING.md": "governance",
+  "COMPLIANCE_BOARD_REPORT.md": "governance",
+  "COMPLIANCE_SUMMARY_EMAIL.md": "governance",
+  "COMPLIANCE_ROADMAP.md": "governance",
+  "COMPLIANCE_KPI_DASHBOARD.md": "governance",
+  "COMPLIANCE_CALENDAR.md": "governance",
+  "COMPLIANCE_COMMUNICATION_PLAN.md": "governance",
+  "COMPLIANCE_BUDGET_TEMPLATE.md": "governance",
+  "COMPLIANCE_INVESTMENT_CASE.md": "governance",
+  "COMPLIANCE_OATH.md": "governance",
+  "COMPLIANCE_POLICY_INDEX.md": "governance",
+  "COMPLIANCE_DIGEST.md": "governance",
+  "COMPLIANCE_TIMELINE.md": "governance",
+  "COMPLIANCE_NOTES.md": "governance",
+  "COMPLIANCE_FAQ.md": "governance",
+  "COMPLIANCE_GLOSSARY.md": "governance",
+  "KEY_PERSON_RISK_ASSESSMENT.md": "governance",
+  "REGULATORY_CORRESPONDENCE_LOG.md": "governance",
+  "REGULATORY_UPDATES.md": "governance",
+  "TRANSPARENCY_REPORT.md": "governance",
+  "WHISTLEBLOWER_POLICY.md": "governance",
+
+  // HR — employee and training
+  "EMPLOYEE_PRIVACY_NOTICE.md": "hr",
+  "EMPLOYEE_HANDBOOK_PRIVACY_SECTION.md": "hr",
+  "TRAINING_RECORD.md": "hr",
+  "COMPLIANCE_ONBOARDING_GUIDE.md": "hr",
+
+  // Config — machine-readable configs
+  "COOKIE_CONSENT_CONFIG.json": "config",
+  "PRIVACY_DASHBOARD_CONFIG.json": "config",
+
+  // Guides — getting started and API docs
+  "QUICK_START_COMPLIANCE_GUIDE.md": "guides",
+  "COMPLIANCE_AUTOMATION_GUIDE.md": "guides",
+  "API_PRIVACY_DOCUMENTATION.md": "guides",
+  "DOCUMENT_CHANGELOG.md": "guides",
+};
+
+/**
+ * Returns the subdirectory for a document based on its filename.
+ */
+export function getDocumentCategory(filename: string): string | undefined {
+  return DOCUMENT_CATEGORIES[filename];
 }
 
 export interface GeneratorContext {
@@ -1739,7 +1912,15 @@ export function writeDocuments(
   const writtenFiles: string[] = [];
 
   for (const doc of docs) {
-    const filePath = path.join(outputDir, doc.filename);
+    const category = doc.category || DOCUMENT_CATEGORIES[doc.filename];
+    let targetDir = outputDir;
+    if (category) {
+      targetDir = path.join(outputDir, category);
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+    }
+    const filePath = path.join(targetDir, doc.filename);
     fs.writeFileSync(filePath, doc.content, "utf-8");
     writtenFiles.push(filePath);
   }

@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import type { GeneratedDocument } from "../generator/index.js";
+import { type GeneratedDocument, getDocumentCategory } from "../generator/index.js";
 import type { CodepliantConfig } from "../config.js";
 import { generateHtml } from "./html.js";
 import { writePdf, type PdfResult } from "./pdf.js";
@@ -48,7 +48,15 @@ export function writeMarkdown(
   const writtenFiles: string[] = [];
 
   for (const doc of docs) {
-    const filePath = path.join(outputDir, doc.filename);
+    const category = doc.category || getDocumentCategory(doc.filename);
+    let targetDir = outputDir;
+    if (category) {
+      targetDir = path.join(outputDir, category);
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+    }
+    const filePath = path.join(targetDir, doc.filename);
     fs.writeFileSync(filePath, doc.content, "utf-8");
     writtenFiles.push(filePath);
   }

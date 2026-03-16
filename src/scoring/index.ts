@@ -184,7 +184,11 @@ function scoreDocumentFreshness(input: ScoreInput): ScoreComponent {
   const details: string[] = [];
 
   for (const doc of docs) {
-    const filePath = path.join(outputDir, doc.filename);
+    // Check both categorized subdirectory and flat layout for backwards compatibility
+    const category = doc.category;
+    const categorizedPath = category ? path.join(outputDir, category, doc.filename) : null;
+    const flatPath = path.join(outputDir, doc.filename);
+    const filePath = (categorizedPath && fs.existsSync(categorizedPath)) ? categorizedPath : flatPath;
     if (!fs.existsSync(filePath)) continue;
 
     checkedCount++;

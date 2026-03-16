@@ -3810,7 +3810,10 @@ function runDiff(
 ) {
   // --since mode: show changelog entries since a given date
   if (sinceDate) {
-    const changelogPath = path.join(absOutputDir, "DOCUMENT_CHANGELOG.md");
+    // Check both categorized (guides/) and flat layout for backwards compatibility
+    const categorizedChangelogPath = path.join(absOutputDir, "guides", "DOCUMENT_CHANGELOG.md");
+    const flatChangelogPath = path.join(absOutputDir, "DOCUMENT_CHANGELOG.md");
+    const changelogPath = fs.existsSync(categorizedChangelogPath) ? categorizedChangelogPath : flatChangelogPath;
     if (!fs.existsSync(changelogPath)) {
       console.error(`${RED()}[CP022] Error: No changelog found at "${changelogPath}".${RESET()}`);
       console.error(`${DIM()}Run ${CYAN()}codepliant go${RESET()}${DIM()} first to generate documents and create a changelog.${RESET()}`);

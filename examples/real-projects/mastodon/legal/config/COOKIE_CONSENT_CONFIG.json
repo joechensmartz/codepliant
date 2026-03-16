@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-03-16T19:09:53.898Z",
+  "project": "@mastodon/mastodon",
+  "company": "[Your Company Name]",
+  "consent_settings": {
+    "require_explicit_consent": true,
+    "show_on_first_visit": true,
+    "respect_dnt": true,
+    "cookie_name": "cookie_consent",
+    "cookie_duration_days": 365,
+    "position": "bottom"
+  },
+  "categories": [
+    {
+      "id": "strictly_necessary",
+      "name": "Strictly Necessary",
+      "description": "Essential cookies required for the website to function. These cannot be disabled.",
+      "required": true,
+      "default_state": "enabled"
+    },
+    {
+      "id": "functional",
+      "name": "Functional",
+      "description": "Cookies that enable enhanced functionality like live chat, error tracking, and personalization.",
+      "required": false,
+      "default_state": "disabled"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics",
+      "description": "Cookies that help us understand how visitors interact with our website by collecting anonymous usage data.",
+      "required": false,
+      "default_state": "disabled"
+    },
+    {
+      "id": "advertising",
+      "name": "Advertising",
+      "description": "Cookies used to deliver relevant advertisements and track ad campaign performance.",
+      "required": false,
+      "default_state": "disabled"
+    }
+  ],
+  "providers": [
+    {
+      "name": "devise",
+      "category_id": "strictly_necessary",
+      "provider": "devise",
+      "purpose": "Authentication and session management",
+      "cookies": [
+        "devise_session"
+      ],
+      "duration": "Session",
+      "privacy_policy_url": ""
+    },
+    {
+      "name": "omniauth",
+      "category_id": "strictly_necessary",
+      "provider": "omniauth",
+      "purpose": "Authentication and session management",
+      "cookies": [
+        "omniauth_session"
+      ],
+      "duration": "Session",
+      "privacy_policy_url": ""
+    },
+    {
+      "name": "pundit",
+      "category_id": "strictly_necessary",
+      "provider": "pundit",
+      "purpose": "Authentication and session management",
+      "cookies": [
+        "pundit_session"
+      ],
+      "duration": "Session",
+      "privacy_policy_url": ""
+    },
+    {
+      "name": "rails-sessions",
+      "category_id": "strictly_necessary",
+      "provider": "rails-sessions",
+      "purpose": "Authentication and session management",
+      "cookies": [
+        "rails_sessions_session"
+      ],
+      "duration": "Session",
+      "privacy_policy_url": ""
+    }
+  ],
+  "cmp_integration": {
+    "onetrust": {
+      "category_mapping": {
+        "strictly_necessary": "C0001",
+        "functional": "C0003",
+        "analytics": "C0002",
+        "advertising": "C0004"
+      }
+    },
+    "cookieyes": {
+      "category_mapping": {
+        "strictly_necessary": "necessary",
+        "functional": "functional",
+        "analytics": "analytics",
+        "advertising": "advertisement"
+      }
+    },
+    "cookiebot": {
+      "category_mapping": {
+        "strictly_necessary": "necessary",
+        "functional": "preferences",
+        "analytics": "statistics",
+        "advertising": "marketing"
+      }
+    }
+  }
+}
