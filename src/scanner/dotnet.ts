@@ -153,6 +153,47 @@ function scanAppSettings(projectPath: string, detected: Map<string, DetectedServ
           });
         }
       }
+
+      // Deep-parse ConnectionStrings section for database provider details
+      parseConnectionStrings(content, relPath, detected);
+    }
+  }
+}
+
+function parseConnectionStrings(content: string, relPath: string, detected: Map<string, DetectedService>) {
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    return;
+  }
+
+  const connStrings = parsed["ConnectionStrings"] as Record<string, string> | undefined;
+  if (!connStrings || typeof connStrings !== "object") return;
+
+  for (const [connName, connValue] of Object.entries(connStrings)) {
+    if (typeof connValue !== "string") continue;
+
+    const lowerConn = connValue.toLowerCase();
+    let dbType = "database";
+    if (lowerConn.includes("server=") || lowerConn.includes("sqlserver") || lowerConn.includes("mssql")) {
+      dbType = "sql-server";
+    } else if (lowerConn.includes("host=") && lowerConn.includes("port=5432")) {
+      dbType = "postgresql";
+    } else if (lowerConn.includes("mysql") || lowerConn.includes("port=3306")) {
+      dbType = "mysql";
+    } else if (lowerConn.includes(".db") || lowerConn.includes("sqlite")) {
+      dbType = "sqlite";
+    }
+
+    const serviceName = `dotnet-connstring-${connName.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+    if (!detected.has(serviceName)) {
+      detected.set(serviceName, {
+        name: serviceName,
+        category: "database",
+        evidence: [{ type: "code_pattern", file: relPath, detail: `ConnectionString "${connName}" (${dbType}) in ${relPath}` }],
+        dataCollected: ["database records", "user data as defined in schema"],
+      });
     }
   }
 }

@@ -67,4 +67,44 @@ describe("scanDotnetDependencies", () => {
       cleanup(dir);
     }
   });
+
+  it("parses ConnectionStrings section and detects database providers", () => {
+    const dir = createTempProject({
+      "appsettings.json": JSON.stringify({
+        ConnectionStrings: {
+          DefaultConnection: "Server=localhost;Database=mydb;User=sa;Password=secret;",
+          ReadReplica: "Host=replica.example.com;Port=5432;Database=mydb;Username=reader;Password=secret;"
+        }
+      }),
+    });
+    try {
+      const result = scanDotnetDependencies(dir);
+      assert.ok(result.some(s => s.name === "dotnet-database"), "should detect dotnet-database from ConnectionStrings pattern");
+      assert.ok(result.some(s => s.name === "dotnet-connstring-defaultconnection"), "should parse DefaultConnection");
+      assert.ok(result.some(s => s.name === "dotnet-connstring-readreplica"), "should parse ReadReplica");
+    } finally {
+      cleanup(dir);
+    }
+  });
+
+  it("detects appsettings.json in root directory (not just subdirs)", () => {
+    const dir = createTempProject({
+      "appsettings.json": JSON.stringify({
+        ConnectionStrings: {
+          MainDb: "Server=db.prod.example.com;Database=app;User=appuser;Password=secret;"
+        },
+        Redis: { ConnectionString: "redis.example.com:6379" }
+      }),
+    });
+    try {
+      const result = scanDotnetDependencies(dir);
+      assert.ok(result.some(s => s.name === "dotnet-database"), "should detect dotnet-database from root appsettings.json");
+      assert.ok(result.some(s => s.name === "dotnet-redis"), "should detect dotnet-redis from root appsettings.json");
+      const mainDbService = result.find(s => s.name === "dotnet-connstring-maindb");
+      assert.ok(mainDbService, "should parse MainDb connection string from root");
+      assert.ok(mainDbService!.evidence[0].file === "appsettings.json", "evidence file should be root appsettings.json");
+    } finally {
+      cleanup(dir);
+    }
+  });
 });

@@ -117,9 +117,9 @@ function scanWpConfig(projectPath: string, detected: Map<string, DetectedService
   }
 
   const wpPatterns: { pattern: RegExp; name: string; category: DetectedService["category"]; dataCollected: string[] }[] = [
-    { pattern: /DB_NAME|DB_USER|DB_PASSWORD|DB_HOST/i, name: "wordpress-database", category: "database", dataCollected: ["user data", "posts", "comments", "user accounts"] },
-    { pattern: /SMTP|WP_MAIL|mail\s*\(/i, name: "wordpress-mail", category: "email", dataCollected: ["email addresses", "email content"] },
-    { pattern: /WP_CACHE|MEMCACHED|W3TC|WP_REDIS/i, name: "wordpress-cache", category: "database", dataCollected: ["cached data", "session data"] },
+    { pattern: /DB_NAME|DB_USER|DB_PASSWORD|DB_HOST/i, name: "wordpress-database", category: "database", dataCollected: ["database name", "database user", "database host", "user data", "posts", "comments", "user accounts"] },
+    { pattern: /WP_MAIL_SMTP|SMTP_HOST|SMTP_PORT|SMTP_USER|SMTP_PASS|WP_MAIL|SMTP|mail\s*\(/i, name: "wordpress-mail", category: "email", dataCollected: ["email addresses", "email content", "SMTP credentials"] },
+    { pattern: /WP_CACHE|REDIS_HOST|REDIS_PORT|REDIS_PASSWORD|MEMCACHED|W3TC|WP_REDIS/i, name: "wordpress-cache", category: "database", dataCollected: ["cached data", "session data", "cache host configuration"] },
     { pattern: /AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY/i, name: "wordpress-auth", category: "auth", dataCollected: ["authentication tokens", "session data"] },
   ];
 

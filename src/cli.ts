@@ -1332,7 +1332,21 @@ function main() {
       }
 
       if (jsonOutput) {
-        console.log(JSON.stringify(result, null, 2));
+        const jsonStr = JSON.stringify(result, null, 2);
+        // For large outputs (>1MB), write to file to avoid pipe truncation
+        const JSON_SIZE_THRESHOLD = 1024 * 1024;
+        if (jsonStr.length > JSON_SIZE_THRESHOLD) {
+          const outFile = path.join(absProjectPath, ".codepliant-scan.json");
+          fs.writeFileSync(outFile, jsonStr + "\n", "utf-8");
+          console.log(JSON.stringify({ _outputFile: outFile, _size: jsonStr.length, _note: "Output exceeded 1MB; written to file to avoid pipe truncation." }));
+        } else {
+          process.stdout.write(jsonStr + "\n", () => {
+            process.exit(0);
+          });
+          // Fallback exit if write callback doesn't fire (e.g. broken pipe)
+          setTimeout(() => process.exit(0), 5000);
+          return;
+        }
         process.exit(0);
       }
 
