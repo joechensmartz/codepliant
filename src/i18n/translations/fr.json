@@ -95,7 +95,7 @@
   "privacy.contact": "Contact",
   "privacy.contactIntro": "Si vous avez des questions concernant cette Politique de Confidentialité ou souhaitez exercer vos droits en matière de protection des données, veuillez nous contacter à :",
   "privacy.contactDPO": "Délégué à la Protection des Données :",
-  "privacy.footer": "Cette politique de confidentialité a été générée par [Codepliant](https://github.com/codepliant/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-la pour votre cas d'utilisation spécifique.",
+  "privacy.footer": "Cette politique de confidentialité a été générée par [Codepliant](https://github.com/joechensmartz/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-la pour votre cas d'utilisation spécifique.",
 
   "tos.title": "Conditions d'Utilisation",
   "tos.agreementToTerms": "Acceptation des conditions",
@@ -170,7 +170,7 @@
   "tos.assignment": "**Cession :** Vous ne pouvez pas céder ou transférer vos droits ou obligations en vertu de ces Conditions sans notre consentement écrit préalable. Nous pouvons céder nos droits et obligations sans restriction.",
   "tos.contact": "Contact",
   "tos.contactText": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter à :",
-  "tos.footer": "Ces Conditions d'Utilisation ont été générées par [Codepliant](https://github.com/codepliant/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-les pour votre cas d'utilisation spécifique.",
+  "tos.footer": "Ces Conditions d'Utilisation ont été générées par [Codepliant](https://github.com/joechensmartz/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-les pour votre cas d'utilisation spécifique.",
 
   "cookie.title": "Politique relative aux Cookies",
   "cookie.whatAreCookies": "Que sont les cookies",
@@ -235,7 +235,7 @@
   "cookie.updatesText": "Nous pouvons mettre à jour cette Politique relative aux Cookies de temps à autre. Les modifications seront publiées sur cette page avec une date de révision mise à jour.",
   "cookie.contact": "Contact",
   "cookie.contactText": "Pour toute question concernant notre utilisation des cookies, veuillez contacter :",
-  "cookie.footer": "Cette politique relative aux cookies a été générée par [Codepliant](https://github.com/codepliant/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-la pour votre cas d'utilisation spécifique.",
+  "cookie.footer": "Cette politique relative aux cookies a été générée par [Codepliant](https://github.com/joechensmartz/codepliant) sur la base d'une analyse automatisée du code. Vérifiez et personnalisez-la pour votre cas d'utilisation spécifique.",
 
   "common.email": "E-mail :",
   "common.processes": "Traite",

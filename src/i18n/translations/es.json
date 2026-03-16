@@ -95,7 +95,7 @@
   "privacy.contact": "Contacto",
   "privacy.contactIntro": "Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos de protección de datos, contáctenos en:",
   "privacy.contactDPO": "Delegado de Protección de Datos:",
-  "privacy.footer": "Esta política de privacidad fue generada por [Codepliant](https://github.com/codepliant/codepliant) basándose en un análisis automatizado del código. Revísela y personalícela para su caso de uso específico.",
+  "privacy.footer": "Esta política de privacidad fue generada por [Codepliant](https://github.com/joechensmartz/codepliant) basándose en un análisis automatizado del código. Revísela y personalícela para su caso de uso específico.",
 
   "tos.title": "Términos de Servicio",
   "tos.agreementToTerms": "Aceptación de los términos",
@@ -170,7 +170,7 @@
   "tos.assignment": "**Cesión:** No puede ceder ni transferir sus derechos u obligaciones en virtud de estos Términos sin nuestro consentimiento previo por escrito. Podemos ceder nuestros derechos y obligaciones sin restricción.",
   "tos.contact": "Contacto",
   "tos.contactText": "Si tiene preguntas sobre estos Términos, contáctenos en:",
-  "tos.footer": "Estos Términos de Servicio fueron generados por [Codepliant](https://github.com/codepliant/codepliant) basándose en un análisis automatizado del código. Revíselos y personalícelos para su caso de uso específico.",
+  "tos.footer": "Estos Términos de Servicio fueron generados por [Codepliant](https://github.com/joechensmartz/codepliant) basándose en un análisis automatizado del código. Revíselos y personalícelos para su caso de uso específico.",
 
   "cookie.title": "Política de Cookies",
   "cookie.whatAreCookies": "Qué son las cookies",
@@ -235,7 +235,7 @@
   "cookie.updatesText": "Podemos actualizar esta Política de Cookies de vez en cuando. Los cambios se publicarán en esta página con una fecha de revisión actualizada.",
   "cookie.contact": "Contacto",
   "cookie.contactText": "Para preguntas sobre nuestro uso de cookies, por favor contacte:",
-  "cookie.footer": "Esta política de cookies fue generada por [Codepliant](https://github.com/codepliant/codepliant) basándose en un análisis automatizado del código. Revísela y personalícela para su caso de uso específico.",
+  "cookie.footer": "Esta política de cookies fue generada por [Codepliant](https://github.com/joechensmartz/codepliant) basándose en un análisis automatizado del código. Revísela y personalícela para su caso de uso específico.",
 
   "common.email": "Correo electrónico:",
   "common.processes": "Procesa",

@@ -211,7 +211,7 @@ export function generateDataMappingRegister(
   lines.push("");
   lines.push(`> **Document Version:** 1.0`);
   lines.push(`> **Document Owner:** ${company}`);
-  lines.push(`> **Generated:** ${date} by [Codepliant](https://github.com/codepliant/codepliant)`);
+  lines.push(`> **Generated:** ${date} by [Codepliant](https://github.com/joechensmartz/codepliant)`);
   lines.push(`> **Next Review Date:** ${nextReview}`);
   lines.push("");
   lines.push("This register provides a complete inventory of personal data processing activities");

@@ -244,7 +244,7 @@ export function generatePrivacyRiskMatrix(
   lines.push("");
   lines.push(`> **Document Version:** 1.0`);
   lines.push(`> **Document Owner:** ${company}`);
-  lines.push(`> **Generated:** ${date} by [Codepliant](https://github.com/codepliant/codepliant)`);
+  lines.push(`> **Generated:** ${date} by [Codepliant](https://github.com/joechensmartz/codepliant)`);
   lines.push(`> **Next Review Date:** ${nextReview}`);
   lines.push("");
   lines.push("This document provides a visual risk assessment of all detected data processing activities,");

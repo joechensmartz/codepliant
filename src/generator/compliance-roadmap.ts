@@ -242,7 +242,7 @@ If a data breach occurs without these documents, response time increases dramati
 - [ ] **Set up CI/CD compliance checks**
   \`\`\`yaml
   # .github/workflows/compliance.yml
-  - uses: codepliant/codepliant@v220
+  - uses: joechensmartz/codepliant@v220
     with:
       fail-on-missing: true
   \`\`\`

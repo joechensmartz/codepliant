@@ -95,7 +95,7 @@
   "privacy.contact": "Kontakt",
   "privacy.contactIntro": "Wenn Sie Fragen zu dieser Datenschutzerklärung haben oder Ihre Datenschutzrechte ausüben möchten, kontaktieren Sie uns bitte unter:",
   "privacy.contactDPO": "Datenschutzbeauftragter:",
-  "privacy.footer": "Diese Datenschutzerklärung wurde von [Codepliant](https://github.com/codepliant/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
+  "privacy.footer": "Diese Datenschutzerklärung wurde von [Codepliant](https://github.com/joechensmartz/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
 
   "tos.title": "Nutzungsbedingungen",
   "tos.agreementToTerms": "Zustimmung zu den Nutzungsbedingungen",
@@ -170,7 +170,7 @@
   "tos.assignment": "**Abtretung:** Sie dürfen Ihre Rechte oder Pflichten aus diesen Bedingungen ohne unsere vorherige schriftliche Zustimmung nicht abtreten oder übertragen. Wir können unsere Rechte und Pflichten ohne Einschränkung abtreten.",
   "tos.contact": "Kontakt",
   "tos.contactText": "Wenn Sie Fragen zu diesen Bedingungen haben, kontaktieren Sie uns bitte unter:",
-  "tos.footer": "Diese Nutzungsbedingungen wurden von [Codepliant](https://github.com/codepliant/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
+  "tos.footer": "Diese Nutzungsbedingungen wurden von [Codepliant](https://github.com/joechensmartz/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
 
   "cookie.title": "Cookie-Richtlinie",
   "cookie.whatAreCookies": "Was sind Cookies",
@@ -235,7 +235,7 @@
   "cookie.updatesText": "Wir können diese Cookie-Richtlinie von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Revisionsdatum veröffentlicht.",
   "cookie.contact": "Kontakt",
   "cookie.contactText": "Bei Fragen zu unserer Verwendung von Cookies kontaktieren Sie bitte:",
-  "cookie.footer": "Diese Cookie-Richtlinie wurde von [Codepliant](https://github.com/codepliant/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
+  "cookie.footer": "Diese Cookie-Richtlinie wurde von [Codepliant](https://github.com/joechensmartz/codepliant) auf Basis einer automatisierten Codeanalyse erstellt. Überprüfen und passen Sie sie für Ihren spezifischen Anwendungsfall an.",
 
   "common.email": "E-Mail:",
   "common.processes": "Verarbeitet",

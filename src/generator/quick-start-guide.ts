@@ -313,7 +313,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: codepliant/codepliant@v220
+      - uses: joechensmartz/codepliant@v220
         with:
           fail-on-missing: true
 \`\`\`
