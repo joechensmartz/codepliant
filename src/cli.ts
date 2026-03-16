@@ -37,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "530.0.0";
+const VERSION = "550.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -250,6 +250,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--ecosystem <name>${RESET()}    Filter to a specific ecosystem (js, python, go, ruby, etc.)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
+  ${DIM()}--watch, -w${RESET()}           Watch for file changes and re-scan continuously
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -260,6 +261,7 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant scan --json | jq '.services'${RESET()}
   ${CYAN()}codepliant scan --json -o scan.json${RESET()}         Save JSON results to a file
   ${CYAN()}codepliant scan -o results.txt${RESET()}              Save scan output to a text file
+  ${CYAN()}codepliant scan --watch${RESET()}                     Watch mode: re-scan on file changes
 `,
 
   tree: `${BOLD()}codepliant tree${RESET()} [path] [options]
@@ -1438,6 +1440,12 @@ function main() {
       }
 
       printScanResults(result, quiet);
+
+      if (watchMode) {
+        startScanWatchMode(absProjectPath, quiet, result);
+        return;
+      }
+
       process.exit(0);
     }
 
@@ -2192,6 +2200,131 @@ function startWatchMode(
         const subdir = path.join(dir, entry.name);
         if (subdir === absOutputDir) continue;
         watchDir(subdir);
+      }
+    }
+
+    try {
+      const watcher = fs.watch(dir, { persistent: true }, (_event, filename) => {
+        if (filename && WATCH_IGNORE_DIRS.has(filename)) return;
+        handleChange();
+      });
+      watchers.push(watcher);
+    } catch {
+      // directory may not be watchable
+    }
+  }
+
+  watchDir(absProjectPath);
+
+  process.on("SIGINT", () => {
+    console.log(`\n${DIM()}Stopping watch mode...${RESET()}`);
+    if (debounceTimer) clearTimeout(debounceTimer);
+    for (const w of watchers) {
+      w.close();
+    }
+    process.exit(0);
+  });
+}
+
+function startScanWatchMode(
+  absProjectPath: string,
+  quiet: boolean,
+  previousResult: ScanResult,
+): void {
+  console.log(
+    `\n${CYAN()}${BOLD()}Watching for changes...${RESET()} ${DIM()}(Ctrl+C to stop)${RESET()}\n`
+  );
+
+  let lastResult = previousResult;
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  const watchers: fs.FSWatcher[] = [];
+
+  function handleChange() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      debounceTimer = null;
+      try {
+        const timestamp = new Date().toLocaleTimeString();
+        console.log(`\n${DIM()}[${timestamp}] Change detected, re-scanning...${RESET()}`);
+
+        const newResult = scan(absProjectPath);
+
+        // Compare services and show diff
+        const oldNames = new Set(lastResult.services.map((s) => s.name));
+        const newNames = new Set(newResult.services.map((s) => s.name));
+
+        let changed = false;
+        for (const s of newResult.services) {
+          if (!oldNames.has(s.name)) {
+            console.log(
+              `  ${GREEN()}+ New service: ${s.name} (${s.category})${RESET()}`
+            );
+            changed = true;
+          }
+        }
+        for (const s of lastResult.services) {
+          if (!newNames.has(s.name)) {
+            console.log(
+              `  ${RED()}- Removed service: ${s.name} (${s.category})${RESET()}`
+            );
+            changed = true;
+          }
+        }
+
+        // Check for data collection changes on existing services
+        for (const newSvc of newResult.services) {
+          if (oldNames.has(newSvc.name)) {
+            const oldSvc = lastResult.services.find((s) => s.name === newSvc.name);
+            if (oldSvc) {
+              const oldData = new Set(oldSvc.dataCollected || []);
+              const newData = new Set(newSvc.dataCollected || []);
+              for (const d of newData) {
+                if (!oldData.has(d)) {
+                  console.log(
+                    `  ${YELLOW()}~ ${newSvc.name}: new data type "${d}"${RESET()}`
+                  );
+                  changed = true;
+                }
+              }
+              for (const d of oldData) {
+                if (!newData.has(d)) {
+                  console.log(
+                    `  ${YELLOW()}~ ${newSvc.name}: removed data type "${d}"${RESET()}`
+                  );
+                  changed = true;
+                }
+              }
+            }
+          }
+        }
+
+        if (changed) {
+          console.log(
+            `\n  ${BOLD()}Services: ${lastResult.services.length} → ${newResult.services.length}${RESET()}`
+          );
+        } else {
+          console.log(`  ${DIM()}No service changes detected.${RESET()}`);
+        }
+
+        lastResult = newResult;
+      } catch (err) {
+        console.error(`  ${RED()}[CP020] Error during re-scan: ${formatError(err)}${RESET()}`);
+      }
+    }, 500);
+  }
+
+  function watchDir(dir: string) {
+    let entries: fs.Dirent[];
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        if (WATCH_IGNORE_DIRS.has(entry.name)) continue;
+        watchDir(path.join(dir, entry.name));
       }
     }
 

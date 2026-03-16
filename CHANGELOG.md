@@ -5,6 +5,14 @@ All notable changes to Codepliant are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [550.0.0] - 2026-03-16
+
+### Added
+- Compliance Evidence Log generator — `COMPLIANCE_EVIDENCE_LOG.md` for SOC 2 / ISO 27001 audit evidence tracking with per-control evidence type, date, location, and reviewer
+- Privacy Impact Screening generator — `PRIVACY_IMPACT_SCREENING.md` quick yes/no questionnaire to determine if a full DPIA is needed, auto-pre-filled from scan results
+- `codepliant scan --watch` flag — continuously watch for file changes and re-scan, showing service diffs (additions, removals, data type changes) in real time
+- Version bumped to 550.0.0, 763 tests passing
+
 ## [500.0.0] - 2026-03-16 — v500 SUPER MILESTONE
 
 ### Added
