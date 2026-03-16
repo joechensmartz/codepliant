@@ -36,7 +36,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "440.0.0";
+const VERSION = "460.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -115,6 +115,7 @@ ${BOLD()}Generation:${RESET()}
   ${CYAN()}page${RESET()}            Generate compliance page
   ${CYAN()}badge${RESET()}           Generate compliance badges
   ${CYAN()}format${RESET()}          Convert a single .md file to HTML
+  ${CYAN()}pdf${RESET()}             Generate PDF for a single document (requires Puppeteer)
   ${CYAN()}export${RESET()}          Export all compliance docs as a ZIP file
   ${CYAN()}compare${RESET()}         Compare compliance status of two projects
 
@@ -1535,6 +1536,14 @@ function main() {
       return;
     }
 
+    if (command === "pdf") {
+      runPdfSingle(args, quiet).then(() => process.exit(0)).catch((err) => {
+        console.error(`${RED()}${BOLD()}[CP074] PDF generation failed:${RESET()} ${formatError(err)}`);
+        process.exit(1);
+      });
+      return;
+    }
+
     if (command === "export") {
       runExport(absProjectPath, absOutputDir, quiet, formatFlag, verbose);
       return;
@@ -2329,6 +2338,87 @@ function runFormat(args: string[], quiet: boolean) {
   }
 
   process.exit(0);
+}
+
+// --- `codepliant pdf` command ---
+
+async function runPdfSingle(args: string[], quiet: boolean) {
+  // Usage: codepliant pdf <file.md>
+  const filePath = args[1];
+  if (!filePath) {
+    console.error(`${RED()}[CP070] Missing document argument.${RESET()}`);
+    console.error(`Usage: codepliant pdf <file.md>`);
+    console.error(`\nGenerate a PDF for a single compliance document using Puppeteer.`);
+    process.exit(1);
+  }
+
+  const absFile = path.resolve(filePath);
+  if (!fs.existsSync(absFile)) {
+    console.error(`${RED()}[CP071] File not found: ${absFile}${RESET()}`);
+    process.exit(1);
+  }
+
+  if (!absFile.endsWith(".md")) {
+    console.error(`${RED()}[CP072] Only .md files are supported. Got: ${path.basename(absFile)}${RESET()}`);
+    process.exit(1);
+  }
+
+  // Check if puppeteer is available
+  let puppeteer: any;
+  try {
+    puppeteer = await import("puppeteer");
+  } catch {
+    // puppeteer not installed — show install instructions
+    console.error(`${RED()}[CP073] Puppeteer is not installed.${RESET()}\n`);
+    console.error(`Puppeteer is required for single-document PDF generation.`);
+    console.error(`\n${BOLD()}To install:${RESET()}`);
+    console.error(`  ${CYAN()}npm install puppeteer${RESET()}`);
+    console.error(`  ${DIM()}# or${RESET()}`);
+    console.error(`  ${CYAN()}npm install puppeteer-core${RESET()}  ${DIM()}(if you have Chrome/Chromium installed)${RESET()}`);
+    console.error(`\n${DIM()}Puppeteer downloads a bundled Chromium (~170 MB) on first install.${RESET()}`);
+    console.error(`${DIM()}Alternatively, use: codepliant go --format pdf  (uses wkhtmltopdf or print-ready HTML)${RESET()}`);
+    process.exit(1);
+  }
+
+  const mdContent = fs.readFileSync(absFile, "utf-8");
+  const baseName = path.basename(absFile, ".md");
+  const docName = baseName.replace(/[_-]/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+
+  // Convert markdown to styled HTML
+  const html = generateCompliancePage(
+    [{ name: docName, filename: path.basename(absFile), content: mdContent }],
+    {
+      companyName: docName,
+      lastUpdated: new Date().toISOString().split("T")[0],
+    }
+  );
+
+  const pdfPath = path.join(path.dirname(absFile), `${baseName}.pdf`);
+
+  if (!quiet) {
+    console.log(`  ${DIM()}Generating PDF for ${path.basename(absFile)}...${RESET()}`);
+  }
+
+  // Launch Puppeteer and generate PDF
+  const browser = await puppeteer.default.launch({ headless: true, args: ["--no-sandbox"] });
+  try {
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
+    await page.pdf({
+      path: pdfPath,
+      format: "A4",
+      margin: { top: "20mm", bottom: "20mm", left: "18mm", right: "18mm" },
+      printBackground: true,
+    });
+  } finally {
+    await browser.close();
+  }
+
+  if (!quiet) {
+    const stats = fs.statSync(pdfPath);
+    console.log(`  ${GREEN()}✓${RESET()} ${path.relative(process.cwd(), pdfPath)} ${DIM()}(${formatFileSize(stats.size)})${RESET()}`);
+    console.log(`\n${GREEN()}${BOLD()}Done!${RESET()} PDF generated for ${path.basename(absFile)}.\n`);
+  }
 }
 
 // --- `codepliant page` command ---

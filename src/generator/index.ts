@@ -132,6 +132,8 @@ import { generateComplianceScorecardVisual } from "./compliance-scorecard-visual
 import { generateDataSubjectRequestLog } from "./data-subject-request-log.js";
 import { generateCompliancePolicyIndex } from "./compliance-policy-index.js";
 import { generateAISupplyChainRisk } from "./ai-supply-chain-risk.js";
+import { generateComplianceOnboardingGuide } from "./compliance-onboarding-guide.js";
+import { generateDataProcessingInventory } from "./data-processing-inventory.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1334,6 +1336,26 @@ export function generateDocuments(
       name: "AI Supply Chain Risk Assessment",
       filename: "AI_SUPPLY_CHAIN_RISK.md",
       content: aiSupplyChainRisk,
+    });
+  }
+
+  // Compliance Onboarding Guide — new employee compliance procedures and reading order
+  const complianceOnboardingGuide = generateComplianceOnboardingGuide(docScan, ctx);
+  if (complianceOnboardingGuide) {
+    docs.push({
+      name: "Compliance Onboarding Guide",
+      filename: "COMPLIANCE_ONBOARDING_GUIDE.md",
+      content: complianceOnboardingGuide,
+    });
+  }
+
+  // Data Processing Inventory — complete inventory of all data processing activities (GDPR Art. 30)
+  const dataProcessingInventory = generateDataProcessingInventory(docScan, ctx);
+  if (dataProcessingInventory) {
+    docs.push({
+      name: "Data Processing Inventory",
+      filename: "DATA_PROCESSING_INVENTORY.md",
+      content: dataProcessingInventory,
     });
   }
 

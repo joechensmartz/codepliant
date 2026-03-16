@@ -126,15 +126,24 @@ Supports: JavaScript/TypeScript, Python, Go, Ruby, Elixir, PHP, Rust, Java, .NET
 
 **Privacy** — DSAR Handling Guide, Consent Management Guide, Data Retention Policy, Data Dictionary, Privacy by Design Checklist, Cookie Inventory, Data Subject Categories, Lawful Basis Assessment
 
-**Operations** — Open Source Notice, License Compliance, Sub-Processor List, Vendor Contacts, Data Flow Map, Record of Processing, Transfer Impact Assessment, Regulatory Updates
+**Operations** — Open Source Notice, License Compliance, Sub-Processor List, Vendor Contacts, Data Flow Map, Record of Processing, Transfer Impact Assessment, Regulatory Updates, Data Processing Inventory
 
 **Audit** — SOC 2 Checklist, ISO 27001 Checklist, Privacy Impact Assessment, Third-Party Risk Assessment, Data Classification, Risk Register, Compliance Certificate, Annual Review Checklist
 
+**Onboarding** — Compliance Onboarding Guide for new employees, with prioritized reading order, key contacts, and onboarding checklist
+
 **Privacy UX** — Privacy Notice (Short) for in-app display, Cookie Consent Config (JSON) for CMP integration (OneTrust, CookieYes, Cookiebot)
 
-**Output formats** — Markdown, HTML, PDF, JSON, Notion, Confluence, cookie consent banner, embeddable widget, 12+ formats total
+**Output formats** — Markdown, HTML, PDF (with preview via `codepliant pdf <doc>`), JSON, Notion, Confluence, DOCX, cookie consent banner, embeddable widget, 12+ formats total
 
 [See example output from a real SaaS project →](./examples/sample-output/)
+
+Browse all output formats on GitHub:
+- [Markdown](./examples/sample-output/) — default, works everywhere
+- [HTML](./examples/sample-output/) — Apple-style compliance page with navigation
+- [PDF](./examples/sample-output/) — print-ready, single-document via `codepliant pdf <doc>`
+- [JSON](./examples/sample-output/) — machine-readable for integrations
+- [Notion / Confluence / Wiki](./examples/sample-output/) — export to your team's docs platform
 
 ---
 
