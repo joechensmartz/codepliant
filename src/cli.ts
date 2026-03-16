@@ -37,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "520.0.0";
+const VERSION = "530.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -245,6 +245,7 @@ Scan the project for third-party services and data collection patterns.
 Does not generate any documents.
 
 ${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <file>${RESET()}   Save scan results to a file (default: stdout for --json, terminal for normal)
   ${DIM()}--json${RESET()}                Output results as JSON (useful for piping)
   ${DIM()}--ecosystem <name>${RESET()}    Filter to a specific ecosystem (js, python, go, ruby, etc.)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
@@ -257,6 +258,8 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant scan --ecosystem python${RESET()}          Only show Python ecosystem results
   ${CYAN()}codepliant scan --json${RESET()}                     JSON output for CI/scripts
   ${CYAN()}codepliant scan --json | jq '.services'${RESET()}
+  ${CYAN()}codepliant scan --json -o scan.json${RESET()}         Save JSON results to a file
+  ${CYAN()}codepliant scan -o results.txt${RESET()}              Save scan output to a text file
 `,
 
   tree: `${BOLD()}codepliant tree${RESET()} [path] [options]
@@ -1253,6 +1256,7 @@ function main() {
   let slackFlag = false;
   let githubPagesFlag = false;
   let prFlag = false;
+  let scanOutputFile: string | undefined;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1322,6 +1326,11 @@ function main() {
   const absProjectPath = path.resolve(projectPath);
   const absOutputDir = path.resolve(absProjectPath, outputDir);
 
+  // For the scan command, --output/-o specifies a file to write results to
+  if (command === "scan" && outputDir !== "./legal") {
+    scanOutputFile = path.resolve(outputDir);
+  }
+
   // Validate project path with actionable error messages
   if (command !== "help" && command !== "init" && command !== "wizard" && command !== "serve" && command !== "auth" && command !== "audit-trail" && command !== "explain" && command !== "upgrade" && command !== "activate" && command !== "deactivate" && command !== "onboard" && command !== "billing") {
     if (!fs.existsSync(absProjectPath)) {
@@ -1369,6 +1378,20 @@ function main() {
 
       if (jsonOutput) {
         const jsonStr = JSON.stringify(result, null, 2);
+
+        // --output <file>: write JSON to specified file
+        if (scanOutputFile) {
+          const outDir = path.dirname(scanOutputFile);
+          if (!fs.existsSync(outDir)) {
+            fs.mkdirSync(outDir, { recursive: true });
+          }
+          fs.writeFileSync(scanOutputFile, jsonStr + "\n", "utf-8");
+          if (!quiet) {
+            console.log(`  ${GREEN()}Scan results written to ${scanOutputFile}${RESET()}`);
+          }
+          process.exit(0);
+        }
+
         // For large outputs (>1MB), write to file to avoid pipe truncation
         const JSON_SIZE_THRESHOLD = 1024 * 1024;
         if (jsonStr.length > JSON_SIZE_THRESHOLD) {
@@ -1382,6 +1405,31 @@ function main() {
           // Fallback exit if write callback doesn't fire (e.g. broken pipe)
           setTimeout(() => process.exit(0), 5000);
           return;
+        }
+        process.exit(0);
+      }
+
+      // --output <file> without --json: capture terminal output to file
+      if (scanOutputFile) {
+        // Temporarily redirect console.log to capture output
+        const outputLines: string[] = [];
+        const origLog = console.log;
+        console.log = (...args: unknown[]) => {
+          outputLines.push(args.map(String).join(" "));
+        };
+        printScanResults(result, quiet);
+        console.log = origLog;
+
+        const outDir = path.dirname(scanOutputFile);
+        if (!fs.existsSync(outDir)) {
+          fs.mkdirSync(outDir, { recursive: true });
+        }
+        // Strip ANSI codes for file output
+        const ansiRegex = /\x1b\[[0-9;]*m/g;
+        const cleanOutput = outputLines.join("\n").replace(ansiRegex, "");
+        fs.writeFileSync(scanOutputFile, cleanOutput + "\n", "utf-8");
+        if (!quiet) {
+          origLog(`  ${GREEN()}Scan results written to ${scanOutputFile}${RESET()}`);
         }
         process.exit(0);
       }

@@ -144,6 +144,8 @@ import { generateDataMinimizationChecklist } from "./data-minimization-checklist
 import { generatePrivacyNoticeMultilingual } from "./privacy-notice-multilingual.js";
 import { generatePrivacyEngineeringGuide } from "./privacy-engineering-guide.js";
 import { generateComplianceTestingPlan } from "./compliance-testing-plan.js";
+import { generateComplianceInvestmentCase } from "./compliance-investment-case.js";
+import { generatePrivacyNoticeChildren } from "./privacy-notice-children.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1469,6 +1471,26 @@ export function generateDocuments(
       name: "Compliance Testing Plan",
       filename: "COMPLIANCE_TESTING_PLAN.md",
       content: complianceTestingPlan,
+    });
+  }
+
+  // Compliance Investment Case — business case for compliance investment with ROI analysis
+  const complianceInvestmentCase = generateComplianceInvestmentCase(docScan, ctx);
+  if (complianceInvestmentCase) {
+    docs.push({
+      name: "Compliance Investment Case",
+      filename: "COMPLIANCE_INVESTMENT_CASE.md",
+      content: complianceInvestmentCase,
+    });
+  }
+
+  // Privacy Notice (Children) — COPPA child-friendly privacy notice with simple language
+  const privacyNoticeChildren = generatePrivacyNoticeChildren(docScan, ctx);
+  if (privacyNoticeChildren) {
+    docs.push({
+      name: "Privacy Notice (Children)",
+      filename: "PRIVACY_NOTICE_CHILDREN.md",
+      content: privacyNoticeChildren,
     });
   }
 
