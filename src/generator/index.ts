@@ -138,6 +138,8 @@ import { generateComplianceDigest } from "./compliance-digest.js";
 import { generatePrivacyNoticeApp } from "./privacy-notice-app.js";
 import { generateComplianceMaturityAssessment } from "./compliance-maturity-assessment.js";
 import { generateRegulatoryMappingMatrix } from "./regulatory-mapping-matrix.js";
+import { generateComplianceBoardReport } from "./compliance-board-report.js";
+import { generatePrivacyNoticeMultilingual } from "./privacy-notice-multilingual.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -1411,6 +1413,19 @@ export function generateDocuments(
       filename: "REGULATORY_MAPPING_MATRIX.md",
       content: regulatoryMappingMatrix,
     });
+  }
+
+  // Compliance Board Report — quarterly board-level compliance report for directors
+  docs.push({
+    name: "Compliance Board Report",
+    filename: "COMPLIANCE_BOARD_REPORT.md",
+    content: generateComplianceBoardReport(docScan, ctx),
+  });
+
+  // Privacy Notice (Multilingual) — simplified notices in DE, FR, ES
+  const multilingualNotices = generatePrivacyNoticeMultilingual(docScan, ctx);
+  for (const notice of multilingualNotices) {
+    docs.push(notice);
   }
 
   // Compliance Certificate — self-attestation certificate (generated after all other docs)

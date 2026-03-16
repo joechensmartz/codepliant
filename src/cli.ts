@@ -23,6 +23,7 @@ import { sendNotification, buildPayload } from "./notifications/index.js";
 import { discoverProjects, type DiscoveredProject } from "./scanner/discover.js";
 import { listAllSignatures, exportSignatures, importSignatures } from "./community/signatures-repo.js";
 import { writeGithubWiki } from "./output/github-wiki.js";
+import { writeGithubPages } from "./output/github-pages.js";
 import { reviewDocuments, formatReviewResults, isReviewAvailable, type AIReviewConfig } from "./ai/review.js";
 import { lintDocuments } from "./lint.js";
 import { validateDocuments, type ValidateResult } from "./validate.js";
@@ -36,7 +37,7 @@ import { scheduleScans, unscheduleScans, getScheduleStatus, frequencyDescription
 import { getBillingStatus, getBillingUsage, openBillingPortal } from "./cloud/billing.js";
 import { checkLicense, checkAndTrackFeature } from "./licensing/index.js";
 import { computeComplianceScore as computeFullComplianceScore, formatScoreBreakdown, type ScoreInput, type ComplianceScore, type RegulationScore, type Recommendation } from "./scoring/index.js";
-const VERSION = "480.0.0";
+const VERSION = "490.0.0";
 
 // --no-color support: disabled via flag, NO_COLOR env, or non-TTY stdout
 let _noColor = false;
@@ -126,7 +127,7 @@ ${BOLD()}Notifications:${RESET()}
 
 ${BOLD()}Server:${RESET()}
   ${CYAN()}serve${RESET()}           Start HTTP API server
-  ${CYAN()}publish${RESET()}         Generate compliance API endpoint spec
+  ${CYAN()}publish${RESET()}         Generate API spec or GitHub Pages site
 
 ${BOLD()}Setup:${RESET()}
   ${CYAN()}init${RESET()}            Interactive setup wizard
@@ -659,19 +660,19 @@ ${BOLD()}Examples:${RESET()}
 
   publish: `${BOLD()}codepliant publish${RESET()} [path] [options]
 
-Generate a compliance API endpoint spec (compliance-api.json).
-Creates a JSON file describing REST endpoints for compliance status,
-document list, and score — for integration with dashboards, Slack bots, etc.
+Generate a compliance API endpoint spec or static HTML site.
 
 ${BOLD()}Options:${RESET()}
+  ${DIM()}--api${RESET()}                 Generate API endpoint spec (compliance-api.json)
+  ${DIM()}--github-pages${RESET()}        Generate static HTML site in docs/ for GitHub Pages
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
-  ${DIM()}--api${RESET()}                 Generate API endpoint spec (required)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant publish --api${RESET()}                  Generate API spec
   ${CYAN()}codepliant publish --api -o ./public${RESET()}      Output to public directory
+  ${CYAN()}codepliant publish --github-pages${RESET()}          Generate GitHub Pages site in docs/
 `,
 
   schedule: `${BOLD()}codepliant schedule${RESET()} <install|uninstall|status> [options]
@@ -1245,6 +1246,7 @@ function main() {
   let ecosystemFlag: string | undefined;
   let sinceFlag: string | undefined;
   let emailFlag = false;
+  let githubPagesFlag = false;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1270,6 +1272,8 @@ function main() {
       emailFlag = true;
     } else if (arg === "--api") {
       apiFlag = true;
+    } else if (arg === "--github-pages") {
+      githubPagesFlag = true;
     } else if (arg === "--frequency") {
       const freq = args[++i];
       if (freq === "daily" || freq === "weekly" || freq === "monthly") {
@@ -1652,7 +1656,7 @@ function main() {
     }
 
     if (command === "publish") {
-      runPublish(absProjectPath, absOutputDir, quiet, verbose, apiFlag);
+      runPublish(absProjectPath, absOutputDir, quiet, verbose, apiFlag, githubPagesFlag);
       return;
     }
 
@@ -6223,10 +6227,12 @@ function runPublish(
   quiet: boolean,
   verbose: boolean,
   apiFlag: boolean,
+  githubPagesFlag: boolean = false,
 ) {
-  if (!apiFlag) {
-    console.error(`${RED()}[CP015] Error: --api flag is required.${RESET()}`);
+  if (!apiFlag && !githubPagesFlag) {
+    console.error(`${RED()}[CP015] Error: --api or --github-pages flag is required.${RESET()}`);
     console.error(`${DIM()}Usage: codepliant publish --api [path]${RESET()}`);
+    console.error(`${DIM()}       codepliant publish --github-pages [path]${RESET()}`);
     process.exit(1);
   }
 
@@ -6242,6 +6248,39 @@ function runPublish(
   const plugins = config.plugins ? loadPlugins(absProjectPath, config.plugins) : [];
   const { result } = scanWithProgress(absProjectPath, quiet, verbose, plugins);
   const docs = generateDocuments(result, config, plugins);
+
+  if (githubPagesFlag) {
+    // Generate static HTML site for GitHub Pages
+    const docsDir = path.join(absProjectPath, "docs");
+
+    if (!quiet) {
+      console.log(`\n${BOLD()}Generating GitHub Pages site...${RESET()}\n`);
+    }
+
+    const writtenFiles = writeGithubPages({
+      docs,
+      outputDir: docsDir,
+      companyName: config.companyName,
+    });
+
+    for (const filePath of writtenFiles) {
+      const relativePath = path.relative(absProjectPath, filePath);
+      const content = fs.readFileSync(filePath, "utf-8");
+      const size = Buffer.byteLength(content, "utf-8");
+      console.log(`  ${GREEN()}✓${RESET()} ${relativePath} ${DIM()}(${formatFileSize(size)})${RESET()}`);
+    }
+
+    console.log(
+      `\n${GREEN()}${BOLD()}Done!${RESET()} ${writtenFiles.length} files written to ${CYAN()}docs/${RESET()}\n`
+    );
+    console.log(`${DIM()}To deploy:${RESET()}`);
+    console.log(`  1. Commit the ${CYAN()}docs/${RESET()} directory`);
+    console.log(`  2. Go to GitHub > Settings > Pages`);
+    console.log(`  3. Set source to "${CYAN()}Deploy from a branch${RESET()}" > ${CYAN()}main${RESET()} > ${CYAN()}/docs${RESET()}`);
+    console.log(`  4. Your compliance docs will be live at ${CYAN()}https://<user>.github.io/<repo>/${RESET()}\n`);
+
+    process.exit(0);
+  }
 
   const score = computeFullComplianceScore({
     scanResult: result,
