@@ -180,7 +180,7 @@ ${BOLD()}Info:${RESET()}
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--json${RESET()}                Output scan results as JSON
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--watch, -w${RESET()}           Watch mode (auto re-scan on changes)
@@ -207,7 +207,7 @@ Scan the project and generate compliance documents.
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--json${RESET()}                Output results as JSON
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--watch, -w${RESET()}           Watch for changes and regenerate automatically
@@ -424,7 +424,7 @@ Confirmed/excluded services are saved to config for future runs.
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -513,7 +513,7 @@ Creates a separate output directory per project (e.g. ./legal/<project-name>/).
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Root output directory (default: ./legal)
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--no-color${RESET()}            Disable colored output
@@ -565,7 +565,7 @@ ${BOLD()}Examples:${RESET()}
 Export compliance documents in a specific format as a ZIP archive.
 
 ${BOLD()}Options:${RESET()}
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--no-color${RESET()}            Disable colored output
@@ -771,7 +771,7 @@ shows a diff of what documents will be updated, then writes the updated document
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
-  ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
+  ${DIM()}--format, -f <fmt>${RESET()}     Output format: markdown, html, pdf, json, notion, confluence, wiki, all
   ${DIM()}--json${RESET()}                Output results as JSON
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
@@ -1652,7 +1652,7 @@ function main() {
         console.error(`${RED()}[CP009] Error: Invalid frequency "${freq}". Use: daily, weekly, monthly${RESET()}`);
         process.exit(1);
       }
-    } else if (arg === "--format") {
+    } else if (arg === "--format" || arg === "-f") {
       const fmt = args[++i];
       if (fmt === "markdown" || fmt === "html" || fmt === "pdf" || fmt === "json" || fmt === "notion" || fmt === "confluence" || fmt === "wiki" || fmt === "docx" || fmt === "all") {
         formatFlag = fmt;
@@ -2190,7 +2190,7 @@ function main() {
       for (let i = 1; i < args.length; i++) {
         const a = args[i];
         if (a.startsWith("-")) {
-          if (a === "--output" || a === "-o" || a === "--format" || a === "--port") i++;
+          if (a === "--output" || a === "-o" || a === "--format" || a === "-f" || a === "--port") i++;
           continue;
         }
         comparePaths.push(a);

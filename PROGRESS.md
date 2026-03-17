@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5088 passing — 100% scanner, 99/138 generators (71.7%)
+- **Tests**: 5218 passing — 100% scanner, 102/138 generators (73.9%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 37 complete (2026-03-17)
-- **Last run**: --company-name/--contact-email flags, 179 tests, 🎉🎉 5088 TESTS (5000+ ACHIEVED!), SaaS founder Q&A research
+- **Iteration**: 38 complete (2026-03-17)
+- **Last run**: -f shorthand, 130 AI tests (5218!), CRA research, stats 5088
 
 ## Priority Backlog
 
@@ -3079,6 +3079,13 @@ Surveyed Hacker News threads (Compliance as Code, EasyCheck Show HN, open-source
 - [Compliance Automation Tools 2026 — Cynomi](https://cynomi.com/learn/compliance-automation-tools/)
 
 ## Development Log
+
+**2026-03-17 — CLI shorthand flags `-f` for `--format` (Iteration 38)**
+- Added `-f` as shorthand for `--format` flag: `codepliant go -f html` now works
+- Confirmed `-o` already works as shorthand for `--output` (was already implemented)
+- Updated all help text to show `-f` alongside `--format`
+- Updated arg-skip logic in compare command to recognize `-f`
+- `npx tsc` passes clean
 
 **2026-03-17 — `--explain` error code explanations (Iteration 33)**
 - Added detailed explanation lookup table for all 27 error codes (CP001–CP027) with summary, detail, and actionable suggestion for each
@@ -7655,3 +7662,80 @@ Enterprise vendors send CAIQ-style questionnaires with 200+ questions about data
 - [SaaS Compliance Requirements Explained (Stripe)](https://stripe.com/resources/more/saas-compliance-requirements-and-how-companies-meet-them)
 - [Cookie Consent for SaaS Companies](https://secureprivacy.ai/blog/cookie-consent-for-saas-companies)
 - [SaaS Compliance: Hidden Legal Risks Most Startups Miss in 2025](https://www.njbusiness-attorney.com/saas-compliance-hidden-legal-risks-most-startups-miss-in-2025/)
+
+### Iteration 38 — 2026-03-17 — EU Cyber Resilience Act (CRA): Current State and Open-Source Impact
+
+#### What is the CRA?
+
+The EU Cyber Resilience Act (Regulation (EU) 2024/2847) is a horizontal EU regulation establishing mandatory cybersecurity requirements for all "products with digital elements" — hardware and software — placed on the EU market. It entered into force on 10 December 2024 and is being phased in over three years.
+
+#### Key 2026–2027 Deadlines
+
+| Date | Obligation |
+|------|-----------|
+| 11 Jun 2026 | Conformity assessment body notification rules apply (Chapter IV) |
+| 11 Sep 2026 | **Vulnerability & incident reporting obligations begin** (Article 14) — manufacturers must report actively exploited vulnerabilities to CSIRT via a new Single Reporting Platform within 24 hrs (early warning), 72 hrs (full notification), and 14 days (final report). Applies to ALL products already on the EU market, including legacy products. |
+| 11 Dec 2027 | **Full compliance required** — all CRA obligations apply, including SBOM requirements, secure-by-design mandates, conformity assessments, and CE marking. |
+
+#### What the CRA Requires (Full Application, Dec 2027)
+
+1. **Software Bill of Materials (SBOM)**: Machine-readable SBOM (SPDX, CycloneDX, or SWID) listing at minimum all top-level dependencies, linked to known CVEs with VEX context. Must be comprehensive, version-specific, and traceable to the build process.
+2. **Vulnerability handling**: Coordinated vulnerability disclosure, security patches for the product's support period, and clear communication to users.
+3. **Secure by design**: Products must be designed and developed to minimize attack surfaces, shipped with secure default configurations.
+4. **Conformity assessment**: Self-assessment for most products; third-party assessment for "important" (Class I/II) and "critical" products.
+5. **Technical documentation**: Maintained and updated throughout the product's lifecycle.
+
+#### Open-Source Exemptions and "Open-Source Steward" Concept
+
+**Non-commercial open source is exempt.** The CRA explicitly states that free and open-source software "not monetised by their manufacturers should not be considered to be a commercial activity." If you develop open source without monetizing it, you are not directly impacted by the CRA.
+
+**What counts as "commercial activity"?** Accepting donations does NOT make it commercial. However, providing paid support, dual-licensing with a commercial tier, or integrating the software into a commercial product you sell would bring it in scope.
+
+**Open-Source Stewards** — a novel legal category created by the CRA for legal persons (e.g., foundations like Apache, Eclipse, Linux Foundation) that provide systematic, sustained support for the development of open-source software intended for commercial use. Stewards have lighter obligations:
+- Put in place a cybersecurity policy to foster secure development and vulnerability handling
+- Cooperate with market surveillance authorities
+- Report actively exploited vulnerabilities and severe incidents
+- **Stewards are NOT subject to administrative fines** (Article 64(10)) — a significant protection
+
+**Commercial users of open-source components** bear the CRA obligations. If a company integrates an open-source library into a product it sells on the EU market, the company (as "manufacturer") is responsible for CRA compliance of the full product, including all open-source dependencies.
+
+#### Is Codepliant Affected?
+
+**As a free, non-monetized open-source CLI tool: NO, Codepliant is not in scope of the CRA.** The tool is MIT-licensed, not monetized by its developer, and does not involve a commercial activity. It falls squarely within the open-source exemption.
+
+**However, Codepliant's users may be affected.** Companies that use Codepliant to generate compliance documents for their own commercial products are likely subject to the CRA if they place software products on the EU market. This creates opportunity:
+
+1. **SBOM generation** — Codepliant already scans dependencies across 10+ ecosystems. Adding CycloneDX/SPDX SBOM output would directly address the CRA's SBOM mandate. This was already identified as a backlog item in Iteration 1 research.
+2. **Vulnerability reporting documentation** — Codepliant could generate a vulnerability disclosure policy template and incident response documentation aligned with the CRA's 24hr/72hr/14-day reporting timeline.
+3. **CRA compliance checklist** — A new document type (`cra-checklist`) could assess a project's CRA readiness based on dependency scanning, security configuration detection, and documentation completeness.
+4. **Blog content opportunity** — "CRA Compliance for Open-Source Developers" would be a high-value SEO target, given the September 2026 reporting deadline approaching and widespread confusion about what's required.
+
+#### European Commission Draft Guidance (March 2026)
+
+The European Commission published draft CRA guidance on 3 March 2026 with a feedback period closing 31 March 2026. This guidance provides practical examples and clarifications on central CRA concepts. The final guidance will be critical for determining exactly how SBOM requirements, open-source boundaries, and conformity assessments work in practice.
+
+**Sources consulted**:
+- [Cyber Resilience Act | EU Digital Strategy](https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act)
+- [CRA - Open Source | EU Digital Strategy](https://digital-strategy.ec.europa.eu/en/policies/cra-open-source)
+- [CRA - Reporting Obligations | EU Digital Strategy](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting)
+- [EU CRA – Open Source Security Foundation](https://openssf.org/public-policy/eu-cyber-resilience-act/)
+- [Open Regulatory Compliance Working Group](https://orcwg.org/cra/)
+- [What the EU's New Software Legislation Means for Developers | GitHub Blog](https://github.blog/open-source/maintainers/what-the-eus-new-software-legislation-means-for-developers/)
+- [SBOM Requirements in the CRA | FOSSA](https://fossa.com/blog/sbom-requirements-cra-cyber-resilience-act/)
+- [EU CRA Key 2026 Milestones | Hogan Lovells](https://www.hoganlovells.com/en/publications/eu-cyber-resilience-act-getting-ready-for-cra-compliance-in-2026)
+- [CRA: What You Need to Know | DLA Piper](https://www.dlapiper.com/en/insights/publications/2026/02/cyber-resilience-act-what-you-need-to-know-and-what-you-need-to-be-doing)
+- [EU CRA SBOM Requirements | Anchore](https://anchore.com/sbom/eu-cra/)
+- [Global Alignment on SBOM Standards | OpenSSF](https://openssf.org/blog/2025/10/22/sboms-in-the-era-of-the-cra-toward-a-unified-and-actionable-framework/)
+- [EU CRA Draft Guidance | Hogan Lovells](https://www.hoganlovells.com/en/publications/eu-cyber-resilience-act-european-commission-publishes-draft-guidance-)
+
+### Iteration 38 — 2026-03-17 — Generator Tests: AI Compliance Trio (102/138 = 73.9%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 5218/5218 passing (was 5088, added 130 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/ai-checklist.test.ts` (30 tests): null guards (no services/no AI/only non-AI), basic generation (title/non-empty output), title & metadata (project name/ISO date/default placeholder/context company name), risk classification display (label regex/Limited for user-facing/High for biometric/aiRiskLevel override), AI services listing (multiple services/excludes non-AI), standard sections (Transparency with Art. 50/Documentation/Human Oversight/Incident Reporting/Content Marking with Art. 50(2) and C2PA/Data Protection with DPIA), high-risk extras (presence for high risk/absence for limited/context override forces section), checklist items (>= 20 items/high > limited count), footer (Codepliant disclaimer/EU AI Act 2024/1689/2 August 2026 deadline), multiple AI services handling
+  - `src/generator/ai-training-data-notice.test.ts` (45 tests): null guards (no services/no AI/only non-AI), basic generation (title/non-empty), header & metadata (project name/ISO date/default placeholders/context company name+email/DPO email presence+absence), regulatory references (EU AI Act 2024/1689/GDPR/CCPA), known providers — OpenAI (policy details/NOT used for training/summary table row), Anthropic (policy details/does NOT use API inputs), Google Gemini (conditional training/opt-out instructions/API-level opt-out), Replicate (not training/table row), Together AI, Cohere, Pinecone (vector database), LangChain (orchestration framework), unknown AI services (Other AI Services section/action required/file evidence), summary section (none-use-for-training message/conditional warning for trainers), summary table (headers), Our Commitment section, per-provider details (section+heading+privacy policy URL+retention info), deduplication (same provider once), Your Rights (GDPR Art. 21/Art. 17), implementation checklist (>= 5 items), contact section, Codepliant disclaimer, multiple providers (3 known/mix of known+unknown), API-level opt-out (present for Gemini/absent for N/A providers)
+  - `src/generator/ai-impact-assessment.test.ts` (55 tests): null guards (no services/no AI/only non-AI), basic generation (title/non-empty >500 chars), header & metadata (project name/ISO date/next review date 1 year out/default placeholders/context company name+email+DPO email), overall risk classification (label regex/Limited for user-facing/High for biometric/aiRiskLevel override), Section 1 Regulatory Overview (EU AI Act 2024/1689/Colorado AI Act SB 24-205 + 1 February 2026/risk level table), Section 2 AI Services Inventory (table+multiple services+data processed), Section 3 Per-Service Risk Evaluation (section heading/service details in backticks/rationale+mitigations checklist), risk classification per service (minimal for basic/limited for user-facing with transparency/high for biometric+hiring+credit scoring+healthcare/unacceptable for social scoring+real-time biometric), Colorado AI Act applicability (education+financial decisions), Section 4 Algorithmic Discrimination (protected characteristics: Race+Disability+Gender identity+Veteran status/assessment checklist with disparate impact + 90-day reporting), Section 5 Fundamental Rights (present for high-risk/absent otherwise/EU Charter rights), monitoring plan (frequency table: Annual+Quarterly+Monthly+Continuous/bias testing+model drift), transparency obligations (Article 50/Colorado consequential decisions+appeal process), AI Incident Response (90 days+without undue delay/Colorado AG), contact+footer (Codepliant/legal advice disclaimer/both acts referenced), section numbering (adjusts with/without fundamental rights section), multiple services (3 services with different risk levels/sequential 3.1+3.2 numbering)
+- **Generator modules now with tests**: 102/138 (73.9%)
+- **Generator coverage**: 71.7% -> 73.9%
