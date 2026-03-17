@@ -12,6 +12,7 @@ import { scanRustDependencies } from "./rust.js";
 import { scanJavaDependencies } from "./java.js";
 import { scanDotnetDependencies } from "./dotnet.js";
 import { scanFlutterDependencies } from "./flutter.js";
+import { scanSwiftDependencies } from "./swift.js";
 import { scanPrismaSchema } from "./schema.js";
 import { scanDjangoModels } from "./django-models.js";
 import { scanDjangoSettings } from "./django-settings.js";
@@ -444,6 +445,7 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
   const javaServices = safeRun("Java deps", () => scanJavaDependencies(absPath), []);
   const dotnetServices = safeRun("Dotnet deps", () => scanDotnetDependencies(absPath), []);
   const flutterServices = safeRun("Flutter deps", () => scanFlutterDependencies(absPath), []);
+  const swiftServices = safeRun("Swift deps", () => scanSwiftDependencies(absPath), []);
   const importServices = safeRun("Imports", () => scanImports(absPath, allFiles), []);
   const envServices = safeRun("Env vars", () => scanEnvFiles(absPath), []);
   const trackingServices = safeRun("Tracking", () => scanTracking(absPath, allFiles), []);
@@ -475,7 +477,7 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
     }
   }
 
-  for (const svcList of [depServices, pythonServices, goServices, rubyServices, elixirServices, phpServices, rustServices, javaServices, dotnetServices, flutterServices, importServices, envServices, trackingServices, frameworkImplicitServices, djangoSettingsServices, terraformServices, dockerComposeServices, githubActionsServices, webSocketServices, fileUploadServices, cachingServices, graphqlEndpointServices, ...pluginScanResults]) {
+  for (const svcList of [depServices, pythonServices, goServices, rubyServices, elixirServices, phpServices, rustServices, javaServices, dotnetServices, flutterServices, swiftServices, importServices, envServices, trackingServices, frameworkImplicitServices, djangoSettingsServices, terraformServices, dockerComposeServices, githubActionsServices, webSocketServices, fileUploadServices, cachingServices, graphqlEndpointServices, ...pluginScanResults]) {
     mergeServicesIntoMap(serviceMap, svcList);
   }
 
@@ -510,6 +512,7 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
           ...safeRun(`WS:${workspace.name}:java`, () => scanJavaDependencies(wsPath), []),
           ...safeRun(`WS:${workspace.name}:dotnet`, () => scanDotnetDependencies(wsPath), []),
           ...safeRun(`WS:${workspace.name}:flutter`, () => scanFlutterDependencies(wsPath), []),
+          ...safeRun(`WS:${workspace.name}:swift`, () => scanSwiftDependencies(wsPath), []),
           ...safeRun(`WS:${workspace.name}:imports`, () => scanImports(wsPath, wsFiles), []),
           ...safeRun(`WS:${workspace.name}:env`, () => scanEnvFiles(wsPath), []),
           ...safeRun(`WS:${workspace.name}:tracking`, () => scanTracking(wsPath, wsFiles), []),

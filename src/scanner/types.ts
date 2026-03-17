@@ -101,7 +101,7 @@ export const FAMILY_MAP: Record<string, string[]> = {
  * Ecosystem tag for a service signature.
  * Used to restrict env-var matching to the project's actual ecosystem.
  */
-export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "dart" | "any";
+export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "dart" | "swift" | "any";
 
 export const SERVICE_SIGNATURES: Record<
   string,
@@ -1017,6 +1017,78 @@ export const SERVICE_SIGNATURES: Record<
     envPatterns: ["MIXPANEL_TOKEN"],
     importPatterns: ["mixpanel_flutter"],
     ecosystem: "dart",
+  },
+
+  // Swift/iOS Ecosystem
+  "firebase-ios-sdk": {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "crash data", "app performance metrics"],
+    envPatterns: ["FIREBASE_API_KEY", "GOOGLE_APP_ID"],
+    importPatterns: ["FirebaseAnalytics", "FirebaseCore", "FirebaseCrashlytics"],
+    ecosystem: "swift",
+  },
+  Firebase: {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "crash data", "app performance metrics"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["Firebase"],
+    ecosystem: "swift",
+  },
+  "stripe-ios": {
+    category: "payment",
+    dataCollected: ["payment information", "billing address", "email", "transaction history"],
+    envPatterns: ["STRIPE_PUBLISHABLE_KEY", "STRIPE_SECRET_KEY"],
+    importPatterns: ["Stripe", "StripePaymentSheet"],
+    ecosystem: "swift",
+  },
+  "sentry-cocoa": {
+    category: "monitoring",
+    dataCollected: ["error data", "stack traces", "user context", "device information"],
+    envPatterns: ["SENTRY_DSN"],
+    importPatterns: ["Sentry"],
+    ecosystem: "swift",
+  },
+  "amplitude-ios": {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "session data"],
+    envPatterns: ["AMPLITUDE_API_KEY"],
+    importPatterns: ["Amplitude", "AmplitudeSwift"],
+    ecosystem: "swift",
+  },
+  "mixpanel-swift": {
+    category: "analytics",
+    dataCollected: ["user behavior", "user profiles", "device information", "location data"],
+    envPatterns: ["MIXPANEL_TOKEN"],
+    importPatterns: ["Mixpanel"],
+    ecosystem: "swift",
+  },
+  "onesignal-ios-sdk": {
+    category: "other",
+    dataCollected: ["device tokens", "user segments", "notification engagement", "device information"],
+    envPatterns: ["ONESIGNAL_APP_ID"],
+    importPatterns: ["OneSignalFramework", "OneSignal"],
+    ecosystem: "swift",
+  },
+  "AppAuth-iOS": {
+    category: "auth",
+    dataCollected: ["OAuth tokens", "session data", "user identity"],
+    envPatterns: [],
+    importPatterns: ["AppAuth"],
+    ecosystem: "swift",
+  },
+  "facebook-ios-sdk": {
+    category: "auth",
+    dataCollected: ["email", "name", "Facebook profile data", "OAuth tokens", "social connections"],
+    envPatterns: ["FACEBOOK_APP_ID"],
+    importPatterns: ["FacebookLogin", "FacebookCore", "FBSDKLoginKit"],
+    ecosystem: "swift",
+  },
+  "google-signin-ios": {
+    category: "auth",
+    dataCollected: ["email", "name", "Google profile data", "OAuth tokens"],
+    envPatterns: ["GOOGLE_CLIENT_ID"],
+    importPatterns: ["GoogleSignIn"],
+    ecosystem: "swift",
   },
 
   // API Framework
