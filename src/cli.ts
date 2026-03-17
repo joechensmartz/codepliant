@@ -174,6 +174,7 @@ ${BOLD()}Info:${RESET()}
   ${CYAN()}changelog${RESET()}       Show version history of codepliant
   ${CYAN()}about${RESET()}          Show project info, mission, credits, and links
   ${CYAN()}celebrate${RESET()}      v500 milestone easter egg
+  ${CYAN()}completions${RESET()}     Output shell completion script (bash, zsh, fish)
   ${CYAN()}help${RESET()}            Show this help message
 
 ${BOLD()}Options:${RESET()}
@@ -900,6 +901,19 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant search GDPR --json${RESET()}          JSON output for scripting
   ${CYAN()}codepliant search cookie -o ./docs${RESET()}     Search in custom output dir
 `,
+  completions: `${BOLD()}codepliant completions${RESET()} [options]
+
+Output a shell completion script to stdout.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--shell <bash|zsh|fish>${RESET()}    Shell type (default: auto-detect from $SHELL)
+
+${BOLD()}Usage:${RESET()}
+  ${CYAN()}codepliant completions --shell zsh >> ~/.zshrc${RESET()}
+  ${CYAN()}codepliant completions --shell bash >> ~/.bashrc${RESET()}
+  ${CYAN()}codepliant completions --shell fish > ~/.config/fish/completions/codepliant.fish${RESET()}
+  ${CYAN()}codepliant completions${RESET()}                              Auto-detect shell
+`,
   };
 }
 
@@ -1202,7 +1216,7 @@ const VALID_COMMANDS = [
   "billing", "update", "health", "audit", "clean", "archive", "version-check",
   "list-docs", "tree", "changelog", "fix", "todo", "benchmark", "preview",
   "reset", "search", "certify", "snapshot", "about", "celebrate", "sbom",
-  "help", "version", "info",
+  "help", "version", "info", "completions",
 ];
 
 function levenshtein(a: string, b: string): number {
@@ -1229,6 +1243,40 @@ function suggestCommand(input: string): string[] {
   if (scored.length === 0) return [];
   const bestDist = scored[0].dist;
   return scored.filter(s => s.dist === bestDist).map(s => s.cmd).slice(0, 3);
+}
+
+function generateCompletionScript(shell: string): string | null {
+  const cmds = VALID_COMMANDS.slice().sort();
+  const cmdList = cmds.join(" ");
+
+  if (shell === "zsh") {
+    return `#compdef codepliant
+_codepliant() {
+  local commands=(
+${cmds.map(c => `    '${c}:${c} command'`).join("\n")}
+  )
+  _describe 'command' commands
+}
+compdef _codepliant codepliant
+`;
+  }
+
+  if (shell === "bash") {
+    return `# bash completion for codepliant
+_codepliant() {
+  local cur=\${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${cmdList}" -- "$cur") )
+}
+complete -F _codepliant codepliant
+`;
+  }
+
+  if (shell === "fish") {
+    const lines = cmds.map(c => `complete -c codepliant -n '__fish_use_subcommand' -a '${c}' -d '${c} command'`);
+    return `# fish completion for codepliant\n${lines.join("\n")}\n`;
+  }
+
+  return null;
 }
 
 function main() {
@@ -1277,6 +1325,26 @@ function main() {
       console.log(`\n${helpText}`);
       process.exit(0);
     }
+  }
+
+  // `codepliant completions` command — output shell completion script
+  if (command === "completions") {
+    const shellIdx = args.indexOf("--shell");
+    let shell = shellIdx !== -1 && args[shellIdx + 1] ? args[shellIdx + 1] : "";
+    if (!shell) {
+      const envShell = process.env.SHELL || "";
+      if (envShell.includes("zsh")) shell = "zsh";
+      else if (envShell.includes("fish")) shell = "fish";
+      else if (envShell.includes("bash")) shell = "bash";
+      else shell = "bash";
+    }
+    const script = generateCompletionScript(shell);
+    if (!script) {
+      console.error(`${RED()}Unsupported shell: "${shell}". Use bash, zsh, or fish.${RESET()}`);
+      process.exit(1);
+    }
+    process.stdout.write(script);
+    process.exit(0);
   }
 
   // Parse options
