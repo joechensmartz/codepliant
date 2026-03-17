@@ -2190,6 +2190,10 @@ function main() {
         if (jsonOutput) {
           console.log(JSON.stringify({
             dryRun: true,
+            projectName: result.projectName,
+            projectPath: result.projectPath,
+            scannedAt: result.scannedAt,
+            ecosystems: result.ecosystems ?? [],
             documents: entries.map(e => ({
               name: e.name,
               filename: e.filename,

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { scanDependencies } from "./dependencies.js";
-import { scanEnvFiles } from "./env.js";
+import { scanEnvFiles, detectEcosystems } from "./env.js";
 import { scanImports } from "./imports.js";
 import { scanPythonDependencies } from "./python.js";
 import { scanGoDependencies } from "./golang.js";
@@ -777,6 +777,15 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
     dataCategories,
     complianceNeeds: deduplicatedNeeds,
   };
+
+  // Detect ecosystems and include in result
+  const detectedEcosystems = safeRun("Ecosystem detection", () => {
+    const ecoSet = detectEcosystems(absPath);
+    return Array.from(ecoSet).sort();
+  }, [] as string[]);
+  if (detectedEcosystems.length > 0) {
+    result.ecosystems = detectedEcosystems as ScanResult["ecosystems"];
+  }
 
   if (licenseScanResult.dependencies.length > 0 || licenseScanResult.projectLicense) {
     result.licenseScan = licenseScanResult;

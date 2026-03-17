@@ -53,6 +53,8 @@ export interface ScanResult {
   services: DetectedService[];
   dataCategories: DataCategory[];
   complianceNeeds: ComplianceNeed[];
+  /** Ecosystems detected in the project (e.g. "js", "python", "go") */
+  ecosystems?: Ecosystem[];
   monorepo?: MonorepoInfo;
   /** License compliance scan results */
   licenseScan?: LicenseScanResult;
