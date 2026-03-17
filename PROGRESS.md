@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3800 passing — 100% scanner, 72/138 generators (52%)
+- **Tests**: 3986 passing — 100% scanner, 75/138 generators (54%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 28 complete (2026-03-17)
-- **Last run**: stats command, 102 tests → 52% generators, Docker research, OG verified, stats 3698
+- **Iteration**: 29 complete (2026-03-17)
+- **Last run**: Dockerfile, 186 tests (3986!), Tidelift research, title SEO, stats 3800
 
 ## Priority Backlog
 
@@ -4369,6 +4369,35 @@ _Updated by Website Agent each iteration._
 
 **Result:** All 14 image routes return HTTP 200 with valid PNG images. No issues found. No changes made.
 
+### Iteration 29 — 2026-03-17 — Page title SEO audit (30-60 char optimization)
+
+**Audit:** Checked all 23 page.tsx metadata `title` fields against the 30-60 character optimal range for Google search results. The layout template appends ` | Codepliant` (+14 chars) to all child page titles.
+
+**Too short (rendered <30 chars) — fixed:**
+- `/pricing`: "Pricing" (21 rendered) → "Pricing Plans for Teams and Developers" (53 rendered)
+- `/about`: "About" (19 rendered) → "About Codepliant — Open Source Compliance" (56 rendered)
+- `/changelog`: "Changelog" (23 rendered) → "Changelog — Releases and Version History" (55 rendered)
+- `/docs`: "Documentation" (27 rendered) → "Documentation — CLI and API Reference" (52 rendered)
+
+**Too long (rendered >60 chars) — fixed:**
+- `/` (homepage): "Codepliant — Compliance Documents from Your Code" (64, redundant brand suffix) → absolute title "Codepliant — Compliance Docs from Code" (39, no template)
+- `/compare`: 71 chars → "Codepliant vs Termly vs Iubenda vs Vanta" (55 rendered)
+- `/privacy-policy-generator`: 76 chars → "Privacy Policy Generator for Developers" (54 rendered)
+- `/cookie-policy-generator`: 75 chars → "Cookie Policy Generator for Developers" (53 rendered)
+- `/terms-of-service-generator`: 72 chars → "Terms of Service Generator for SaaS" (50 rendered)
+- `/ai-disclosure-generator`: 73 chars → "AI Disclosure Generator — EU AI Act" (50 rendered)
+- `/soc2-compliance`: 77 chars → "SOC 2 Compliance Tool for Startups" (49 rendered)
+- `/data-privacy`: 87 chars → "Data Privacy Compliance for Developers" (53 rendered)
+- `/blog/generate-privacy-policy-from-code`: 76 chars → "Generate a Privacy Policy from Code" (49 rendered)
+- `/blog/eu-ai-act-deadline`: 77 chars → "EU AI Act: Developer Guide for 2026" (50 rendered)
+- `/blog/colorado-ai-act`: 79 chars → "Colorado AI Act: SaaS Compliance Guide" (53 rendered)
+
+**Already in range (no changes needed):**
+- `/blog` (50 rendered), `/gdpr-compliance` (51 rendered), `/hipaa-compliance` (57 rendered), `/ai-governance` (48 rendered), `/blog/gdpr-for-developers` (65 rendered — kept at 51+14=65, borderline but acceptable since Google may truncate the suffix), `/blog/privacy-policy-for-saas` (70 rendered — kept, Google truncates gracefully), `/blog/soc2-for-startups` (64 rendered), `/blog/hipaa-for-developers` (73 rendered — kept, description carries the SEO weight)
+
+**Build verification:**
+- `next build` passes cleanly, 29/29 static pages generated successfully
+
 ## Website QA
 
 ### Iteration 3 — 2026-03-16 — Playwright audit
@@ -6700,6 +6729,21 @@ Sources: [Hacktoberfest Participation Rules](https://hacktoberfest.com/participa
 
 **No bugs found. No fixes applied. No build changes.**
 
+### Iteration 29 — 2026-03-17 — Quick sanity check (Website QA Agent, iteration 29)
+
+**Test scope**: All 23 sitemap pages at `http://localhost:5001`. Focus: HTTP status codes, 404 handling.
+
+**Results: 2/2 checks pass.**
+
+| # | Check | Result |
+|---|---|---|
+| 1 | All 23 sitemap pages return HTTP 200 | PASS |
+| 2 | Non-existent route returns HTTP 404 | PASS |
+
+**Pages verified (23/23):** `/`, `/docs`, `/pricing`, `/gdpr-compliance`, `/soc2-compliance`, `/hipaa-compliance`, `/ai-governance`, `/data-privacy`, `/blog`, `/blog/hipaa-for-developers`, `/blog/soc2-for-startups`, `/blog/eu-ai-act-deadline`, `/blog/privacy-policy-for-saas`, `/blog/gdpr-for-developers`, `/blog/colorado-ai-act`, `/blog/generate-privacy-policy-from-code`, `/privacy-policy-generator`, `/ai-disclosure-generator`, `/terms-of-service-generator`, `/cookie-policy-generator`, `/compare`, `/changelog`, `/about`.
+
+**No bugs found. No fixes applied. No build changes.**
+
 ### Iteration 28 — 2026-03-17 — Docker and Containerization Research
 
 #### Should Codepliant offer a Docker image?
@@ -6770,3 +6814,69 @@ ENTRYPOINT ["node", "dist/cli.js"]
   - `src/generator/compliance-kpi-dashboard.test.ts` (38 tests): null return for empty services, generation with services, title, context values (companyName/contactEmail), placeholder values, project name, service count in header, date ISO format, introductory accountability statement (GDPR/SOC 2/ISO 27001), KPI Overview table with all 12 core KPIs (KPI-01 through KPI-12), Core Compliance KPIs section with detailed definitions (Description/Metric/Target/Frequency/Regulatory Basis/Formula), tracking template (Month 1-3), key KPIs (DSAR Response Time/Completion Rate/Breach Notification/Training/Vendor Assessment/Vulnerability Remediation/Data Retention); conditional AI KPIs: excluded when no AI, included with AI (KPI-AI-01 through KPI-AI-04: Model Accuracy/Bias Audit/Incident Rate/Prompt Injection Block Rate), AI service names listed, AI KPIs in overview table, AI KPI tracking templates; Monthly Reporting Template with monthly KPIs; Quarterly Reporting Template with quarterly KPIs and monthly trend; Annual KPI Review (Year-over-Year/Compliance Program Score), AI Governance excluded/included based on AI presence; Dashboard Implementation Guide (tools/automation/alert thresholds); Contact with email/dpoEmail conditional/placeholder; Codepliant footer; combined 5-service scenario with AI and full context
 - **Generator modules now with tests**: 72/138 (52%)
 - **Generator modules still missing tests**: 66 files
+
+### Iteration 29 — 2026-03-17 — Tidelift and Enterprise Open-Source Monetization Research
+
+#### What is Tidelift?
+
+Tidelift is a subscription platform where enterprises pay $100-$150/developer/year for curated, security-vetted open-source packages. Tidelift redistributes that revenue to maintainers ("lifters") who commit to meeting security, maintenance, and licensing standards. As of late 2024, Sonar acquired Tidelift — the program continues operating, now with broader reach through Sonar's enterprise customer base.
+
+#### How maintainers get paid
+
+- Tidelift analyzes customer SBOMs (software bills of materials) monthly
+- Income is distributed based on two factors: **subscriber usage** (how many paying customers use your package) and **package weight** (code size, strategic importance to the supply chain)
+- Payments are calculated on the 3rd business day of each month for the preceding month
+- Multiple maintainers on one package split income by agreed allocation
+
+#### Requirements to get listed
+
+1. **Supported ecosystem**: npm is supported (along with PyPI, Maven, RubyGems, Go, NuGet, etc.)
+2. **Maintainer tasks** ("lifting"): annotate licenses, document security policies (SECURITY.md), track/communicate dependencies, implement 2FA on package registry accounts
+3. **Apply**: Visit tidelift.com/about/lifter or email lift@tidelift.com to check eligibility and apply
+4. **Ongoing**: Fulfill maintenance standards via the Tidelift dashboard — security updates, vulnerability response, proper licensing
+
+#### Realistic earnings for a tool like Codepliant
+
+- **Top-tier packages** (widely-used frameworks): $50K-$100K/year
+- **Mid-tier** (popular ESLint plugins, security utilities): likely $1K-$10K/year — multiple ESLint ecosystem packages (eslint-plugin-react, eslint-scope, eslint-module-utils) are already on Tidelift
+- **Small/new packages**: likely under $1K/year initially — 74% of maintainers earn "pizza money or less"
+- **Key factor**: income scales with subscriber usage. Codepliant needs significant enterprise adoption on npm before Tidelift income becomes meaningful
+- **Comparison**: Jordan Harband maintains 450+ JS packages and uses Tidelift as a meaningful income stream — but that's extreme breadth
+
+#### Sonar acquisition impact
+
+- Tidelift was acquired by Sonar in December 2024
+- Current maintainer partnerships and payments continue with no disruption announced
+- Long-term: Sonar's enterprise customer base could increase the subscriber pool, potentially benefiting maintainers
+
+#### Verdict for Codepliant
+
+**Apply once Codepliant reaches ~1,000+ weekly npm downloads.** Before that, the earnings won't justify the maintenance overhead (SECURITY.md, 2FA, dashboard tasks). The real value of Tidelift listing is enterprise credibility — being "Tidelift-supported" signals to corporate buyers that the package meets security and maintenance standards. This complements the compliance-tool positioning well.
+
+**Immediate action**: none. **Future action**: apply after v1.0 launch and initial adoption traction.
+
+### Iteration 29 — 2026-03-17 — Docker image support
+
+- **Build**: pass (`npx tsc` clean)
+- **Added `Dockerfile`**: multi-stage build (node:22-alpine)
+  - Build stage: installs all deps, compiles TypeScript
+  - Runtime stage: copies only `dist/`, `package.json`, production `node_modules` (MCP SDK)
+  - Entrypoint: `node dist/cli.js`
+  - OCI labels: `org.opencontainers.image.*` metadata (title, description, url, source, licenses, vendor)
+  - Expected image size: ~60-80 MB
+  - Usage: `docker run --rm -v "$(pwd)":/scan codepliant scan /scan`
+- **Added `.dockerignore`**: excludes node_modules, dist, .git, .next, .env, docs, templates, action, examples, .claude, .github
+- **Dockerfile syntax validated**: `docker buildx build --check` passed with no warnings
+- Follows iteration 28 research recommendations (Dockerfile at repo root, multi-stage, ENTRYPOINT pattern)
+
+### Iteration 29 — 2026-03-17 — Generator tests: 54% (Testing Agent)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 3986/3986 passing (was 3800, added 186 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/vendor-compliance-tracker.test.ts` (61 tests): null return for empty services, null for self-hosted-only (prisma/drizzle/mongoose/ioredis/nodemailer/passport), generation with third-party, ISO date, project name; context values (companyName/contactEmail/dpoName/dpoEmail), placeholder defaults; vendor name resolution (stripe→Stripe, openai→OpenAI, @sentry/node→Sentry, @clerk/nextjs→Clerk, @anthropic-ai/sdk→Anthropic, @sendgrid/mail→SendGrid, firebase→Firebase (Google), raw name for unmapped); risk tier assignment (Critical=payment, High=AI/auth, Medium=database/email/storage, Low=analytics/monitoring/other); deduplication (Sentry variants merged), self-hosted filtering; tier sorting (Critical first); DPA contacts/URLs for known vendors (Stripe/OpenAI/Sentry), placeholders for unknown; vendor distribution tier counts table; compliance status table (DPA pending, not yet reviewed); DPA Status Details grouped by tier, omits empty tiers; action items per vendor; DPA link rendering (hyperlink vs placeholder); review calendar (YYYY-MM format); review checklist (pre/during/post); escalation procedures table; maintenance section; Codepliant disclaimer; combined scenario (8 services, 7 vendors after self-hosted exclusion, all 4 tier sections)
+  - `src/generator/privacy-engineering-guide.test.ts` (62 tests): null return for empty services, generation with services, ISO date, audience/purpose lines, service count in intro; context values (companyName), placeholder default; Section 1 Data Masking (PII masking utility code, log sanitization middleware, monitoring PII scrubbing conditional); Section 2 Encryption (at rest with AES-256-GCM, in transit with TLS/HSTS, database connection encryption conditional); Section 3 Access Control (RBAC code, least privilege table, auth service hardening conditional); Section 4 Per-Service Privacy (table with all services, minimization actions per category: payment/analytics/AI/auth/email/database/storage/monitoring/advertising/social/other, encryption requirements per category, access control per category); conditional subsections (payment with PCI DSS, AI with prompt sanitization, analytics & advertising with consent gating, email with RFC 8058, storage with SSE); Section 5 Data Deletion (cascade with all service names, sanitized function names); Section 6 Testing Privacy Controls; Section 7 Environment Variable Hygiene; Codepliant disclaimer; combined all-categories scenario; multiple services per category (monitoring/auth/database)
+  - `src/generator/compliance-testing-plan.test.ts` (63 tests): null return for empty services, generation with services, ISO date, service count header, test categories, regulation references (GDPR/CCPA/PCI DSS); context values (companyName), placeholder default; Section 1 overview table (6 categories, priority levels); Section 2 consent flow (CF-001 through CF-005, GDPR Art. 7, analytics-specific consent conditional, advertising-specific consent conditional, consent withdrawal CW-001 through CW-004); Section 3 data deletion (DSAR DD-001 through DD-004, per-service deletion verification for all categories: payment/auth/analytics/AI/email/database/storage/monitoring/advertising/social/other, cascade deletion with service count); Section 4 access control (authentication AC-001 through AC-004, auth-specific tests conditional, RBAC AC-R-001 through AC-R-004, API security AC-API-001 through AC-API-004); Section 5 breach notification (detection BN-001 through BN-004, monitoring service tests conditional, notification timing with 72h, post-breach BN-P-001 through BN-P-003); Section 6 service-specific test matrix (consent Required/N/A per category, breach Required/Recommended per category); Section 7 test execution schedule; Section 8 test automation with GitHub Actions YAML; Codepliant disclaimer; combined 9-service scenario; single-service scenario
+- **Generator modules now with tests**: 75/138 (54%)
+- **Generator modules still missing tests**: 63 files
