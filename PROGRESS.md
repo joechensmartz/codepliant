@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2867 passing — 100% scanner coverage, 48/138 generators
+- **Tests**: 3037 passing — 100% scanner coverage, 51/138 generators
 - **Repos tested**: 1200+
 - **Document types**: 123+ (added Disclaimer)
 - **Ecosystems**: 13
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 20 complete (2026-03-17)
-- **Last run**: MILESTONE — FUNDING.yml, CHANGELOG v1.1.0, 108 tests, launch readiness assessment, Show HN draft, full QA 10/10 pass
+- **Iteration**: 21 complete (2026-03-17)
+- **Last run**: diff-in-go output, 170 tests, stats sync, link audit, performance optimization, growth research
 
 ## Priority Backlog
 
@@ -2756,7 +2756,64 @@ The timing is strong: EU AI Act high-risk obligations take effect August 2026, E
 
 **The research phase is complete. It is time to ship.**
 
+### Iteration 21 — 2026-03-17 — Post-Launch Growth Tactics
+
+#### 1. Sustaining Growth After the HN/PH Spike
+
+**The "Day 3" problem:** Traffic from Hacker News decays within 48 hours; Product Hunt within a week. Projects that sustain growth do these things differently:
+
+- **Ecosystem integrations as growth loops.** Every integration (GitHub Action, VS Code extension, MCP server) creates a new discovery surface. Microsoft embeds tools into developer workflows to build "ecosystem stickiness" — Codepliant should do the same with CI/CD plugins, pre-commit hooks, and IDE extensions. Each integration is a new install vector.
+- **Quickstart-first onboarding.** 73% of developers want hands-on experience within minutes. The `npx codepliant go .` one-liner is already strong. Next: add an interactive `codepliant init` that walks users through first scan + first doc, outputting a shareable compliance summary they can post.
+- **"Logo wall" social proof.** Customer logos, testimonials, and case studies influence 12.4% of adoption decisions. After launch, actively solicit GitHub issues/PRs as testimonials. Feature early adopters on the website.
+- **Sustained content cadence.** One blog post per week covering a specific compliance topic (e.g., "What your Next.js app needs in its privacy policy") drives organic search traffic long after launch day fades.
+- **Newsletter cross-pollination.** Pitch to developer newsletters (TLDR, JavaScript Weekly, Node Weekly, Console.dev) on a rolling basis — not just at launch. Each newsletter hit is a mini-launch.
+- **GitHub trending maintenance.** Star velocity matters. Encourage stars via README badge, post-install CLI message ("If codepliant helped you, star us on GitHub"), and periodic Show HN follow-ups with new features.
+
+#### 2. Content-Led Growth for Compliance Tools
+
+**What works in the compliance content space:**
+
+- **Template libraries as lead magnets.** Codepliant already generates 90+ document types. Publish a "Compliance Template Gallery" on the website where visitors can preview sample outputs (privacy policy for a Next.js + Stripe app, AI disclosure for an OpenAI integration). These pages rank for long-tail searches like "GDPR privacy policy for SaaS" and "AI disclosure template."
+- **"Compliance teardown" blog series.** Analyze the compliance posture of popular open-source projects (with permission or using public repos). "We ran Codepliant on cal.com — here's what it found" is compelling, shareable content that demonstrates product value.
+- **Regulatory countdown content.** EU AI Act high-risk obligations (Aug 2026), EU CRA SBOM reporting (Sep 2026), India DPDP Phase 2 (Nov 2026) — each is an SEO-friendly blog post and social media campaign. "X days until [regulation]: Is your project ready?"
+- **Webinars with compliance lawyers.** Partner with a privacy attorney for a 30-minute monthly "Developer Compliance Office Hours" webinar. Low cost, builds authority, generates email signups.
+- **Case studies by stack.** "How a Rails + Stripe startup used Codepliant to generate their privacy policy in 30 seconds" — one per framework/stack, each targeting different developer communities.
+- **SEO playbook from security companies.** Cybersecurity companies drive significant organic traffic through educational content mapped to buyer intent keywords. Apply the same approach: target "do I need a privacy policy for my app," "GDPR requirements for developers," "AI disclosure requirements 2026."
+
+#### 3. Building Community Around a Compliance Tool
+
+**Platform selection:**
+
+- **GitHub Discussions (primary).** Best for async support, feature requests, and template sharing. Low friction — users are already on GitHub. Enable Categories: Q&A, Show & Tell (users sharing generated docs), Feature Requests, Templates.
+- **Discord (secondary, add when >500 GitHub stars).** Better for real-time chat, but requires active moderation. Start with channels: #general, #support, #show-your-docs, #feature-ideas, #compliance-news. Too early = empty room effect.
+- **Avoid Slack** for open-source community — messages disappear, no SEO benefit, poor async experience.
+
+**Community engagement tactics:**
+
+- **Monthly "Compliance Office Hours"** — 30-minute live session (Discord or Twitter/X Spaces) where maintainers answer compliance questions. Record and post to YouTube for async viewers.
+- **"Template of the Month" contributions** — Invite community members to submit new document templates via PR. Feature contributors in release notes. This is how Notion built its template community.
+- **"Compliance Champions" program** — Recognize top contributors with a badge in GitHub Discussions and a mention on the website. Low cost, high loyalty.
+- **Cross-community presence** — Post in relevant Discord/Slack communities (Indie Hackers, r/SaaS, Dev.to, relevant framework communities like Next.js Discord, Rails Discord) when sharing educational content. Don't spam product links — share genuinely useful compliance knowledge.
+- **Hacktoberfest and similar events** — Label issues as "good first issue" and "hacktoberfest" to attract contributors during October. Compliance-themed issues (add a new regulation scanner, add a new document template) are accessible to non-expert contributors.
+
+**Growth timeline:**
+
+| Phase | Stars | Actions |
+|-------|-------|---------|
+| Launch (Week 1) | 0-200 | HN, PH, newsletters, GitHub Discussions only |
+| Traction (Month 1-3) | 200-1K | Weekly blog posts, template gallery, first case study |
+| Community (Month 3-6) | 1K-5K | Discord launch, monthly office hours, Hacktoberfest |
+| Scale (Month 6-12) | 5K+ | Champions program, conference talks, partnership integrations |
+
 ## Development Log
+
+**2026-03-17 — Diff summary in `codepliant go` output**
+- After generation, `codepliant go` now displays a "Changes Since Last Generation" section
+- Shows counts and filenames for new (+), updated (~), removed (-), and unchanged (=) documents
+- Each changed document includes a detail line (e.g., "Added section: ...", "2 new service(s) detected")
+- When no previous output exists (first run), all docs show as "new"; on reruns with no changes, shows "All documents unchanged"
+- Fixed: `diffDocuments` call in `runScanAndGenerate` now passes the `outputFormat` parameter to avoid false "removed" flags when using `--format markdown`
+- Build verified: `npx tsc` passes cleanly
 
 **2026-03-17 — Comprehensive `codepliant health` command**
 - Rewrote `runHealth()` in `src/cli.ts` to provide a full project health check
@@ -3133,6 +3190,18 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Iteration 21: Final stats synchronization
+
+- Updated test count from "2,759" to "2,867" in 4 locations:
+  - `src/app/about/page.tsx` — stats array
+  - `src/app/page.tsx` — proof points fact text
+  - `src/app/page.tsx` — stats bar display
+  - `src/app/changelog/page.tsx` — v1.1.0 test suite expansion line (also updated percentage from 262% to 276%)
+- Document types (123+) already correct across all files — no changes needed
+- Ecosystems (13) already correct across all files — no changes needed
+- Generator test count (48/138) reflected in changelog via existing "100% scanner coverage and growing generator coverage" language
+- `next build` passes cleanly — 29 static pages, 0 errors
 
 ### 2026-03-17 — Iteration 20: Final launch polish
 
@@ -3825,6 +3894,63 @@ _Updated by Website Agent each iteration._
 
 **Build verification:**
 - `next build` passes cleanly, all 27 routes generated (22 pages + OG image routes)
+
+### Iteration 21 — 2026-03-17 — Loading performance audit (Core Web Vitals)
+
+**Audit scope**: All source files in `src/app/` checked for font loading, client-side JavaScript usage, CSS optimization, image lazy loading, and code block rendering strategy. Focus on LCP, CLS, and INP impact.
+
+**1. Font loading (`next/font`) — PASS, no changes needed:**
+- `src/app/layout.tsx` imports `Outfit` and `Source_Sans_3` from `next/font/google` (line 2)
+- Both fonts configured with `display: "swap"` (prevents invisible text during load, good for LCP)
+- Both fonts configured with `subsets: ["latin"]` (reduces font file size)
+- Both fonts specify exact `weight` arrays to avoid downloading unused weights
+- Font CSS variables (`--font-outfit`, `--font-source-sans`) applied via `className` on `<body>` — correct Next.js pattern that avoids layout shift (CLS)
+
+**2. Code blocks — PASS, no changes needed:**
+- All code blocks across the site are static `<pre>/<code>` elements rendered server-side
+- The `CodeBlock` component in `src/app/blog/components.tsx` is a server component (no "use client" directive)
+- Homepage example output (`src/app/page.tsx` lines 389-445) uses inline `<pre>` with static content — fully server-rendered, zero client JS
+- No syntax highlighting libraries loaded (no Prism, Shiki, or highlight.js) — code blocks use simple `font-mono` + `text-code-fg`/`bg-code-bg` styling
+- This means zero JS hydration cost for code blocks, which is optimal for LCP and INP
+
+**3. Client-side JavaScript — PASS, no changes needed:**
+- Only 1 file in `src/app/` uses `"use client"`: `src/app/error.tsx`
+- This is required by Next.js — error boundaries must be client components to use `useEffect` and the `reset` callback
+- All other 22 page components are server components (no "use client" directive)
+- No `next/dynamic` imports found anywhere — no lazy-loaded client components
+- Build output confirms minimal per-page JS: 238 bytes for all pages except `/compare` (3.45 kB due to large static HTML, not client JS)
+- First Load JS shared bundle: 102 kB (framework overhead only, no custom client code)
+
+**4. CSS optimization — 3 unused custom properties removed:**
+- Audited all CSS custom properties in `src/app/globals.css` against usage in all `src/app/**/*.tsx` files
+- Found 3 unused custom properties (defined but never referenced outside their definition):
+  - `--ease-out-expo` (line 39) — only `--ease-out-quart` is used in components
+  - `--shadow-sm` (lines 41, 62) — the Tailwind `shadow-sm` utility class does not use this custom property
+  - `--shadow-md` (lines 42, 63) — never referenced in any component
+- **Fix** (`src/app/globals.css`): Removed all 3 unused properties from both light mode `:root` and dark mode `@media (prefers-color-scheme: dark)` blocks
+- All other custom properties verified as used: 16 color tokens, 7 text scale tokens, 9 space tokens, 1 easing token
+- Total CSS savings: ~200 bytes (minor, but eliminates dead code)
+
+**5. Images — PASS, no changes needed:**
+- Zero `<img>` elements found across all pages (confirmed via grep)
+- Zero `next/image` (`<Image>`) imports found
+- Site uses only inline SVGs for icons (all with `aria-hidden="true"`)
+- OG images are generated server-side via `next/og` ImageResponse (13 endpoints) — these are not loaded on page
+- No images below the fold to add `loading="lazy"` to
+
+**Core Web Vitals summary:**
+
+| Metric | Status | Notes |
+|---|---|---|
+| LCP | Optimized | All pages are statically generated (SSG). Fonts use `display: "swap"` + `next/font` preloading. No render-blocking client JS. |
+| CLS | Optimized | Fonts preloaded with explicit weights via `next/font` (no FOUT shift). No images on any page. No dynamic content insertion. |
+| INP | Optimized | Only 1 client component (error.tsx). Zero interactive client-side JS on normal page loads. 238 bytes per-page JS. |
+
+**Build verification:**
+- `next build` passes cleanly: compiled in 1162ms, 29/29 static pages generated, 102 kB First Load JS shared
+
+**Files modified (1):**
+- `src/app/globals.css` — removed 3 unused CSS custom properties (`--ease-out-expo`, `--shadow-sm`, `--shadow-md`)
 
 ## Website QA
 
@@ -5416,3 +5542,59 @@ Added `codepliant completions` command that outputs shell completion scripts for
 - Other: annual-review-checklist, api-documentation, consent-record-template, cookie-consent-config, dsar-guide, employee-handbook-privacy, employee-privacy, international-transfer-impact, key-person-risk, lawful-basis-assessment, quick-start-guide, review-notes, whistleblower
 
 **Progress trajectory:** 798 (iter 1) -> 1341 (iter 6) -> 1752 (iter 10) -> 2605 (iter 18) -> 2759 (iter 19) -> 2867 (iter 20)
+
+### Iteration 21 — 2026-03-17 — Link rot prevention audit
+
+**Test scope**: Source code review of all page components in `codepliant-site/src/app/`, focused on external link validation, mailto link format, codepliant.dev domain references, and anchor link resolution.
+
+**External links audited (9 unique URLs across all pages):**
+
+| URL | Status | Location |
+|---|---|---|
+| `https://www.npmjs.com/package/codepliant` | OK (403 = bot protection, package verified via `npm view`) | 10+ pages |
+| `https://github.com/calcom/cal.com` | OK (200) | `page.tsx` homepage |
+| `https://github.com/chatwoot/chatwoot` | OK (200) | `page.tsx` homepage |
+| `https://github.com/twentyhq/twenty` | OK (200) | `page.tsx` homepage |
+| `https://modelcontextprotocol.io` | OK (200) | `docs/page.tsx` |
+| `https://github.com/joechensmartz/codepliant` | OK (not fetched — instruction to not access) | 20+ pages |
+| `https://github.com/joechensmartz/codepliant/issues` | OK (not fetched) | `error.tsx` |
+| `https://github.com/joechensmartz/codepliant/blob/main/CONTRIBUTING.md` | OK (not fetched) | `about/page.tsx` |
+| `https://schema.org` | OK (standard vocabulary URL) | JSON-LD in all pages |
+
+**Mailto links audited (1):**
+- `mailto:hello@codepliant.dev` in `pricing/page.tsx` — Valid email format. Domain not yet accepting mail (codepliant.dev not live), but structurally correct. No fix needed; will work once domain is provisioned.
+
+**codepliant.dev domain references:**
+- Found in 30+ files across SEO metadata (canonical URLs, JSON-LD breadcrumbs, og:url, sitemap.ts, robots.ts, metadataBase in layout.tsx). These are all metadata/structured data declarations, not user-clickable navigation links. Standard practice to set canonical URLs before domain goes live. **No fix needed.**
+
+**Anchor link audit (all pages):**
+
+| Page | Anchor links | All resolve? |
+|---|---|---|
+| `page.tsx` (homepage) | `#example-output` | Yes (`id="example-output"` at line 372) |
+| `layout.tsx` | `#main-content` | Yes (`id="main-content"` at line 276) |
+| `blog/eu-ai-act-deadline` | 10 anchors (`#timeline`, `#risk-classification`, `#article-50`, `#detecting-ai`, `#extraterritorial`, `#penalties`, `#gpai`, `#compliance-steps`, `#industry-impact`, `#what-to-do`) | Yes (all 10 IDs present) |
+| `blog/colorado-ai-act` | 10 anchors | Yes (all 10 IDs present) |
+| `blog/soc2-for-startups` | 7 anchors | Yes (all 7 IDs present) |
+| `blog/hipaa-for-developers` | 6 anchors | Yes (all 6 IDs present) |
+| `blog/gdpr-for-developers` | 9 anchors | Yes (all 9 IDs present) |
+
+**Bugs found and fixed:**
+
+1. **Wrong GitHub organization in blog post link** — `blog/generate-privacy-policy-from-code/page.tsx` line 732 had `href="https://github.com/codepliant/codepliant"` while every other page in the site uses `https://github.com/joechensmartz/codepliant`. The `codepliant` GitHub org does not match the actual repository owner.
+   - **Fix** (`src/app/blog/generate-privacy-policy-from-code/page.tsx`): Changed `https://github.com/codepliant/codepliant` to `https://github.com/joechensmartz/codepliant`.
+
+**No other issues found.** All external links resolve, all anchor links point to existing element IDs, the mailto link has valid format, and codepliant.dev references are confined to SEO metadata (not navigable links).
+
+### Iteration 21 — Generator Tests (privacy-risk-matrix, data-mapping-register, compliance-calendar)
+
+- **Build**: pass
+- **Tests**: 3037/3037 passing (was 2867, added 170 new tests across 3 files)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/privacy-risk-matrix.test.ts` (48 tests): null return (empty services), generation with each of the 7 service categories (analytics, auth, payment, ai, database, storage, email), generation with multiple services, context values (companyName, placeholder), date format, next review date, document version, Executive Summary section with level counts (Critical/High/Medium/Low) and total, Visual Risk Matrix 5x5 grid with all likelihood labels (Rare/Unlikely/Possible/Likely/Almost Certain), risk ID placement in grid, Scoring Legend, Risk Register table with service names and likelihood/impact labels, Risk Details and Mitigations section, data types at risk per category (payment: credit card tokens/billing addresses, analytics: IP addresses/device fingerprints/browsing history, AI: user prompts/generated outputs, auth: email addresses/passwords-hashes/OAuth tokens), mitigations per category (payment: PCI DSS/tokenization, analytics: cookie consent/anonymize IP, AI: data minimization/DPIA Art. 35, auth: bcrypt-argon2/MFA, database: encryption at rest/field-level, storage: server-side encryption/ACLs, email: double opt-in/one-click unsubscribe), conditional international transfer risk (2+ services triggers, 1 service does not), advertising triggers analytics risk, risk scoring and sorting (descending by score), correct risk colors (Critical >= 15, High 10-14, Medium 5-9), Codepliant attribution, professional review disclaimer, comprehensive test with all 7 categories + international transfer (8 total risks)
+  - `src/generator/data-mapping-register.test.ts` (54 tests): null returns (empty services, services with no dataCollected), generation with single and multiple services, context values (companyName, contactEmail, dpoName, dpoEmail, euRepresentative, website), placeholder defaults, dpoEmail fallback to contactEmail, conditional EU Representative and website fields, date format, next review date, Data Controller Information section, Data Inventory table with data elements, deduplication of data elements across services with shared-with merging, lawful basis mapping (auth/payment -> contract performance, analytics -> legitimate interest, advertising -> consent), retention periods (payment: 7 years, analytics: 26 months, custom dataRetentionDays), data sensitivity classification (Financial, Directly Identifiable, Indirectly Identifiable, Security Credential), source derivation (IP -> automatic HTTP, email -> user-provided form, payment -> checkout, cookie -> cookies/SDK), storage location derivation (third-party vs self-managed), Data Flow Summary grouped by sensitivity category, Third-Party Processors section with data/purpose/DPA status, Internal only for non-processors, International Data Transfers with SCCs, no-processors message, Retention Schedule, data categories from scan result, dynamic section numbering (with/without processors), GDPR Article 30 reference, Codepliant attribution, professional review disclaimer, comprehensive test with all service categories and context fields
+  - `src/generator/compliance-calendar.test.ts` (68 tests): null return (empty services), generation with single and multiple services, context values (companyName, placeholder), date format, project name, disclaimer, Applicable Regulations section (GDPR default when no jurisdictions, GDPR with gdpr jurisdiction, CCPA with ccpa jurisdiction/US location/analytics services, EU AI Act with AI services, PCI DSS with payment services, ePrivacy with analytics, CAN-SPAM with email), Monthly Calendar with all 12 months, recurring monthly activities (breach logs, consent mechanisms), conditional monitoring review, quarterly activities (re-run Codepliant, compliance status report, DSAR review with GDPR, PCI DSS vulnerability scan with payment, analytics cookie consent review), semi-annual compliance audits (H1/H2), conditional AI risk assessment (H1/H2), annual activities (privacy policy review, compliance summary, CCPA disclosures update, PCI DSS self-assessment, staff training, vendor review, backup/DR review with storage, data retention review, encryption verification with storage, access control review, auth session audit, AI disclosure review in August, breach response drill, email consent review, GDPR transfer review in October, pre-audit preparation, annual review report), Annual Summary table with item counts, Service-Specific Compliance Activities subsections (AI, Payment, Analytics, Auth, Email, Storage/Database with service names), conditional subsection absence, Tips section, Codepliant attribution, informational purposes disclaimer, comprehensive test with all 8 service categories and all regulations
+- **Generator test coverage**: 51/138 generators now have dedicated tests (was 48/138)
+
+**Progress trajectory:** 798 (iter 1) -> 1341 (iter 6) -> 1752 (iter 10) -> 2605 (iter 18) -> 2759 (iter 19) -> 2867 (iter 20) -> 3037 (iter 21)

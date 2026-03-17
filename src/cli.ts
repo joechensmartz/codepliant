@@ -2101,7 +2101,7 @@ function runScanAndGenerate(
   const docs = generateDocuments(result, config, plugins);
 
   // Track changes before writing
-  const diff = diffDocuments(docs, absOutputDir);
+  const diff = diffDocuments(docs, absOutputDir, outputFormat);
 
   const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, result);
 
@@ -2194,6 +2194,46 @@ function runScanAndGenerate(
     console.log(`  ${GREEN()}${BOLD()}Estimated manual equivalent: ${estimatedManualHours}+ hours${RESET()}`);
     console.log(`  ${GREEN()}${BOLD()}Estimated lawyer cost: $${costK.toLocaleString()},000+${RESET()}`);
     console.log();
+
+    // --- Changes Summary (diff against previous generation) ---
+    if (diff.hasChanges) {
+      const added = diff.changes.filter(c => c.type === "added");
+      const updated = diff.changes.filter(c => c.type === "updated");
+      const removed = diff.changes.filter(c => c.type === "removed");
+      const unchangedCount = docs.length - diff.changes.filter(c => c.type !== "removed").length;
+
+      console.log(`${CYAN()}${"─".repeat(50)}${RESET()}`);
+      console.log(`${CYAN()}${BOLD()}Changes Since Last Generation${RESET()}`);
+      console.log(`${CYAN()}${"─".repeat(50)}${RESET()}`);
+      console.log();
+
+      if (added.length > 0) {
+        console.log(`  ${GREEN()}${BOLD()}+ ${added.length} new${RESET()}`);
+        for (const change of added) {
+          console.log(`    ${GREEN()}+${RESET()} ${change.filename} ${DIM()}(${change.details[0] || change.document})${RESET()}`);
+        }
+      }
+      if (updated.length > 0) {
+        console.log(`  ${YELLOW()}${BOLD()}~ ${updated.length} updated${RESET()}`);
+        for (const change of updated) {
+          console.log(`    ${YELLOW()}~${RESET()} ${change.filename} ${DIM()}(${change.details[0] || change.document})${RESET()}`);
+        }
+      }
+      if (removed.length > 0) {
+        console.log(`  ${RED()}${BOLD()}- ${removed.length} removed${RESET()}`);
+        for (const change of removed) {
+          console.log(`    ${RED()}-${RESET()} ${change.filename} ${DIM()}(${change.details[0] || change.document})${RESET()}`);
+        }
+      }
+      if (unchangedCount > 0) {
+        console.log(`  ${DIM()}= ${unchangedCount} unchanged${RESET()}`);
+      }
+      console.log();
+    } else {
+      console.log(`${CYAN()}${"─".repeat(50)}${RESET()}`);
+      console.log(`  ${DIM()}All documents unchanged since last generation.${RESET()}`);
+      console.log();
+    }
   }
 
   console.log(
