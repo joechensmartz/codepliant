@@ -2,8 +2,8 @@ name: "Codepliant Compliance Check"
 description: "Scan your codebase for compliance requirements and generate privacy policies, terms of service, and more from your actual code."
 
 branding:
-  icon: shield
-  color: blue
+  icon: 'shield'
+  color: 'green'
 
 inputs:
   path:
