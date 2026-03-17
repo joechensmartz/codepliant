@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3376 passing — 100% scanner, 60/138 generators (43%)
+- **Tests**: 3496 passing — 100% scanner, 63/138 generators (46%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 24 complete (2026-03-17)
-- **Last run**: action marketplace ready, 120 tests, structured data (WebSite/TechArticle/WebPage), stats sync 3256, Actions listing research
+- **Iteration**: 25 complete (2026-03-17)
+- **Last run**: export command, 120 tests, npm discoverability, stats 3376, performance audit
 
 ## Priority Backlog
 
@@ -2805,7 +2805,71 @@ The timing is strong: EU AI Act high-risk obligations take effect August 2026, E
 | Community (Month 3-6) | 1K-5K | Discord launch, monthly office hours, Hacktoberfest |
 | Scale (Month 6-12) | 5K+ | Champions program, conference talks, partnership integrations |
 
+### Iteration 25 — 2026-03-17 — npm Package Discoverability
+
+#### 1. Optimizing an npm Package for Search
+
+**package.json fields that drive ranking:**
+
+- **`keywords` array** — The single most impactful SEO lever. npm search indexes these directly. For Codepliant, use: `["compliance", "privacy-policy", "gdpr", "soc2", "terms-of-service", "ai-disclosure", "cookie-policy", "code-scanner", "cli", "privacy", "legal", "generator", "eu-ai-act", "ccpa", "sbom", "developer-tools"]`. Keep it under 20; each should be a term a potential user would actually type into `npm search`.
+- **`description`** — Displayed in every search result listing. Keep it under 120 characters, front-load the value proposition. Current: consider something like "Scan your codebase and generate privacy policies, terms of service, AI disclosures, and 90+ compliance documents."
+- **`repository`, `homepage`, `bugs`** — npm uses these to link to GitHub. A linked repo with stars, recent commits, and open issues boosts the "maintenance" and "quality" scores in npm's ranking algorithm.
+
+**README as a ranking signal:**
+
+- npm indexes README content for full-text search. Terms in the README can match search queries even if they're not in `keywords`.
+- README length correlates with package selection — research shows highly-adopted packages tend to have larger, more detailed READMEs.
+- Include: one-liner description, install command, quick usage example, feature list, badge row (npm version, downloads, license, build status), and a link to full docs.
+- Add a "Why Codepliant?" section with compliance-related terms (GDPR, CCPA, SOC 2, EU AI Act) to capture long-tail searches.
+
+#### 2. What Makes npm Packages Rank Higher in Search
+
+npm search (powered by npms.io's algorithm) scores packages on three axes:
+
+| Factor | Weight | What it measures |
+|--------|--------|-----------------|
+| **Quality** | ~33% | Has README, has tests, has license, has `.gitignore`, linting config, TypeScript types, no deprecation warnings |
+| **Popularity** | ~33% | Weekly downloads, GitHub stars, dependents (other packages that depend on yours), community size |
+| **Maintenance** | ~33% | Commit recency, issue response time, release frequency, open issues ratio |
+
+**Actionable steps to maximize score:**
+
+- Ensure `codepliant` has: a LICENSE file, passing tests, TypeScript types (already has), a `.npmignore` or `files` field to keep package small, no security vulnerabilities in deps.
+- Push frequent small releases rather than infrequent large ones — maintenance score rewards release cadence.
+- Respond to GitHub issues quickly (even just a label/comment) — issue response time is tracked.
+- Encourage downloads via `npx codepliant go .` in blog posts, tutorials, and README — downloads compound the popularity score.
+- Getting other packages to list `codepliant` as a dependency or peerDependency (e.g., via a `codepliant-config` or `eslint-plugin-codepliant`) boosts the "dependents" metric.
+
+#### 3. Getting Featured / Trending on npmjs.com
+
+**npmjs.com does not have a curated "featured" section.** There is no editorial team selecting packages. Visibility comes entirely from:
+
+- **npm search ranking** (quality + popularity + maintenance score as above).
+- **npm trending** — External tools like npmtrends.com and npm-trending track daily download velocity. A sudden spike in downloads (from a launch event, blog post, or newsletter mention) gets you on these lists, which drives more downloads (flywheel effect).
+- **Curated lists** — The real discovery happens on third-party curated lists: `awesome-npm`, `awesome-nodejs`, `awesome-privacy`, `awesome-compliance`, and framework-specific awesome lists. Submit PRs to get listed.
+- **npmjs.com search suggestions** — When users type in the search bar, autocomplete is driven by download volume and exact keyword matches. Having `compliance` and `privacy-policy` in your package name/keywords helps.
+
+**Tactical playbook for Codepliant:**
+
+1. **Launch week**: Coordinate blog post + HN + PH + newsletter mentions to spike downloads on the same day. Download velocity (not just total) matters for trending.
+2. **npx as a growth hack**: Every `npx codepliant go .` invocation counts as a download. Promote the npx command everywhere — it's zero-commitment for the user and boosts download numbers.
+3. **Awesome list submissions**: Target `awesome-nodejs`, `awesome-npm`, `awesome-privacy`, `awesome-compliance`, `awesome-developer-tools`, and framework-specific lists (awesome-nextjs, awesome-react, etc.).
+4. **Bundlephobia / packagephobia**: Keep install size small. These tools display package size and developers filter by it. Current `.files` or `.npmignore` should exclude test fixtures, docs, and source maps.
+5. **Socket.dev and Snyk Advisor**: These package health dashboards influence developer trust. Ensure no known vulnerabilities, have a clear license, and maintain a good OpenSSF Scorecard.
+6. **npm provenance**: Enable npm provenance via GitHub Actions (`--provenance` flag on `npm publish`). This adds a verified build badge on npmjs.com, increasing trust and click-through.
+
 ## Development Log
+
+**2026-03-17 — `codepliant export` JSON command (Iteration 25)**
+- Added `codepliant export` command that outputs a single JSON file with structured compliance data
+- JSON includes: project info, detected services (name, category, dataCollected), document metadata (name, category, filename, lineCount), compliance score with grade, compliance needs, data categories, and scan duration
+- Does NOT include full document content — only metadata, keeping output lightweight for pipelines
+- Supports `--output` / `-o` flag to write to a file; defaults to stdout for easy piping
+- When writing to stdout, all banner/progress output is suppressed automatically for clean JSON
+- Renamed the previous `export` command (ZIP archive) to `export-zip` to avoid conflict
+- Updated help text, usage listing, and VALID_COMMANDS array
+- Use cases: CI/CD pipelines, dashboard integrations, compliance reporting tools
+- Build verified: `npx tsc` passes cleanly
 
 **2026-03-17 — GitHub Action marketplace-ready (Iteration 24)**
 - Updated `action.yml` branding: changed color from `blue` to `green`, quoted icon and color values per marketplace best practices
@@ -3096,6 +3160,17 @@ The timing is strong: EU AI Act high-risk obligations take effect August 2026, E
 - **Generator modules now with tests** (60 total, was 57)
 - **Generator modules still missing tests**: 78 files (was 81)
 
+### Iteration 25 — 2026-03-17
+- **Build**: pass
+- **Tests**: 3496/3496 passing (was 3376, added 120 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/ai-governance.test.ts` (44 tests): null return for no services/no AI services, generation with AI services, project name, date format, context values (companyName/contactEmail/dpoName/dpoEmail/placeholder defaults), AI services listed in scope with dataCollected, non-AI services excluded from scope, risk level determination (minimal for internal data, limited for user prompts/generated content, high for biometric/facial recognition/credit scoring/hiring/healthcare diagnosis), aiRiskLevel context override, EU AI Act regulatory alignment (2024/1689), NIST AI RMF reference (GOVERN/MAP/MEASURE/MANAGE), conditional transparency (full for limited, basic for minimal), conditional conformity assessment (required before deployment for high, self-assessment for non-high), conditional risk messages (high: Annex IV/EU database, limited: transparency obligations, minimal: no mandatory requirements), roles and responsibilities (AI Governance Officer/Development Team/Compliance Team/Executive Leadership), AI development lifecycle controls (Planning/Data Preparation/Development/Testing/Deployment/Monitoring), lifecycle checklist items (prompt injection), vendor evaluation per AI service (DPA/SOC 2 Type II), bias testing requirements (protected characteristics/methodology), transparency requirements (Art. 50/Annex IV), AI-specific incident response (prompt injection exploit/systematic bias), review and audit schedule (Quarterly/Annually), contact section, Codepliant disclaimer, sequential section numbering (1-11), multiple AI services handling
+  - `src/generator/privacy-notice-multilingual.test.ts` (35 tests): empty array for no services, generates exactly 3 documents (DE/FR/ES), German document (PRIVACY_NOTICE_DE.md/Deutsch/Datenschutz), French document (PRIVACY_NOTICE_FR.md/Français/confidentialité), Spanish document (PRIVACY_NOTICE_ES.md/Español/privacidad), context values (companyName/contactEmail/placeholder defaults) in all languages, date format, category-specific collection bullets (auth: E-Mail-Adresse/Correo electrónico, payment: Zahlungsinformationen/Datos de pago, analytics: Nutzungsdaten, AI: KI-Funktionen, monitoring: Technische Informationen), fallback collection bullet when no matching categories, base purpose bullet always present (Bereitstellung/Fournir/Proporcionar), category-specific purpose bullets (payment/analytics/AI/monitoring), service provider names in sharing section (Dienstleister), law enforcement sharing in each language (Strafverfolgungsbehörden/autorités judiciaires/Autoridades judiciales), never-sell statement (niemals/jamais/Nunca), user rights in each language (Ihre Rechte/Vos droits/Sus derechos), links to Privacy Policy/Terms/Security, disclaimers in each language (Haftungsausschluss/Avertissement/Aviso), multiple category bullets combined, processor list truncation to 5 with +N count, isDataProcessor=false exclusion from sharing, intro references full English policy
+  - `src/generator/regulatory-readiness-scorecard.test.ts` (41 tests): null return for no services, generation with services, date format, context company name/placeholder default, GDPR assessment by default (no jurisdictions), GDPR privacy notice check met when services exist, breach notification always action needed, DPO check met/unmet based on context, DPIA higher weight with AI (15%), consent management higher weight with analytics (15%), privacy by design met when company configured, jurisdictional scope met when jurisdictions configured, CCPA assessment with ccpa jurisdiction (Do Not Sell action needed with analytics), CCPA absent with gdpr-only jurisdiction, EU AI Act assessment conditional on AI services (risk classification met with aiRiskLevel, governance framework met with aiUsageDescription), PCI DSS assessment conditional on payment services (tokenization always met), SOC 2 assessment with 3+ services (access control met), SOC 2 absent with <3 services, overall readiness section with score percentage, summary table with per-regulation scores, progress bar characters, priority action plan sorted by weight descending, action items limited to 10, per-regulation assessment section, action items for unmet checks, disclaimer (automated code analysis/not legal advice), multiple regulations combined (GDPR+CCPA+EU AI Act+PCI DSS+SOC 2), processor agreements met/unmet threshold (2 services), advertising category treated same as analytics for consent checks
+- **Generator modules now with tests** (63 total, was 60)
+- **Generator modules still missing tests**: 75 files (was 78)
+
 ### Iteration 17 — 2026-03-17
 
 #### Homebrew Distribution Research
@@ -3220,6 +3295,18 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Iteration 25: Stats sync (3,376 tests, 60/138 generators)
+
+- Updated test count from "3,256" to "3,376" in 3 files:
+  - `src/app/page.tsx` — proof points fact text + stats bar display
+  - `src/app/about/page.tsx` — stats array
+  - `src/app/changelog/page.tsx` — v1.1.0 summary text
+- Updated changelog v1.1.0 tests line:
+  - Test count: "3,256" to "3,376"
+  - Percentage: "327%" to "342%"
+  - Generator test suites: "57" to "60"
+- `next build` passes cleanly — 29 static pages, 0 errors
 
 ### 2026-03-17 — Iteration 24: Stats sync (3,256 tests)
 
@@ -4161,6 +4248,51 @@ _Updated by Website Agent each iteration._
 - `src/app/soc2-compliance/page.tsx` — added WebPage JSON-LD
 - `src/app/ai-governance/page.tsx` — added WebPage JSON-LD
 - `src/app/data-privacy/page.tsx` — added WebPage JSON-LD
+
+### Iteration 25 — 2026-03-17 — Performance and bundle audit
+
+**1. Total CSS file size:**
+- Source: `globals.css` = 3.9 KB
+- Built output: `.next/static/css/39b61dbfcf3f6beb.css` = 49 KB (Tailwind v4 compiled)
+- Verdict: Excellent. Single CSS file, well within budget.
+
+**2. Total JS bundle size:**
+- Built JS in `.next/static/` = 856 KB total (uncompressed)
+- Breakdown of largest chunks:
+  - `framework` (React): 190 KB
+  - `4bd1b696` (shared vendor): 173 KB
+  - `1255` (shared): 173 KB
+  - `main` (Next.js runtime): 128 KB
+  - `polyfills`: 113 KB
+- Page-specific JS is minimal (most pages are 332 bytes — server components producing no client JS)
+- Only client component: `error.tsx` (1.9 KB chunk)
+- Verdict: Good. Nearly all pages are fully server-rendered. The ~856 KB total is the Next.js framework baseline; actual per-page client JS is near zero.
+
+**3. Largest page by source size:**
+- `blog/eu-ai-act-deadline/page.tsx` = 51.6 KB (source)
+- `blog/privacy-policy-for-saas/page.tsx` = 51.2 KB
+- `blog/colorado-ai-act/page.tsx` = 50.2 KB
+- `blog/gdpr-for-developers/page.tsx` = 48.9 KB
+- `docs/page.tsx` = 42.4 KB
+- All blog posts are 34-52 KB (long-form content, expected)
+- Verdict: Acceptable for long-form SEO content. These are server-rendered so source size does not impact client bundle.
+
+**4. External requests per page:**
+- Google Fonts: 0 external requests (uses `next/font/google` which self-hosts font files at build time — 9 woff2 files totaling 200 KB served from `.next/static/media/`)
+- Analytics/tracking scripts: None
+- External images: None (no `<img>` or `<Image>` tags with external URLs)
+- External JS/CSS: None
+- All outbound `href` links are navigation-only (GitHub, npm) — no resource loading
+- Verdict: Excellent. Zero external requests at page load. Fully self-contained.
+
+**5. Optimization opportunities (none requiring immediate action):**
+- **Font subsetting**: 9 woff2 files (200 KB) for 2 font families (Outfit: 4 weights, Source Sans 3: 3 weights). Could reduce to 2-3 files by limiting weights, but current size is acceptable.
+- **Polyfills**: 113 KB polyfill chunk is the Next.js default. Could be reduced with `next.config.ts` `optimizePackageImports` or by targeting modern browsers only, but this is low priority.
+- **Blog page sizes**: Blog posts are 34-52 KB of TSX source each. If more posts are added, extracting shared components (CTA blocks, author bios, related links) into `blog/components.tsx` would reduce duplication. A `blog/components.tsx` already exists — good foundation.
+- **`ignoreBuildErrors` in next.config.ts**: Both `typescript.ignoreBuildErrors` and `eslint.ignoreDuringBuilds` are set to `true`. Not a performance issue, but worth noting — TypeScript errors may be silently skipped during builds.
+- **No `<Image>` component usage**: The site has zero images, which is great for performance but means OG images (generated via `opengraph-image.tsx` routes) are the only visual assets. No optimization needed.
+
+**Summary:** The site is lean and well-optimized. Zero external requests at page load, near-zero client-side JS (only `error.tsx` uses client components), self-hosted fonts, single CSS file under 50 KB. No bugs found. No changes made.
 
 ## Website QA
 
@@ -6174,3 +6306,18 @@ compliance documents based on what your code actually uses — not questionnaire
 3. Input/output tables are scannable
 4. Numbers (13 ecosystems, 120+ services, 25+ documents) build credibility
 5. Zero-config quick start lowers the barrier to adoption
+
+### Iteration 25 — 2026-03-17 — Quick verification pass
+
+**Test scope**: All 23 sitemap pages at `http://localhost:5001`, plus internal link validation, blog rendering, and homepage stats consistency.
+
+**Results: All 4 checks pass. Zero bugs found. No files modified.**
+
+| # | Check | Result | Details |
+|---|-------|--------|---------|
+| 1 | All pages return 200 | **PASS** | 23/23 sitemap pages return HTTP 200; custom 404 page returns HTTP 404 for unknown routes |
+| 2 | Homepage stats correct | **PASS** | "123+ document types", "13 ecosystems", "97.8% detection precision", "1,200+ repos tested" — all consistent with v1.1.0 stats and iteration 23/24 verified values. Pricing free tier correctly shows "Up to 5 document types". No "tests passing" count displayed (removed in earlier iteration to avoid stale counts). |
+| 3 | No broken links | **PASS** | 23 unique internal paths extracted from homepage + 6 key pages (docs, pricing, about, blog, compare, changelog); all 23 return HTTP 200. No broken internal links found. |
+| 4 | Blog posts all render | **PASS** | Blog index (`/blog`) lists all 7 posts. All 7 individual blog post pages return HTTP 200 with full content (97-135KB each) and correct `<h1>` tags: HIPAA for SaaS Developers, SOC 2 for Startups, EU AI Act, Privacy Policy for SaaS, GDPR for Developers, Colorado AI Act, Generate a Privacy Policy from Code |
+
+**Summary: 4/4 PASS. Site remains stable and launch-ready.**

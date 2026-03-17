@@ -119,7 +119,8 @@ ${BOLD()}Generation:${RESET()}
   ${CYAN()}badge${RESET()}           Generate compliance badges
   ${CYAN()}format${RESET()}          Convert a single .md file to HTML
   ${CYAN()}pdf${RESET()}             Generate PDF for a single document (requires Puppeteer)
-  ${CYAN()}export${RESET()}          Export all compliance docs as a ZIP file
+  ${CYAN()}export${RESET()}          Export structured JSON with scan results and document metadata
+  ${CYAN()}export-zip${RESET()}      Export all compliance docs as a ZIP file
   ${CYAN()}compare${RESET()}         Compare compliance status of two projects
   ${CYAN()}sbom${RESET()}            Generate CycloneDX SBOM from dependency scan
 
@@ -532,7 +533,29 @@ ${BOLD()}Examples:${RESET()}
 
   export: `${BOLD()}codepliant export${RESET()} [path] [options]
 
-Export compliance documents in a specific format.
+Export a single JSON file with all scan results and document metadata.
+Useful for CI/CD pipelines, dashboard integrations, and compliance reporting tools.
+
+The JSON includes: project info, detected services, document metadata
+(name, category, filename, line count), and compliance score.
+Full document content is NOT included — only metadata.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <file>${RESET()}   Write JSON to a file (default: stdout)
+  ${DIM()}--quiet, -q${RESET()}           Suppress banner and progress output
+  ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant export${RESET()}                            Print JSON to stdout
+  ${CYAN()}codepliant export -o compliance.json${RESET()}          Write to file
+  ${CYAN()}codepliant export ./my-app${RESET()}                    Export for a specific project
+  ${CYAN()}codepliant export --quiet | jq '.score'${RESET()}       Pipe to jq in CI
+`,
+
+  "export-zip": `${BOLD()}codepliant export-zip${RESET()} [path] [options]
+
+Export compliance documents in a specific format as a ZIP archive.
 
 ${BOLD()}Options:${RESET()}
   ${DIM()}--format <fmt>${RESET()}         Output format: markdown, html, pdf, json, notion, confluence, wiki, all
@@ -541,8 +564,8 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
-  ${CYAN()}codepliant export --format wiki${RESET()}              Export as GitHub Wiki pages
-  ${CYAN()}codepliant export --format confluence${RESET()}        Export for Confluence
+  ${CYAN()}codepliant export-zip --format wiki${RESET()}            Export as GitHub Wiki pages
+  ${CYAN()}codepliant export-zip --format confluence${RESET()}      Export for Confluence
 `,
 
   doctor: `${BOLD()}codepliant doctor${RESET()} [path]
@@ -1219,7 +1242,7 @@ const VALID_COMMANDS = [
   "stats", "summary", "quickstart", "completeness", "migrate", "lint", "validate",
   "diff", "hook", "page", "badge", "env", "dashboard", "metrics", "notify",
   "check-config", "config", "init", "wizard", "serve", "template", "signatures",
-  "format", "pdf", "export", "doctor", "auth", "audit-trail", "team-config",
+  "format", "pdf", "export", "export-zip", "doctor", "auth", "audit-trail", "team-config",
   "review", "explain", "why", "ignore", "compare", "publish", "schedule",
   "billing", "update", "health", "audit", "clean", "archive", "version-check",
   "list-docs", "tree", "changelog", "fix", "todo", "benchmark", "preview",
@@ -1879,7 +1902,12 @@ function main() {
     }
 
     if (command === "export") {
-      runExport(absProjectPath, absOutputDir, quiet, formatFlag, verbose);
+      runExportJson(absProjectPath, absOutputDir, outputDir, quiet, verbose);
+      return;
+    }
+
+    if (command === "export-zip") {
+      runExportZip(absProjectPath, absOutputDir, quiet, formatFlag, verbose);
       return;
     }
 
@@ -6406,7 +6434,82 @@ function runSignatures(absProjectPath: string, args: string[]) {
   process.exit(1);
 }
 
-function runExport(absProjectPath: string, absOutputDir: string, quiet: boolean, formatFlag: OutputFormat | undefined, verbose: boolean = false) {
+function runExportJson(absProjectPath: string, absOutputDir: string, rawOutputFlag: string, quiet: boolean, verbose: boolean = false) {
+  // When --output is provided (rawOutputFlag !== "./legal"), treat it as a file path
+  const outputToFile = rawOutputFlag !== "./legal" ? path.resolve(rawOutputFlag) : undefined;
+
+  if (!quiet && !outputToFile) {
+    // When outputting to stdout, suppress all non-JSON output
+    quiet = true;
+  }
+
+  if (!quiet) printBanner();
+
+  const config = loadConfig(absProjectPath);
+  const plugins = config.plugins ? loadPlugins(absProjectPath, config.plugins) : [];
+  const { result, durationMs, timings } = scanWithProgress(absProjectPath, true, verbose, plugins);
+
+  if (verbose && timings && !quiet) {
+    printTimings(timings, durationMs);
+  }
+
+  const docs = generateDocuments(result, config, plugins);
+  const complianceScore = computeComplianceScore(result, absOutputDir);
+
+  const grade = complianceScore >= 90 ? "A" : complianceScore >= 80 ? "B" : complianceScore >= 70 ? "C" : complianceScore >= 60 ? "D" : "F";
+
+  const exportData = {
+    exportedAt: new Date().toISOString(),
+    version: VERSION,
+    project: {
+      name: result.projectName,
+      path: result.projectPath,
+    },
+    services: result.services.map((s) => ({
+      name: s.name,
+      category: s.category,
+      dataCollected: s.dataCollected,
+    })),
+    documents: docs.map((d) => ({
+      name: d.name,
+      category: getDocumentCategory(d.filename) || "general",
+      filename: d.filename,
+      lineCount: d.content.split("\n").length,
+    })),
+    complianceNeeds: result.complianceNeeds,
+    dataCategories: result.dataCategories,
+    score: {
+      value: complianceScore,
+      grade,
+      servicesDetected: result.services.length,
+      documentsGenerated: docs.length,
+      requiredDocs: result.complianceNeeds.filter((n) => n.priority === "required").length,
+      recommendedDocs: result.complianceNeeds.filter((n) => n.priority === "recommended").length,
+    },
+    scanDurationMs: durationMs,
+  };
+
+  const jsonStr = JSON.stringify(exportData, null, 2);
+
+  if (outputToFile) {
+    const dir = path.dirname(outputToFile);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(outputToFile, jsonStr, "utf-8");
+    if (!quiet) {
+      const relPath = path.relative(absProjectPath, outputToFile);
+      console.log(`\n  ${GREEN()}✓${RESET()} Exported compliance data to ${relPath}`);
+      console.log(`    ${DIM()}${result.services.length} services, ${docs.length} documents, score: ${complianceScore}% (${grade})${RESET()}\n`);
+    }
+  } else {
+    console.log(jsonStr);
+  }
+
+  process.exit(0);
+}
+
+function runExportZip(absProjectPath: string, absOutputDir: string, quiet: boolean, formatFlag: OutputFormat | undefined, verbose: boolean = false) {
   if (!quiet) printBanner();
 
   const config = loadConfig(absProjectPath);
