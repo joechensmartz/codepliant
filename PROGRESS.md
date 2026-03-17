@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2605 passing — 100% scanner coverage, 42/132 generators
+- **Tests**: 2759 passing — 100% scanner coverage, 45/132 generators
 - **Repos tested**: 1200+
-- **Document types**: 122+
+- **Document types**: 123+ (added Disclaimer)
 - **Ecosystems**: 13
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 18 complete (2026-03-17)
-- **Last run**: health command, 82 tests, HIPAA blog, canonical audit, data consistency fix, i18n research
+- **Iteration**: 19 complete (2026-03-17)
+- **Last run**: Disclaimer generator, 154 tests, internal linking, favicon/manifest, pre-launch QA pass, Sponsors research
 
 ## Priority Backlog
 
@@ -2371,6 +2371,102 @@ Codepliant currently supports English, German, French, and Spanish. Recommended 
 4. **Incremental rollout**: Ship PT-BR and JA first (P0), then IT/NL/HI (P1), then remaining languages
 5. **Community contributions**: Open locale files for community PRs with a legal review gate before merge
 
+### Iteration 19 — 2026-03-17
+
+#### GitHub Sponsors and Open-Source Funding
+
+**1. How to Set Up GitHub Sponsors**
+
+GitHub Sponsors is available to any individual or organization that contributes to an open-source project and operates in a supported region. Setup steps:
+
+1. **Apply for GitHub Sponsors**: Go to github.com/sponsors and sign up. Complete the sponsored developer profile with a clear description of the project and how funds will be used.
+2. **Create a FUNDING.yml file**: Add `.github/FUNDING.yml` to the repository's default branch. This file powers the "Sponsor" button on the repo page. Example:
+   ```yaml
+   github: [username]
+   open_collective: codepliant
+   custom: ["https://buymeacoffee.com/codepliant"]
+   ```
+3. **Set up sponsorship tiers**: GitHub allows up to 10 one-time tiers and 10 monthly tiers. Each tier can include a description of perks and optional access to a private sponsors-only repository.
+4. **Submit bank and tax information**: Required before payouts can be processed. GitHub takes zero fees on Sponsors payments.
+5. **Enable two-factor authentication**: Required for all sponsored accounts.
+6. **Optional fiscal host**: If operating as a project (not individual), Open Source Collective can serve as a fiscal host, enabling the GitHub organization to receive sponsorships without needing its own bank account.
+
+**Key detail**: GitHub Sponsors charges zero platform fees — 100% of sponsorship payments go to the maintainer (minus payment processing). This is a significant advantage over Open Collective (which charges 10% fiscal host fee) and Patreon (which charges 5-12%).
+
+**2. Sponsorship Tiers That Work for Developer Tools**
+
+Based on analysis of successful open-source developer tools, the following tier structure is recommended for Codepliant:
+
+| Tier | Monthly | Target Audience | Typical Perks |
+|------|---------|-----------------|---------------|
+| **Supporter** | $5 | Individual developers | Name in SPONSORS.md, sponsor badge, warm fuzzy feeling |
+| **Backer** | $15 | Power users / freelancers | All above + priority issue responses, early access to release notes |
+| **Bronze** | $50 | Small companies | All above + logo on README (small), quarterly project updates |
+| **Silver** | $100 | Mid-size companies | All above + logo on README (medium) + website sponsors page, input on roadmap |
+| **Gold** | $250 | Companies with compliance needs | All above + logo on README (large) + homepage, priority feature requests |
+| **One-time** | $5/$25/$100 | Anyone | Shout-out in release notes (optional), name in SPONSORS.md |
+
+ESLint uses a higher-tier corporate structure (Bronze $200/mo, Silver $500/mo, Gold $1,000/mo, Diamond $5,000/mo) because they have massive adoption. For an early-stage project like Codepliant, starting lower and scaling up as adoption grows is more realistic.
+
+**3. Typical Sponsor Perks**
+
+Common perks across successful open-source projects:
+
+- **Logo placement**: On README, project website, and/or documentation. This is the single most popular corporate sponsor perk. Logos are typically organized by tier size.
+- **Priority issues**: Sponsors get faster response times on bug reports and feature requests. Some projects use a "sponsor" label on GitHub issues.
+- **Early access**: Beta/RC builds, new features behind flags, or preview documentation before public release.
+- **Private sponsors channel**: Discord/Slack channel or GitHub Discussions category for sponsors only.
+- **Sponsor badge**: GitHub automatically shows a badge on sponsor profiles. Some projects add custom badges.
+- **Roadmap input**: Higher-tier sponsors get a voice in feature prioritization (not veto power, but weighted input).
+- **Consulting/support hours**: Top-tier sponsors may get a set number of hours for integration support or custom configuration.
+- **Welcome message**: GitHub Sponsors supports a custom welcome message sent after payment, useful for delivering perks (e.g., invite links to private repos/channels).
+
+**What does NOT work well as perks:**
+- Promising features exclusively to sponsors (creates resentment in the open-source community)
+- Physical merchandise at low tiers (logistics overhead exceeds the sponsorship value)
+- Excessive tier complexity (more than 5-6 tiers causes decision paralysis)
+
+**4. How Much Do Comparable Open-Source Tools Earn?**
+
+| Project | Annual Revenue (approx.) | Primary Funding Sources | Notes |
+|---------|------------------------|------------------------|-------|
+| **ESLint** | ~$204,000/year (2025) | Open Collective, GitHub Sponsors, Tidelift | Top sponsors: Automattic ($24K), Airbnb ($24K), Meta ($20K), AG Grid ($20K). Declining Tidelift and ad revenue. |
+| **Prettier** | ~$57,000/year | Open Collective, GitHub Sponsors | Significantly less than ESLint despite similar adoption. Fewer corporate sponsors. |
+| **Biome** | ~$32,000/year | Open Collective, GitHub Sponsors, Polar.sh | Newer project, growing. Won a $22,500 bounty from Prettier challenge. Uses Polar.sh for task-based funding. |
+| **typescript-eslint** | Has Open Collective | Open Collective, GitHub Sponsors | Separate from ESLint's budget. |
+
+**Key observations:**
+- Even widely-used developer tools struggle to generate substantial revenue from sponsorships alone. ESLint is used by millions of projects but earns ~$200K/year — roughly one senior engineer's salary.
+- Corporate sponsors at $1K+/month drive the majority of revenue. Individual $5/month sponsors provide community goodwill but minimal revenue.
+- Diversified funding sources matter: Open Collective + GitHub Sponsors + Tidelift + website ads together provide more stability than any single source.
+- Biome's use of Polar.sh (task-based bounties where sponsors fund specific features) is an emerging model worth watching.
+
+**5. Recommendations for Codepliant**
+
+**Phase 1 (Now — Pre-launch):**
+- Create `.github/FUNDING.yml` pointing to GitHub Sponsors
+- Set up 4-5 sponsorship tiers ($5/$15/$50/$100/$250 monthly + one-time options)
+- Add a "Sponsors" section to README.md with placeholder for logos
+- Add a sponsors page to the codepliant website
+
+**Phase 2 (Post v1.0 launch):**
+- Apply for GitHub Sponsors (requires published project with some traction)
+- Set up Open Collective as a secondary funding channel
+- Register on Tidelift (pays maintainers when enterprise subscribers use the tool)
+- Add Polar.sh for bounty-style funding on specific features
+
+**Phase 3 (Growth):**
+- Pursue corporate sponsors directly — compliance-focused companies (law firms, GRC platforms, cloud providers) are natural sponsors for a compliance tool
+- Consider a "Codepliant for Teams" premium tier (not open-core, but hosted/managed service) as a revenue complement to sponsorships
+- Apply to foundation grants (NLnet, Sovereign Tech Fund, GitHub Accelerator) for specific feature development
+
+**Revenue expectations (realistic):**
+- Year 1: $0-2,000 (mostly individual supporters, project building credibility)
+- Year 2: $5,000-15,000 (if 500+ GitHub stars and corporate adoption begins)
+- Year 3+: $20,000-50,000 (if Codepliant becomes a standard compliance tool, with corporate sponsors)
+
+Sponsorship alone will not sustain full-time development. Most successful open-source projects combine sponsorships with consulting, managed services, or foundation grants. For Codepliant, the compliance consulting angle is particularly strong — companies that need compliance documents also need compliance expertise.
+
 ## Development Log
 
 **2026-03-17 — Comprehensive `codepliant health` command**
@@ -2748,6 +2844,27 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Internal linking audit and improvement
+
+- **Docs page**: Added "Compliance Frameworks" section linking to all 5 compliance pages (GDPR, HIPAA, SOC 2, AI Governance, Data Privacy)
+- **Docs page**: Added "Guides & Tutorials" section linking to all 7 blog posts
+- **GDPR compliance**: Added links to AI Governance, blog/gdpr-for-developers, blog/privacy-policy-for-saas
+- **HIPAA compliance**: Replaced terms-of-service-generator link with blog/hipaa-for-developers (more relevant)
+- **SOC 2 compliance**: Replaced terms-of-service-generator link with blog/soc2-for-startups (more relevant)
+- **AI Governance**: Replaced compare link with HIPAA compliance (more relevant cross-framework link)
+- **Data Privacy Hub**: Added SOC 2 Compliance and AI Governance links to related pages
+- **blog/gdpr-for-developers**: Added blog/generate-privacy-policy-from-code, blog/soc2-for-startups, blog/hipaa-for-developers
+- **blog/soc2-for-startups**: Added blog/hipaa-for-developers, blog/privacy-policy-for-saas
+- **blog/privacy-policy-for-saas**: Added blog/generate-privacy-policy-from-code, blog/hipaa-for-developers, blog/soc2-for-startups
+- **blog/eu-ai-act-deadline**: Added blog/soc2-for-startups, blog/privacy-policy-for-saas (replaced compare link)
+- **blog/colorado-ai-act**: Added blog/soc2-for-startups
+- **blog/generate-privacy-policy-from-code**: Added "Related reading" section with 4 blog links (gdpr, privacy-policy-for-saas, soc2, hipaa)
+- **blog/hipaa-for-developers**: Added blog/privacy-policy-for-saas, blog/generate-privacy-policy-from-code
+- All compliance pages now link to 3+ other compliance pages
+- All blog posts now link to 3+ other blog posts
+- Docs page now links to all compliance pages and all blog posts
+- `next build` passes cleanly
 
 ### 2026-03-17 — New blog post: HIPAA for SaaS Developers
 
@@ -3749,6 +3866,60 @@ All 20 pages load well under 2 seconds (all under 2ms). PASS.
 - `src/app/docs/page.tsx` — docs 120/121+ -> 122+, ecosystems 12 -> 13
 - `src/app/blog/generate-privacy-policy-from-code/page.tsx` — ecosystems 12 -> 13
 
+### Iteration 19 — 2026-03-17 — Final pre-launch checklist
+
+**Test scope**: All 23 pages at `http://localhost:5001`, covering the 8-point pre-launch checklist: HTTP status, console errors, mobile responsiveness, link integrity, sitemap accuracy, OG images, placeholder text, and performance.
+
+**Pages audited (23)**: `/`, `/pricing`, `/about`, `/docs`, `/compare`, `/changelog`, `/gdpr-compliance`, `/soc2-compliance`, `/hipaa-compliance`, `/ai-governance`, `/data-privacy`, `/blog`, `/blog/eu-ai-act-deadline`, `/blog/gdpr-for-developers`, `/blog/privacy-policy-for-saas`, `/blog/colorado-ai-act`, `/blog/hipaa-for-developers`, `/blog/soc2-for-startups`, `/blog/generate-privacy-policy-from-code`, `/ai-disclosure-generator`, `/cookie-policy-generator`, `/privacy-policy-generator`, `/terms-of-service-generator`
+
+**Results: All 8 checks pass after fixes.**
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Every page returns 200 | 23/23 PASS |
+| 2 | No console errors (all JS/CSS/font assets load) | 9/9 assets HTTP 200 PASS |
+| 3 | Mobile responsive (viewport meta on all pages) | 23/23 PASS |
+| 4 | All links work (no 404s, no dead hrefs) | 25 unique internal links, all HTTP 200 PASS |
+| 5 | Sitemap matches actual pages | 23 sitemap URLs = 23 page files PASS |
+| 6 | All OG images render | 23/23 og:image returns HTTP 200 PASS |
+| 7 | No placeholder text anywhere | No lorem ipsum, TODO, FIXME, or placeholder content PASS |
+| 8 | Performance (no page > 3s) | All pages < 3ms PASS |
+
+**Bugs found and fixed:**
+
+1. **`/blog/hipaa-for-developers` returning HTTP 404** — The page file exists at `src/app/blog/hipaa-for-developers/page.tsx` and builds successfully, but the running server was using a stale `.next` cache that did not include this page. The build output existed in `.next/server/app/blog/hipaa-for-developers/` but the server returned the 404 error page instead.
+   - **Fix**: Rebuilt via `npx next build` and restarted the server. Page now returns HTTP 200 with full content (44KB HTML).
+
+2. **Missing OG image for `/blog/hipaa-for-developers`** — All 6 other blog posts had an `opengraph-image.tsx` file generating dynamic OG images via `next/og`. The HIPAA blog post (added in iteration 18) was missing this file, causing it to fall back to the root layout's generic OG image instead of a blog-specific one.
+   - **Fix**: Created `src/app/blog/hipaa-for-developers/opengraph-image.tsx` using the same `BlogOgLayout` component as the other blog posts, with title "HIPAA for SaaS Developers: What You Actually Need to Know", category "HIPAA", date "Mar 17, 2026".
+
+3. **Stale JS chunk returning HTTP 400 on all 23 pages** — The shared JS chunk `/_next/static/chunks/4bd1b696-f785427dddbba9fb.js` returned HTTP 400 from the running server because the server process was started from a previous build. The current build generated the same chunk filename but the running server's in-memory cache was stale.
+   - **Fix**: Full rebuild and server restart resolved the issue. All 6 JS chunks, 1 CSS file, and 2 font files now return HTTP 200.
+
+4. **Stale test count across 4 files** — PROGRESS.md reports 2,759 tests passing. Homepage showed "2,523" in two places (trust signals and social proof stats), about page showed "2,523", and changelog showed "763 to 2,523 tests (231% increase)".
+   - **Fix**: Updated all to "2,759" in `src/app/page.tsx` (2 occurrences), `src/app/about/page.tsx` (1), `src/app/changelog/page.tsx` (1, now "763 to 2,759 tests (262% increase)").
+
+**Checks that passed without issues:**
+
+- **Sitemap completeness**: 23 URLs in sitemap.xml match exactly the 23 page.tsx files. Homepage included as base URL.
+- **robots.txt**: Contains `User-Agent: *`, `Allow: /`, `Sitemap: https://codepliant.dev/sitemap.xml`.
+- **Document types**: "122+" consistent across all pages.
+- **Ecosystems**: "13" consistent across all pages.
+- **Pricing**: $19/$49 consistent across all pages.
+- **Placeholder text scan**: No lorem ipsum, TODO, FIXME, `[Your Company]`, or `href="#"` found. "null" appears only in `/dev/null` within code examples (blog posts).
+- **Viewport meta**: All 23 pages include `width=device-width, initial-scale=1`.
+- **Fonts**: 2 woff2 files preloaded, both return HTTP 200.
+
+**Build verification:** `npx next build` passes cleanly, 23 static pages + dynamic OG image routes generated. Server running on port 5001.
+
+**Files created (1):**
+- `src/app/blog/hipaa-for-developers/opengraph-image.tsx`
+
+**Files modified (4):**
+- `src/app/page.tsx` — tests 2,523 -> 2,759 (2 occurrences)
+- `src/app/about/page.tsx` — tests 2,523 -> 2,759
+- `src/app/changelog/page.tsx` — tests 2,523 -> 2,759, percentage 231% -> 262%
+
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
 - **Tests**: 1166/1166 passing (was 1059, added 107 new tests)
@@ -4692,3 +4863,37 @@ Added `codepliant completions` command that outputs shell completion scripts for
    - **Fix**: `rm -rf .next && npx next build && npx next start -p 5001`
 
 **Build verification:** `next build` passes cleanly, all static pages and 12 dynamic OG image routes generated.
+
+### Iteration 19 — Favicon and Branding Files
+
+**Added files:**
+
+1. **`src/app/icon.tsx`** — Dynamic favicon (32x32) using Next.js `ImageResponse`. Renders a green shield with checkmark on a dark background (`#28241e`), matching the CLI logo concept. Uses brand colors from `og-utils.tsx` (shield fill `#d4eae6`, stroke `#1a7a6d`). Served at `/icon`.
+
+2. **`src/app/apple-icon.tsx`** — Apple touch icon (180x180) using the same shield design, scaled up with a larger border radius. Served at `/apple-icon`.
+
+3. **`src/app/manifest.ts`** — PWA web manifest with app name, description, `standalone` display mode, brand `theme_color` (`#1a7a6d`), warm `background_color` (`#faf8f5`), and icon references. Served at `/manifest.webmanifest`.
+
+**Build verification:** `next build` passes cleanly — 29 static pages, 14 dynamic routes (including `/icon`, `/apple-icon`, `/manifest.webmanifest`).
+
+**2026-03-17 — Website Disclaimer generator (Iteration 19)**
+- Created `src/generator/disclaimer.ts` — generates a DISCLAIMER.md covering all standard website disclaimer sections
+  - General Information Disclaimer, Professional Advice Disclaimer (legal, financial, medical, technical), No Warranties, External Links Disclaimer, Errors and Omissions Disclaimer, Fair Use Disclaimer, Changes, Contact Information
+  - Conditional AI Disclaimer section when AI services detected (covers accuracy, non-determinism, independent verification)
+  - Conditional Payment Disclaimer section when payment services detected (covers third-party processors, refunds, chargebacks)
+  - Uses GeneratorContext for company name, email, website; always generated (every website needs one)
+- Created `src/generator/disclaimer.test.ts` with 21 tests covering all sections, conditional logic, section numbering, context values, and placeholders
+- Registered in `src/generator/index.ts`: import, DOCUMENT_CATEGORIES (legal), USER_FACING_DOCS, and generator call after EULA
+- Inspired by Termly's Disclaimer generator identified in iteration 1 research as a quick win
+- Build verified: `npx tsc` passes cleanly, all 21 new tests pass
+
+### Iteration 19 — Generator Tests (penetration-test-scope, data-deletion-procedures, training-record)
+
+- **Build**: pass
+- **Tests**: 2759/2759 passing (was 2605, added 133 new tests across 3 files + 21 from disclaimer)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/penetration-test-scope.test.ts` (51 tests): null returns (no services, insufficient data processors, non-processors), trigger conditions (auth/payment/ai/monitoring categories, 3+ data processors), context values (companyName, website, securityEmail fallback to contactEmail, placeholders), executive summary with service counts and category breakdown, risk assessment factors (payment/PCI, auth, AI, storage, 5+ third-party), web application testing section, conditional auth section (clerk/supabase JWT checks, auth flow checklist), API endpoint section numbering (2.2 vs 2.3), conditional payment/AI/storage sections, third-party integration assessment (database exclusion, security considerations mapping), infrastructure testing (database/monitoring rows), out of scope, methodology, testing environment, deliverables, disclaimer
+  - `src/generator/data-deletion-procedures.test.ts` (41 tests): null return (empty services), basic generation, context values (companyName, contactEmail, dpoName, dpoEmail, fallback), GDPR Art. 17 header, purpose/legal basis sections, pre-deletion checklist with DPO notification, per-service procedures (Stripe/OpenAI/Sentry/PostHog/Clerk/Supabase/SendGrid known services with API endpoints, admin steps, retention exceptions), generic deletion steps for unknown services, data collected display, category labels (AI/monitoring/email/social capitalization), internal database SQL section, verification table, Art. 17(3) exceptions, backup handling, escalation with DPO details, multiple services across categories, sequential section numbering
+  - `src/generator/training-record.test.ts` (40 tests): null return (empty services), basic generation, context values (companyName, contactEmail, dpoName, dpoEmail, fallback), GDPR Art. 39(1)(b) header, purpose section, training schedule (standard rows, conditional AI/PCI DSS rows), core topics (data protection basics, breach procedures, DSAR handling), conditional role-specific topics (AI/payment/analytics/auth — presence and absence), all topics when all categories present, sign-off sheet, annual completion tracker with current year, training materials, assessment and certification with DPO details, non-compliance section with DPO email, disclaimer footer
+- **Generator test coverage**: 45/132 generators now have tests (was 42)

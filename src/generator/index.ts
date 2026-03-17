@@ -152,6 +152,7 @@ import { generateComplianceEvidenceLog } from "./compliance-evidence-log.js";
 import { generatePrivacyImpactScreening } from "./privacy-impact-screening.js";
 import { generateImpressum } from "./impressum.js";
 import { generateEULA } from "./eula.js";
+import { generateDisclaimer } from "./disclaimer.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -185,6 +186,7 @@ const DOCUMENT_CATEGORIES: Record<string, string> = {
   "LICENSE_COMPLIANCE.md": "legal",
   "IMPRESSUM.md": "legal",
   "END_USER_LICENSE_AGREEMENT.md": "legal",
+  "DISCLAIMER.md": "legal",
 
   // AI — EU AI Act and AI governance
   "AI_DISCLOSURE.md": "ai",
@@ -376,6 +378,7 @@ const USER_FACING_DOCS = new Set([
   "API_TERMS_OF_USE.md",
   "IMPRESSUM.md",
   "END_USER_LICENSE_AGREEMENT.md",
+  "DISCLAIMER.md",
 ]);
 
 function configToContext(config?: CodepliantConfig): GeneratorContext {
@@ -1745,6 +1748,13 @@ export function generateDocuments(
     name: "End User License Agreement",
     filename: "END_USER_LICENSE_AGREEMENT.md",
     content: generateEULA(docScan, ctx),
+  });
+
+  // Disclaimer — always generated, every website needs one
+  docs.push({
+    name: "Disclaimer",
+    filename: "DISCLAIMER.md",
+    content: generateDisclaimer(docScan, ctx),
   });
 
   // Impressum — German legal disclosure required by Section 5 DDG (formerly TMG)
