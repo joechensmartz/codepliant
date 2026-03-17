@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 1806 passing — 100% scanner coverage
+- **Tests**: 1946 passing — 100% scanner coverage
 - **Repos tested**: 1200+
 - **Document types**: 121+
-- **Ecosystems**: 12 (added Swift/iOS)
+- **Ecosystems**: 12
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 11 complete (2026-03-17)
-- **Last run**: v1.1.0 prep, 132 tests, AI governance page, privacy policy generator, VHS demo research, 9 QA fixes
+- **Iteration**: 12 complete (2026-03-17)
+- **Last run**: GitHub Action v1, 140 tests, ToS/Cookie generator pages, awesome-list strategy, footer navigation fix
 
 ## Priority Backlog
 
@@ -1603,6 +1603,170 @@ This solves Issue #3 (demo GIF) with a reproducible, version-controlled approach
 - [asciinema](https://github.com/asciinema/asciinema)
 - [terminalizer](https://github.com/faressoft/terminalizer)
 
+### Iteration 12 — 2026-03-16
+
+#### Awesome-List Submission Strategy
+
+**Goal:** Get Codepliant listed on high-visibility curated awesome lists to drive organic discovery and establish credibility.
+
+---
+
+**1. getprobo/awesome-compliance (63 stars)**
+
+- **Repo:** https://github.com/getprobo/awesome-compliance
+- **Best category:** Tools & Software > Compliance automation
+- **Entry format:** `[Name](URL) - Description`
+- **Requirements:** Follow sindresorhus/awesome guidelines; one PR per suggestion; search for duplicates first; descriptive PR title and commit message; check spelling/grammar.
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) - Open-source CLI that scans codebases and generates compliance documents (Privacy Policy, Terms of Service, Cookie Policy, AI Disclosure) based on actual code analysis. Supports 12 ecosystems and 121+ document types.
+  ```
+- **Draft PR title:** `Add Codepliant — CLI compliance document generator from code analysis`
+- **Draft PR description:**
+  ```
+  Codepliant is an open-source Node.js CLI that scans source code to detect services, data collection patterns, and third-party integrations, then generates tailored compliance documents. Unlike traditional policy generators, it bases documents on what the code actually does rather than questionnaire answers.
+
+  - Zero network calls — runs entirely locally
+  - 12 ecosystems (Node.js, Python, Go, Rust, Ruby, PHP, Java, .NET, Terraform, Docker, Elixir, Swift)
+  - 121+ document types including GDPR, SOC 2, AI Act, HIPAA
+  - MIT licensed
+  ```
+- **Fit assessment:** Excellent. This is a compliance-specific list and Codepliant is a compliance automation tool. Straightforward submission.
+
+---
+
+**2. pluja/awesome-privacy (13k+ stars)**
+
+- **Repo:** https://github.com/pluja/awesome-privacy
+- **Best category:** Developer Tools (or potentially a new "Compliance & Legal" category)
+- **Entry format:** Tool name with brief description under the "Instead use" section of a category
+- **Requirements:** Submit PR; contributing guide exists at `/misc/Contributing.md` (or via Discussions). The list focuses on privacy-respecting alternatives to proprietary services. 154+ PRs have been merged historically.
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) - Open-source CLI that generates privacy policies and compliance documents by scanning your actual codebase. Runs locally with zero network calls.
+  ```
+- **Draft PR title:** `Add Codepliant to Developer Tools`
+- **Draft PR description:**
+  ```
+  Codepliant is an open-source, privacy-respecting CLI tool that generates privacy policies, cookie policies, and other compliance documents by scanning source code locally. It makes no network calls and collects no data — all analysis runs on the user's machine.
+
+  This fits the awesome-privacy ethos: it helps developers create accurate privacy documentation without relying on SaaS policy generators that may track usage or require account creation.
+  ```
+- **Fit assessment:** Good but not perfect. This list focuses on privacy-respecting alternatives to proprietary services. Codepliant fits as a privacy-first alternative to SaaS compliance generators (Termly, Iubenda), but the list doesn't have a dedicated compliance/legal category yet. May need to propose a new section or fit under Developer Tools.
+
+---
+
+**3. sindresorhus/awesome-nodejs (58k+ stars)**
+
+- **Repo:** https://github.com/sindresorhus/awesome-nodejs
+- **Best category:** Command-line apps (or Documentation)
+- **Entry format:** `[package](github-link) - Description.`
+- **Requirements (strict):**
+  - Package must be older than 30 days
+  - Minimum 100 GitHub stars
+  - Must be broadly useful, not niche
+  - Link to GitHub repo, not npm or website
+  - Description: short, no marketing language, start with capital, end with period, never start with "A" or "An"
+  - One PR per suggestion, add to bottom of category
+  - Explain why it's better if similar projects exist
+  - **IMPORTANT: Submissions are currently paused due to spam ("PAUSED UNTIL SEPTEMBER")** — need to check if this has been lifted before submitting
+- **Draft list entry:**
+  ```
+  - [codepliant](https://github.com/codepliant/codepliant) - Scan codebases and generate compliance documents based on detected services and data patterns.
+  ```
+- **Draft PR title:** `Add codepliant - compliance document generator from code analysis`
+- **Draft PR description:**
+  ```
+  [codepliant](https://github.com/codepliant/codepliant) scans source code to detect third-party services, data collection patterns, and infrastructure, then generates tailored compliance documents (privacy policies, terms of service, cookie policies). Supports 12 ecosystems with zero runtime dependencies.
+
+  This is unique because existing policy generators use questionnaires — codepliant analyzes what the code actually does.
+  ```
+- **Fit assessment:** High visibility but strict requirements. Need 100+ GitHub stars first. Submissions may be paused. The "Command-line apps" section is the natural fit. The bar for CLI tools is especially high; the contributing guide suggests also considering awesome-cli-apps as an alternative.
+- **Blocker:** Must reach 100+ GitHub stars before submitting.
+
+---
+
+**4. agamm/awesome-developer-first (1.6k stars)**
+
+- **Repo:** https://github.com/agamm/awesome-developer-first
+- **Best category:** Infrastructure as Code (or a Compliance/Legal category)
+- **Entry format:** Product name (hyperlinked) with brief description, plus GitHub stars badge for open-source projects
+- **Requirements (strict):**
+  - Must be "marketed for developers" with code examples on front page
+  - Must meet a milestone: 1K GitHub stars, 1K followers, Product Hunt award, or SOC-2 compliance
+  - **Only paid tools and services accepted** — free/open-source-only tools may not qualify
+  - Must list competitors and explain differentiation
+  - Entries sorted alphabetically
+  - New categories need multiple entries
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) ![GitHub stars](https://img.shields.io/github/stars/codepliant/codepliant) - CLI that scans codebases and generates compliance documents from actual code analysis.
+  ```
+- **Fit assessment:** Poor fit currently. This list targets paid developer-first SaaS products. Codepliant is free/open-source with no paid tier. Also requires 1K+ stars. Revisit if/when Codepliant adds a paid tier or reaches 1K stars.
+- **Blocker:** Requires paid offering and 1K+ GitHub stars.
+
+---
+
+#### Additional Awesome Lists Worth Targeting
+
+**5. bakke92/awesome-gdpr (248 stars)**
+- **Repo:** https://github.com/bakke92/awesome-gdpr
+- **Best category:** Tools
+- **Entry format:** `[Resource Name](URL) - Short description.`
+- **Requirements:** CC0 license, standard PR process, CONTRIBUTING.md exists
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) - Open-source CLI that scans codebases and generates GDPR-compliant privacy policies based on detected data processing activities.
+  ```
+- **Fit assessment:** Excellent. The "Tools" section is a natural home. GDPR is Codepliant's strongest compliance vertical.
+
+**6. devtoolsd/awesome-devtools (635 stars)**
+- **Repo:** https://github.com/devtoolsd/awesome-devtools
+- **Best category:** CLIs & Terminal Tools
+- **Entry format:** `[Tool Name](URL) - Brief description.`
+- **Requirements:** Informal — "PRs welcome!" No star thresholds.
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) - Scan codebases and generate compliance documents (privacy policies, terms of service) from detected services and data patterns.
+  ```
+- **Fit assessment:** Good. Low barrier to entry, reasonable visibility.
+
+**7. theopenlane/awesome-compliance (24 stars)**
+- **Repo:** https://github.com/theopenlane/awesome-compliance
+- **Best category:** Tools/Libraries
+- **Entry format:** Standard awesome list format
+- **Draft list entry:**
+  ```
+  - [Codepliant](https://github.com/codepliant/codepliant) - Open-source CLI that generates compliance documents by scanning source code for services, data patterns, and infrastructure.
+  ```
+- **Fit assessment:** Small audience but highly relevant. Easy submission.
+
+**8. Other lists to investigate later:**
+- awesome-cli-apps (sindresorhus) — recommended by awesome-nodejs contributing guide for CLI tools
+- awesome-security (sbilly) — if it has a compliance/tools section
+- awesome-typescript — if it accepts CLI tools built with TypeScript
+- awesome-npm — for npm package discovery
+
+---
+
+#### Submission Priority and Timeline
+
+| Priority | List | Stars | Blocker | Action |
+|----------|------|-------|---------|--------|
+| 1 | getprobo/awesome-compliance | 63 | None | Submit now |
+| 2 | bakke92/awesome-gdpr | 248 | None | Submit now |
+| 3 | devtoolsd/awesome-devtools | 635 | None | Submit now |
+| 4 | theopenlane/awesome-compliance | 24 | None | Submit now |
+| 5 | pluja/awesome-privacy | 13k+ | Category fit unclear | Submit after researching category options |
+| 6 | sindresorhus/awesome-nodejs | 58k+ | 100+ stars + submissions paused | Submit after reaching 100 stars and pause lifted |
+| 7 | agamm/awesome-developer-first | 1.6k | 1K stars + paid tier needed | Not viable currently |
+
+**Immediate actions (no blockers):** Submit PRs to awesome-compliance (getprobo), awesome-gdpr, awesome-devtools, awesome-compliance (theopenlane) — these four have no star requirements and Codepliant is a direct fit.
+
+**Near-term (after traction):** Submit to awesome-privacy once 50+ stars demonstrate community validation, and to awesome-nodejs once 100+ stars are reached and submissions reopen.
+
+**Key insight:** The smaller, niche lists (awesome-compliance, awesome-gdpr) are more likely to accept the PR quickly and provide targeted traffic from users actively seeking compliance tools. The large lists (awesome-nodejs, awesome-privacy) provide volume but have higher bars and longer review cycles.
+
 ## Development Log
 
 **2026-03-16 — Swift/iOS ecosystem support (Issue #2)**
@@ -1782,6 +1946,17 @@ This solves Issue #3 (demo GIF) with a reproducible, version-controlled approach
   - `src/generator/compliance-roadmap.test.ts` (43 tests): always returns string (never null) even with no services, company name/default placeholder, generated date, service count, four-phase overview table, Phase 1 privacy/terms (GDPR Art. 13), conditional cookie compliance (presence/absence with analytics), conditional AI compliance (EU AI Act Art. 50/August 2026/AI_MODEL_CARD.md, presence/absence), conditional payment compliance (REFUND_POLICY.md/14-day cooling-off, presence/absence), Week 1 checklist with conditional rows, Phase 2 security/IR (SECURITY.md/INCIDENT_RESPONSE_PLAN.md/72-hour breach notification), access/change control (ACCESS_CONTROL_POLICY.md/CHANGE_MANAGEMENT_POLICY.md), data protection (DSAR/DATA_RETENTION_POLICY.md), website context for security email, Phase 3 advanced compliance, conditional SOC 2 preparation (>=5 services, SOC2_READINESS_CHECKLIST.md/ISO_27001_CHECKLIST.md), data processing agreements (DPA/PIA/TIA/SCC/Schrems II), AI-specific PIA note (GDPR Art. 35), vendor management, Phase 4 ongoing monitoring (CI/CD/pre-commit/periodic scans), review cadence table, trigger-based updates, progress tracker, regulatory deadlines (GDPR always, CCPA conditional on jurisdictions, EU AI Act conditional on AI), Codepliant footer with version and service count, legal disclaimer, all conditional sections together, sub-processor count reference
 - **Generator modules now with tests** (20 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap
 - **Generator modules still missing tests**: 111 files (was 114)
+
+### Iteration 12 — 2026-03-16
+- **Build**: pass
+- **Tests**: 1946/1946 passing (was 1806, added 140 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/sla.test.ts` (37 tests): null return for no monitoring/empty/non-monitoring services, generation with monitoring service, project name, date format, context company name/email/securityEmail/securityEmail fallback to contactEmail/placeholder values, monitoring service names in overview (single/multiple joined), Overview/Definitions/Service Level Objectives sections, uptime tiers (Standard 99.5%/Professional 99.9%/Enterprise 99.95%), performance metrics table (API response/page load/error rate), Incident Classification (P1-P4 severity), response times (15 min/4 hours), Communication (status page/incident/maintenance), Service Credits (schedule/request process/limitations), Exclusions (Force Majeure/free tier), Support channels table (email/chat/phone), Reporting and Transparency, SLA Modifications (30 days notice), Contact section, conditional database performance row (Database Query Time/Data Durability 99.999999999% presence/absence), conditional auth example in P2 severity (Authentication failing presence/absence), conditional payment example in P2 (Payment processing errors presence/absence), all conditional sections together, sequential section numbering (1-11), Codepliant disclaimer with project name
+  - `src/generator/iso27001.test.ts` (47 tests): null return for no services/fewer than 5/exactly 4, generation with exactly 5/more than 5 services, project name, date format, context company name/email/placeholder values, Overview with service count (5/7), applicable Annex A domains, disclaimer about certification, service-to-control mapping table with category labels (Error Monitoring/Database/Authentication/Payment Processing/Analytics), Annex A Controls Checklist header, A.5 Organizational Controls (policies/roles/acceptable use/classification/incident management with incident response plan/business continuity with RTO-RPO/legal requirements), conditional A.5.34 Privacy/PII (presence with analytics/AI, absence without), conditional A.5.19 Supplier Relationships (presence with payment, absence without), A.6 People Controls (screening/terms/awareness/disciplinary/termination), A.7 Physical Controls (perimeters/entry/storage media), A.8 Technological Controls (endpoints/secure auth/malware/vulnerabilities/configuration/secure SDLC), conditional A.8.2 auth-specific privileged access (MFA/JIT vs generic), conditional A.8.10 Information Deletion (database+storage specific vs generic), conditional monitoring logging alerts (Configure alerting in presence/absence), conditional database/storage encryption at rest, conditional A.8.28 AI-Specific Secure Coding (guardrails/bias/absence), Implementation Roadmap (Gap Analysis through Stage 2 Audit), Statement of Applicability with all domains marked Yes, Next Steps (ISMS owner/scope/risk assessment/certification body), Codepliant disclaimer, all conditional sections together
+  - `src/generator/consent-guide.test.ts` (56 tests): null return for no analytics-advertising/empty/non-analytics services, generation with analytics/advertising service, project name, date format, context company name/email/placeholder values, Legal Basis Classification (GDPR Article 6), Consent Required with analytics/advertising/AI/social services, Legitimate Interest with monitoring/email services (Document in LIA/provide opt-out), no legitimate interest message, Contractual Necessity with auth/payment/database (Essential for service delivery), no contractual message, Cookie Consent Banner Requirements (block non-essential/granular choices/reject-all/dark patterns/proof of consent), Strictly Necessary category with contractual services, conditional Analytics/Advertising/AI Services/Social category rows (presence/absence), cookie banner HTML example, Global Privacy Control (navigator.globalPrivacyControl/CCPA), PostHog consent pattern (posthog/posthog-js names/opt_out_capturing_by_default), Google Analytics Consent Mode v2 (@google-analytics/data/gtag/analytics_storage/ad_storage), PostHog/GA pattern exclusion, generic pattern for other analytics (mixpanel/loadServiceAfterConsent), generic pattern exclusion for PostHog+GA only, Consent Storage Recommendations (localStorage/first-party cookie/server-side), Consent Record Schema (userId/timestamp/gpcDetected), retention guidance (3 years/GDPR Article 7(1)), Consent Withdrawal Process (GDPR Article 7(3)/withdrawConsent), conditional PostHog/GA cleanup in withdrawal (presence/absence), Technical Implementation Checklist (banner before scripts/GPC/Reject All), per-service checklist for consent-required services, per-service checklist for legitimate interest, AI/advertising category mapping, Recommended CMPs (Cookiebot/Klaro/CookieConsent), Contact section, Codepliant disclaimer, sequential section numbering (1-9), comprehensive full service set combination
+- **Generator modules now with tests** (23 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide
+- **Generator modules still missing tests**: 108 files (was 111)
 
 ## Website Updates
 
@@ -2876,3 +3051,116 @@ Sources:
    - **Fix** (`src/app/changelog/page.tsx`): Added Swift/iOS entry to v1.1.0 changes and updated summary.
 
 **Build verification:** `npx next build` passes cleanly, all pages generated as static content. Server restarted with `npx next start -p 5001`, all 20 routes verified HTTP 200.
+
+### Iteration 12 — 2026-03-16 — Link and navigation completeness audit
+
+**Test scope**: Full site crawl from homepage across all 20 pages at `http://localhost:5001`. Focus: sitemap verification, navigation coverage, orphan page detection, blog index link completeness.
+
+**Sitemap verification (20 URLs):** All 20 URLs in `sitemap.xml` return HTTP 200. PASS.
+
+**Blog index links to all 4 posts:** PASS.
+- `/blog/eu-ai-act-deadline`
+- `/blog/privacy-policy-for-saas`
+- `/blog/gdpr-for-developers`
+- `/blog/colorado-ai-act`
+
+**Orphan page check:** 0 orphan pages. Every sitemap page is linked from at least one other page. PASS.
+
+**Navigation coverage audit:**
+- Header nav links: `/docs`, `/pricing`, `/changelog`, `/blog`, `/about`, plus hamburger menu items. PASS.
+- Footer nav: 4 columns (Product, Resources, Compliance, Company).
+
+**Bug found and fixed:**
+
+1. **4 pages missing from footer navigation** — `/cookie-policy-generator`, `/soc2-compliance`, `/hipaa-compliance`, and `/ai-governance` were not linked from the global footer. While these pages were cross-linked from related content pages (not orphans), they were not discoverable from the site-wide footer navigation, reducing SEO link equity and user discoverability.
+   - **Fix** (`src/app/layout.tsx`): Renamed footer "Legal" column to "Compliance" and expanded it from 4 links to 9 links. Added: Cookie Policy (`/cookie-policy-generator`), AI Disclosure (`/ai-disclosure-generator`), SOC 2 (`/soc2-compliance`), HIPAA (`/hipaa-compliance`), AI Governance (`/ai-governance`). All 20 sitemap pages are now reachable from the global navigation (header or footer), excluding individual blog posts which are properly linked from the `/blog` index.
+
+**Post-fix verification:**
+- All 20 sitemap URLs: HTTP 200. PASS.
+- All non-blog sitemap pages present in footer: PASS.
+- Blog index links to all 4 posts: PASS.
+- 0 orphan pages: PASS.
+- `npx next build` passes cleanly, server restarted on port 5001.
+
+### Iteration 12 — 2026-03-16
+
+**GitHub Action improvements** (`action.yml`, `action/entrypoint.sh`, `README.md`):
+
+1. **Added `format` input** — Supports `markdown`, `html`, `pdf`, `json` output formats, passed through to `npx codepliant go --format`.
+2. **Renamed outputs for consistency** — `services-found` -> `services-count`, `documents-needed` -> `documents-count` to match standard naming conventions.
+3. **Changed `comment-on-pr` default to `true`** — PR comment is the primary value of the GitHub Action; opt-out is more useful than opt-in.
+4. **Action now generates documents** — Runs `npx codepliant go` (not just `scan`) so the action produces compliance docs in the output directory, making it useful for CI/CD pipelines that commit or artifact the results.
+5. **Updated PR comment footer** — Links to `joechensmartz/codepliant` instead of `codepliant/codepliant`.
+6. **Expanded docFileMap** — Added `Refund Policy` and `Security Policy` to the compliance score calculation.
+7. **Updated README CI/CD section** — Added `format` and `comment-on-pr` inputs to the example, documented action outputs.
+
+**Build verification:** `npx tsc` passes cleanly.
+
+### Iteration 12 — 2026-03-16 — Cookie Policy Generator page redesign
+
+**Cookie Policy Generator page** (`src/app/cookie-policy-generator/page.tsx`):
+
+The page was a minimal stub with a detection grid and a small CTA. Expanded it to a full content page matching the depth of the privacy policy generator page.
+
+**New sections added:**
+
+1. **What a cookie policy must contain** — 8 requirements derived from the ePrivacy Directive (Article 5(3)) and GDPR: cookie inventory, purpose per cookie, categories, third-party cookies, user controls, consent mechanism, data transfers, and policy updates.
+
+2. **The four types of cookies** — Essential, analytics, marketing, and preferences. Each type includes a consent requirement badge (green "No consent required" for essential, amber "Consent required" for the rest), a description, and specific services/cookies Codepliant detects in that category.
+
+3. **How Codepliant detects cookie-setting services** — 5-step process: scan dependencies, scan source code imports, scan environment variables, categorize and map cookies, generate the policy. Uses the numbered-step design pattern from the privacy policy generator page.
+
+4. **Cookie-setting services Codepliant detects** — Expanded from 8 items to 16, now including specific cookie names where applicable (e.g., "Google Analytics (_ga, _gid)", "Stripe (__stripe_mid, __stripe_sid)", "Facebook Pixel (_fbp)").
+
+5. **Before/after comparison** — Generic cookie policy template vs. Codepliant-generated output for a Next.js SaaS app using Google Analytics, Stripe, Clerk, and Facebook Pixel. The Codepliant version names specific cookies, their durations, provider companies, and consent requirements per the ePrivacy Directive.
+
+6. **ePrivacy Directive requirements** — 4-card grid covering prior informed consent, clear information, freely given consent, and easy withdrawal.
+
+7. **FAQ section** — 7 questions with FAQ JSON-LD structured data. Covers ePrivacy Directive basics, cookie vs. privacy policy differences, cookie types, detection methods, essential cookie exemptions, regeneration frequency, and pricing.
+
+8. **Related resources** — Links to privacy policy generator, GDPR compliance, data privacy hub, and terms of service generator.
+
+**SEO improvements:**
+- Added `keywords` meta array targeting "cookie policy generator" and related terms (14 keywords)
+- Added Twitter card metadata
+- Added FAQ JSON-LD (FAQPage schema) for rich snippet eligibility
+- Updated SoftwareApplication JSON-LD with fuller description
+- Added breadcrumb navigation (visual + JSON-LD already existed)
+- Page title updated to "Cookie Policy Generator for Developers | Generate from Code | Codepliant"
+
+**Build verification:** `npx next build` passes cleanly, all pages generated as static content.
+
+### Iteration 12 — 2026-03-16 — Terms of Service Generator page overhaul
+
+**Rewrote the Terms of Service Generator page** (`src/app/terms-of-service-generator/page.tsx`) from a short stub into a comprehensive landing page targeting "terms of service generator for SaaS":
+
+1. **Breadcrumb navigation** — Added `<nav aria-label="Breadcrumb">` with Home / Terms of Service Generator path.
+
+2. **"What a SaaS terms of service must contain" section** (new) — 10 cards covering: service description, account registration, payment terms, acceptable use, intellectual property, limitation of liability, dispute resolution, termination, data handling, and modification/notice. Each card explains why the clause matters for SaaS specifically.
+
+3. **"Key clauses Codepliant generates" section** (new) — Deep dive into 4 critical clauses (limitation of liability, arbitration, intellectual property, termination) explaining why generic templates fail for each and how Codepliant generates specificity based on detected services.
+
+4. **"How Codepliant generates terms of service from code" section** — 4-step process (scan dependencies, detect services, map clauses, generate document) with numbered steps matching privacy policy page pattern.
+
+5. **"Services that trigger ToS clauses" section** — 10 service categories (payments, auth, AI, storage, databases, email, analytics, monitoring, CRM, feature flags) with the specific ToS clauses each detection triggers.
+
+6. **Before/after comparison** — Generic template vs Codepliant-generated for a Next.js SaaS using Stripe, Clerk, OpenAI, and Sentry. Shows concrete differences across payment terms, limitation of liability (with AI disclaimer), intellectual property (with AI output ownership), and termination (with data export and deletion obligations).
+
+7. **"Why generic templates fail for SaaS" section** — 5 cards covering: not reflecting actual product, vague liability clauses, missing AI clauses, one-sided termination, and staleness when stack changes.
+
+8. **CTA section** — `npx codepliant go` with links to GitHub, npm, and docs.
+
+9. **FAQ section** — 8 questions with FAQ JSON-LD structured data: differentiation, SaaS ToS requirements, enforceability, supported languages, pricing, clause selection logic, customization, and update frequency.
+
+10. **Related resources** — Links to Privacy Policy Generator, Cookie Policy Generator, GDPR Compliance Tool, and Privacy Policy for SaaS blog post.
+
+**SEO improvements:**
+- Updated meta title to "Terms of Service Generator for SaaS | Generate from Code | Codepliant"
+- Added 12 SEO keywords targeting "terms of service generator for SaaS" and related queries
+- Added Twitter card meta tags
+- Added FAQ JSON-LD structured data (8 entries)
+- Updated SoftwareApplication JSON-LD with detailed description
+- Retained BreadcrumbList JSON-LD
+
+**Build verification:**
+- `next build` passes cleanly, all 25 static pages generated

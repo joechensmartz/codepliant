@@ -185,13 +185,17 @@ Create `.codepliantrc.json` in your project root:
 }
 ```
 
-### CI/CD
+### CI/CD (GitHub Action)
 
 ```yaml
 - uses: joechensmartz/codepliant@v1
   with:
-    fail-on-missing: true
+    fail-on-missing: true    # Fail if required docs are missing
+    comment-on-pr: true      # Post compliance summary on PRs
+    format: markdown          # markdown, html, pdf, json
 ```
+
+Outputs `services-count`, `documents-count`, and `compliance-score` for use in subsequent steps.
 
 ### MCP Server (Claude Code / Cursor)
 

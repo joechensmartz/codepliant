@@ -18,18 +18,22 @@ inputs:
     description: "Fail the action if required compliance documents are missing"
     required: false
     default: "false"
+  format:
+    description: "Output format for generated documents (markdown, html, pdf, json)"
+    required: false
+    default: "markdown"
   comment-on-pr:
     description: "Post a comment on the pull request with scan results"
     required: false
-    default: "false"
+    default: "true"
 
 outputs:
-  services-found:
+  services-count:
     description: "Number of third-party services detected"
-    value: ${{ steps.scan.outputs.services-found }}
-  documents-needed:
+    value: ${{ steps.scan.outputs.services-count }}
+  documents-count:
     description: "Number of compliance documents needed"
-    value: ${{ steps.scan.outputs.documents-needed }}
+    value: ${{ steps.scan.outputs.documents-count }}
   compliance-score:
     description: "Compliance score (0-100) based on existing documents vs requirements"
     value: ${{ steps.scan.outputs.compliance-score }}
@@ -48,6 +52,7 @@ runs:
         INPUT_PATH: ${{ inputs.path }}
         INPUT_OUTPUT_DIR: ${{ inputs.output-dir }}
         INPUT_FAIL_ON_MISSING: ${{ inputs.fail-on-missing }}
+        INPUT_FORMAT: ${{ inputs.format }}
         INPUT_COMMENT_ON_PR: ${{ inputs.comment-on-pr }}
         GITHUB_TOKEN: ${{ github.token }}
       run: bash ${{ github.action_path }}/action/entrypoint.sh
