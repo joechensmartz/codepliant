@@ -1247,7 +1247,8 @@ ${BOLD()}Output path:${RESET()}    ${outputPath} ${hasOutput ? `${GREEN()}(exist
 ${BOLD()}Available Scanners:${RESET()}
 ${scannerList.map((s) => `  ${CYAN()}•${RESET()} ${s}`).join("\n")}
 
-${BOLD()}Ecosystems:${RESET()}     JS/TS, Python, Go, Ruby, Elixir, PHP, Rust, Java, .NET, Django
+${BOLD()}Services:${RESET()}       ${Object.keys(SERVICE_SIGNATURES).length} detected signatures
+${BOLD()}Ecosystems:${RESET()}     JS/TS, Python, Go, Ruby, Elixir, PHP, Rust, Java, .NET, Dart, Swift, Kotlin (12)
 ${BOLD()}ORM Scanners:${RESET()}   Prisma, Drizzle, Mongoose, TypeORM, Sequelize, Django, SQLAlchemy, GraphQL
 ${BOLD()}Output Formats:${RESET()} Markdown, HTML, PDF, JSON, Notion, Confluence, Wiki, DOCX
 ${BOLD()}Languages:${RESET()}      EN, DE, FR, ES

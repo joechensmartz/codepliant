@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4261 passing — 100% scanner, 81/138 generators (59%)
+- **Tests**: 4344 passing — 100% scanner, 84/138 generators (60.9%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 31 complete (2026-03-17)
-- **Last run**: demo.tape, 147 tests (4261!), Show HN 24h strategy, stats 4114, Issue #3 demo GIF resolved
+- **Iteration**: 32 complete (2026-03-17)
+- **Last run**: info fix, 83 tests, 🎉 60% GENERATOR COVERAGE (84/138), adjacent tools research, stats 4261
 
 ## Priority Backlog
 
@@ -2944,6 +2944,58 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
 - **The Show HN post title matters.** Format: `Show HN: Codepliant – [concise value prop]`. Keep it factual; HN penalizes hype. Example: "Show HN: Codepliant – scan your code and generate privacy policies automatically."
 - **Track metrics in real-time:** GitHub star count (API or repo page), npm download count (`npm info codepliant`), and HN post score/comment count. Record snapshots at 1h, 6h, 12h, 24h, 48h, 7d.
 
+### Iteration 32 — 2026-03-17 — Top 5 Adjacent Open-Source Compliance Tools to Watch in 2026
+
+These are not competitors but adjacent tools that Codepliant could integrate with or learn from.
+
+#### 1. Bearer CLI (github.com/Bearer/bearer)
+
+- **What it does**: Open-source SAST tool that scans source code to detect security vulnerabilities and privacy risks by analyzing data flows. Filters and prioritizes findings by business impact.
+- **Key capabilities**: Detects sensitive data flows (PII, PHI), identifies which components process sensitive data (databases, third-party APIs like OpenAI, Sentry), maps data to compliance frameworks (GDPR, HIPAA, OWASP Top 10).
+- **Language support**: Go, Python, PHP, JavaScript, TypeScript, Ruby, Java.
+- **2026 momentum**: Surpassed 50,000 downloads; acquired by Cycode which now offers Bearer Pro commercially while keeping the CLI open source.
+- **Integration opportunity for Codepliant**: Bearer's data flow analysis could feed into Codepliant's document generation. If Bearer detects that an app sends PII to Stripe and Sentry, Codepliant could auto-populate the privacy policy with those exact data flows. A `codepliant scan --bearer` flag that ingests Bearer's JSON output would be a powerful pipeline.
+
+#### 2. Privado (github.com/Privado-Inc/privado)
+
+- **What it does**: Open-source static analysis tool that discovers personal data flows in code, identifies 110+ personal data elements, and maps them from collection points to sinks (third parties, databases, logs, APIs).
+- **Key capabilities**: Generates Apple Privacy Manifest, Google Play Store Data Safety, and Privacy Nutrition Label reports automatically. Uses YAML-based policy files for privacy guardrails. Runs entirely locally — no code leaves the machine.
+- **Language support**: Java and Python (GA); enterprise version covers all languages; JS/TS support expanding.
+- **Integration opportunity for Codepliant**: Privado's mobile store compliance reports (App Store Privacy Manifest, Play Store Data Safety) are a natural complement to Codepliant's legal document generation. Codepliant could either integrate Privado's data flow findings to enrich generated documents, or add its own mobile store report generators using Privado's approach as a reference. The YAML-based policy model is also worth studying for Codepliant's planned policy-as-code features.
+
+#### 3. Checkov (github.com/bridgecrewio/checkov)
+
+- **What it does**: Open-source infrastructure-as-code (IaC) security scanner by Bridgecrew/Palo Alto Networks. Scans Terraform, CloudFormation, Kubernetes manifests, Helm charts, ARM templates, Serverless frameworks, and Dockerfiles.
+- **Key capabilities**: Ships with 1,000+ built-in policies covering CIS benchmarks, SOC 2, HIPAA, PCI DSS, and GDPR controls. Supports custom policies in Python or YAML. Unified CLI for multi-framework scanning. Graph-based analysis for cross-resource dependency checks.
+- **2026 momentum**: De facto standard for IaC compliance scanning; deeply integrated into Prisma Cloud.
+- **Integration opportunity for Codepliant**: Codepliant already has IaC scanning in its backlog (Issue #6). Rather than building IaC policy checks from scratch, Codepliant could ingest Checkov's JSON output and translate infrastructure findings into compliance document language (e.g., "Your infrastructure uses encrypted S3 buckets and enforces TLS 1.2" in the security practices section of a SOC 2 narrative). A `codepliant scan --checkov-report path/to/checkov.json` flag would bridge IaC compliance and document generation.
+
+#### 4. KICS — Keeping Infrastructure as Code Secure (github.com/Checkmarx/kics)
+
+- **What it does**: Open-source IaC scanner by Checkmarx that detects security vulnerabilities, compliance issues, and misconfigurations early in the development cycle.
+- **Key capabilities**: Supports 22+ platforms (Terraform, CloudFormation, Kubernetes, Docker, Ansible, Helm, OpenAPI 3.0). Ships with 2,400+ Rego-based queries. Severity-based failure thresholds for CI/CD integration via Docker images and GitHub Actions.
+- **2026 momentum**: v2.1.19 released January 2026; 9,700+ commits, 141+ contributors. Used in production by GitLab, Cisco, and Orca Security.
+- **Integration opportunity for Codepliant**: KICS's Rego-based query system is worth studying for Codepliant's policy engine. Rego (from OPA) is becoming the lingua franca for compliance-as-code policies. If Codepliant ever adds configurable compliance rules, adopting Rego syntax would tap into a large existing policy ecosystem. KICS's OpenAPI scanning is also relevant — Codepliant could scan OpenAPI specs to identify what data an API collects and auto-generate privacy disclosures for API-first products.
+
+#### 5. Open Policy Agent / OPA (github.com/open-policy-agent/opa)
+
+- **What it does**: General-purpose policy engine that decouples policy from application logic. Policies are written in Rego, a declarative language. CNCF graduated project.
+- **Key capabilities**: Enforces fine-grained access controls and security policies across cloud stacks. Integrates with Kubernetes (via Gatekeeper), Terraform, CI/CD pipelines, microservices, and API gateways. Used for authorization, admission control, data filtering, and compliance enforcement.
+- **2026 momentum**: Mature CNCF project with massive ecosystem adoption. Styra (commercial OPA) continues to expand enterprise offerings. OPA is the policy engine behind many other tools on this list (KICS uses Rego, Checkov supports OPA policies).
+- **Integration opportunity for Codepliant**: OPA is the most strategic integration target. Codepliant could: (1) Express its compliance rules as Rego policies, making them interoperable with the broader OPA ecosystem; (2) Read existing OPA/Rego policies from a project and translate them into human-readable compliance documentation ("Your project enforces the following access control policies..."); (3) Ship a `codepliant.rego` bundle that organizations can load into OPA to enforce document freshness, required document types, and minimum compliance scores as automated policy gates in CI/CD.
+
+#### Summary: Integration Priority Matrix
+
+| Tool | Integration Effort | Value to Users | Priority |
+|------|-------------------|----------------|----------|
+| Bearer CLI | Medium (JSON ingestion) | High (enriches privacy policies with real data flows) | HIGH |
+| Privado | Medium (data flow + mobile reports) | High (mobile store compliance is unaddressed gap) | HIGH |
+| OPA/Rego | High (policy language adoption) | Very High (ecosystem interop, CI/CD enforcement) | HIGH |
+| Checkov | Low (JSON report ingestion) | Medium (IaC findings to doc language) | MEDIUM |
+| KICS | Low (reference for Rego policies) | Medium (OpenAPI scanning, query patterns) | MEDIUM |
+
+**Key takeaway**: Bearer and Privado are the highest-value near-term integrations because they produce structured data about what personal data an application processes — exactly the input Codepliant needs to generate accurate compliance documents. OPA is the most strategic long-term play because adopting Rego would make Codepliant's compliance rules portable and composable with the broader cloud-native policy ecosystem.
+
 ## Development Log
 
 **2026-03-17 — `codepliant stats` one-line compliance summary (Iteration 28)**
@@ -3279,7 +3331,19 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
   - `src/generator/security-awareness-program.test.ts` (35 tests): null return for no services, generation with services, context values (companyName/contactEmail/securityEmail/dpoName/dpoEmail), placeholder defaults, securityEmail fallback to contactEmail, program overview with objectives (SOC 2/ISO 27001/GDPR Art. 39), scope and audience table (All employees/Engineering/Executive team), conditional AI/ML engineers audience (present with ai, absent without), conditional Finance/billing audience with PCI DSS (present with payment, absent without), phishing awareness module (spear-phishing/simulation program/< 5% click rate), password hygiene module (16 characters/NIST 800-63B/password manager), incident reporting module with security email (STOP/REPORT/PRESERVE procedure), social engineering defence (pretexting/tailgating), device and endpoint security (full-disk encryption/VPN), data handling and classification (Public/Internal/Confidential/Restricted), conditional AI security module (present with ai: external AI tools warning/Acceptable AI Use Policy, absent without), conditional PCI DSS module (present with payment: never store card numbers, absent without), PCI module numbering (3.8 when AI also present, 3.7 when AI absent), monthly activities calendar (January-December/Cybersecurity Awareness Month), quarterly activities (Q1-Q4), metrics and KPIs (Training completion/Phishing click rate/MFA enrollment), training completion tracking with current year, non-compliance section (failed phishing simulation/48 hours), program governance section, tools and resources (LMS Platform/Phishing Simulator/Password Manager), related documents (INCIDENT_RESPONSE_PLAN/ACCESS_CONTROL_POLICY), conditional AI use policy in related documents (present with ai, absent without), Codepliant disclaimer, comprehensive test with all conditional sections
 - **Generator test coverage**: 66/138 generators now have dedicated tests (was 63/138)
 
-**Progress trajectory:** 798 (iter 1) -> 1341 (iter 6) -> 1752 (iter 10) -> 2605 (iter 18) -> 2759 (iter 19) -> 2867 (iter 20) -> 3037 (iter 21) -> 3177 (iter 22) -> 3496 (iter 25) -> 3581 (iter 26)
+**Progress trajectory:** 798 (iter 1) -> 1341 (iter 6) -> 1752 (iter 10) -> 2605 (iter 18) -> 2759 (iter 19) -> 2867 (iter 20) -> 3037 (iter 21) -> 3177 (iter 22) -> 3496 (iter 25) -> 3581 (iter 26) -> 4344 (iter 32)
+
+### Iteration 32 — 2026-03-17 — Generator Tests (84/138 = 60.9%)
+
+- **Build**: pass
+- **Tests**: 4344/4344 passing (was 4261, added 83 new tests across 3 generator test files)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-glossary.test.ts` (28 tests): null return for no services, generation with title and project name, context company name/placeholder default, core GDPR terms always present (DPA/DSAR/Personal Data/Lawful Basis/Data Breach/Privacy by Design), CCPA terms always present (CCPA/CPRA/Do Not Sell or Share), AI terms conditional on AI services (EU AI Act/High-Risk AI System/AI Model Card/Algorithmic Transparency/Human-in-the-Loop with exclusion check), payment terms conditional (PCI DSS/Cardholder Data Environment/Tokenisation with exclusion), auth terms conditional (MFA/Zero Trust Architecture), monitoring terms conditional (BCP/DRP), analytics terms conditional (Special Category Data), SOC 2/ISO terms conditional on 5+ services (SOC 2 Type I & II/Trust Services Criteria/ISMS/SoA/Risk Treatment Plan with exclusion), HIPAA terms always present, abbreviations quick reference table (DPA abbreviation), alphabetical sorting in Full Glossary section, letter group headers (B/C/D/P), Full Glossary with definitions and sources, Applicable Regulatory Frameworks (GDPR/CCPA/CPRA always, EU AI Act/PCI DSS conditional), How to Use/Maintaining sections, term count and service count in header, abbreviation parentheses (DPA/DSAR), Codepliant disclaimer
+  - `src/generator/compliance-scorecard-visual.test.ts` (27 tests): null return for no services, generation with title and project name, context company name/placeholder default, overall grade box (OVERALL GRADE), ASCII bar characters in area scores, Privacy/Security/Vendor Management/Documentation area assessments, AI Governance conditional (presence/absence with ### header check), Score Summary table with Overall row, trend indicators legend (Improving/Stable/Needs Attention), grade scale reference (90-100% Excellent), detailed assessment with Factor/Detail table, priority actions section for unconfigured context, privacy score improvement with full context (company/email/DPO/jurisdictions/retention/toll-free), security score with config (securityEmail/bugBountyUrl/auth detection), AI governance with config (aiRiskLevel/aiUsageDescription), services scanned count, historical tracking template with AI column conditional, large service footprint penalty (>10 services), small service footprint reward, documentation language config, Codepliant disclaimer
+  - `src/generator/data-subject-request-log.test.ts` (28 tests): null return for no services, generation with title, context company name/DPO email/placeholder defaults, GDPR request types by default (ACC/ERA/REC/POR/RES/OBJ), CCPA types excluded without CCPA jurisdiction (OPT/KNO/DEL pipe-delimited check), CCPA types included with CCPA jurisdiction (Opt-Out/Right to Know/Right to Delete), applicable regulations header (GDPR/CCPA/CPRA), status values reference (Received/Verifying/In Progress/Extended/Completed/Denied/Closed), DSAR log template with blank rows (DSAR-001 through DSAR-005), identity verification log, data locations with detected services and dataCollected join, multiple services in data locations, non-data-processor exclusion (isDataProcessor=false), response tracking section, deadline extensions (60-day), denial log (manifestly unfounded), monthly summary template (total requests/completed within deadline/average response time), CCPA metrics in monthly summary conditional (Opt-out/Right to Know/Right to Delete rows), quarterly report template (Month 1-3), response deadlines reference (GDPR 30 days/CCPA 45 days/UK GDPR), empty dataCollected graceful handling (Various fallback), Codepliant disclaimer
+- **Generator test coverage**: 84/138 generators now have dedicated tests (was 81/138, added compliance-glossary, compliance-scorecard-visual, data-subject-request-log)
+- **Milestone**: 60% generator test coverage reached (84/138 = 60.9%)
 
 ### Iteration 17 — 2026-03-17
 
@@ -7132,3 +7196,13 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - `src/generator/data-subject-rights-portal.test.ts` (46 tests): empty string return for empty services, generation with single/multiple services, context values (companyName, contactEmail, website, dpoEmail with fallback, placeholders), Overview section with GDPR/CCPA references, My Data Dashboard with service data, conditional View Data sections (analytics/AI/payment data with exclusion tests), Download Data with GDPR Art. 20 portability, Delete Account with GDPR Art. 17/CCPA §1798.105 (conditional payment exception), Manage Consent (conditional analytics/AI toggles with exclusion), API Endpoints (all 6 endpoints), UI Wireframe (portal layout, My Data/Export/Delete/Consent tabs, AI wireframe toggles, service overflow for 5+ services), Implementation Checklist (5 phases), Security Requirements, Compliance Mapping, Response Time SLAs, data category counting, Codepliant attribution, legal review disclaimer, comprehensive all-categories test
   - `src/generator/privacy-impact-register.test.ts` (48 tests): null return for empty services, generation with single/multiple services, context values (companyName, dpoName, dpoEmail with fallback, contactEmail, placeholders), next review date one year ahead, header with organization info, automated generation disclaimer, Purpose section (GDPR Art. 35(1)/5(2)), DPIA Triggers section (Art. 35(3)), conditional Assessment Summary (AI/payment/analytics/auth/monitoring with high/medium/low risk, always-present General Assessment, cross-border assessment for multi-jurisdiction or 3+ services with exclusion), Detailed Assessment Records (AI with openai scope/mitigations, payment with PCI DSS, analytics with cookie consent, general with data categories), Risk Assessment Matrix (AI critical, payment high, analytics/auth/monitoring), Third-Party Services Inventory (DPIA required Yes/Review needed, service deduplication), Outcome Tracking status definitions, Review History, Supervisory Authority Consultation (Art. 36), Contact section, assessment ID formats (DPIA-YYYYMMDD-AI, PIA-YYYYMMDD-GENERAL), Codepliant attribution, legal counsel disclaimer, comprehensive all-categories test
 - **Generator modules now with tests**: 81/138 (was 78/138, added compliance-investment-case, data-subject-rights-portal, privacy-impact-register)
+
+### Iteration 32 — 2026-03-17 — Version & Info Polish
+
+- **Build**: pass (`npx tsc` clean)
+- **Verified**: `codepliant version` and `codepliant --version` / `-V` all output cleanly (`codepliant v1.1.0`)
+- **Verified**: `codepliant info` already existed with version, Node.js, OS, scanners, output formats
+- **Improved `codepliant info`**:
+  - Added dynamic service signature count (124 detected signatures) from `SERVICE_SIGNATURES`
+  - Updated ecosystem list to include Dart, Swift, Kotlin (was missing 3 of 12 ecosystems)
+  - Ecosystem count now shown explicitly (12)
