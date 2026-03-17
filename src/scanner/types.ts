@@ -92,6 +92,7 @@ export const FAMILY_MAP: Record<string, string[]> = {
     "@aws-sdk/client-sns",
   ],
   firebase: ["firebase", "firebase-admin"],
+  "facebook-android": ["facebook-login-android", "facebook-sdk-android"],
   supabase: ["@supabase/supabase-js", "@supabase/auth-helpers"],
   clerk: ["@clerk/nextjs", "@clerk/backend"],
   mailchimp: ["@mailchimp/mailchimp_marketing", "@mailchimp/mailchimp_transactional"],
@@ -101,7 +102,7 @@ export const FAMILY_MAP: Record<string, string[]> = {
  * Ecosystem tag for a service signature.
  * Used to restrict env-var matching to the project's actual ecosystem.
  */
-export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "dart" | "swift" | "any";
+export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "dart" | "swift" | "kotlin" | "any";
 
 export const SERVICE_SIGNATURES: Record<
   string,
@@ -1089,6 +1090,120 @@ export const SERVICE_SIGNATURES: Record<
     envPatterns: ["GOOGLE_CLIENT_ID"],
     importPatterns: ["GoogleSignIn"],
     ecosystem: "swift",
+  },
+
+  // Kotlin/Android Ecosystem
+  "firebase-analytics-android": {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "app events", "screen views"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["com.google.firebase.analytics"],
+    ecosystem: "kotlin",
+  },
+  "firebase-auth-android": {
+    category: "auth",
+    dataCollected: ["email", "name", "phone number", "OAuth tokens", "session data"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["com.google.firebase.auth"],
+    ecosystem: "kotlin",
+  },
+  "firebase-crashlytics-android": {
+    category: "monitoring",
+    dataCollected: ["crash data", "stack traces", "device information", "app state"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["com.google.firebase.crashlytics"],
+    ecosystem: "kotlin",
+  },
+  "firebase-firestore-android": {
+    category: "database",
+    dataCollected: ["user data as defined in schema", "document content"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["com.google.firebase.firestore"],
+    ecosystem: "kotlin",
+  },
+  "firebase-messaging-android": {
+    category: "other",
+    dataCollected: ["device tokens", "notification content", "message data"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["com.google.firebase.messaging"],
+    ecosystem: "kotlin",
+  },
+  "stripe-android": {
+    category: "payment",
+    dataCollected: ["payment information", "billing address", "email", "transaction history"],
+    envPatterns: ["STRIPE_PUBLISHABLE_KEY", "STRIPE_SECRET_KEY"],
+    importPatterns: ["com.stripe.android"],
+    ecosystem: "kotlin",
+  },
+  "sentry-android": {
+    category: "monitoring",
+    dataCollected: ["error data", "stack traces", "user context", "device information"],
+    envPatterns: ["SENTRY_DSN"],
+    importPatterns: ["io.sentry"],
+    ecosystem: "kotlin",
+  },
+  "amplitude-android": {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "session data"],
+    envPatterns: ["AMPLITUDE_API_KEY"],
+    importPatterns: ["com.amplitude"],
+    ecosystem: "kotlin",
+  },
+  "mixpanel-android": {
+    category: "analytics",
+    dataCollected: ["user behavior", "user profiles", "device information", "location data"],
+    envPatterns: ["MIXPANEL_TOKEN"],
+    importPatterns: ["com.mixpanel.android"],
+    ecosystem: "kotlin",
+  },
+  "onesignal-android": {
+    category: "other",
+    dataCollected: ["device tokens", "user segments", "notification engagement", "device information"],
+    envPatterns: ["ONESIGNAL_APP_ID"],
+    importPatterns: ["com.onesignal"],
+    ecosystem: "kotlin",
+  },
+  "facebook-login-android": {
+    category: "auth",
+    dataCollected: ["email", "name", "Facebook profile data", "OAuth tokens", "social connections"],
+    envPatterns: ["FACEBOOK_APP_ID"],
+    importPatterns: ["com.facebook.login"],
+    ecosystem: "kotlin",
+  },
+  "facebook-sdk-android": {
+    category: "auth",
+    dataCollected: ["email", "name", "Facebook profile data", "OAuth tokens", "social connections"],
+    envPatterns: ["FACEBOOK_APP_ID"],
+    importPatterns: ["com.facebook.FacebookSdk"],
+    ecosystem: "kotlin",
+  },
+  "google-auth-android": {
+    category: "auth",
+    dataCollected: ["email", "name", "Google profile data", "OAuth tokens"],
+    envPatterns: ["GOOGLE_CLIENT_ID"],
+    importPatterns: ["com.google.android.gms.auth"],
+    ecosystem: "kotlin",
+  },
+  "braze-android": {
+    category: "analytics",
+    dataCollected: ["user behavior", "user profiles", "device information", "push tokens", "location data"],
+    envPatterns: [],
+    importPatterns: ["com.braze"],
+    ecosystem: "kotlin",
+  },
+  "revenuecat-android": {
+    category: "payment",
+    dataCollected: ["purchase history", "subscription data", "transaction receipts", "user identity"],
+    envPatterns: [],
+    importPatterns: ["com.revenuecat.purchases"],
+    ecosystem: "kotlin",
+  },
+  "google-ads-android": {
+    category: "advertising",
+    dataCollected: ["device information", "ad interaction data", "user behavior", "location data"],
+    envPatterns: [],
+    importPatterns: ["com.google.android.gms.ads"],
+    ecosystem: "kotlin",
   },
 
   // API Framework

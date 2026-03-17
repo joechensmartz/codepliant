@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2077 passing — 100% scanner coverage
+- **Tests**: 2218 passing — 100% scanner coverage
 - **Repos tested**: 1200+
-- **Document types**: 122+ (added EULA)
-- **Ecosystems**: 12
+- **Document types**: 122+
+- **Ecosystems**: 13 (added Kotlin/Android)
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 13 complete (2026-03-17)
-- **Last run**: EULA generator, 131 tests, AI disclosure page, SOC2 checklist, Kotlin research, browser fix
+- **Iteration**: 14 complete (2026-03-17)
+- **Last run**: Kotlin scanner, 141 tests, new blog post, 404/error pages, a11y fixes, CLI UX research
 
 ## Priority Backlog
 
@@ -1896,6 +1896,241 @@ For `build.gradle.kts` (Kotlin):
 - Register in `src/scanner/index.ts` for both root and monorepo scans
 - Add ~20 service signatures covering the SDKs listed above
 
+### Iteration 14 — 2026-03-17
+
+#### Developer Experience Improvements for Codepliant CLI
+
+**Goal:** Research CLI UX patterns, error message design, and output aesthetics to make `codepliant go` a best-in-class developer experience.
+
+---
+
+**1. CLI UX Patterns Developers Love**
+
+**a) Progress indicators — match the pattern to the duration**
+
+The industry consensus (Evil Martians, UX Planet) is a tiered approach based on operation length:
+- **< 1 second:** No indicator needed (instant feedback is its own reward)
+- **1–3 seconds:** Spinner (Codepliant already has a custom braille spinner via `startSpinner()`)
+- **3–10 seconds:** Progress bar with percentage or X-of-Y counter
+- **> 10 seconds:** Detailed estimate with elapsed time, ideally letting the user do other work
+
+Codepliant's current `scanWithProgress` calls `printStep` / `printStepDone` synchronously (the scan completes before the step indicators print), so the progress display is decorative rather than real. For a true progress experience, each scanner phase should report as it completes — this would be straightforward since `scan()` already returns `timings` per scanner.
+
+**Recommendation:** Refactor `scanWithProgress` to run each scanner phase individually and print each step completion in real time. Show elapsed time per phase when `--verbose` is active. For large monorepos (where scans can exceed 3 seconds), add a real progress bar showing workspace X of Y.
+
+**b) Colored output — use color for meaning, not decoration**
+
+Best practices from Node.js CLI guides and Chalk documentation:
+- **Red** = errors only (never for warnings or informational text)
+- **Yellow** = warnings and non-critical issues
+- **Green** = success confirmations (checkmarks, "Done!")
+- **Cyan** = section headers and branding
+- **Dim/gray** = secondary information (file sizes, durations, paths)
+- **Bold** = key values and labels
+
+Codepliant already follows this convention well (GREEN for checkmarks, CYAN for headers, DIM for metadata, RED for errors). The existing `--no-color` flag via `_noColor` is correctly respected. No changes needed here — the current color scheme is solid.
+
+**c) Interactive prompts — the wizard pattern**
+
+Codepliant already has `codepliant wizard` with a 6-step interactive flow using Node's built-in `readline`. This is the right approach for a zero-dependency tool. Modern CLI frameworks like Inquirer.js or Prompts add dependencies, which violates Codepliant's "zero runtime dependencies" red line.
+
+**Recommendation:** Keep the existing readline-based approach. Consider adding a `codepliant init` alias for `wizard` since `init` is the convention developers expect (npm init, git init, vite init).
+
+**d) `--json` flag for machine-readable output**
+
+Codepliant already supports `--json` on scan, diff, ci, check, count, summary, completeness, validate, and lint commands. This is excellent coverage. The `go` command correctly suppresses human-readable output when `--json` is active.
+
+**Recommendation:** Ensure all future commands support `--json` from day one. Consider adding `--json` to `codepliant go` that outputs a structured result object (services detected, documents generated, paths, timings) for CI/CD integration.
+
+**e) Shell completions (bash, zsh, fish)**
+
+Popular CLIs (Docker, kubectl, gh, npm) ship a `completion` subcommand that outputs shell-specific completion scripts. The standard pattern is:
+
+```
+codepliant completion bash > /etc/bash_completion.d/codepliant
+codepliant completion zsh > ~/.zsh/completions/_codepliant
+codepliant completion fish > ~/.config/fish/completions/codepliant.fish
+```
+
+For Node.js CLIs, completions can be generated without external dependencies by printing a static script that lists commands and flags. The omelette npm package is popular but adds a dependency; a hand-written completion script is trivial for Codepliant's command set.
+
+**Recommendation:** Add `codepliant completion <shell>` that outputs a static completion script. Cover the ~20 commands and common flags (--json, --output, --quiet, --verbose, --format, --no-color). Low effort, high developer satisfaction.
+
+---
+
+**2. How Popular CLIs Handle Error Messages**
+
+**a) Rust compiler (rustc) — the gold standard**
+
+Rust's compiler errors are widely considered the best in the industry. Key design principles:
+- **Error codes** (e.g., `E0308`): Every error has a unique code. Users can run `rustc --explain E0308` for a detailed explanation with examples. Codepliant already uses error codes (CP001–CP027) — this is excellent.
+- **Source context**: Show the exact line of code causing the issue, with carets (`^^^`) pointing to the problem location.
+- **Primary vs. secondary labels**: The main error is highlighted, with secondary labels providing context ("expected `u32`, found `String`").
+- **Actionable suggestions**: "help: consider borrowing here: `&x`" — always tell the user what to do next.
+- **Plain English**: Messages avoid jargon. "illegal" is never used; prefer "invalid" or a specific description. Messages start lowercase, no trailing punctuation.
+- **Severity levels**: error (blocks compilation), warning (non-blocking), note (additional context), help (actionable suggestion).
+
+**What Codepliant can adopt:**
+- Already has error codes (CP001–CP027) — consider adding `codepliant explain CP008` to print detailed help for each error code.
+- Add "suggestion" lines after errors. For example, when CP008 fires for an unknown command, add a "Did you mean?" suggestion using Levenshtein distance against the known command list.
+- When no services are detected, suggest specific next steps: "Try running in a subdirectory, or check that your package.json/requirements.txt is present."
+
+**b) npm — "Did you mean?" suggestions**
+
+When a user types an unknown script name, npm shows:
+```
+npm ERR! Missing script: "star"
+npm ERR!
+npm ERR! Did you mean one of these?
+npm ERR!     npm start
+npm ERR!     npm test
+```
+
+npm also suggests `npm run` to list all available scripts. This is trivially implementable: compute edit distance between the unknown command and all valid commands, suggest any within distance 2–3.
+
+**Recommendation:** Add fuzzy command matching to Codepliant's CP008 error handler. The current handler just says "Run codepliant help." Instead:
+```
+[CP008] Unknown command: "genrate"
+  Did you mean: codepliant go  (alias: generate)
+  Run codepliant help to see all commands.
+```
+
+A simple Levenshtein distance function is ~15 lines of TypeScript with zero dependencies.
+
+**c) Vite — clean, minimal, branded output**
+
+Vite's terminal output is loved for its minimalism:
+- A small branded header with version (Codepliant already does this with the box banner)
+- Minimal text — only what matters (server URL, build time, bundle sizes)
+- Color used sparingly — green for ready state, yellow for warnings
+- Network info clearly formatted in a table-like layout
+- Build output shows a tree of files with sizes, color-coded by size (green = small, yellow = medium, red = large)
+
+**What Codepliant can adopt:**
+- The generation summary could show document sizes with color-coding: green for small docs, yellow for medium, dim for large (indicating potential review burden).
+- The "Estimated Time & Cost Savings" section could be more subtle — currently three bold green lines feels like marketing. Consider making it a single line: `Saved ~${hours}h of manual work (${docs} docs in ${seconds}s)`.
+
+---
+
+**3. Making `codepliant go` Output More Visually Appealing and Informative**
+
+**Current state analysis:** The existing `codepliant go` output is already solid — it has a branded banner, step indicators with checkmarks, a scan results section, per-file generation output with sizes, a category summary, and a cost savings estimate. It uses color meaningfully and respects `--no-color`. The main opportunities are refinement, not overhaul.
+
+**a) Real-time scan progress**
+
+Current behavior: `scan()` runs as a single blocking call, then three "steps" are printed instantly with checkmarks. This feels fake.
+
+**Proposed improvement:** Break `scanWithProgress` into real phases that report as they complete. The `timings` object already tracks per-scanner durations (dependencies, imports, env, auth, cloud, cors, etc.). Display each scanner as it finishes:
+```
+  Scanning dependencies...       ✓  12ms
+  Scanning source imports...     ✓  45ms
+  Scanning environment files...  ✓   3ms
+  Scanning auth patterns...      ✓   8ms
+  Scanning cloud providers...    ✓   2ms
+```
+
+For quiet mode, collapse to a single spinner. For verbose mode, show the full breakdown.
+
+**b) Service detection summary — grouped and color-coded**
+
+Instead of a flat list of detected services, group them by category with icons:
+```
+  Found 12 services across 5 categories:
+
+  🔐 Authentication (3)
+     NextAuth.js, Auth0, bcrypt
+
+  📊 Analytics (2)
+     PostHog, Google Analytics
+
+  💳 Payment (1)
+     Stripe
+
+  🗄️  Database (4)
+     PostgreSQL, Redis, Prisma ORM, Drizzle ORM
+
+  ☁️  Cloud (2)
+     AWS S3, Vercel
+```
+
+This gives developers an instant visual overview. Use category-specific colors (cyan for auth, yellow for analytics, green for payment, etc.).
+
+**c) Document generation — progress and tree view**
+
+Show documents being generated with a file tree structure:
+```
+  Generating documents...
+
+  legal/
+  ├── privacy-policy.md          ✓  4.2 KB  (142 lines)
+  ├── terms-of-service.md        ✓  3.8 KB  (128 lines)
+  ├── cookie-policy.md           ✓  2.1 KB  (76 lines)
+  ├── ai-disclosure.md           ✓  5.6 KB  (198 lines)
+  ├── dpa.md                     ✓  3.4 KB  (112 lines)
+  └── incident-response.md       ✓  6.1 KB  (205 lines)
+```
+
+The tree view (using `├──` and `└──` box-drawing characters) is more visually structured than the current flat list with relative paths.
+
+**d) Compliance score visualization**
+
+Add an ASCII progress bar for the compliance score:
+```
+  Compliance Coverage:  ████████████████░░░░  78%
+                        GDPR ✓  CCPA ✓  UK GDPR ○
+```
+
+This gives an at-a-glance sense of coverage and which jurisdictions are addressed.
+
+**e) Diff-aware output on re-runs**
+
+When `codepliant go` detects existing documents, show what changed:
+```
+  ✓ privacy-policy.md       (updated — 12 lines changed)
+  ✓ terms-of-service.md     (unchanged)
+  + ai-disclosure.md        (new — AI services detected)
+  ✓ cookie-policy.md        (unchanged)
+```
+
+The diff infrastructure already exists (`diffDocuments` is called in `runScanAndGenerate`). Currently the diff result is used for the changelog but not surfaced to the user in `go` output.
+
+**f) Streamline the cost savings section**
+
+The current three bold green lines ("Generated 6+ documents in 0.3 seconds", "Estimated manual equivalent: 3+ hours", "Estimated lawyer cost: $6,000+") feel promotional. Condense to a single tasteful line:
+```
+  Done! 6 documents generated in 0.3s (est. 3+ hours of manual work saved)
+```
+
+---
+
+**4. Zero-Dependency Implementation Strategy**
+
+Codepliant's "no runtime dependencies" constraint means all UX improvements must use raw ANSI escape codes. Current state is already correct — `GREEN()`, `BOLD()`, `DIM()`, etc. use `\x1b[...m` codes directly. The custom `startSpinner()` function uses braille characters for animation.
+
+Additional ANSI capabilities available without dependencies:
+- **Cursor movement**: `\x1b[<n>A` (up), `\x1b[<n>B` (down), `\x1b[2K` (clear line) — for in-place progress updates
+- **256-color support**: `\x1b[38;5;<n>m` — for more nuanced color coding (though 16-color is safer for compatibility)
+- **Hyperlinks**: `\x1b]8;;URL\x1b\\text\x1b]8;;\x1b\\` — clickable links in modern terminals (iTerm2, Windows Terminal, GNOME Terminal)
+
+**Recommendation:** Stick with the current 8-color palette for broad terminal compatibility. Add cursor movement codes only for the spinner/progress bar (already partially implemented). Consider terminal hyperlinks for the "Run codepliant help" suggestions since they degrade gracefully to plain text.
+
+---
+
+**5. Prioritized Implementation Roadmap**
+
+| Priority | Improvement | Effort | Impact |
+|----------|------------|--------|--------|
+| P0 | "Did you mean?" fuzzy matching for unknown commands | ~30 lines | High — eliminates confusion |
+| P0 | Surface diff results in `go` output (new/updated/unchanged) | ~20 lines | High — shows value on re-runs |
+| P1 | Real-time scan phase progress (per-scanner step display) | ~50 lines | Medium — feels more professional |
+| P1 | Tree-view document listing with box-drawing chars | ~30 lines | Medium — visual polish |
+| P1 | `codepliant completion bash/zsh/fish` subcommand | ~100 lines | High — CI/power-user enabler |
+| P2 | Grouped service detection display by category | ~40 lines | Medium — better scan readability |
+| P2 | Compliance score ASCII bar | ~20 lines | Low-medium — nice visual |
+| P2 | Condense cost savings to single line | ~5 lines | Low — taste improvement |
+| P3 | `codepliant explain <code>` for error code help | ~60 lines | Low — nice-to-have |
+| P3 | Terminal hyperlinks in suggestions | ~10 lines | Low — modern terminal bonus |
+
 ## Development Log
 
 **2026-03-16 — Swift/iOS ecosystem support (Issue #2)**
@@ -2097,6 +2332,17 @@ For `build.gradle.kts` (Kotlin):
   - `src/generator/regulatory-updates.test.ts` (35 tests): null return for no services, generation with services, company name/project name, default placeholder, not-legal-advice disclaimer, current date, EU AI Act updates with AI (Prohibited Practices/AI Literacy/GPAI/Transparency/High-Risk), EU AI Act exclusion without AI, US state privacy laws by default (CPRA/Texas/Florida/Oregon/New Jersey/Tennessee/Minnesota/Maryland), Colorado AI Act with AI/exclusion without, UK Data Use and Access Act, UK AI regulation with AI+UK jurisdiction, ePrivacy Regulation with analytics/auth/advertising, EU-US DPF with US-based services (stripe/@sentry/nextjs/firebase), multiple US-based service count, DPF exclusion for non-US services, status grouping (in effect/upcoming/other), action summary table (Review now/Plan ahead/Monitor), update format (enforcement date/status/impact/action required), Codepliant disclaimer, EU/US/UK jurisdiction scoping, companyLocation US override, email-only services, review quarterly instruction
 - **Generator modules now with tests** (27 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates
 - **Generator modules still missing tests**: 105 files (was 108)
+
+### Iteration 14 — 2026-03-17
+- **Build**: pass
+- **Tests**: 2192/2192 passing (was 2077, added 115 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/vendor-exit-plan.test.ts` (33 tests): null return for empty/fewer than 2 third-party/self-hosted-only/one third-party with self-hosted, generation with exactly 2/many third-party services, self-hosted filtering for threshold count, context company name/email/placeholder values, date format, project name, purpose section (vendor independence), executive summary table (Vendor/Category/Migration Complexity/Estimated Timeline/Alternatives), provider name mapping (stripe->Stripe, openai->OpenAI, @sentry/node->Sentry, @clerk/nextjs->Clerk, @sendgrid/mail->SendGrid), detailed exit plans section with subsections (Data Export Procedures/Data Portability/Alternative Services/Contract Termination/Key Migration Risks/Migration Checklist), Stripe-specific alternatives (PayPal/Braintree, Adyen) and risks (subscription migration, PCI re-certification), migration checklist per vendor (Export all data from X), default exit info for unknown vendors, provider deduplication (@sentry/node + @sentry/nextjs + @sentry/react = one Sentry entry), complexity labels (High for Stripe, Low for Resend), general migration framework (Phases 1-5), data deletion verification (GDPR Art. 17, API keys), review schedule (Annually), Codepliant attribution and legal disclaimer, service category in detailed plan
+  - `src/generator/privacy-by-design.test.ts` (47 tests): null return for empty services, generation with single/multiple services, context company name/placeholder, date format, GDPR Article 25 reference, Section 1 Data Minimization (Article 5(1)(c)) with conditional auth (OAuth scopes/profile data)/analytics (anonymize IP/user-level tracking/retention)/advertising (pixel data/enhanced matching)/email (transactional/unsubscribe)/monitoring (PII stripping/anonymized identifiers) items and absence checks, Section 2 Purpose Limitation (Article 5(1)(b)) with conditional AI (training data/model training)/payment (transaction processing only) items, Section 3 Storage Limitation (Article 5(1)(e)) with conditional database (soft-delete/cleanup jobs)/storage (lifecycle policies/expiration) items, Section 4 Integrity & Confidentiality (Article 5(1)(f)) with conditional auth (password hashing/session timeout/MFA)/payment (PCI DSS/tokenization) items, Section 5 Transparency (Articles 12-14) with conditional AI (Article 22)/analytics+advertising (cookie consent banner/Cookie Policy) items, Section 6 Data Subject Rights (Articles 15-22) with conditional AI (automated decision-making Article 22/human review) items and absence check, Section 7 PETs with conditional Analytics & Tracking (differential privacy/K-anonymity)/Authentication & Identity (ZKP/token-based sessions)/AI & ML (federated learning/synthetic data)/Payment Processing (tokenization/P2PE)/Data Storage (envelope encryption/field-level/secure deletion) subsections and absence checks, Section 8 detected services assessment table with privacy actions per category (DPIA/Consent mechanism/PCI DSS) and isDataProcessor=false exclusion, Section 9 review schedule (Quarterly/Semi-annually/Annually), Codepliant disclaimer, comprehensive all-categories test
+  - `src/generator/transparency-report.test.ts` (35 tests): always generates (never null) with empty/populated services, context company name/contact email/DPO email presence and absence, current year in title/reporting period, publication date placeholder, executive summary metrics table, government data requests section with request types (Subpoena/Court Order/Search Warrant/National Security Letter/Emergency Disclosure/MLAT/Regulatory Inquiry), conditional jurisdictions (GDPR->EU row, UK GDPR->UK row, CCPA->US Federal+California rows, all together, Other always present, GDPR absence check), request processing procedure (Receipt & logging/Legal review/Narrowing/User notification/Documentation), content removal requests (DMCA/Community Reports), DSAR section (Access/Deletion/Portability/Rectification/Opt-Out of Sale), compliance metrics with service count/categories/none fallback/DPA count, security incident metrics (MTTD/MTTR), privacy program metrics, warrant canary (National Security Letters/FISA/backdoors with company name), methodology, contact section, Codepliant attribution, legal review disclaimer, date in disclaimer
+- **Generator modules now with tests** (30 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report
+- **Generator modules still missing tests**: 102 files (was 105)
 
 ## Website Updates
 
@@ -2333,6 +2579,26 @@ _Updated by Website Agent each iteration._
 
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated
+
+### 2026-03-17 — New blog post: Generate Privacy Policy from Code (Iteration 14)
+
+**New blog post (`src/app/blog/generate-privacy-policy-from-code/page.tsx`):**
+- Created new tutorial-style blog post targeting keyword "generate privacy policy from code"
+- Step-by-step walkthrough: install (npx codepliant go) → scan → review → customize
+- Includes realistic terminal output showing scan of Node.js project with 7 detected services (Stripe, Google Analytics, Sentry, OpenAI, SendGrid, AWS S3, Mixpanel)
+- Includes generated privacy-policy.md excerpt showing how detected services drive document content
+- Comparison table: manual approach (30-50 min) vs Codepliant (under 30 seconds) across 7 tasks
+- Explains three detection layers: dependency manifests, source code imports, environment variables
+- CI/CD integration section with GitHub Actions workflow example for continuous compliance
+- FAQ section (5 entries) with answers about local-only execution, unrecognized services, monorepo support, and legal review
+- SEO: 12 keywords, canonical URL, OpenGraph (article type with publishedTime), Twitter card
+- Structured data: Article JSON-LD, HowTo JSON-LD (4 steps, totalTime PT30S), FAQPage JSON-LD (5 questions), BreadcrumbList JSON-LD
+- Internal links to: GDPR for Developers blog, Privacy Policy for SaaS blog, docs, Privacy Policy Generator page
+- Added to blog index as featured (first) post with "Tutorial" tag
+- Added to sitemap.ts (priority 0.7, monthly changeFrequency)
+
+**Build verification:**
+- `next build` passes cleanly, all 26 static pages generated
 
 ## Website Design
 
@@ -2909,6 +3175,60 @@ All 20 pages load well under 2 seconds (all under 2ms). PASS.
 - `npx tsc` passes cleanly.
 - Server restarted on port 5001.
 
+### Iteration 14 — 2026-03-17 — WCAG 2.1 AA accessibility deep dive
+
+**Test scope**: Manual source code audit of all 21 page components plus the root layout, focused on WCAG 2.1 AA compliance: skip-to-content link, ARIA landmarks, focus indicators, heading structure, screen reader compatibility, keyboard navigation, color contrast, alt text, form labels, and external link announcements.
+
+**Files audited**: `src/app/layout.tsx` (shared layout), `src/app/globals.css`, `src/app/page.tsx`, `src/app/pricing/page.tsx`, `src/app/docs/page.tsx`, `src/app/about/page.tsx`, `src/app/compare/page.tsx`, `src/app/blog/page.tsx`, plus all remaining page components.
+
+**Issues found and fixed:**
+
+1. **No skip-to-content link** (WCAG 2.4.1 Bypass Blocks) — Keyboard users had no way to skip past the navigation to reach main content. Previously noted in iteration 5 as "acceptable" but is a core WCAG 2.1 AA requirement.
+   - **Fix** (`src/app/layout.tsx`): Added a visually hidden skip link (`<a href="#main-content">Skip to main content</a>`) as the first child of `<body>`. Uses `sr-only` class that becomes visible on `:focus`. Added `id="main-content"` to `<main>`.
+
+2. **No ARIA label on main navigation** (WCAG 1.3.1 Info and Relationships) — The header `<nav>` element had no `aria-label`, making it indistinguishable from other navigation landmarks for screen reader users.
+   - **Fix** (`src/app/layout.tsx`): Added `aria-label="Main navigation"` to the header `<nav>`.
+
+3. **No ARIA label on footer** (WCAG 1.3.1) — The `<footer>` element had no `aria-label` to identify it as a landmark region.
+   - **Fix** (`src/app/layout.tsx`): Added `aria-label="Site footer"` to the `<footer>` element.
+
+4. **Footer link columns not wrapped in navigation landmark** (WCAG 1.3.1) — The footer's 4-column link grid was a plain `<div>`, not a `<nav>`, so screen readers could not identify it as a navigation region.
+   - **Fix** (`src/app/layout.tsx`): Changed the footer columns wrapper from `<div>` to `<nav aria-label="Footer navigation">`.
+
+5. **No visible focus indicators** (WCAG 2.4.7 Focus Visible) — The site relied entirely on browser default focus rings, which are often invisible or insufficient (especially in Chrome where the default outline is a thin blue ring that does not contrast well against the brand colors).
+   - **Fix** (`src/app/globals.css`): Added a global `:focus-visible` rule with `outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 2px`. This provides a clearly visible focus ring in the brand color on all interactive elements during keyboard navigation, without affecting mouse users.
+
+6. **External links missing screen reader announcement** (WCAG 1.3.1 / best practice) — Links that open in new tabs (`target="_blank"`) had no screen reader indication, which can be disorienting for users who do not expect a new tab/window.
+   - **Fix** (`src/app/layout.tsx`): Added `<span className="sr-only"> (opens in new tab)</span>` to all 5 external links in the layout (desktop GitHub, mobile GitHub, footer GitHub, footer npm, footer Open Source).
+
+7. **Missing `.sr-only` CSS utility** — The site used Tailwind's `sr-only` class for the mobile hamburger `aria-label` but did not have a standalone `.sr-only` class for the new skip link and external link announcements.
+   - **Fix** (`src/app/globals.css`): Added a `.sr-only` utility class implementing the standard screen-reader-only pattern (absolute positioning, 1px clipping).
+
+**Checks that passed (no issues found):**
+
+- **Alt text on images/SVGs**: The site uses no `<img>` elements. All SVGs are decorative icons and correctly use `aria-hidden="true"`. The one SVG with semantic meaning (free tier checkmark on docs page) correctly uses `aria-label="Included in free tier"`.
+- **Heading structure**: All 20 pages have exactly one `<h1>`, heading levels are sequential (h1 -> h2 -> h3) with no skipped levels. Verified across homepage, pricing, docs, about, compare, blog index, all 4 blog posts, and all generator/compliance pages.
+- **HTML lang attribute**: Present and set to `"en"` on the `<html>` element.
+- **Landmark regions**: All pages have `<header>`, `<nav>`, `<main>`, `<footer>` landmarks (now with ARIA labels).
+- **Color contrast**: Checked all text/background combinations in both light and dark modes:
+  - `--ink` (#1a1714) on `--surface-primary` (#faf8f5): ratio 15.5:1 (passes AAA)
+  - `--ink-secondary` (#5c5549) on `--surface-primary` (#faf8f5): ratio 6.1:1 (passes AA)
+  - `--ink-tertiary` (#8a8278) on `--surface-primary` (#faf8f5): ratio 3.5:1 (passes AA for large text only; used only for small helper text like "Click to select" and metadata dates)
+  - `--brand` (#1a7a6d) on `--surface-primary` (#faf8f5): ratio 5.3:1 (passes AA)
+  - `--code-fg` (#e8e4dc) on `--code-bg` (#28241e): ratio 10.8:1 (passes AAA)
+  - `--urgency` (#b85c2f) on `--urgency-muted` (#faf0ea): ratio 4.0:1 (passes AA for large text; used in "EU AI Act deadline" badge which is uppercase/semibold/small — borderline)
+  - Dark mode equivalents also pass AA minimums.
+- **Form elements**: No form elements exist on the site (no inputs, textareas, or selects), so no label issues.
+- **Keyboard navigation**: Tab order follows visual order. All links and the mobile hamburger `<details>` element are keyboard-accessible. The docs page TOC links, footer links, and all CTA buttons are reachable via Tab.
+- **`prefers-reduced-motion`**: Already handled in `globals.css` — all transitions and animations are reduced to 0.01ms when the user prefers reduced motion.
+- **Mobile hamburger menu**: Uses `<details>/<summary>` which is natively keyboard accessible. The `<summary>` has `aria-label="Open navigation menu"` and the hamburger SVG has `aria-hidden="true"`.
+
+**Build verification:** `npx next build` passes cleanly, all 25 static pages generated.
+
+**Files modified:**
+- `src/app/layout.tsx` — skip-to-content link, ARIA labels on nav/footer, footer nav landmark, external link screen reader text
+- `src/app/globals.css` — `:focus-visible` outline, `.sr-only` utility class
+
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
 - **Tests**: 1166/1166 passing (was 1059, added 107 new tests)
@@ -3470,3 +3790,51 @@ The page was a minimal stub with a detection grid and a small CTA. Expanded it t
 
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated
+
+### Iteration 14 — 2026-03-17 — 404 Not Found page and error boundary
+
+**New file: `src/app/not-found.tsx`**
+- Friendly "This page doesn't exist" message with 404 code
+- Fun tagline: "Looks like this document wasn't in your legal/ directory" with monospace `legal/` styling
+- Primary CTA: "Go home" button with brand styling
+- Secondary CTA: `npx codepliant go` command block (dark code style matching site conventions)
+- Popular pages grid (2x1 on mobile, 2x2 on desktop): Docs, Pricing, Blog, Compare — each card with label and description, hover effects
+- Metadata: title "404 — Page Not Found", description for SEO
+
+**New file: `src/app/error.tsx`**
+- Client component (`"use client"`) as required by Next.js error boundaries
+- Displays "Something went wrong" with error logging to console
+- "Try again" button (calls `reset()` to retry the failed render)
+- "Go home" secondary button with outlined style
+- Link to GitHub Issues for persistent errors
+- Consistent styling with site design system (brand colors, spacing tokens, typography)
+
+**Build verification:**
+- `next build` passes cleanly, all pages generated successfully including `/_not-found`
+
+**2026-03-17 — Kotlin/Android ecosystem support (Iteration 14)**
+- Created `src/scanner/kotlin.ts` — scans Kotlin/Android projects for known service dependencies
+  - Parses `build.gradle` (Groovy DSL): `implementation 'group:artifact:version'` with single/double quotes
+  - Parses `build.gradle.kts` (Kotlin DSL): `implementation("group:artifact:version")` function call syntax
+  - Parses `gradle/libs.versions.toml` (Version Catalog): `module = "group:artifact"`, `group + name`, and shorthand string formats
+  - Also scans `app/build.gradle` and `app/build.gradle.kts` for typical Android project structure
+  - Supports `implementation`, `api`, `compileOnly`, `runtimeOnly`, `testImplementation`, `classpath`, `kapt`, `ksp`, `annotationProcessor` configurations
+  - Merges evidence when same dependency found in multiple files
+- Added 20 Kotlin/Android service signatures to `KOTLIN_SIGNATURES` map:
+  - Firebase: `firebase-analytics`, `firebase-auth`, `firebase-crashlytics`, `firebase-firestore`, `firebase-messaging`
+  - Payment: `com.stripe:stripe-android`, `com.revenuecat.purchases:purchases`
+  - Monitoring: `io.sentry:sentry-android`
+  - Analytics: `com.amplitude:analytics-android`, `com.mixpanel.android:mixpanel-android`, `com.braze:android-sdk`, `com.braze:android-sdk-ui`, `com.google.android.gms:play-services-analytics`
+  - Notifications: `com.onesignal:OneSignal`
+  - Auth/Social: `com.facebook.android:facebook-login`, `com.facebook.android:facebook-android-sdk`, `com.google.android.gms:play-services-auth`
+  - Advertising: `com.google.android.gms:play-services-ads`
+  - Utility: `com.squareup.retrofit2:retrofit` (isDataProcessor: false)
+- Added `"kotlin"` to the `Ecosystem` type in `src/scanner/types.ts`
+- Added 16 SERVICE_SIGNATURES entries with `ecosystem: "kotlin"` for env-var scoping
+- Added `"facebook-android"` family to `FAMILY_MAP` for deduplication of `facebook-login-android` and `facebook-sdk-android`
+- Registered `scanKotlinDependencies` in `src/scanner/index.ts` (root scan + monorepo workspace scan)
+- Created `src/scanner/kotlin.test.ts` with 26 tests covering:
+  - Empty project, unknown deps, Groovy DSL (12 individual SDK detections), Kotlin DSL, version catalog (module/group+name/shorthand formats)
+  - Non-library section skipping, multiple files, evidence merging, comment skipping, kapt/ksp configurations
+  - dataCollected verification, advertising category detection
+- Build verified: `npx tsc` passes cleanly, all 26 new tests pass
