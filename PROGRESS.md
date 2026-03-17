@@ -6,14 +6,14 @@
 
 ## Current Status
 
-- **Version**: 1.0.0 (published to npm)
-- **Tests**: 1674 passing — 100% scanner coverage
+- **Version**: 1.1.0 (prepared, not yet published)
+- **Tests**: 1806 passing — 100% scanner coverage
 - **Repos tested**: 1200+
 - **Document types**: 121+
 - **Ecosystems**: 12 (added Swift/iOS)
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 10 complete (2026-03-17)
-- **Last run**: Swift scanner, 154 tests, GDPR/data-privacy pages, mobile menu, PH launch strategy
+- **Iteration**: 11 complete (2026-03-17)
+- **Last run**: v1.1.0 prep, 132 tests, AI governance page, privacy policy generator, VHS demo research, 9 QA fixes
 
 ## Priority Backlog
 
@@ -1426,6 +1426,183 @@ Products where the maker posted a detailed, authentic first comment averaged **1
 - [Best of Product Hunt 2025 Leaderboard](https://www.producthunt.com/leaderboard/yearly/2025/all)
 - [Aikido Security PH Launch Discussion](https://www.producthunt.com/p/aikido-2/a-look-at-aikido-s-first-launch-on-product-hunt)
 
+### Iteration 11 — 2026-03-16
+
+#### Developer Documentation Best Practices
+
+**Research scope**: How top open-source CLI tools structure their docs, which README demo format is best for Codepliant, and how to automate demo GIF creation with VHS to solve Issue #3.
+
+---
+
+#### 1. Documentation Structure — What Works for CLI/Developer Tools
+
+**The Diataxis framework** (used by Django, NumPy, Gatsby, and others) defines four documentation types that every developer tool should have:
+
+| Type | Purpose | Codepliant example |
+|---|---|---|
+| **Tutorials** | Learning-oriented, hands-on walkthroughs | "Generate your first privacy policy in 60 seconds" |
+| **How-to guides** | Task-oriented, solve specific problems | "Scan a monorepo", "Add custom service signatures" |
+| **Reference** | Information-oriented, complete technical details | CLI flags, config options, service signature schema |
+| **Explanation** | Understanding-oriented, conceptual context | "How Codepliant detects services", "What GDPR requires" |
+
+**How top doc frameworks organize content:**
+
+| Framework | Structure | Best for |
+|---|---|---|
+| **Astro Starlight** | Progressive disclosure: Start Here → Guides → Components → Reference → Resources. Separates "how-to" from "what-you-can-do" from "how-it-works". | Clean, fast doc sites with minimal config. Built-in search, i18n, accessibility. |
+| **Docusaurus** | Modular plugin-based: Getting Started → Guides → Advanced → Reference. Supports nested subcategories (e.g., "Markdown Features" with 11 sub-items). | Feature-rich doc sites with blog, versioning, and search. |
+| **VitePress** | Intro → Writing → Customization → Experimental. Hybrid SSG/SPA for near-instant navigation (<100ms hot reload). Vue components in Markdown. | Lightweight, fast doc sites. Used by Vite, Rollup, Vue, Pinia. |
+
+**How successful CLI tools structure their docs:**
+
+- **GitHub CLI (gh)**: Groups by functional area (auth, repo, issue, pr, codespace, etc.), each with subcommands. Two-tier sidebar: parent commands → subcommands. Also includes configuration, environment variables, and enterprise setup.
+- **ESLint**: Audience-based segmentation — "Use ESLint" (end users) → "Extend ESLint" (plugin authors) → "Integrate ESLint" (tooling) → "Contribute" (OSS contributors). Progressive complexity from getting started to architecture.
+
+**Recommended doc structure for Codepliant:**
+
+```
+docs/
+├── getting-started/
+│   ├── installation.md        # npm, npx, Homebrew
+│   ├── quickstart.md          # First scan in 60 seconds
+│   └── how-it-works.md        # Architecture overview
+├── guides/
+│   ├── scanning.md            # Scan commands and options
+│   ├── document-types.md      # All 121+ doc types explained
+│   ├── ecosystems.md          # Per-ecosystem details
+│   ├── ci-cd.md               # GitHub Actions, GitLab CI
+│   ├── monorepos.md           # Turborepo, Nx, workspaces
+│   └── custom-signatures.md   # Adding new service signatures
+├── reference/
+│   ├── cli.md                 # All commands and flags
+│   ├── config.md              # Configuration file schema
+│   ├── service-signatures.md  # Full signature catalog
+│   └── output-formats.md      # JSON, Markdown, HTML
+├── compliance/
+│   ├── gdpr.md                # GDPR-specific guidance
+│   ├── ccpa.md                # CCPA/CPRA guidance
+│   ├── hipaa.md               # HIPAA guidance
+│   └── soc2.md                # SOC 2 guidance
+└── contributing/
+    ├── development.md         # Dev setup, running tests
+    ├── adding-scanners.md     # How to add ecosystem support
+    └── architecture.md        # Codebase architecture
+```
+
+**Recommended framework**: Astro Starlight. It is purpose-built for documentation, has the best defaults (search, a11y, i18n, dark mode out of the box), and the Codepliant website already uses Astro. Zero migration friction.
+
+---
+
+#### 2. README Demo Formats — Comparison
+
+| Tool | Format | File size | GitHub rendering | Programmatic creation | Maintenance |
+|---|---|---|---|---|---|
+| **VHS (charmbracelet)** | GIF, MP4, WebM | Medium (1-5 MB for GIF) | Native `![demo](demo.gif)` | Excellent — `.tape` files are code | Re-run tape file to regenerate |
+| **asciinema** | `.cast` (text-based) | Tiny (50-200 KB) | Requires embed player (no native rendering) | Good — can script recordings | Needs hosted player or SVG converter |
+| **terminalizer** | GIF | Large (3-10 MB) | Native GIF embed | Moderate — YAML config + manual recording | Re-record to update |
+| **SVG animation** | SVG | Small (100-500 KB) | Native `![demo](demo.svg)` | Manual/complex | Hand-edit SVG or use svg-term |
+
+**Verdict: VHS is the best choice for Codepliant.** Reasons:
+
+1. **GIF renders natively on GitHub** — no external player needed (unlike asciinema)
+2. **Fully declarative** — `.tape` files are version-controlled code, not binary recordings
+3. **Reproducible** — anyone can regenerate the demo by running `vhs demo.tape`
+4. **CI-friendly** — can run in Docker (`docker run ghcr.io/charmbracelet/vhs`)
+5. **Multiple outputs** — single tape produces GIF + MP4 + WebM simultaneously
+6. **Active maintenance** — Charm is one of the most respected CLI tool companies
+
+**asciinema** is better for long, interactive demos where file size matters and you have a website to host the player. For a README GIF (Issue #3), VHS wins.
+
+---
+
+#### 3. Automated Demo GIF with VHS — Implementation Plan
+
+**Installation:**
+```bash
+brew install vhs    # macOS
+# Also needs: brew install ttyd ffmpeg (VHS installs these as deps)
+```
+
+**Draft `.tape` file for Codepliant (`demo.tape`):**
+
+```tape
+# Codepliant Demo GIF
+# Usage: vhs demo.tape
+
+Output demo.gif
+Output demo.mp4
+
+# Terminal appearance
+Set Shell "bash"
+Set FontSize 22
+Set Width 1200
+Set Height 600
+Set Theme "Catppuccin Mocha"
+Set Padding 20
+Set TypingSpeed 50ms
+Set WindowBar Colorful
+
+# Show the command
+Type "npx codepliant go ./my-saas-app"
+Sleep 500ms
+Enter
+
+# Wait for scan output to appear
+Sleep 3s
+
+# Let the user read the scan results
+Sleep 4s
+
+# Show the generated files
+Type "ls compliance-docs/"
+Sleep 300ms
+Enter
+Sleep 2s
+
+# Preview the privacy policy
+Type "head -30 compliance-docs/privacy-policy.md"
+Sleep 300ms
+Enter
+Sleep 5s
+```
+
+**Key VHS features to leverage:**
+
+- `Hide` / `Show` — hide setup commands (e.g., `cd` into the project directory) from the recording
+- `Wait /regex/` — pause until specific output appears (e.g., `Wait /Scan complete/`) instead of guessing sleep durations
+- `Set TypingSpeed 50ms` — makes typing look natural, not instant
+- `@` per-command speed override — e.g., `Type@100ms "slow text"` for emphasis
+- `Require codepliant` — fails fast if the CLI isn't installed
+
+**Optimization tips for smaller GIFs:**
+- Keep recordings under 15 seconds (GitHub displays GIFs inline; large ones are slow)
+- Use `Set Width 1200 Set Height 600` (16:10 ratio, not too tall)
+- Reduce colors with a dark theme (fewer color transitions = smaller GIF)
+- Use `ffmpeg` post-processing to optimize: `ffmpeg -i demo.gif -vf "fps=10,scale=800:-1" demo-optimized.gif`
+
+**CI automation** — add to GitHub Actions:
+
+```yaml
+- name: Generate demo GIF
+  run: |
+    docker run --rm -v $PWD:/vhs ghcr.io/charmbracelet/vhs /vhs/demo.tape
+```
+
+This solves Issue #3 (demo GIF) with a reproducible, version-controlled approach.
+
+---
+
+**Sources:**
+- [Diataxis documentation framework](https://diataxis.fr/)
+- [Astro Starlight docs](https://starlight.astro.build/getting-started/)
+- [Docusaurus docs](https://docusaurus.io/docs/category/guides)
+- [VitePress guide](https://vitepress.dev/guide/what-is-vitepress)
+- [GitHub CLI manual](https://cli.github.com/manual/)
+- [ESLint documentation](https://eslint.org/docs/latest/)
+- [VHS — charmbracelet/vhs](https://github.com/charmbracelet/vhs)
+- [asciinema](https://github.com/asciinema/asciinema)
+- [terminalizer](https://github.com/faressoft/terminalizer)
+
 ## Development Log
 
 **2026-03-16 — Swift/iOS ecosystem support (Issue #2)**
@@ -1594,6 +1771,17 @@ Products where the maker posted a detailed, authentic first comment averaged **1
   - `src/generator/disaster-recovery.test.ts` (45 tests): null return for <3 services (0/1/2), generation with 3+ services, last updated date, project name and organization, intro mentioning BCP and incident response, default placeholders, context values, securityEmail fallback, contactEmail in recovery complete template, disaster scenarios table (RTO/RPO targets), conditional database/auth/payment/storage/AI/email recovery sections (presence/absence), affected services listing, Terraform step (presence/absence via cicdScan), Kubernetes steps (presence/absence), deployment pipeline vs manual deployment (hasDeploymentPipeline flag/no cicdScan), communication templates (internal disaster declaration, customer notification, recovery complete, regulatory notification with GDPR 72-hour), DR testing schedule (tabletop/backup drill/partial failover/full simulation/communication drill), test success criteria (RTO/RPO/data integrity), DR team table (Commander/Technical/Database/Infrastructure/Communications/Security/Executive), related documents (BCP/IRP/Backup/Encryption/Change Management), plan maintenance (semi-annually, lessons learned), Codepliant disclaimer, sequential procedure numbering (2.1-2.6), numbering adjustment for absent categories, all service categories together with Terraform+Kubernetes+pipeline, company name in communication templates (declaration/notification/signoff), multiple services in affected line
 - **Generator modules now with tests** (17 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery
 - **Generator modules still missing tests**: 114 files (was 117)
+
+### Iteration 11 — 2026-03-16
+- **Build**: pass
+- **Tests**: 1806/1806 passing (was 1674, added 132 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/audit-log-policy.test.ts` (41 tests): null return for no services/non-audit categories (storage/email/AI only), generation with monitoring/analytics/auth/payment services, last updated date, project name, default placeholders, context values (companyName/contactEmail), purpose section (GDPR Article 30, SOC 2), scope section, events logged table with known service mappings (@sentry/node, posthog, dd-trace), generic events for unknown audit-relevant services, standard application events table (Authentication/Authorization/Security Events/Critical severity), multiple known services in events table, retention periods per category (monitoring 30/90 days, analytics 26 months, auth account duration, payment 7 years), retention justifications, retention rules (minimum/automated deletion/legal holds/anonymization), access controls with role-based access per category (monitoring/analytics/auth/payment), PCI DSS scope for payment logs, access principles (least privilege/need-to-know/time-limited/meta-audit), access review schedule (quarterly/monthly/annually), log integrity (TLS 1.2/AES-256/append-only/immutability), tampering detection (timestamps/checksums), incident response integration (GDPR 72-hour/post-mortem), policy review section, Codepliant disclaimer, all four audit-relevant categories together, non-audit category exclusion from retention/access controls
+  - `src/generator/business-continuity.test.ts` (48 tests): null return for <3 services (0/1/2), generation with 3+ services, last updated date, project name, default placeholders, context values (companyName/contactEmail/securityEmail), securityEmail fallback to contactEmail, recovery objectives section (RTO/RPO definitions), critical services (auth/payment/database at RTO 1 hour, RPO 0-5 min), high priority services (email/storage/AI at RTO 4 hours), standard services (monitoring/analytics at RTO 24 hours), no-services-detected placeholders for each tier, infrastructure overview with/without cloudScan, cloud provider regions and Not specified fallback, architecture diagram placeholder, database failover (promote replica/connection strings), application failover (health check/load balancer), conditional auth failover (cached sessions/extend tokens, presence/absence), conditional payment failover (idempotency keys/reconcile, presence/absence), conditional AI failover (graceful degradation, presence/absence), backup strategy (schedule/AES-256/verification/monthly restore drill), communication plan (P1-P4 severity/internal/external), escalation path, status update templates with company name, roles and responsibilities (Incident Commander/Technical Lead/DPO), third-party dependency map with impact descriptions and workarounds, testing and drills (tabletop/backup drill/full DR simulation), plan maintenance, Codepliant disclaimer, all service categories together, isDataProcessor false exclusion from dependency map
+  - `src/generator/compliance-roadmap.test.ts` (43 tests): always returns string (never null) even with no services, company name/default placeholder, generated date, service count, four-phase overview table, Phase 1 privacy/terms (GDPR Art. 13), conditional cookie compliance (presence/absence with analytics), conditional AI compliance (EU AI Act Art. 50/August 2026/AI_MODEL_CARD.md, presence/absence), conditional payment compliance (REFUND_POLICY.md/14-day cooling-off, presence/absence), Week 1 checklist with conditional rows, Phase 2 security/IR (SECURITY.md/INCIDENT_RESPONSE_PLAN.md/72-hour breach notification), access/change control (ACCESS_CONTROL_POLICY.md/CHANGE_MANAGEMENT_POLICY.md), data protection (DSAR/DATA_RETENTION_POLICY.md), website context for security email, Phase 3 advanced compliance, conditional SOC 2 preparation (>=5 services, SOC2_READINESS_CHECKLIST.md/ISO_27001_CHECKLIST.md), data processing agreements (DPA/PIA/TIA/SCC/Schrems II), AI-specific PIA note (GDPR Art. 35), vendor management, Phase 4 ongoing monitoring (CI/CD/pre-commit/periodic scans), review cadence table, trigger-based updates, progress tracker, regulatory deadlines (GDPR always, CCPA conditional on jurisdictions, EU AI Act conditional on AI), Codepliant footer with version and service count, legal disclaimer, all conditional sections together, sub-processor count reference
+- **Generator modules now with tests** (20 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap
+- **Generator modules still missing tests**: 111 files (was 114)
 
 ## Website Updates
 
@@ -2056,6 +2244,84 @@ _Updated by Website Agent each iteration._
 - Software application JSON-LD description updated
 
 **Design consistency:** All styling uses existing design tokens (`text-ink-secondary`, `bg-surface-secondary`, `text-brand`, `bg-code-bg`, `text-code-fg`, `border-border`). No new CSS classes or custom styles introduced.
+
+**Build verification:**
+- `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 11 — 2026-03-16 — Privacy Policy Generator page overhaul
+
+**Rewrote the Privacy Policy Generator page** (`src/app/privacy-policy-generator/page.tsx`) from a short stub into a comprehensive landing page targeting "privacy policy generator for developers":
+
+1. **Breadcrumb navigation** (new) — Added `<nav aria-label="Breadcrumb">` with Home / Privacy Policy Generator path. Breadcrumb JSON-LD rendered in `<script type="application/ld+json">`.
+
+2. **"What a privacy policy must contain" section** (new) — Eight cards covering every required element: data collected, legal basis (why), third-party services, retention periods, user rights (GDPR Articles 15-22, CCPA 1798.100-135), international transfers, cookie disclosures, and contact information. Explains why missing any element means non-compliance.
+
+3. **"How Codepliant generates your privacy policy from code" section** (new) — Four numbered steps with branded circle indicators: (1) scan dependencies and imports, (2) detect services and data flows, (3) map legal obligations (GDPR legal basis per category), (4) generate the document. Each step has a detailed description of what happens internally.
+
+4. **"What Codepliant detects" section** (expanded) — Increased from 8 to 12 detection categories with specific service examples in parentheses: Clerk/Auth0/Firebase Auth for auth, PostHog/Mixpanel/Amplitude for analytics, Stripe/PayPal for payments, Sentry/Datadog/LogRocket for monitoring, LaunchDarkly/Statsig for feature flags, Intercom/HubSpot for CRM, OneSignal/Firebase for push notifications.
+
+5. **Before/after comparison** (new) — Side-by-side visual comparison of a generic privacy policy template vs. Codepliant-generated output for a Next.js SaaS app using Stripe, PostHog, Clerk, and Sentry. Generic version shows vague "we may collect" / "we may use third-party service providers" language. Codepliant version names each service, lists exact data categories, includes GDPR article references per processing activity, and specifies international transfer destinations. Summary callout below highlights the key difference.
+
+6. **"Why questionnaire-based generators fall short" section** (new) — Four problem cards: self-reporting gaps, instant staleness when dependencies change, generic language that fails GDPR specificity requirements, and missing legal basis mapping (Article 6).
+
+7. **"Regulation-aware output" section** (new) — 2x2 grid covering GDPR (EU), CCPA/CPRA (California), LGPD (Brazil), and PIPEDA (Canada) with specific requirements Codepliant addresses for each regulation.
+
+8. **CTA section** (enhanced) — Descriptive copy about what users get, "Works offline" tagline, `npx codepliant go` command block.
+
+9. **FAQ section** (new) — 8 questions with FAQ JSON-LD schema: differentiation from other generators, required privacy policy contents, GDPR compliance, supported languages, pricing (free/MIT), third-party detection mechanism, customization options, regeneration frequency.
+
+10. **Related resources** (new) — 2x2 grid linking to GDPR Compliance Tool, Cookie Policy Generator, Data Privacy Hub, and Privacy Policy for SaaS blog post.
+
+**SEO improvements:**
+- Title updated to "Privacy Policy Generator for Developers | Generate from Code | Codepliant"
+- Added `keywords` meta array with 12 privacy policy terms including target keyword "privacy policy generator for developers"
+- Enhanced meta description to mention code scanning, data collection detection, and regulation coverage
+- Added Twitter card metadata
+- FAQ JSON-LD with 8 questions
+- SoftwareApplication JSON-LD schema
+- Breadcrumb JSON-LD schema
+
+**Design consistency:** All styling uses existing design tokens (`text-ink-secondary`, `bg-surface-secondary`, `text-brand`, `bg-code-bg`, `text-code-fg`, `border-border`). No new CSS classes or custom styles introduced.
+
+**Build verification:**
+- `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 11 — 2026-03-16 — AI Governance page overhaul
+
+**Rewrote the AI Governance page** (`src/app/ai-governance/page.tsx`) from a basic framework overview into a comprehensive AI governance guide:
+
+1. **Visible breadcrumb navigation** (new) — Added `<nav aria-label="Breadcrumb">` with Home / AI Governance path. Breadcrumb JSON-LD now rendered in page (was defined but not rendered).
+
+2. **"What AI governance means for developers" section** (new) — Explains why AI governance requires engineering involvement, contrasts with traditional compliance, and positions Codepliant as the bridge between code and governance documentation.
+
+3. **"EU AI Act overview" section** (expanded) — Full risk classification breakdown with color-coded border indicators (red=Unacceptable, orange=High, yellow=Limited, green=Minimal). Includes obligations per tier, key deadlines timeline (Feb 2025 through Aug 2027), and penalty structure (up to 35M euros or 7% turnover). Links to `/blog/eu-ai-act-deadline`.
+
+4. **"NIST AI RMF alignment" section** (retained/improved) — Four NIST functions (Govern, Map, Measure, Manage) with introductory paragraph linking to Colorado AI Act blog post for US state-level context.
+
+5. **"How Codepliant detects AI services and generates compliance documents" section** (new) — Detection table covering 7 categories: LLM Providers, ML Frameworks, AI Orchestration, AI Infrastructure, Vector Databases, AI APIs, and Env Variables. Explains the scan-to-classify-to-document pipeline.
+
+6. **"AI governance documents Codepliant generates" section** (updated) — 12 document types in 2-column grid, added Algorithmic Impact Assessment and AI Incident Response Plan.
+
+7. **"AI governance checklist for SaaS companies" section** (new) — 6 categories (AI inventory & classification, Risk management, Transparency & disclosure, Human oversight, Data governance, Monitoring & incident response) with 30 interactive checkbox items.
+
+8. **"Why AI governance matters now" section** (expanded) — Updated EU AI Act timeline, added Colorado AI Act reference with link to `/blog/colorado-ai-act`, added enterprise sales and investor context.
+
+9. **CTA section** (enhanced) — Descriptive copy mentioning risk classification and framework alignment. Added links to GitHub, npm, and docs.
+
+10. **Related resources** (new) — 6 linked cards: EU AI Act Developer Guide, Colorado AI Act Guide, Data Privacy Hub, GDPR Compliance Tool, SOC 2 Compliance Tool, Compare page.
+
+11. **FAQ section** — Expanded from 4 to 8 entries: added questions about EU AI Act deadlines, Colorado AI Act applicability, AI model inventories, and documentation update cadence.
+
+**SEO improvements:**
+- Added `keywords` meta array with 15 AI governance terms
+- Enhanced meta title to include "| Codepliant" for brand recognition
+- Enhanced meta description to mention EU AI Act, NIST AI RMF, and code scanning
+- Breadcrumb JSON-LD now rendered (was defined but never injected into page)
+- FAQ JSON-LD expanded from 4 to 8 questions
+- Internal links to `/blog/eu-ai-act-deadline` and `/blog/colorado-ai-act` throughout content
+- Anchor IDs with `scroll-mt-24` on all major sections for deep linking
+
+**Design consistency:** All styling uses existing design tokens (`text-ink-secondary`, `bg-surface-secondary`, `text-brand`, `bg-code-bg`, `text-code-fg`, `border-border-subtle`). No new CSS classes or custom styles introduced.
 
 **Build verification:**
 - `next build` passes cleanly, 25/25 static pages generated successfully
@@ -2553,3 +2819,60 @@ Sources:
    - **Fix** (`src/app/pricing/page.tsx`): Pro CTA now links to `/docs`. Team CTA now links to `mailto:hello@codepliant.dev` (contact action).
 
 **Build verification:** `npx next build` passes cleanly, all 25 static pages generated successfully. Zero `href="#"` instances remain in source code.
+
+**2026-03-16 — Prepare v1.1.0 release (Iteration 11)**
+- Updated version from 1.0.0 to 1.1.0 in two locations:
+  - `package.json` — `"version": "1.1.0"`
+  - `src/cli.ts` — `const VERSION = "1.1.0"`
+- Replaced CHANGELOG.md with clean Keep a Changelog format covering v1.1.0 and v1.0.0
+  - v1.1.0 sections: Added (wizard, sbom, Terraform, Django, Flutter, Swift, Impressum, doc categorization), Changed (puppeteer optional, package size reduction), Fixed (GitHub Actions scanner, dedup edge cases)
+  - v1.0.0 section: Initial release summary (120+ doc types, 10+ ecosystems, 200+ signatures, MCP server)
+- Build verified: `npx tsc` passes cleanly with zero errors
+- Files ready for publish — `npm publish` NOT run (manual step)
+
+### Iteration 11 — 2026-03-16 — Full regression audit after 10 iterations
+
+**Test scope**: All 20 routes audited via curl at `http://localhost:5001`. Regression testing focused on: route availability, mobile hamburger menu presence, JSON-LD schema validity, test count accuracy, document type count accuracy, ecosystem count accuracy, and mobile overflow prevention.
+
+**Pages audited**: `/`, `/about`, `/ai-disclosure-generator`, `/ai-governance`, `/blog`, `/blog/colorado-ai-act`, `/blog/eu-ai-act-deadline`, `/blog/gdpr-for-developers`, `/blog/privacy-policy-for-saas`, `/changelog`, `/compare`, `/cookie-policy-generator`, `/data-privacy`, `/docs`, `/gdpr-compliance`, `/hipaa-compliance`, `/pricing`, `/privacy-policy-generator`, `/soc2-compliance`, `/terms-of-service-generator`
+
+**Results: All 20 routes pass all checks after fixes.**
+
+1. **Full route audit (20 routes)** — All return HTTP 200. PASS.
+2. **Mobile hamburger menu** — Present on all 20 pages (SVG 3-line icon inside `<details>` element, added in iteration 10). PASS.
+3. **JSON-LD schemas** — All pages have valid JSON-LD with required fields. Organization schema has `name`, `description`, `url` on all pages. SoftwareApplication schemas have `name` and `description`. Article schemas have `headline` and `description`. PASS.
+4. **Test count** — Shows "1,806" on homepage, about, and changelog (matches PROGRESS.md "1806 passing"). PASS.
+5. **Document type count** — Shows "121+" across homepage, layout meta tags, docs, blog. PASS.
+6. **Ecosystem count** — Shows "12" on homepage, about, pricing, docs, changelog. PASS.
+7. **Mobile overflow prevention** — Global CSS rules added (`overflow-x: hidden` on html/body, `overflow-x: auto` on pre elements). All pages with `<pre>` or `<table>` blocks have overflow-x-auto wrappers. PASS.
+
+**Bugs found and fixed:**
+
+1. **Stale test count across 3 pages** — Homepage, about, and changelog all showed "1,367 tests" instead of the current "1,806 tests" from PROGRESS.md.
+   - **Fix**: Updated `src/app/page.tsx` (trust signals section), `src/app/about/page.tsx` (stats array), `src/app/changelog/page.tsx` (v1.1.0 changes).
+
+2. **Stale ecosystem count across 4 pages** — Homepage showed "10+", about showed "11", pricing showed "10+", docs FAQ showed "10+", changelog v1.0.0 said "10+ ecosystems". Current count is 12.
+   - **Fix**: Updated `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/pricing/page.tsx`, `src/app/docs/page.tsx`, `src/app/changelog/page.tsx` to "12".
+
+3. **Stale document type count "35+" across 6 files** — Homepage, layout.tsx metadata, docs, and blog all referenced "35+ compliance documents" instead of the current "121+".
+   - **Fix**: Updated all occurrences in `src/app/page.tsx`, `src/app/layout.tsx`, `src/app/docs/page.tsx`, `src/app/blog/page.tsx`.
+
+4. **Organization JSON-LD missing `description` field** — The shared `organizationJsonLd()` function in `layout.tsx` (rendered on all 20 pages) omitted the `description` property, which is a recommended field for Organization schema.
+   - **Fix** (`src/app/layout.tsx`): Added `description` to the Organization JSON-LD.
+
+5. **Pricing page SoftwareApplication JSON-LD missing `description`** — The pricing page's SoftwareApplication schema had `name` and `offers` but no `description`.
+   - **Fix** (`src/app/pricing/page.tsx`): Added `description` field.
+
+6. **Cookie Policy Generator and Terms of Service Generator pages missing page-level JSON-LD** — These two pages only inherited the Organization JSON-LD from layout.tsx, unlike all other pages which have SoftwareApplication + BreadcrumbList schemas.
+   - **Fix** (`src/app/cookie-policy-generator/page.tsx`, `src/app/terms-of-service-generator/page.tsx`): Added SoftwareApplication and BreadcrumbList JSON-LD functions and script tags.
+
+7. **Homepage file tree `<pre>` block missing overflow-x-auto** — The "legal/ (generated)" file tree preview had no `overflow-x-auto` on its container div, risking horizontal overflow on narrow screens.
+   - **Fix** (`src/app/page.tsx`): Added `overflow-x-auto` class to the container div.
+
+8. **No global mobile overflow safeguard** — No CSS-level prevention of horizontal scroll.
+   - **Fix** (`src/app/globals.css`): Added `overflow-x: hidden` on `html, body` and `overflow-x: auto; max-width: 100%` on `pre` elements.
+
+9. **Changelog missing Swift/iOS entry** — The v1.1.0 changelog did not mention the Swift/iOS ecosystem scanner that was added.
+   - **Fix** (`src/app/changelog/page.tsx`): Added Swift/iOS entry to v1.1.0 changes and updated summary.
+
+**Build verification:** `npx next build` passes cleanly, all pages generated as static content. Server restarted with `npx next start -p 5001`, all 20 routes verified HTTP 200.
