@@ -4432,10 +4432,10 @@ function runLint(
   const warnings = result.issues.filter((i) => i.severity === "warning");
 
   for (const issue of errors) {
-    console.log(`  ${RED()}ERROR${RESET()}   ${issue.document}: ${issue.message}`);
+    console.log(`  ${RED()}ERROR${RESET()}   ${DIM()}[${issue.rule}]${RESET()} ${issue.document}: ${issue.message}`);
   }
   for (const issue of warnings) {
-    console.log(`  ${YELLOW()}WARN${RESET()}    ${issue.document}: ${issue.message}`);
+    console.log(`  ${YELLOW()}WARN${RESET()}    ${DIM()}[${issue.rule}]${RESET()} ${issue.document}: ${issue.message}`);
   }
 
   console.log();

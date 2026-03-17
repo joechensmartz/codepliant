@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4756 passing — 100% scanner, 93/138 generators (67.4%)
+- **Tests**: 4909 passing — 100% scanner, 96/138 generators (69.6%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 35 complete (2026-03-17)
-- **Last run**: --jurisdictions flag, 155 tests, 🎉 2/3 GENERATOR COVERAGE (93/138), dev.to strategy, tsconfig fix
+- **Iteration**: 36 complete (2026-03-17)
+- **Last run**: lint enhanced (3 rules), 149 tests (4909!), US state privacy laws, stats 4756
 
 ## Priority Backlog
 
@@ -7429,3 +7429,130 @@ codepliant go --jurisdictions gdpr,ccpa,uk-gdpr
   - `src/generator/compliance-board-report.test.ts` (63 tests): always returns string (never null even with no services), basic generation with services, quarter/year in title, date format, Confidential classification, project name, context values (company name, placeholder), Executive Summary (Key Metrics table, service count, AI active Yes/No, Payment Processing Yes/No), risk levels (Low/<5, Medium/5+, High/10+ or AI, Critical/15+ or AI+payment), Board Action Items (AI governance/EU AI Act/PCI DSS conditional, exclusion without), Risk Heatmap (Likelihood vs Impact Matrix, conditional AI misuse/Payment fraud, Risk by Service Category with AI High/Payment High/Auth Medium/Monitoring Low), Regulatory Updates (GDPR default, EU AI Act with AI, PCI DSS with payment, CCPA with jurisdictions, NIS2/DORA always, Upcoming Changes), Budget vs Actual (Startup/Growth/Enterprise tiers based on service count and AI+payment, budget line items), Compliance Program Status (Document Coverage, AI Compliance row conditional, Key Achievements/Planned sections), Incident & DSAR Summary, Strategic Recommendations (automated scanning always, EU AI Act readiness with AI, vendor consolidation 10+, legal review/board training always), Appendix (detected services, data truncation to 3 items, 25-service limit), Codepliant disclaimer, comprehensive test with 8 services and all sections
 - **Generator modules now with tests**: 93/138 (67.4%)
 - **Generator coverage**: 65.2% → 67.4% — PAST THE 2/3 (66.7%) MILESTONE!
+
+### Iteration 36 — 2026-03-17 — US State Privacy Law Landscape Research
+
+#### CCPA vs CPRA: Key Differences
+
+The CPRA (California Privacy Rights Act) **amended** the CCPA — it is not a separate law. Key changes the CPRA introduced (effective Jan 1, 2023):
+
+| Feature | CCPA (Original) | CPRA (Amendment) |
+|---|---|---|
+| **Enforcement** | CA Attorney General | New dedicated agency: California Privacy Protection Agency (CPPA) |
+| **Revenue threshold** | $25M | $26,625,000 (adjusted) |
+| **Consumer data threshold** | 50,000 consumers | 100,000 consumers |
+| **Sensitive personal info** | Not a distinct category | New category (health, geolocation, race, etc.) with right to limit use |
+| **Consumer rights** | Know, delete, opt-out of sale | Added: right to correct, right to limit sensitive data use |
+| **Data sharing** | Only "sale" restricted | "Sale" AND "sharing" (cross-context behavioral advertising) restricted |
+| **Penalties** | $2,500/$7,500 per violation | Same, but CPPA can impose administrative fines directly |
+
+**New for 2026**: CPPA adopted final regulations (effective Jan 1, 2026) requiring: (1) mandatory cybersecurity audits for certain businesses, (2) risk assessments for automated decision-making technology (ADMT), (3) expanded consumer rights related to algorithmic processes, and (4) the DELETE Act's DROP system requiring data brokers to honor bulk opt-out/deletion requests with 45-day sweeps.
+
+#### The 20 US States with Comprehensive Privacy Laws (as of 2026)
+
+California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah, Virginia, and (with amendments) Arkansas.
+
+**Effective date clusters:**
+- Already in effect: CA, CO, CT, DE, IA, MD, MN, MT, NE, NH, NJ, OR, TN, TX, UT, VA
+- Jan 1, 2026: Indiana, Kentucky, Rhode Island
+- Jul 1, 2026: Connecticut (major amendments), Arkansas, Utah (amendments)
+
+#### 5 Most Impactful State Privacy Laws for SaaS Developers
+
+**1. California (CCPA/CPRA) — The Gold Standard**
+- **Why it matters**: Largest US economy; sets the de facto national baseline. Most SaaS companies will hit the thresholds.
+- **Unique**: Only state with a dedicated enforcement agency (CPPA). New 2026 ADMT risk assessment and cybersecurity audit requirements. DELETE Act's DROP system for data broker bulk deletion.
+- **Thresholds**: $26.625M revenue OR 100,000+ CA consumers OR 50%+ revenue from selling data.
+- **Penalties**: $2,500/violation, $7,500/intentional or child-related violation.
+- **SaaS impact**: Automated decision-making risk assessments affect any SaaS using ML/AI features. Cybersecurity audit requirements add operational burden.
+
+**2. Texas (TDPSA) — No Revenue/Size Threshold**
+- **Why it matters**: Second-largest US state, and the TDPSA has **no revenue threshold and no minimum consumer count** — it applies to virtually any business operating in or serving Texas residents.
+- **Unique**: Only major state law to forego numeric applicability thresholds entirely. Uses SBA small business definitions instead, which vary by NAICS code (creating unpredictable coverage). Even small businesses lose their exemption if they sell sensitive data.
+- **SaaS impact**: A 3-person SaaS startup serving Texas users could be covered. Dual controller/processor roles for SaaS platforms create specific obligations. Must honor universal opt-out signals.
+- **Penalties**: Up to $7,500/violation; enforced by TX Attorney General.
+
+**3. Maryland (MODPA) — Strictest in the Nation**
+- **Why it matters**: Effective Oct 1, 2025 (enforcement from Apr 1, 2026). Sets a new high-water mark for US privacy protection, even exceeding GDPR in some areas.
+- **Unique provisions**:
+  - **Blanket ban on selling sensitive data** — consent does NOT override this. First state to do this.
+  - **Strongest data minimization**: collection limited to what is "reasonably necessary and proportionate" to provide the specific service requested. Goes beyond GDPR.
+  - **Applies to nonprofits** (only narrow first-responder exceptions).
+  - **Lowest thresholds**: 35,000 consumers OR 10,000 consumers if 20%+ revenue from data sales.
+  - **Higher penalties**: $10,000/violation, $25,000 for repeat violations (vs. $7,500 in most states).
+- **SaaS impact**: Data minimization requirement means SaaS apps cannot collect "nice to have" data. Sensitive data sale ban affects any SaaS with data monetization models.
+
+**4. Connecticut (CTDPA, as amended) — Leading on Minors and Neural Data**
+- **Why it matters**: CT has been the most actively amended state privacy law. July 2026 amendments significantly expand scope and protections.
+- **Unique provisions (2026 amendments)**:
+  - **Neural data** added to sensitive data definition (brain-computer interface data, neurotechnology).
+  - **Categorical ban** on processing minors' data for targeted advertising or sale — consent cannot override.
+  - **Anti-addictive design**: prohibits system design features that "significantly increase, sustain or extend" a minor's usage.
+  - **Threshold reduction**: dropping from 100,000 to 35,000 consumers (matching Maryland).
+  - New applicability triggers for processing sensitive data or selling data at any volume.
+- **SaaS impact**: Any SaaS with users under 18 must implement age-gating and avoid engagement-maximizing patterns. Neural data category is forward-looking for health/wellness/BCI SaaS.
+
+**5. Colorado (CPA) — Universal Opt-Out Pioneer**
+- **Why it matters**: First state to mandate recognition of universal opt-out mechanisms (UOOMs) with published technical specifications and an official recognized mechanism list.
+- **Unique provisions**:
+  - **Mandatory UOOM compliance** since Jul 1, 2024. Currently, Global Privacy Control (GPC) is the only recognized mechanism.
+  - UOOM providers cannot use, disclose, or retain any personal data collected through the opt-out mechanism for any other purpose.
+  - Controllers cannot require additional personal data beyond what is strictly necessary to verify Colorado residency.
+  - Data protection assessments required for targeted advertising, profiling, and sensitive data processing.
+- **Thresholds**: 100,000 consumers OR 25,000 consumers + revenue from data sales.
+- **SaaS impact**: Must implement GPC signal detection in web applications. Cannot dark-pattern around opt-out. Sets technical implementation requirements that other states are adopting.
+
+#### Common Threshold Patterns Across All 20 States
+
+| Pattern | States |
+|---|---|
+| 100K consumers OR 25K + revenue from sales | VA, CO, CT (until Jul 2026), IN, IA, KY, MT, NH, NJ, TN, UT |
+| 35K consumers (lower bar) | MD, RI, CT (from Jul 2026) |
+| No numeric threshold (SBA-based) | TX, NE |
+| Revenue-based ($25M+) | CA only |
+
+#### Key Trends for Codepliant to Support
+
+1. **Universal opt-out signals (GPC)**: CO mandates, CA/CT/MT/TX also require. Codepliant should detect GPC implementation in scanned code and flag its absence.
+2. **Sensitive data categories are expanding**: Neural data (CT), consumer health data (WA separate law, MD strict), biometric (IL BIPA still strongest standalone). Codepliant's scanner should flag sensitive data types.
+3. **Minor-specific protections are the hottest enforcement area**: CT, CA, MD, OR all have enhanced child protections. SaaS serving any age group should generate age-verification compliance docs.
+4. **Data minimization is becoming a hard requirement** (MD leads, others following). Codepliant could flag "over-collection" patterns.
+5. **No-threshold states** (TX, NE) mean even tiny SaaS startups need compliance docs — strong argument for Codepliant's free/open-source value proposition.
+6. **Automated decision-making (ADMT) requirements** (CA 2026, CT 2026) affect any SaaS using ML/AI — aligns with Codepliant's existing AI disclosure generator.
+
+#### Relevance to Codepliant's `--jurisdictions` Flag
+
+The `--jurisdictions` flag should support at minimum: `ccpa`, `cpra` (alias for ccpa), `tdpsa`, `modpa`, `ctdpa`, `cpa-co`, and a `us-all` shorthand. Generated privacy policies should include state-specific sections for: consumer rights by state, sensitive data definitions (vary significantly), opt-out mechanisms required, minor-specific disclosures, and data sale restrictions (especially MD's blanket ban).
+
+### Iteration 36 — 2026-03-17 — Enhanced `codepliant lint` Command
+
+**What changed**: Improved the existing `codepliant lint` command with three new lint checks, bringing the total to seven distinct lint rules:
+
+1. **placeholder** (existing, expanded) — Added more placeholder patterns: `[Your Company Address]`, `[your-domain.com]`, `[privacy@example.com]`, `[dpo@example.com]`, `[PLACEHOLDER...]`, `[YOUR...]`
+2. **undetected-service** (new) — Flags documents that reference well-known third-party services (Stripe, Google Analytics, Sentry, etc.) not found in the project scan. Covers 40+ known services across payments, analytics, monitoring, email, cloud, auth, AI, and infrastructure categories.
+3. **broken-link** (new) — Detects broken internal markdown links (`[text](path)`) by checking if target files exist relative to the document or the output directory root. Skips external URLs, mailto, and anchor-only links.
+4. **inconsistent-company-name** (new) — Extracts company names from `**Company:**` fields and H1 headings across all documents. Flags when different names appear in different docs (e.g., "Acme Corp" in ToS but "Acme Inc" in Security Policy).
+
+**Other improvements**:
+- Added `rule` field to `LintIssue` interface — every issue now carries a machine-readable rule identifier (e.g., `missing-document`, `placeholder`, `broken-link`, `undetected-service`, `inconsistent-company-name`, `missing-section`, `outdated`, `empty-document`, `unreadable`)
+- CLI output now shows rule tags: `ERROR [missing-document]` / `WARN [broken-link]`
+- JSON output includes the `rule` field for CI integration
+
+**Files modified**:
+- `src/lint.ts` — Added 3 new check functions, expanded placeholder patterns, added `rule` to all issues
+- `src/lint.test.ts` — Added 4 new tests (rule identifier, broken links, undetected services, inconsistent company names); 8 tests total, all passing
+- `src/cli.ts` — Updated lint report output to show rule tags
+
+**Tests**: `npx tsc` clean, 8/8 lint tests passing
+
+### Iteration 36 — 2026-03-17 — Generator Tests (96/138 = 69.6%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4909/4909 passing (was 4756, added 149 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/quick-start-guide.test.ts` (53 tests): always returns string (never null even with no services), title/tagline, date format, context values (companyName/contactEmail/website/placeholder values), service count display (0/2), detected service names listing, no-services fallback text, Step 1 Review Privacy Policy (placeholder instructions, estimated time 15-30 min, PRIVACY_POLICY.md link), conditional AI Notice (EU AI Act/AI_DISCLOSURE.md presence/absence), Step 2 framework-specific instructions (Next.js/Nuxt/Vue/Angular/SvelteKit/Rails/Django/Laravel/Express/React/generic fallback), HTML format pro tip, Next.js AI disclosure link in footer, Step 3 Cookie Consent (analytics: COOKIE_CONSENT_CONFIG.json/CookieYes/Cookiebot/OneTrust, no-analytics message), Step 4 CI/CD (GitHub Actions compliance.yml/GitLab CI/pre-commit hook), Step 5 Ongoing Maintenance (schedule table: commit/weekly/monthly/quarterly/annually), Quick Reference table (conditional AI Disclosure/Cookie Policy/Refund Policy presence/absence), Need Help section (go/dashboard/validate/report commands), Codepliant footer, legal disclaimer, comprehensive stack test with all service types
+  - `src/generator/third-party-cookie-notice.test.ts` (46 tests): null return for no services/unknown providers/database-only, generation with Google Analytics/PostHog/next-auth, date format, project name, context values (companyName/contactEmail/placeholder values), Provider Summary section with table headers, ePrivacy Directive/GDPR Art. 6(1)(a) references, per-provider cookie details (Google Analytics _ga/_gid/_gat + opt-out URL, PostHog ph_*/distinct_id, Mixpanel mp_*, Hotjar _hj*, Meta Pixel _fbp/fr, Clerk __session, Supabase sb-*-auth-token, Segment ajs_anonymous_id, Amplitude amp_*, Microsoft Clarity _clck/_clsk, Vercel Analytics va_*, Firebase _ga_firebase), provider deduplication (Google LLC once for GA + @google-analytics/data), category classification (Advertising/Analytics/Authentication), Cookies Set subsection per provider, opt-out instructions (third-party visit URL/GPC, first-party auth strictly necessary), Your Rights section (Withdraw consent/Request deletion/Port/GDPR Art. 20), Browser-Level Controls (Chrome/Firefox/Safari/Edge), GPC section, Contact section, Codepliant attribution/project name/legal review/static code analysis disclaimers, multiple providers test
+  - `src/generator/employee-handbook-privacy.test.ts` (50 tests): null return for no services, generation with services, Privacy & Monitoring title, effective date, Internal document notice, context values (companyName/contactEmail/dpoName/dpoEmail/placeholder values), Section 1 Purpose & Scope (workplace monitoring/device usage/email monitoring/employee data privacy, scope: employees/contractors/interns/temporary workers), Section 2 Workplace Monitoring Policy (monitoring principles: Security/Compliance/Performance/proportionality, active monitoring tools table with monitoring/analytics services presence/absence, Sentry deduplication by label, not-for-performance-evaluation disclaimer), Section 3 Device Usage Policy (company-issued/BYOD/MDM, third-party service count in Software & Cloud Services), Section 4 Email & Communication Monitoring (email not private, email services table: SendGrid/Resend, messaging tools), conditional Section 5 AI Tools (openai/user prompts/employee responsibilities/sensitive data warning, absence without AI), Employee Data Privacy Rights (IP addresses/login timestamps/email metadata, GDPR rights table: Access/Rectification/Erasure/Data Portability, exercise rights with 30 days, DPO in rights section), Enforcement & Consequences (termination/circumvent monitoring/retaliation), Changes to Policy, Employee Acknowledgment form (Employee/Manager Name/Signature), Codepliant/legal+HR disclaimer, section numbering without AI (1-7) vs with AI (1-8), known tool descriptions (Sentry/PostHog/Hotjar/Datadog RUM), comprehensive stack test
+- **Generator modules now with tests**: 96/138 (69.6%)
+- **Generator coverage**: 67.4% → 69.6%

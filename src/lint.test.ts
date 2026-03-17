@@ -84,4 +84,69 @@ describe("lintDocuments", () => {
       cleanup(dir);
     }
   });
+
+  it("issues include a rule identifier", () => {
+    const dir = createTempProject({ stripe: "^14.0.0" });
+    try {
+      const result = lintDocuments(dir, "legal");
+      assert.ok(result.issues.length > 0);
+      for (const issue of result.issues) {
+        assert.ok(typeof issue.rule === "string", `Issue should have a rule field: ${JSON.stringify(issue)}`);
+        assert.ok(issue.rule.length > 0, "Rule should not be empty");
+      }
+    } finally {
+      cleanup(dir);
+    }
+  });
+
+  it("detects broken internal document links", () => {
+    const dir = createTempProject({}, {
+      "TERMS_OF_SERVICE.md": "# Terms of Service\n\nSee our [Privacy Policy](PRIVACY_POLICY.md) and [FAQ](./FAQ.md) for details.\n",
+      "SECURITY.md": "# Security Policy\n\nContent.\n",
+      "INCIDENT_RESPONSE_PLAN.md": "# Incident Response Plan\n\nContent.\n",
+    });
+    try {
+      const result = lintDocuments(dir, "legal");
+      const brokenLinkIssues = result.issues.filter((i) => i.rule === "broken-link");
+      // FAQ.md doesn't exist, so it should be flagged
+      assert.ok(brokenLinkIssues.some((i) => i.message.includes("FAQ.md")), "Should detect broken link to FAQ.md");
+    } finally {
+      cleanup(dir);
+    }
+  });
+
+  it("detects references to services not found in scan", () => {
+    // Create a project with no Stripe dependency but a doc mentioning Stripe
+    const dir = createTempProject({}, {
+      "TERMS_OF_SERVICE.md": "# Terms of Service\n\nWe use Stripe for payment processing and Mixpanel for analytics.\n",
+      "SECURITY.md": "# Security Policy\n\nContent.\n",
+      "INCIDENT_RESPONSE_PLAN.md": "# Incident Response Plan\n\nContent.\n",
+    });
+    try {
+      const result = lintDocuments(dir, "legal");
+      const serviceIssues = result.issues.filter((i) => i.rule === "undetected-service");
+      assert.ok(serviceIssues.length > 0, "Should detect undetected service references");
+      assert.ok(serviceIssues.some((i) => i.message.includes("Stripe")), "Should flag Stripe reference");
+    } finally {
+      cleanup(dir);
+    }
+  });
+
+  it("detects inconsistent company names across documents", () => {
+    // Use filenames that codepliant actually generates for a bare project
+    const dir = createTempProject({}, {
+      "TERMS_OF_SERVICE.md": "# Acme Corp Terms of Service\n\n**Company:** Acme Corp\n\nTerms content.\n",
+      "SECURITY.md": "# Acme Inc Security Policy\n\n**Company:** Acme Inc\n\nSecurity content.\n",
+      "INCIDENT_RESPONSE_PLAN.md": "# Incident Response Plan\n\nContent.\n",
+    });
+    try {
+      const result = lintDocuments(dir, "legal");
+      const nameIssues = result.issues.filter((i) => i.rule === "inconsistent-company-name");
+      assert.ok(nameIssues.length > 0, "Should detect inconsistent company names");
+      assert.ok(nameIssues[0].message.includes("Acme Corp"), "Should mention first company name");
+      assert.ok(nameIssues[0].message.includes("Acme Inc"), "Should mention second company name");
+    } finally {
+      cleanup(dir);
+    }
+  });
 });
