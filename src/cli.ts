@@ -139,6 +139,7 @@ ${BOLD()}Setup:${RESET()}
   ${CYAN()}template${RESET()}        Manage custom document templates
   ${CYAN()}config show${RESET()}     Pretty-print current configuration
   ${CYAN()}check-config${RESET()}    Validate config against schema, show completeness
+  ${CYAN()}onboard${RESET()}         Guided onboarding for new projects
 
 ${BOLD()}Account:${RESET()}
   ${CYAN()}upgrade${RESET()}         Upgrade to Pro or Team plan
@@ -1427,6 +1428,7 @@ const VALID_COMMANDS = [
   "list-docs", "tree", "changelog", "fix", "todo", "benchmark", "preview",
   "reset", "search", "certify", "snapshot", "about", "celebrate", "sbom",
   "help", "version", "info", "completions",
+  "upgrade", "activate", "deactivate", "onboard",
 ];
 
 function levenshtein(a: string, b: string): number {
@@ -2218,6 +2220,66 @@ function main() {
     if (command === "billing") {
       const subCmd = args[1];
       runBilling(absProjectPath, subCmd, quiet);
+      return;
+    }
+
+    if (command === "upgrade") {
+      if (!quiet) printBanner();
+      const plan = args[1] as PlanName | undefined;
+      if (!plan || (plan !== "pro" && plan !== "team")) {
+        console.log(`\n  ${BOLD()}Choose a plan to upgrade:${RESET()}\n`);
+        for (const [key, details] of Object.entries(PLAN_DETAILS)) {
+          console.log(`  ${CYAN()}${BOLD()}${details.name}${RESET()} ${DIM()}(${details.price})${RESET()}`);
+          for (const f of details.features) {
+            console.log(`    ${GREEN()}✓${RESET()} ${f}`);
+          }
+          console.log();
+        }
+        console.log(`  ${DIM()}Usage: codepliant upgrade pro${RESET()}  or  ${DIM()}codepliant upgrade team${RESET()}\n`);
+        process.exit(0);
+      }
+      const result = handleUpgrade(plan);
+      console.log(`\n  ${GREEN()}${BOLD()}Opening checkout for ${PLAN_DETAILS[plan].name} plan...${RESET()}`);
+      console.log(`  ${DIM()}${result.url}${RESET()}\n`);
+      console.log(`  ${DIM()}After payment, run: ${CYAN()}codepliant activate <license-key>${RESET()}\n`);
+      process.exit(0);
+    }
+
+    if (command === "activate") {
+      if (!quiet) printBanner();
+      const key = args[1];
+      if (!key) {
+        console.error(`${RED()}[CP016] Error: license key required.${RESET()}`);
+        console.error(`${DIM()}Usage: codepliant activate <license-key>${RESET()}`);
+        process.exit(1);
+      }
+      const result = handleActivate(absProjectPath, key);
+      if (result.success) {
+        console.log(`\n  ${GREEN()}${BOLD()}${result.message}${RESET()}\n`);
+      } else {
+        console.error(`\n  ${RED()}${result.message}${RESET()}\n`);
+        process.exit(1);
+      }
+      process.exit(0);
+    }
+
+    if (command === "deactivate") {
+      if (!quiet) printBanner();
+      const result = handleDeactivate();
+      if (result.success) {
+        console.log(`\n  ${GREEN()}${BOLD()}${result.message}${RESET()}\n`);
+      } else {
+        console.error(`\n  ${RED()}${result.message}${RESET()}\n`);
+        process.exit(1);
+      }
+      process.exit(0);
+    }
+
+    if (command === "onboard") {
+      runOnboard(absProjectPath).then(() => process.exit(0)).catch((err) => {
+        console.error(`${RED()}Error: ${formatError(err)}${RESET()}`);
+        process.exit(1);
+      });
       return;
     }
 

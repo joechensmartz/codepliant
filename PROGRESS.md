@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5218 passing — 100% scanner, 102/138 generators (73.9%)
+- **Tests**: 5386 passing — 100% scanner, 105/138 generators (76.1%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 38 complete (2026-03-17)
-- **Last run**: -f shorthand, 130 AI tests (5218!), CRA research, stats 5088
+- **Iteration**: 39 complete (2026-03-17)
+- **Last run**: 4 dead commands fixed, 168 tests, 🎉 75% GENERATOR COVERAGE (105/138), Starlight research
 
 ## Priority Backlog
 
@@ -3077,6 +3077,75 @@ Surveyed Hacker News threads (Compliance as Code, EasyCheck Show HN, open-source
 - [Reddit cybersecurity discussions analysis 2026](https://elnion.com/2026/01/27/from-phishing-to-ai-chaos-what-my-analysis-of-all-reddit-cybersecurity-discussions-so-far-in-2026-revealed/)
 - [Top 12 Policy as Code Tools in 2026 — Spacelift](https://spacelift.io/blog/policy-as-code-tools)
 - [Compliance Automation Tools 2026 — Cynomi](https://cynomi.com/learn/compliance-automation-tools/)
+
+### Iteration 39 — Documentation Site Framework Comparison (2026-03-17)
+
+**Brief**: Best practices for open-source project documentation sites; compare Astro Starlight vs Docusaurus vs VitePress for Codepliant.
+
+**Best Practices for Open-Source Documentation Sites**
+
+Essential elements for a CLI tool documentation site:
+- **Getting started / Quick start** — install command, first scan, expected output
+- **Command reference** — every flag, subcommand, and option documented
+- **Guides / Tutorials** — common workflows (e.g., "Generate a Privacy Policy for a Next.js app")
+- **Configuration reference** — all config options with defaults
+- **Contributing guide** — how to add service signatures, run tests, submit PRs
+- **API docs** (if applicable) — for programmatic usage via `import`
+- **Search** — full-text search is table stakes for any docs site
+- **Dark mode** — expected by developer audiences
+- **Versioning** — tie docs to CLI versions as the project matures
+
+**Framework Comparison**
+
+| Criteria | Astro Starlight | Docusaurus | VitePress |
+|---|---|---|---|
+| **Built on** | Astro (framework-agnostic) | React | Vue + Vite |
+| **JS shipped to client** | Zero by default (island architecture) | Full React bundle | Minimal (Vue hydration) |
+| **Build speed** | Very fast (Astro) | Slower (webpack/React) | Fastest (Vite) |
+| **Search** | Pagefind (built-in, zero-config) | Algolia DocSearch or local plugin | Built-in local search |
+| **i18n** | Built-in | Built-in | Built-in |
+| **Doc versioning** | Community plugin | Built-in, first-class | Manual / community |
+| **MDX support** | Yes (also Markdoc) | Yes (core feature) | No (Vue components in MD) |
+| **CSS customization** | CSS variables + Tailwind easy | Infima (tightly coupled) | CSS variables + flexible |
+| **Component framework** | Any (React, Vue, Svelte, Solid) | React only | Vue only |
+| **Dark mode** | Built-in | Built-in | Built-in |
+| **GitHub Stars** | ~15k (Starlight) + 50k (Astro) | ~64k | ~17k |
+| **npm weekly downloads** | Growing rapidly | ~11k | ~393k |
+| **Maturity** | Newer (2023+), active development | Most mature (Meta-backed, 2017+) | Mature (Vue ecosystem) |
+| **Learning curve** | Low (Markdown-first, minimal config) | Medium (React knowledge helps) | Low (Markdown-first) |
+
+**Recommendation for Codepliant: Astro Starlight**
+
+Starlight is the best fit for Codepliant for these reasons:
+
+1. **Zero JS by default** — Codepliant is a zero-dependency, local-first CLI. The docs site should reflect that philosophy: fast, lean, no bloat. Starlight ships zero client-side JS unless you explicitly opt in.
+
+2. **Performance** — Astro's island architecture means the docs site will score 100 on Lighthouse out of the box, which matters for a tool that developers evaluate quickly.
+
+3. **Low maintenance** — Starlight is opinionated with sensible defaults (navigation from file structure, built-in search via Pagefind, dark mode, SEO). Less config to maintain means more time on the CLI itself.
+
+4. **Framework-agnostic components** — If interactive demos are ever needed (e.g., a "try Codepliant" playground), any framework can be used without rebuilding the site.
+
+5. **Tailwind-friendly** — Easy to match the existing codepliant-site branding if the current site already uses Tailwind.
+
+6. **Content-first** — Markdown and Markdoc support is ideal for CLI documentation that is primarily text, code blocks, and tables.
+
+7. **Growing ecosystem** — Starlight plugins for versioning, API docs generation, and OpenAPI are actively developed.
+
+**When Docusaurus would be better**: If Codepliant needed heavy doc versioning across many major releases, or if the team was already deep in the React ecosystem. Docusaurus's versioning is the most mature.
+
+**When VitePress would be better**: If the site needed to double as a Vue component library showcase, or if raw build speed was the single top priority.
+
+**Sources**:
+- [Starlight — Build documentation sites with Astro](https://starlight.astro.build/)
+- [Starlight vs. Docusaurus — LogRocket](https://blog.logrocket.com/starlight-vs-docusaurus-building-documentation/)
+- [VitePress vs Astro Starlight — DEV Community](https://dev.to/kevinbism/coding-the-perfect-documentation-deciding-between-vitepress-and-astro-starlight-2i11)
+- [Documentation Generator Comparison 2025 — OkiDoki](https://okidoki.dev/documentation-generator-comparison)
+- [Choosing the Perfect Documentation Site — Medium](https://medium.com/@movin_silva/choosing-the-perfect-documentation-site-caf86a9a9e30)
+- [Command Line Interface Guidelines](https://clig.dev/)
+- [Distr: Migrating from Docusaurus to Starlight](https://distr.sh/blog/distr-docs/)
+- [Multi-framework docs with Astro Starlight — Arcjet](https://blog.arcjet.com/multi-framework-docs-with-astro-starlight/)
+- [Top 5 Open-Source Documentation Tools 2026 — Hackmamba](https://hackmamba.io/technical-documentation/top-5-open-source-documentation-development-platforms-of-2024/)
 
 ## Development Log
 
@@ -7739,3 +7808,30 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
   - `src/generator/ai-impact-assessment.test.ts` (55 tests): null guards (no services/no AI/only non-AI), basic generation (title/non-empty >500 chars), header & metadata (project name/ISO date/next review date 1 year out/default placeholders/context company name+email+DPO email), overall risk classification (label regex/Limited for user-facing/High for biometric/aiRiskLevel override), Section 1 Regulatory Overview (EU AI Act 2024/1689/Colorado AI Act SB 24-205 + 1 February 2026/risk level table), Section 2 AI Services Inventory (table+multiple services+data processed), Section 3 Per-Service Risk Evaluation (section heading/service details in backticks/rationale+mitigations checklist), risk classification per service (minimal for basic/limited for user-facing with transparency/high for biometric+hiring+credit scoring+healthcare/unacceptable for social scoring+real-time biometric), Colorado AI Act applicability (education+financial decisions), Section 4 Algorithmic Discrimination (protected characteristics: Race+Disability+Gender identity+Veteran status/assessment checklist with disparate impact + 90-day reporting), Section 5 Fundamental Rights (present for high-risk/absent otherwise/EU Charter rights), monitoring plan (frequency table: Annual+Quarterly+Monthly+Continuous/bias testing+model drift), transparency obligations (Article 50/Colorado consequential decisions+appeal process), AI Incident Response (90 days+without undue delay/Colorado AG), contact+footer (Codepliant/legal advice disclaimer/both acts referenced), section numbering (adjusts with/without fundamental rights section), multiple services (3 services with different risk levels/sequential 3.1+3.2 numbering)
 - **Generator modules now with tests**: 102/138 (73.9%)
 - **Generator coverage**: 71.7% -> 73.9%
+
+### Iteration 39 — 2026-03-17 — Generator Tests: Break 75% Threshold (105/138 = 76.1%)
+
+- **Build**: pass
+- **Tests**: 5386/5386 passing (was 5218, added 168 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/ai-supply-chain-risk.test.ts` (55 tests): null guards (no services/no AI/only non-AI), basic generation (title/date/project name), context values (company name/placeholder), Executive Summary (service count/single-provider WARNING/no warning for multi-provider/monthly spend), provider matching (OpenAI/Anthropic/Google AI via gemini/AWS Bedrock/Cohere/Mistral/Hugging Face/Replicate/Stability AI/unrecognized provider), provider risk profiles (lock-in risk/API stability/known risk factors/alternatives/data sent), overall risk computation (Critical for multiple high-risk/High for single), risk scenarios (outage/pricing/deprecation/shutdown/complete loss vs partial degradation), Migration Playbook (section/steps/timeline), Recommendations (abstraction layer/CRITICAL diversify for single/no diversify for multi/cost budgets/annual review), Monitoring Checklist (weekly status/quarterly failover/annual reassessment), estimated monthly spend tiers (1/2/3+ services), footer (Codepliant/legal review disclaimer), comprehensive multi-provider test
+  - `src/generator/compliance-evidence-log.test.ts` (63 tests): null guard (empty services), basic generation (title/date), context values (company/DPO/email/placeholders), header metadata (next review/services count/disclaimer), Summary section (total/collected/pending/completion rate), SOC 2 controls (CC1.1/CC2.1/CC3.1/CC8.1/CC9.1), conditional SOC 2 (CC5.1 auth/CC5.2 database/CC6.2 storage/CC7.2 monitoring with presence/absence), ISO 27001 controls (A.5.1/A.8.1 service count/A.10.1/A.14.1/A.15.1 3+ services/A.16.1/A.18.1), A.12.4 status depends on monitoring (Collected vs Pending), category-specific controls (AI-1/PCI-1/PRIV-1 with presence/absence), Evidence Collection Schedule (weekly/quarterly/AI governance/PCI DSS conditional), Evidence Quality Checklist (dated/production), Services in Scope (lists services/deduplicates), footer (Codepliant/review disclaimer), comprehensive all-categories test
+  - `src/generator/regulatory-correspondence-log.test.ts` (50 tests): null guard (empty services), basic generation (title/date/project name), context values (company/DPO name+email/placeholders), header (GDPR Art. 5(2)/6 year retention), Section 1 Correspondence Register (columns), Section 2 Communication Categories (breach notification 72h/DSAR/proactive consultation Art. 36/AI incident report conditional), Section 3 Authorities (EU via eu/gdpr/uk jurisdictions/US via us/ccpa/both when none specified/PCI SSC for payment/AI Office for AI), Section 4 Breach Notification (72h column), Section 5 Audit Log (type column), Section 6 Follow-Up (priority), Section 7 Escalation (inbound 4h/proactive notifications), Section 8 Annual Summary (metrics), Section 9 Contact (DPO/Legal Counsel/email), jurisdiction field from context, combined jurisdiction+jurisdictions, footer (Codepliant/review disclaimer), comprehensive test with all features
+- **Generator modules now with tests**: 105/138 (76.1%)
+- **Generator coverage**: 73.9% -> 76.1% — PASSED 75% THRESHOLD
+
+### Iteration 39b — 2026-03-17 — CLI Polish: Color Verification + Missing Command Dispatch Fix
+
+- **Build**: pass (`npx tsc` clean)
+- **Color verification** (all three mechanisms confirmed working):
+  1. `--no-color` flag: strips all ANSI codes from output — verified via `xxd` (no `0x1b` bytes)
+  2. `NO_COLOR=1` env var: respected correctly — same clean output
+  3. Non-TTY (piping): auto-disables color when stdout is not a TTY — verified
+  - Implementation is solid: `initColor()` called first in `main()`, all ANSI codes go through `c()` helper, no direct escape codes outside `cli.ts`
+- **Bug found and fixed: 4 commands with no dispatch** (`upgrade`, `activate`, `deactivate`, `onboard`):
+  - These commands were listed in help text, had per-command `--help` entries, were excluded from path validation, and had fully-implemented handler functions imported — but were never wired into the command dispatch. Running `codepliant upgrade` would print "[CP008] Unknown command"
+  - Added command dispatch for all four: `upgrade` shows plan details or opens checkout, `activate` saves license key, `deactivate` removes license, `onboard` runs guided setup
+  - Added all four to `VALID_COMMANDS` array (enables shell completions + typo suggestions)
+  - Added `onboard` to help text (was missing from the Setup section)
+- **Files changed**: `src/cli.ts`
