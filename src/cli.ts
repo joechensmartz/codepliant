@@ -2415,9 +2415,8 @@ function main() {
     }
 
     if (command === "template") {
-      // TODO: implement runTemplate
-      console.error(`${RED()}[CP016] The "template" command is not yet implemented.${RESET()}`);
-      process.exit(1);
+      runTemplate(absProjectPath, args);
+      return;
     }
 
     if (command === "signatures") {
