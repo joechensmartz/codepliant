@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3698 passing — 100% scanner, 69/138 generators (50%)
+- **Tests**: 3800 passing — 100% scanner, 72/138 generators (52%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 27 complete (2026-03-17)
-- **Last run**: validate command, 117 tests, 🎉 50% GENERATOR COVERAGE, Hacktoberfest prep, JSON-LD v1.1.0
+- **Iteration**: 28 complete (2026-03-17)
+- **Last run**: stats command, 102 tests → 52% generators, Docker research, OG verified, stats 3698
 
 ## Priority Backlog
 
@@ -2860,6 +2860,17 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
 
 ## Development Log
 
+**2026-03-17 — `codepliant stats` one-line compliance summary (Iteration 28)**
+- Added `codepliant stats` command that outputs a single formatted line summarizing project compliance status
+- Output format: `codepliant v1.1.0 | 7 services | 123 docs | Score: A (98%) | Last scan: 2 days ago`
+- Scans the project, counts existing documents in the output directory (recursively, .md/.html/.pdf/.txt), computes compliance score, and checks last modification time of docs
+- Supports `--json` flag for machine-readable output (version, services, docs, score, grade, lastScan ISO timestamp, lastScanRelative)
+- Useful for shell prompts, CI badges, status bars, and quick project health checks
+- Separated `stats` from `count` — `count` retains the key=value machine-friendly format, `stats` provides the human-readable one-liner
+- Added dedicated help text for `stats` command with output format example
+- Reuses existing scan/scoring infrastructure (no new dependencies)
+- Build verified: `npx tsc` passes cleanly
+
 **2026-03-17 — `codepliant export` JSON command (Iteration 25)**
 - Added `codepliant export` command that outputs a single JSON file with structured compliance data
 - JSON includes: project info, detected services (name, category, dataCollected), document metadata (name, category, filename, lineCount), compliance score with grade, compliance needs, data categories, and scan duration
@@ -4306,6 +4317,57 @@ _Updated by Website Agent each iteration._
 - **No `<Image>` component usage**: The site has zero images, which is great for performance but means OG images (generated via `opengraph-image.tsx` routes) are the only visual assets. No optimization needed.
 
 **Summary:** The site is lean and well-optimized. Zero external requests at page load, near-zero client-side JS (only `error.tsx` uses client components), self-hosted fonts, single CSS file under 50 KB. No bugs found. No changes made.
+
+### Iteration 28 — 2026-03-17 — OG image, favicon, and apple-icon verification
+
+**Scope:** Verified all dynamically generated image routes return HTTP 200 with valid `image/png` content. Tested against dev server at `http://localhost:5001`.
+
+**OG image endpoints (12 total) — all passing:**
+
+| Route | Status | Content-Type | Size |
+|-------|--------|-------------|------|
+| `/opengraph-image` (root) | 200 | image/png | 61,740 B |
+| `/gdpr-compliance/opengraph-image` | 200 | image/png | 57,311 B |
+| `/hipaa-compliance/opengraph-image` | 200 | image/png | 58,001 B |
+| `/soc2-compliance/opengraph-image` | 200 | image/png | 57,680 B |
+| `/ai-governance/opengraph-image` | 200 | image/png | 53,248 B |
+| `/blog/hipaa-for-developers/opengraph-image` | 200 | image/png | 48,123 B |
+| `/blog/gdpr-for-developers/opengraph-image` | 200 | image/png | 44,885 B |
+| `/blog/soc2-for-startups/opengraph-image` | 200 | image/png | 39,736 B |
+| `/blog/privacy-policy-for-saas/opengraph-image` | 200 | image/png | 44,506 B |
+| `/blog/colorado-ai-act/opengraph-image` | 200 | image/png | 45,037 B |
+| `/blog/eu-ai-act-deadline/opengraph-image` | 200 | image/png | 49,692 B |
+| `/blog/generate-privacy-policy-from-code/opengraph-image` | 200 | image/png | 45,725 B |
+
+**Favicon and apple-icon endpoints (2 total) — all passing:**
+
+| Route | Status | Content-Type | Size |
+|-------|--------|-------------|------|
+| `/icon` (favicon) | 200 | image/png | 942 B |
+| `/apple-icon` | 200 | image/png | 3,991 B |
+
+**Meta tag verification:**
+- Homepage `og:image` meta tag correctly references `https://codepliant.dev/opengraph-image?<hash>`
+- Blog pages correctly reference their page-specific OG image (e.g., `https://codepliant.dev/blog/gdpr-for-developers/opengraph-image?<hash>`)
+- All OG images use Next.js `ImageResponse` API with `runtime = "edge"` and shared utilities from `src/app/og/og-utils.tsx`
+
+**Source files (14 total):**
+- `src/app/opengraph-image.tsx` — root OG image with branding, tagline, badges, and terminal mockup
+- `src/app/gdpr-compliance/opengraph-image.tsx`
+- `src/app/hipaa-compliance/opengraph-image.tsx`
+- `src/app/soc2-compliance/opengraph-image.tsx`
+- `src/app/ai-governance/opengraph-image.tsx`
+- `src/app/blog/hipaa-for-developers/opengraph-image.tsx`
+- `src/app/blog/gdpr-for-developers/opengraph-image.tsx`
+- `src/app/blog/soc2-for-startups/opengraph-image.tsx`
+- `src/app/blog/privacy-policy-for-saas/opengraph-image.tsx`
+- `src/app/blog/colorado-ai-act/opengraph-image.tsx`
+- `src/app/blog/eu-ai-act-deadline/opengraph-image.tsx`
+- `src/app/blog/generate-privacy-policy-from-code/opengraph-image.tsx`
+- `src/app/icon.tsx` — 32x32 favicon (shield + checkmark on dark background)
+- `src/app/apple-icon.tsx` — 180x180 apple touch icon (same design, larger)
+
+**Result:** All 14 image routes return HTTP 200 with valid PNG images. No issues found. No changes made.
 
 ## Website QA
 
@@ -6621,3 +6683,90 @@ Sources: [Hacktoberfest Participation Rules](https://hacktoberfest.com/participa
   - `src/generator/whistleblower.test.ts` (35 tests): requiresWhistleblowerPolicy — true for GDPR/UK GDPR jurisdiction, false for non-EU/no jurisdiction, true/false for jurisdictions array with/without EU entries; generateWhistleblowerPolicy — null for non-EU/no/non-EU-array jurisdiction, generation with GDPR/UK GDPR/jurisdictions array, date format, context values (companyName/contactEmail/dpoName/dpoEmail), dpoEmail fallback, placeholder values (company/email/DPO name), Purpose (Directive 2019/1937), Scope (employees/contractors), Reportable Breaches (data protection/financial services), Internal Reporting Channels (email/written/in-person/anonymous), Reporting Procedure (7-day acknowledgment/3-month feedback), Protection Against Retaliation, Confidentiality, Data Protection (GDPR), External Reporting, Record Keeping, Contact (Designated Officer), disclaimer, company name used 3+ times throughout
 - **Generator modules now with tests**: 69/138 (50%) — milestone reached!
 - **Generator modules still missing tests**: 69 files
+
+### Iteration 28 — 2026-03-17 — Quick sanity check (Website QA Agent, iteration 28)
+
+**Test scope**: Quick check of all 23 pages at `http://localhost:5001`. Focus: HTTP status codes, blog index correctness, errors.
+
+**Results: 3/3 checks pass.**
+
+| # | Check | Result |
+|---|---|---|
+| 1 | All 23 sitemap pages return 200 | PASS |
+| 2 | Blog index links to all 7 blog posts matching sitemap | PASS |
+| 3 | No 500/error responses on any page | PASS — all "error" matches are Next.js boilerplate (`app/error-*.js` chunk) |
+
+**Blog index verified (7/7 posts):** hipaa-for-developers, soc2-for-startups, eu-ai-act-deadline, privacy-policy-for-saas, gdpr-for-developers, colorado-ai-act, generate-privacy-policy-from-code.
+
+**No bugs found. No fixes applied. No build changes.**
+
+### Iteration 28 — 2026-03-17 — Docker and Containerization Research
+
+#### Should Codepliant offer a Docker image?
+
+**Yes — primarily for CI/CD integration.** Key use cases:
+
+1. **CI/CD pipelines**: Teams run `docker run --rm -v .:/scan codepliant/codepliant scan /scan` in GitHub Actions, GitLab CI, or CircleCI without installing Node.js or npm. This is the dominant use case — every major security/compliance CLI ships a Docker image for this reason.
+2. **Reproducible environments**: Pinned image tags guarantee identical behavior across dev machines, CI runners, and staging. No Node.js version mismatch issues.
+3. **Air-gapped / locked-down environments**: Some enterprise teams cannot install npm packages but can pull pre-approved Docker images from an internal registry.
+4. **Monorepo scanning**: Mount the repo once, run Codepliant against multiple subdirectories without installing per-project.
+
+**Not a priority for day-to-day developer use** — `npx codepliant` is faster and simpler for local development. Docker is an additive distribution channel, not a replacement.
+
+#### How competitors distribute via Docker
+
+| Tool | Image | Base | Size | Notes |
+|------|-------|------|------|-------|
+| **Trivy** | `aquasec/trivy` on Docker Hub + `ghcr.io` | Alpine | ~50 MB | Single static Go binary. Also ships GitHub Action wrapping the image. |
+| **Snyk** | `snyk/snyk` on Docker Hub | Multiple tags per ecosystem (node, python, etc.) | ~200-400 MB | Heavier because each tag bundles the target runtime. |
+| **Bearer** | `bearer/bearer` on Docker Hub + `ghcr.io` | Alpine | ~80 MB | Go binary. Usage: `docker run --rm -v /path:/tmp/scan bearer/bearer:latest-amd64 scan /tmp/scan`. |
+
+**Common patterns**: all three publish to Docker Hub and ghcr.io, use `--rm` and `-v` volume mounts, tag with semver + `latest`, and provide a GitHub Action that wraps the Docker image.
+
+#### Minimal Codepliant Dockerfile
+
+```dockerfile
+# -- Build stage --
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY tsconfig.json ./
+COPY src/ ./src/
+RUN npx tsc
+
+# -- Runtime stage --
+FROM node:22-alpine
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json ./
+# No runtime deps — Codepliant has zero runtime dependencies
+ENTRYPOINT ["node", "dist/cli.js"]
+```
+
+**Expected image size**: ~60-80 MB (Node.js Alpine base ~50 MB + compiled JS ~few MB).
+
+**Key design decisions**:
+- Multi-stage build keeps TypeScript compiler and devDependencies out of the final image
+- Zero runtime dependencies means no `npm ci --production` step needed — just copy `dist/`
+- `ENTRYPOINT` so users run `docker run codepliant/codepliant scan /path` naturally
+- Volume mount pattern: `docker run --rm -v "$(pwd)":/scan codepliant/codepliant scan /scan`
+
+#### Recommended next steps (not urgent)
+
+1. Add Dockerfile to repo root
+2. Publish to `ghcr.io/codepliant/codepliant` (free for public repos, avoids Docker Hub rate limits)
+3. Add GitHub Action workflow that builds + pushes on release tags
+4. Later: create `codepliant-action` GitHub Action wrapping the Docker image (like `trivy-action`)
+
+### Iteration 28 — 2026-03-17 — Generator tests: 52% (Testing Agent)
+
+- **Build**: pass
+- **Tests**: 3800/3800 passing (was 3698, added 102 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/information-security-policy.test.ts` (29 tests): null return for <3 services (0/1/2 services), generation with exactly 3 services, title, effective/last-updated date ISO format, project name, context values (companyName/contactEmail), placeholder values (company/email), Purpose section (ISO 27001/NIST CSF), Scope section with service count, Information Security Objectives (Confidentiality/Integrity/Availability), Roles and Responsibilities table (CISO/Development/Operations/All Staff), Access Control (least privilege/MFA), Incident Management (1-hour reporting/INCIDENT_RESPONSE_PLAN.md), Policy Review (annually); conditional CI/CD: excludes Development Security when no cicdScan/null cicdScan, includes with cicdScan (provider name), Enabled/Not detected for CI/CD features (tests/linting/security scanning/dependency scanning), hasAutomatedTests fallback, hasDependencyUpdates fallback, platforms array when no provider, Unknown when no provider or platforms; Codepliant disclaimer footer; combined scenario (context + CI/CD + 4 services)
+  - `src/generator/data-minimization-checklist.test.ts` (35 tests): null return for empty services, generation with services, title, context values (companyName/contactEmail), placeholder values, project name, date ISO format, GDPR Article 5(1)(c) reference, legal advice disclaimer, Per-Service Data Analysis section; category-specific fields: payment (payment_info/billing_address/transaction_history/customer_email), AI (user_prompts/conversation_history/generated_content/model_usage_metadata), analytics (page_views/user_behavior/device_info/ip_address), auth (email/password_hash/session_token/oauth_token), monitoring (error_data/stack_traces), email (email_address/email_content/open_tracking), storage (uploaded_files/file_metadata), database (user_data), advertising (conversion_events/device_fingerprint/cross_site_tracking); unknown category graceful handling; declared dataCollected display, extra fields with Review needed, no duplicate for template fields; Data Reduction Opportunities (present for analytics, absent for database-only, correct count); Summary statistics with service count; GDPR compliance checklist; Practical Steps; Related Documents with contact email; Codepliant footer; combined 5-service scenario; overlapping + extending dataCollected
+  - `src/generator/compliance-kpi-dashboard.test.ts` (38 tests): null return for empty services, generation with services, title, context values (companyName/contactEmail), placeholder values, project name, service count in header, date ISO format, introductory accountability statement (GDPR/SOC 2/ISO 27001), KPI Overview table with all 12 core KPIs (KPI-01 through KPI-12), Core Compliance KPIs section with detailed definitions (Description/Metric/Target/Frequency/Regulatory Basis/Formula), tracking template (Month 1-3), key KPIs (DSAR Response Time/Completion Rate/Breach Notification/Training/Vendor Assessment/Vulnerability Remediation/Data Retention); conditional AI KPIs: excluded when no AI, included with AI (KPI-AI-01 through KPI-AI-04: Model Accuracy/Bias Audit/Incident Rate/Prompt Injection Block Rate), AI service names listed, AI KPIs in overview table, AI KPI tracking templates; Monthly Reporting Template with monthly KPIs; Quarterly Reporting Template with quarterly KPIs and monthly trend; Annual KPI Review (Year-over-Year/Compliance Program Score), AI Governance excluded/included based on AI presence; Dashboard Implementation Guide (tools/automation/alert thresholds); Contact with email/dpoEmail conditional/placeholder; Codepliant footer; combined 5-service scenario with AI and full context
+- **Generator modules now with tests**: 72/138 (52%)
+- **Generator modules still missing tests**: 66 files

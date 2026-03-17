@@ -90,7 +90,7 @@ ${BOLD()}Scanning:${RESET()}
   ${CYAN()}check${RESET()}           Quick compliance pass/fail check
   ${CYAN()}ci${RESET()}              CI/CD: scan + check in one step (exit 0/1)
   ${CYAN()}count${RESET()}           Quick stats: services, documents, score
-  ${CYAN()}stats${RESET()}           Alias for count (supports --detailed)
+  ${CYAN()}stats${RESET()}           One-line compliance status (for shell prompts, CI badges)
   ${CYAN()}lint${RESET()}            Check existing docs for completeness
   ${CYAN()}validate${RESET()}        Validate all generated docs for completeness
   ${CYAN()}diff${RESET()}            Show changes since last generation
@@ -825,7 +825,24 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant count${RESET()}                     Quick stats for current project
   ${CYAN()}codepliant count ./my-app${RESET()}             Stats for a specific project
   ${CYAN()}codepliant count --json${RESET()}               JSON output for CI
-  ${CYAN()}codepliant stats --detailed${RESET()}           Detailed breakdown of all metrics
+  ${CYAN()}codepliant count --detailed${RESET()}           Detailed breakdown of all metrics
+`,
+
+  stats: `${BOLD()}codepliant stats${RESET()} [path] [options]
+
+One-line compliance status summary. Useful for shell prompts, CI badges, and status bars.
+
+${BOLD()}Output format:${RESET()}
+  codepliant v1.1.0 | 7 services | 123 docs | Score: A (98%) | Last scan: 2 days ago
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant stats${RESET()}                     One-line status for current project
+  ${CYAN()}codepliant stats ./my-app${RESET()}             Status for a specific project
+  ${CYAN()}codepliant stats --json${RESET()}               JSON output for CI badges
 `,
 
   notify: `${BOLD()}codepliant notify${RESET()} [path] [options]
@@ -1744,7 +1761,7 @@ function main() {
     }
 
     if (command === "stats") {
-      runCount(absProjectPath, absOutputDir, jsonOutput, detailedFlag);
+      runStats(absProjectPath, absOutputDir, jsonOutput);
       return;
     }
 
@@ -3954,6 +3971,121 @@ function runCount(
   }
   console.log();
 
+  process.exit(0);
+}
+
+// --- `codepliant stats` command ---
+
+function countDocsOnDisk(outputDir: string): number {
+  if (!fs.existsSync(outputDir)) return 0;
+  let count = 0;
+  const docExtensions = new Set([".md", ".html", ".pdf", ".txt"]);
+  function walkDir(dir: string) {
+    let entries: fs.Dirent[];
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      if (entry.name.startsWith(".")) continue;
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkDir(fullPath);
+      } else if (entry.isFile() && docExtensions.has(path.extname(entry.name).toLowerCase())) {
+        count++;
+      }
+    }
+  }
+  walkDir(outputDir);
+  return count;
+}
+
+function getLastDocModification(outputDir: string): Date | null {
+  if (!fs.existsSync(outputDir)) return null;
+  let latest: Date | null = null;
+  const docExtensions = new Set([".md", ".html", ".pdf", ".txt"]);
+  function walkDir(dir: string) {
+    let entries: fs.Dirent[];
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      if (entry.name.startsWith(".")) continue;
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkDir(fullPath);
+      } else if (entry.isFile() && docExtensions.has(path.extname(entry.name).toLowerCase())) {
+        try {
+          const stat = fs.statSync(fullPath);
+          if (!latest || stat.mtime > latest) {
+            latest = stat.mtime;
+          }
+        } catch {
+          // skip
+        }
+      }
+    }
+  }
+  walkDir(outputDir);
+  return latest;
+}
+
+function formatTimeAgo(date: Date): string {
+  const now = Date.now();
+  const diffMs = now - date.getTime();
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffDays > 0) return `${diffDays} day${diffDays === 1 ? "" : "s"} ago`;
+  if (diffHours > 0) return `${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
+  if (diffMinutes > 0) return `${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
+  return "just now";
+}
+
+function runStats(
+  absProjectPath: string,
+  absOutputDir: string,
+  jsonOutput: boolean,
+) {
+  const config = loadConfig(absProjectPath);
+  const result = scan(absProjectPath);
+  const docs = generateDocuments(result, config);
+
+  // Compute compliance score
+  const scoreInput: ScoreInput = {
+    scanResult: result,
+    docs,
+    config,
+    outputDir: absOutputDir,
+  };
+  const fullScore = computeFullComplianceScore(scoreInput);
+
+  // Count existing docs on disk
+  const docsOnDisk = countDocsOnDisk(absOutputDir);
+
+  // Last modification time
+  const lastMod = getLastDocModification(absOutputDir);
+
+  if (jsonOutput) {
+    console.log(JSON.stringify({
+      version: VERSION,
+      services: result.services.length,
+      docs: docsOnDisk,
+      score: fullScore.total,
+      grade: fullScore.grade,
+      lastScan: lastMod ? lastMod.toISOString() : null,
+      lastScanRelative: lastMod ? formatTimeAgo(lastMod) : null,
+    }, null, 2));
+    process.exit(0);
+  }
+
+  const lastScanStr = lastMod ? formatTimeAgo(lastMod) : "never";
+  console.log(`codepliant v${VERSION} | ${result.services.length} services | ${docsOnDisk} docs | Score: ${fullScore.grade} (${fullScore.total}%) | Last scan: ${lastScanStr}`);
   process.exit(0);
 }
 
