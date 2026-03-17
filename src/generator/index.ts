@@ -150,6 +150,7 @@ import { generateVendorComplianceTracker } from "./vendor-compliance-tracker.js"
 import { generatePrivacyMetricsDashboard } from "./privacy-metrics-dashboard.js";
 import { generateComplianceEvidenceLog } from "./compliance-evidence-log.js";
 import { generatePrivacyImpactScreening } from "./privacy-impact-screening.js";
+import { generateImpressum } from "./impressum.js";
 
 export interface GeneratedDocument {
   name: string;
@@ -181,6 +182,7 @@ const DOCUMENT_CATEGORIES: Record<string, string> = {
   "THIRD_PARTY_COOKIE_NOTICE.md": "legal",
   "OPEN_SOURCE_NOTICE.md": "legal",
   "LICENSE_COMPLIANCE.md": "legal",
+  "IMPRESSUM.md": "legal",
 
   // AI — EU AI Act and AI governance
   "AI_DISCLOSURE.md": "ai",
@@ -370,6 +372,7 @@ const USER_FACING_DOCS = new Set([
   "PRIVACY_NOTICE_APP.md",
   "PRIVACY_NOTICE_MULTILINGUAL.md",
   "API_TERMS_OF_USE.md",
+  "IMPRESSUM.md",
 ]);
 
 function configToContext(config?: CodepliantConfig): GeneratorContext {
@@ -1731,6 +1734,16 @@ export function generateDocuments(
       name: "Privacy Impact Screening",
       filename: "PRIVACY_IMPACT_SCREENING.md",
       content: privacyImpactScreening,
+    });
+  }
+
+  // Impressum — German legal disclosure required by Section 5 DDG (formerly TMG)
+  const impressum = generateImpressum(docScan, ctx);
+  if (impressum) {
+    docs.push({
+      name: "Impressum",
+      filename: "IMPRESSUM.md",
+      content: impressum,
     });
   }
 

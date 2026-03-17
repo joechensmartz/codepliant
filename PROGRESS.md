@@ -7,12 +7,12 @@
 ## Current Status
 
 - **Version**: 1.0.0 (published to npm)
-- **Tests**: 1166 passing (+107 new in iteration 5)
+- **Tests**: 1282 passing (+116 new in iteration 6)
 - **Repos tested**: 1200+
-- **Document types**: 120+
+- **Document types**: 121+ (added Impressum)
 - **npm package size**: 831KB
-- **Iteration**: 5 complete (2026-03-17)
-- **Last run**: SBOM generator, 107 tests, privacy blog, footer redesign, QA a11y audit, distribution research
+- **Iteration**: 6 complete (2026-03-17)
+- **Last run**: Impressum generator, 116 tests, Colorado AI Act blog, docs page, QA 5 fixes, GitHub Actions research
 
 ## Priority Backlog
 
@@ -644,6 +644,249 @@ At 1% conversion rate with 10,000 users and $25 average revenue per paying user,
 
 8. **[LOW] Publish on DEV.to and Hashnode**: Write 2-3 technical articles about the compliance-as-code approach. These rank well in Google and drive sustained organic traffic. Topics: "Why Your Privacy Policy Should Be Generated from Code", "Automating GDPR Compliance for Node.js Apps", "What Your package.json Reveals About Your Data Practices."
 
+### Iteration 6 — 2026-03-16
+
+#### GitHub Actions for Compliance — Monetization Research
+
+##### 1. Existing GitHub Actions for Compliance/Privacy Scanning — What Exists
+
+**Compliance-focused actions in the marketplace:**
+
+- **ghascompliance (GitHub Advanced Security Compliance)** — Lets organizations codify policies for Dependabot, secret scanning, code scanning alerts, and open source license usage. Configurable risk thresholds via YAML. Closest existing action to compliance policy enforcement but focused on security alerts, not document generation.
+- **Azure Policy Compliance Scan** — Triggers on-demand Azure resource compliance checks from GitHub workflows. Infrastructure-focused, not code/privacy-focused.
+- **Google Checks App Compliance Scan** — Scans mobile apps for compliance issues and data collection/sharing behaviors using Google Checks. Mobile-app-only; does not scan source code for web/backend projects.
+- **Prisma Cloud Scan** — Scans container images for vulnerabilities and compliance issues. Container/infrastructure scope only.
+- **42Crunch API Conformance Scan** — API security and conformance scanning. API-specific, not general compliance.
+- **ghas-policy-as-code** — Define compliance and risk rules for repositories using YAML config. Security-alert-focused.
+
+**SBOM generation actions:**
+
+- **CycloneDX cdxgen** — Generates CycloneDX SBOMs in CI/CD. Codepliant already has `codepliant sbom` which could complement this.
+- **Syft + Grype** — Syft generates SBOMs (CycloneDX/SPDX), Grype scans them for vulnerabilities. Well-established pipeline.
+- **GitHub native SBOM export** — Built-in SPDX export for repositories. Read-access only, no CI/CD integration for document generation.
+
+**GDPR-specific tools (standalone, not GitHub Actions):**
+
+- **mammuth/gdpr-scanner** — Checks domains for GDPR violations (tracking, anonymization, privacy statements). Website-scanning focus, not codebase-scanning.
+- **dev4privacy/gdpr-analyzer** — Analyzes webpage source code and behavior for GDPR compliance scoring. Web-focused.
+- **smartlawhub/Automated-GDPR-Compliance-Checking** — NLP-based extraction of data practices from privacy policies to check GDPR mandatory information. Analyzes existing policies, doesn't generate them.
+
+**What's missing (Codepliant's opportunity):**
+
+- No GitHub Action exists that scans source code and generates compliance documents (Privacy Policy, Terms of Service, Cookie Policy, AI Disclosure).
+- No action generates privacy policies from dependency/import analysis.
+- No action produces compliance documentation as PR artifacts or comments.
+- No action combines SBOM generation with human-readable compliance documents.
+- The gap between "security scanning" and "compliance document generation" is completely unserved in the marketplace.
+
+##### 2. GitHub Actions Marketplace Submission Process
+
+**Requirements to publish:**
+
+1. Action must be in a **public repository**
+2. Repository must contain a single **action.yml or action.yaml** at the root
+3. Repository must **not contain workflow files** (`.github/workflows/`)
+4. Action **name must be unique** — cannot match existing marketplace actions, users, or orgs
+5. Publisher must have **two-factor authentication** enabled
+6. Publisher must accept the **GitHub Marketplace Developer Agreement**
+
+**Publishing process:**
+
+1. Create the action repository with action.yml at root
+2. Tag with a semantic version release (e.g., v1.0.0)
+3. Navigate to the action metadata file in the repo — GitHub shows a "Publish to Marketplace" banner
+4. Click "Draft a release" and check "Publish this Action to the GitHub Marketplace"
+5. Fill in release details and publish
+
+**Key facts:**
+
+- Actions are published **immediately** — no GitHub review process
+- No cost to publish — entirely free
+- Actions appear in marketplace search results and can be discovered by category
+- Over 25,000 actions currently in the marketplace, but only 913 (as of 2024 data) are from verified GitHub users — being verified is a differentiator
+- Average OSSF security score for marketplace actions is only 4.23/10 — a well-maintained action stands out
+
+**Recommended repository structure for Codepliant Action:**
+
+```
+codepliant-action/
+├── action.yml          # Action metadata (inputs, outputs, runs)
+├── README.md           # Usage docs (displayed on marketplace page)
+├── LICENSE             # MIT (matching main project)
+├── dist/               # Bundled JS (if JavaScript action) or empty for composite
+└── .github/            # NO workflow files in this repo
+```
+
+##### 3. How Popular Security GitHub Actions Work
+
+**Action type comparison (relevant to Codepliant):**
+
+| Type | Speed | Cross-platform | Complexity | Best for |
+|------|-------|----------------|-----------|----------|
+| **Composite** | Fast | Yes (all runners) | Low | Wrapping CLI tools, simple orchestration |
+| **JavaScript** | Fast | Yes (all runners) | Medium | Complex logic, GitHub API integration |
+| **Docker** | Slow (container boot) | Linux only | High | Isolated environments, specific dependencies |
+
+**Recommendation for Codepliant: Composite action** — wraps `npx codepliant` commands, fast startup, works on all runner OSes, simplest to maintain.
+
+**Snyk Action pattern:**
+
+- Multiple sub-actions in one repo (setup/, node/, docker/, iac/, python/, etc.)
+- Docker-based actions with environment variables (SNYK_INTEGRATION_NAME, SNYK_INTEGRATION_VERSION)
+- Passes CLI args through `with.args` property
+- Requires SNYK_TOKEN secret for authentication
+- Outputs results as snyk.json file
+
+**CodeQL Action pattern:**
+
+- Split into multiple actions: init/, analyze/, upload-sarif/, autobuild/
+- JavaScript-based (Node.js) action
+- Uses SARIF format for results upload to GitHub Code Scanning
+- Inputs include: languages, queries, packs, RAM limits, thread counts
+- Outputs integrate directly with GitHub Security tab
+- `upload-sarif` action is reusable by any tool that produces SARIF output
+
+**Trivy Action pattern:**
+
+- Single action with many configurable inputs
+- Key inputs: scan-type (image/fs/config/repo), format (table/json/sarif), severity filter, exit-code for fail/pass control
+- Built-in caching via actions/cache
+- SARIF output enables GitHub Code Scanning integration
+- exit-code input controls whether findings fail the workflow (0 = pass, 1 = fail)
+
+**Common patterns across all popular security actions:**
+
+1. **SARIF upload** — Most security actions output SARIF format and use `github/codeql-action/upload-sarif` to push results to GitHub's Security tab / Code Scanning interface
+2. **Configurable severity thresholds** — Users set which severity levels should fail the build
+3. **PR annotations** — Results appear inline in PR diffs (red for errors, yellow for warnings, blue for info)
+4. **Multiple output formats** — JSON for programmatic use, SARIF for GitHub integration, human-readable for logs
+5. **Caching** — Cache vulnerability databases or scan results for faster subsequent runs
+6. **Exit code control** — Separate "informational" mode (exit 0) from "enforcement" mode (exit 1 on findings)
+
+##### 4. Proposed Codepliant GitHub Action Design
+
+**action.yml structure:**
+
+```yaml
+name: 'Codepliant Compliance Scan'
+description: 'Scan your codebase and generate compliance documents (Privacy Policy, Terms of Service, AI Disclosure, Cookie Policy)'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  version:
+    description: 'Codepliant version to use'
+    required: false
+    default: 'latest'
+  command:
+    description: 'Command to run: scan, go, sbom, wizard'
+    required: false
+    default: 'scan'
+  output-format:
+    description: 'Output format: json, markdown, text'
+    required: false
+    default: 'markdown'
+  output-dir:
+    description: 'Directory to write generated documents'
+    required: false
+    default: './compliance-docs'
+  fail-on-missing:
+    description: 'Fail if required compliance documents are missing or outdated'
+    required: false
+    default: 'false'
+  documents:
+    description: 'Comma-separated list of documents to generate (privacy-policy,terms-of-service,cookie-policy,ai-disclosure)'
+    required: false
+    default: 'all'
+  comment-on-pr:
+    description: 'Post scan summary as a PR comment'
+    required: false
+    default: 'true'
+outputs:
+  scan-results:
+    description: 'JSON scan results'
+  documents-generated:
+    description: 'List of generated document paths'
+  services-detected:
+    description: 'Number of services/SDKs detected'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Run Codepliant
+      shell: bash
+      run: npx codepliant@${{ inputs.version }} ${{ inputs.command }} . --json
+```
+
+**Workflow example for users:**
+
+```yaml
+name: Compliance Check
+on: [push, pull_request]
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: codepliant/codepliant-action@v1
+        with:
+          command: scan
+          comment-on-pr: 'true'
+          fail-on-missing: 'false'
+```
+
+##### 5. Monetization Strategy via GitHub Action
+
+**Free tier (open source action):**
+
+- Full scan and document generation (same as CLI)
+- JSON/markdown output as workflow artifacts
+- PR comment with scan summary
+- SBOM generation
+
+**Pro tier (license key required):**
+
+- `fail-on-missing` enforcement mode — blocks PRs if compliance docs are outdated or missing
+- Compliance drift detection (`codepliant diff` in CI)
+- Custom document templates
+- Historical compliance tracking (compare scans across commits)
+- Team dashboard / badge generation
+- Priority support
+
+**Implementation approach:**
+
+- Free features: composite action wrapping `npx codepliant`
+- Pro features: check for CODEPLIANT_LICENSE_KEY secret, call a lightweight validation API (only for license check, not for scanning — preserves zero-network-calls for core scanning)
+- License key validation can be a simple JWT check against a public key bundled in the action — no network call needed for validation itself, only for initial key issuance
+
+**Revenue model:**
+
+- Free action drives adoption and awareness (marketplace visibility)
+- Pro license: $19/month per repo or $99/month per org (unlimited repos)
+- Enterprise: $499/month with SSO, audit logs, custom frameworks
+- GitHub Marketplace does not take a cut of action usage — monetization is entirely through the license key model
+
+##### 6. Recommended Actions for Iteration 6
+
+1. **[HIGH] Create the `codepliant-action` repository**: Set up a public repo with action.yml (composite type), README with usage examples, and branding (shield icon, blue color). Use the design above as the starting template. This is the single highest-ROI monetization move.
+
+2. **[HIGH] Implement PR comment feature**: After scanning, post a formatted summary comment on the PR showing detected services, data categories, and which documents need updating. This is the "wow" moment that drives word-of-mouth adoption. Use `github-script` or direct GitHub API calls in the composite action.
+
+3. **[HIGH] Publish to GitHub Marketplace immediately**: Since there is no review process, publish as soon as the action works. Being first-to-market for "compliance document generation" in the marketplace is a significant advantage. Tag as v1.0.0 to match the CLI version.
+
+4. **[MEDIUM] Add SARIF output to Codepliant CLI**: Output compliance findings (e.g., "Stripe detected but no Cookie Policy generated") as SARIF so they appear in GitHub's Security tab. This integrates Codepliant into the same developer workflow as CodeQL, Snyk, and Trivy — making it feel like a natural part of the security toolchain.
+
+5. **[MEDIUM] Implement `fail-on-missing` as the first Pro feature**: This is the natural upgrade path — teams use the free action to see their compliance status, then upgrade to Pro to enforce it in CI. Gate behind a license key check.
+
+6. **[MEDIUM] Add artifact upload for generated documents**: Upload generated compliance docs as workflow artifacts so they can be downloaded from the Actions tab. This makes the action immediately useful even without PR comments.
+
+7. **[LOW] Apply for GitHub Verified Creator status**: Only 913 of 25,000+ marketplace actions are from verified creators. Verification builds trust and improves marketplace ranking. Requirements include consistent maintenance, documentation, and community engagement.
+
+8. **[LOW] Create example workflows for common setups**: Provide copy-paste workflow files for Node.js, Python, Go, Ruby, and monorepo setups. Lower the barrier to adoption.
+
 ## Development Log
 
 **2026-03-16 — Add `codepliant sbom` command (CycloneDX SBOM generation)**
@@ -880,6 +1123,34 @@ _Updated by Website Agent each iteration._
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated
 
+### 2026-03-16 — Colorado AI Act blog post improvements (Iteration 6)
+
+**Colorado AI Act blog post improvements (`src/app/blog/colorado-ai-act/page.tsx`):**
+- Added table of contents with 10 anchor-linked sections (scroll-mt-24 for sticky nav offset)
+- Added breadcrumb navigation (Home / Blog / Colorado AI Act)
+- Added urgency callout box at top with compliance deadline reminder and inline `npx codepliant go` CTA
+- Added new section "Detecting AI services in your codebase" with:
+  - Table of 8 AI providers Codepliant detects (OpenAI, Anthropic, Google AI, LangChain, Vercel AI SDK, Cohere, Together AI, Replicate) with package names and env vars
+  - Code example: `npx codepliant go` terminal output showing detected AI services and generated documents
+  - Code example: `npx codepliant scan --json | jq` filtered for AI/ML services with structured output
+  - Code example: GitHub Actions workflow (`.github/workflows/compliance.yml`) for CI/CD compliance automation
+- Added NIST AI RMF detail to affirmative defense section (four core functions: Govern, Map, Measure, Manage)
+- Added "Data privacy overlap" row to Colorado vs EU AI Act comparison table
+- Added FAQ JSON-LD structured data (5 entries: effective date, extraterritorial scope, high-risk definition, NIST affirmative defense, detecting AI services)
+- Added breadcrumb JSON-LD structured data
+- Added SEO keywords meta tag (12 keywords)
+- Added OpenGraph publishedTime, modifiedTime, authors, tags
+- Improved CTA section: brand-colored background, lists detected AI providers, links to GitHub/npm/docs
+- Added CodeBlock component (matching EU AI Act/GDPR/Privacy post pattern) for formatted code examples
+- Added internal links to: EU AI Act blog, GDPR blog, Privacy Policy for SaaS blog, AI Disclosure Generator, AI Governance hub, Data Privacy hub
+- Updated related resources: added GDPR blog, Privacy Policy blog posts
+- Updated color classes from generic (text-muted, bg-surface, text-foreground) to theme tokens (text-ink-secondary, bg-surface-secondary, text-ink)
+- Updated title to include "(SB 24-205)" for SEO
+- Updated read time from 14 min to 18 min (content expanded significantly)
+
+**Build verification:**
+- `next build` passes cleanly, all 25 static pages generated
+
 ## Website Design
 
 ### Iteration 3 — 2026-03-16 — Hero section and CTA improvements
@@ -941,6 +1212,31 @@ _Updated by Website Agent each iteration._
 6. **page.tsx** — Not modified.
 
 **Removed from old footer**: Generators column and Compliance column (links are accessible from the main pages and nav). Consolidated into the four standard SaaS footer columns.
+
+**Build verification:**
+- `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 6 — 2026-03-16 — Docs page overhaul
+
+**Replaced stub docs page** (`src/app/docs/page.tsx`) with a comprehensive getting-started guide:
+
+1. **Table of contents** — Nav with six anchor links (Quick Start, Configuration, CLI Commands, Output Formats, MCP Server, FAQ) using the site's `surface-secondary` card style.
+
+2. **Quick Start section** — Three numbered steps: (1) `npx codepliant go`, (2) generated file tree preview, (3) `codepliant init` for optional config. Code blocks use `code-bg`/`code-fg` with dollar-sign prompt styling matching the homepage.
+
+3. **Configuration section** — Full `.codepliantrc.json` example with tabbed file-header style. Reference table of all 17 config fields with field name, type, and description sourced from `CodepliantConfig` interface in `src/config.ts`.
+
+4. **CLI Commands section** — Three sub-sections: Generation (go, sbom, update, export, report), Scanning and Analysis (scan, check, dashboard, diff, audit, lint), Setup (init, wizard, config show, hook install). Each command in a bordered card. Common flags table (--output, --format, --json, --quiet, --ci).
+
+5. **Output Formats section** — Table of 8 formats (Markdown, HTML, PDF, JSON, Notion, Confluence, DOCX, All) with flag, description, and free/Pro indicator.
+
+6. **MCP Server section** — Setup instructions for Claude Code (`.claude/mcp_servers.json`) and Cursor (`.cursor/mcp.json`) with JSON config blocks. Lists 4 MCP tools (codepliant_scan, codepliant_go, codepliant_get_config, codepliant_set_config). Notes stdio transport.
+
+7. **FAQ section** — Eight questions: zero network calls, no account required, production readiness, supported ecosystems, deterministic detection, 120+ document types, keeping docs updated, customization.
+
+8. **Bottom CTA** — Centered card with `npx codepliant go`, consistent with footer CTA.
+
+**Design consistency**: All spacing uses `--space-*` variables, typography uses `--text-*` fluid clamp variables, colors use design system tokens, code blocks match homepage dark style, tables match homepage style, transitions use `--ease-out-quart`.
 
 **Build verification:**
 - `next build` passes cleanly, 25/25 static pages generated successfully
@@ -1031,6 +1327,44 @@ _Updated by Website Agent each iteration._
 
 **Script**: `/tmp/codepliant-qa-5.ts` — run with `npx tsx /tmp/codepliant-qa-5.ts`
 
+### Iteration 6 — 2026-03-16 — Link validation & content consistency
+
+**Test scope**: Manual audit of all 20 pages plus source code review, focused on link validation, footer links, blog post structure consistency, social proof data accuracy, and placeholder text detection.
+
+**Pages audited**: `/`, `/pricing`, `/docs`, `/changelog`, `/about`, `/compare`, `/blog`, `/blog/eu-ai-act-deadline`, `/blog/gdpr-for-developers`, `/blog/privacy-policy-for-saas`, `/blog/colorado-ai-act`, `/privacy-policy-generator`, `/terms-of-service-generator`, `/cookie-policy-generator`, `/ai-disclosure-generator`, `/data-privacy`, `/gdpr-compliance`, `/soc2-compliance`, `/hipaa-compliance`, `/ai-governance`
+
+**Results: All issues fixed. Build passes cleanly, all 25 static pages generated.**
+
+**Checks performed:**
+1. **All pages return HTTP 200** — Verified all 20 routes respond correctly.
+2. **Footer links** — All 14 footer links verified: Product (Documentation, Pricing, Compare, Get Started all resolve to valid internal pages), Resources (Blog, Changelog resolve internally; GitHub and npm point to correct external URLs), Legal (Privacy Policy, Terms of Service, Data Privacy, GDPR all resolve to valid internal pages), Company (About resolves internally; Open Source points to GitHub). All internal links return 200.
+3. **Blog post structure consistency** — Audited all 4 blog posts for breadcrumbs, TOC, and CTA:
+   - EU AI Act: Has visible breadcrumb nav, breadcrumb JSON-LD, TOC ("In this guide"), CTA section. Consistent.
+   - Privacy Policy for SaaS: Has visible breadcrumb nav, breadcrumb JSON-LD, TOC ("Table of contents"), CTA section. Consistent.
+   - GDPR for Developers: Had breadcrumb JSON-LD and TOC but was missing visible breadcrumb nav. Fixed.
+   - Colorado AI Act: Had breadcrumbJsonLd() function defined but never rendered. Missing visible breadcrumb nav and missing TOC. Fixed.
+4. **Social proof numbers** — PROGRESS.md reports 1,166 tests, 1,200+ repos, 120+ document types. Homepage was showing stale "1,059 tests passing" in two places. Updated to "1,166". Repos (1,200+) and documents (120+) were already correct.
+5. **Placeholder text scan** — Searched all page source files for `[Your Company]`, `lorem ipsum`, `TODO`, `FIXME`, and `href="#"`. No placeholder content found in site copy. The only `href: "#"` instances are the "Start free trial" and "Contact sales" pricing CTAs (documented as intentional since iteration 3). "acme-saas" and "Acme Inc." appear only in example code snippets.
+
+**Bugs found and fixed:**
+
+1. **Stale test count on homepage** — Trust signals section and social proof section both displayed "1,059 tests passing". PROGRESS.md reports 1,166 tests after iteration 5.
+   - **Fix** (`src/app/page.tsx`): Updated both occurrences from "1,059" to "1,166".
+
+2. **Colorado AI Act blog post missing visible breadcrumb nav** — The other 3 blog posts have a visible Home / Blog / Title breadcrumb navigation, but the Colorado AI Act post only had "Blog" as static text with no nav element.
+   - **Fix** (`src/app/blog/colorado-ai-act/page.tsx`): Added `<nav aria-label="Breadcrumb">` with Home / Blog / Colorado AI Act links, plus rendered the existing `breadcrumbJsonLd()` function in a `<script type="application/ld+json">` tag.
+
+3. **Colorado AI Act blog post missing table of contents** — The other 3 blog posts all have a TOC section. The Colorado AI Act post had none.
+   - **Fix** (`src/app/blog/colorado-ai-act/page.tsx`): Added a TOC nav with 9 section links. Added `id` attributes to all 9 `<h2>` elements so the TOC anchor links resolve correctly.
+
+4. **GDPR for Developers blog post missing visible breadcrumb nav** — Had breadcrumb JSON-LD and a "Blog" link at top, but not the full Home / Blog / Title breadcrumb pattern used by the other posts.
+   - **Fix** (`src/app/blog/gdpr-for-developers/page.tsx`): Added `<nav aria-label="Breadcrumb">` with Home / Blog / GDPR for Developers links.
+
+**Not fixed (acceptable):**
+- **"Start free trial" and "Contact sales" CTAs use `href: "#"`** on homepage and `/pricing` — Placeholder links for features not yet built. Documented since iteration 3.
+- **Footer "Privacy Policy" and "Terms of Service" point to generator pages** — Acceptable for pre-launch site, documented since iteration 3.
+- **No skip-to-content link** — Documented since iteration 5.
+
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
 - **Tests**: 1166/1166 passing (was 1059, added 107 new tests)
@@ -1041,3 +1375,31 @@ _Updated by Website Agent each iteration._
   - `src/generator/subprocessor-list.test.ts` (30 tests): null return for empty/fewer-than-3/all-self-hosted/only-2-third-party services, generation with exactly 3/more-than-3/mixed third-party+self-hosted, context company name/email/placeholder values, date format, project name, overview section, sub-processor table columns, provider name mapping (Stripe/PostHog/SendGrid), purpose descriptions, data processed from service data, US location for US providers, EU location for EU providers (Lemon Squeezy), privacy policy links, deduplication (multiple Sentry packages→one row), self-hosted exclusion (Prisma/Redis), changes-to-list section (DPA reference), how-to-object section, Codepliant attribution
 - **Generator modules now with tests** (14 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, soc2-checklist, data-retention, subprocessor-list
 - **Generator modules still missing tests**: 117 files (was 120)
+
+### Iteration 6 — 2026-03-16 (tests)
+- **Build**: pass
+- **Tests**: 1282/1282 passing (was 1166, added 104 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/risk-register.test.ts` (33 tests): null return for empty services, generation with auth/database/payment/analytics/AI/email services, vendor risk threshold (3+ services), context company name/placeholder, date format, GDPR risk by default and with jurisdictions, GDPR likelihood varies with analytics (4 vs 3), CCPA risk inclusion/exclusion by jurisdiction, Executive Summary section (risk level counts, total), Risk Scoring Matrix section (score ranges, action levels), Risk Register table (ID/Risk/Category/Likelihood/Impact/Score/Level columns), Risk Details section (category/likelihood/impact/score fields), mitigations as checklist items, related services, RISK-NNN ID format, risk sorting by score descending, risk level labels, missing compliance documents risk (required vs recommended priority), legal disclaimer, Codepliant attribution, comprehensive test with all service categories and both GDPR+CCPA jurisdictions
+  - `src/generator/vendor-contacts.test.ts` (31 tests): null return for empty/all-self-hosted/self-hosted-auth-only services, generation with single/multiple/mixed third-party services, self-hosted exclusion (Prisma/Nodemailer), context company name/email/placeholder values, date format, project name, Overview section (DSAR reference), Vendor Contact Table columns (Privacy Email/DPA/Deletion/Status/Incident), Detailed Vendor Contacts section, DSAR Quick-Reference Checklist (6 steps, 14-day follow-up), response deadlines (GDPR 30 days, CCPA 45 days), Maintaining This Document section (quarterly review), known vendor contacts (Stripe privacy email/DPA URL/status page, OpenAI, PostHog, SendGrid, Sentry, Clerk), unknown vendor placeholder fallback, package-to-provider name mapping (@anthropic-ai/sdk to Anthropic), Sentry deduplication (3 packages to 1 entry), Codepliant attribution, disclaimer about verifying contacts
+  - `src/generator/executive-dashboard.test.ts` (40 tests): null return for empty services, generation with single/multiple services, context company name/placeholder, date format, project name, Regulatory Status section (5 regulations table), GDPR assessment (yellow with EU jurisdiction, Action Required with 5+ services+auth), CCPA assessment (green without analytics, Action Required with analytics+Do Not Sell), EU AI Act assessment (Not Applicable without AI, Transparency Required with AI+Art. 52, High Risk with aiRiskLevel=high), PCI DSS assessment (Not Applicable without payment, Compliance Required with payment+service name), HIPAA assessment (Not Applicable without health data, Action Required with HIPAA compliance need), Quick Stats section (data processors count excluding isDataProcessor=false, data categories count, regulation counts), Top Risks section (data breach with 3+ processors, non-compliant AI, cookie/tracking consent, payment exposure, max 3 risks), Upcoming Deadlines (annual review, GDPR DPA review, EU AI Act 2026-08-02, PCI DSS SAQ, quarterly privacy review), Recommended Actions (immediate for red, short-term for yellow, ongoing), Codepliant attribution, professional review disclaimer, links to related documents, comprehensive test with all categories
+- **Generator modules now with tests** (17 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, soc2-checklist, data-retention, subprocessor-list, risk-register, vendor-contacts, executive-dashboard
+- **Generator modules still missing tests**: 114 files (was 117)
+
+**2026-03-16 — Add German Impressum generator (Section 5 DDG / TMG)**
+- Research iteration 2 identified Impressum as low priority but easy to implement; picked as a quick win
+- Created `src/generator/impressum.ts` — generates a German-language Impressum (legal disclosure)
+  - Required by Section 5 DDG (Digitale-Dienste-Gesetz, formerly Section 5 TMG) for German/EU websites
+  - Returns null when no EU/German jurisdiction detected (checks jurisdiction, jurisdictions array, companyLocation)
+  - Fields from GeneratorContext: companyName, contactEmail, website
+  - Additional fields via ImpressumConfig extras: address, phone, managingDirector, tradeRegister, vatId
+  - Includes all legally required sections: company info, authorized representative, contact, responsible person (§ 18 MStV), EU dispute resolution (OS platform link), liability disclaimer (Haftungsausschluss)
+  - Includes legal review disclaimer per project quality red lines
+- Created `src/generator/impressum.test.ts` with 12 tests covering:
+  - Null return for non-EU jurisdiction, undefined jurisdiction with no German indicators
+  - Generation triggers: GDPR jurisdiction, EU in jurisdictions array, Germany/Deutschland in companyLocation
+  - Required sections present: Angaben zum Diensteanbieter, Kontakt, Vertreten durch, Verantwortlich, Streitbeilegung, OS platform link
+  - Extras override (all 8 fields), placeholder fallbacks, context fallback, Haftungsausschluss, legal disclaimer
+- Registered in `src/generator/index.ts`: import, DOCUMENT_CATEGORIES ("legal"), USER_FACING_DOCS, generateDocuments
+- Build verified: `npx tsc` passes cleanly, all 12 new tests pass
