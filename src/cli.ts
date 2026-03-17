@@ -187,6 +187,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--detailed${RESET()}            Show detailed stats (for count/stats command)
   ${DIM()}--ecosystem <name>${RESET()}    Filter scan to specific ecosystem (js, python, go, ruby, etc.)
+  ${DIM()}--jurisdictions <list>${RESET()} Comma-separated jurisdictions: gdpr, ccpa, uk-gdpr (overrides config)
   ${DIM()}--no-color${RESET()}            Disable colored output
   ${DIM()}--port <number>${RESET()}        Port for serve command (default: 3939)
   ${DIM()}--explain <code>${RESET()}       Show detailed explanation for an error code (e.g., --explain CP006)
@@ -212,6 +213,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--watch, -w${RESET()}           Watch for changes and regenerate automatically
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--dry-run${RESET()}             Preview what would be generated without writing files
+  ${DIM()}--jurisdictions <list>${RESET()} Comma-separated jurisdictions (overrides config): gdpr, ccpa, uk-gdpr
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -221,6 +223,7 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant go --format html${RESET()}         Generate HTML documents
   ${CYAN()}codepliant go --watch${RESET()}               Watch mode
   ${CYAN()}codepliant go --dry-run${RESET()}             Preview without writing
+  ${CYAN()}codepliant go --jurisdictions gdpr,ccpa${RESET()}  Target specific jurisdictions
 `,
 
   report: `${BOLD()}codepliant report${RESET()} [path] [options]
@@ -1588,6 +1591,7 @@ function main() {
   let scanOutputFile: string | undefined;
   let fromEnvFlag = false;
   let dryRunFlag = false;
+  let jurisdictionsFlag: string[] | undefined;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1623,6 +1627,14 @@ function main() {
       fromEnvFlag = true;
     } else if (arg === "--dry-run") {
       dryRunFlag = true;
+    } else if (arg === "--jurisdictions") {
+      const val = args[++i];
+      if (val) {
+        jurisdictionsFlag = val.split(",").map((j) => {
+          const normalized = j.trim().toUpperCase().replace(/-/g, " ");
+          return normalized;
+        }).filter(Boolean);
+      }
     } else if (arg === "--frequency") {
       const freq = args[++i];
       if (freq === "daily" || freq === "weekly" || freq === "monthly") {
@@ -1795,6 +1807,9 @@ function main() {
       if (!quiet && !jsonOutput) printBanner();
 
       const config = loadConfig(absProjectPath);
+      if (jurisdictionsFlag) {
+        config.jurisdictions = jurisdictionsFlag;
+      }
       const outputFormat = formatFlag || getOutputFormat(config);
 
       if (dryRunFlag) {
@@ -1900,7 +1915,7 @@ function main() {
         process.exit(0);
       }
 
-      const result = runScanAndGenerate(absProjectPath, absOutputDir, quiet, jsonOutput, outputFormat, verbose);
+      const result = runScanAndGenerate(absProjectPath, absOutputDir, quiet, jsonOutput, outputFormat, verbose, jurisdictionsFlag ? { jurisdictions: jurisdictionsFlag } : undefined);
 
       if (watchMode) {
         startWatchMode(absProjectPath, absOutputDir, quiet, result, outputFormat);
@@ -2391,9 +2406,13 @@ function runScanAndGenerate(
   jsonOutput: boolean,
   outputFormat: OutputFormat = "markdown",
   verbose: boolean = false,
+  overrides?: { jurisdictions?: string[] },
 ): ScanResult {
   // Load config and plugins
   const config = loadConfig(absProjectPath);
+  if (overrides?.jurisdictions) {
+    config.jurisdictions = overrides.jurisdictions;
+  }
 
   if (!quiet && !jsonOutput) {
     printConfigWarnings(config);

@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4601 passing — 100% scanner, 90/138 generators (65.2%)
+- **Tests**: 4756 passing — 100% scanner, 93/138 generators (67.4%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 34 complete (2026-03-17)
-- **Last run**: compare enhanced, 123 tests, 65.2% generators, developer forum research, --explain errors
+- **Iteration**: 35 complete (2026-03-17)
+- **Last run**: --jurisdictions flag, 155 tests, 🎉 2/3 GENERATOR COVERAGE (93/138), dev.to strategy, tsconfig fix
 
 ## Priority Backlog
 
@@ -7333,3 +7333,99 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - `src/generator/cookie-consent-config.test.ts` (41 tests): null returns (no services, database-only, storage-only, email-only, monitoring-only), valid JSON for analytics and auth services with newline, top-level fields (version 1.0.0, ISO timestamp, project name), context values (company name, placeholder), consent settings (explicit consent, first visit, DNT, cookie name/duration, position), all 4 cookie categories (strictly_necessary required/enabled, functional/analytics/advertising disabled), provider mapping for 8 known providers (Google Analytics, posthog, mixpanel, Meta Pixel, Google Ads, @sentry/browser, stripe, hotjar) with correct category_ids and privacy policy URLs, auth services as strictly_necessary with session cookie generation, provider deduplication, CMP integration mappings (OneTrust C0001-C0004, CookieYes necessary/advertisement, Cookiebot necessary/preferences/statistics/marketing), comprehensive 8-service scenario, advertising-only generation
 - **Generator modules now with tests**: 90/138 (65.2%)
 - **Generator coverage**: 63.0% → 65.2%
+
+### Iteration 35 — 2026-03-17 — Dev.to Article Strategy Research
+
+Researched top-performing dev.to articles about privacy, GDPR, compliance, and developer tools to identify the best topics and title patterns for a Codepliant launch article.
+
+#### High-Engagement Title Patterns on Dev.to
+
+Titles that perform well fall into these categories:
+
+1. **"What You Actually Need to Know" pattern** — e.g., "GDPR for Developers: What You Actually Need to Know" — plain-language promise of practical value, cuts through legal jargon fear
+2. **Numbered listicles** — e.g., "14 Open Source Tools To Become The Ultimate Developer", "Top 10 Open-Source CLI Tools" — consistently high reactions; dev.to curators acknowledge these perform well even if editorially divisive
+3. **Year-forward framing** — e.g., "8 Developer Tools That Will Boost Your Workflow in 2026", "Data Privacy in 2025 — What Developers & Businesses Must Know" — timeliness signals drive clicks
+4. **"I built/analyzed X" personal narrative** — e.g., "I Analyzed 1 Million dev.to Articles: Here's What the Data Reveals" — personal stakes + data = high engagement
+5. **Problem-to-solution arc** — e.g., "From DevOps to Data Ethics: Why Every Engineer Needs GDPR Training", "Making GDPR Compliance Simple for Developers" — positions the reader's pain then resolves it
+
+#### Platform Insights (from analysis of 1M dev.to articles, 2022-2026)
+
+- **AI is the #1 tag**: grew from 3% to 23% of all articles by mid-2025, surpassing `webdev` and `programming`
+- **Short-form dominates**: ~90% of articles are 6 minutes or less to read; avg reading time is ~3 minutes
+- **Engagement is declining per-article**: volume up but reactions/comments trend down — attention saturation means quality and differentiation matter more than ever
+- **Weekday posting preferred**: weekends show a 5% dip; specific weekday matters less than content quality
+- **Curation is human-driven**: dev.to's "Top 7 Featured" is editorially selected, not algorithmic — they prioritize diverse voices and thoughtful posts over pure popularity
+- **Initial engagement is critical**: early reactions/comments trigger feed visibility momentum
+- **Tags matter for discovery**: tag selection influences both algorithmic feed placement and editorial curation consideration
+
+#### Recommended Article Topics for Codepliant Launch
+
+Ranked by predicted engagement based on research:
+
+1. **"I Built an Open-Source CLI That Scans Your Code and Writes Your Privacy Policy"** — personal narrative + open source + practical tool; hits the "I built X" pattern that drives curiosity and comments
+2. **"GDPR Compliance for Developers: What Your Code Already Knows About You"** — leverages the high-performing "What You Actually Need to Know" pattern; reframes compliance as code analysis rather than legal burden
+3. **"Stop Writing Privacy Policies by Hand — Let Your package.json Do It"** — provocative/contrarian hook; specificity of "package.json" signals developer authenticity
+4. **"5 Compliance Documents Every SaaS Developer Ships Without (And How to Generate Them in 60 Seconds)"** — numbered list + pain point + speed promise; combines two proven patterns
+5. **"Your node_modules Know More About GDPR Than You Do"** — humor + surprise + developer-specific reference; strong share potential
+6. **"From Zero to GDPR-Compliant: One CLI Command for Your Entire Codebase"** — "From X to Y" transformation pattern + concrete tool promise
+7. **"Open-Source Privacy: Why I Made a Free Tool to Replace $5K/year Compliance Software"** — cost comparison + open-source values; appeals to indie/startup developers
+
+#### Recommended Tags
+
+Primary: `opensource`, `privacy`, `webdev`, `productivity`
+Secondary (rotate by article): `ai`, `javascript`, `tutorial`, `security`
+
+#### Tactical Notes
+
+- Keep articles under 5 minutes read time (sweet spot for dev.to)
+- Include a code snippet or terminal output screenshot early — dev.to readers scan for code blocks
+- End with a clear CTA: `npx codepliant go .` one-liner
+- Respond to every comment in the first 24 hours to boost algorithmic ranking
+- Consider a "Show DEV" post format (#showdev tag) for the launch announcement — these get editorial attention
+- Cross-post timing: publish Tuesday-Thursday morning (US timezone) for maximum weekday visibility
+
+#### Sources
+
+- [I Analyzed 1 Million dev.to Articles (2022-2026): Here's What the Data Reveals](https://dev.to/marina_eremina/i-analyzed-1-million-devto-articles-2022-2026-heres-what-the-data-reveals-44gm)
+- [How does the promotion of posts work on DEV?](https://dev.to/grahamthedev/how-does-the-promotion-of-posts-work-on-dev-39c)
+- [GDPR for Developers: What You Actually Need to Know](https://dev.to/yanikpei/gdpr-for-developers-what-you-actually-need-to-know-45l1)
+- [GdprApi-Open — Making GDPR Compliance Simple for Developers](https://dev.to/goconnect/gdprapi-open-making-gdpr-compliance-simple-for-developers-1lig)
+- [14 Open Source Tools To Become The Ultimate Developer](https://dev.to/anthonymax/14-open-source-tools-to-become-the-ultimate-developer-9j2)
+- [Top 7 Open-Source CLI Tools](https://dev.to/dev_kiran/top-7-open-source-cli-tools-4dnl)
+- [Top 5 Emerging Developer Tools to Watch in 2026](https://dev.to/thebitforge/top-5-emerging-developer-tools-to-watch-in-2026-12pl)
+- [GDPR in 2025 - Why It Still Matters and How to Stay Updated](https://dev.to/heyjoshlee/gdpr-in-2025-why-it-still-matters-and-how-to-stay-updated-190p)
+- [From DevOps to Data Ethics: Why Every Engineer Needs GDPR Training](https://dev.to/mehwish_malik_4f29ff7fb04/from-devops-to-data-ethics-why-every-engineer-needs-gdpr-training-3g0b)
+
+### Iteration 35 — 2026-03-17
+
+#### `--jurisdictions` CLI flag (Development Agent)
+
+Added `--jurisdictions` flag to the CLI so users can override config file jurisdictions from the command line:
+
+```
+codepliant go --jurisdictions gdpr,ccpa,uk-gdpr
+```
+
+**Changes:**
+- `src/cli.ts`: Added `jurisdictionsFlag` variable and `--jurisdictions` argument parsing with comma-splitting and normalization (lowercase input auto-uppercased, hyphens converted to spaces for matching VALID_JURISDICTIONS)
+- `src/cli.ts`: `runScanAndGenerate()` now accepts an optional `overrides` parameter with `jurisdictions` array, applied after `loadConfig()`
+- `src/cli.ts`: The `go` command applies `jurisdictionsFlag` both in the dry-run path (direct config override) and the normal path (via `runScanAndGenerate` overrides)
+- `src/cli.ts`: Updated help text for `go` command and global options to document the new flag
+- `npx tsc`: passes cleanly
+
+**Design decisions:**
+- Flag value is comma-separated (matches env var `CODEPLIANT_JURISDICTIONS` pattern)
+- Input is normalized: `gdpr` → `GDPR`, `uk-gdpr` → `UK GDPR` — validation still happens via `validateConfig()` downstream
+- Override applies only to the `go` command (the primary generation entry point); other commands that load config independently are unaffected
+
+### Iteration 35 — 2026-03-17 — Generator Tests (93/138 = 67.4%) — PAST 2/3!
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4756/4756 passing (was 4601, added 155 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-maturity-assessment.test.ts` (45 tests): null return for empty services, basic generation with single service, date format, project name, context values (company name, placeholder), Scoring Guide section (all 5 levels), Maturity Summary section (all 6 domains, overall score, auto-assessed count, manual count, maximum possible score 250), auto-scoring Governance (GOV-01 with services, GOV-02 always, GOV-04 higher for >5 services/lower for 1-5, GOV-07 always), auto-scoring Privacy (PRI-01 with services, PRI-04 with/without analytics), auto-scoring Security (SEC-01 higher with auth/lower without, SEC-02 with/without monitoring, SEC-06 with database), auto-scoring Vendor (VEN-01 higher for >3/lower for 1-3, VEN-04 for >3), auto-scoring AI (AI-01/AI-02/AI-05 with/without AI services, N/A marking), auto-scoring Incident (INC-01/INC-02/INC-04 always), question tables ([AUTO]/[MANUAL] markers), Improvement Action Plan (priorities below level 4), Assessment Sign-Off (Assessor/Compliance Officer/Executive Sponsor), Next Assessment (quarterly cadence), Codepliant disclaimer, visual score bars, comprehensive test with all 8 service categories
+  - `src/generator/regulatory-mapping-matrix.test.ts` (47 tests): null return for empty services, basic generation with single service, date format, project name, context values (company name, placeholder), Legend section (YES/?/—), matrix table header (all 6 regulations), service listing, GDPR assessment (auth/analytics/database/personal data keywords), CCPA assessment (analytics/auth/email), EU AI Act assessment (AI services/non-AI exclusion/AI data keywords), PCI DSS assessment (payment services/payment data keywords/non-payment exclusion), HIPAA assessment (health data/database manual review), SOC 2 assessment (auth/payment/AI/analytics), applicability icons (YES/?), Regulation Coverage Summary (priority levels, coverage %), Detailed Assessment by Regulation (all 6 subsections, applicable services with reasons, manual assessment listing), Category Heatmap (exposure levels), Recommendations (GDPR/CCPA/EU AI Act/PCI DSS/SOC 2), Codepliant disclaimer, comprehensive test with 10 service categories
+  - `src/generator/compliance-board-report.test.ts` (63 tests): always returns string (never null even with no services), basic generation with services, quarter/year in title, date format, Confidential classification, project name, context values (company name, placeholder), Executive Summary (Key Metrics table, service count, AI active Yes/No, Payment Processing Yes/No), risk levels (Low/<5, Medium/5+, High/10+ or AI, Critical/15+ or AI+payment), Board Action Items (AI governance/EU AI Act/PCI DSS conditional, exclusion without), Risk Heatmap (Likelihood vs Impact Matrix, conditional AI misuse/Payment fraud, Risk by Service Category with AI High/Payment High/Auth Medium/Monitoring Low), Regulatory Updates (GDPR default, EU AI Act with AI, PCI DSS with payment, CCPA with jurisdictions, NIS2/DORA always, Upcoming Changes), Budget vs Actual (Startup/Growth/Enterprise tiers based on service count and AI+payment, budget line items), Compliance Program Status (Document Coverage, AI Compliance row conditional, Key Achievements/Planned sections), Incident & DSAR Summary, Strategic Recommendations (automated scanning always, EU AI Act readiness with AI, vendor consolidation 10+, legal review/board training always), Appendix (detected services, data truncation to 3 items, 25-service limit), Codepliant disclaimer, comprehensive test with 8 services and all sections
+- **Generator modules now with tests**: 93/138 (67.4%)
+- **Generator coverage**: 65.2% → 67.4% — PAST THE 2/3 (66.7%) MILESTONE!
