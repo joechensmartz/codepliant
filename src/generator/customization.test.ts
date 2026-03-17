@@ -208,4 +208,106 @@ describe("applyOverrides", () => {
     assert.ok(useIdx < retentionIdx, "How We Use before Data Retention");
     assert.ok(retentionIdx < contactIdx, "Data Retention before Contact");
   });
+
+  it("handles document with no h2 headings", () => {
+    const noH2 = `# Title\n\nJust a paragraph with no sections.\n`;
+    const overrides = { "Nonexistent": "Something." };
+    const result = applyOverrides(noH2, overrides);
+    assert.strictEqual(result, noH2);
+  });
+
+  it("does not match h3 headings for override", () => {
+    const doc = `# Title\n\n## Real Section\n\nContent.\n\n### Subsection\n\nSub content.\n`;
+    const overrides = { "Subsection": "Replaced." };
+    const result = applyOverrides(doc, overrides);
+    // h3 should not match, so subsection content should remain
+    assert.ok(result.includes("Sub content."));
+  });
+
+  it("preserves trailing whitespace in document", () => {
+    const doc = `# Title\n\n## Section A\n\nContent A.\n\n## Section B\n\nContent B.\n`;
+    const overrides = { "Section A": "New A." };
+    const result = applyOverrides(doc, overrides);
+    assert.ok(result.includes("## Section B"));
+    assert.ok(result.includes("Content B."));
+  });
+
+  it("handles override body with markdown formatting", () => {
+    const overrides = {
+      "Data Retention": "**Bold text** and *italic text* and `code`.",
+    };
+    const result = applyOverrides(sampleDoc, overrides);
+    assert.ok(result.includes("**Bold text**"));
+    assert.ok(result.includes("*italic text*"));
+    assert.ok(result.includes("`code`"));
+  });
+
+  it("handles override body with a table", () => {
+    const overrides = {
+      "Data Retention": "| Period | Type |\n|--------|------|\n| 30 days | Logs |",
+    };
+    const result = applyOverrides(sampleDoc, overrides);
+    assert.ok(result.includes("| Period | Type |"));
+    assert.ok(result.includes("| 30 days | Logs |"));
+  });
+
+  it("handles override body with code block", () => {
+    const overrides = {
+      "Data Retention": "```json\n{\"retention\": \"90d\"}\n```",
+    };
+    const result = applyOverrides(sampleDoc, overrides);
+    assert.ok(result.includes("```json"));
+    assert.ok(result.includes("\"retention\": \"90d\""));
+  });
+
+  it("handles document with consecutive sections no blank lines", () => {
+    const compact = `# Doc\n## A\nContent A.\n## B\nContent B.\n`;
+    const overrides = { "A": "New A." };
+    const result = applyOverrides(compact, overrides);
+    assert.ok(result.includes("New A."));
+    assert.ok(result.includes("Content B."));
+  });
+
+  it("handles heading with trailing spaces", () => {
+    const doc = `# Title\n\n## Section With Spaces   \n\nContent here.\n\n## Next\n\nMore.\n`;
+    const overrides = { "Section With Spaces": "Replaced." };
+    const result = applyOverrides(doc, overrides);
+    assert.ok(result.includes("Replaced."));
+  });
+
+  it("non-matching override leaves all sections intact", () => {
+    const overrides = { "Missing Section": "Orphaned text." };
+    const result = applyOverrides(sampleDoc, overrides);
+    assert.ok(result.includes("We collect personal data"));
+    assert.ok(result.includes("We use your information"));
+    assert.ok(result.includes("We retain your data"));
+    assert.ok(result.includes("privacy@example.com"));
+  });
+
+  it("override with link in body", () => {
+    const overrides = {
+      "Contact Us": "Visit [our site](https://example.com) for info.",
+    };
+    const result = applyOverrides(sampleDoc, overrides);
+    assert.ok(result.includes("[our site](https://example.com)"));
+    assert.ok(!result.includes("privacy@example.com"));
+  });
+
+  it("handles empty document string", () => {
+    const result = applyOverrides("", { "Section": "Body." });
+    assert.strictEqual(result, "");
+  });
+
+  it("handles document with only a title and no sections", () => {
+    const doc = `# Just a Title\n\nSome intro text.\n`;
+    const result = applyOverrides(doc, { "Anything": "Override." });
+    assert.strictEqual(result, doc);
+  });
+
+  it("idempotent when applied twice with same overrides", () => {
+    const overrides = { "Data Retention": "Fixed retention." };
+    const first = applyOverrides(sampleDoc, overrides);
+    const second = applyOverrides(first, overrides);
+    assert.strictEqual(first, second);
+  });
 });

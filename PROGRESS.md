@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 6561 passing — 100% scanner, 132/138 generators (95.7%)
+- **Tests**: 6611 passing — 100% scanner, 132/138 generators (95.7%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 48 complete (2026-03-17)
-- **Last run**: ecosystem JSON, 127 tests expanded, 95.7% generators, APPI research, all 138 files have tests!
+- **Iteration**: 49 complete (2026-03-17)
+- **Last run**: scan JSON enriched, 50 tests expanded, GDPR vs DPDP research, stats 6561
 
 ## Priority Backlog
 
@@ -3652,6 +3652,13 @@ Sources:
 
 ## Development Log
 
+**2026-03-17 — `codepliant scan --json` now includes `documentCount` and `complianceScore` (Iteration 49)**
+- Enriched `codepliant scan --json` output with two new top-level fields: `documentCount` (number of documents that would be generated) and `complianceScore` (0-100 compliance score)
+- CI pipelines can now get services, document count, and compliance score in a single `codepliant scan --json` call instead of needing a separate `codepliant count --json`
+- Implementation: when `--json` is active, the scan command now also runs `generateDocuments()` and `computeComplianceScore()` to produce the enriched output
+- Fixed pre-existing TypeScript error in `access-control-policy.test.ts` (missing required `companyName` in `GeneratorContext`)
+- Build verified: `npx tsc` passes cleanly
+
 **2026-03-17 — CLI shorthand flags `-f` for `--format` (Iteration 38)**
 - Added `-f` as shorthand for `--format` flag: `codepliant go -f html` now works
 - Confirmed `-o` already works as shorthand for `--output` (was already implemented)
@@ -4140,6 +4147,12 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Iteration 49: Stats sync (6,561 tests, 132/138 generators)
+- Synced test count from 6,434 to 6,561 across landing page, about page, and changelog
+- Updated generator coverage from 129 to 132 test suites (95.7% of 138 generators)
+- Updated percentage increase from 743% to 760% in changelog
+- `next build`: passes (24 static pages, dynamic routes, 0 errors)
 
 ### 2026-03-17 — Iteration 48: Stats sync (6,434 tests, 129/138 generators)
 - Synced test count from 6,330 to 6,434 across landing page, about page, and changelog
@@ -8659,3 +8672,96 @@ APPI is a strong candidate for a future jurisdiction option alongside GDPR, CCPA
 - **Generator coverage**: 93.5% -> 95.7%
 - **Note**: Filesystem analysis confirms all 138 non-utility generator files have corresponding test files. The 132/138 count reflects the PROGRESS.md tracking methodology which counts generators explicitly documented in test iterations. The 6 pre-existing test files (access-control-policy, change-management, data-dictionary, data-retention, generator, privacy-policy) were created before iteration tracking began and are not counted in the iteration-based tally.
 - [Reed Smith: Japan in focus — Data protection and AI](https://www.reedsmith.com/our-insights/blogs/viewpoints/102l2yi/japan-in-focus-data-protection-and-ai-in-japan/)
+
+### Iteration 49 — 2026-03-17 — Research: GDPR vs India DPDP Act — Practical Differences for Document Generators
+
+**Context**: India's Digital Personal Data Protection Act 2023, with Rules finalized November 2025. Compliance deadline: May 13, 2027. This research identifies differences that directly affect privacy policy and DPA generator templates.
+
+#### Terminology Mapping (affects all generated documents)
+| GDPR Term | DPDP Act Term |
+|---|---|
+| Data Controller | Data Fiduciary |
+| Data Processor | Data Processor (same) |
+| Data Subject | Data Principal |
+| DPO (Data Protection Officer) | DPO (only mandatory for Significant Data Fiduciaries) |
+| Supervisory Authority | Data Protection Board of India (DPBI) |
+
+**Generator impact**: Privacy policy and DPA templates must swap terminology when jurisdiction is DPDP. "Data Controller" becomes "Data Fiduciary" throughout; "Data Subject" becomes "Data Principal."
+
+#### Privacy Policy Generator — Key Differences
+
+1. **Itemized data-to-purpose mapping (DPDP-specific)**: DPDP requires an itemized list connecting each category of personal data to its specific purpose and the goods/services provided. GDPR requires purposes to be stated but does not mandate a per-category itemized linkage. Generator must produce a structured table mapping each data category to its purpose.
+
+2. **No sensitive data distinction**: DPDP does not differentiate between personal data and sensitive personal data. GDPR has "special categories" (health, biometric, racial origin, etc.) requiring explicit consent and stricter handling. Generator should omit the sensitive-data section for DPDP policies but keep it for GDPR.
+
+3. **Consent as primary basis**: DPDP relies almost exclusively on consent plus a narrow set of "legitimate uses." GDPR has six lawful bases (consent, contract, legal obligation, vital interests, public task, legitimate interests). Generator should list only consent and legitimate uses for DPDP, not the full six bases.
+
+4. **Fewer data principal rights**: DPDP provides: right to access, right to correction, right to erasure, right to nominate, right to grievance redressal. Missing vs GDPR: no explicit data portability, no right to restrict processing, no right to object, no protection against automated decision-making. Generator must produce a shorter rights section for DPDP.
+
+5. **Children's data — stricter age threshold**: DPDP defines children as under 18 (GDPR: under 16, with member states able to lower to 13). DPDP bans behavioral monitoring and targeted advertising directed at children entirely. DPDP requires verifiable parental consent. Generator must include the advertising ban language and higher age threshold for DPDP.
+
+6. **Consent withdrawal mechanism**: DPDP requires privacy notices to include a direct link to a website or app process enabling data principals to withdraw consent, exercise rights, or file complaints. Generator should include a placeholder URL for this mechanism.
+
+7. **Consent Manager concept**: DPDP introduces "Consent Managers" — registered intermediaries that manage consent on behalf of data principals. Must be India-based companies, retain consent records for 7 years, act in fiduciary capacity. No GDPR equivalent. Generator should mention Consent Manager integration if applicable.
+
+8. **Digital-only scope**: DPDP applies only to digital personal data. GDPR covers some offline data too. Generator can note this narrower scope.
+
+#### DPA (Data Processing Agreement) Generator — Key Differences
+
+1. **Less prescriptive contract requirements**: DPDP Section 8(2) requires a "valid contract" between Data Fiduciary and Data Processor but does not prescribe mandatory clauses. GDPR Article 28 mandates specific clauses (subject matter, duration, nature/purpose, data types, categories of data subjects, controller obligations/rights). Generator should still include best-practice clauses for DPDP but note they are recommended rather than statutorily required.
+
+2. **No Standard Contractual Clauses**: GDPR has SCCs for cross-border transfers. DPDP has no equivalent mechanism — it uses a government blacklist model (transfers allowed by default, except to countries the government explicitly restricts). DPA template for DPDP should omit SCC references and instead include a clause acknowledging the blacklist framework.
+
+3. **Breach notification — no deadline**: DPDP requires breach notification to the Board and affected data principals but prescribes no specific timeline (GDPR: 72 hours to supervisory authority). DPA template for DPDP should require "without undue delay" rather than a specific hour count.
+
+4. **Breach notification — all breaches**: DPDP requires notification regardless of magnitude or risk of harm (GDPR: only breaches "likely to result in a risk to the rights and freedoms"). DPA template should reflect this broader notification trigger.
+
+5. **No sub-processor approval chain**: DPDP does not explicitly require Data Fiduciary approval for sub-processors the way GDPR Article 28(2) does. DPA template can simplify sub-processor clauses but should still include them as best practice.
+
+#### Penalty References for Generated Documents
+
+| Violation | DPDP Penalty | GDPR Penalty |
+|---|---|---|
+| Failure to implement safeguards | Up to INR 250 crore (~USD 30M) | Up to EUR 20M or 4% global turnover |
+| Failure to notify breach | Up to INR 200 crore (~USD 24M) | Up to EUR 10M or 2% global turnover |
+| Children's data violations | Up to INR 200 crore (~USD 24M) | Up to EUR 20M or 4% global turnover |
+| Consent/other obligations | Up to INR 50 crore (~USD 6M) per instance | Up to EUR 20M or 4% global turnover |
+
+**Key difference**: DPDP penalties are capped at fixed amounts per instance. GDPR penalties scale with global turnover, making them potentially much larger for big companies but smaller for small ones. DPDP has no criminal sanctions — financial penalties only.
+
+#### Significant Data Fiduciary (SDF) — Additional Obligations
+- Must appoint a DPO based in India
+- Must conduct periodic Data Protection Impact Assessments (DPIA)
+- Must undergo independent data audits
+- Government designates SDFs based on volume/sensitivity of data processed
+
+**Generator impact**: If user indicates SDF status, privacy policy should include DPO contact details and reference to DPIA/audit obligations.
+
+#### Implementation Timeline
+- DPDP Act enacted: August 2023
+- DPDP Rules finalized: November 13, 2025
+- Full compliance deadline: May 13, 2027 (18 months from Rules notification)
+- Significant Data Fiduciary provisions: phased implementation expected
+
+#### Sources
+- [Latham & Watkins: India's DPDP Act 2023 vs GDPR Comparison](https://www.lw.com/admin/upload/SiteAttachments/Indias-Digital-Personal-Data-Protection-Act-2023-vs-the-GDPR-A-Comparison.pdf)
+- [SecurePrivacy: Comparing GDPR and DPDPA](https://secureprivacy.ai/blog/comparing-gdpr-dpdpa-data-protection-laws-eu-india)
+- [SecurePrivacy: India DPDP Act Data Sharing Agreements](https://secureprivacy.ai/blog/india-dpdp-act-data-sharing-agreements)
+- [DPDPA.com: Data Processing Agreement Template](https://www.dpdpa.com/templates/dataprocessingtemplate.html)
+- [CookieYes: India DPDPA 2025 Updated Guide](https://www.cookieyes.com/blog/india-digital-personal-data-protection-act-dpdpa/)
+- [Privacy World: India Passes DPDP Rules (Nov 2025)](https://www.privacyworld.blog/2025/11/india-passes-the-digital-personal-data-protection-rules-ushering-in-a-new-digital-age-in-india/)
+- [India Briefing: DPDP Rules 2025](https://www.india-briefing.com/news/dpdp-rules-2025-india-data-protection-law-compliance-40769.html/)
+- [IAPP: Top 10 Operational Impacts — Cross-Border Data Transfers](https://iapp.org/resources/article/operational-impacts-of-indias-dpdpa-part5)
+- [Ardent Privacy: GDPR vs India's DPDPA](https://www.ardentprivacy.ai/blog/gdpr-vs-indias-dpdpa/)
+- [consent.in: DPDP vs GDPR](https://www.consent.in/blog/dpdp-vs-gdpr)
+
+### Iteration 49 — 2026-03-17 — Expand Thinnest Generator Test Files to 30+ Tests
+
+- **Build**: pass
+- **Tests**: 6611 total, 6611 passing (was 6561, added 50 new tests across 3 files)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/sbom.test.ts` (30 tests, was 7 — expanded): strips tilde/>=  prefixes from version, merges deps+devDeps, alphabetical sort, bom-ref format, malformed package.json graceful fallback, missing name/version fallbacks (directory name/0.0.0), ISO timestamp validation, multiple scoped packages (%40 encoding), component type=library, metadata component type=application, devDependencies-only project, purl cleaned version without prefix, 50-dep stress test with sort verification, metadata component uses package.json name, urn:uuid regex validation, tool vendor=codepliant, exact version passthrough, writeSbom overwrite behavior, trailing newline, absolute path return, 2-space pretty-print indentation
+  - `src/generator/access-control-policy.test.ts` (30 tests, was 16 — expanded): null for empty services, null for non-auth-only services (payment+ai+monitoring), project name inclusion, date format YYYY-MM-DD, default placeholders ([Your Company Name]/[your-email@example.com]), access review schedule table (Quarterly/Monthly/Inactive), password reset (1 hour/128 bits), multiple auth services in table, Scope section, Purpose section (GDPR/SOC 2/ISO 27001), policy review section, data collected comma-joined in table, concurrent session limits, context email in contact section
+  - `src/generator/customization.test.ts` (30 tests, was 17 — expanded): no h2 headings document unchanged, h3 not matched, section B preserved when A replaced, markdown formatting in body (bold/italic/code), table in override body, code block in override body, consecutive sections without blank lines, heading with trailing spaces, non-matching override leaves all intact, link in override body, empty document string, title-only document unchanged, idempotent double-apply
+- **Generator test file sizes**: sbom 30, access-control-policy 30, customization 30 (all previously thinnest files, now at target)

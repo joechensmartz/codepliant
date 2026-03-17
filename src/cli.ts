@@ -2044,7 +2044,22 @@ function main() {
       }
 
       if (jsonOutput) {
-        const jsonStr = JSON.stringify(result, null, 2);
+        // Enrich scan JSON with documentCount and complianceScore for CI pipelines
+        const config = loadConfig(absProjectPath);
+        const docs = generateDocuments(result, config);
+        const scoreInput: ScoreInput = {
+          scanResult: result,
+          docs,
+          config,
+          outputDir: absOutputDir,
+        };
+        const fullScore = computeFullComplianceScore(scoreInput);
+        const enrichedResult = {
+          ...result,
+          documentCount: docs.length,
+          complianceScore: fullScore.total,
+        };
+        const jsonStr = JSON.stringify(enrichedResult, null, 2);
 
         // --output <file>: write JSON to specified file
         if (scanOutputFile) {

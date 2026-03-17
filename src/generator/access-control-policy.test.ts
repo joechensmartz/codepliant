@@ -181,4 +181,135 @@ describe("generateAccessControlPolicy", () => {
     assert.ok(result.includes("Codepliant"));
     assert.ok(result.includes("does not constitute legal advice"));
   });
+
+  it("returns null when services array is empty", () => {
+    const scan = makeScan({ services: [] });
+    assert.strictEqual(generateAccessControlPolicy(scan), null);
+  });
+
+  it("returns null when only non-auth services exist", () => {
+    const scan = makeScan({
+      services: [
+        makeService("stripe", "payment"),
+        makeService("openai", "ai"),
+        makeService("sentry", "monitoring"),
+      ],
+    });
+    assert.strictEqual(generateAccessControlPolicy(scan), null);
+  });
+
+  it("includes project name in generated content", () => {
+    const scan = makeScan({
+      projectName: "my-special-app",
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("my-special-app"));
+  });
+
+  it("includes date in generated content", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    // Should contain a date in YYYY-MM-DD format
+    assert.ok(/\d{4}-\d{2}-\d{2}/.test(result));
+  });
+
+  it("uses default placeholders when no context provided", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("[Your Company Name]"));
+    assert.ok(result.includes("[your-email@example.com]"));
+  });
+
+  it("includes access review schedule table", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("Quarterly"));
+    assert.ok(result.includes("Monthly"));
+    assert.ok(result.includes("Inactive account cleanup"));
+  });
+
+  it("includes password reset section", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("Password Reset"));
+    assert.ok(result.includes("1 hour"));
+    assert.ok(result.includes("128 bits"));
+  });
+
+  it("handles multiple auth services in the table", () => {
+    const scan = makeScan({
+      services: [
+        makeService("next-auth", "auth", ["email", "name"]),
+        makeService("passport", "auth", ["email", "OAuth tokens"]),
+      ],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("next-auth"));
+    assert.ok(result.includes("passport"));
+  });
+
+  it("includes Scope section", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("## 2. Scope"));
+    assert.ok(result.includes("administrators"));
+  });
+
+  it("includes Purpose section with compliance references", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("## 1. Purpose"));
+    assert.ok(result.includes("GDPR"));
+    assert.ok(result.includes("SOC 2"));
+    assert.ok(result.includes("ISO 27001"));
+  });
+
+  it("includes policy review section", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("Policy Review"));
+    assert.ok(result.includes("security incident"));
+  });
+
+  it("includes data collected in the services table", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email", "name", "profile photo"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("email, name, profile photo"));
+  });
+
+  it("includes concurrent session limits mention", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan)!;
+    assert.ok(result.includes("Concurrent session"));
+  });
+
+  it("uses context email in the contact section", () => {
+    const scan = makeScan({
+      services: [makeService("next-auth", "auth", ["email"])],
+    });
+    const result = generateAccessControlPolicy(scan, {
+      companyName: "TestCorp",
+      contactEmail: "admin@corp.com",
+    })!;
+    assert.ok(result.includes("admin@corp.com"));
+  });
 });
