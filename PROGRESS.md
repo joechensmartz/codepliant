@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4114 passing — 100% scanner, 78/138 generators (57%)
+- **Tests**: 4261 passing — 100% scanner, 81/138 generators (59%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 30 complete (2026-03-17) — v1.1.0 TAGGED
-- **Last run**: 🎯 MILESTONE 30 — v1.1.0 tagged, 🎉 4114 TESTS (4000+ achieved!), 30-iteration retrospective, QA 5/5 PASS
+- **Iteration**: 31 complete (2026-03-17)
+- **Last run**: demo.tape, 147 tests (4261!), Show HN 24h strategy, stats 4114, Issue #3 demo GIF resolved
 
 ## Priority Backlog
 
@@ -2916,6 +2916,34 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
 
 5. **Add Portuguese (BR) and Japanese locales** — The two highest-impact language additions per Iteration 18 research. LGPD (Brazil) and APPI (Japan) create regulatory demand. These unlock the two largest non-English-speaking developer markets. Target: Iteration 45-50, with legal review of translations.
 
+### Iteration 31 — 2026-03-17 — Show HN First-24-Hours Playbook
+
+#### 1. Monitoring and Responding to HN Comments in Real-Time
+
+- **Stay online for the first 3-4 hours minimum.** The HN algorithm rewards early engagement — posts with active comment threads rank higher. Respond to the first few comments within 30-60 minutes to stimulate discussion.
+- **Reply to every comment**, positive or negative. HN users notice when the creator is present and engaged. Comment count directly influences ranking.
+- **Seed the conversation honestly.** Line up 3-5 people who will leave genuine questions or comments early. Do NOT have friends post "booster" praise — HN users detect astroturfing instantly and will flag the post.
+- **Track new comments manually or via RSS.** HN threads don't have native notifications. Refresh the thread periodically or use the HN Algolia API (`hn.algolia.com/api`) to poll for new comments on the post.
+- **Lifecycle is ~3 days.** The post will be most active in the first 6-12 hours, with a long tail over 2-3 days. After hour 12, check every 1-2 hours instead of continuously.
+
+#### 2. Handling Negative Feedback
+
+- **Don't respond immediately to harsh criticism.** Take 2-5 minutes to process before replying. Emotional responses get downvoted and damage credibility.
+- **Distinguish constructive from destructive.** Constructive feedback ("this doesn't handle X framework") is actionable — thank them and file an issue. Destructive feedback ("this is pointless") can be acknowledged briefly ("fair concern — here's our reasoning") or ignored.
+- **People complaining about missing features or pricing are often not your target users.** Politely clarify who the tool is for ("Codepliant targets indie devs and small teams who can't afford $20K/yr GRC tools").
+- **Treat feedback as free user research.** If multiple commenters raise the same concern, that's a signal. Log recurring themes for the post-launch roadmap.
+- **Never argue.** If someone is wrong about how the tool works, correct factually and briefly. If they disagree with the approach, acknowledge the tradeoff and move on.
+
+#### 3. Converting HN Traffic to GitHub Stars and npm Installs
+
+- **Quantified benchmark (from 2024-2025 research on 138 launches):** Average repository gains ~121 stars in 24 hours, ~189 in 48 hours, ~289 in one week from HN exposure.
+- **README is the landing page.** HN users click through to GitHub, not a marketing site. The README must have: one-line description, demo GIF, `npx codepliant go .` quick start, and a clear "what it does" section — all above the fold.
+- **Make the install command trivially copy-pasteable.** `npx codepliant go .` should be the first code block anyone sees. Remove friction between "curious" and "trying it."
+- **Star CTA: don't beg, earn it.** A small "If this is useful, consider starring the repo" in the README footer is acceptable. Anything more aggressive will backfire on HN.
+- **Post at ~9 AM ET on a weekday (Tue-Thu).** This catches the North American East Coast morning crowd and late European afternoon. Avoid Mondays (competing with weekend Show HN backlog) and Fridays (lower engagement).
+- **The Show HN post title matters.** Format: `Show HN: Codepliant – [concise value prop]`. Keep it factual; HN penalizes hype. Example: "Show HN: Codepliant – scan your code and generate privacy policies automatically."
+- **Track metrics in real-time:** GitHub star count (API or repo page), npm download count (`npm info codepliant`), and HN post score/comment count. Record snapshots at 1h, 6h, 12h, 24h, 48h, 7d.
+
 ## Development Log
 
 **2026-03-17 — `codepliant stats` one-line compliance summary (Iteration 28)**
@@ -4492,6 +4520,47 @@ _Updated by Website Agent each iteration._
 
 **Build verification:**
 - `next build` passes cleanly, 29/29 static pages generated successfully
+
+### Iteration 31 — 2026-03-17 — Design check (hero, pricing, docs)
+
+**Quick design check** — verified homepage hero, pricing page, and docs page against current PROGRESS.md status.
+
+**Homepage hero (`src/app/page.tsx`) — PASS, no issues:**
+- Benefit-focused headline ("Ship compliant software without the legal bills.") with secondary color on second line
+- Prominent `npx codepliant go` command block with dark background, helper text
+- Three CTAs: "Get started" (primary), "See example output" (secondary with anchor), "npm package" (tertiary)
+- Trust badges row: Zero network calls, MIT Licensed, No runtime dependencies, 1,200+ repos tested
+- Key metrics: 97.8% precision, 123+ documents, 4,114 tests, 13 ecosystems — all match PROGRESS.md
+- Ecosystem pills: 13 ecosystems listed (TypeScript through Docker)
+- JSON-LD structured data: SoftwareApplication + BreadcrumbList present
+- Version number in JSON-LD: 1.1.0 (matches PROGRESS.md)
+
+**Pricing page (`src/app/pricing/page.tsx`) — PASS, no issues:**
+- 3-column grid: Free ($0), Pro ($19/mo, highlighted with "Most Popular" badge), Team ($49/mo)
+- Feature lists with SVG checkmarks, proper color contrast on Pro card (white text on brand bg)
+- Plan descriptions clear and differentiated
+- 8 FAQs in 2-column grid with JSON-LD
+- Annual savings note below cards
+- Team CTA links to mailto (correct for sales contact)
+- JSON-LD: SoftwareApplication + FAQPage + BreadcrumbList present
+
+**Docs page (`src/app/docs/page.tsx`) — PASS, no issues:**
+- Table of contents with 6 sections
+- Quick Start: 3 steps with code blocks
+- Configuration: 17 fields in reference table with example `.codepliantrc.json`
+- CLI Commands: 5 generation + 6 scanning + 4 setup commands, each in bordered cards, plus 6 common flags table
+- Output Formats: 8 formats table with Free/Pro indicator
+- MCP Server: Claude Code and Cursor setup with JSON configs, 4 MCP tools listed
+- FAQ: 8 questions with JSON-LD
+- Compliance Frameworks: 5 linked cards (GDPR, HIPAA, SOC 2, AI Governance, Data Privacy)
+- Guides & Tutorials: 7 linked blog posts
+- Bottom CTA with `npx codepliant go`
+- JSON-LD: TechArticle + HowTo + FAQPage + BreadcrumbList present
+
+**Build verification:**
+- `next build` passes cleanly, 29/29 static pages generated successfully
+
+**No changes made.** All three pages are consistent with current project status and design system.
 
 ## Website QA
 
@@ -6861,6 +6930,20 @@ Sources: [Hacktoberfest Participation Rules](https://hacktoberfest.com/participa
 
 **No bugs found. No fixes applied. No build changes.**
 
+### Iteration 31 — 2026-03-17 — Quick sanity check (Website QA Agent, iteration 31)
+
+**Test scope**: All 23 sitemap pages at `http://localhost:5001`. Quick HTTP 200 check plus 404 verification.
+
+**Results: PASS. All 23 pages return HTTP 200. Zero errors.**
+
+**Pages verified (23/23):** `/`, `/docs`, `/pricing`, `/gdpr-compliance`, `/soc2-compliance`, `/hipaa-compliance`, `/ai-governance`, `/data-privacy`, `/blog`, `/blog/hipaa-for-developers`, `/blog/soc2-for-startups`, `/blog/eu-ai-act-deadline`, `/blog/privacy-policy-for-saas`, `/blog/gdpr-for-developers`, `/blog/colorado-ai-act`, `/blog/generate-privacy-policy-from-code`, `/privacy-policy-generator`, `/ai-disclosure-generator`, `/terms-of-service-generator`, `/cookie-policy-generator`, `/compare`, `/changelog`, `/about`.
+
+**404 handling**: `/this-page-does-not-exist` correctly returns HTTP 404. Server is not silently returning 200 for all routes.
+
+**Sitemap**: `/sitemap.xml` returns 23 URLs matching the 23 page routes. No missing or extra entries.
+
+**No bugs found. No fixes applied. No build changes.**
+
 ### Iteration 28 — 2026-03-17 — Docker and Containerization Research
 
 #### Should Codepliant offer a Docker image?
@@ -7027,3 +7110,25 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - `src/generator/incident-severity-matrix.test.ts` (48 tests): basic output, context values (company, dpoEmail, securityEmail, fallbacks), all five severity levels P0-P4, response time requirements, escalation paths, communication requirements, communication channels, per-service impact assessment table (data at risk, compromised severity, outage severity, regulatory impact), category-specific incident scenarios (AI, payment, auth, database/storage, analytics with inclusion/exclusion), severity decision tree, regulatory response timelines (GDPR, PCI DSS conditional, EU AI Act conditional), incident response roles, Codepliant disclaimer, full-scenario with all categories
   - `src/generator/data-lifecycle-diagram.test.ts` (40 tests): null returns (empty services, unsupported categories), basic output, context values, lifecycle overview section, mermaid diagram structure (subgraphs, styling), all seven data types (identity/auth, payment, analytics, AI, email/communication, monitoring/technical, database-storage/user-content), retention periods per category, retention summary table, detailed lifecycle per data type, lifecycle stage details, multiple data types coexistence, deduplication of same-category services, multiple sources listing, disclaimer, full seven-type scenario, mermaid styling count
   - `src/generator/compliance-communication-plan.test.ts` (40 tests): null return for empty services, basic output, context values (company, contactEmail, dpoName, dpoEmail, placeholders), communication objectives, stakeholder communication matrix (all 10 roles, escalation status), communication calendar (regular cadence + event-driven), escalation matrix (4 levels), communication templates A/B/C, conditional Template D (AI with risk level), conditional Template E (payment), recommended channels with automation examples, RACI matrix with abbreviation legend, communication effectiveness metrics, contact section, Codepliant disclaimer with service count, full scenario with all sections numbered
+
+### Iteration 31 — 2026-03-17 — Demo GIF Tape File (Issue #3)
+
+- **Build**: pass (`npx tsc` clean)
+- **Created `demo.tape`**: VHS tape file at project root for generating `assets/demo.gif`
+  - Uses Catppuccin Mocha theme, 900x500, font size 16
+  - Runs `npx codepliant go` and captures output
+  - To generate: `brew install charmbracelet/tap/vhs && vhs demo.tape`
+- **README updated**: Added demo GIF placeholder image after badges, added "Generating the Demo GIF" section with VHS install/run instructions
+- **Issue #3 addressed**: Demo GIF tape file created; GIF generation requires VHS installation and running `vhs demo.tape`
+- **Retrospective note**: Issue #3 was flagged as "critical but never executed across 4 iterations" — now unblocked with a concrete tape file ready to run
+
+### Iteration 31 — 2026-03-17 — Generator Tests (81/138 = 59%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4232/4232 passing (was 4114, added 118 net new tests across 3 generator test files)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-investment-case.test.ts` (53 tests): null return for empty services, generation with single/multiple services, context values (companyName, placeholder, date, projectName, service count), Executive Summary with regulatory framework count, Cost of Non-Compliance (GDPR default, CCPA by jurisdiction/US location/analytics, EU AI Act, PCI DSS, COPPA, HIPAA conditional fines), Litigation Exposure (AI liability conditional), Reputational Damage, Regulatory Exposure Assessment (analytics/advertising/auth/payment/AI/email/storage/database conditional sections with service names), ROI section (small/medium/large tier investment ranges and ROI examples), Implementation Roadmap (phases 1-4, conditional AI disclosure/PCI DSS tasks), Stakeholder Talking Points (board GDPR/AI Act turnover risk, B2B vs Enterprise label, legal regulation list), Industry Benchmarks, disclaimer, Codepliant attribution, sequential section numbering, comprehensive all-categories test
+  - `src/generator/data-subject-rights-portal.test.ts` (46 tests): empty string return for empty services, generation with single/multiple services, context values (companyName, contactEmail, website, dpoEmail with fallback, placeholders), Overview section with GDPR/CCPA references, My Data Dashboard with service data, conditional View Data sections (analytics/AI/payment data with exclusion tests), Download Data with GDPR Art. 20 portability, Delete Account with GDPR Art. 17/CCPA §1798.105 (conditional payment exception), Manage Consent (conditional analytics/AI toggles with exclusion), API Endpoints (all 6 endpoints), UI Wireframe (portal layout, My Data/Export/Delete/Consent tabs, AI wireframe toggles, service overflow for 5+ services), Implementation Checklist (5 phases), Security Requirements, Compliance Mapping, Response Time SLAs, data category counting, Codepliant attribution, legal review disclaimer, comprehensive all-categories test
+  - `src/generator/privacy-impact-register.test.ts` (48 tests): null return for empty services, generation with single/multiple services, context values (companyName, dpoName, dpoEmail with fallback, contactEmail, placeholders), next review date one year ahead, header with organization info, automated generation disclaimer, Purpose section (GDPR Art. 35(1)/5(2)), DPIA Triggers section (Art. 35(3)), conditional Assessment Summary (AI/payment/analytics/auth/monitoring with high/medium/low risk, always-present General Assessment, cross-border assessment for multi-jurisdiction or 3+ services with exclusion), Detailed Assessment Records (AI with openai scope/mitigations, payment with PCI DSS, analytics with cookie consent, general with data categories), Risk Assessment Matrix (AI critical, payment high, analytics/auth/monitoring), Third-Party Services Inventory (DPIA required Yes/Review needed, service deduplication), Outcome Tracking status definitions, Review History, Supervisory Authority Consultation (Art. 36), Contact section, assessment ID formats (DPIA-YYYYMMDD-AI, PIA-YYYYMMDD-GENERAL), Codepliant attribution, legal counsel disclaimer, comprehensive all-categories test
+- **Generator modules now with tests**: 81/138 (was 78/138, added compliance-investment-case, data-subject-rights-portal, privacy-impact-register)

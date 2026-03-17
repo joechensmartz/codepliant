@@ -16,6 +16,10 @@
   <a href="./LICENSE"><img src="https://img.shields.io/github/license/joechensmartz/codepliant?style=flat-square" alt="license" /></a>
 </p>
 
+<p align="center">
+  <img src="./assets/demo.gif" width="700" alt="Codepliant demo" />
+</p>
+
 ---
 
 ## Quick Start
@@ -209,6 +213,20 @@ Outputs `services-count`, `documents-count`, and `compliance-score` for use in s
 Markdown (default), HTML, PDF, JSON, DOCX, Notion, Confluence, GitHub Pages, cookie consent banner, embeddable widget — [see all formats →](./examples/sample-output/)
 
 ---
+
+## Generating the Demo GIF
+
+The demo GIF in this README is generated with [VHS](https://github.com/charmbracelet/vhs) from `demo.tape`.
+
+```bash
+# Install VHS
+brew install charmbracelet/tap/vhs
+
+# Generate the GIF
+vhs demo.tape
+```
+
+The output is written to `assets/demo.gif`.
 
 ## Links
 
