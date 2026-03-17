@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4909 passing — 100% scanner, 96/138 generators (69.6%)
+- **Tests**: 5088 passing — 100% scanner, 99/138 generators (71.7%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 36 complete (2026-03-17)
-- **Last run**: lint enhanced (3 rules), 149 tests (4909!), US state privacy laws, stats 4756
+- **Iteration**: 37 complete (2026-03-17)
+- **Last run**: --company-name/--contact-email flags, 179 tests, 🎉🎉 5088 TESTS (5000+ ACHIEVED!), SaaS founder Q&A research
 
 ## Priority Backlog
 
@@ -3561,6 +3561,19 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Iteration 37: Stats sync (4,909 tests, 96/138 generators)
+
+- Updated test count from "4,756" to "4,909" in 3 files:
+  - `src/app/page.tsx` — proof points fact text + stats bar display
+  - `src/app/about/page.tsx` — stats array
+  - `src/app/changelog/page.tsx` — v1.1.0 summary text
+- Updated changelog v1.1.0 tests line:
+  - Test count: "4,756" to "4,909"
+  - Percentage: "523%" to "543%"
+  - Generator test suites: "93" to "96"
+  - Generator coverage: "67.4%" to "69.6%"
+- `next build` passes cleanly — 29 static pages, 0 errors
 
 ### 2026-03-17 — Iteration 25: Stats sync (3,376 tests, 60/138 generators)
 
@@ -7545,6 +7558,23 @@ The `--jurisdictions` flag should support at minimum: `ccpa`, `cpra` (alias for 
 
 **Tests**: `npx tsc` clean, 8/8 lint tests passing
 
+### Iteration 37 — 2026-03-17 — CLI `--company-name` and `--contact-email` Flags
+
+**What changed**: Added `--company-name` and `--contact-email` CLI flags to `codepliant go` so users can set company identity without a config file. These flags override values from `.codepliantrc.json`.
+
+Usage: `codepliant go --company-name "Acme Inc" --contact-email "privacy@acme.com"`
+
+**Implementation**:
+- Added `companyNameFlag` and `contactEmailFlag` variables in the flag parsing section
+- Added `--company-name` and `--contact-email` cases in the argument parsing loop
+- Merged flag values into config after `loadConfig()` in the `go` command handler (flags take precedence over config file)
+- Updated `go` command help text with new options and example
+
+**Files modified**:
+- `src/cli.ts` — Flag declarations, parsing, config override in `go` handler, help text
+
+**Tests**: `npx tsc` clean
+
 ### Iteration 36 — 2026-03-17 — Generator Tests (96/138 = 69.6%)
 
 - **Build**: pass (`npx tsc` clean)
@@ -7556,3 +7586,72 @@ The `--jurisdictions` flag should support at minimum: `ccpa`, `cpra` (alias for 
   - `src/generator/employee-handbook-privacy.test.ts` (50 tests): null return for no services, generation with services, Privacy & Monitoring title, effective date, Internal document notice, context values (companyName/contactEmail/dpoName/dpoEmail/placeholder values), Section 1 Purpose & Scope (workplace monitoring/device usage/email monitoring/employee data privacy, scope: employees/contractors/interns/temporary workers), Section 2 Workplace Monitoring Policy (monitoring principles: Security/Compliance/Performance/proportionality, active monitoring tools table with monitoring/analytics services presence/absence, Sentry deduplication by label, not-for-performance-evaluation disclaimer), Section 3 Device Usage Policy (company-issued/BYOD/MDM, third-party service count in Software & Cloud Services), Section 4 Email & Communication Monitoring (email not private, email services table: SendGrid/Resend, messaging tools), conditional Section 5 AI Tools (openai/user prompts/employee responsibilities/sensitive data warning, absence without AI), Employee Data Privacy Rights (IP addresses/login timestamps/email metadata, GDPR rights table: Access/Rectification/Erasure/Data Portability, exercise rights with 30 days, DPO in rights section), Enforcement & Consequences (termination/circumvent monitoring/retaliation), Changes to Policy, Employee Acknowledgment form (Employee/Manager Name/Signature), Codepliant/legal+HR disclaimer, section numbering without AI (1-7) vs with AI (1-8), known tool descriptions (Sentry/PostHog/Hotjar/Datadog RUM), comprehensive stack test
 - **Generator modules now with tests**: 96/138 (69.6%)
 - **Generator coverage**: 67.4% → 69.6%
+
+### Iteration 37 — 2026-03-17 — Generator Tests: 5000 MILESTONE (99/138 = 71.7%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 5088/5088 passing (was 4909, added 179 new tests — BROKE 5000!)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/ai-model-card.test.ts` (73 tests): null guards (no services/non-AI only/mixed non-AI/empty array), basic generation (title/project name/date format/Article 53/EU AI Act/Codepliant footer), context values (companyName/contactEmail/placeholder values/dpoEmail presence/absence), risk classification (label/capitalisation/aiRiskLevel override), known provider model cards (OpenAI/Anthropic/@google/generative-ai/@ai-sdk/openai/@ai-sdk/anthropic/@ai-sdk/google/@ai-sdk/google-vertex/@vercel/ai/replicate/together-ai/cohere/@pinecone-database/pinecone/langchain — all 13 providers), unknown provider fallback (generic info/limitations/bias note), card content sections (Overview table/Data Inputs/Known Limitations/Bias Considerations/Performance Metrics placeholders with Accuracy/Latency/Error rate/Fairness/Training Data Transparency/service identifier in backticks), multiple AI services (separate cards/three services/ignores non-AI), Article 53 compliance summary (53(1) technical documentation/53(1)(a) model identification/53(1)(b) training and testing/53(1)(c) integration information/53(1)(d) copyright/53(2) systemic risk/checkbox items/deployer note), data flow summary (section present/data-to-provider mapping/multiple providers for same data type/deduplication/table headers), contact section (present/email), provider-specific details (OpenAI hallucination/Anthropic Constitutional AI + sycophantic/Vercel orchestration/Pinecone vector/LangChain RAG/Cohere embeddings/Replicate community/Together AI open-source/Google Vertex enterprise), disclaimer (legal review/2 August 2026 deadline)
+  - `src/generator/international-transfer-impact.test.ts` (48 tests): null guards (no context/non-EU jurisdiction/no US services/empty services/non-data-processor), EU jurisdiction detection (eu/gdpr/germany/france/european union/eea/jurisdictions array/case-insensitive), basic generation (title/Schrems II/GDPR Chapter V/date format/United States importing country), context values (companyName/contactEmail/dpoName/empty values fallback), US-based service detection (stripe/openai/@sentry/node/multiple services/correct count), document sections (1. Assessment Overview/2. US-Based Services table/3. Legal Framework with 3.1 DPF + 3.2 SCCs + 3.3 Supplementary Measures checklist/4. US Surveillance Law with FISA 702 + Executive Order 14086/5. Per-Service Assessment/6. SCC Checklist/7. Recommendations/8. Review Schedule), risk assessment by category (High for payment+AI/Medium for analytics/Low for monitoring/Medium-High for storage/High per-service for sensitive data), DPF references (adequacy decision C(2023) 4745/dataprivacyframework.gov/Data Protection Review Court), footer (Codepliant/legal advice disclaimer/DPO review)
+  - `src/generator/data-retention-schedule-visual.test.ts` (58 tests): null guards (no services/fewer than 3/exactly 2/exactly 1/generates at 3), basic generation (title/project name/date format/DATA_RETENTION_POLICY.md reference), context values (companyName/contactEmail/placeholder values/dpoEmail presence/absence/dataRetentionDays override with "from configuration"/omit override when absent), Mermaid Gantt chart (mermaid block/gantt title/dateFormat/Legend section with milestone/category sections: Payment Processing+AI Service+Error Monitoring), retention periods (7 years for payment/90 days for AI/90 days for monitoring/2 years for analytics/3 years for email/Until deletion for auth+storage+database), summary table (section present/table headers/High risk marking/Low risk marking/3650 effective days for until-deletion), expiry timeline (section/mermaid timeline block/date entries), data lifecycle phases (section/flowchart LR/Collection+Processing+Storage+Delete phases/retention period decision node), risk heat map (section/High 7+ years/Moderate 1-7 years/Low < 1 year/payment as high risk/None when no categories in level/recommended actions), sorting (longest retention first), unknown categories (fallback to 'other' = 1 year), unique categories (deduplication from multiple same-category services), footer (contact section/Codepliant/legal review)
+- **Generator modules now with tests**: 99/138 (71.7%)
+- **Generator coverage**: 69.6% → 71.7%
+- **MILESTONE**: 5000+ tests reached (5088 total)
+
+### Iteration 37 — 2026-03-17 — Top 10 Compliance Questions SaaS Founders Ask on Reddit (r/startups, r/SaaS)
+
+Research into the most frequently asked compliance questions by SaaS founders on Reddit's r/startups and r/SaaS communities, synthesized from web searches of aggregated discussions and compliance guides that reference these communities. Each question includes the best answer angle for Codepliant.
+
+**1. "Do I need a privacy policy, and can I just use a template?"**
+Founders launching MVPs ask this constantly. Most use free generators (TermsFeed, GetTerms, PrivacyPolicies.com) and get generic output that does not reflect their actual tech stack.
+- **Codepliant angle**: `codepliant go` scans the actual codebase, detects real services (Stripe, Google Analytics, Sentry, etc.), and generates a privacy policy that lists what data is actually collected. No questionnaire, no guessing. The `codepliant lint` command then flags placeholders and inconsistencies.
+
+**2. "When do I need SOC 2, and is it worth the cost for an early-stage startup?"**
+B2B SaaS founders hit this wall when enterprise prospects send security questionnaires. SOC 2 Type II audits cost $20K-$80K+ and take 3-6 months. 74% of enterprise buyers now require it before signing.
+- **Codepliant angle**: Codepliant cannot replace SOC 2, but it generates the compliance documentation layer (privacy policy, security policy, DPA, data handling docs) that SOC 2 readiness builds on. Position as "Step 0 before you spend $50K on an audit" — get your documentation house in order first, for free.
+
+**3. "Which privacy laws actually apply to my SaaS? GDPR? CCPA? All 20 US state laws?"**
+Founders are confused because compliance depends on where users are located, not where the company is incorporated. Eight new US state privacy laws took effect in 2025 alone (Delaware, Iowa, New Hampshire, New Jersey, Tennessee, Minnesota, Maryland, Kentucky).
+- **Codepliant angle**: The `--jurisdictions` flag generates jurisdiction-specific sections. `codepliant go --jurisdictions us-all,gdpr` produces a privacy policy with state-specific consumer rights, opt-out mechanisms, and sensitive data definitions. No-threshold states like Texas and Nebraska mean even tiny startups need compliance docs — a strong argument for a free, open-source tool.
+
+**4. "Do I need a Data Processing Agreement (DPA), and where do I get one?"**
+Enterprise procurement teams immediately disqualify SaaS vendors without a readily available DPA. Founders discover this mid-deal and scramble to produce one.
+- **Codepliant angle**: Codepliant's DPA generator creates a DPA pre-populated with detected sub-processors (AWS, Stripe, analytics vendors, etc.) extracted from the codebase scan. The sub-processor list with geographic locations is generated automatically — the hardest part of DPA creation done for free.
+
+**5. "How do I handle cookie consent properly? Do I need a cookie banner?"**
+GDPR requires opt-in consent with pre-blocking; CCPA requires opt-out. Founders are confused by conflicting advice and worry about getting fined. Colorado now mandates Global Privacy Control (GPC) signal detection.
+- **Codepliant angle**: `codepliant go` generates a cookie policy that lists actual cookies set by detected services (Google Analytics _ga/_gid, PostHog ph_*, Stripe __stripe_*, etc.) and a COOKIE_CONSENT_CONFIG.json with per-provider details. The quick-start guide recommends CMP implementation (CookieYes, Cookiebot, OneTrust) based on detected analytics services.
+
+**6. "Do I need to disclose that my product uses AI? What does the EU AI Act require?"**
+The EU AI Act's GPAI obligations took effect August 2025, with full application August 2026. Violations carry fines up to 35M EUR or 7% of global turnover. Founders building AI-powered features are unsure what documentation is needed.
+- **Codepliant angle**: Codepliant detects OpenAI, Anthropic, Hugging Face, and other AI service imports, then generates an AI Disclosure document covering EU AI Act transparency requirements, risk classification, training data practices, and automated decision-making notices. The `codepliant lint` command flags missing AI disclosures when AI services are detected in code.
+
+**7. "How much does compliance cost? Can I DIY it or do I need a $500/hr lawyer?"**
+SaaS lawyers charge $200-$800+/hr; fixed-fee legal packages start at $3,500 for basic docs (ToS + Privacy Policy + Cookie Policy). Many bootstrapped founders cannot afford this at pre-revenue stage.
+- **Codepliant angle**: Codepliant is free, open-source, and generates the same document set (privacy policy, ToS, cookie policy, DPA, security policy, AI disclosure, and 20+ more) that lawyers charge thousands for. The generated docs include a "consult a lawyer" disclaimer — positioning Codepliant as "first draft for free, then pay a lawyer to review" rather than "replace your lawyer."
+
+**8. "What compliance docs do I need before launching — the minimum viable set?"**
+Pre-launch founders want a checklist. The minimum for a US SaaS is typically: Privacy Policy, Terms of Service, Cookie Policy (if using analytics/tracking). For B2B add: DPA, Security Policy, Acceptable Use Policy.
+- **Codepliant angle**: `codepliant go` generates all required documents in one command based on what the scanner actually finds. The quick-start guide provides a prioritized checklist with estimated review times (Step 1: Privacy Policy 15-30 min, Step 2: framework-specific implementation, etc.). The `codepliant lint` command validates completeness and flags missing documents.
+
+**9. "How do I handle children's data / age verification? COPPA keeps coming up."**
+Connecticut, California, Maryland, and Oregon have enhanced child protections. Founders building consumer-facing products worry about COPPA ($50K+ per violation) and emerging state age-verification requirements.
+- **Codepliant angle**: Codepliant's generated privacy policies include age-restriction clauses and COPPA-specific sections when applicable. The scanner could flag age-related patterns in code (date-of-birth fields, age gates). This is an area where Codepliant's `--jurisdictions` flag adds state-specific minor protections (CT's neural data protections for minors, CA's age-appropriate design code).
+
+**10. "My enterprise prospect sent me a security questionnaire — how do I fill it out?"**
+Enterprise vendors send CAIQ-style questionnaires with 200+ questions about data handling, encryption, sub-processors, incident response, and data retention. Founders with no security team panic.
+- **Codepliant angle**: While Codepliant does not fill out questionnaires directly, the generated security policy, DPA (with sub-processor list), data retention policy, and incident response documentation contain the answers to 60-70% of typical questionnaire questions. Running `codepliant go` before responding to a security questionnaire gives founders a documented baseline to reference.
+
+**Sources consulted**:
+- [SaaS Privacy Compliance Requirements: Complete 2025 Guide](https://secureprivacy.ai/blog/saas-privacy-compliance-requirements-2025-guide)
+- [Legal Checklist for U.S. SaaS Startups](https://toslawyer.com/legal-checklist-for-u-s-saas-startups-tos-privacy-dpa-sla-and-more/)
+- [SaaS Compliance: A Practical Guide for Growing Companies](https://drata.com/blog/saas-compliance)
+- [The SaaS DPA Guide: GDPR Requirements, Subprocessors, and Automation](https://secureprivacy.ai/blog/data-processing-agreements-dpas-for-saas)
+- [SOC 2 Compliance Roadmap for Startups 2025](https://www.promise.legal/guides/soc2-roadmap)
+- [EU AI Act 2026 Updates: Compliance Requirements](https://www.legalnodes.com/article/eu-ai-act-2026-updates-compliance-requirements-and-business-risks)
+- [Navigating the EU AI Act: A Practical Guide for AI Founders and SaaS Products](https://maxonboarder.medium.com/navigating-the-eu-ai-act-a-practical-guide-for-ai-founders-and-saas-products-984705550686)
+- [SaaS Compliance Requirements Explained (Stripe)](https://stripe.com/resources/more/saas-compliance-requirements-and-how-companies-meet-them)
+- [Cookie Consent for SaaS Companies](https://secureprivacy.ai/blog/cookie-consent-for-saas-companies)
+- [SaaS Compliance: Hidden Legal Risks Most Startups Miss in 2025](https://www.njbusiness-attorney.com/saas-compliance-hidden-legal-risks-most-startups-miss-in-2025/)

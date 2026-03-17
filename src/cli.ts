@@ -214,6 +214,8 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
   ${DIM()}--dry-run${RESET()}             Preview what would be generated without writing files
   ${DIM()}--jurisdictions <list>${RESET()} Comma-separated jurisdictions (overrides config): gdpr, ccpa, uk-gdpr
+  ${DIM()}--company-name <name>${RESET()} Company name (overrides config file)
+  ${DIM()}--contact-email <email>${RESET()} Contact email (overrides config file)
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -224,6 +226,7 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant go --watch${RESET()}               Watch mode
   ${CYAN()}codepliant go --dry-run${RESET()}             Preview without writing
   ${CYAN()}codepliant go --jurisdictions gdpr,ccpa${RESET()}  Target specific jurisdictions
+  ${CYAN()}codepliant go --company-name "Acme Inc" --contact-email "privacy@acme.com"${RESET()}  Override config
 `,
 
   report: `${BOLD()}codepliant report${RESET()} [path] [options]
@@ -1592,6 +1595,8 @@ function main() {
   let fromEnvFlag = false;
   let dryRunFlag = false;
   let jurisdictionsFlag: string[] | undefined;
+  let companyNameFlag: string | undefined;
+  let contactEmailFlag: string | undefined;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1627,6 +1632,10 @@ function main() {
       fromEnvFlag = true;
     } else if (arg === "--dry-run") {
       dryRunFlag = true;
+    } else if (arg === "--company-name") {
+      companyNameFlag = args[++i];
+    } else if (arg === "--contact-email") {
+      contactEmailFlag = args[++i];
     } else if (arg === "--jurisdictions") {
       const val = args[++i];
       if (val) {
@@ -1807,6 +1816,12 @@ function main() {
       if (!quiet && !jsonOutput) printBanner();
 
       const config = loadConfig(absProjectPath);
+      if (companyNameFlag) {
+        config.companyName = companyNameFlag;
+      }
+      if (contactEmailFlag) {
+        config.contactEmail = contactEmailFlag;
+      }
       if (jurisdictionsFlag) {
         config.jurisdictions = jurisdictionsFlag;
       }
