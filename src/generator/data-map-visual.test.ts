@@ -62,11 +62,8 @@ describe("buildMermaidDiagram", () => {
       ],
     });
     const diagram = buildMermaidDiagram(scan);
-    // Sentry appears twice in PROVIDER_SHORT, but buildMermaidDiagram deduplicates by label
     const sentryMatches = diagram.match(/Sentry/g);
-    // Should appear in exactly one edge (from + to = 2 occurrences on the line)
     assert.ok(sentryMatches);
-    // One edge line contains "Sentry" twice (from label and node label)
     assert.ok(sentryMatches.length <= 3);
   });
 
@@ -100,7 +97,6 @@ describe("buildMermaidDiagram", () => {
       ],
     });
     const diagram = buildMermaidDiagram(scan);
-    // Clerk should be used as provider short name, sanitized ID should not contain special chars
     assert.ok(diagram.includes("Clerk"));
     assert.ok(!diagram.match(/\[.*@.*\]/));
   });
@@ -109,6 +105,189 @@ describe("buildMermaidDiagram", () => {
     const scan = makeScan({ services: [] });
     const diagram = buildMermaidDiagram(scan);
     assert.equal(diagram, "graph LR");
+  });
+
+  // ── New tests ──────────────────────────────────────────────────────
+
+  it("truncates data labels to first 3 items", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["alpha", "bravo", "charlie", "delta", "echo"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("alpha, bravo, charlie"));
+    assert.ok(!diagram.includes("delta"));
+    assert.ok(!diagram.includes("echo"));
+  });
+
+  it("maps lowercase openai to OpenAI provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "openai", category: "ai", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["prompts"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("OpenAI"));
+  });
+
+  it("maps @sendgrid/mail to SendGrid provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "@sendgrid/mail", category: "email", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["email addresses"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("SendGrid"));
+  });
+
+  it("maps resend to Resend provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "resend", category: "email", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["email content"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("Resend"));
+  });
+
+  it("maps @aws-sdk/client-s3 to AWS S3 provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "@aws-sdk/client-s3", category: "storage", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["files"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("AWS S3"));
+  });
+
+  it("uses raw name when no PROVIDER_SHORT mapping exists", () => {
+    const scan = makeScan({
+      services: [
+        { name: "my-custom-lib", category: "other", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["custom data"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("my-custom-lib"));
+  });
+
+  it("does not add forwarding edge when only monitoring present", () => {
+    const monOnly = makeScan({
+      services: [
+        { name: "@sentry/node", category: "monitoring", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["errors"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(monOnly);
+    assert.ok(!diagram.includes("|logs|"));
+  });
+
+  it("sanitizes IDs replacing all non-alphanumeric chars with underscores", () => {
+    const scan = makeScan({
+      services: [
+        { name: "my-lib.v2@beta", category: "other", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["stuff"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    // The sanitized ID should not contain -, ., or @
+    const lines = diagram.split("\n").filter((l) => l.includes("my"));
+    for (const line of lines) {
+      // Before the [ should be sanitized ID
+      const idMatch = line.match(/^\s+(\S+)\[/);
+      if (idMatch) {
+        assert.ok(!idMatch[1].includes("-"));
+        assert.ok(!idMatch[1].includes("."));
+        assert.ok(!idMatch[1].includes("@"));
+      }
+    }
+  });
+
+  it("handles single service producing single edge line", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["cards"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    const lines = diagram.split("\n");
+    // First line is "graph LR", then one edge line
+    assert.equal(lines.length, 2);
+  });
+
+  it("generates multiple edge lines for multiple distinct services", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["cards"] },
+        { name: "openai", category: "ai", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["prompts"] },
+        { name: "posthog", category: "analytics", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["events"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    const lines = diagram.split("\n");
+    // "graph LR" + 3 service edges
+    assert.equal(lines.length, 4);
+  });
+
+  it("maps @anthropic-ai/sdk to Anthropic provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "@anthropic-ai/sdk", category: "ai", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["messages"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("Anthropic"));
+  });
+
+  it("maps cloudinary to Cloudinary provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "cloudinary", category: "storage", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["images"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("Cloudinary"));
+  });
+
+  it("maps dd-trace to Datadog provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "dd-trace", category: "monitoring", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["traces"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("Datadog"));
+  });
+
+  it("maps mongoose to MongoDB provider label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "mongoose", category: "database", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["documents"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    assert.ok(diagram.includes("MongoDB"));
+  });
+
+  it("each edge line uses arrow notation with pipe-delimited label", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["cards"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    const edgeLine = diagram.split("\n")[1];
+    assert.ok(edgeLine.includes("-->|"));
+    assert.ok(edgeLine.includes("|"));
+  });
+
+  it("edge from User node has User as the source", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["cards"] },
+      ],
+    });
+    const diagram = buildMermaidDiagram(scan);
+    const edgeLine = diagram.split("\n")[1].trim();
+    assert.ok(edgeLine.startsWith("User[User]"));
   });
 });
 
@@ -220,8 +399,6 @@ describe("generateDataFlowDiagram", () => {
     });
     const result = generateDataFlowDiagram(scan);
     assert.ok(result);
-    // "other" is not a collection category, so collection should be empty
-    // The flow.collection array depends on scanner/data-flow buildDataFlowMap
   });
 
   it("groups services by category in inventory", () => {
@@ -237,5 +414,98 @@ describe("generateDataFlowDiagram", () => {
     assert.ok(result.includes("| Stripe | payment |"));
     assert.ok(result.includes("| PostHog | analytics |"));
     assert.ok(result.includes("| OpenAI | ai |"));
+  });
+
+  // ── New tests ──────────────────────────────────────────────────────
+
+  it("includes date in YYYY-MM-DD format", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(/\d{4}-\d{2}-\d{2}/.test(result));
+  });
+
+  it("uses default contact email placeholder when no context", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("[your-email@example.com]"));
+  });
+
+  it("includes service nodes explanation in legend", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("**Service nodes**"));
+  });
+
+  it("includes Visual Data Flow heading", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("## Visual Data Flow"));
+  });
+
+  it("includes CI/CD export instruction with mermaid-cli", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("@mermaid-js/mermaid-cli"));
+  });
+
+  it("includes service inventory table headers", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("| Service | Category | Data Processed |"));
+  });
+
+  it("shows data collected in inventory rows", () => {
+    const scan = makeScan({
+      services: [
+        { name: "stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["cards", "billing"] },
+      ],
+    });
+    const result = generateDataFlowDiagram(scan)!;
+    assert.ok(result.includes("cards, billing"));
+  });
+
+  it("handles project name with special characters", () => {
+    const scan = makeScan({ projectName: "my-app_v2.0" });
+    const result = generateDataFlowDiagram(scan)!;
+    assert.ok(result.includes("my-app_v2.0"));
+  });
+
+  it("returns a string (not null) for single service", () => {
+    const scan = makeScan({
+      services: [
+        { name: "posthog", category: "analytics", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["events"] },
+      ],
+    });
+    const result = generateDataFlowDiagram(scan);
+    assert.equal(typeof result, "string");
+  });
+
+  it("includes horizontal rule separator", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("---"));
+  });
+
+  it("includes Mermaid link in intro text", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("https://mermaid.js.org/"));
+  });
+
+  it("inventory shows multiple data items comma-separated", () => {
+    const scan = makeScan({
+      services: [
+        { name: "openai", category: "ai", evidence: [{ type: "dependency", file: "package.json", detail: "pkg" }], dataCollected: ["prompts", "completions", "tokens"] },
+      ],
+    });
+    const result = generateDataFlowDiagram(scan)!;
+    assert.ok(result.includes("prompts, completions, tokens"));
+  });
+
+  it("includes Last updated label", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("**Last updated:**"));
+  });
+
+  it("includes Company label", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("**Company:**"));
+  });
+
+  it("includes Project label", () => {
+    const result = generateDataFlowDiagram(makeScan())!;
+    assert.ok(result.includes("**Project:**"));
   });
 });

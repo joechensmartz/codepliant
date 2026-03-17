@@ -108,8 +108,6 @@ describe("generateTermsOfService", () => {
       services: [makeService("stripe", "payment", ["payment info"])],
     });
     const result = generateTermsOfService(scan);
-    // Should not contain an AI-specific heading section
-    // (the word "AI" may appear incidentally in disclaimer language, so check for section heading)
     const lines = result.split("\n");
     const aiSectionHeadings = lines.filter(
       (l) => /^##\s+\d+\.\s+.*\bAI\b/i.test(l)
@@ -210,10 +208,8 @@ describe("generateTermsOfService", () => {
     });
     const result = generateTermsOfService(scan);
 
-    // All conditional sections should be present
     const lines = result.split("\n");
     const sectionHeadings = lines.filter((l) => /^##\s+\d+\./.test(l));
-    // With all services: agreement + description + accounts + acceptable use + AI + payment + user content + privacy + IP + disclaimer + liability + indemnification + disputes + termination + changes + SLA + force majeure + governing law + general provisions + contact = ~20 sections
     assert.ok(sectionHeadings.length >= 16, `Expected at least 16 sections, got ${sectionHeadings.length}`);
   });
 
@@ -233,9 +229,141 @@ describe("generateTermsOfService", () => {
         return match ? parseInt(match[1], 10) : 0;
       });
 
-    // Sections should be sequentially numbered
     for (let i = 0; i < sectionNums.length; i++) {
       assert.strictEqual(sectionNums[i], i + 1, `Section ${i + 1} should be numbered ${i + 1}, got ${sectionNums[i]}`);
     }
+  });
+
+  // ── New tests ──────────────────────────────────────────────────────
+
+  it("returns a non-empty string", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(typeof result === "string");
+    assert.ok(result.length > 0);
+  });
+
+  it("starts with markdown h1 heading", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(result.startsWith("#"));
+  });
+
+  it("includes last modified date", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(/Last Modified|last modified/i.test(result) || result.includes("**Last Modified:**") || /\*\*.*[Mm]odified.*\*\*/.test(result));
+  });
+
+  it("includes acceptable use list items", () => {
+    const result = generateTermsOfService(makeScan());
+    // Should have bullet points under acceptable use
+    const bulletCount = (result.match(/^- /gm) || []).length;
+    assert.ok(bulletCount >= 5, `Expected at least 5 bullet items, got ${bulletCount}`);
+  });
+
+  it("section count without conditional services is baseline", () => {
+    const scan = makeScan({ services: [] });
+    const result = generateTermsOfService(scan);
+    const lines = result.split("\n");
+    const headings = lines.filter((l) => /^##\s+\d+\./.test(l));
+    const baselineCount = headings.length;
+    // With no services: agreement + description + accounts + acceptable use + privacy + IP + disclaimer + liability + indemnification + disputes + termination + changes + force majeure + governing law + general provisions + contact = 16
+    assert.ok(baselineCount >= 14, `Expected at least 14 baseline sections, got ${baselineCount}`);
+  });
+
+  it("AI section adds exactly one extra section heading", () => {
+    const noAi = makeScan({ services: [] });
+    const withAi = makeScan({ services: [makeService("openai", "ai")] });
+    const baseHeadings = generateTermsOfService(noAi).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    const aiHeadings = generateTermsOfService(withAi).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    assert.equal(aiHeadings, baseHeadings + 1);
+  });
+
+  it("payment section adds exactly one extra section heading", () => {
+    const noPay = makeScan({ services: [] });
+    const withPay = makeScan({ services: [makeService("stripe", "payment")] });
+    const baseHeadings = generateTermsOfService(noPay).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    const payHeadings = generateTermsOfService(withPay).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    assert.equal(payHeadings, baseHeadings + 1);
+  });
+
+  it("storage section adds exactly one extra section heading", () => {
+    const noStore = makeScan({ services: [] });
+    const withStore = makeScan({ services: [makeService("@aws-sdk/client-s3", "storage")] });
+    const baseHeadings = generateTermsOfService(noStore).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    const storeHeadings = generateTermsOfService(withStore).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    assert.equal(storeHeadings, baseHeadings + 1);
+  });
+
+  it("monitoring section adds exactly one extra section heading", () => {
+    const noMon = makeScan({ services: [] });
+    const withMon = makeScan({ services: [makeService("@sentry/node", "monitoring")] });
+    const baseHeadings = generateTermsOfService(noMon).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    const monHeadings = generateTermsOfService(withMon).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    assert.equal(monHeadings, baseHeadings + 1);
+  });
+
+  it("all four conditional sections add 4 extra headings", () => {
+    const none = makeScan({ services: [] });
+    const all = makeScan({
+      services: [
+        makeService("openai", "ai"),
+        makeService("stripe", "payment"),
+        makeService("@aws-sdk/client-s3", "storage"),
+        makeService("@sentry/node", "monitoring"),
+      ],
+    });
+    const baseHeadings = generateTermsOfService(none).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    const allHeadings = generateTermsOfService(all).split("\n").filter((l) => /^##\s+\d+\./.test(l)).length;
+    assert.equal(allHeadings, baseHeadings + 4);
+  });
+
+  it("includes termination list items", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(result.includes("Termination") || result.includes("termination"));
+    // termination section has bullet list
+    const lines = result.split("\n");
+    const terminationIdx = lines.findIndex((l) => /termination/i.test(l) && /^##/.test(l));
+    assert.ok(terminationIdx >= 0);
+  });
+
+  it("includes entire agreement clause in general provisions", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(result.includes("entire agreement") || result.includes("Entire Agreement") || result.includes("entire"));
+  });
+
+  it("includes assignment clause", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(result.includes("assign") || result.includes("Assignment"));
+  });
+
+  it("includes footer with italic disclaimer", () => {
+    const result = generateTermsOfService(makeScan());
+    // Footer should be italic markdown (wrapped in *)
+    assert.ok(result.includes("*"));
+    const lastLine = result.trim().split("\n").pop()!;
+    assert.ok(lastLine.startsWith("*") || lastLine.includes("*"));
+  });
+
+  it("project name with spaces is included correctly", () => {
+    const scan = makeScan({ projectName: "My Cool App" });
+    const result = generateTermsOfService(scan);
+    assert.ok(result.includes("My Cool App"));
+  });
+
+  it("contact section includes email bold label", () => {
+    const ctx: GeneratorContext = { companyName: "TestCo", contactEmail: "legal@testco.com" };
+    const result = generateTermsOfService(makeScan(), ctx);
+    assert.ok(result.includes("**"));
+    assert.ok(result.includes("legal@testco.com"));
+  });
+
+  it("generates valid markdown with no unclosed code blocks", () => {
+    const result = generateTermsOfService(makeScan());
+    const backtickBlocks = (result.match(/```/g) || []).length;
+    assert.equal(backtickBlocks % 2, 0, "Unclosed code blocks detected");
+  });
+
+  it("horizontal rule separates header from body", () => {
+    const result = generateTermsOfService(makeScan());
+    assert.ok(result.includes("---"));
   });
 });

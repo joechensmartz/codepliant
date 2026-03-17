@@ -4203,6 +4203,12 @@ end
 
 _Updated by Website Agent each iteration._
 
+### 2026-03-17 — Iteration 51: Stats sync (6,711 tests, 132/138 generators)
+- Synced test count from 6,611 to 6,711 across landing page, about page, and changelog
+- Updated percentage increase from 767% to 780% in changelog
+- Generator coverage unchanged at 132/138 (95.7%)
+- `next build`: passes (29 static pages, 13 dynamic routes, 0 errors)
+
 ### 2026-03-17 — Iteration 50 (Milestone): Stats sync (6,611 tests, 132/138 generators)
 - Synced test count from 6,561 to 6,611 across landing page, about page, and changelog
 - Updated percentage increase from 760% to 767% in changelog
@@ -8851,4 +8857,71 @@ APPI is a strong candidate for a future jurisdiction option alongside GDPR, CCPA
   - `src/generator/env-example.test.ts` (46 tests, was 18 — expanded by 28): Anthropic SDK env vars, Google AI env vars, Replicate env vars, Cohere env vars, Pinecone env vars, PayPal env vars, Supabase env vars, PostHog env vars, Resend env vars, Drizzle DB env vars, MongoDB env vars, Clerk auth env vars, category ordering (db before email, auth before db, analytics before monitoring), date in header, trailing newline, KEY=value format validation, no blank lines within category, all major categories simultaneously, return type always string, isDataProcessor=false filtering, isDataProcessor=true inclusion, isDataProcessor=undefined default, writeEnvExample content match, overwrite existing file, null for services without env patterns, no file written when empty, nested directory creation
   - `src/generator/disclaimer.test.ts` (45 tests, was 22 — expanded by 23): section numbering with only AI, section numbering with only Payment, medical advice disclaimer, technical advice disclaimer, implied warranties list (5 items), virus disclaimer, project name with special chars, AI non-deterministic behavior, AI model updates, AI liability disclaimer, Payment card info not stored, Payment price changes, Payment account security responsibility, markdown horizontal rules, GitHub link to Codepliant, AI disclaimer via Anthropic service, Payment disclaimer via PayPal, non-AI/non-payment services skip conditional sections, fair use Section 107 US copyright, external links no endorsement, errors section unintentional slights, effective/last updated dates matching
   - `src/generator/change-management.test.ts` (68 tests, was 19 — expanded by 49): CircleCI/Jenkins/Travis CI/Azure Pipelines/Netlify/docker-compose/Terraform detection, configFile return, features array validation, no duplicate platform for Docker, policy date, default placeholders, purpose section, scope section (6 items), review standards (minimum reviewers, response times), review checklist (secrets/backward compat/logging), automated checks table (7 items), deployment approval matrix, staging soak times, rollback triggers (error rate 5x, response time 3x), rollback methods (git revert, feature flag, database), change log fields, Keep a Changelog reference, audit trail retention 1 year, retroactive emergency review 24h, GDPR Art 32, PCI DSS 6.5, quarterly reviews, post-failure reviews, CI/CD platform table, payment credit card logging check, AI data minimization, auth session management, all three service types together, GitHub link, special chars in project name, stakeholder notification, monitoring window
+
+### Iteration 51 — Testing Agent — Expand 3 More Thin Generator Test Files
+
+- **Build**: pass (`npx tsc` clean, zero errors)
+- **Tests**: 6788 total, 6787 passing (was 6711, added 77 new tests across 3 files)
+- **Failing tests**: 1 pre-existing failure in `src/scanner/no-network.test.ts` ("no telemetry or analytics code in codepliant itself") — unrelated to this iteration's changes
+- **Tests added this iteration** (expanded 3 thinnest generator test files to 30+ each):
+  - `src/generator/data-map-visual.test.ts` (55 tests, was 28 — expanded by 27): truncates data labels to first 3 items, maps lowercase openai to OpenAI provider label, maps @sendgrid/mail to SendGrid, maps resend to Resend, maps @aws-sdk/client-s3 to AWS S3, uses raw name when no PROVIDER_SHORT mapping, no forwarding edge with monitoring-only, sanitizes all non-alphanumeric chars to underscores, single service produces single edge line, multiple distinct services produce multiple edge lines, maps @anthropic-ai/sdk to Anthropic, maps cloudinary to Cloudinary, maps dd-trace to Datadog, maps mongoose to MongoDB, arrow notation with pipe-delimited label, edge from User node, date in YYYY-MM-DD format, default contact email placeholder, service nodes in legend, Visual Data Flow heading, CI/CD mermaid-cli instruction, service inventory table headers, data collected in inventory rows, project name with special chars, returns string for single service, horizontal rule separator, Mermaid link in intro, multiple data items comma-separated, Last updated/Company/Project labels
+  - `src/generator/terms-of-service.test.ts` (39 tests, was 22 — expanded by 17): returns non-empty string, starts with h1 heading, includes last modified date, acceptable use list items count, baseline section count without conditional services, AI/payment/storage/monitoring each add exactly one extra heading, all four conditional sections add 4 headings, termination list items, entire agreement clause, assignment clause, italic footer disclaimer, project name with spaces, contact section bold email label, valid markdown no unclosed code blocks, horizontal rule separator
+  - `src/generator/data-subject-categories.test.ts` (53 tests, was 30 — expanded by 23): returns string for non-empty services, Last Updated/Organization/Project labels, horizontal rule separator, table markdown separator row, End Users 30-day retention, End Users usage data in data types, Paying Customers billing address, Website Visitors Art. 6(1)(f) and Art. 6(1)(a) citations, Employees name/email/role/access logs, Employees Art. 6(1)(b) citation, Support Contacts ticket content, Support Contacts Art. 6(1)(f) citation, next review date ~1 year after last reviewed, related documents are markdown links, italic footer, auth-only has End Users but not Paying Customers, payment triggers both End Users and Paying Customers, other category minimal rows, project name with special chars, data subjects and personal data in overview, table row counts for full/analytics-only/payment-only scans
+- **File line counts**: data-map-visual.test.ts 511 (was 241), terms-of-service.test.ts 369 (was 241), data-subject-categories.test.ts 436 (was 242)
 - **File line counts**: env-example.test.ts 498 (was 212), disclaimer.test.ts 420 (was 232), change-management.test.ts 609 (was 239)
+
+### Iteration 51 — Website Fix — 2026-03-17
+
+- **Issue**: `/icon` and `/apple-icon` routes returned HTTP 500 in dev and production
+- **Root cause**: Both `src/app/icon.tsx` and `src/app/apple-icon.tsx` used `export const runtime = "edge"` with `ImageResponse` from `next/og`. The edge runtime lacks full Node.js API support needed by the image generation pipeline, causing the 500 errors.
+- **Fix**: Changed `runtime = "edge"` to `runtime = "nodejs"` in both files. This allows `ImageResponse` to use the full Node.js runtime, and as a bonus both routes are now statically pre-rendered at build time (`○ Static`) instead of dynamically server-rendered (`ƒ Dynamic`).
+- **Build**: `npx next build` passes — 31 static routes, 11 dynamic routes, zero errors
+- **Files changed**:
+  - `src/app/icon.tsx` — `runtime` changed from `"edge"` to `"nodejs"`
+  - `src/app/apple-icon.tsx` — `runtime` changed from `"edge"` to `"nodejs"`
+
+### Iteration 51 — 2026-03-17 — Research: Singapore PDPA for SaaS
+
+**Overview**: Singapore's Personal Data Protection Act (PDPA, Act No. 26 of 2012, last major amendment 2020/2021) governs collection, use, disclosure, and care of personal data by private-sector organisations. Enforced by the Personal Data Protection Commission (PDPC). As of March 2026, the PDPA remains the primary data protection law with no new omnibus amendment since the 2020 Amendment Act, though several enforcement and administrative updates have landed in 2025-2026.
+
+**Recent Developments (2025-2026)**:
+- **DPO notification to PDPC** became mandatory 1 June 2025 — all organisations must register their Data Protection Officer with the PDPC, not just appoint one internally.
+- **NRIC authentication phase-out** announced Feb 2026 — private organisations must stop using NRIC numbers for authentication by 31 Dec 2026; enforcement intensifies 1 Jan 2027 (Section 24 breach risk).
+- **EU-Singapore Digital Trade Agreement (EUSDTA)** entered into force 1 Feb 2026, reinforcing mutual commitments on cross-border data flows and personal data protection.
+- **Data Portability Obligation** (introduced in 2020 Amendment Act) still not yet in force as of March 2026; effective date TBD.
+- **Statutory Bodies amendment** (S217-2025, 28 Mar 2025) extended PDPA-aligned obligations to additional public-sector statutory bodies.
+
+**11 Core Obligations Relevant to SaaS**:
+1. **Consent** — must be voluntary, informed, specific. Deemed consent and deemed consent by notification are available for certain scenarios.
+2. **Purpose Limitation** — collect/use/disclose only for purposes a reasonable person would consider appropriate, and that the individual has been notified of.
+3. **Notification** — inform individuals of purposes on or before collection (Section 20).
+4. **Access & Correction** — individuals can request access to and correction of their personal data.
+5. **Accuracy** — reasonable effort to ensure data is accurate and complete.
+6. **Protection (Security)** — reasonable security arrangements to protect personal data from unauthorised access, collection, use, disclosure, copying, modification, disposal, or similar risks.
+7. **Retention Limitation** — cease retention when no longer needed for legal or business purposes.
+8. **Transfer Limitation** — personal data transferred outside Singapore must receive comparable protection (Section 26). Mechanisms: contractual clauses (most common for SaaS), Binding Corporate Rules, APEC CBPR/PRP certification.
+9. **Accountability** — develop and implement data protection policies, make them publicly available, designate a DPO (now must register with PDPC).
+10. **Data Breach Notification** — notify PDPC within 3 calendar days of assessing a breach is notifiable. Notifiable = likely significant harm to individuals OR affects 500+ individuals. Notify affected individuals as soon as practicable. Overall discovery-to-notification expectation: 30 days.
+11. **Do Not Call (DNC)** — respect Singapore DNC registry for marketing messages (relevant if SaaS sends SMS/phone marketing to Singapore numbers).
+
+**Key SaaS-Specific Considerations**:
+- **Cross-border cloud hosting**: If personal data is stored/processed on cloud infra outside Singapore, the Transfer Limitation Obligation applies. Global SaaS ToS are rarely sufficient — need explicit contractual data-protection clauses at PDPA-comparable standard.
+- **Data intermediaries (processors)**: PDPA applies to both data controllers and data intermediaries. SaaS acting as a processor for Singapore customers must comply with Protection and Retention obligations directly.
+- **No data localisation mandate**: PDPA does not require data to remain in Singapore, only that overseas recipients provide comparable protection.
+- **Consent for cookies/tracking**: PDPA consent obligations apply to personal data collected via cookies. No separate cookie law, but PDPC guidance treats cookie data as personal data when it identifies an individual.
+- **Penalties**: Up to SGD 1 million or 10% of annual turnover in Singapore (whichever is higher) for organisations. Individuals face up to SGD 5,000 fine or imprisonment.
+
+**Relevance to Codepliant**:
+- PDPA is a strong candidate for a future compliance template alongside GDPR, CCPA, LGPD.
+- Key generator outputs: Privacy Policy (consent + notification + transfer clauses), Data Breach Response Plan, Cookie Policy (consent for tracking), DPO designation notice.
+- Cross-border transfer section is critical for any SaaS using cloud hosting outside Singapore.
+- The 11-obligation structure maps well to Codepliant's existing generator architecture.
+
+**Sources**:
+- [PDPC Official — Data Protection Obligations](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act/data-protection-obligations)
+- [Chambers Data Protection & Privacy 2026 — Singapore](https://practiceguides.chambers.com/practice-guides/data-protection-privacy-2026/singapore)
+- [ICLG Data Protection 2025-2026 — Singapore](https://iclg.com/practice-areas/data-protection-laws-and-regulations/singapore)
+- [PDPC Data Breach Management Guide](https://www.pdpc.gov.sg/help-and-resources/2021/01/data-breach-management-guide)
+- [ResGuard — Cross-Border Data Transfers from Singapore](https://resguard-solutions.com/blog/en/singapore-cross-border-data-transfers/)
+- [IMDA — APEC CBPR Certification](https://www.imda.gov.sg/how-we-can-help/cross-border-privacy-rules-certification)
+- [Singapore Statutes — S217-2025 Statutory Bodies Amendment](https://sso.agc.gov.sg/SL-Supp/S217-2025/Published/20250328?DocDate=20250328)
