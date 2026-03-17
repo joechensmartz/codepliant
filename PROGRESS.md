@@ -7,12 +7,13 @@
 ## Current Status
 
 - **Version**: 1.0.0 (published to npm)
-- **Tests**: 1282 passing (+116 new in iteration 6)
+- **Tests**: 1367 passing (+85 in iteration 7)
 - **Repos tested**: 1200+
-- **Document types**: 121+ (added Impressum)
+- **Document types**: 121+
+- **Ecosystems**: 11 (added Flutter/Dart)
 - **npm package size**: 831KB
-- **Iteration**: 6 complete (2026-03-17)
-- **Last run**: Impressum generator, 116 tests, Colorado AI Act blog, docs page, QA 5 fixes, GitHub Actions research
+- **Iteration**: 7 complete (2026-03-17)
+- **Last run**: Flutter scanner, 85 tests, compare page, pricing update, SEO audit 50/50, v1.1.0 planning
 
 ## Priority Backlog
 
@@ -1151,6 +1152,31 @@ _Updated by Website Agent each iteration._
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated
 
+### 2026-03-16 — Compare page overhaul (Iteration 7)
+
+**Compare page improvements (`src/app/compare/page.tsx`):**
+- Added Vanta as 4th competitor column (was Codepliant vs Termly vs Iubenda, now includes Vanta)
+- Updated all pricing data from PROGRESS.md research: Termly $14-20/mo (~10 doc types, 28 privacy laws), Iubenda (150K+ clients, from $29/yr), Vanta ($10,000+/yr core, up to $80K/yr, 30+ frameworks, 300+ integrations)
+- Updated document count from "35+" to "120+" across all content and JSON-LD to match current PROGRESS.md status
+- Added "pricing gap" visualization section showing Codepliant's position between form wizards ($14-20/mo) and enterprise GRC ($10K+/yr)
+- Added quick summary boxes for all 4 competitors at top of page
+- Added Vanta-specific FAQ entries ("How does Codepliant compare to Vanta?" and "Does Codepliant replace Vanta or Drata?")
+- Added highlight rows in comparison table for Codepliant's key differentiators (code scanning, open source, self-hosted, AI Act, pricing)
+- Added new comparison rows: Compliance Frameworks, Self-Hosted/Offline, Target User
+- Added "$0 vs $10,000+/year" section explaining Vanta pricing tiers (Core $10K, Plus $15-30K, Growth $30K+, Scale $80K+, add-ons)
+- Added Vanta "when to use" section with specific use cases and budget requirements
+- Updated color tokens from legacy classes (text-muted, text-foreground, bg-surface, text-accent) to proper theme tokens (text-ink-secondary, text-ink, bg-surface-secondary, text-brand)
+- Added breadcrumb navigation (Home / Compare) with breadcrumb JSON-LD
+- Added SEO keywords meta tag (9 keywords targeting comparison search queries)
+- Updated meta title, description, and OG tags to include Vanta
+- Enhanced CTA section with links to docs, GitHub, and npm
+- Added AI Governance Hub to related pages section
+- Changed internal links from `<a>` tags to Next.js `<Link>` components for client-side navigation
+- Widened max-width from 680px to 900px to accommodate 5-column comparison table
+
+**Build verification:**
+- `next build` passes cleanly, all 25 static pages generated
+
 ## Website Design
 
 ### Iteration 3 — 2026-03-16 — Hero section and CTA improvements
@@ -1237,6 +1263,37 @@ _Updated by Website Agent each iteration._
 8. **Bottom CTA** — Centered card with `npx codepliant go`, consistent with footer CTA.
 
 **Design consistency**: All spacing uses `--space-*` variables, typography uses `--text-*` fluid clamp variables, colors use design system tokens, code blocks match homepage dark style, tables match homepage style, transitions use `--ease-out-quart`.
+
+**Build verification:**
+- `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 7 — 2026-03-16 — Pricing page update
+
+**Pricing model updated** (`src/app/pricing/page.tsx`) per iteration 4 research recommendation (Free/$19 Pro/$49 Team):
+
+**Plan changes:**
+- **Free** ($0): CLI scanning, Markdown output, up to 5 document types, 10+ ecosystems, 8 ORM scanners, 4 languages, community support
+- **Pro** ($19/mo, was $29): Unlimited document types, HTML/PDF/DOCX/JSON output, `codepliant diff` change detection, Notion & Confluence export, CI/CD GitHub Action, custom branding & templates, priority email support
+- **Team** ($49/mo, was $79): Everything in Pro + team dashboard, multi-project scanning (`scan-all`), webhook notifications, custom compliance templates, shared template library, SSO/SAML, dedicated support with SLA
+
+**Layout changes:**
+- Switched from stacked single-column cards to a 3-column grid layout (`grid-cols-1 md:grid-cols-3`) for side-by-side plan comparison
+- Pro card highlighted with "Most Popular" badge (absolute positioned pill above card), `scale-[1.02]` lift, and `bg-brand` background
+- Added SVG checkmark icons (stroke-based) replacing plain Unicode checkmarks, colored `text-brand` for Free/Team and white for Pro
+- Added horizontal divider between plan header and feature list for visual separation
+- Features displayed as single-column list (was 2-column grid) for better readability in narrower cards
+- Added annual savings note below pricing cards ("Save up to 34% with annual billing")
+
+**FAQ section expanded:**
+- Renamed heading from "Questions" to "Frequently Asked Questions"
+- Expanded from 4 to 8 questions in a 2-column grid layout (`grid-cols-1 md:grid-cols-2`)
+- New questions: "What does codepliant diff do?", "Do you offer annual billing?" ($149/yr Pro, $399/yr Team), "What happens if I exceed 5 document types on Free?", "Can I self-host the Team dashboard?"
+- Updated existing answers to reflect new pricing and feature set
+
+**SEO metadata updated:**
+- Meta description, OpenGraph, and Twitter card text updated from $29/$79 to $19/$49
+
+**Note:** Old $29/$79 prices still referenced on homepage (`src/app/page.tsx`) and compare page (`src/app/compare/page.tsx`) — not updated per task scope (pricing page only). Should be updated in a follow-up iteration.
 
 **Build verification:**
 - `next build` passes cleanly, 25/25 static pages generated successfully
@@ -1365,6 +1422,30 @@ _Updated by Website Agent each iteration._
 - **Footer "Privacy Policy" and "Terms of Service" point to generator pages** — Acceptable for pre-launch site, documented since iteration 3.
 - **No skip-to-content link** — Documented since iteration 5.
 
+### Iteration 7 — 2026-03-16 — SEO & structured data validation
+
+**Test scope**: 50 Playwright tests across all 20 pages, focused exclusively on SEO and structured data. Run via `npx playwright test tests/seo-audit.spec.ts` at `http://localhost:5001`.
+
+**Results: 50/50 tests passed, 0 failures, 0 bugs found.**
+
+**Test categories:**
+1. **SEO meta tags (20 pages)** — Every page verified for: `<title>` tag (non-empty), `<meta name="description">` (>20 chars), `<link rel="canonical">` (https://codepliant.dev/...), `og:title`, `og:description`, `og:url`, `og:image`. All 20 pages pass all 7 checks.
+2. **JSON-LD structured data — homepage (3 tests)** — SoftwareApplication schema (name, offers array), Organization schema (name, sameAs), BreadcrumbList schema. All present and valid.
+3. **JSON-LD structured data — blog posts (4 tests)** — All 4 blog posts (`eu-ai-act-deadline`, `gdpr-for-developers`, `privacy-policy-for-saas`, `colorado-ai-act`) have Article JSON-LD with headline and datePublished.
+4. **Sitemap completeness (1 test)** — `/sitemap.xml` contains all 20 page URLs and exactly 20 `<url>` entries. No pages missing.
+5. **robots.txt (1 test)** — Contains `User-Agent: *`, `Allow: /`, and `Sitemap: https://codepliant.dev/sitemap.xml`.
+6. **No duplicate title tags (1 test)** — All 20 pages have unique `<title>` values. No duplicates.
+7. **Heading hierarchy (20 pages)** — Every page has exactly 1 `<h1>`. Heading levels are sequential (no jumps from h1 to h3 without h2). All 20 pages pass.
+
+**Bugs found**: None. All SEO foundations are solid across all 20 pages.
+
+**Notable observations:**
+- Two pages (`cookie-policy-generator`, `privacy-policy-generator`) have minimal OG tags (no twitter card) but inherit from layout defaults — acceptable.
+- `docs` page has no explicit OG tags beyond what the layout provides — inherits correctly from the root layout metadata.
+- All blog posts have full OG article metadata including `publishedTime`, `modifiedTime`, and `authors`.
+
+**Script**: `codepliant-site/tests/seo-audit.spec.ts` — run with `npx playwright test tests/seo-audit.spec.ts`
+
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
 - **Tests**: 1166/1166 passing (was 1059, added 107 new tests)
@@ -1387,6 +1468,16 @@ _Updated by Website Agent each iteration._
 - **Generator modules now with tests** (17 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, soc2-checklist, data-retention, subprocessor-list, risk-register, vendor-contacts, executive-dashboard
 - **Generator modules still missing tests**: 114 files (was 117)
 
+### Iteration 7 — 2026-03-16 (tests)
+- **Build**: pass
+- **Tests**: 1367/1367 passing (was 1282, added 66 new scanner tests + 19 flutter tests from other agent)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/scanner/environment-scanner.test.ts` (31 tests): unknown with low confidence when no env vars set, production detection (NODE_ENV=production/prod, RAILS_ENV=production, ASPNETCORE_ENVIRONMENT=Production, APP_ENV=live, GIN_MODE=release), staging detection (NODE_ENV=staging/test, FLASK_ENV=qa, MIX_ENV=test), development detection (NODE_ENV=development/dev, RACK_ENV=local, FLASK_DEBUG=1/true), Django settings module heuristics (prod/staging/dev paths), NODE_ENV priority over lower-priority vars, all signals collected even when first match wins, low confidence for unrecognized values, case-insensitive matching, isStrictEnvironment (true for production/unknown, false for staging/development), getEnvironmentComplianceNote (production/staging/development/unknown messages)
+  - `src/scanner/logging-scanner.test.ts` (20 tests): console.log detection (3 call sites), winston import+usage, pino import+usage, bunyan import+usage, morgan HTTP logger, multiple logging libraries in same project, PII risk flagging (user.email, user.password, req.body.ssn, JSON.stringify(user), authorization header), no PII flags for safe messages, empty project returns empty results, project with no logging returns empty, findings capped at 100, file path and line number in findings, generateLoggingAssessment null for no libraries, assessment with detected libraries, assessment with PII findings table, PII table truncated to 25 entries
+  - `src/scanner/turbo-scanner.test.ts` (15 tests): detected=false when no turbo.json, detected=false for empty directory, turbo.json v2 tasks detection, turbo.json v1 pipeline detection, malformed turbo.json graceful handling, empty turbo.json (no tasks/pipeline), package discovery under apps/packages/libs/services/tooling directories, directory name fallback when package.json has no name, relative path in package info, full Turborepo with apps+packages+tasks, non-directory entries ignored, subdirectories without package.json ignored
+- **Scanner modules still missing tests** (3): ci-cd-scanner, file-walker, graphql-endpoint-scanner
+
 **2026-03-16 — Add German Impressum generator (Section 5 DDG / TMG)**
 - Research iteration 2 identified Impressum as low priority but easy to implement; picked as a quick win
 - Created `src/generator/impressum.ts` — generates a German-language Impressum (legal disclosure)
@@ -1403,3 +1494,106 @@ _Updated by Website Agent each iteration._
   - Extras override (all 8 fields), placeholder fallbacks, context fallback, Haftungsausschluss, legal disclaimer
 - Registered in `src/generator/index.ts`: import, DOCUMENT_CATEGORIES ("legal"), USER_FACING_DOCS, generateDocuments
 - Build verified: `npx tsc` passes cleanly, all 12 new tests pass
+
+**2026-03-16 — Flutter/Dart ecosystem support (Issue #1)**
+- Created new scanner `src/scanner/flutter.ts` that parses `pubspec.yaml` for known Flutter/Dart service dependencies
+- Handles two pubspec.yaml formats: inline (`package: ^version`) and multi-line (`package:\n    version: ^x.y.z`)
+- Detects 13 Flutter/Dart service packages across 6 categories:
+  - Firebase (4): `firebase_core` (analytics), `firebase_auth` (auth), `firebase_analytics` (analytics), `cloud_firestore` (database)
+  - Payment (2): `stripe_sdk`, `flutter_stripe`
+  - Monitoring (1): `sentry_flutter`
+  - Auth (3): `supabase_flutter`, `google_sign_in`, `flutter_facebook_auth`
+  - Analytics (2): `amplitude_flutter`, `mixpanel_flutter`
+  - Notifications (1): `onesignal_flutter`
+- Added "dart" to `Ecosystem` type in `src/scanner/types.ts`
+- Added all 13 Flutter/Dart packages to `SERVICE_SIGNATURES` in `src/scanner/types.ts` with ecosystem: "dart"
+- Registered `scanFlutterDependencies` in `src/scanner/index.ts` (root scan + monorepo workspace scanning)
+- Created `src/scanner/flutter.test.ts` with 19 tests covering:
+  - No pubspec.yaml, unknown dependencies, each of the 13 packages individually, multiple deps at once, multi-line format, dev_dependencies section, top-level key boundary, evidence detail content, dataCollected accuracy
+- Build verified: `npx tsc` passes cleanly, all 19 new tests pass
+
+### Iteration 7 — 2026-03-16 (npm optimization & v1.1.0 release planning)
+
+#### 1. npm Package Size Optimization
+
+**Current state**: 841KB package size, 3.6MB unpacked, 445 files (220 `.d.ts` files). Largest file is `dist/cli.js` at 395KB (47% of package). `puppeteer` is listed as a runtime dependency which is a massive transitive install.
+
+**Quick wins (no bundler needed)**:
+- **Move puppeteer to optionalDependencies or peerDependencies**: Puppeteer installs a full Chromium binary (~300MB). Most CLI users do not need it. Moving it to `optionalDependencies` or making it a lazy-loaded peer dependency would dramatically reduce install time/size. This is the single highest-impact change.
+- **Strip `.d.ts` files for CLI-only users**: 220 declaration files add weight. Consider publishing a separate `codepliant-types` package or only including `.d.ts` for the public API entry points (`index.d.ts`, `scanner/index.d.ts`, `generator/index.d.ts`, `output/index.d.ts`, `config.d.ts`, `scoring/index.d.ts`) rather than every internal module.
+- **Audit the `files` array**: The current `files` field in package.json uses broad globs like `dist/scanner/**/*.js`. Tightening these to only export public-facing modules (not internal helpers) could reduce file count.
+- **Verify with `npm pack --dry-run`**: Always run this before publishing to catch unintended inclusions.
+
+**Bundler-based optimization (medium effort, high impact)**:
+- **Bundle with tsup (esbuild-based) or rollup**: Collapse all source files into a single `dist/cli.js` and a single `dist/index.js`. This eliminates hundreds of individual files, enables minification, and enables tree-shaking of dead code paths.
+  - tsup config: `entry: ['src/cli.ts', 'src/index.ts'], format: ['esm'], dts: true, splitting: true, minify: true, treeshake: true`
+  - Note: tsup is no longer actively maintained; **tsdown** is the recommended successor for new projects.
+  - For a CLI tool, a single-file bundle is ideal. The 395KB cli.js could likely be reduced to ~150-200KB minified.
+- **Set `"sideEffects": false`** in package.json to signal to downstream bundlers that all modules are safe to tree-shake.
+- **Use `minify: true`** in tsup/esbuild config. Since this is a CLI tool (not a library users debug into), minification is safe and typically yields 40-60% size reduction.
+
+**Advanced optimization**:
+- **Use `size-limit`** package to track bundle size in CI and prevent regressions.
+- **Replace heavy utility patterns**: If any large vendored data (e.g., service signature definitions in `types.js` at 26KB) can be split into lazy-loaded chunks, do so.
+- **Target**: Realistic goal is **300-400KB package size** (from 841KB) with bundling + minification, or **under 200KB** with aggressive tree-shaking and puppeteer removal from dependencies.
+
+Sources:
+- [Reducing npm package size by 83%](https://dev.to/nombrekeff/reducing-npm-package-size-by-83-4jde)
+- [How to bundle a tree-shakable TypeScript library with tsup](https://dev.to/orabazu/how-to-bundle-a-tree-shakable-typescript-library-with-tsup-and-publish-with-npm-3c46)
+- [tsup on npm](https://www.npmjs.com/package/tsup)
+- [Tree Shaking | webpack](https://webpack.js.org/guides/tree-shaking/)
+- [How to ignore files from your npm package](https://zellwk.com/blog/ignoring-files-from-npm-package/)
+- [Control what you publish in npm packages](https://medium.com/trabe/control-what-you-publish-inside-your-npm-packages-e3ec911638b8)
+
+#### 2. v1.1.0 Release Content
+
+**Features added since v1.0.0** (all in iterations 1-6):
+- Interactive wizard command (`codepliant wizard`) — guided setup for first-time users
+- SBOM (Software Bill of Materials) generation
+- Terraform/IaC scanner — detects infrastructure-as-code compliance needs
+- Django settings.py INSTALLED_APPS scanning — improved Python framework detection
+- German Impressum generator (Section 5 DDG) — legal disclosure for German/EU websites
+- npm package size reduction (906KB to 831KB)
+- 116+ new tests (iteration 6 alone added 104)
+- GitHub Actions research for CI/CD integration
+
+**Recommended v1.1.0 release scope**:
+- All of the above features constitute a solid minor version bump
+- Semantic versioning rationale: new features (wizard, sbom, terraform, impressum) are additive and backward-compatible, warranting a MINOR version bump (1.0.0 -> 1.1.0)
+- If npm package optimization (bundling/minification) is completed before release, include it — smaller install size is a strong adoption signal
+- Consider holding puppeteer change for v1.2.0 or v2.0.0 if it requires a breaking API change
+
+**Recommended CHANGELOG categories** (per Keep a Changelog standard):
+- **Added**: Wizard command, SBOM generation, Terraform scanner, Django settings scanner, Impressum generator, GitHub Actions support
+- **Changed**: npm package size reduced from 906KB to target (300-400KB with bundling)
+- **Fixed**: QA fixes from iteration 5
+
+#### 3. Release Notes That Drive Adoption
+
+**Structure for v1.1.0 release notes** (synthesized from best practices):
+
+1. **Lead with user value, not technical details**: Instead of "Added Terraform scanner module", write "Codepliant now scans your Terraform files to detect cloud infrastructure compliance requirements — no manual configuration needed."
+
+2. **Use the Keep a Changelog format**: Group changes into Added/Changed/Deprecated/Removed/Fixed/Security. This is the most widely recognized format in the npm ecosystem. Use ISO 8601 dates (YYYY-MM-DD).
+
+3. **Include a highlights section**: Pick 2-3 marquee features and give them each a one-paragraph explanation with a code example:
+   - `codepliant wizard` — "Run the interactive wizard to generate your first compliance document in under 60 seconds"
+   - SBOM generation — "Generate a Software Bill of Materials for supply chain compliance"
+   - Terraform support — "Infrastructure-as-code scanning for AWS/GCP/Azure compliance"
+
+4. **Add upgrade instructions**: `npm install -g codepliant@1.1.0` — make it trivially easy to upgrade.
+
+5. **Show before/after or stats**: "Now supports 121+ document types. Package size reduced by X%. 1282 tests passing." Numbers build confidence.
+
+6. **Call to action**: Link to documentation, invite feedback via GitHub Issues, mention the project roadmap for what is coming in v1.2.0.
+
+7. **Cross-post for visibility**: Publish release notes on GitHub Releases, npm package page (via README), and consider a blog post or dev.to article for the v1.1.0 launch.
+
+8. **Use automation for consistency**: Tools like conventional-changelog or release-it can auto-generate changelogs from commit messages if using conventional commits.
+
+Sources:
+- [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+- [How to create perfect release notes: 12 templates](https://monday.com/blog/rnd/release-note-template/)
+- [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)
+- [release-it](https://www.npmjs.com/package/release-it)
+- [What to expect for open source in 2026 (GitHub Blog)](https://github.blog/open-source/maintainers/what-to-expect-for-open-source-in-2026/)

@@ -101,7 +101,7 @@ export const FAMILY_MAP: Record<string, string[]> = {
  * Ecosystem tag for a service signature.
  * Used to restrict env-var matching to the project's actual ecosystem.
  */
-export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "any";
+export type Ecosystem = "js" | "python" | "go" | "ruby" | "elixir" | "php" | "rust" | "java" | "dotnet" | "dart" | "any";
 
 export const SERVICE_SIGNATURES: Record<
   string,
@@ -924,6 +924,99 @@ export const SERVICE_SIGNATURES: Record<
     envPatterns: [],
     importPatterns: ["zod"],
     isDataProcessor: false,
+  },
+
+  // Flutter/Dart
+  firebase_core: {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "crash data", "app performance metrics"],
+    envPatterns: ["FIREBASE_API_KEY", "FIREBASE_PROJECT_ID"],
+    importPatterns: ["firebase_core"],
+    ecosystem: "dart",
+  },
+  firebase_auth: {
+    category: "auth",
+    dataCollected: ["email", "name", "phone number", "OAuth tokens", "session data"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["firebase_auth"],
+    ecosystem: "dart",
+  },
+  firebase_analytics: {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "app events", "screen views"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["firebase_analytics"],
+    ecosystem: "dart",
+  },
+  cloud_firestore: {
+    category: "database",
+    dataCollected: ["user data as defined in schema", "document content"],
+    envPatterns: ["FIREBASE_API_KEY"],
+    importPatterns: ["cloud_firestore"],
+    ecosystem: "dart",
+  },
+  stripe_sdk: {
+    category: "payment",
+    dataCollected: ["payment information", "billing address", "email", "transaction history"],
+    envPatterns: ["STRIPE_SECRET_KEY", "STRIPE_PUBLISHABLE_KEY"],
+    importPatterns: ["stripe_sdk"],
+    ecosystem: "dart",
+  },
+  flutter_stripe: {
+    category: "payment",
+    dataCollected: ["payment information", "billing address", "email", "transaction history"],
+    envPatterns: ["STRIPE_SECRET_KEY", "STRIPE_PUBLISHABLE_KEY"],
+    importPatterns: ["flutter_stripe"],
+    ecosystem: "dart",
+  },
+  sentry_flutter: {
+    category: "monitoring",
+    dataCollected: ["error data", "stack traces", "user context", "device information"],
+    envPatterns: ["SENTRY_DSN"],
+    importPatterns: ["sentry_flutter"],
+    ecosystem: "dart",
+  },
+  supabase_flutter: {
+    category: "auth",
+    dataCollected: ["email", "password hash", "session data", "user metadata", "database content"],
+    envPatterns: ["SUPABASE_URL", "SUPABASE_ANON_KEY"],
+    importPatterns: ["supabase_flutter"],
+    ecosystem: "dart",
+  },
+  amplitude_flutter: {
+    category: "analytics",
+    dataCollected: ["user behavior", "device information", "session data"],
+    envPatterns: ["AMPLITUDE_API_KEY"],
+    importPatterns: ["amplitude_flutter"],
+    ecosystem: "dart",
+  },
+  onesignal_flutter: {
+    category: "other",
+    dataCollected: ["device tokens", "user segments", "notification engagement", "device information"],
+    envPatterns: ["ONESIGNAL_APP_ID"],
+    importPatterns: ["onesignal_flutter"],
+    ecosystem: "dart",
+  },
+  google_sign_in: {
+    category: "auth",
+    dataCollected: ["email", "name", "Google profile data", "OAuth tokens"],
+    envPatterns: ["GOOGLE_CLIENT_ID"],
+    importPatterns: ["google_sign_in"],
+    ecosystem: "dart",
+  },
+  flutter_facebook_auth: {
+    category: "auth",
+    dataCollected: ["email", "name", "Facebook profile data", "OAuth tokens", "social connections"],
+    envPatterns: ["FACEBOOK_APP_ID"],
+    importPatterns: ["flutter_facebook_auth"],
+    ecosystem: "dart",
+  },
+  mixpanel_flutter: {
+    category: "analytics",
+    dataCollected: ["user behavior", "user profiles", "device information", "location data"],
+    envPatterns: ["MIXPANEL_TOKEN"],
+    importPatterns: ["mixpanel_flutter"],
+    ecosystem: "dart",
   },
 
   // API Framework
