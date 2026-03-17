@@ -209,6 +209,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--quiet, -q${RESET()}           Minimal output
   ${DIM()}--watch, -w${RESET()}           Watch for changes and regenerate automatically
   ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
+  ${DIM()}--dry-run${RESET()}             Preview what would be generated without writing files
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -217,6 +218,7 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant go -o ./docs${RESET()}             Output to ./docs
   ${CYAN()}codepliant go --format html${RESET()}         Generate HTML documents
   ${CYAN()}codepliant go --watch${RESET()}               Watch mode
+  ${CYAN()}codepliant go --dry-run${RESET()}             Preview without writing
 `,
 
   report: `${BOLD()}codepliant report${RESET()} [path] [options]
@@ -1375,6 +1377,7 @@ function main() {
   let prFlag = false;
   let scanOutputFile: string | undefined;
   let fromEnvFlag = false;
+  let dryRunFlag = false;
 
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
@@ -1408,6 +1411,8 @@ function main() {
       prFlag = true;
     } else if (arg === "--from-env") {
       fromEnvFlag = true;
+    } else if (arg === "--dry-run") {
+      dryRunFlag = true;
     } else if (arg === "--frequency") {
       const freq = args[++i];
       if (freq === "daily" || freq === "weekly" || freq === "monthly") {
@@ -1581,6 +1586,109 @@ function main() {
 
       const config = loadConfig(absProjectPath);
       const outputFormat = formatFlag || getOutputFormat(config);
+
+      if (dryRunFlag) {
+        // Dry-run: scan and generate in memory, but write nothing
+        const plugins = config.plugins ? loadPlugins(absProjectPath, config.plugins) : [];
+        const { result, durationMs } = scanWithProgress(absProjectPath, quiet || jsonOutput, verbose, plugins);
+
+        if (!quiet && !jsonOutput) {
+          console.log(`\n  ${DIM()}Scanned in ${formatDuration(durationMs)}${RESET()}\n`);
+          printScanResults(result, quiet);
+        }
+
+        const docs = generateDocuments(result, config, plugins);
+
+        // Compute compliance score
+        const scoreInput: ScoreInput = {
+          scanResult: result,
+          docs,
+          config,
+          outputDir: absOutputDir,
+        };
+        const fullScore = computeFullComplianceScore(scoreInput);
+
+        // Collect per-doc stats
+        const docCategoryMap = new Map<string, number>();
+        const docCategorySizeMap = new Map<string, number>();
+        interface DryRunEntry {
+          name: string;
+          filename: string;
+          category: string;
+          size: number;
+        }
+        const entries: DryRunEntry[] = [];
+
+        for (const doc of docs) {
+          const size = Buffer.byteLength(doc.content, "utf-8");
+          const cat = classifyDocCategory(doc.name);
+          docCategoryMap.set(cat, (docCategoryMap.get(cat) || 0) + 1);
+          docCategorySizeMap.set(cat, (docCategorySizeMap.get(cat) || 0) + size);
+          entries.push({ name: doc.name, filename: doc.filename, category: cat, size });
+        }
+
+        const totalSize = entries.reduce((sum, e) => sum + e.size, 0);
+
+        if (jsonOutput) {
+          console.log(JSON.stringify({
+            dryRun: true,
+            documents: entries.map(e => ({
+              name: e.name,
+              filename: e.filename,
+              category: e.category,
+              estimatedSize: e.size,
+            })),
+            totalDocuments: docs.length,
+            totalEstimatedSize: totalSize,
+            complianceScore: fullScore.total,
+            complianceGrade: fullScore.grade,
+          }, null, 2));
+          process.exit(0);
+        }
+
+        console.log(`\n${CYAN()}${"─".repeat(50)}${RESET()}`);
+        console.log(`${CYAN()}${BOLD()}Dry Run — Preview${RESET()}`);
+        console.log(`${CYAN()}${"─".repeat(50)}${RESET()}\n`);
+
+        console.log(`${YELLOW()}${BOLD()}No files will be written.${RESET()}\n`);
+
+        // Group by category for display
+        const grouped = new Map<string, DryRunEntry[]>();
+        for (const entry of entries) {
+          if (!grouped.has(entry.category)) grouped.set(entry.category, []);
+          grouped.get(entry.category)!.push(entry);
+        }
+
+        for (const cat of [...grouped.keys()].sort()) {
+          const catEntries = grouped.get(cat)!;
+          console.log(`  ${DIM()}${cat}/${RESET()}`);
+          for (let i = 0; i < catEntries.length; i++) {
+            const e = catEntries[i];
+            const isLast = i === catEntries.length - 1;
+            const connector = isLast ? "└──" : "├──";
+            console.log(`  ${DIM()}${connector}${RESET()} ${e.filename} ${DIM()}(${e.name}: ${formatFileSize(e.size)})${RESET()}`);
+          }
+        }
+
+        console.log();
+        console.log(`${CYAN()}${"─".repeat(50)}${RESET()}`);
+        console.log(`${CYAN()}${BOLD()}Summary${RESET()}`);
+        console.log(`${CYAN()}${"─".repeat(50)}${RESET()}\n`);
+        console.log(`  ${BOLD()}Total documents:${RESET()} ${docs.length}`);
+        console.log(`  ${BOLD()}Total estimated size:${RESET()} ${formatFileSize(totalSize)}`);
+        console.log();
+        console.log(`  ${BOLD()}By category:${RESET()}`);
+        for (const [cat, count] of [...docCategoryMap.entries()].sort((a, b) => b[1] - a[1])) {
+          const catSize = docCategorySizeMap.get(cat) || 0;
+          console.log(`    ${DIM()}${cat}:${RESET()} ${count} doc${count > 1 ? "s" : ""} ${DIM()}(${formatFileSize(catSize)})${RESET()}`);
+        }
+        console.log();
+        console.log(`  ${BOLD()}Compliance score:${RESET()} ${fullScore.total}% (${fullScore.grade})`);
+        console.log();
+        console.log(`${DIM()}Run without --dry-run to write files to ${path.relative(absProjectPath, absOutputDir)}/${RESET()}\n`);
+
+        process.exit(0);
+      }
 
       const result = runScanAndGenerate(absProjectPath, absOutputDir, quiet, jsonOutput, outputFormat, verbose);
 
