@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5386 passing — 100% scanner, 105/138 generators (76.1%)
+- **Tests**: 5457 passing — 100% scanner, 108/138 generators (78.3%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 39 complete (2026-03-17)
-- **Last run**: 4 dead commands fixed, 168 tests, 🎉 75% GENERATOR COVERAGE (105/138), Starlight research
+- **Iteration**: 40 complete (2026-03-17)
+- **Last run**: --quiet global fix, 71 tests (5457!), 78.3% generators, Phase 2 progress report
 
 ## Priority Backlog
 
@@ -3146,6 +3146,38 @@ Starlight is the best fit for Codepliant for these reasons:
 - [Distr: Migrating from Docusaurus to Starlight](https://distr.sh/blog/distr-docs/)
 - [Multi-framework docs with Astro Starlight — Arcjet](https://blog.arcjet.com/multi-framework-docs-with-astro-starlight/)
 - [Top 5 Open-Source Documentation Tools 2026 — Hackmamba](https://hackmamba.io/technical-documentation/top-5-open-source-documentation-development-platforms-of-2024/)
+
+### Iteration 40 — Phase 2 Progress (Iterations 31-39 Review)
+
+#### What Was Accomplished in Phase 2 (Iterations 31-39)
+
+**Testing**: Generator test coverage jumped from 54% (75/138) at iteration 30 to 76.1% (105/138) at iteration 39 — 30 additional generators tested across 9 iterations. Total test count grew from 3,986 to 5,386. Surpassed both the 4,000 test milestone (iteration 30.1) and the 5,000 test milestone (iteration 37).
+
+**CLI features shipped**: `codepliant compare` enhanced (iteration 34), `codepliant lint` command added (iteration 36), `--company-name` and `--contact-email` flags (iteration 37), `-f` shorthand for `--format` (iteration 38), `--explain` error code explanations (iteration 33), color verification and dead command dispatch fixes (iteration 39b), version and info polish (iteration 32).
+
+**Research completed**: Show HN first-24-hours playbook (31), adjacent open-source compliance tools survey (32), 2026 compliance deadlines for marketing (33), most-requested features on dev forums (34), dev.to article strategy (35), US state privacy law landscape (36), top compliance questions SaaS founders ask on Reddit (37), EU Cyber Resilience Act impact analysis (38), documentation site framework comparison — Starlight recommended (39).
+
+**Release prep**: v1.1.0 finalized with git tag, demo GIF tape file created (iteration 31).
+
+#### Status vs. Iteration 30 Goals
+
+| Goal | Target | Status | Assessment |
+|------|--------|--------|------------|
+| Ship v1.1.0 + Show HN | Complete in 2-3 iterations | Tag created, publish not yet executed | BEHIND — still not published |
+| 75%+ generator test coverage | 100/138 by iteration 45 | 105/138 (76.1%) at iteration 39 | AHEAD — hit target 6 iterations early |
+| Build + publish GitHub Action | Within 1 week of npm launch | Not started (blocked by npm publish) | BLOCKED |
+| Execute post-launch growth playbook | Day 0-7 timeline | Research done, execution blocked by launch | BLOCKED |
+| Portuguese (BR) + Japanese locales | Iterations 45-50 | Not started (on schedule) | ON TRACK |
+
+**Bottom line**: Testing exceeded expectations. Research output was strong. But the single most important goal — actually shipping v1.1.0 and launching — remains unexecuted. The demo GIF (Issue #3) is still not recorded. The growth playbook and GitHub Action are both blocked downstream of the publish.
+
+#### Top 3 Priorities for Iterations 41-50
+
+1. **Execute `npm publish` and Show HN launch** — This has been "ready" for 10+ iterations. No more polish. Publish v1.1.0, record the demo GIF, and post Show HN within the next 2-3 iterations. Everything else is secondary.
+
+2. **Push generator test coverage to 90%+ (125/138)** — Momentum is strong at 76.1%. At the current rate of ~3.3 generators/iteration, reaching 125/138 by iteration 50 is achievable. Prioritize the most-used generators (Node.js/React/Next.js stack documents).
+
+3. **Ship the documentation site on Astro Starlight** — The framework decision is made (iteration 39 research). A proper docs site is the second-highest-impact item for post-launch credibility after the README/demo GIF. Stand it up with: quick start, command reference, and 3-5 workflow guides.
 
 ## Development Log
 
@@ -7835,3 +7867,34 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
   - Added all four to `VALID_COMMANDS` array (enables shell completions + typo suggestions)
   - Added `onboard` to help text (was missing from the Setup section)
 - **Files changed**: `src/cli.ts`
+
+### Iteration 40 — 2026-03-17 — Global `--quiet` / `-q` Flag Audit + Test Fixes
+
+- **Build**: pass (`npx tsc` clean)
+- **Quiet flag audit**: verified `--quiet` / `-q` is parsed globally and threaded to all commands. Found and fixed the following gaps:
+  - `count`: did not accept `quiet` parameter. In `--detailed` mode, `printBanner()` was called unconditionally. Fixed: added `quiet` param, guarded banner and timing output.
+  - `stats`: did not accept `quiet` parameter. Fixed: added `quiet` param for signature consistency (output is already one-line, so behavioral change is minimal).
+  - `summary`: did not accept `quiet` parameter. Fixed: added `quiet` param for signature consistency (output is already one paragraph).
+  - `init`: `printBanner()` called unconditionally. Fixed: guarded with `if (!quiet)`. Matters for `init --from-env` in CI/CD.
+  - `wizard`: `printBanner()` called unconditionally. Fixed: guarded with `if (!quiet)`.
+  - `serve`: banner was already guarded, but server startup messages and endpoint list were not. Fixed: wrapped all informational output in `if (!quiet)`.
+- **Commands already correctly respecting quiet**: `go`, `scan`, `check`, `ci`, `report`, `dashboard`, `metrics`, `health`, `audit`, `diff`, `lint`, `validate`, `doctor`, `export`, `export-zip`, `compare`, `review`, `explain`, `why`, `ignore`, `page`, `badge`, `env`, `format`, `pdf`, `publish`, `schedule`, `billing`, `upgrade`, `activate`, `deactivate`, `update`, `clean`, `archive`, `version-check`, `list-docs`, `tree`, `changelog`, `fix`, `todo`, `benchmark`, `preview`, `reset`, `search`, `certify`, `snapshot`, `sbom`, `completeness`, `migrate`, `check-config`, `notify`, `quickstart`
+- **Commands intentionally not using quiet** (interactive or decorative): `onboard`, `about`, `celebrate`, `config show`
+- **Pre-existing test file TS errors fixed**: 3 test files used obsolete `detectedVia` field instead of `evidence` array:
+  - `src/generator/compliance-budget-template.test.ts`
+  - `src/generator/incident-communication-templates.test.ts`
+  - `src/generator/executive-briefing.test.ts`
+- **Files changed**: `src/cli.ts`, `src/generator/compliance-budget-template.test.ts`, `src/generator/incident-communication-templates.test.ts`, `src/generator/executive-briefing.test.ts`
+
+### Iteration 40b — 2026-03-17 — Generator Tests: 108/138 = 78.3%
+
+- **Build**: pass
+- **Tests**: 5457/5457 passing (was 5386, added 71 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-budget-template.test.ts` (25 tests): basic generation (title/overview/five budget categories/summary with total), default placeholder/context company name, tier detection (Startup for few services/Growth for 5+/Enterprise for 15+ or AI+payment), AI-specific items (monitoring/bias testing/EU AI Act review/ethics advisory/liability coverage/training), PCI DSS items (scanning tools/QSA assessment/awareness training/assessment), analytics cookie consent marked Critical, CCPA legal assessment with ccpa jurisdiction, HIPAA items with health compliance need, SOC 2 for Growth but not Startup, ISO 27001 for Enterprise only, cost optimization strategies (Quick Wins/Phase Your Spending), cost drivers (AI/payment/GDPR/auth/vendor count for 10+), per-service cost impact table (high-risk vs standard costs/$2,000-$7,000 vs $800-$3,500), 20-entry cap with overflow message, disclaimer footer
+  - `src/generator/incident-communication-templates.test.ts` (22 tests): null return for no services, header with company name, context values (company/email/DPO/security email/website), security email fallback to contact email, all five templates (Initial Notification/Status Update/Resolution Notice/Post-Mortem/Supervisory Authority Notification), email and status page versions, resolution notice sections (INCIDENT SUMMARY/WHAT WE DID/PREVENT RECURRENCE/COMPENSATION), post-mortem sections (Executive Summary/Timeline/Root Cause/Action Items/Regulatory Compliance), conditional PCI DSS regulatory items (24-hour processor notification/card brands, presence/absence), conditional AI regulatory items (AI provider notified/model inputs reviewed, presence/absence), GDPR Art 33 notification template (72 hours), usage guide (When to Use/Communication Channels), bracketed placeholder instructions, breach register and insurance items always present, disclaimer footer
+  - `src/generator/data-map-visual.test.ts` (24 tests): buildMermaidDiagram — starts with graph LR, User->Service edges for each service, data collected labels on edges, category fallback for empty dataCollected, provider label deduplication (Sentry), AI->monitoring forwarding edge (logs), no forwarding when only AI or only monitoring, sanitized Mermaid node IDs, empty diagram for no services; generateDataFlowDiagram — null return for no services, title with project name, context company name/default placeholder, embedded Mermaid code block, legend section, data flow details (collection points/third-party sharing), service inventory table grouped by category, known package name mapping (openai->OpenAI/stripe->Stripe), how-to-use section (GitHub/VS Code/Mermaid Live Editor), contact email from context, disclaimer footer
+- **Generator modules now with tests**: 108/138 (78.3%)
+- **Generator coverage**: 76.1% -> 78.3%
+- **Note**: `data-flow-map.ts` does not exist as a generator file; `generateDataFlowMapDocument` lives in `src/scanner/data-flow.ts` (already tested). Substituted `data-map-visual.ts` (generateDataFlowDiagram + buildMermaidDiagram) which was untested.

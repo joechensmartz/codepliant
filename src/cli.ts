@@ -1958,17 +1958,17 @@ function main() {
     }
 
     if (command === "count") {
-      runCount(absProjectPath, absOutputDir, jsonOutput, detailedFlag);
+      runCount(absProjectPath, absOutputDir, quiet, jsonOutput, detailedFlag);
       return;
     }
 
     if (command === "stats") {
-      runStats(absProjectPath, absOutputDir, jsonOutput);
+      runStats(absProjectPath, absOutputDir, quiet, jsonOutput);
       return;
     }
 
     if (command === "summary") {
-      runSummary(absProjectPath, absOutputDir, jsonOutput);
+      runSummary(absProjectPath, absOutputDir, quiet, jsonOutput);
       return;
     }
 
@@ -2053,7 +2053,7 @@ function main() {
     }
 
     if (command === "init") {
-      printBanner();
+      if (!quiet) printBanner();
       if (fromEnvFlag) {
         runInitFromEnv(absProjectPath).then(() => process.exit(0)).catch((err) => {
           console.error(`${RED()}[CP011] Error during init --from-env: ${formatError(err)}${RESET()}`);
@@ -2069,7 +2069,7 @@ function main() {
     }
 
     if (command === "wizard") {
-      printBanner();
+      if (!quiet) printBanner();
       const wizardFormat = formatFlag || undefined;
       runWizard(absProjectPath, outputDir, wizardFormat).then(() => process.exit(0)).catch((err) => {
         console.error(`${RED()}[CP012] Error during wizard: ${formatError(err)}${RESET()}`);
@@ -2080,15 +2080,17 @@ function main() {
 
     if (command === "serve") {
       if (!quiet) printBanner();
-      console.log(`${BOLD()}Starting Codepliant API server on port ${port}...${RESET()}\n`);
+      if (!quiet) console.log(`${BOLD()}Starting Codepliant API server on port ${port}...${RESET()}\n`);
       startServer({ port }).then(() => {
-        console.log(`${GREEN()}${BOLD()}Server listening${RESET()} on ${CYAN()}http://localhost:${port}${RESET()}\n`);
-        console.log(`${DIM()}Endpoints:${RESET()}`);
-        console.log(`  ${CYAN()}GET  /api/health${RESET()}          Health check`);
-        console.log(`  ${CYAN()}GET  /api/scan?path=${RESET()}      Scan a project`);
-        console.log(`  ${CYAN()}GET  /api/status?path=${RESET()}    Compliance status`);
-        console.log(`  ${CYAN()}POST /api/generate${RESET()}        Generate documents\n`);
-        console.log(`${DIM()}Press Ctrl+C to stop.${RESET()}\n`);
+        if (!quiet) {
+          console.log(`${GREEN()}${BOLD()}Server listening${RESET()} on ${CYAN()}http://localhost:${port}${RESET()}\n`);
+          console.log(`${DIM()}Endpoints:${RESET()}`);
+          console.log(`  ${CYAN()}GET  /api/health${RESET()}          Health check`);
+          console.log(`  ${CYAN()}GET  /api/scan?path=${RESET()}      Scan a project`);
+          console.log(`  ${CYAN()}GET  /api/status?path=${RESET()}    Compliance status`);
+          console.log(`  ${CYAN()}POST /api/generate${RESET()}        Generate documents\n`);
+          console.log(`${DIM()}Press Ctrl+C to stop.${RESET()}\n`);
+        }
       }).catch((err) => {
         console.error(`${RED()}[CP012] Failed to start server: ${formatError(err)}${RESET()}`);
         process.exit(1);
@@ -4136,6 +4138,7 @@ function runCi(
 function runCount(
   absProjectPath: string,
   absOutputDir: string,
+  quiet: boolean,
   jsonOutput: boolean,
   detailed: boolean = false,
 ) {
@@ -4201,12 +4204,12 @@ function runCount(
     process.exit(0);
   }
 
-  printBanner();
-  console.log(`${BOLD()}Detailed Statistics${RESET()}\n`);
+  if (!quiet) printBanner();
+  if (!quiet) console.log(`${BOLD()}Detailed Statistics${RESET()}\n`);
 
   // Overview
   console.log(`  Services: ${result.services.length}   Documents: ${docs.length}   Score: ${fullScore.total}% (${fullScore.grade})`);
-  console.log(`  Scan: ${scanDuration}ms   Generation: ${genDuration}ms   Total: ${scanDuration + genDuration}ms\n`);
+  if (!quiet) console.log(`  Scan: ${scanDuration}ms   Generation: ${genDuration}ms   Total: ${scanDuration + genDuration}ms\n`);
 
   // Per-scanner timing breakdown
   if (timings) {
@@ -4320,6 +4323,7 @@ function formatTimeAgo(date: Date): string {
 function runStats(
   absProjectPath: string,
   absOutputDir: string,
+  quiet: boolean,
   jsonOutput: boolean,
 ) {
   const config = loadConfig(absProjectPath);
@@ -4364,6 +4368,7 @@ function runStats(
 function runSummary(
   absProjectPath: string,
   absOutputDir: string,
+  quiet: boolean,
   jsonOutput: boolean,
 ) {
   const config = loadConfig(absProjectPath);

@@ -9,9 +9,9 @@ function makeScan(overrides?: Partial<ScanResult>): ScanResult {
     projectName: "test-project",
     projectPath: "/tmp/test",
     services: [
-      { name: "Stripe", category: "payment", detectedVia: "dependency", dataCollected: ["payment info"] },
-      { name: "OpenAI", category: "ai", detectedVia: "import", dataCollected: ["prompts"] },
-      { name: "PostHog", category: "analytics", detectedVia: "env", dataCollected: ["usage data"] },
+      { name: "Stripe", category: "payment", evidence: [{ type: "dependency", file: "package.json", detail: "stripe" }], dataCollected: ["payment info"] },
+      { name: "OpenAI", category: "ai", evidence: [{ type: "import", file: "src/index.ts", detail: "openai" }], dataCollected: ["prompts"] },
+      { name: "PostHog", category: "analytics", evidence: [{ type: "env_var", file: ".env", detail: "POSTHOG_KEY" }], dataCollected: ["usage data"] },
     ],
     dataCategories: [{ category: "personal", sources: ["email"] }],
     ...(overrides as any),
