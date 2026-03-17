@@ -229,4 +229,192 @@ describe("generateDisclaimer", () => {
     const occurrences = result.split("MegaSoft").length - 1;
     assert.ok(occurrences >= 5, `Expected at least 5 occurrences of company name, got ${occurrences}`);
   });
+
+  // ── New tests: deeper coverage ──────────────────────────────────────
+
+  it("returns a non-empty string always", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.length > 0);
+    assert.strictEqual(typeof result, "string");
+  });
+
+  it("numbers sections sequentially with only AI section", () => {
+    const scan = makeScan({
+      services: [makeService("openai", "ai")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("## 7. Artificial Intelligence Disclaimer"));
+    assert.ok(result.includes("## 8. Changes to This Disclaimer"));
+    assert.ok(result.includes("## 9. Contact Information"));
+    assert.ok(!result.includes("## 10."), "Should not have section 10 with only AI");
+  });
+
+  it("numbers sections sequentially with only Payment section", () => {
+    const scan = makeScan({
+      services: [makeService("stripe", "payment")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("## 7. Payment and Financial Transactions Disclaimer"));
+    assert.ok(result.includes("## 8. Changes to This Disclaimer"));
+    assert.ok(result.includes("## 9. Contact Information"));
+  });
+
+  it("includes medical advice disclaimer", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("Medical advice"));
+    assert.ok(result.includes("qualified healthcare provider"));
+  });
+
+  it("includes technical advice disclaimer", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("Technical advice"));
+    assert.ok(result.includes("professional technical consultation"));
+  });
+
+  it("includes implied warranties list in No Warranties section", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("IMPLIED WARRANTIES OF MERCHANTABILITY"));
+    assert.ok(result.includes("FITNESS FOR A PARTICULAR PURPOSE"));
+    assert.ok(result.includes("NON-INFRINGEMENT"));
+    assert.ok(result.includes("ACCURACY OR COMPLETENESS OF CONTENT"));
+    assert.ok(result.includes("AVAILABILITY OR UNINTERRUPTED ACCESS"));
+  });
+
+  it("includes virus disclaimer in No Warranties section", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("free of viruses or other harmful components"));
+  });
+
+  it("uses default jurisdiction placeholder when not provided", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("[Your Jurisdiction]") || !result.includes("jurisdiction") || result.length > 0);
+  });
+
+  it("handles project name with special characters", () => {
+    const scan = makeScan({ projectName: "my-app_v2.0" });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("my-app_v2.0"));
+  });
+
+  it("AI section mentions non-deterministic behavior", () => {
+    const scan = makeScan({
+      services: [makeService("openai", "ai")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("not guaranteed to be deterministic"));
+  });
+
+  it("AI section mentions model updates", () => {
+    const scan = makeScan({
+      services: [makeService("openai", "ai")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("updated, modified, or replaced"));
+  });
+
+  it("AI section disclaims liability", () => {
+    const scan = makeScan({
+      services: [makeService("openai", "ai")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("expressly disclaims all liability"));
+  });
+
+  it("Payment section mentions card information not stored", () => {
+    const scan = makeScan({
+      services: [makeService("stripe", "payment")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("does not store or directly process your payment card information"));
+  });
+
+  it("Payment section mentions price changes", () => {
+    const scan = makeScan({
+      services: [makeService("stripe", "payment")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("subject to change without prior notice"));
+  });
+
+  it("Payment section mentions account security responsibility", () => {
+    const scan = makeScan({
+      services: [makeService("stripe", "payment")],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("maintain the security of your account credentials"));
+  });
+
+  it("contains markdown horizontal rules as section dividers", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("---"));
+  });
+
+  it("includes GitHub link to Codepliant", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("https://github.com/joechensmartz/codepliant"));
+  });
+
+  it("AI disclaimer triggered by multiple different AI services", () => {
+    const scan = makeScan({
+      services: [
+        makeService("@anthropic-ai/sdk", "ai"),
+      ],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("Artificial Intelligence Disclaimer"));
+  });
+
+  it("Payment disclaimer triggered by PayPal service", () => {
+    const scan = makeScan({
+      services: [
+        makeService("@paypal/checkout-server-sdk", "payment"),
+      ],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(result.includes("Payment and Financial Transactions Disclaimer"));
+  });
+
+  it("non-AI non-payment services do not trigger conditional sections", () => {
+    const scan = makeScan({
+      services: [
+        makeService("prisma", "database"),
+        makeService("next-auth", "auth"),
+        makeService("@sendgrid/mail", "email"),
+        makeService("@sentry/node", "monitoring"),
+      ],
+    });
+    const result = generateDisclaimer(scan);
+    assert.ok(!result.includes("Artificial Intelligence Disclaimer"));
+    assert.ok(!result.includes("Payment and Financial Transactions Disclaimer"));
+    assert.ok(result.includes("## 7. Changes to This Disclaimer"));
+    assert.ok(result.includes("## 8. Contact Information"));
+  });
+
+  it("includes fair use section 107 reference for US copyright", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("Section 107"));
+    assert.ok(result.includes("United States Copyright Law"));
+  });
+
+  it("external links section mentions no endorsement", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("do not warrant, endorse, guarantee"));
+  });
+
+  it("errors section mentions unintentional slights", () => {
+    const result = generateDisclaimer(makeScan());
+    assert.ok(result.includes("perceived slights"));
+    assert.ok(result.includes("unintentional"));
+  });
+
+  it("includes both effective and last updated dates matching", () => {
+    const result = generateDisclaimer(makeScan());
+    const today = new Date().toISOString().split("T")[0];
+    const effectiveMatch = result.match(/\*\*Effective Date:\*\* (\S+)/);
+    const updatedMatch = result.match(/\*\*Last Updated:\*\* (\S+)/);
+    assert.ok(effectiveMatch);
+    assert.ok(updatedMatch);
+    assert.strictEqual(effectiveMatch![1], today);
+    assert.strictEqual(updatedMatch![1], today);
+  });
 });

@@ -167,6 +167,226 @@ describe("generateEnvExample", () => {
     const headers = result.match(/# === AI Services ===/g);
     assert.strictEqual(headers?.length, 1);
   });
+
+  // ── New tests: additional service coverage ──────────────────────────
+
+  it("generates env vars for Anthropic SDK", () => {
+    const scan = makeScan([makeService("@anthropic-ai/sdk", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("ANTHROPIC_API_KEY=sk-ant-your-key-here"));
+    assert.ok(result.includes("CLAUDE_API_KEY=sk-ant-your-key-here"));
+  });
+
+  it("generates env vars for Google AI", () => {
+    const scan = makeScan([makeService("@google/generative-ai", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("GOOGLE_AI_KEY="));
+    assert.ok(result.includes("GEMINI_API_KEY="));
+  });
+
+  it("generates env vars for Replicate", () => {
+    const scan = makeScan([makeService("replicate", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("REPLICATE_API_TOKEN=r8_your-token-here"));
+  });
+
+  it("generates env vars for Cohere", () => {
+    const scan = makeScan([makeService("cohere", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("COHERE_API_KEY="));
+    assert.ok(result.includes("CO_API_KEY="));
+  });
+
+  it("generates env vars for Pinecone", () => {
+    const scan = makeScan([makeService("@pinecone-database/pinecone", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("PINECONE_API_KEY=your-pinecone-api-key"));
+    assert.ok(result.includes("PINECONE_ENVIRONMENT=us-east-1-aws"));
+  });
+
+  it("generates env vars for PayPal", () => {
+    const scan = makeScan([makeService("@paypal/checkout-server-sdk", "payment")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("PAYPAL_CLIENT_ID="));
+    assert.ok(result.includes("PAYPAL_CLIENT_SECRET="));
+  });
+
+  it("generates env vars for Supabase", () => {
+    const scan = makeScan([makeService("@supabase/supabase-js", "auth")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("SUPABASE_URL=https://your-project.supabase.co"));
+    assert.ok(result.includes("SUPABASE_ANON_KEY="));
+    assert.ok(result.includes("SUPABASE_SERVICE_ROLE="));
+  });
+
+  it("generates env vars for PostHog", () => {
+    const scan = makeScan([makeService("posthog", "analytics")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("POSTHOG_API_KEY=phc_your-posthog-key"));
+    assert.ok(result.includes("# === Analytics ==="));
+  });
+
+  it("generates env vars for Resend email", () => {
+    const scan = makeScan([makeService("resend", "email")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("RESEND_API_KEY=re_your-resend-api-key"));
+  });
+
+  it("generates env vars for Drizzle database", () => {
+    const scan = makeScan([makeService("drizzle", "database")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("DRIZZLE_DATABASE_URL=postgresql://"));
+  });
+
+  it("generates env vars for MongoDB", () => {
+    const scan = makeScan([makeService("mongoose", "database")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("MONGODB_URI=mongodb://"));
+  });
+
+  it("generates env vars for Clerk auth", () => {
+    const scan = makeScan([makeService("@clerk/nextjs", "auth")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("CLERK_SECRET_KEY="));
+    assert.ok(result.includes("CLERK_PUBLISHABLE_KEY="));
+  });
+
+  // ── Category ordering tests ─────────────────────────────────────────
+
+  it("orders database before email category", () => {
+    const scan = makeScan([
+      makeService("@sendgrid/mail", "email"),
+      makeService("prisma", "database"),
+    ]);
+    const result = generateEnvExample(scan);
+    const dbIdx = result.indexOf("# === Database ===");
+    const emailIdx = result.indexOf("# === Email ===");
+    assert.ok(dbIdx < emailIdx, "Database should come before Email");
+  });
+
+  it("orders auth before database category", () => {
+    const scan = makeScan([
+      makeService("prisma", "database"),
+      makeService("next-auth", "auth"),
+    ]);
+    const result = generateEnvExample(scan);
+    const authIdx = result.indexOf("# === Authentication ===");
+    const dbIdx = result.indexOf("# === Database ===");
+    assert.ok(authIdx < dbIdx, "Auth should come before Database");
+  });
+
+  it("orders analytics before monitoring category", () => {
+    const scan = makeScan([
+      makeService("@sentry/node", "monitoring"),
+      makeService("posthog", "analytics"),
+    ]);
+    const result = generateEnvExample(scan);
+    const analyticsIdx = result.indexOf("# === Analytics ===");
+    const monitoringIdx = result.indexOf("# === Monitoring ===");
+    assert.ok(analyticsIdx < monitoringIdx, "Analytics should come before Monitoring");
+  });
+
+  // ── Output format tests ─────────────────────────────────────────────
+
+  it("includes date in the header", () => {
+    const scan = makeScan([makeService("openai", "ai")]);
+    const result = generateEnvExample(scan);
+    // Header should contain a date in YYYY-MM-DD format
+    assert.ok(/# \d{4}-\d{2}-\d{2}/.test(result), "Header should include date");
+  });
+
+  it("ends with a trailing newline", () => {
+    const scan = makeScan([makeService("openai", "ai")]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.endsWith("\n"), "Output should end with newline");
+  });
+
+  it("uses KEY=value format for all env vars", () => {
+    const scan = makeScan([
+      makeService("openai", "ai"),
+      makeService("stripe", "payment"),
+    ]);
+    const result = generateEnvExample(scan);
+    const lines = result.split("\n").filter(l => !l.startsWith("#") && l.trim() !== "");
+    for (const line of lines) {
+      assert.ok(/^[A-Z_]+=.+$/.test(line), `Line should be KEY=value format: ${line}`);
+    }
+  });
+
+  it("does not include blank lines between vars in the same category", () => {
+    const scan = makeScan([makeService("stripe", "payment")]);
+    const result = generateEnvExample(scan);
+    // Find the payment section
+    const paymentStart = result.indexOf("# === Payment ===");
+    const afterPayment = result.substring(paymentStart);
+    const lines = afterPayment.split("\n");
+    // After the header, vars should be consecutive (no blank lines until next section)
+    let foundFirstVar = false;
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i];
+      if (!foundFirstVar && /^[A-Z_]+=/.test(line)) {
+        foundFirstVar = true;
+        continue;
+      }
+      if (foundFirstVar) {
+        if (line.trim() === "") break; // blank line means section ended
+        assert.ok(/^[A-Z_]+=/.test(line), "Vars in same category should be consecutive");
+      }
+    }
+  });
+
+  // ── Full integration: all categories at once ────────────────────────
+
+  it("handles all major categories simultaneously", () => {
+    const scan = makeScan([
+      makeService("openai", "ai"),
+      makeService("stripe", "payment"),
+      makeService("next-auth", "auth"),
+      makeService("prisma", "database"),
+      makeService("@aws-sdk/client-s3", "storage"),
+      makeService("@sendgrid/mail", "email"),
+      makeService("posthog", "analytics"),
+      makeService("@sentry/node", "monitoring"),
+    ]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("# === AI Services ==="));
+    assert.ok(result.includes("# === Payment ==="));
+    assert.ok(result.includes("# === Authentication ==="));
+    assert.ok(result.includes("# === Database ==="));
+    assert.ok(result.includes("# === Storage ==="));
+    assert.ok(result.includes("# === Email ==="));
+    assert.ok(result.includes("# === Analytics ==="));
+    assert.ok(result.includes("# === Monitoring ==="));
+  });
+
+  it("returns string type always (not null or undefined)", () => {
+    const result = generateEnvExample(makeScan());
+    assert.strictEqual(typeof result, "string");
+  });
+
+  it("filters out service with isDataProcessor=false even if it has env patterns", () => {
+    const scan = makeScan([
+      makeService("openai", "ai", ["user prompts"], false),
+    ]);
+    const result = generateEnvExample(scan);
+    assert.strictEqual(result, "");
+  });
+
+  it("includes service with isDataProcessor=true", () => {
+    const scan = makeScan([
+      makeService("openai", "ai", ["user prompts"], true),
+    ]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("OPENAI_API_KEY="));
+  });
+
+  it("includes service with isDataProcessor=undefined (default)", () => {
+    const scan = makeScan([
+      makeService("openai", "ai", ["user prompts"]),
+    ]);
+    const result = generateEnvExample(scan);
+    assert.ok(result.includes("OPENAI_API_KEY="));
+  });
 });
 
 describe("writeEnvExample", () => {
@@ -207,6 +427,72 @@ describe("writeEnvExample", () => {
       assert.ok(fs.existsSync(tmpDir));
     } finally {
       fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it("writes correct content matching generateEnvExample output", () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "codepliant-test-"));
+    try {
+      const scan = makeScan([makeService("openai", "ai"), makeService("stripe", "payment")]);
+      const expected = generateEnvExample(scan);
+      const filePath = writeEnvExample(scan, tmpDir);
+      assert.ok(filePath !== null);
+      const written = fs.readFileSync(filePath!, "utf-8");
+      assert.strictEqual(written, expected);
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it("overwrites existing .env.example file", () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "codepliant-test-"));
+    try {
+      fs.writeFileSync(path.join(tmpDir, ".env.example"), "OLD_CONTENT=old", "utf-8");
+      const scan = makeScan([makeService("openai", "ai")]);
+      const filePath = writeEnvExample(scan, tmpDir);
+      assert.ok(filePath !== null);
+      const content = fs.readFileSync(filePath!, "utf-8");
+      assert.ok(!content.includes("OLD_CONTENT"));
+      assert.ok(content.includes("OPENAI_API_KEY="));
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it("returns null for services without env patterns", () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "codepliant-test-"));
+    try {
+      const scan = makeScan([makeService("@vercel/analytics", "analytics")]);
+      const result = writeEnvExample(scan, tmpDir);
+      assert.strictEqual(result, null);
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it("does not write file when result would be empty", () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "codepliant-test-"));
+    try {
+      writeEnvExample(makeScan(), tmpDir);
+      assert.ok(!fs.existsSync(path.join(tmpDir, ".env.example")));
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it("creates nested output directories", () => {
+    const tmpDir = path.join(os.tmpdir(), `codepliant-test-${Date.now()}`, "deep", "nested");
+    try {
+      const scan = makeScan([makeService("openai", "ai")]);
+      const result = writeEnvExample(scan, tmpDir);
+      assert.ok(result !== null);
+      assert.ok(fs.existsSync(tmpDir));
+      assert.ok(fs.existsSync(result!));
+    } finally {
+      fs.rmSync(path.join(os.tmpdir(), `codepliant-test-${Date.now()}`), { recursive: true, force: true });
+      // Cleanup the actual created dir
+      const base = tmpDir.split("/deep/")[0];
+      if (fs.existsSync(base)) fs.rmSync(base, { recursive: true, force: true });
     }
   });
 });
