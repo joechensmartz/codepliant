@@ -1836,10 +1836,17 @@ function main() {
       if (dryRunFlag) {
         // Dry-run: scan and generate in memory, but write nothing
         const plugins = config.plugins ? loadPlugins(absProjectPath, config.plugins) : [];
-        const { result, durationMs } = scanWithProgress(absProjectPath, quiet || jsonOutput, verbose, plugins);
+        const { result, durationMs, timings } = scanWithProgress(absProjectPath, quiet || jsonOutput, verbose, plugins);
 
         if (!quiet && !jsonOutput) {
           console.log(`\n  ${DIM()}Scanned in ${formatDuration(durationMs)}${RESET()}\n`);
+        }
+
+        if (verbose && timings && !quiet && !jsonOutput) {
+          printTimings(timings, durationMs);
+        }
+
+        if (!quiet && !jsonOutput) {
           printScanResults(result, quiet);
         }
 

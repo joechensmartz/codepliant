@@ -7,12 +7,12 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5592 passing — 100% scanner, 111/138 generators (80.4%)
+- **Tests**: 5723 passing — 100% scanner, 114/138 generators (82.6%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 41 complete (2026-03-17)
+- **Iteration**: 42 complete (2026-03-17)
 - **Last run**: command aliases, 135 tests, 🎉 80% GENERATOR COVERAGE (111/138), npm growth research
 
 ## Priority Backlog
@@ -3273,6 +3273,91 @@ The single most effective tactic is a well-executed Show HN launch with a demo G
 2. Optimize package.json keywords and description before `npm publish`
 3. Draft the Show HN post text and first comment
 4. Prepare 3 launch posts: Dev.to tutorial, r/javascript announcement, Twitter thread
+
+### Iteration 42 — 2026-03-17 — California ADMT Regulations: What SaaS Developers Need to Know
+
+#### Background
+
+The California Privacy Protection Agency (CPPA) Board adopted final regulations on Automated Decision-Making Technology (ADMT) on July 24, 2025. The Office of Administrative Law approved them on September 22, 2025, and they were filed with the Secretary of State. The regulations went into effect January 1, 2026, but the ADMT-specific obligations have a phased enforcement timeline with the critical deadline of **January 1, 2027** for businesses using ADMT to make "significant decisions."
+
+#### What Counts as ADMT
+
+ADMT means "any technology that processes personal information and uses computation to replace human decision-making or substantially replace human decision-making." This is broad enough to capture:
+- Machine learning models (recommendations, scoring, risk assessment)
+- Rule-based scoring and decisioning systems
+- Facial recognition and emotion-recognition technology
+- Even advanced spreadsheet-based decisioning — if it materially replaces human judgment
+
+**Exclusions**: Purely technical tools like web hosting, spellcheckers, calculators, and anti-virus software are excluded, provided they do not replace human decision-making. A decision "substantially replaces" human involvement if the ADMT output is used to make a decision without meaningful human review.
+
+#### What Is a "Significant Decision"
+
+The regulations only trigger full ADMT compliance obligations when ADMT is used for a **"significant decision"** — defined as a decision that results in the provision or denial of:
+- Financial or lending services
+- Housing
+- Education enrollment or opportunities
+- Employment or independent contracting opportunities or compensation
+- Healthcare services
+
+**Notably excluded**: Advertising and marketing decisions are not considered "significant decisions." This narrows the scope considerably for many SaaS products.
+
+#### Core Obligations for SaaS Developers (by Jan 1, 2027)
+
+1. **Pre-Use Notice**: Before collecting personal information for ADMT use (or before using existing data), businesses must provide a prominent notice describing: (a) how the ADMT works, (b) what types of personal information affect its outputs, (c) what outputs it generates and how they're used in decisions, and (d) the alternative decision-making process if the consumer opts out.
+
+2. **Opt-Out Right**: Consumers must be able to opt out of ADMT-based significant decisions, subject to certain exceptions. The business must offer an alternative human-review process.
+
+3. **Access Right**: Consumers can request information about the business's use of ADMT, including the logic of the system and how ADMT outputs are used in decision-making.
+
+4. **Risk Assessment**: Businesses must conduct and document a risk assessment covering seven factors: purposes for using the ADMT, how the ADMT's logic works, possible negative impacts, planned safeguards, and policies to limit negative impacts. Must be updated every three years or when there is a material change in the ADMT used.
+
+#### Service Provider / Processor Obligations
+
+SaaS companies that act as service providers or processors under the CCPA have a **direct obligation** under the new regulations to cooperate with businesses' ADMT compliance efforts. SaaS vendors should expect customers to add ADMT-specific contractual requirements, including:
+- Assisting the business with ADMT compliance obligations
+- Providing transparency about how the SaaS product's ADMT features work
+- Supporting opt-out and access request fulfillment
+- Cooperating with risk assessment documentation
+
+#### Enforcement Timeline
+
+| Deadline | Requirement |
+|----------|-------------|
+| Jan 1, 2026 | Regulations in effect; risk assessment requirements begin |
+| Jan 1, 2027 | Full ADMT obligations enforceable (pre-use notice, opt-out, access rights) |
+| Apr 1, 2027 | Consumer access request obligations fully enforceable |
+| Dec 31, 2027 | Risk assessments for processing activities that began before Jan 1, 2026 must be completed |
+| Apr 1, 2028 | First cybersecurity audit certification due (businesses with $100M+ gross revenue) |
+
+**Penalties**: Up to $2,500 per violation, $7,500 per intentional violation. Enforced by the CPPA and the California Attorney General.
+
+#### Codepliant Opportunity
+
+This is directly relevant to Codepliant's roadmap:
+
+1. **ADMT Pre-Use Notice Generator**: Codepliant could scan code for ML/AI library usage (already planned for EU AI Act) and generate a CCPA-compliant pre-use notice document describing the ADMT, its inputs, outputs, and purpose. This is a new document type no competitor offers.
+
+2. **ADMT Risk Assessment Template**: Generate a structured risk assessment document pre-populated with detected ADMT usage from code scanning. The seven-factor framework maps well to automated scanning (purpose, logic, data inputs, outputs, safeguards).
+
+3. **Privacy Policy ADMT Section**: Update the existing privacy policy generator to include an ADMT disclosure section when AI/ML libraries are detected — describing the types of automated decisions, consumer rights to opt out and access, and how to request human review.
+
+4. **Service Provider Agreement Addendum**: For B2B SaaS, generate ADMT-specific contractual language that service providers can include in their DPAs / vendor agreements.
+
+5. **Detection Signatures**: Add scanner signatures for common ADMT patterns: credit scoring libraries, recommendation engines, hiring/screening tools, insurance risk models, loan underwriting systems. These trigger ADMT-specific disclosures in generated documents.
+
+**Priority**: HIGH — Jan 2027 enforcement is ~9 months away, and SaaS developers building products in fintech, HR tech, edtech, healthtech, and insurtech are the exact audience that needs this. The intersection of code scanning + ADMT disclosure generation is an unoccupied niche.
+
+Sources:
+- [CPPA Announcement: California Finalizes Regulations](https://cppa.ca.gov/announcements/2025/20250923.html)
+- [CPPA Regulations Page](https://cppa.ca.gov/regulations/ccpa_updates.html)
+- [Skadden: California Finalizes CCPA Regulations for ADMT](https://www.skadden.com/insights/publications/2025/10/california-finalizes-cppa-regulations)
+- [White & Case: CPPA Finalizes Rules on ADMT](https://www.whitecase.com/insight-alert/cppa-finalizes-rules-admt-risk-assessments-and-cybersecurity-audits-requirements)
+- [Littler: California's Final Regulations on Automated Decisionmaking](https://www.littler.com/news-analysis/asap/californias-long-awaited-final-regulations-automated-decisionmaking-create-new)
+- [Wiley: California Finalizes Pivotal CCPA Regulations on AI](https://www.wiley.law/alert-California-Finalizes-Pivotal-CCPA-Regulations-on-AI-Cyber-Audits-and-Risk-Governance)
+- [Akin: New California Regulations Regarding Employer Use of ADMT](https://www.akingump.com/en/insights/alerts/new-california-regulations-regarding-employer-use-of-automated-decision-making-technology-compliance-required-by-january-1-2027)
+- [Mayer Brown: Updates to the CCPA Regulations](https://www.mayerbrown.com/en/insights/publications/2026/01/updates-to-the-ccpa-regulations-what-businesses-need-to-know-now-about-automated-decision-making-cybersecurity-audits-and-risk-assessments)
+- [Thompson Coburn: California's 2026 CCPA Regulations Summary](https://www.thompsoncoburn.com/insights/californias-2026-ccpa-regulations-summary-and-preparation-guide/)
+- [Morrison Foerster: CCPA Regulations on Cybersecurity, Risk Assessments, and ADMT](https://www.mofo.com/resources/insights/251007-ccpa-regulations-on-cybersecurity-risk-assessments)
 
 ## Development Log
 
@@ -8016,3 +8101,23 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
 - **Generator modules now with tests**: 111/138 (80.4%)
 - **Generator coverage**: 78.3% -> 80.4% — PASSED 80% THRESHOLD
 - **MILESTONE**: 80%+ generator test coverage reached (111/138)
+
+### Iteration 42 — 2026-03-17 — Fix `--verbose` / `-v` timing breakdown for `codepliant go --dry-run`
+
+- **Build**: pass (`npx tsc` clean)
+- **Issue**: `codepliant go --verbose` correctly showed per-scanner timing breakdown in normal mode, but the `--dry-run` path did not capture or print timings — the `timings` return value from `scanWithProgress` was destructured away
+- **Fix**: In the `go` command dry-run branch (`src/cli.ts` ~line 1839), captured `timings` from `scanWithProgress` and added `printTimings()` call when `verbose && timings && !quiet && !jsonOutput`
+- **Verified**: `codepliant go -v --dry-run`, `codepliant go --verbose --dry-run`, and `codepliant go --verbose` all show full per-scanner timing breakdown (44 scanners timed: monorepo detection, file walk, dependencies, Python/Go/Ruby/Elixir/PHP/Rust/Java/Dotnet/Flutter/Swift/Kotlin deps, imports, env vars, tracking, framework implicit, Django settings, Terraform, Docker Compose, GitHub Actions, WebSockets, file uploads, caching, GraphQL endpoints, schema, Django/SQLAlchemy/Go/TypeORM-Sequelize/Mongoose/GraphQL/Drizzle models, OpenAPI specs, API routes, industry, accessibility, CORS, auth patterns, infrastructure, vulnerability scan, logging scan, license scan)
+- **Files changed**: `src/cli.ts`
+
+### Iteration 42b — 2026-03-17 — Generator Tests: 114/138 = 82.6%
+
+- **Build**: pass
+- **Tests**: 5723/5723 passing (was 5592, added 131 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/acceptable-ai-use.test.ts` (50 tests): null guards (no services/only non-AI/mixed non-AI), basic generation (title/date/project name), context values (companyName/contactEmail/placeholders), Section 3 AI Services in Use (lists AI services in table/maps OpenAI+Anthropic provider names/multiple services/excludes non-AI), Section 4 Acceptable Uses (permitted uses with Content+Code assistance/conditional uses requiring approval), Section 5 Prohibited Uses (deceptive practices/discriminatory decision-making+protected characteristics/social scoring), Section 6 Content Review Requirements (review process table with Customer-facing+Code suggestions/review checklist with Accuracy+Bias+Privacy), risk classification (minimal for basic AI/limited for user-facing/high for biometric+healthcare/aiRiskLevel context override/high=qualified human review/limited=spot-checks/minimal=clearly labeled), Section 7 Bias and Fairness (bias awareness training/30 days remediation/bias assessment table), Section 8 Data Handling (data minimization/GDPR Article 7 user consent), Section 9 AI Incident Response (harmful content/AI hallucination), Section 10 Governance (AI Governance Lead roles table/policy violation consequences), Section 11 Policy Review (Quarterly), disclaimer (Codepliant/does not constitute legal advice), regulatory references (EU AI Act/NIST AI Risk Management Framework)
+  - `src/generator/ai-red-team-guide.test.ts` (50 tests): null guards (no services/only non-AI/mixed non-AI), basic generation (title/date/project name), context values (companyName/contactEmail/placeholders/DPO email/security email), Detected AI Attack Surface (table with service names+data/service count in scope note/risk level based on data count), OWASP LLM Top 10 (LLM01 Prompt Injection+OWASP LLM01:2025/LLM02 Sensitive Information Disclosure/LLM06 Excessive Agency+least-privilege/LLM07 System Prompt Leakage/LLM09 Misinformation+hallucination/LLM10 Unbounded Consumption/Test Cases+Mitigations+Test Results sections/Not Tested status), Provider-Specific Scenarios (OpenAI-specific/Anthropic+Constitutional AI/LangChain+agent tools/no section for unknown providers/multiple providers), Bias Probing (Demographic Bias Tests with Gender+Ethnicity+Disability/Fairness Metrics with Disparate Impact+Counterfactual Fairness), Data Extraction (Training Data+Membership inference/Cross-Session Leakage+Session isolation), Red Team Exercise Template (Pre-Exercise Checklist+written authorisation/four phases Reconnaissance+Vulnerability Testing+Exploitation+Reporting/Severity Classification+24 hours), Regulatory Compliance Mapping (EU AI Act Art. 9/GDPR Art. 25+Art. 35/NIST AI RMF), Recommended Tools (Garak+PyRIT+Promptfoo/owasp.org link), disclaimer (Codepliant/reviewed and customised), AI service names in header
+  - `src/generator/api-documentation.test.ts` (31 tests): null guards (no API category+no endpoints/database-only services), generation with API Data Collection category (title/date/project name), context values (companyName/contactEmail/placeholders), overview section (API category description/endpoint count metrics), privacy policy mapping (GDPR legal basis column), third-party data flow (lists data processor services/excludes non-data-processors), recommendations (input validation/rate limiting/field-level encryption), disclaimer (Codepliant/reviewed by engineering and legal teams), endpoint detection with real files (Next.js App Router route.ts POST+GET/Express app.post+app.get/request body destructuring extracts email+name+password/email->Contact category/password->Authentication category/Detailed Endpoint Documentation section/Endpoint Summary table), handles nonexistent project path (0 endpoints)
+- **Generator modules now with tests**: 114/138 (82.6%)
+- **Generator coverage**: 80.4% -> 82.6%
