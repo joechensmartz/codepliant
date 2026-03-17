@@ -189,6 +189,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--ecosystem <name>${RESET()}    Filter scan to specific ecosystem (js, python, go, ruby, etc.)
   ${DIM()}--no-color${RESET()}            Disable colored output
   ${DIM()}--port <number>${RESET()}        Port for serve command (default: 3939)
+  ${DIM()}--explain <code>${RESET()}       Show detailed explanation for an error code (e.g., --explain CP006)
   ${DIM()}--version, -V${RESET()}         Print version and exit
 
 Run ${CYAN()}codepliant <command> --help${RESET()} for command-specific help.
@@ -1087,6 +1088,160 @@ function classifyDocCategory(docName: string): string {
 // CP026: Billing error
 // CP027: General error
 
+const ERROR_EXPLANATIONS: Record<string, { summary: string; detail: string; suggestion: string }> = {
+  CP001: {
+    summary: "Permission denied",
+    detail: "Codepliant does not have read or write access to the target file or directory. This usually happens when the project is owned by a different user, or when the output directory has restrictive permissions.",
+    suggestion: "Run: chmod -R u+rw <path>  — or run codepliant with the correct user. Avoid running with sudo unless necessary.",
+  },
+  CP002: {
+    summary: "Disk full",
+    detail: "The filesystem has no space left to write generated compliance documents. Codepliant generates Markdown, HTML, and other files that typically require only a few hundred KB.",
+    suggestion: "Free up disk space (check with 'df -h') and try again. You can also use '--output' to write to a different filesystem.",
+  },
+  CP003: {
+    summary: "Read-only filesystem",
+    detail: "The target filesystem is mounted as read-only. This can happen with Docker volumes, network mounts, or when a disk has errors.",
+    suggestion: "Remount the filesystem as read-write, or use '--output <dir>' to write documents to a writable location.",
+  },
+  CP004: {
+    summary: "Too many open files",
+    detail: "The operating system file descriptor limit has been reached. Large monorepos with thousands of files can trigger this, especially during deep scanning.",
+    suggestion: "Increase the limit with: ulimit -n 4096  (or higher). For persistent changes, edit /etc/security/limits.conf (Linux) or use 'launchctl limit' (macOS).",
+  },
+  CP005: {
+    summary: "Circular symlink",
+    detail: "A symbolic link forms a loop (A -> B -> A). Codepliant follows symlinks during scanning and detected an infinite cycle.",
+    suggestion: "Find the circular symlink with: find <project> -type l -exec test ! -e {} \\; -print  — then remove or fix the broken link.",
+  },
+  CP006: {
+    summary: "Path not found",
+    detail: "The specified project path does not exist on disk. This commonly happens when the path is misspelled, the directory was deleted, or you are running codepliant from the wrong working directory.",
+    suggestion: "Double-check the path with 'ls <path>'. Run 'codepliant go .' to scan the current directory.",
+  },
+  CP007: {
+    summary: "Not a directory",
+    detail: "The path exists but is a file, not a directory. Codepliant scans project directories, not individual files.",
+    suggestion: "Pass the project root directory instead: codepliant go /path/to/project  (not /path/to/project/package.json).",
+  },
+  CP008: {
+    summary: "Unknown command",
+    detail: "The command you typed is not recognized. This may be a typo or a command from a newer version of codepliant.",
+    suggestion: "Run 'codepliant help' to see all available commands. Run 'codepliant version-check' to see if a newer version is available.",
+  },
+  CP009: {
+    summary: "Invalid argument",
+    detail: "A flag or option was given an invalid value. For example, an unrecognized output format, an invalid port number, or a malformed date.",
+    suggestion: "Check the allowed values in 'codepliant <command> --help'. Common formats: markdown, html, pdf, json. Dates use YYYY-MM-DD.",
+  },
+  CP010: {
+    summary: "Config error",
+    detail: "The configuration file (.codepliant.json or codepliant.config.json) is malformed, contains invalid values, or a config subcommand was not recognized.",
+    suggestion: "Run 'codepliant check-config' to validate your config. Run 'codepliant init' to create a fresh config file.",
+  },
+  CP011: {
+    summary: "Init error",
+    detail: "The 'init' command failed, possibly because of a permission issue, existing config conflict, or invalid environment variables when using --from-env.",
+    suggestion: "Check file permissions in the project directory. For --from-env, ensure environment variables are set correctly (see docs).",
+  },
+  CP012: {
+    summary: "Server error",
+    detail: "The 'serve' or 'wizard' command failed to start. Common causes: port already in use, missing dependencies, or permission issues.",
+    suggestion: "Try a different port with '--port <number>'. Check if another process is using the port: lsof -i :<port>.",
+  },
+  CP013: {
+    summary: "Review error",
+    detail: "The AI-powered document review failed. This requires an API key for the configured AI provider.",
+    suggestion: "Ensure your AI API key is set (e.g., OPENAI_API_KEY). Run 'codepliant review --help' for configuration details.",
+  },
+  CP014: {
+    summary: "Compare error",
+    detail: "The 'compare' command requires two project paths to diff their compliance status.",
+    suggestion: "Usage: codepliant compare /path/to/project-a /path/to/project-b",
+  },
+  CP015: {
+    summary: "Missing argument",
+    detail: "A required argument was not provided. For example, a document name, service name, or file path that the command needs to operate.",
+    suggestion: "Run 'codepliant <command> --help' to see required arguments for the command you are using.",
+  },
+  CP016: {
+    summary: "Template error",
+    detail: "A template operation failed. The template subcommand may not be recognized, or a template file could not be read or parsed.",
+    suggestion: "Run 'codepliant template --help' to see available subcommands. Ensure template files are valid Markdown.",
+  },
+  CP017: {
+    summary: "Notification error",
+    detail: "Sending a compliance notification (email, Slack, webhook) failed. This usually means the notification endpoint is unreachable or misconfigured.",
+    suggestion: "Check your notification config in .codepliant.json (webhookUrl, slackWebhook, etc.). Test the endpoint manually with curl.",
+  },
+  CP018: {
+    summary: "Fix error",
+    detail: "The 'fix' command could not apply the requested fix. Either the issue name was not recognized or the fix could not be applied to the current project state.",
+    suggestion: "Run 'codepliant fix --help' to see supported fix targets: missing-dpo, stale-docs, missing-consent.",
+  },
+  CP019: {
+    summary: "Hook error",
+    detail: "The 'hook' subcommand was not recognized. Hooks integrate codepliant into your git workflow via pre-commit checks.",
+    suggestion: "Usage: codepliant hook install  or  codepliant hook uninstall",
+  },
+  CP020: {
+    summary: "Scan error",
+    detail: "An error occurred during project scanning. This can happen if files are unreadable, the project structure is unusual, or there is a bug in a scanner module.",
+    suggestion: "Run with '--verbose' to see which scanner failed. Check that all project files are readable. Report persistent issues at https://github.com/joechensmartz/codepliant/issues.",
+  },
+  CP021: {
+    summary: "Export error",
+    detail: "The export operation failed, typically when writing a ZIP archive or JSON export to disk.",
+    suggestion: "Check that the output directory exists and is writable. Use '--output <dir>' to specify an alternative location.",
+  },
+  CP022: {
+    summary: "Changelog error",
+    detail: "The changelog file could not be found or parsed. Codepliant looks for CHANGELOG.md in the output directory.",
+    suggestion: "Run 'codepliant go' first to generate documents (including the changelog). Check if the file exists at the expected path.",
+  },
+  CP023: {
+    summary: "Validation error",
+    detail: "One or more generated documents failed validation checks. Documents may be incomplete, missing required sections, or contain placeholder text.",
+    suggestion: "Run 'codepliant validate' for a detailed report. Run 'codepliant go' to regenerate documents.",
+  },
+  CP024: {
+    summary: "Schedule error",
+    detail: "The 'schedule' subcommand was not recognized. Schedule lets you set up periodic compliance scans via cron.",
+    suggestion: "Usage: codepliant schedule install [--frequency daily|weekly|monthly]  or  codepliant schedule uninstall  or  codepliant schedule status",
+  },
+  CP025: {
+    summary: "Auth error",
+    detail: "The 'auth' subcommand was not recognized or authentication failed.",
+    suggestion: "Usage: codepliant auth login  — to authenticate with your Codepliant account.",
+  },
+  CP026: {
+    summary: "Billing error",
+    detail: "The 'billing' subcommand was not recognized or the billing API is unreachable.",
+    suggestion: "Usage: codepliant billing status | usage | portal",
+  },
+  CP027: {
+    summary: "General error",
+    detail: "An unexpected error occurred that does not match a specific error code. This is a catch-all for unhandled exceptions.",
+    suggestion: "Run with '--verbose' for more detail. If the error persists, report it at https://github.com/joechensmartz/codepliant/issues with the full error output.",
+  },
+};
+
+function explainErrorCode(code: string): void {
+  const upper = code.toUpperCase();
+  const entry = ERROR_EXPLANATIONS[upper];
+  if (!entry) {
+    console.error(`${RED()}Unknown error code: "${code}"${RESET()}`);
+    console.error(`\nValid error codes: ${Object.keys(ERROR_EXPLANATIONS).join(", ")}`);
+    process.exit(1);
+  }
+  console.log(`\n${BOLD()}[${upper}] ${entry.summary}${RESET()}\n`);
+  console.log(`${BOLD()}What happened:${RESET()}`);
+  console.log(`  ${entry.detail}\n`);
+  console.log(`${BOLD()}How to fix:${RESET()}`);
+  console.log(`  ${entry.suggestion}\n`);
+  console.log(`${DIM()}Learn more: https://github.com/joechensmartz/codepliant/blob/main/docs/errors.md#${upper.toLowerCase()}${RESET()}`);
+}
+
 function formatError(err: unknown): string {
   if (!(err instanceof Error)) return String(err);
 
@@ -1102,7 +1257,7 @@ function formatError(err: unknown): string {
   }
 
   if (e.code === "EROFS") {
-    return "[CP003] File system is read-only. Cannot write documents.";
+    return "[CP003] File system is read-only. Cannot write documents.\n  Try: use '--output <dir>' to write to a writable location.";
   }
 
   if (e.code === "EMFILE" || e.code === "ENFILE") {
@@ -1360,6 +1515,20 @@ function main() {
     process.exit(0);
   }
 
+  // --explain CP001: show detailed explanation for an error code
+  const explainIdx = args.indexOf("--explain");
+  if (explainIdx !== -1) {
+    const code = args[explainIdx + 1];
+    if (!code) {
+      console.error(`${RED()}Usage: codepliant --explain <error-code>${RESET()}`);
+      console.error(`\nExample: codepliant --explain CP006`);
+      console.error(`\nValid error codes: ${Object.keys(ERROR_EXPLANATIONS).join(", ")}`);
+      process.exit(1);
+    }
+    explainErrorCode(code);
+    process.exit(0);
+  }
+
   if (!command || command === "help" || command === "--help" || command === "-h") {
     printBanner();
     printUsage();
@@ -1501,7 +1670,7 @@ function main() {
   if (command !== "help" && command !== "init" && command !== "wizard" && command !== "serve" && command !== "auth" && command !== "audit-trail" && command !== "explain" && command !== "upgrade" && command !== "activate" && command !== "deactivate" && command !== "onboard" && command !== "billing") {
     if (!fs.existsSync(absProjectPath)) {
       console.error(`${RED()}[CP006] Error: "${absProjectPath}" does not exist.${RESET()}`);
-      console.error(`${DIM()}Check the path and try again.${RESET()}`);
+      console.error(`${DIM()}Check the path and try again. Run ${CYAN()}codepliant --explain CP006${RESET()}${DIM()} for more info.${RESET()}`);
       process.exit(1);
     }
 
@@ -1515,7 +1684,7 @@ function main() {
 
     if (!stat.isDirectory()) {
       console.error(`${RED()}[CP007] Error: "${absProjectPath}" is not a directory.${RESET()}`);
-      console.error(`${DIM()}Codepliant scans project directories, not individual files.${RESET()}`);
+      console.error(`${DIM()}Codepliant scans project directories, not individual files. Run ${CYAN()}codepliant --explain CP007${RESET()}${DIM()} for more info.${RESET()}`);
       process.exit(1);
     }
   }
@@ -2136,7 +2305,11 @@ function main() {
     console.error(`\n${DIM()}Run ${CYAN()}codepliant help${RESET()}${DIM()} to see available commands.${RESET()}`);
     process.exit(1);
   } catch (err) {
-    console.error(`\n${RED()}${BOLD()}[CP027] Error:${RESET()} ${formatError(err)}`);
+    const errMsg = formatError(err);
+    const codeMatch = errMsg.match(/\[CP(\d{3})\]/);
+    console.error(`\n${RED()}${BOLD()}[CP027] Error:${RESET()} ${errMsg}`);
+    const hintCode = codeMatch ? `CP${codeMatch[1]}` : "CP027";
+    console.error(`${DIM()}Run ${CYAN()}codepliant --explain ${hintCode}${RESET()}${DIM()} for details on this error.${RESET()}`);
     process.exit(1);
   }
 }

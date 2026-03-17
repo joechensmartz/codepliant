@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4344 passing — 100% scanner, 84/138 generators (60.9%)
+- **Tests**: 4478 passing — 100% scanner, 87/138 generators (63.0%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 32 complete (2026-03-17)
-- **Last run**: info fix, 83 tests, 🎉 60% GENERATOR COVERAGE (84/138), adjacent tools research, stats 4261
+- **Iteration**: 33 complete (2026-03-17)
+- **Last run**: --explain errors, 134 tests, 63% generators, 2026 deadlines research, CSS verified
 
 ## Priority Backlog
 
@@ -2996,7 +2996,53 @@ These are not competitors but adjacent tools that Codepliant could integrate wit
 
 **Key takeaway**: Bearer and Privado are the highest-value near-term integrations because they produce structured data about what personal data an application processes — exactly the input Codepliant needs to generate accurate compliance documents. OPA is the most strategic long-term play because adopting Rego would make Codepliant's compliance rules portable and composable with the broader cloud-native policy ecosystem.
 
+### Iteration 33 — 2026-03-17 — Top 3 Upcoming 2026 Compliance Deadlines for Marketing Content
+
+#### 1. EU AI Act — High-Risk AI System Requirements (August 2, 2026)
+
+- **Regulation**: EU AI Act (Regulation 2024/1689), Articles 6–49 plus Annex III
+- **What happens**: The majority of the AI Act's substantive rules enter into force. Organizations deploying or developing high-risk AI systems (biometrics, critical infrastructure, education, employment, law enforcement, migration, justice, democratic processes) must have completed conformity assessments, finalized technical documentation, affixed CE marking, and registered in the EU database. Transparency obligations under Article 50 also take effect for general-purpose AI.
+- **Who's affected**: Any company building or deploying AI systems that operate in or serve EU users — this includes US SaaS companies with EU customers. Penalties reach up to EUR 35 million or 7% of global annual revenue.
+- **Marketing angle for Codepliant**: Position code-scanning as the first step toward AI Act compliance — Codepliant can detect AI/ML library usage (TensorFlow, PyTorch, OpenAI, etc.) and auto-generate AI Disclosure documents that map to Article 50 transparency requirements. Content themes: "Is your AI system high-risk under the EU AI Act?", "Generate your AI Act transparency documentation from code."
+- **Sources**: [EU AI Act Implementation Timeline](https://artificialintelligenceact.eu/implementation-timeline/), [EU AI Act 2026 Compliance Guide](https://secureprivacy.ai/blog/eu-ai-act-2026-compliance), [The EU AI Act: 6 Steps to Take Before 2 August 2026](https://www.orrick.com/en/Insights/2025/11/The-EU-AI-Act-6-Steps-to-Take-Before-2-August-2026)
+
+#### 2. NIS2 Directive — Full Enforcement Across EU Member States (October 17, 2026)
+
+- **Regulation**: NIS2 Directive (Directive 2022/2555)
+- **What happens**: While the transposition deadline was October 17, 2024, the majority of EU member states missed it and are still finalizing national laws throughout 2025–2026. By October 2026, enforcement will be fully operational across remaining laggard states, with national authorities actively auditing and penalizing non-compliant entities. Organizations in essential and important sectors must demonstrate cybersecurity risk management measures, incident reporting procedures, and supply chain security.
+- **Who's affected**: 18 sectors including energy, transport, banking, health, digital infrastructure, ICT service management, public administration, and digital providers (cloud, search engines, online marketplaces, social networks). Estimated 160,000+ entities across the EU. US companies providing digital services to EU customers are in scope.
+- **Marketing angle for Codepliant**: Codepliant's code scanning can detect security libraries, encryption usage, authentication patterns, and logging infrastructure — all relevant to NIS2's technical security measures. Content themes: "Prove your NIS2 cybersecurity posture starts in the codebase", "Auto-document your security practices for NIS2 auditors."
+- **Sources**: [NIS2 Directive — Shaping Europe's Digital Future](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive), [NIS2 Directive Transposition Tracker](https://ecs-org.eu/activities/nis2-directive-transposition-tracker/), [NIS2, DORA & ISO 27001: 2026 Compliance Manual](https://kymatio.com/blog/nis2-iso-27001-and-dora-compliance-manual-version-2026)
+
+#### 3. US State Privacy Law Wave — Indiana, Kentucky, Rhode Island, Connecticut Amendments (July 1, 2026)
+
+- **Regulations**: Indiana Consumer Data Protection Act (effective July 1, 2026 — after April 1 cure period expiry), Kentucky Consumer Data Protection Act (effective July 1, 2026), Rhode Island Data Transparency and Privacy Protection Act (effective July 1, 2026), Connecticut neural data amendments (effective July 1, 2026)
+- **What happens**: Three new state privacy laws become fully enforceable on July 1, 2026, bringing the total to 20+ US states with comprehensive consumer privacy laws. Indiana's cure-period window closes (April–July 2026). Connecticut expands its definition of sensitive data to include neural data. These laws require privacy notices, data processing disclosures, opt-out mechanisms, and data protection assessments.
+- **Who's affected**: Any business meeting the state-specific thresholds (typically: processing data of 100,000+ consumers, or 25,000+ consumers if deriving 50%+ revenue from data sales). SaaS companies, app developers, and e-commerce platforms with users in these states.
+- **Marketing angle for Codepliant**: This is Codepliant's sweet spot — scanning code to identify what personal data is actually collected, which third-party services process it, and generating state-specific privacy policies. Content themes: "20 states, 20 different privacy laws — one scan", "Your code knows what data you collect, your privacy policy should too", "July 1 deadline: are your privacy policies ready for Indiana, Kentucky, and Rhode Island?"
+- **Sources**: [New Year, New Rules: US State Privacy Requirements Coming Online as 2026 Begins](https://iapp.org/news/a/new-year-new-rules-us-state-privacy-requirements-coming-online-as-2026-begins), [Privacy Laws 2026: Global Updates & Compliance Guide](https://secureprivacy.ai/blog/privacy-laws-2026), [Five Privacy Checkpoints to Start 2026](https://www.wiley.law/alert-Five-Privacy-Checkpoints-to-Start-2026)
+
+#### Marketing Content Calendar Recommendation
+
+| Deadline | Date | Content Start | Content Type |
+|----------|------|---------------|--------------|
+| US State Privacy Wave | July 1, 2026 | April–May 2026 | Blog series, landing page, state-by-state comparison tool |
+| EU AI Act High-Risk | August 2, 2026 | May–June 2026 | Technical guide, AI disclosure template showcase, webinar |
+| NIS2 Full Enforcement | October 17, 2026 | July–August 2026 | Security documentation guide, NIS2 readiness checklist |
+
+**Key takeaway**: All three deadlines align with Codepliant's core value proposition — scanning code to generate accurate compliance documents. The July 1 US state privacy wave is the most immediate and directly maps to Codepliant's existing privacy policy generator. The August 2 EU AI Act deadline maps to the AI Disclosure generator. The NIS2 deadline is a stretch opportunity that could motivate a security-practices document generator.
+
 ## Development Log
+
+**2026-03-17 — `--explain` error code explanations (Iteration 33)**
+- Added detailed explanation lookup table for all 27 error codes (CP001–CP027) with summary, detail, and actionable suggestion for each
+- Added `--explain <code>` global flag: `codepliant --explain CP006` prints a structured explanation with "What happened" and "How to fix" sections
+- Invalid codes show a helpful error listing all valid codes
+- Added `--explain` to the help/usage output under Options
+- Improved inline error messages: CP003 (read-only FS) now includes `--output` suggestion; CP006 and CP007 now include `--explain` hint
+- General catch-all error handler (CP027) now extracts the error code from the message and shows a tailored `--explain` hint
+- Addresses P2 "better error messages" finding from iteration 14 research
+- Build verified: `npx tsc` passes cleanly
 
 **2026-03-17 — `codepliant stats` one-line compliance summary (Iteration 28)**
 - Added `codepliant stats` command that outputs a single formatted line summarizing project compliance status
@@ -7206,3 +7252,15 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - Added dynamic service signature count (124 detected signatures) from `SERVICE_SIGNATURES`
   - Updated ecosystem list to include Dart, Swift, Kotlin (was missing 3 of 12 ecosystems)
   - Ecosystem count now shown explicitly (12)
+
+### Iteration 33 — 2026-03-17 — Generator Tests (87/138 = 63%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4478/4478 passing (was 4344, added 134 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-digest.test.ts` (53 tests): null return for empty services, generation with single/multiple services, context values (company name, contact email, DPO name/email, placeholders), date format, At a Glance metrics (service count, document count, category count), critical doc coverage (100%/0%/partial), service inventory grouped by category with alphabetical sort, New Risks section (AI/ML EU AI Act Art. 50, payment PCI DSS, high service count >10, analytics/monitoring cookie consent, no risks fallback), Upcoming Deadlines (quarterly review, DSAR, breach notification, EU AI Act conditional), Action Items (AI/payment conditional, DSAR/sub-processor always), Document Status (critical docs Missing/Current, AI_DISCLOSURE.md conditional, COOKIE_POLICY.md conditional), How to Use section, Quick Commands section, Codepliant attribution, review disclaimer, comprehensive test with all service types and docs
+  - `src/generator/compliance-onboarding-guide.test.ts` (37 tests): null return for empty services, generation with single/multiple services, context values (company name, contact email, placeholders), date format, Key Contacts section (DPO row conditional on dpoName/dpoEmail, securityEmail), Services section (name/category/data collected, category label formatting, total count), Required Reading phases (Day 1/Week 1/Week 2/Month 1), AI-specific reading conditional, Key Policies (Data Handling, Access & Auth, Incident Response, Payment PCI DSS conditional, AI Usage Rules conditional), Onboarding Checklist (AI item conditional), FAQ section (AI-positive/negative answer), Codepliant attribution, review disclaimer, comprehensive test with all service categories
+  - `src/generator/data-processing-inventory.test.ts` (44 tests): null return for empty services and unrecognized categories, generation with single/multiple services, context values (company name, contact email, DPO name/email, EU Representative conditional, website conditional, placeholders), date format, next review date, GDPR Article 30 reference, processing activities for all 9 categories (auth/analytics/payment/email/ai/monitoring/storage/advertising/database), sequential PA IDs, Processing Activities Summary (risk level counts, DPIA warning singular/plural for high-risk, international transfer count, automated decision-making count), Overview Table with truncated data types, Legal Basis Summary grouping, International Data Transfers section (with/without transfers), Review & Maintenance section, Codepliant attribution, review disclaimer, comprehensive test with all 9 service categories
+- **Generator modules now with tests**: 87/138 (63.0%)
+- **Generator coverage**: 60.9% → 63.0%
