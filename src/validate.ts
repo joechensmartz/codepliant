@@ -1,5 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
+import type { ScanResult, ComplianceNeed } from "./scanner/types.js";
+
+// ────────────────────────────────────────────────────────────────────────────
+// Legacy types & function (used by other parts of the CLI — do not remove)
+// ────────────────────────────────────────────────────────────────────────────
 
 export interface DocumentValidation {
   name: string;
@@ -128,4 +133,259 @@ export function validateDocuments(outputDir: string): ValidateResult {
   );
 
   return { documents, allComplete };
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// New: Deep document-quality validation (`codepliant validate`)
+// ────────────────────────────────────────────────────────────────────────────
+
+/** Map from ComplianceNeed.document name → expected filename(s). */
+const NEED_TO_FILENAME: Record<string, string[]> = {
+  "Privacy Policy": ["PRIVACY_POLICY.md"],
+  "Terms of Service": ["TERMS_OF_SERVICE.md"],
+  "Security Policy": ["SECURITY.md"],
+  "AI Disclosure": ["AI_DISCLOSURE.md"],
+  "Cookie Policy": ["COOKIE_POLICY.md"],
+  "Data Processing Agreement": ["DATA_PROCESSING_AGREEMENT.md"],
+  "Incident Response Plan": ["INCIDENT_RESPONSE_PLAN.md"],
+};
+
+/** Placeholder patterns that indicate the user hasn't customised the document. */
+const PLACEHOLDER_PATTERNS = [
+  "[Your Company Name]",
+  "[Your Company]",
+  "[your-email@example.com]",
+  "[Company Name]",
+  "[Contact Email]",
+  "[INSERT",
+  "[TODO",
+  "[PLACEHOLDER",
+  "[YOUR ",
+];
+
+/** Staleness threshold in milliseconds (30 days). */
+const STALE_THRESHOLD_MS = 30 * 24 * 60 * 60 * 1000;
+
+// ── Individual check types ──────────────────────────────────────────────────
+
+export type CheckStatus = "pass" | "fail" | "warn";
+
+export interface ValidationCheck {
+  check: string;
+  status: CheckStatus;
+  message: string;
+  details?: string[];
+}
+
+export interface DocumentQualityEntry {
+  filename: string;
+  name: string;
+  checks: ValidationCheck[];
+  pass: boolean;
+}
+
+export interface DeepValidateResult {
+  /** Overall pass / fail */
+  pass: boolean;
+  /** Per-document quality entries */
+  documents: DocumentQualityEntry[];
+  /** Top-level checks (e.g. "required documents exist") */
+  checks: ValidationCheck[];
+  /** Summary counts */
+  summary: {
+    totalChecks: number;
+    passed: number;
+    failed: number;
+    warned: number;
+  };
+}
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
+/**
+ * Recursively collect all .md files under a directory, returning paths
+ * relative to the root outputDir.
+ */
+function collectMarkdownFiles(dir: string, root?: string): { relPath: string; absPath: string }[] {
+  const base = root ?? dir;
+  const results: { relPath: string; absPath: string }[] = [];
+
+  if (!fs.existsSync(dir)) return results;
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...collectMarkdownFiles(fullPath, base));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      results.push({ relPath: path.relative(base, fullPath), absPath: fullPath });
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Check whether a document mentions at least one of the detected service names.
+ */
+function documentMentionsServices(content: string, serviceNames: string[]): string[] {
+  const lower = content.toLowerCase();
+  return serviceNames.filter((name) => lower.includes(name.toLowerCase()));
+}
+
+// ── Main validation function ────────────────────────────────────────────────
+
+/**
+ * Deep-validate generated compliance documents.
+ *
+ * 1. Required documents exist (based on scan complianceNeeds)
+ * 2. No stale documents (older than 30 days)
+ * 3. No placeholder-only content (service names must appear)
+ * 4. Section completeness (reuses existing logic)
+ */
+export function deepValidateDocuments(
+  outputDir: string,
+  scanResult?: ScanResult,
+): DeepValidateResult {
+  const absDir = path.resolve(outputDir);
+  const topChecks: ValidationCheck[] = [];
+  const docEntries: DocumentQualityEntry[] = [];
+
+  const mdFiles = collectMarkdownFiles(absDir);
+  const filenameSet = new Set(mdFiles.map((f) => path.basename(f.absPath)));
+
+  // Detected service names (for placeholder check)
+  const serviceNames = scanResult ? scanResult.services.map((s) => s.name) : [];
+
+  // ── Check 1: Required documents exist ─────────────────────────────────
+  if (scanResult) {
+    const missingDocs: string[] = [];
+
+    for (const need of scanResult.complianceNeeds) {
+      const expectedFiles = NEED_TO_FILENAME[need.document];
+      if (!expectedFiles) continue; // no filename mapping for this need
+
+      const found = expectedFiles.some((fn) => filenameSet.has(fn));
+      if (!found) {
+        missingDocs.push(`${need.document} (${expectedFiles.join(" or ")})`);
+      }
+    }
+
+    topChecks.push({
+      check: "required-documents-exist",
+      status: missingDocs.length === 0 ? "pass" : "fail",
+      message:
+        missingDocs.length === 0
+          ? "All required documents exist"
+          : `${missingDocs.length} required document(s) missing`,
+      details: missingDocs.length > 0 ? missingDocs : undefined,
+    });
+  }
+
+  // ── Per-document checks ───────────────────────────────────────────────
+  const now = Date.now();
+
+  for (const { relPath, absPath: filePath } of mdFiles) {
+    const filename = path.basename(filePath);
+    const name = filenameToName(filename);
+    const checks: ValidationCheck[] = [];
+
+    const content = fs.readFileSync(filePath, "utf-8");
+    const stat = fs.statSync(filePath);
+
+    // Check 2: Staleness
+    const ageMs = now - stat.mtimeMs;
+    const ageDays = Math.floor(ageMs / (24 * 60 * 60 * 1000));
+    const stale = ageMs > STALE_THRESHOLD_MS;
+    checks.push({
+      check: "not-stale",
+      status: stale ? "fail" : "pass",
+      message: stale
+        ? `Document is ${ageDays} days old (exceeds 30-day threshold)`
+        : `Document is ${ageDays} day(s) old`,
+    });
+
+    // Check 3: Placeholder detection
+    const foundPlaceholders = PLACEHOLDER_PATTERNS.filter((p) =>
+      content.includes(p),
+    );
+    checks.push({
+      check: "no-placeholders",
+      status: foundPlaceholders.length === 0 ? "pass" : "fail",
+      message:
+        foundPlaceholders.length === 0
+          ? "No placeholder text detected"
+          : `${foundPlaceholders.length} placeholder pattern(s) found`,
+      details: foundPlaceholders.length > 0 ? foundPlaceholders : undefined,
+    });
+
+    // Check 3b: Document mentions actual service names (only for docs that should)
+    if (serviceNames.length > 0) {
+      const mentioned = documentMentionsServices(content, serviceNames);
+      // Only flag as a problem for core compliance docs (privacy policy, DPA, cookie policy, etc.)
+      const coreDocFilenames = new Set([
+        "PRIVACY_POLICY.md",
+        "COOKIE_POLICY.md",
+        "DATA_PROCESSING_AGREEMENT.md",
+        "SUBPROCESSOR_LIST.md",
+        "AI_DISCLOSURE.md",
+        "THIRD_PARTY_RISK_ASSESSMENT.md",
+      ]);
+
+      if (coreDocFilenames.has(filename)) {
+        checks.push({
+          check: "contains-service-names",
+          status: mentioned.length > 0 ? "pass" : "warn",
+          message:
+            mentioned.length > 0
+              ? `References ${mentioned.length} of ${serviceNames.length} detected service(s)`
+              : `Does not reference any of the ${serviceNames.length} detected service(s)`,
+          details: mentioned.length > 0 ? mentioned : serviceNames,
+        });
+      }
+    }
+
+    // Check 4: Section completeness
+    const sections = validateMarkdownSections(content);
+    if (sections.totalSections > 0) {
+      const allComplete = sections.completeSections === sections.totalSections;
+      checks.push({
+        check: "sections-complete",
+        status: allComplete ? "pass" : "warn",
+        message: `${sections.completeSections}/${sections.totalSections} sections have content`,
+        details: sections.emptySections.length > 0 ? sections.emptySections : undefined,
+      });
+    }
+
+    const docPass = checks.every((c) => c.status !== "fail");
+
+    docEntries.push({
+      filename: relPath,
+      name,
+      checks,
+      pass: docPass,
+    });
+  }
+
+  // Sort for deterministic output
+  docEntries.sort((a, b) => a.filename.localeCompare(b.filename));
+
+  // ── Summary ───────────────────────────────────────────────────────────
+  const allChecks = [...topChecks, ...docEntries.flatMap((d) => d.checks)];
+  const passed = allChecks.filter((c) => c.status === "pass").length;
+  const failed = allChecks.filter((c) => c.status === "fail").length;
+  const warned = allChecks.filter((c) => c.status === "warn").length;
+
+  const overallPass = failed === 0;
+
+  return {
+    pass: overallPass,
+    documents: docEntries,
+    checks: topChecks,
+    summary: {
+      totalChecks: allChecks.length,
+      passed,
+      failed,
+      warned,
+    },
+  };
 }

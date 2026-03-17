@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3581 passing — 100% scanner, 66/138 generators (48%)
+- **Tests**: 3698 passing — 100% scanner, 69/138 generators (50%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 26 complete (2026-03-17)
-- **Last run**: npm provenance, 85 tests, MCP publishing research, robots.txt AI rules, stats 3496
+- **Iteration**: 27 complete (2026-03-17)
+- **Last run**: validate command, 117 tests, 🎉 50% GENERATOR COVERAGE, Hacktoberfest prep, JSON-LD v1.1.0
 
 ## Priority Backlog
 
@@ -6511,3 +6511,113 @@ Common across all three:
 1. **Stale test count across 3 pages** — Homepage and about page display "2,867 tests passing", changelog displays "3,037". PROGRESS.md reports 3,496 tests. This is a recurring issue documented in iterations 5, 6, 8, 11, 13, 18, and 19 — the test count drifts as new tests are added without updating the site source files.
 
 **No other issues found. No fixes applied. No build changes.**
+
+### Iteration 27 — 2026-03-17 — `codepliant validate` deep document-quality checks
+
+**Goal**: Add a `codepliant validate` command that goes beyond section-completeness to check document quality: required documents exist, staleness, placeholder detection, and service-name presence.
+
+**Changes made (2 files)**:
+
+| # | Change | File |
+|---|--------|------|
+| 1 | New `deepValidateDocuments()` function with 4 check types | `src/validate.ts` |
+| 2 | Rewired `runValidate()` to use deep validation with scan context | `src/cli.ts` |
+
+**Validation checks implemented:**
+
+| Check | Scope | Status on failure |
+|-------|-------|-------------------|
+| `required-documents-exist` | Top-level: verifies ComplianceNeed docs are present based on scan | FAIL |
+| `not-stale` | Per-document: flags docs older than 30 days | FAIL |
+| `no-placeholders` | Per-document: detects `[Your Company Name]`, `[TODO`, etc. | FAIL |
+| `contains-service-names` | Per-document (core docs only): checks detected services are mentioned | WARN |
+| `sections-complete` | Per-document: reuses existing section-completeness logic | WARN |
+
+**Key design decisions:**
+- Existing `validateDocuments()` function preserved for backward compatibility (used by other commands)
+- `deepValidateDocuments()` runs a project scan to detect services, then validates documents against scan results
+- Scan failure is non-fatal — scan-dependent checks are skipped gracefully
+- `--json` outputs full structured result; exit code 1 on any FAIL check (useful for CI)
+- WARN checks (service-name presence, section completeness) do not cause exit code 1
+- Documents in subdirectories (categorized layout) are collected recursively
+
+**Build verification**: `npx tsc` passes cleanly with zero errors.
+
+**Summary: 2 files modified, 5 validation checks added, `npx tsc` passes.**
+
+### Iteration 27 — 2026-03-17 — Hacktoberfest Preparation Research
+
+**1. Hacktoberfest 2026 Timing & Maintainer Rules**
+
+Hacktoberfest 2026 has not been officially announced yet. Based on the consistent pattern (2024, 2025), expect:
+- **Dates:** October 1–31, 2026
+- **Registration opens:** ~September 15, 2026
+- **Maintainer opt-in:** Add the `hacktoberfest` topic to the GitHub repo
+- **PR acceptance:** Merge PRs or apply `hacktoberfest-accepted` label; mark spam with `spam` or `invalid` labels
+- **Requirements:** CONTRIBUTING.md, clear issue descriptions, responsive reviews
+- **Contributor threshold (2025):** 6 merged PRs for full completion; first 10,000 completers got a t-shirt
+
+**2. Effective Labels**
+
+- `hacktoberfest` topic on the repo (required for discoverability)
+- `good first issue` — scoped, self-contained, clear acceptance criteria
+- `help wanted` — broader tasks for experienced contributors
+- Best practices: include steps to reproduce/implement, link to relevant source files, estimate effort ("~30 min"), and tag the language/area (e.g., `typescript`, `docs`, `testing`)
+
+**3. Issue Types That Attract Contributors to Compliance/CLI Tools**
+
+- Documentation improvements (README examples, usage guides)
+- Adding new scanner signatures or detection patterns (low-risk, pattern-matching)
+- Test coverage for existing features (clear pass/fail)
+- Typo/lint/formatting fixes (lowest barrier)
+- New output formats or minor CLI flags (visible impact)
+
+**4. Five "Good First Issue" Ideas for Codepliant**
+
+1. **Add service signatures for 3 new services** — Pick from Plausible Analytics, PostHog, or Resend; add entries to `SERVICE_SIGNATURES` in `src/scanner/types.ts` with correct `envPatterns`, `importPatterns`, and `dataCollected`. (~30 min)
+2. **Add YAML output format to `scan` command** — The CLI supports `--json`; add a `--yaml` flag using `js-yaml` as a devDependency. (~1 hr)
+3. **Write snapshot tests for 3 generator templates** — Create test fixtures that run a known scan result through `privacy-policy.ts`, `terms-of-service.ts`, and `ai-disclosure.ts`, then assert the output matches a stored snapshot. (~1 hr)
+4. **Improve error messages for unsupported project types** — When `scanner/` finds no recognizable files, the current message is generic. Add a friendlier message listing supported ecosystems and linking to docs. (~20 min)
+5. **Add `--quiet` flag to suppress non-essential output** — Some CI pipelines only want the generated document. Add a `--quiet` / `-q` flag that suppresses info/warning logs. (~30 min)
+
+Sources: [Hacktoberfest Participation Rules](https://hacktoberfest.com/participation/), [How to Participate as a Maintainer](https://www.loginradius.com/blog/engineering/hacktoberfest-participation-as-maintainer/), [Maintainer's Guide to Hacktoberfest](https://www.freecodecamp.org/news/project-maintainer-guide-to-hacktoberfest/)
+
+### Iteration 27 — 2026-03-17 — Version audit for JSON-LD schemas
+
+**Version audit across all SoftwareApplication JSON-LD schemas:**
+- Verified 13 pages with `"@type": "SoftwareApplication"` JSON-LD
+- 12 pages already had `version: "1.1.0"` — no changes needed
+- 1 page (`src/app/docs/page.tsx`) had a nested SoftwareApplication in the `about` field with no `version` property — added `version: "1.1.0"`
+- No pages had stale `"1.0.0"` in their SoftwareApplication schemas
+- `manifest.webmanifest` (generated via `src/app/manifest.ts`) has no version field — this is correct since the Web App Manifest spec does not define a `version` property
+
+**Build verification:**
+- `next build` passes cleanly, 29/29 static pages generated successfully
+
+### Iteration 27 — 2026-03-17 — Quick sanity check (Website QA Agent, iteration 27)
+
+**Test scope**: Quick sanity check of all 23 pages at `http://localhost:5001`. Focus: HTTP status codes, homepage correctness, errors.
+
+**Results: 3/3 checks pass.**
+
+| # | Check | Result |
+|---|---|---|
+| 1 | All 23 sitemap pages return 200 | PASS |
+| 2 | Homepage content correct (hero, stats, nav, ecosystem logos, CTA) | PASS |
+| 3 | No 500/error responses on any page | PASS — all "error" and "500" text matches are legitimate content (marketing copy, code examples, Next.js boilerplate) |
+
+**Homepage stats observed**: 1,200+ repos tested, 97.8% detection precision, 123+ document types, 2,867 tests passing, 13 ecosystems. The stale test count (2,867 vs. 3,496 in PROGRESS.md) persists as noted in iteration 26.
+
+**No bugs found. No fixes applied. No build changes.**
+
+### Iteration 27 — 2026-03-17 — Generator tests: 50% milestone (Testing Agent)
+
+- **Build**: pass
+- **Tests**: 3698/3698 passing (was 3581, added 117 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/subprocessor-notification.test.ts` (30 tests): null return for <3 third-party services, null for empty services, null for all self-hosted services, null for exactly 2 third-party, generation with 3+ third-party services, date format, context values (companyName/contactEmail/dpoEmail/website), dpoEmail fallback to contactEmail, placeholder values (company/email/website), Purpose of This Notice (GDPR Article 28), Sub-Processor Change Details (new/removed/replaced), Current Sub-Processor List, Due Diligence (security/privacy assessment), Right to Object (30-day period), Impact on Data Protection, Contact Information, provider name mapping (Stripe/OpenAI/PostHog), raw name for unknown services, provider deduplication (Sentry), category purpose descriptions, 'other' purpose fallback, data collected in table, self-hosted exclusion from count, self-hosted + 3 third-party generation, Codepliant disclaimer
+  - `src/generator/data-protection-policy.test.ts` (52 tests): null return for empty services, generation with services, date format, context values (companyName/contactEmail/dpoName/dpoEmail), dpoEmail fallback, placeholder values (company/email/DPO name), Purpose and Scope, Data Classification table (Restricted/Confidential/Internal/Public), Data Handling Procedures (Collection/Storage/Transmission/Processing), Access Control (Least Privilege/Need-to-Know), Data Disposal (Retention/Methods/Verification), Data Protection Incidents (72 hours/GDPR Art. 33), Training and Awareness, Third-Party Data Processors, Compliance and Monitoring, Roles and Responsibilities, Contact; conditional payment (card details/billing/transaction/7-year retention, exclusion), conditional auth (credentials/session tokens/MFA/account retention, exclusion), conditional AI (input/output data/processing rules/90-day retention, exclusion), conditional analytics (usage/IP/anonymization/26-month retention, exclusion), conditional storage (files/malware scan/public access, exclusion), conditional database (profile/app data/parameterized queries/backups, exclusion), conditional email (addresses/records/3-year retention), conditional monitoring (error reports/performance metrics), engaged processors table (3+ services/self-hosted exclusion/omit when <3), all categories together, Codepliant disclaimer
+  - `src/generator/whistleblower.test.ts` (35 tests): requiresWhistleblowerPolicy — true for GDPR/UK GDPR jurisdiction, false for non-EU/no jurisdiction, true/false for jurisdictions array with/without EU entries; generateWhistleblowerPolicy — null for non-EU/no/non-EU-array jurisdiction, generation with GDPR/UK GDPR/jurisdictions array, date format, context values (companyName/contactEmail/dpoName/dpoEmail), dpoEmail fallback, placeholder values (company/email/DPO name), Purpose (Directive 2019/1937), Scope (employees/contractors), Reportable Breaches (data protection/financial services), Internal Reporting Channels (email/written/in-person/anonymous), Reporting Procedure (7-day acknowledgment/3-month feedback), Protection Against Retaliation, Confidentiality, Data Protection (GDPR), External Reporting, Record Keeping, Contact (Designated Officer), disclaimer, company name used 3+ times throughout
+- **Generator modules now with tests**: 69/138 (50%) — milestone reached!
+- **Generator modules still missing tests**: 69 files

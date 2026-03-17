@@ -27,7 +27,7 @@ import { writeGithubWiki } from "./output/github-wiki.js";
 import { writeGithubPages } from "./output/github-pages.js";
 import { reviewDocuments, formatReviewResults, isReviewAvailable, type AIReviewConfig } from "./ai/review.js";
 import { lintDocuments } from "./lint.js";
-import { validateDocuments, type ValidateResult } from "./validate.js";
+import { validateDocuments, deepValidateDocuments, type ValidateResult, type DeepValidateResult, type CheckStatus } from "./validate.js";
 
 import { handleAuthLogin } from "./cloud/sso.js";
 import { handleAuditTrail, logAuditEntry } from "./cloud/audit-trail.js";
@@ -4138,45 +4138,89 @@ function runValidate(
     console.log(`${BOLD()}Validating generated compliance documents...${RESET()}\n`);
   }
 
-  const result = validateDocuments(absOutputDir);
+  // Run a scan so we can check required documents and service-name presence
+  let scanResult: ReturnType<typeof scan> | undefined;
+  try {
+    scanResult = scan(absProjectPath);
+  } catch {
+    // Scan failure is non-fatal — we just skip scan-dependent checks
+    if (!quiet && !jsonOutput) {
+      console.log(`${YELLOW()}Warning: Could not scan project — skipping service-based checks.${RESET()}\n`);
+    }
+  }
+
+  const result = deepValidateDocuments(absOutputDir, scanResult);
 
   if (jsonOutput) {
     console.log(JSON.stringify(result, null, 2));
-    process.exit(result.allComplete ? 0 : 1);
+    process.exit(result.pass ? 0 : 1);
   }
 
-  if (!quiet) {
-    console.log(`  ${DIM()}Documents found: ${result.documents.length}${RESET()}\n`);
-  }
-
-  if (result.documents.length === 0) {
+  if (result.documents.length === 0 && result.checks.length === 0) {
     console.log(`${YELLOW()}No documents found in ${absOutputDir}.${RESET()}`);
     console.log(`${DIM()}Run ${CYAN()}codepliant go${RESET()}${DIM()} to generate documents first.${RESET()}\n`);
     process.exit(1);
   }
 
-  for (const doc of result.documents) {
-    const complete = doc.completeSections === doc.totalSections;
-    const icon = complete ? `${GREEN()}✓${RESET()}` : `${YELLOW()}⚠${RESET()}`;
-    console.log(`  ${icon} ${doc.name}: ${doc.completeSections}/${doc.totalSections} sections complete`);
+  // Print top-level checks (required-documents-exist, etc.)
+  if (result.checks.length > 0) {
+    for (const chk of result.checks) {
+      const icon = statusIcon(chk.status);
+      console.log(`  ${icon} ${chk.message}`);
+      if (chk.details && !quiet) {
+        for (const d of chk.details) {
+          console.log(`    ${DIM()}- ${d}${RESET()}`);
+        }
+      }
+    }
+    console.log();
+  }
 
-    if (!quiet && doc.emptySections.length > 0) {
-      for (const section of doc.emptySections) {
-        console.log(`    ${DIM()}${RED()}Missing content:${RESET()} ${DIM()}${section}${RESET()}`);
+  // Print per-document results
+  if (!quiet) {
+    console.log(`  ${DIM()}Documents validated: ${result.documents.length}${RESET()}\n`);
+  }
+
+  for (const doc of result.documents) {
+    const icon = doc.pass ? `${GREEN()}✓${RESET()}` : `${RED()}✗${RESET()}`;
+    console.log(`  ${icon} ${doc.name} ${DIM()}(${doc.filename})${RESET()}`);
+
+    if (!quiet) {
+      for (const chk of doc.checks) {
+        if (chk.status === "pass" && quiet) continue;
+        const ci = statusIcon(chk.status);
+        console.log(`    ${ci} ${chk.message}`);
+        if (chk.details && chk.status !== "pass") {
+          for (const d of chk.details) {
+            console.log(`      ${DIM()}- ${d}${RESET()}`);
+          }
+        }
       }
     }
   }
 
   console.log();
 
-  if (result.allComplete) {
-    console.log(`${GREEN()}${BOLD()}PASS${RESET()} All ${result.documents.length} document(s) are complete.\n`);
+  // Summary line
+  const { passed, failed, warned, totalChecks } = result.summary;
+  if (result.pass) {
+    console.log(`${GREEN()}${BOLD()}PASS${RESET()} ${passed}/${totalChecks} checks passed${warned > 0 ? `, ${warned} warning(s)` : ""}.\n`);
   } else {
-    const incomplete = result.documents.filter((d) => d.completeSections < d.totalSections).length;
-    console.log(`${YELLOW()}${BOLD()}INCOMPLETE${RESET()} ${incomplete} document(s) have sections without content.\n`);
+    console.log(`${RED()}${BOLD()}FAIL${RESET()} ${failed} check(s) failed, ${passed} passed${warned > 0 ? `, ${warned} warning(s)` : ""} out of ${totalChecks}.\n`);
   }
 
-  process.exit(result.allComplete ? 0 : 1);
+  process.exit(result.pass ? 0 : 1);
+}
+
+function statusIcon(status: CheckStatus): string {
+  switch (status) {
+    case "pass":
+      return `${GREEN()}✓${RESET()}`;
+    case "fail":
+      return `${RED()}✗${RESET()}`;
+    case "warn":
+      return `${YELLOW()}⚠${RESET()}`;
+  }
 }
 
 // --- `codepliant diff` command ---
