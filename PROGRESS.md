@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2218 passing — 100% scanner coverage
+- **Tests**: 2312 passing — 100% scanner coverage, 33/132 generators
 - **Repos tested**: 1200+
 - **Document types**: 122+
-- **Ecosystems**: 13 (added Kotlin/Android)
+- **Ecosystems**: 13
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 14 complete (2026-03-17)
-- **Last run**: Kotlin scanner, 141 tests, new blog post, 404/error pages, a11y fixes, CLI UX research
+- **Iteration**: 15 complete (2026-03-17)
+- **Last run**: fuzzy matching, 94 tests, homepage polish, 21 meta descriptions optimized, MCP research
 
 ## Priority Backlog
 
@@ -2131,7 +2131,96 @@ Additional ANSI capabilities available without dependencies:
 | P3 | `codepliant explain <code>` for error code help | ~60 lines | Low — nice-to-have |
 | P3 | Terminal hyperlinks in suggestions | ~10 lines | Low — modern terminal bonus |
 
+### Iteration 15 — 2026-03-17
+
+#### MCP Ecosystem & Opportunities
+
+**1. Most Popular MCP Servers in Claude Code / Cursor Ecosystem**
+
+The MCP ecosystem has grown rapidly. The official MCP Registry (registry.modelcontextprotocol.io) lists published servers, and third-party directories collectively index 18,000+ servers. The most popular categories and servers in the Claude Code / Cursor ecosystem:
+
+- **Developer tools**: GitHub (api.githubcopilot.com/mcp/), Sentry (mcp.sentry.dev/mcp), Linear, Jira/Atlassian, Asana
+- **Databases**: PostgreSQL via @bytebase/dbhub, Supabase, Neon, Airtable
+- **Design/Docs**: Figma, Notion (mcp.notion.com/mcp), Confluence
+- **Communication**: Slack, Gmail
+- **Infrastructure**: AWS, Azure, Cloudflare, Vercel
+- **Reference servers** (maintained by MCP steering group): Filesystem, Git, Memory (knowledge graph), Fetch (web content), Sequential Thinking, Time
+
+Claude Code's MCP docs page dynamically loads servers from `api.anthropic.com/mcp-registry/v0/servers` and highlights servers with `worksWith: ["claude-code"]` tagging. Servers support three transports: stdio (local), HTTP (recommended for remote), and SSE (deprecated).
+
+**2. MCP for Compliance & Security Tasks**
+
+The compliance/security MCP space is nascent but growing. Existing servers found:
+
+- **MCP Compliance** — FedRAMP compliance operations: understanding, implementing, and evidencing security controls via CLI + MCP tools
+- **EU AI Act Compliance Chatbot** — hybrid retrieval (vector search + knowledge graph) for EU AI Act questions
+- **MCP Cloud Compliance** — natural language queries about AWS security posture for compliance auditing
+- **CodeSherlock.ai** — validates code against OWASP, CWE, and SOC-2 standards; checks for security vulnerabilities
+- **Zenable** — prevents vulnerabilities and automates governance (SQL injection detection, hardcoded secrets, policy violations)
+- **TurboPentest** — agentic AI penetration testing generating SOC 2, ISO 27001, PCI DSS reports
+- **MCP SBOM Server** (gkhays/mcp-sbom-server) — scans projects with Trivy, produces CycloneDX SBOMs (Python-based)
+- **RAD Security** — Kubernetes/cloud security insights
+- **Kaspersky OpenTIP** — threat intelligence API
+- **AML Watcher / OFAC Sanctions Screening** — financial compliance (KYC/AML)
+- **FeedOracle v4.2** — MiCA, DORA, AML regulatory compliance with 27 MCP tools
+
+Key observation: **No MCP server currently combines code scanning + compliance document generation** the way Codepliant does. This is a clear gap and competitive advantage. Most compliance MCP servers focus on querying regulations or cloud posture — none scan a codebase's dependencies to auto-generate privacy policies, terms of service, or AI disclosures.
+
+**3. Recommended Additional MCP Tools for Codepliant**
+
+Current 7 tools in `src/mcp/server.ts`: `scan_project`, `incremental_scan`, `generate_compliance_docs`, `check_compliance`, `get_config`, `set_config`, plus 1 resource (`compliance_status`).
+
+Recommended additions (in priority order):
+
+| Priority | Tool Name | Description | Rationale |
+|----------|-----------|-------------|-----------|
+| P0 | `list_services` | Return just the detected services as structured JSON (no compliance docs) | Lightweight; useful for AI agents that want to query services without full scan output |
+| P0 | `explain_requirement` | Given a regulation (e.g. "GDPR Article 13") and a detected service, explain what's required | High value for compliance-aware coding assistants |
+| P1 | `diff_compliance` | Show what changed since last generation (already exists as CLI `codepliant diff`) | Natural MCP tool; agents can check if docs are stale |
+| P1 | `generate_sbom` | Produce a CycloneDX or SPDX SBOM from scan results | Only one competitor (mcp-sbom-server, Python/Trivy-based); Codepliant already has dependency data |
+| P1 | `validate_documents` | Check existing legal/ docs against current scan — flag outdated sections | Goes beyond `check_compliance` (which only checks file existence) |
+| P2 | `wizard` | Interactive config wizard (expose the CLI wizard as MCP tool with elicitation) | MCP now supports elicitation — server can request structured input from user mid-task |
+| P2 | `export_report` | Generate a single compliance report (JSON/HTML) summarizing everything | Useful for CI/CD integrations and dashboards |
+| P2 | `list_regulations` | List supported regulations/frameworks with brief descriptions | Discovery tool for agents unfamiliar with Codepliant's capabilities |
+| P3 | `suggest_env_vars` | Based on detected services, suggest which env vars need documentation | Helps developers understand what secrets they're using |
+
+The current 7 tools are well-designed. The biggest gaps are: (a) a lightweight structured-data query tool (`list_services`), (b) regulation explanation (`explain_requirement`), and (c) exposing the existing `diff` functionality as an MCP tool.
+
+**4. MCP Marketplaces & Directories for Listing**
+
+| Directory | URL | Size | Submission Method | Priority |
+|-----------|-----|------|-------------------|----------|
+| **MCP Registry** (official) | registry.modelcontextprotocol.io | Official | `mcp-publisher` CLI tool; requires GitHub OAuth or domain verification; namespace format `io.github.username/server-name` | **P0** — feeds Claude Code's built-in server list |
+| **mcp.so** | mcp.so | 18,600+ servers | GitHub issue submission (click "Submit" in nav) | **P0** — largest community directory |
+| **Glama** | glama.ai/mcp/servers | 19,400+ servers | "Add Server" button on site | **P1** — second largest directory |
+| **Smithery** | smithery.ai | Large registry | Web submission | **P1** — well-known in MCP community |
+| **MCPJam** | mcpjam.com | Growing | Testing/inspector platform with community features | **P2** — more of a testing tool |
+| **npm** | npmjs.com | N/A | Already published as npm package | **Done** — `npx codepliant mcp` already works |
+| **Anthropic API Registry** | api.anthropic.com/mcp-registry | Curated | Likely requires Anthropic outreach; `worksWith: ["claude-code"]` tag | **P0** — appears directly in Claude Code docs |
+
+**Recommended listing strategy:**
+1. Publish to the official MCP Registry via `mcp-publisher` CLI (highest impact — feeds Claude Code's UI)
+2. Submit to mcp.so via GitHub issue (largest community, easy submission)
+3. Submit to Glama via their "Add Server" flow
+4. Reach out to Anthropic about inclusion in their curated API registry (servers shown on code.claude.com/docs/en/mcp)
+5. Add `.mcp.json` example to Codepliant repo so teams can add it as a project-scoped MCP server
+
+**Additional MCP opportunities:**
+- **Claude Code Plugin**: Codepliant could be distributed as a Claude Code plugin (plugins can bundle MCP servers via `.mcp.json` at plugin root or inline in `plugin.json`), giving automatic MCP server lifecycle management
+- **MCP Tool Search compatibility**: Add clear server instructions so Claude Code's Tool Search can discover Codepliant tools dynamically (important when users have many MCP servers)
+- **Elicitation support**: MCP now supports server-initiated elicitation (requesting structured input mid-task) — the wizard tool could use this for interactive config setup
+- **Project-scoped `.mcp.json`**: Ship a `.mcp.json` template that teams check into their repos for automatic Codepliant MCP integration
+
 ## Development Log
+
+**2026-03-17 — Fuzzy command matching for CLI UX**
+- Added Levenshtein distance function and `suggestCommand()` in `src/cli.ts` (~35 lines)
+- When a user types an unknown command (e.g. `scna`, `goo`, `helo`), the CLI now suggests the closest valid command: `Did you mean "scan"?`
+- Maintains a `VALID_COMMANDS` array of all 60+ registered commands
+- Shows up to 3 suggestions when multiple commands tie at the same edit distance
+- Max distance threshold scales with input length (min 2), avoiding nonsensical suggestions
+- Build verified: `npx tsc` passes cleanly
+- Tested: `scna` → scan, `goo` → go, `helo` → help, `reveiw` → review, `scann` → scan
 
 **2026-03-16 — Swift/iOS ecosystem support (Issue #2)**
 - Created `src/scanner/swift.ts` — scans Swift/iOS projects for known service dependencies
@@ -2343,6 +2432,17 @@ Additional ANSI capabilities available without dependencies:
   - `src/generator/transparency-report.test.ts` (35 tests): always generates (never null) with empty/populated services, context company name/contact email/DPO email presence and absence, current year in title/reporting period, publication date placeholder, executive summary metrics table, government data requests section with request types (Subpoena/Court Order/Search Warrant/National Security Letter/Emergency Disclosure/MLAT/Regulatory Inquiry), conditional jurisdictions (GDPR->EU row, UK GDPR->UK row, CCPA->US Federal+California rows, all together, Other always present, GDPR absence check), request processing procedure (Receipt & logging/Legal review/Narrowing/User notification/Documentation), content removal requests (DMCA/Community Reports), DSAR section (Access/Deletion/Portability/Rectification/Opt-Out of Sale), compliance metrics with service count/categories/none fallback/DPA count, security incident metrics (MTTD/MTTR), privacy program metrics, warrant canary (National Security Letters/FISA/backdoors with company name), methodology, contact section, Codepliant attribution, legal review disclaimer, date in disclaimer
 - **Generator modules now with tests** (30 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report
 - **Generator modules still missing tests**: 102 files (was 105)
+
+### Iteration 15 — 2026-03-17
+- **Build**: pass
+- **Tests**: 2312/2312 passing (was 2218, added 94 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/open-source-notice.test.ts` (22 tests): null return for no licenseScan/empty deps+no projectLicense, generation with dependencies/projectLicense only, default placeholders, context values (companyName/contactEmail), project name and date, project license in introduction, license summary table grouped by license with counts, copyleft dependencies section presence/absence, copyleft compliance requirements, attribution notices grouped by license with alphabetical sorting, license text summaries for known licenses (MIT details block), warnings section presence/absence, Obtaining Source Code section, Your Obligations section, Contact section with email, Codepliant disclaimer footer, section numbering without copyleft/warnings (1-6), section numbering with copyleft+warnings (1-8), copyleft marking in summary table (Yes/No)
+  - `src/generator/api-terms.test.ts` (35 tests): null return for no API indicators, generation via API Data Collection data category/API framework service (express, fastify, hono, nestjs, koa, fastapi, django-rest-framework, rails)/service evidence mentioning api/router/endpoint/API directory (src/api, pages/api), default placeholders, context values (companyName/contactEmail/website), date and project name, acceptance of terms section, API access & authentication section, authentication methods with auth services presence/absence (next-auth/clerk listed, Bearer Token, API Key), rate limits section with tier table (Free/Standard/Enterprise) and headers and exceeding limits, usage restrictions section, AI-specific restrictions presence/absence (openai, misleading content, human-generated), payment data section presence/absence (stripe, PCI DSS), SLA section with availability (99.9%) and incident response (P0-P3), monitoring subsection presence/absence (sentry), versioning and deprecation section (12 months, Sunset header), intellectual property section, limitation of liability section (AS IS, uppercase company name), termination section, changes to terms section (30 days notice), contact section, Codepliant disclaimer, sequential section numbering (1-5+), all conditional sections with all service types, router/endpoint keyword evidence detection
+  - `src/generator/cookie-inventory.test.ts` (37 tests): null return for no analytics/auth services and non-cookie-only services, generation with auth/analytics/advertising services, default placeholders, context values, date and project name, ePrivacy Directive reference (2002/58/EC), summary table with category counts and consent status, strictly necessary cookies for auth (session_id, auth_token, csrf_token, Article 5(3)), auth provider-specific cookies for next-auth (session-token/csrf-token/callback-url)/clerk (__session/__client_uat)/supabase (sb-*-auth-token)/@auth/core (authjs.session-token)/better-auth (session_token), Google Analytics cookies (_ga/_gid/_gat), PostHog cookies (ph_*/distinct_id), Mixpanel cookies (mp_*/mp_optout), Meta Pixel advertising cookies (_fbp/_fbc), TikTok Pixel cookies (_ttp), LinkedIn Insight Tag cookies (li_*/bcookie), advertising section absence without advertising services, detected services section with evidence file references, legal requirements (ePrivacy/GDPR Art. 6(1)(a)/CCPA/GPC), inventory maintenance (quarterly), Codepliant disclaimer with project name, combined auth+analytics+advertising inventory, consent required status, functional/performance section absence, cookie-free analytics (Plausible), Segment cookies (ajs_anonymous_id/ajs_user_id), Hotjar cookies (_hj*), Microsoft Clarity cookies (_clck/_clsk)
+- **Generator modules now with tests** (33 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report, open-source-notice, api-terms, cookie-inventory
+- **Generator modules still missing tests**: 99 files (was 102)
 
 ## Website Updates
 
@@ -2599,6 +2699,38 @@ _Updated by Website Agent each iteration._
 
 **Build verification:**
 - `next build` passes cleanly, all 26 static pages generated
+
+### 2026-03-17 — Homepage consolidation and stat updates (Iteration 15)
+
+**Stats updated to match PROGRESS.md:**
+- Document types: 121+ -> 122+ (hero, metadata, JSON-LD, steps data, pricing features)
+- Tests passing: 1,806 -> 2,218
+- Ecosystems: 12 -> 13
+- Ecosystem list expanded from 10 to 13 items (added .NET, Elixir, Docker)
+
+**Sections consolidated:**
+- Merged standalone "Ecosystems & credibility" section into "Trust signals" section — ecosystem pills now appear directly below the stats row, eliminating a thin standalone section
+- Removed orphan callout quote that lacked attribution (the "PostHog" quote) — similar messaging already exists in the example output section
+- Merged "Real project evidence" table and "What developers are saying" testimonials into a single "Proof" section with shared bg-surface-secondary background, reducing visual fragmentation
+
+**Section order improved for clearer narrative:**
+- Before: Example Output -> Evidence -> Pricing -> EU AI Act -> Testimonials -> Final CTA
+- After:  Example Output -> EU AI Act (urgency) -> Evidence + Testimonials (proof) -> Pricing -> Final CTA
+- Rationale: urgency before proof before ask; evidence and testimonials together reinforce credibility before the pricing decision
+
+**Page structure (final):**
+1. Hero — problem + solution + CTA
+2. Trust signals + ecosystems — stats + stack compatibility
+3. Before/After — problem elaboration
+4. How it works — 3-step solution
+5. Example output — proof of quality
+6. EU AI Act deadline — urgency driver
+7. Evidence + testimonials — social proof
+8. Pricing — conversion
+9. Final CTA — closing
+
+**Build verification:**
+- `next build` passes cleanly
 
 ## Website Design
 
@@ -3838,3 +3970,88 @@ The page was a minimal stub with a detection grid and a small CTA. Expanded it t
   - Non-library section skipping, multiple files, evidence merging, comment skipping, kapt/ksp configurations
   - dataCollected verification, advertising category detection
 - Build verified: `npx tsc` passes cleanly, all 26 new tests pass
+
+### Iteration 15 — 2026-03-17 — New content verification & performance audit
+
+**Test scope**: New content verification at `http://localhost:5001`. Focus on the new blog post, 404 page, error boundary, blog index post count, sitemap URL count, and homepage performance.
+
+**Pages verified**: 21 routes + `/nonexistent-page` (404 test) + `/sitemap.xml`
+
+**Pre-test fix**: The running server was using a stale `.next` build cache that did not include the new blog post (`/blog/generate-privacy-policy-from-code`), the custom 404 page, or the updated sitemap. The blog post returned HTTP 404, the sitemap had 19 URLs instead of 21 (missing `/blog` index and `/blog/generate-privacy-policy-from-code`), and the 404 page rendered the default Next.js "This page could not be found" instead of the custom `not-found.tsx`.
+- **Fix**: Cleared `.next/` directory, rebuilt with `npx next build` (all 22 static pages generated), restarted server on port 5001.
+
+**Results after rebuild: All checks pass.**
+
+1. **New blog post `/blog/generate-privacy-policy-from-code`** — HTTP 200. PASS.
+   - h1: "How to Generate a Privacy Policy from Your Code in 30 Seconds"
+   - 10 h2 headings (TOC, 9 content sections including FAQ)
+   - Breadcrumb nav present (Home / Blog / Generate Privacy Policy from Code)
+   - 4 JSON-LD schemas: Article, HowTo (4 steps), FAQPage (5 questions), BreadcrumbList
+   - Meta tags: description, og:title, og:description, og:type=article, twitter:card=summary_large_image
+   - Internal links to `/blog/gdpr-for-developers`, `/blog/privacy-policy-for-saas`, `/docs`, `/privacy-policy-generator`
+   - External link to GitHub with `target="_blank" rel="noopener noreferrer"`
+   - CTA section with `npx codepliant go` command block
+
+2. **404 page (`/nonexistent-page`)** — HTTP 404. Custom `not-found.tsx` renders correctly. PASS.
+   - h1: "This page doesn't exist"
+   - Themed copy: "Looks like this document wasn't in your legal/ directory."
+   - "Go home" CTA button + `npx codepliant go` command block
+   - "Popular pages" section with 4 links (Docs, Pricing, Blog, Compare)
+   - No default Next.js "This page could not be found" text
+
+3. **Error boundary (`error.tsx`)** — File exists with "use client" directive. PASS.
+   - h1: "Something went wrong"
+   - "Try again" button (calls `reset()`) + "Go home" link
+   - GitHub issues link for bug reports
+   - Uses correct design tokens (`text-brand`, `bg-brand`, `border-border-subtle`)
+
+4. **Blog index shows 5 posts** — PASS.
+   - `/blog/generate-privacy-policy-from-code` (Tutorial, March 17, 2026)
+   - `/blog/eu-ai-act-deadline` (EU AI Act, March 15, 2026)
+   - `/blog/gdpr-for-developers` (GDPR, March 15, 2026)
+   - `/blog/privacy-policy-for-saas` (Privacy, March 15, 2026)
+   - `/blog/colorado-ai-act` (AI Regulation, March 15, 2026)
+
+5. **Sitemap has 21 URLs** — PASS.
+   - New entries present: `/blog/generate-privacy-policy-from-code` (priority 0.7), `/blog` (priority 0.8)
+   - All 21 URLs verified against `sitemap.ts` source
+
+6. **All 21 routes return HTTP 200** — PASS.
+
+7. **Homepage performance audit** — PASS.
+   - HTML size: 114KB raw, ~16KB gzipped
+   - Load time: 2ms (static, served from disk)
+   - CSS: 1 file, 49.8KB (`a357fc0c8979d6e8.css`)
+   - Fonts: 2 preloaded woff2 files (32KB + 29KB = 61KB total)
+   - JS shared chunks: 6 files, ~464KB total uncompressed (mostly polyfills 113KB + 2 framework chunks 173KB each)
+   - Per-page error boundary JS: 1.9KB
+   - No broken resources — CSS, JS, and fonts all return HTTP 200
+   - No console errors expected (static build)
+
+**Bugs found and fixed:**
+
+1. **Stale `.next` build cache** — The server was running a build that pre-dated the new blog post, custom 404 page, and updated sitemap. This caused the blog post to 404, the sitemap to show 19 URLs instead of 21, the blog index to show 4 posts instead of 5, and the 404 page to use the Next.js default instead of the custom `not-found.tsx`.
+   - **Fix**: `rm -rf .next && npx next build && npx next start -p 5001`. This is the same stale-cache issue documented in iterations 4, 5, and 13 — inherent to Next.js static builds when source files are added without rebuilding.
+
+**No code changes required.** All source files (`page.tsx`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, blog index `posts` array) were already correct. The only fix was rebuilding.
+
+### Iteration 15 — 2026-03-17 — Meta description audit and optimization
+
+**Audit of all 21 page.tsx files** across `src/app/` (including blog subdirectories):
+
+**Issues found:**
+- 15 pages had meta descriptions exceeding 160 characters (range: 194-288 chars) — truncated in SERPs
+- 1 page (changelog) was too short at 89 characters
+- 1 page (about) had a weak opener with no keyword or value prop
+- 1 page (docs) was missing OpenGraph and Twitter card metadata
+- Layout.tsx default description used stale "121+" count instead of "122+"
+
+**Fixes applied to all 21 pages:**
+- All descriptions now between 132-160 characters (optimal SERP range)
+- Each includes primary keyword for the page
+- Each has a clear value proposition or action-oriented language
+- All descriptions are unique (no duplicates across 21 pages)
+- OpenGraph descriptions updated to match meta descriptions on every page
+- Added missing OG/Twitter metadata to docs page
+
+**Build verification:** `next build` passes cleanly, all 21 pages generated successfully.
