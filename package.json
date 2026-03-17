@@ -121,7 +121,9 @@
     "templates"
   ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@modelcontextprotocol/sdk": "^1.27.1"
+  },
+  "optionalDependencies": {
     "puppeteer": "^24.39.1"
   }
 }

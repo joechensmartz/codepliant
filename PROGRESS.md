@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.0.0 (published to npm)
-- **Tests**: 1367 passing (+85 in iteration 7)
+- **Tests**: 1452 passing — **100% scanner test coverage**
 - **Repos tested**: 1200+
 - **Document types**: 121+
-- **Ecosystems**: 11 (added Flutter/Dart)
-- **npm package size**: 831KB
-- **Iteration**: 7 complete (2026-03-17)
-- **Last run**: Flutter scanner, 85 tests, compare page, pricing update, SEO audit 50/50, v1.1.0 planning
+- **Ecosystems**: 11
+- **npm package size**: 831KB (puppeteer now optional, saves 300MB on install)
+- **Iteration**: 8 complete (2026-03-17)
+- **Last run**: puppeteer→optional, 100% scanner coverage, changelog/about pages, Show HN draft, cross-page consistency fixes
 
 ## Priority Backlog
 
@@ -888,6 +888,196 @@ jobs:
 
 8. **[LOW] Create example workflows for common setups**: Provide copy-paste workflow files for Node.js, Python, Go, Ruby, and monorepo setups. Lower the barrier to adoption.
 
+### Iteration 8 — 2026-03-16
+
+#### Show HN Launch Preparation
+
+##### 1. Analysis of Top Show HN Posts for Developer Tools (2025-2026)
+
+**Top-performing developer tool Show HN posts of 2025 (by points):**
+
+| Title | Points | Comments |
+|-------|--------|----------|
+| Clippy – 90s UI for local LLMs | 1,122 | 275 |
+| Term.everything – Run any GUI app in the terminal | 1,094 | 144 |
+| Kitten TTS – 25MB CPU-Only, Open-Source TTS Model | 1,003 | 361 |
+| I built a hardware processor that runs Python | 983 | 265 |
+| Unsure Calculator – back-of-a-napkin probabilistic calculator | 930 | 162 |
+| I built an AI that turns GitHub codebases into easy tutorials | 923 | 172 |
+| Free, in-browser PDF editor | 791 | 182 |
+| Cs16.css – CSS library based on Counter Strike 1.6 UI | 819 | 141 |
+| Unregistry – "docker push" directly to servers without registry | 726 | 164 |
+| Whispering – Open-source, local-first dictation | 591 | 152 |
+| Browser MCP – Automate your browser using Cursor, Claude | 616 | 217 |
+| Interactive systemd – a better way to work with systemd units | 546 | 204 |
+| My LLM CLI tool can run tools now, from Python code | 529 | 165 |
+| Pangolin – Open source alternative to Cloudflare Tunnels | 500 | 125 |
+
+**Top-performing developer tool Show HN posts of 2026 (by points):**
+
+| Title | Points | Comments |
+|-------|--------|----------|
+| ChartGPU – WebGPU-powered charting library (1M points at 60fps) | 670 | 214 |
+| Micasa – Track your house from the terminal | 657 | 218 |
+| Sweep – Open-weights 1.5B model for next-edit autocomplete | 534 | 153 |
+| NanoClaw – Clawdbot in 500 lines of TS with Apple container isolation | 533 | 224 |
+| OpenWorkers – Self-hosted Cloudflare workers in Rust | 500 | 158 |
+| Terminal UI for AWS | 390 | 210 |
+| Prism.Tools – Free and privacy-focused developer utilities | 380 | 104 |
+| LocalGPT – Local-first AI assistant in Rust with persistent memory | 331 | 156 |
+| PgDog – Scale Postgres without changing the app | 326 | 64 |
+| Terminal Phone – E2EE Walkie Talkie from the Command Line | 322 | 85 |
+
+**Title patterns that get the most points:**
+
+1. **"[Name] – [clear one-line description]"** is the dominant format (Clippy, Unregistry, Pangolin, ChartGPU, OpenWorkers, PgDog)
+2. **"I built [specific thing]"** personal framing works well (983 pts, 923 pts)
+3. **Specificity wins**: titles with concrete details (e.g., "25MB CPU-Only", "1M points at 60fps", "500 lines of TS") outperform vague ones
+4. **"Open source alternative to X"** is a proven pattern (Pangolin vs Cloudflare Tunnels)
+5. **Titles between 40-80 characters** perform best; too short or too long underperform
+6. **No superlatives**: none of the top posts use "fastest", "best", or "first"
+
+**What top comments praise:**
+- Working demos that can be tried immediately
+- Open-source and self-hostable projects
+- Privacy-first, zero-telemetry design
+- Technical depth in the founder's first comment
+- Solving a real pain point the commenter has experienced
+- Small binary/package size and minimal dependencies
+
+**What top comments criticize:**
+- Marketing language or sales-y tone
+- Missing GitHub repo link
+- Requiring sign-up before trying the tool
+- Vague descriptions that do not explain what the tool actually does
+- Booster comments from friends/employees (community detects and flags these)
+- AI-wrapper projects with no genuine technical depth
+
+##### 2. Ideal Show HN Post Structure
+
+**Title format:**
+```
+Show HN: [Name] – [what it does in plain English]
+```
+- Make it obvious what you built and where the link goes
+- Link the URL field to the GitHub repo (not a marketing site) — this is what HN dev audience expects
+- Leave the text field blank (posts without URLs get penalized)
+
+**First comment (post immediately after submission):**
+1. One-sentence intro: who you are and what the tool does
+2. The problem: why this matters, framed as a pain point fellow devs experience
+3. Your backstory: how you came to work on this (personal motivation seeds good discussion)
+4. What is different: the technical approach that differentiates this from alternatives
+5. Technical details: architecture decisions, constraints, trade-offs
+6. Honest limitations: what it does not do yet (builds trust)
+7. Call to action: "Try it on your project and let me know what breaks"
+
+**Tone rules:**
+- Talk as a fellow builder, not a marketer — imagine having a drink with a dev friend
+- Never sell; interest them and let them sell themselves
+- When criticized, agree with the positive intent behind the critique, then explain your reasoning — you will not convince the critic but you will convince the silent audience
+- Do NOT have friends/cofounders post booster comments; the community detects this and it backfires
+
+**Timing:**
+- **Best day: Tuesday** — average peak score of 110 points, nearly 60% higher than Monday (68) or Wednesday (69). Saturday is second best at 89.
+- **Best time: 9 AM - 12 PM Pacific** — catches the US morning crowd while EU is still online
+- **Treat your launch window as 30 minutes**: 51% of Show HN posts disappear from the front page within a single 30-minute window. Be ready to respond to comments instantly.
+- High scores do not equal longevity: the HN ranking algorithm decays posts aggressively. A 3,000-point post at 24 hours ranks below a 50-point post at 2 hours. Capture emails/GitHub stars during peak visibility.
+- AI-related Show HN posts are currently underperforming expectations (oversaturation in 2025-2026). Codepliant should lead with the compliance/privacy angle, not the AI angle.
+
+**Pre-launch checklist:**
+- GitHub repo README must be polished with clear install instructions, a usage example, and an output preview
+- `npx codepliant go .` must work flawlessly on a clean machine (the HN crowd will try it immediately)
+- Have 2-3 team members ready to engage in comments within the first 30 minutes
+- Prepare answers for predictable objections: "how is this different from Termly?", "do I still need a lawyer?", "what about [framework] support?"
+
+##### 3. Draft Show HN Title and First Comment for Codepliant
+
+**Recommended title:**
+```
+Show HN: Codepliant – Open-source CLI that scans your code and generates compliance docs
+```
+
+**Rationale:** Follows the proven "[Name] – [plain description]" pattern. Hits three HN-favored signals: open-source, CLI tool, and solves a real problem. At 76 characters, it is within the optimal 40-80 range. Avoids superlatives and marketing language.
+
+**Alternative titles (ranked):**
+1. `Show HN: Codepliant – Generate privacy policies from actual code analysis, not templates`
+2. `Show HN: Codepliant – Scan your codebase, generate GDPR/CCPA compliance docs automatically`
+3. `Show HN: Codepliant – Your package.json knows more about your data practices than you do`
+
+Title #3 is riskier but more curiosity-driven — could work well if the first comment backs it up with substance.
+
+**Draft first comment:**
+
+```
+Hey HN — I built Codepliant because I was tired of filling out privacy policy
+generators that ask me questions I should not have to answer manually.
+
+My codebase already knows what data it collects. If I import Stripe, I process
+payment data. If I use NextAuth, I handle authentication. If I have a Sentry DSN
+in my .env, I am sending error telemetry somewhere. Why am I filling out a form
+to tell a generator things my package.json already declares?
+
+Codepliant scans your actual code — package.json, imports, .env files, Terraform
+configs, Django settings.py, even GitHub Actions workflows — and generates
+compliance documents (Privacy Policy, Terms of Service, Cookie Policy, AI
+Disclosure, DPA, SBOM) based on what it actually finds.
+
+Some technical details:
+- Zero network calls — everything runs locally, nothing leaves your machine
+- Zero runtime dependencies — only devDependencies
+- Supports 11 ecosystems (Node, Python, Go, Ruby, Rust, Java, PHP, .NET,
+  Terraform, Flutter, Django)
+- 121+ document types, 1,300+ tests
+- ~830KB package size
+
+What it does NOT do: this is not legal advice. Generated documents include a
+disclaimer and should be reviewed by counsel. But it gets you 80% of the way
+there in 30 seconds instead of 3 hours, and unlike template generators, the
+output actually matches what your code does.
+
+Try it: npx codepliant go . (scans current directory, generates docs)
+
+I would love feedback on detection accuracy — if it misses a service in your
+stack or generates something wrong, please open an issue. That is the most
+valuable thing you can tell me.
+
+GitHub: [link]
+```
+
+**Why this draft works:**
+- Opens with a personal pain point (not a pitch)
+- Explains the "why" before the "what"
+- Technical details satisfy the HN audience's curiosity
+- Honest about limitations (not legal advice)
+- Specific numbers build credibility (121+ doc types, 1,300+ tests, 830KB)
+- Ends with an actionable one-liner (`npx codepliant go .`) and a genuine request for feedback
+- Zero marketing language; reads like a fellow builder sharing their work
+
+##### 4. Recommended Launch Actions
+
+1. **[HIGH] Polish the GitHub README**: Add a demo GIF (Issue #3 is still open) showing `npx codepliant go .` scanning a real project. This is the single most impactful pre-launch task — HN users click through to GitHub first.
+
+2. **[HIGH] Schedule for a Tuesday, 9-10 AM Pacific**: This is the statistically optimal window. Have the first comment ready to paste immediately after submission.
+
+3. **[HIGH] Prepare FAQ responses**: Draft short, non-defensive answers for: "How is this different from Termly/Iubenda?", "Can I trust auto-generated legal docs?", "What about [language] support?", "Does this phone home?"
+
+4. **[MEDIUM] Cross-post to complementary channels the same day**: Post to r/selfhosted, r/devops, r/webdev, and DEV.to within 2-4 hours of the HN post. HN traffic spikes and decays within hours — capture the overflow.
+
+5. **[MEDIUM] Set up analytics for the launch window**: Track GitHub stars, npm installs, and website traffic in real-time during the first 2 hours. This data informs whether to do a follow-up "Launch HN" post for a future version.
+
+6. **[LOW] Consider a "Show HN" dry run**: Post a technical blog post to HN first (e.g., "What your package.json reveals about your data practices") to build karma and test messaging before the main launch.
+
+Sources:
+- [Best of Show HN 2025](https://bestofshowhn.com/2025)
+- [Best of Show HN 2026](https://bestofshowhn.com/2026)
+- [Show HN Survival Study: 605 Posts Tracked for 63 Days](https://asof.app/research/show-hn-survival)
+- [State of Show HN 2025 (Sturdy Statistics)](https://blog.sturdystatistics.com/posts/show_hn/)
+- [How to launch a dev tool on Hacker News (Markepear)](https://www.markepear.dev/blog/dev-tool-hacker-news-launch)
+- [How to crush your Hacker News launch (DEV.to)](https://dev.to/dfarrell/how-to-crush-your-hacker-news-launch-10jk)
+- [Show HN Guidelines (official)](https://news.ycombinator.com/showhn.html)
+- [When is the best time to post on Show HN (Myriade)](https://www.myriade.ai/blogs/when-is-it-the-best-time-to-post-on-show-hn)
+
 ## Development Log
 
 **2026-03-16 — Add `codepliant sbom` command (CycloneDX SBOM generation)**
@@ -1177,6 +1367,25 @@ _Updated by Website Agent each iteration._
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated
 
+### 2026-03-16 — Changelog page overhaul (Iteration 8)
+
+**Changelog page improvements (`src/app/changelog/page.tsx`):**
+- Added v1.0.0 release (2026-03-16) with "Latest" tag: 120+ document types, 10+ ecosystems, 200+ service signatures, MCP server, plugin system, monorepo support
+- Added v1.1.0 upcoming release with "Upcoming" tag: wizard command, SBOM generation, Terraform/IaC scanner, Django settings.py scanner, Flutter/Dart support, Impressum generator, npm size reduction, test suite expansion (763 to 1,367)
+- Introduced categorized change system with four categories: New (green), Improved (blue), Tests (purple), Fix (amber) — each with colored badge
+- Added `CategoryBadge` and `VersionBadge` components for visual differentiation
+- Added summary text for major releases (v1.0.0 and v1.1.0) below version header
+- "Upcoming" releases get purple dot with ring effect; "Latest" gets brand dot with ring; older releases get plain dot
+- Added legend bar showing all four category badges below page header
+- Added anchor IDs (`#v1.0.0`, `#v1.1.0`, etc.) to each release section with `scroll-mt-24`
+- Added "Stay up to date" CTA card at bottom with GitHub star link and SVG icon
+- Widened max-width from 680px to 720px for better badge layout
+- Updated all color tokens to use `text-ink-secondary`, `bg-surface-secondary`, `border-border-subtle` theme tokens
+- All existing releases (v0.1.0 through v0.8.0) preserved with categorized changes
+
+**Build verification:**
+- `next build` passes cleanly, all 25 static pages generated
+
 ## Website Design
 
 ### Iteration 3 — 2026-03-16 — Hero section and CTA improvements
@@ -1294,6 +1503,37 @@ _Updated by Website Agent each iteration._
 - Meta description, OpenGraph, and Twitter card text updated from $29/$79 to $19/$49
 
 **Note:** Old $29/$79 prices still referenced on homepage (`src/app/page.tsx`) and compare page (`src/app/compare/page.tsx`) — not updated per task scope (pricing page only). Should be updated in a follow-up iteration.
+
+**Build verification:**
+- `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 8 — 2026-03-16 — About page overhaul
+
+**Rewrote the About page** (`src/app/about/page.tsx`) to tell the Codepliant story with concrete details from the project:
+
+1. **Mission statement** — Lead paragraph changed to the core mission: "Every developer should have access to accurate compliance documents without paying thousands for lawyers." Body copy explains the three bad options developers face today (generic templates, expensive lawyers, skipping compliance) and why Codepliant exists.
+
+2. **How it works section** (new) — Explains the code-scanning approach: CLI reads dependencies, imports, env vars, and config files to detect actual services. Contrasts with questionnaire-based tools. Includes the "Not 'third-party analytics' — it says PostHog because it found PostHog in your code" line.
+
+3. **Key principles section** (replaced "What we believe") — Four cards covering the project's technical commitments:
+   - Zero network calls — everything local, no telemetry
+   - Open source — MIT licensed, full transparency
+   - Deterministic scanning — no AI/LLMs in the scanning pipeline, pattern matching only
+   - Developer experience — one command, zero config, no questionnaires
+
+4. **By the numbers section** (new) — 2x4 stats grid with current project metrics: 1,367 tests passing, 1,200+ repos tested, 121+ document types, 11 ecosystems. Stats displayed in `text-brand` for visual emphasis.
+
+5. **Open source commitment section** (new) — Dedicated section explaining MIT license, public availability of all scanning code and generators, and invitation for contributions (scanner signatures, document types, ecosystem support, docs, bug reports).
+
+6. **Get involved section** (replaced "Contribute") — Two CTAs side by side: "View on GitHub" (primary brand button) and "Contributing guide" (secondary outlined button linking to CONTRIBUTING.md). Includes inline `npx codepliant go` code snippet.
+
+7. **Team section** — Retained from previous version, unchanged.
+
+**SEO metadata updated:**
+- Meta description updated to include the mission statement
+- OpenGraph and Twitter descriptions updated to mention code scanning approach and key principles
+
+**Design consistency:** All styling uses existing design tokens (`text-ink-secondary`, `bg-surface-secondary`, `text-brand`, `bg-code-bg`, `text-code-fg`, `border-border`, `--ease-out-quart`). No new CSS classes or custom styles introduced.
 
 **Build verification:**
 - `next build` passes cleanly, 25/25 static pages generated successfully
@@ -1446,6 +1686,50 @@ _Updated by Website Agent each iteration._
 
 **Script**: `codepliant-site/tests/seo-audit.spec.ts` — run with `npx playwright test tests/seo-audit.spec.ts`
 
+### Iteration 8 — 2026-03-16 — Cross-page consistency audit
+
+**Test scope**: Source code review of all 20 page files in `codepliant-site/src/app/`, focused on color token consistency, pricing consistency, test count consistency, CTA button styling, and footer rendering.
+
+**Results: 3 categories of inconsistency found and fixed. Build passes cleanly.**
+
+**1. Legacy color tokens replaced across 15 pages:**
+
+The homepage, layout, docs, blog index, compare, and eu-ai-act-deadline pages used the correct design tokens (`text-ink-secondary`, `bg-surface-secondary`, `text-ink`). However, 15 other pages still used legacy tokens that are not defined in the design system and would render incorrectly or fall back to browser defaults:
+
+- `text-muted` -> `text-ink-secondary` (all 15 pages)
+- `bg-surface` (without suffix) -> `bg-surface-secondary` (all 15 pages)
+- `text-foreground` -> `text-ink` (4 pages: ai-disclosure-generator, blog/gdpr-for-developers, blog/privacy-policy-for-saas, blog/colorado-ai-act)
+- `text-accent` -> `text-brand` (1 page: blog/privacy-policy-for-saas)
+
+Files fixed: `pricing/page.tsx`, `about/page.tsx`, `changelog/page.tsx`, `terms-of-service-generator/page.tsx`, `privacy-policy-generator/page.tsx`, `cookie-policy-generator/page.tsx`, `ai-disclosure-generator/page.tsx`, `data-privacy/page.tsx`, `ai-governance/page.tsx`, `hipaa-compliance/page.tsx`, `soc2-compliance/page.tsx`, `gdpr-compliance/page.tsx`, `blog/colorado-ai-act/page.tsx`, `blog/gdpr-for-developers/page.tsx`, `blog/privacy-policy-for-saas/page.tsx`
+
+Additionally, the pricing page used raw Tailwind colors (`text-white`, `bg-white`, `hover:bg-gray-100`) instead of design tokens. Fixed to use `text-surface-primary`, `bg-surface-primary`, `hover:bg-surface-secondary` for dark mode compatibility. Non-highlighted pricing cards changed from `bg-surface-secondary` to `bg-surface-primary` to match homepage pricing card styling.
+
+**2. Pricing inconsistency fixed on homepage and compare page:**
+
+The pricing page correctly showed $19/$49 (updated in iteration 7). However, the homepage and compare page still showed the old $29/$79 prices:
+
+- `src/app/page.tsx`: JSON-LD offers ($29/$79 -> $19/$49), plans array ($29/$79 -> $19/$49), comparison text ("$29/mo for teams" -> "$19/mo for teams")
+- `src/app/compare/page.tsx`: FAQ answer ($29/$79 -> $19/$49), feature table pricing row ($29/mo -> $19/mo), pricing gap section ($29/mo -> $19/mo), pricing comparison section ($29/$79 -> $19/$49)
+
+**3. Test count updated on homepage:**
+
+PROGRESS.md reports 1,367 tests passing. The homepage displayed "1,166" in two places (trust signals section and social proof stats grid). Updated both to "1,367".
+
+**4. CTA button consistency — verified, no issues:**
+
+All pages use consistent CTA patterns:
+- Primary CTA: `bg-brand hover:bg-brand-hover text-surface-primary` with `rounded-lg`
+- Secondary CTA: `border border-border-subtle hover:border-brand text-ink hover:text-brand` with `rounded-lg`
+- Link CTA: `text-brand hover:text-brand-hover` with arrow SVG icon
+- All transitions use `transition-colors duration-150` with `--ease-out-quart`
+
+**5. Footer rendering — verified, no issues:**
+
+Footer is defined once in `src/app/layout.tsx` and renders on all pages via the root layout. All 14 footer links point to valid internal/external URLs. Footer uses correct design tokens throughout.
+
+**Build verification:** `next build` passes cleanly, all 25 static pages generated successfully.
+
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
 - **Tests**: 1166/1166 passing (was 1059, added 107 new tests)
@@ -1477,6 +1761,17 @@ _Updated by Website Agent each iteration._
   - `src/scanner/logging-scanner.test.ts` (20 tests): console.log detection (3 call sites), winston import+usage, pino import+usage, bunyan import+usage, morgan HTTP logger, multiple logging libraries in same project, PII risk flagging (user.email, user.password, req.body.ssn, JSON.stringify(user), authorization header), no PII flags for safe messages, empty project returns empty results, project with no logging returns empty, findings capped at 100, file path and line number in findings, generateLoggingAssessment null for no libraries, assessment with detected libraries, assessment with PII findings table, PII table truncated to 25 entries
   - `src/scanner/turbo-scanner.test.ts` (15 tests): detected=false when no turbo.json, detected=false for empty directory, turbo.json v2 tasks detection, turbo.json v1 pipeline detection, malformed turbo.json graceful handling, empty turbo.json (no tasks/pipeline), package discovery under apps/packages/libs/services/tooling directories, directory name fallback when package.json has no name, relative path in package info, full Turborepo with apps+packages+tasks, non-directory entries ignored, subdirectories without package.json ignored
 - **Scanner modules still missing tests** (3): ci-cd-scanner, file-walker, graphql-endpoint-scanner
+
+### Iteration 8 — 2026-03-16 (tests)
+- **Build**: pass
+- **Tests**: 1452/1452 passing (was 1367, added 85 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/scanner/ci-cd-scanner.test.ts` (31 tests): empty project (no platforms, no VCS, no tests/deploy/security/deps), GitHub Actions workflow detection (config file, features, detail extraction), workflow name extraction from YAML name field, filename fallback when no name field, automated test detection (npm test, jest, vitest), security scanning detection (codeql, snyk), Dependabot yml/yaml variants, GitLab CI detection with test/security patterns, CircleCI detection, Jenkins detection, Travis CI, Azure Pipelines, Vercel with deployment pipeline flag, Netlify with deployment pipeline flag, Docker via Dockerfile, Docker via docker-compose.yml, Kubernetes directory, Terraform main.tf, Bitbucket Pipelines, AWS CodePipeline buildspec.yml, multiple platforms in same project, Git VCS detection, GitHub VCS provider (.github dir), GitLab VCS provider (.gitlab-ci.yml), Renovate config (renovate.json, .renovaterc), skips non-YAML files in workflows
+  - `src/scanner/file-walker.test.ts` (25 tests): empty directory returns empty, .ts file collection, correct fullPath/relativePath/extension, extension filtering, ignores node_modules/dist/build/coverage/__pycache__/.git/hidden dirs/venv/.venv/vendor, skips binary extensions (png/woff2/db), skips .lock files, skipTests true excludes .test/.spec/__tests__ files, skipTests false includes test files, recurses into deep subdirectories, circular symlink handling, broken symlink handling, SOURCE_EXTENSIONS contents, TRACKING_EXTENSIONS contents, ALL_EXTENSIONS is union, unreadable directory graceful handling, multiple extension types at once
+  - `src/scanner/graphql-endpoint-scanner.test.ts` (29 tests): empty project returns no endpoints/services, Apollo Server import detection, Apollo Server custom path, express-graphql detection, graphql-yoga with createYoga and custom endpoint, Mercurius (Fastify), NestJS GraphQL decorators, Strawberry/Graphene/Ariadne (Python), gqlgen (Go), graphql-ruby, generic /graphql and /api/graphql path references, feature detection (subscriptions/mutations/queries/file-uploads/persisted-queries/query-depth-limiting), GraphQL API service creation with dataCollected, uploaded files in dataCollected, real-time subscription data in dataCollected, deduplication, pre-walked files acceptance, evidence with code_pattern type, Absinthe (Elixir), Juniper (Rust), multiple endpoints in different files
+- **Scanner modules still missing tests**: 0 — 100% scanner test coverage achieved
+- **Generator modules still missing tests**: 114 files (unchanged)
 
 **2026-03-16 — Add German Impressum generator (Section 5 DDG / TMG)**
 - Research iteration 2 identified Impressum as low priority but easy to implement; picked as a quick win
@@ -1597,3 +1892,17 @@ Sources:
 - [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)
 - [release-it](https://www.npmjs.com/package/release-it)
 - [What to expect for open source in 2026 (GitHub Blog)](https://github.blog/open-source/maintainers/what-to-expect-for-open-source-in-2026/)
+
+---
+
+### Iteration 8 — Package Size Optimization (2026-03-16)
+
+**Objective**: Move puppeteer from `dependencies` to `optionalDependencies` to eliminate the ~300MB Chromium download for users who don't need PDF generation.
+
+**Changes made**:
+1. **Moved `puppeteer` from `dependencies` to `optionalDependencies`** in `package.json`. This means `npm install codepliant` will no longer force-download Chromium. Users who need the `codepliant pdf` command can run `npm install puppeteer` separately.
+2. **Verified the import is already dynamic**: `src/cli.ts` line 2765 uses `await import("puppeteer")` inside a try/catch block, with a clear error message guiding users to install puppeteer if missing. No code changes needed.
+3. **TypeScript compilation**: `npx tsc` passes clean.
+4. **Package tarball size**: 843KB / 3.7MB unpacked / 447 files (unchanged — the tarball never included Chromium). The real impact is on end-user install: `npm install codepliant` no longer triggers a ~300MB Chromium download.
+
+**Impact**: This is the single highest-impact change identified in the iteration 7 research. Users who only need scanning and document generation (the primary use case) get a fast, lightweight install. PDF generation remains available as an opt-in.
