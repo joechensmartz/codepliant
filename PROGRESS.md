@@ -7,20 +7,20 @@
 ## Current Status
 
 - **Version**: 1.0.0 (published to npm)
-- **Tests**: 926 passing (+91 new in iteration 3)
+- **Tests**: 1059 passing (+133 new in iteration 4)
 - **Repos tested**: 1200+
 - **Document types**: 120+
 - **npm package size**: 831KB
-- **Iteration**: 3 complete (2026-03-17)
-- **Last run**: Terraform scanner, 79 generator tests, hero redesign, blog index, Playwright QA (2 bugs fixed), launch strategy research
+- **Iteration**: 4 complete (2026-03-17)
+- **Last run**: Wizard command, 133 generator tests, GDPR blog, social proof section, QA 91/91, monetization research
 
 ## Priority Backlog
 
 ### High Priority
 - [ ] Add demo GIF to README (Issue #3)
-- [ ] Improve Django detection — scan settings.py INSTALLED_APPS (Issue #5)
-- [ ] Add Terraform/IaC scanner (Issue #6)
-- [ ] Interactive wizard command (Issue #8)
+- [x] Improve Django detection — scan settings.py INSTALLED_APPS (Issue #5) — done in iteration 2
+- [x] Add Terraform/IaC scanner (Issue #6) — done in iteration 3
+- [x] Interactive wizard command (Issue #8) — done in iteration 4
 - [x] Website: add real example output preview on homepage
 - [x] Website: SEO meta tags for all pages (verified + JSON-LD added)
 - [x] Reduce npm package size (906KB → 831KB, excluded dist/app/ etc.)
@@ -394,7 +394,138 @@ Most fields are static company info that can be stored in `.codepliant.yml` or `
 
 8. **[LOW] Prepare EU AI Act content for August 2026**: As the deadline approaches, search volume for "EU AI Act compliance" will spike. Having content ready to publish in July 2026 positions Codepliant to capture that traffic.
 
+### Iteration 4 — 2026-03-16
+
+#### How Successful Open-Source CLI Tools Monetize
+
+**Sponsorship Model (ESLint, Prettier, Biome)**
+
+- **ESLint** earned $204,452 in 2025 across Open Collective, GitHub Sponsors, Tidelift, and website ads. Top corporate sponsors: Automattic ($24K), Airbnb ($24K), Meta ($20K), AG Grid ($20K). Sponsorship tiers range from $200/mo (Bronze) to $5,000/mo (Diamond). This funds a small team of dedicated maintainers and freelancers. ESLint is one of the most successful sponsorship-funded projects, yet $204K/year barely supports 2-3 full-time engineers in a high-cost-of-living area.
+- **Prettier** uses Open Collective and GitHub Sponsors but earns significantly less than ESLint (estimated $20-50K/year based on comparable projects with similar star counts). Prettier has no paid product — it is purely donation-funded.
+- **Biome** (the Rome fork) adopted sponsorship + enterprise support after Rome Tools Inc. burned through $4.5M in VC and laid off all employees. Biome offers corporate sponsorship for visibility and paid enterprise support where core contributors work on company-specific projects. This is a cautionary tale: VC funding for a dev tool with no clear revenue path led to shutdown.
+- **Takeaway for solo devs**: Sponsorship alone is not a viable monetization path for a single-developer project. ESLint is a top-10 npm package used by millions and still only generates $204K/year. A niche compliance tool would be lucky to see $5-10K/year in sponsorship. Sponsorship should be a supplement, not the primary revenue source.
+
+**Paid Product / Open Core Model (Tailwind CSS, Snyk)**
+
+- **Tailwind CSS** generated $2M+ in revenue through Tailwind UI (premium component library at $299 one-time) and Tailwind Plus (500+ component templates as lifetime licenses). The model: free framework drives massive doc traffic, docs funnel users to paid products. However, in January 2026, Tailwind laid off 75% of engineering (from 20 to 5 people) after AI tools caused a ~40% drop in documentation traffic and ~80% revenue decline. AI chatbots now generate Tailwind code directly, bypassing the docs-to-purchase funnel. This is a critical warning for any monetization strategy that depends on documentation traffic.
+- **Snyk** uses an open-core model: Free tier (individual devs, limited scans), Team ($25/dev/month), Enterprise (custom pricing). The free tier is generous enough to hook individual developers; the paid tier targets teams needing CI/CD integration, higher scan limits, and compliance reporting. Snyk charges per "contributing developer" (anyone who committed to a private repo in 90 days), not per scan or per app. This scales naturally with team size.
+- **Takeaway**: The open-core model (free CLI, paid cloud/team features) is the most proven path for developer tools. The key is making the free tier genuinely useful while offering clear team/enterprise value in paid tiers. Avoid dependence on documentation traffic as a funnel — AI is eroding that channel.
+
+**Acquisition Path (Turborepo)**
+
+- **Turborepo** was acquired by Vercel in December 2021 before raising any external funding. Vercel open-sourced the CLI (MPL 2.0) and monetized through remote caching as a Vercel platform feature — converting free CLI users into paying Vercel customers. Turborepo's founder joined Vercel full-time.
+- **Takeaway**: Acquisition is a viable exit but not a monetization strategy you can plan around. It requires building a tool that is strategically valuable to a larger platform company. For Codepliant, potential acquirers could include: GitHub (compliance-as-code in Actions), Vercel/Netlify (compliance for deployed apps), Vanta/Drata (code-level scanning to complement their GRC platforms), or Snyk (expanding from security to compliance).
+
+#### The Compliance Tool Pricing Landscape and Gap Analysis
+
+**Enterprise Tier ($7,500-$100K+/year) — Vanta, Drata, Sprinto**
+
+- **Vanta**: Core plan starts at $10,000/year (single framework). Plus tier $15,000-$30,000/year. Growth $30,000+. Scale up to $80,000/year. Add-ons: Trust Center ($6,000/year), Vendor Risk Management ($11,200/year). Pricing is not public — requires a sales call. Primarily GRC/audit automation with 300+ integrations, not document generation.
+- **Drata**: Foundation plan starts at $7,500/year. Advanced $15,000-$25,000/year. Enterprise $50,000-$100,000+. Customers report 85% reduction in prep time and 150-200 hours saved annually. Also requires sales call for pricing.
+- **Sprinto**: Positioned as the affordable middle ground for startups and SMBs. Strong automation without rigid enterprise pricing. Exact pricing not public but reportedly lower than Vanta/Drata.
+- **Who they serve**: Series A+ startups and mid-market companies pursuing SOC 2, ISO 27001, HIPAA certifications. These are audit-readiness platforms, not document generators.
+
+**SMB Tier ($10-$20/month) — Termly, Iubenda**
+
+- **Termly**: Free tier available. Starter $14/month ($10/month annual) — 2 policy generators + CMP with 50K banner views. Pro+ $20/month ($15/month annual) — all policy generators + unlimited CMP. Agency plan custom pricing. These are web-based form wizards, not code-aware.
+- **Iubenda**: Similar pricing range, broader integration ecosystem (WordPress, Shopify, GTM). 150K+ clients.
+- **Who they serve**: Small business owners, marketers, non-technical users who need a cookie banner and privacy policy for a website.
+
+**The Gap Codepliant Can Fill ($0-$49/month)**
+
+There is a clear pricing gap between:
+1. Free/cheap policy generators (Termly at $10-20/mo) that use form wizards and don't understand your code
+2. Enterprise compliance platforms (Vanta at $10K+/yr) that are overkill for small teams and don't generate documents from code
+
+Codepliant occupies a unique position: **developer-focused, code-aware compliance document generation**. No existing tool does this. The target customer is:
+- Indie developers and small startups (1-10 engineers) who need compliance docs but can't afford $10K/year for Vanta
+- Developers who want documents that accurately reflect their actual tech stack, not generic templates
+- Teams that want compliance-as-code in their CI/CD pipeline
+
+Enterprise developers are 3.5x more likely to pay for developer tools than independent developers (SlashData research). The buyer persona matters: if the buyer is an individual developer, pricing must be under $50/month. If the buyer is a team lead or engineering manager, pricing can be $100-500/month.
+
+#### Recommended Monetization Model for Codepliant
+
+**Tier Structure**
+
+| Tier | Price | Target | Features |
+|------|-------|--------|----------|
+| **Free (CLI)** | $0 | Indie devs, OSS projects | Full CLI scanning + document generation. All 120+ document types. Local-only, no account needed. MIT licensed. |
+| **Pro** | $19/month or $149/year | Solo developers, freelancers | CI/CD GitHub Action (compliance gate on PRs). Scheduled re-scans with change detection (`codepliant diff`). Export to Notion, Confluence, Google Docs. Custom branding/templates. Priority email support. |
+| **Team** | $49/month or $399/year (up to 10 seats) | Small startups, agencies | Everything in Pro. Team dashboard (compliance status across repos). Multi-repo scanning. Shared template library. Slack/Teams notifications on compliance drift. Role-based access. |
+| **Enterprise** | Custom ($500+/month) | Mid-market, regulated industries | Everything in Team. SSO/SAML. Custom framework support. Dedicated support. SLA. Audit trail. On-premise deployment option. |
+
+**Rationale**:
+- Free tier must remain fully functional as a standalone CLI — this is the growth engine. Open source conversion rates are 0.5-3%, so maximizing adoption is critical. Even at 1% conversion, you need 10,000 active users to get 100 paying customers.
+- $19/month Pro tier targets the Termly price range ($10-20/month) but offers dramatically more value (code-aware scanning vs. form wizards). This is the impulse-buy price point for individual developers.
+- $49/month Team tier fills the gap between Termly ($20/month) and Vanta ($10,000/year). A 10-person startup paying $49/month ($588/year) instead of $10,000/year for Vanta is a compelling value proposition.
+- Enterprise tier captures the long tail of organizations that need custom compliance frameworks, SSO, and audit trails.
+
+**Premium Features That Make Sense (ranked by feasibility and demand)**
+
+1. **CI/CD GitHub Action** [HIGH value, MEDIUM effort]: Run `codepliant scan` on every PR as a compliance gate. Flag new services that need disclosure updates. This is the #1 "compliance-as-code" feature developers want in 2026. Can be a free Action that requires a Pro license key for advanced features (change detection, blocking PRs).
+
+2. **Export to Notion/Confluence/Google Docs** [HIGH value, LOW effort]: Developers don't want to manually copy markdown files into their wiki. Direct export to where teams actually store documentation. Notion and Confluence APIs are straightforward to integrate.
+
+3. **Team Dashboard (Cloud)** [HIGH value, HIGH effort]: Web dashboard showing compliance status across all repos in an org. Which repos have outdated docs? Which added new services since last scan? This is the primary justification for the Team tier — visibility across a team's entire portfolio.
+
+4. **Custom Templates** [MEDIUM value, LOW effort]: Let users customize document templates (add company-specific clauses, remove sections, change formatting). Store templates in `.codepliant/templates/` or in a cloud account.
+
+5. **Change Detection (`codepliant diff`)** [MEDIUM value, MEDIUM effort]: Already in the backlog. Show what changed since last generation — new services detected, removed services, updated documents. Essential for CI/CD workflows and audit trails.
+
+6. **Multi-format Export (PDF, DOCX)** [MEDIUM value, LOW effort]: Codepliant already generates HTML and PDF. Adding DOCX would cover legal teams who need Word documents for review and redlining.
+
+7. **Priority Support** [LOW incremental effort]: Dedicated email/Slack channel for Pro/Team customers. Low cost to provide at small scale, high perceived value.
+
+**What NOT to Build (yet)**
+
+- A full GRC platform — this is Vanta/Drata territory and requires massive engineering investment.
+- AI-powered document customization — risky for legal documents where accuracy is critical. Codepliant's deterministic, code-based approach is a differentiator.
+- White-label/reseller program — premature until the product has significant market traction.
+
+#### Revenue Projections (Conservative)
+
+Assuming a successful launch (Show HN front page, 500+ GitHub stars in first month):
+- **Month 1-3**: 500-2,000 CLI users, 0 paying (building trust, gathering feedback)
+- **Month 3-6**: 2,000-5,000 CLI users, 10-30 Pro subscribers ($190-$570/month)
+- **Month 6-12**: 5,000-10,000 CLI users, 50-100 Pro + 5-10 Team subscribers ($1,200-$2,400/month)
+- **Year 2**: 10,000-25,000 CLI users, 150-300 Pro + 20-50 Team subscribers ($4,000-$8,000/month)
+
+At 1% conversion rate with 10,000 users and $25 average revenue per paying user, that is $2,500/month ($30K/year). This is a realistic solo-developer SaaS income, not venture-scale — which is appropriate for the project's current stage.
+
+#### Recommended Actions from Iteration 4
+
+1. **[HIGH] Build the GitHub Action first**: This is the highest-leverage premium feature. A free GitHub Action that runs `codepliant scan` on PRs, with Pro-tier features (change detection, PR comments with compliance diffs) gated behind a license key. This creates a natural upgrade path: developer tries free CLI, adds Action to CI, wants diff/blocking features, upgrades to Pro.
+
+2. **[HIGH] Set up Stripe + license key infrastructure**: Before launching any paid tier, implement a simple license key system. Generate keys on purchase, validate in CLI/Action. Use Stripe for billing — it handles subscriptions, trials, and invoicing. Estimated effort: 2-3 days.
+
+3. **[HIGH] Add GitHub Sponsors and Open Collective immediately**: Even before paid tiers launch, sponsorship provides early revenue signal and social proof. Add sponsor buttons to the GitHub repo, README, and website. Target: $500-$1,000/month from sponsors.
+
+4. **[MEDIUM] Build Notion/Confluence export**: Low-effort, high-perceived-value feature that justifies the Pro tier. Notion API is well-documented; Confluence REST API is straightforward. This is a "wow" feature in demos: "run one command and your compliance docs appear in your team's Notion workspace."
+
+5. **[MEDIUM] Implement `codepliant diff`**: Already in the backlog. This is a prerequisite for the CI/CD compliance gate (the Action needs to know what changed). Store scan results as a `.codepliant/snapshot.json` and compare on subsequent runs.
+
+6. **[LOW] Design the Team dashboard**: This is the highest-effort feature but the primary justification for the Team tier. Start with a simple web app that ingests scan results from multiple repos and displays compliance status. Can be a Next.js app (matching the existing website stack) deployed on Vercel.
+
+7. **[LOW] Explore acquisition positioning**: Ensure the project is visible to potential acquirers (Snyk, GitHub, Vanta) by engaging with their ecosystems — build a Snyk integration, publish on GitHub Marketplace, write comparison content. Acquisition is not a goal but should be a possible outcome.
+
 ## Development Log
+
+**2026-03-16 — Interactive wizard command (Issue #8)**
+- Wired up the `codepliant wizard` command in `src/cli.ts` — previously a stub that printed "coming soon"
+- The existing `runWizard` function (already implemented at line ~5310) provides a 6-step interactive flow:
+  1. Scans the project and reports detected services
+  2. Lets user confirm/exclude each detected service individually
+  3. Multi-select jurisdictions (GDPR, CCPA, UK GDPR)
+  4. Prompts for company info (or confirms existing config)
+  5. Previews documents to be generated with line counts
+  6. Generates documents, writes `.codepliantrc.json`, shows compliance score
+- Uses Node.js built-in `readline` — no new dependencies
+- Config saves `confirmedServices` and `excludeServices` for future runs
+- Tests already exist in `src/wizard.test.ts` (config fields, service filtering, previous selections)
+- Fixed pre-existing type error in `src/generator/dpa.test.ts` (missing `sources` field on `DataCategory`)
+- Build verified: `npx tsc` passes cleanly
+- Marked Issues #5 (Django settings) and #6 (Terraform) as done in backlog (completed in iterations 2 and 3)
 
 **2026-03-16 — Reduce npm package size**
 - Updated `files` field in package.json to use explicit directory allowlist instead of `dist/**/*.js` glob
@@ -468,6 +599,17 @@ Most fields are static company info that can be stored in `.codepliant.yml` or `
 - **Generator modules now with tests** (8 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy
 - **Generator modules still missing tests**: 123 files (was 126)
 
+### Iteration 4 — 2026-03-16
+- **Build**: pass
+- **Tests**: 1059/1059 passing (was 926, added 133 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/ai-disclosure.test.ts` (56 tests): classifyAIRisk — minimal/limited/high classification, high-risk patterns (biometric, facial recognition, credit scoring, hiring, healthcare diagnosis), user-facing patterns (user prompts, conversation history, chatbot), high precedence over limited, context aiRiskLevel override; generateAIDisclosure — null return for no AI/empty/non-AI services, generation with AI services, project name, date format, context company name/email/DPO email/placeholder values, introduction referencing EU AI Act (2024/1689), AI systems inventory table with provider mapping (OpenAI, Anthropic), multiple AI services, aiUsageDescription, risk classification display (minimal/limited/high), risk obligations (Art. 50, conformity assessment), manual override note, transparency obligations (Art. 50, Art. 50(5) first-interaction), AI limitations, AI-generated content section (synthetic content, Art. 50(2) machine-readable marking), data processing table, data retention, cross-border transfers (SCC), human oversight, user rights (opt out, lodge complaints), provider policy links (OpenAI, Anthropic), provider deduplication, compliance checklist, high-risk checklist items presence/absence, contact section, sequential section numbering, legal disclaimer
+  - `src/generator/dpa.test.ts` (36 tests): null return for no processor-category/empty/database-only services, generation with AI/analytics/email/payment/monitoring services, context company name/email/placeholder values, date format, project name, GDPR Article 28 reference, subject matter/duration section, nature/purpose section, personal data types with/without data categories, fallback text for empty categories, data subjects section, processor obligations (Art. 32), sub-processors table with service details, multiple sub-processors, sub-processor engagement rules, international data transfers (SCC), security measures (encryption, access controls), breach notification (72 hours, Art. 33/34), return/deletion, controller rights (audit), governing law, contact, legal disclaimer, non-processor service exclusion from table
+  - `src/generator/incident-response.test.ts` (41 tests): always generates (never null) with empty/no/database-only services, context company name/email/security email/DPO name/DPO email/website/placeholder values, security email fallback to contact email, date format, incident classification table (P1-P4 severity, response times), detection/reporting procedures, GDPR 72-hour notification (Art. 33, timeline milestones T=0/T+24/T+72), authority notification template with company name, user notification template with company name, investigation procedures (containment, root cause, audit trails), remediation steps, post-incident review (5 business days, root cause analysis), contact list table, conditional AI incident handling (prompt injection, bias, hallucination, disable/throttle, notify AI provider), conditional PCI DSS section (cardholder data, 24 hours, PAN breach checklist), conditional HIPAA section (60 days, HHS, breach assessment, re-identification, low probability), all three conditional sections together, section numbering for conditional sections (10/11/12), legal disclaimer with project name
+- **Generator modules now with tests** (11 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response
+- **Generator modules still missing tests**: 120 files (was 123)
+
 ## Website Updates
 
 _Updated by Website Agent each iteration._
@@ -536,6 +678,36 @@ _Updated by Website Agent each iteration._
 **Build verification:**
 - `next build` passes cleanly, all 25 static pages generated (was 24, added /blog)
 
+### 2026-03-16 — GDPR blog post improvements (Iteration 4)
+
+**GDPR blog post improvements (`src/app/blog/gdpr-for-developers/page.tsx`):**
+- Added table of contents with 9 anchor-linked sections
+- Added new section "Detecting GDPR-relevant services with Codepliant" with:
+  - Code example: `npx codepliant go` terminal output showing detected analytics, payments, auth, error tracking, email, database, and AI services
+  - Code example: GDPR-relevant detection patterns (dependency names, import patterns, env vars) across 5 categories
+  - Code example: `npx codepliant scan --json` output showing structured service data with categories and detection methods
+- Added new section "Common GDPR mistakes developers make" with 7 detailed mistake cards:
+  - Adding npm packages without checking data implications
+  - Logging personal data in plain text
+  - Treating anonymization as trivial
+  - Forgetting about backups in deletion flows
+  - Using Google Fonts/CDN scripts without consent
+  - No data retention policy in code
+  - Collecting data "just in case"
+- Added FAQ JSON-LD structured data (2 entries: detecting GDPR services, common mistakes)
+- Added breadcrumb JSON-LD structured data
+- Added SEO keywords meta tag (15 keywords)
+- Added OpenGraph publishedTime, modifiedTime, authors, tags
+- Improved CTA: "Check your GDPR compliance now" with `npx codepliant go` command and link to docs
+- Added internal links to: EU AI Act blog post, Colorado AI Act blog post, Privacy Policy Generator, Cookie Policy Generator, AI Disclosure Generator, AI Governance Hub, Data Privacy Hub, docs page
+- Added CodeBlock component (matching EU AI Act post pattern) for formatted code examples
+- Updated related resources to include EU AI Act and Colorado AI Act blog posts
+- Updated "Blog" breadcrumb to be a clickable link
+- Updated read time from 15 min to 20 min (content expanded significantly)
+
+**Build verification:**
+- `next build` passes cleanly, all 25 static pages generated
+
 ## Website Design
 
 ### Iteration 3 — 2026-03-16 — Hero section and CTA improvements
@@ -559,6 +731,19 @@ _Updated by Website Agent each iteration._
 - New row of four trust badges with green checkmark icons: "Zero network calls", "MIT Licensed", "No runtime dependencies", "1,200+ repos tested"
 - Key metrics retained below trust badges, now centered for better visual hierarchy
 - Test count updated from 763 to 835 to match current PROGRESS.md status
+
+**Build verification:**
+- `next build` passes cleanly, all pages generated successfully
+
+### Iteration 4 — 2026-03-16 — Social proof / credibility section
+
+**New section added to homepage** (`src/app/page.tsx`) between trust signals and "Before / After", before "How it works":
+
+1. **Key stats grid** (2x2 on mobile, 4-col on desktop): "926 tests passing", "1,200+ repos scanned", "120+ documents", "10+ ecosystems" — large display numbers with tertiary labels beneath each.
+
+2. **Supported ecosystems row**: "Works with your stack" label + pill-style tags for TypeScript, Python, Go, Ruby, Rust, Java, PHP, Swift, Kotlin, and Terraform. Uses border + surface-secondary styling consistent with the site's design system.
+
+3. **Callout quote** with left brand-colored border: "Every document mentions your actual services by name. Not 'third-party analytics' — it says PostHog because it found PostHog in your code." — italicized blockquote format.
 
 **Build verification:**
 - `next build` passes cleanly, all pages generated successfully
@@ -589,3 +774,29 @@ _Updated by Website Agent each iteration._
 **Minor observations (not fixed — intentional):**
 - "Start free trial" and "Contact sales" CTAs on the homepage pricing section use `href="#"` — placeholder links for features not yet built
 - Footer links "Privacy" and "Terms" point to the generator pages (`/privacy-policy-generator`, `/terms-of-service-generator`) rather than actual Codepliant privacy/terms pages — acceptable for now since the site is pre-launch
+
+### Iteration 4 — 2026-03-16 — Full Playwright regression + new content audit
+
+**Test scope**: 91 tests across 20 pages (added `/blog` index page), run via Playwright headless Chromium at `http://localhost:5001`.
+
+**Pages audited**: `/`, `/pricing`, `/docs`, `/changelog`, `/about`, `/compare`, `/blog`, `/blog/eu-ai-act-deadline`, `/blog/gdpr-for-developers`, `/blog/privacy-policy-for-saas`, `/blog/colorado-ai-act`, `/privacy-policy-generator`, `/terms-of-service-generator`, `/cookie-policy-generator`, `/ai-disclosure-generator`, `/data-privacy`, `/gdpr-compliance`, `/soc2-compliance`, `/hipaa-compliance`, `/ai-governance`
+
+**Results: 91/91 tests passed, 0 failures, 0 bugs found.**
+
+**Test categories:**
+1. **Full route audit (20 routes)** — All return HTTP 200, no console errors
+2. **Mobile nav overflow regression** — Nav fits within 375px viewport (iteration 3 fix holds)
+3. **Compare table overflow regression** — No horizontal overflow at 375px (iteration 3 fix holds)
+4. **Blog index page** — 4 post links rendered, h1 present, JSON-LD structured data present, meta description correct
+5. **EU AI Act blog post** — h1 correct, BlogPosting JSON-LD schema present, OG title set, 24,752 chars of content
+6. **Hero section (Design Agent iteration 3)** — h1 renders ("Ship compliant software without the legal bills."), command block shows `npx codepliant go`, 3 CTA buttons present, trust signals (Zero network calls, MIT Licensed, 97.8%) all visible
+7. **Internal links from homepage** — 15 unique internal links found, all resolve to HTTP 200
+8. **Screenshots** — Desktop (1440px, 654KB) and mobile (375px, 509KB) full-page screenshots captured; visually verified — layout is clean, no rendering artifacts, proper responsive behavior
+9. **Mobile overflow all pages** — 0/20 pages overflow at 375px viewport
+10. **Title tags** — All 20 pages have proper, unique `<title>` tags
+
+**Pre-test fix**: Server was returning HTTP 500 due to stale `.next` build cache (missing `./124.js` chunk). Fixed by clearing `.next/` directory and restarting the dev server. This is a dev-mode caching issue, not a code bug.
+
+**Screenshots**: `/tmp/codepliant-qa-4-screenshots/homepage-desktop-1440px.png`, `/tmp/codepliant-qa-4-screenshots/homepage-mobile-375px.png`
+
+**Script**: `/tmp/codepliant-qa-4.ts` — run with `npx tsx /tmp/codepliant-qa-4.ts`

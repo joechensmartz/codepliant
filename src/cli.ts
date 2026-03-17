@@ -1605,7 +1605,12 @@ function main() {
 
     if (command === "wizard") {
       printBanner();
-      console.log("Interactive wizard coming soon. Use: codepliant init"); process.exit(0);
+      const wizardFormat = formatFlag || undefined;
+      runWizard(absProjectPath, outputDir, wizardFormat).then(() => process.exit(0)).catch((err) => {
+        console.error(`${RED()}[CP012] Error during wizard: ${formatError(err)}${RESET()}`);
+        process.exit(1);
+      });
+      return;
     }
 
     if (command === "serve") {
