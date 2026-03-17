@@ -97,7 +97,7 @@ ${BOLD()}Scanning:${RESET()}
   ${CYAN()}dashboard${RESET()}       Show compliance status dashboard
   ${CYAN()}status${RESET()}          Alias for dashboard
   ${CYAN()}metrics${RESET()}         All compliance metrics in one view (for standup reporting)
-  ${CYAN()}summary${RESET()}         One-paragraph plain English compliance summary
+  ${CYAN()}summary${RESET()}         One-page compliance summary (score, risks, services, actions)
   ${CYAN()}quickstart${RESET()}      Show quick start guide based on scan results
   ${CYAN()}completeness${RESET()}    Show percentage of recommended docs that exist
   ${CYAN()}migrate${RESET()}         Show new document types available after upgrade
@@ -928,11 +928,12 @@ ${BOLD()}Examples:${RESET()}
 
   summary: `${BOLD()}codepliant summary${RESET()} [path] [options]
 
-Print a one-paragraph plain English summary of your project's compliance status.
-Includes service count, key services, needed documents, and compliance score.
+Print a one-page compliance summary of your project. Shows compliance score,
+risk level, detected services by category, data categories, regulatory readiness,
+top risks, and recommended actions — everything you need at a glance.
 
 ${BOLD()}Options:${RESET()}
-  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--json${RESET()}                Output as JSON (enriched with full breakdown)
   ${DIM()}--no-color${RESET()}            Disable colored output
 
 ${BOLD()}Examples:${RESET()}
@@ -4700,43 +4701,197 @@ function runSummary(
 
   // Identify key/notable services to name explicitly
   const serviceNames = result.services.map((s) => s.name);
-  const notable = serviceNames.filter((n) =>
-    /openai|stripe|anthropic|google|sentry|posthog|mixpanel|amplitude|datadog|twilio|sendgrid|aws|firebase|supabase|clerk|auth0|vercel/i.test(n)
-  );
-  const namedServices = notable.length > 0
-    ? notable.slice(0, 3).join(", ") + (notable.length > 3 ? `, and ${notable.length - 3} more` : "")
-    : serviceNames.slice(0, 3).join(", ") + (serviceNames.length > 3 ? `, and ${serviceNames.length - 3} more` : "");
+
+  // Group services by category
+  const categoryGroups = new Map<string, string[]>();
+  for (const svc of result.services) {
+    const group = categoryGroups.get(svc.category) || [];
+    group.push(svc.name);
+    categoryGroups.set(svc.category, group);
+  }
 
   // Identify needed document types
   const neededDocs = [...new Set(result.complianceNeeds.map((n) => n.document))];
-  const neededList = neededDocs.length > 0
-    ? neededDocs.slice(0, 4).map((d) => d.toLowerCase()).join(", ") + (neededDocs.length > 4 ? `, and ${neededDocs.length - 4} more` : "")
-    : "no additional documents";
+  const generatedNames = new Set(docs.map((d) => d.name));
+  const missingRequired = result.complianceNeeds
+    .filter((n) => n.priority === "required" && !generatedNames.has(n.document))
+    .map((n) => n.document);
+  const missingRecommended = result.complianceNeeds
+    .filter((n) => n.priority === "recommended" && !generatedNames.has(n.document))
+    .map((n) => n.document);
 
-  // Build the summary paragraph
-  const serviceCountText = result.services.length === 1
-    ? "1 service"
-    : `${result.services.length} services`;
-  const docCountText = docs.length === 1
-    ? "1 document"
-    : `${docs.length} documents`;
+  // Data processors count
+  const dataProcessors = result.services.filter((s) => s.isDataProcessor !== false).length;
 
-  const summary = `Your project uses ${serviceCountText}${namedServices ? ` including ${namedServices}` : ""}. You need ${neededList}. Codepliant generates ${docCountText} for your project. Your compliance score is ${fullScore.total}% (${fullScore.grade}).`;
+  // Risk level
+  let riskLevel: string;
+  let riskDetail: string;
+  if (fullScore.total >= 90) {
+    riskLevel = "LOW";
+    riskDetail = "Compliance posture is strong. Continue regular monitoring.";
+  } else if (fullScore.total >= 75) {
+    riskLevel = "MODERATE";
+    riskDetail = "Minor gaps identified. Address recommended items within 30 days.";
+  } else if (fullScore.total >= 50) {
+    riskLevel = "HIGH";
+    riskDetail = "Significant compliance gaps. Immediate action required.";
+  } else {
+    riskLevel = "CRITICAL";
+    riskDetail = "Major compliance deficiencies. Escalate to leadership immediately.";
+  }
 
+  // Top risks
+  const topRisks: string[] = [];
+  if (missingRequired.length > 0) {
+    topRisks.push(`${missingRequired.length} required document(s) missing: ${missingRequired.slice(0, 3).join(", ")}${missingRequired.length > 3 ? ` +${missingRequired.length - 3} more` : ""}`);
+  }
+  const hasAI = result.services.some((s) => s.category === "ai");
+  if (hasAI) topRisks.push("AI services in use — EU AI Act obligations apply");
+  const hasPayment = result.services.some((s) => s.category === "payment");
+  if (hasPayment) topRisks.push("Payment processing — PCI DSS scope implications");
+  const hasAds = result.services.some((s) => s.category === "advertising");
+  if (hasAds) topRisks.push("Advertising/tracking — cookie consent required");
+
+  // Category label helper
+  const catLabel = (cat: string): string => {
+    const labels: Record<string, string> = {
+      ai: "AI/ML", analytics: "Analytics", auth: "Auth", advertising: "Ads",
+      database: "Database", email: "Email", monitoring: "Monitoring",
+      payment: "Payment", social: "Social", storage: "Storage", other: "Other",
+    };
+    return labels[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+  };
+
+  // JSON output — enriched
   if (jsonOutput) {
+    const servicesByCategory: Record<string, string[]> = {};
+    for (const [cat, svcs] of categoryGroups.entries()) {
+      servicesByCategory[catLabel(cat)] = svcs;
+    }
     console.log(JSON.stringify({
-      summary,
-      services: result.services.length,
-      serviceNames,
-      documents: docs.length,
-      neededDocuments: neededDocs,
+      projectName: result.projectName,
+      projectPath: result.projectPath,
+      scannedAt: result.scannedAt,
       score: fullScore.total,
       grade: fullScore.grade,
+      riskLevel,
+      services: result.services.length,
+      dataProcessors,
+      servicesByCategory,
+      dataCategories: result.dataCategories.map((c) => c.category),
+      documentsGenerated: docs.length,
+      neededDocuments: neededDocs,
+      missingRequired,
+      missingRecommended,
+      topRisks,
+      regulationScores: fullScore.regulationScores?.map((r) => ({
+        regulation: r.regulation,
+        score: r.score,
+        grade: r.grade,
+      })) || [],
+      recommendations: fullScore.recommendations?.slice(0, 5).map((r) => ({
+        impact: r.impact,
+        title: r.title,
+        pointsGain: r.estimatedPointsGain,
+      })) || [],
     }, null, 2));
     process.exit(0);
   }
 
-  console.log(`\n${summary}\n`);
+  // --- Terminal one-page summary ---
+  const lines: string[] = [];
+
+  // Header
+  const riskColor = riskLevel === "LOW" ? GREEN() : riskLevel === "MODERATE" ? YELLOW() : RED();
+  lines.push("");
+  lines.push(`${BOLD()}Compliance Summary: ${result.projectName}${RESET()}`);
+  lines.push(`${DIM()}Scanned ${result.scannedAt.split("T")[0]} by Codepliant v${VERSION}${RESET()}`);
+  lines.push("");
+
+  // Score + Risk
+  const gradeColor = fullScore.total >= 75 ? GREEN() : fullScore.total >= 50 ? YELLOW() : RED();
+  lines.push(`  ${BOLD()}Score:${RESET()}      ${gradeColor}${fullScore.total}%${RESET()} (${gradeColor}${fullScore.grade}${RESET()})`);
+  lines.push(`  ${BOLD()}Risk Level:${RESET()} ${riskColor}${riskLevel}${RESET()} — ${riskDetail}`);
+  lines.push("");
+
+  // Key metrics row
+  const requiredCount = result.complianceNeeds.filter((n) => n.priority === "required").length;
+  const recommendedCount = result.complianceNeeds.filter((n) => n.priority === "recommended").length;
+  lines.push(`  ${BOLD()}Services:${RESET()}   ${result.services.length} detected (${dataProcessors} data processors)`);
+  lines.push(`  ${BOLD()}Documents:${RESET()}  ${docs.length} generated`);
+  lines.push(`  ${BOLD()}Actions:${RESET()}    ${requiredCount} required, ${recommendedCount} recommended`);
+  lines.push(`  ${BOLD()}Data types:${RESET()} ${result.dataCategories.length} categories`);
+  lines.push("");
+
+  // Services by category
+  if (categoryGroups.size > 0) {
+    lines.push(`  ${BOLD()}Services detected:${RESET()}`);
+    const sortedCats = Array.from(categoryGroups.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    for (const [cat, svcs] of sortedCats) {
+      const label = catLabel(cat);
+      const svcList = svcs.slice(0, 5).join(", ") + (svcs.length > 5 ? ` +${svcs.length - 5} more` : "");
+      lines.push(`    ${CYAN()}${label}:${RESET()} ${svcList}`);
+    }
+    lines.push("");
+  }
+
+  // Data categories
+  if (result.dataCategories.length > 0) {
+    lines.push(`  ${BOLD()}Data categories:${RESET()}`);
+    for (const cat of result.dataCategories.slice(0, 6)) {
+      const sources = cat.sources.slice(0, 3).join(", ");
+      lines.push(`    ${DIM()}-${RESET()} ${cat.category} ${DIM()}(via ${sources})${RESET()}`);
+    }
+    if (result.dataCategories.length > 6) {
+      lines.push(`    ${DIM()}...and ${result.dataCategories.length - 6} more${RESET()}`);
+    }
+    lines.push("");
+  }
+
+  // Regulatory readiness
+  if (fullScore.regulationScores && fullScore.regulationScores.length > 0) {
+    lines.push(`  ${BOLD()}Regulatory readiness:${RESET()}`);
+    for (const reg of fullScore.regulationScores) {
+      const regColor = reg.score >= 75 ? GREEN() : reg.score >= 50 ? YELLOW() : RED();
+      lines.push(`    ${reg.regulation}: ${regColor}${reg.score}/100${RESET()} (${regColor}${reg.grade}${RESET()})`);
+    }
+    lines.push("");
+  }
+
+  // Top risks
+  if (topRisks.length > 0) {
+    lines.push(`  ${BOLD()}Top risks:${RESET()}`);
+    for (const risk of topRisks.slice(0, 5)) {
+      lines.push(`    ${RED()}!${RESET()} ${risk}`);
+    }
+    lines.push("");
+  }
+
+  // Recommendations
+  if (fullScore.recommendations && fullScore.recommendations.length > 0) {
+    lines.push(`  ${BOLD()}Recommended actions:${RESET()}`);
+    for (const rec of fullScore.recommendations.slice(0, 5)) {
+      const impactColor = rec.impact === "critical" || rec.impact === "high" ? RED() : rec.impact === "medium" ? YELLOW() : DIM();
+      lines.push(`    ${impactColor}[${rec.impact.toUpperCase()}]${RESET()} ${rec.title} ${DIM()}(+${rec.estimatedPointsGain} pts)${RESET()}`);
+    }
+    lines.push("");
+  }
+
+  // Missing documents
+  if (missingRequired.length > 0) {
+    lines.push(`  ${RED()}${BOLD()}Missing required documents:${RESET()}`);
+    for (const doc of missingRequired) {
+      lines.push(`    ${RED()}-${RESET()} ${doc}`);
+    }
+    lines.push("");
+  }
+
+  // Footer
+  lines.push(`${DIM()}Run 'codepliant go' to generate all documents, or 'codepliant summary --json' for machine-readable output.${RESET()}`);
+  lines.push(`${DIM()}This is not legal advice. All documents should be reviewed by qualified legal counsel.${RESET()}`);
+  lines.push("");
+
+  console.log(lines.join("\n"));
   process.exit(0);
 }
 
