@@ -1,16 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0066cc"/>
-      <stop offset="100%" stop-color="#0040aa"/>
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="60" y1="30" x2="140" y2="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00d4aa"/>
+      <stop offset="100%" stop-color="#00b894"/>
+    </linearGradient>
+    <linearGradient id="check" x1="75" y1="90" x2="125" y2="130" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0f7ef"/>
     </linearGradient>
   </defs>
+
   <!-- Rounded square background -->
-  <rect width="200" height="200" rx="40" fill="url(#bg)"/>
-  <!-- Shield icon -->
-  <path d="M100 35 L145 55 L145 105 C145 135 125 158 100 170 C75 158 55 135 55 105 L55 55 Z" fill="white" opacity="0.95"/>
-  <!-- Checkmark inside shield -->
-  <path d="M82 105 L95 118 L120 88" stroke="#0066cc" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <!-- Code brackets at bottom -->
-  <text x="72" y="155" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="22" font-weight="700" fill="white" opacity="0.9">&lt;/&gt;</text>
+  <rect width="200" height="200" rx="44" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern (code aesthetic) -->
+  <line x1="66" y1="0" x2="66" y2="200" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <line x1="100" y1="0" x2="100" y2="200" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <line x1="134" y1="0" x2="134" y2="200" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <line x1="0" y1="66" x2="200" y2="66" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <line x1="0" y1="100" x2="200" y2="100" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <line x1="0" y1="134" x2="200" y2="134" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+
+  <!-- Left curly brace { -->
+  <path d="M58 60 Q58 50 65 50 L72 50 Q65 50 65 60 L65 90 Q65 100 55 100 Q65 100 65 110 L65 140 Q65 150 72 150 L65 150 Q58 150 58 140"
+        stroke="#00d4aa" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Right curly brace } -->
+  <path d="M142 60 Q142 50 135 50 L128 50 Q135 50 135 60 L135 90 Q135 100 145 100 Q135 100 135 110 L135 140 Q135 150 128 150 L135 150 Q142 150 142 140"
+        stroke="#00d4aa" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Shield shape (centered, between braces) -->
+  <path d="M100 42 L134 58 L134 100 C134 126 119 146 100 155 C81 146 66 126 66 100 L66 58 Z"
+        fill="url(#shield)" opacity="0.15" stroke="url(#shield)" stroke-width="2"/>
+
+  <!-- Inner shield highlight -->
+  <path d="M100 52 L126 64 L126 98 C126 118 115 134 100 141 C85 134 74 118 74 98 L74 64 Z"
+        fill="url(#shield)" opacity="0.25"/>
+
+  <!-- Checkmark -->
+  <path d="M84 100 L96 113 L118 86"
+        stroke="url(#check)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Subtle glow behind checkmark -->
+  <circle cx="100" cy="100" r="24" fill="#00d4aa" opacity="0.08"/>
 </svg>

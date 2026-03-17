@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Green rounded square -->
+  <rect width="200" height="200" rx="44" fill="url(#bg3)"/>
+
+  <!-- Large C letter with integrated checkmark -->
+  <g transform="translate(100, 100)">
+    <!-- C shape -->
+    <path d="M20 -48 A55 55 0 1 0 20 48"
+          stroke="white" stroke-width="16" fill="none" stroke-linecap="round"/>
+
+    <!-- Checkmark extending from top of C -->
+    <path d="M10 -10 L24 6 L48 -30"
+          stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

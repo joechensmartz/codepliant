@@ -16,6 +16,7 @@ import { loadPlugins } from "./plugins/loader.js";
 import type { CodepliantPlugin } from "./plugins/index.js";
 import type { ScanResult, ScanTimings } from "./scanner/index.js";
 import { generateEnvExample, writeEnvExample } from "./generator/env-example.js";
+import { generateSbom, writeSbom } from "./generator/sbom.js";
 import { generateQuickStartGuide } from "./generator/quick-start-guide.js";
 import { initTemplates, getTemplatesDir } from "./templates/engine.js";
 import { startServer } from "./api/server.js";
@@ -120,6 +121,7 @@ ${BOLD()}Generation:${RESET()}
   ${CYAN()}pdf${RESET()}             Generate PDF for a single document (requires Puppeteer)
   ${CYAN()}export${RESET()}          Export all compliance docs as a ZIP file
   ${CYAN()}compare${RESET()}         Compare compliance status of two projects
+  ${CYAN()}sbom${RESET()}            Generate CycloneDX SBOM from dependency scan
 
 ${BOLD()}Notifications:${RESET()}
   ${CYAN()}notify${RESET()}          Send compliance status notification
@@ -1849,6 +1851,11 @@ function main() {
       return;
     }
 
+    if (command === "sbom") {
+      runSbom(absProjectPath, outputDir, quiet, verbose);
+      return;
+    }
+
     console.error(`${RED()}[CP008] Unknown command: "${command}"${RESET()}`);
     console.error(`${DIM()}Run ${CYAN()}codepliant help${RESET()}${DIM()} to see available commands.${RESET()}`);
     process.exit(1);
@@ -2889,6 +2896,51 @@ function runEnv(
     );
     console.log(
       `${DIM()}Copy to .env.local and fill in your actual values.${RESET()}\n`
+    );
+  }
+
+  process.exit(0);
+}
+
+function runSbom(
+  absProjectPath: string,
+  outputDir: string,
+  quiet: boolean,
+  verbose: boolean
+) {
+  if (!quiet) printBanner();
+
+  const config = loadConfig(absProjectPath);
+  const plugins = config.plugins ? loadPlugins(absProjectPath, config.plugins) : [];
+
+  const { result, durationMs, timings } = scanWithProgress(absProjectPath, quiet, verbose, plugins);
+
+  if (!quiet) {
+    console.log(`\n  ${DIM()}Scanned in ${formatDuration(durationMs)}${RESET()}\n`);
+  }
+
+  if (verbose && timings && !quiet) {
+    printTimings(timings, durationMs);
+  }
+
+  const bom = generateSbom(result);
+
+  // Determine output path: --output flag or default to sbom.json in project root
+  const outputPath =
+    outputDir !== "./legal"
+      ? path.resolve(outputDir)
+      : path.join(absProjectPath, "sbom.json");
+
+  const writtenPath = writeSbom(bom, outputPath);
+
+  if (!quiet) {
+    const relativePath = path.relative(absProjectPath, writtenPath);
+    console.log(`  ${GREEN()}✓${RESET()} ${relativePath} ${DIM()}(${bom.components.length} component(s))${RESET()}`);
+    console.log(
+      `\n${GREEN()}${BOLD()}Done!${RESET()} CycloneDX SBOM generated at ${relativePath}\n`
+    );
+    console.log(
+      `${DIM()}Format: CycloneDX ${bom.specVersion} — compatible with OWASP Dependency-Track, Snyk, Grype, etc.${RESET()}\n`
     );
   }
 
