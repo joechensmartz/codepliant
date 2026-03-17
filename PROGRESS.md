@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3986 passing — 100% scanner, 75/138 generators (54%)
+- **Tests**: 4114 passing — 100% scanner, 78/138 generators (57%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
 - **Iteration**: 30 complete (2026-03-17) — v1.1.0 TAGGED
-- **Last run**: v1.1.0 release finalization — tag created, all checks green
+- **Last run**: 🎯 MILESTONE 30 — v1.1.0 tagged, 🎉 4114 TESTS (4000+ achieved!), 30-iteration retrospective, QA 5/5 PASS
 
 ## Priority Backlog
 
@@ -2858,6 +2858,64 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
 5. **Socket.dev and Snyk Advisor**: These package health dashboards influence developer trust. Ensure no known vulnerabilities, have a clear license, and maintain a good OpenSSF Scorecard.
 6. **npm provenance**: Enable npm provenance via GitHub Actions (`--provenance` flag on `npm publish`). This adds a verified build badge on npmjs.com, increasing trust and click-through.
 
+### Iteration 30 — 30-Iteration Retrospective
+
+#### Top Achievements Across Iterations 1-29
+
+1. **Product maturity leap**: From 798 tests (Iteration 1) to 3,986 tests (Iteration 29) — a 5x increase. Scanner coverage reached 100%. Generator test coverage went from near-zero to 54% (75/138 generators).
+
+2. **Ecosystem explosion**: Added Terraform/IaC (Iteration 3), Swift/iOS (dev log), Kotlin/Android (Iteration 13), Docker, Elixir, and Django scanners — growing from ~8 to 13 supported ecosystems.
+
+3. **Feature completeness**: Shipped SBOM generation (CycloneDX 1.5), interactive wizard, `codepliant diff`, `codepliant health`, `codepliant stats`, `codepliant export`, `codepliant validate`, shell completions, fuzzy command matching, dry-run mode, and tree-view output. Document types grew from ~100 to 123+.
+
+4. **Comprehensive launch strategy**: Built a complete go-to-market playbook spanning Show HN (Iteration 8), Product Hunt (Iteration 10), awesome-list submissions (Iteration 12), newsletter pitches (Iteration 5), and npm discoverability (Iteration 25) — all with ready-to-ship drafts.
+
+5. **Deep market research**: Mapped the full competitive landscape (Termly, Iubenda, Vanta, Drata), identified Codepliant's unique differentiator (code-scanning vs. questionnaires), designed a tiered monetization model ($0/19/49/custom), and researched GitHub Sponsors, Tidelift, and enterprise funding paths.
+
+6. **Regulatory coverage**: Deep-dived India DPDP Act (Iteration 2), German Impressum (Iteration 2), SBOM requirements (Iteration 2), EU AI Act, i18n strategy for 9+ languages (Iteration 18), and identified upcoming deadlines (EU CRA Sep 2026, DPDP Phase 2 Nov 2026).
+
+7. **Infrastructure ready**: GitHub Action designed and marketplace-ready (Iteration 6/24), MCP server with 7 tools built and MCP marketplace listing strategy defined (Iteration 15), Dockerfile added (Iteration 29), VS Code extension architecture designed (Iteration 16).
+
+8. **Website and SEO**: Full website QA across 29 iterations — SEO meta tags, JSON-LD structured data, OG images, sitemap, accessibility audit (WCAG 2.1 AA), Core Web Vitals optimization, and page title SEO audit.
+
+#### What Worked Well in the Automated Agent Workflow
+
+- **Compounding knowledge**: Each iteration built on prior findings. The research agent's deep dives (competitive intel, regulations, launch strategy) directly informed the development agent's feature priorities. The Iteration 20 launch readiness assessment synthesized all prior work into a single actionable plan.
+
+- **Parallel agent specialization**: Research, development, testing, website design, and QA agents operating in parallel produced more output than any sequential workflow could. The testing agent alone added 3,000+ tests while the research agent focused on market strategy.
+
+- **PROGRESS.md as shared state**: A single coordination document prevented duplicated work and maintained continuity across agents and iterations. Every agent reads the same source of truth before starting.
+
+- **Iteration cadence**: Short iterations with clear deliverables (one research topic, one feature, one test batch) kept momentum high and prevented scope creep within any single iteration.
+
+- **Research-driven development**: Features were not added speculatively. Terraform scanning, SBOM generation, Kotlin/Android support, and the i18n roadmap all came from research-backed demand signals (regulatory deadlines, competitor gaps, developer pain points).
+
+#### What Could Be Improved for the Next 30 Iterations
+
+- **Demo GIF still missing (Issue #3)**: Flagged as critical in Iterations 3, 8, 11, and 20, yet still unresolved. The VHS tape file was drafted but never executed. This is the single most impactful README improvement and has been repeatedly deprioritized.
+
+- **v1.1.0 still unpublished**: The npm publish has been "ready" since Iteration 9 but not executed. Shipping should not wait for perfection.
+
+- **Generator test coverage at 54%**: Good progress but 63 generators remain untested. The rate of ~6 generators tested per iteration means full coverage is ~10 iterations away. Consider prioritizing the highest-risk generators (privacy-policy, terms-of-service, ai-disclosure already done).
+
+- **No real-world user feedback yet**: 29 iterations of building and researching without external validation. The risk of building in a vacuum increases with each iteration. Launch sooner, learn from users.
+
+- **Research breadth vs. depth tradeoff**: Some iterations covered very broad ground (Iteration 5 covered awesome lists, newsletters, OWASP, and IAPP in one pass). Deeper follow-through on fewer channels would yield more actionable results.
+
+- **Agent coordination overhead**: The PROGRESS.md file has grown to nearly 7,000 lines. Reading it at the start of each iteration consumes significant context budget. Consider splitting into separate files per section (research.md, dev-log.md, test-results.md).
+
+#### Top 5 Priorities for Iterations 31-60
+
+1. **Ship v1.1.0 and execute the Show HN launch** — The product is ready. The launch materials are drafted. The demo GIF must be recorded, the README polished, and `npm publish` executed. Target: complete within 2-3 iterations. Everything else is secondary to getting real users.
+
+2. **Reach 75%+ generator test coverage** — Continue the testing agent's cadence. Prioritize generators used by the most common project types (Node.js/React/Next.js stacks). Target: 100/138 generators tested by Iteration 45.
+
+3. **Build and publish the GitHub Action** — The highest-leverage monetization and distribution feature. The action.yml design is ready (Iteration 6/24). Publish to the GitHub Marketplace within 1 week of the npm launch. This creates a second discovery surface and the foundation for Pro-tier features.
+
+4. **Execute post-launch growth playbook** — Submit awesome-list PRs (4 ready, no blockers), pitch JavaScript Weekly and TLDR, post to Reddit and DEV.to, publish the "GDPR privacy policy from code" blog post. Follow the Day 0-7 timeline from Iteration 20. Track metrics against the benchmarks defined in Iteration 9.
+
+5. **Add Portuguese (BR) and Japanese locales** — The two highest-impact language additions per Iteration 18 research. LGPD (Brazil) and APPI (Japan) create regulatory demand. These unlock the two largest non-English-speaking developer markets. Target: Iteration 45-50, with legal review of translations.
+
 ## Development Log
 
 **2026-03-17 — `codepliant stats` one-line compliance summary (Iteration 28)**
@@ -4394,6 +4452,43 @@ _Updated by Website Agent each iteration._
 
 **Already in range (no changes needed):**
 - `/blog` (50 rendered), `/gdpr-compliance` (51 rendered), `/hipaa-compliance` (57 rendered), `/ai-governance` (48 rendered), `/blog/gdpr-for-developers` (65 rendered — kept at 51+14=65, borderline but acceptable since Google may truncate the suffix), `/blog/privacy-policy-for-saas` (70 rendered — kept, Google truncates gracefully), `/blog/soc2-for-startups` (64 rendered), `/blog/hipaa-for-developers` (73 rendered — kept, description carries the SEO weight)
+
+**Build verification:**
+- `next build` passes cleanly, 29/29 static pages generated successfully
+
+### Iteration 30 — 2026-03-17 — Milestone comprehensive verification
+
+**Scope:** Final verification of design consistency, footer rendering, mobile nav, code block styling, and spacing across all 29 pages.
+
+**1. Design tokens audit:**
+- **Color tokens**: All 29 pages use the design system color tokens (`text-ink`, `text-ink-secondary`, `bg-surface-primary`, `bg-surface-secondary`, `text-brand`, `bg-code-bg`, `text-code-fg`, `border-border-subtle`). Zero hardcoded hex colors found in any `.tsx` file. No `bg-[#...]` or `text-[#...]` overrides.
+- **Semantic status colors**: The changelog page uses Tailwind color utilities (`text-emerald-700`, `bg-blue-50`, `text-purple-700`, `bg-amber-50`) for category badges (New, Improved, Tests, Fix). These are intentional — the design system has no status color tokens, and these are scoped to badge components only.
+- **Typography tokens**: 8 core pages (homepage, layout, docs, about, pricing, not-found, error, changelog) use the fluid `text-[length:var(--text-*)]` design tokens (80 occurrences). The remaining 19 pages (generators, compliance pages, blog posts, compare) use standard Tailwind `text-sm`/`text-lg`/`text-2xl` classes (405 occurrences). Both render correctly — the fluid tokens provide responsive scaling while the Tailwind classes use fixed sizes. This is a pre-existing pattern from when those pages were created before the token system was established. Full migration is a future task.
+- **Spacing tokens**: Same split — 8 core pages use `var(--space-*)` tokens (327 occurrences), 19 pages use Tailwind spacing utilities like `mb-4`, `px-6` (546 occurrences). Both render correctly.
+
+**2. Footer renders on all pages:**
+- Footer is defined in `src/app/layout.tsx` as a component rendered inside `RootLayout`, which wraps all pages via `<Footer />` after `<main>`. Every page inherits this layout — confirmed by the root layout structure (lines 277-305). No page overrides the root layout.
+- Footer contains: CTA block with `npx codepliant go`, 4-column nav (Product, Resources, Compliance, Company), MIT Licensed and Zero Network Calls badges, and copyright.
+
+**3. Mobile nav works:**
+- Desktop nav (hidden on `sm:` breakpoint): 6 links (Pricing, Docs, Changelog, Blog, About, GitHub).
+- Mobile nav (visible below `sm:`): 2 always-visible links (Docs, Pricing) + hamburger `<details>` menu with 4 secondary links (Blog, Changelog, About, GitHub). Menu items have `min-h-[44px]` touch targets.
+- `overflow-x: hidden` on `<html>` and `<body>` prevents horizontal scroll.
+- `<details>` element used for hamburger — works without JavaScript, no client component needed.
+
+**4. Code blocks styled consistently:**
+- All code blocks across all pages use `bg-code-bg text-code-fg` color tokens. Zero exceptions.
+- Block-level code: `font-mono`, dark background, rounded corners, consistent padding.
+- Inline code: `bg-code-bg text-code-fg px-1.5 py-0.5 rounded text-sm` pattern used on blog posts and compliance pages.
+- **Fix applied**: HIPAA compliance page (`src/app/hipaa-compliance/page.tsx`) had 3 inline `<code>` elements using `bg-surface-secondary` instead of `bg-code-bg text-code-fg`. Updated all 3 to match the standard inline code pattern used across the rest of the site.
+
+**5. All pages have proper spacing:**
+- All pages wrap content in `max-w-[960px] mx-auto` containers matching the header/footer width.
+- Section spacing is consistent within each page group (generators use `mb-16` between sections, compliance pages use `mb-16`, blog posts use `mb-12`).
+- Footer has `mt-[var(--space-24)]` (96px) top margin on all pages.
+
+**Bug fixed:**
+- `src/app/hipaa-compliance/page.tsx`: 3 inline `<code>` elements (EHR_API_KEY, FHIR_BASE_URL, HIPAA_AUDIT_LOG) changed from `bg-surface-secondary` to `bg-code-bg text-code-fg` for consistency with all other inline code across the site.
 
 **Build verification:**
 - `next build` passes cleanly, 29/29 static pages generated successfully
@@ -6744,6 +6839,28 @@ Sources: [Hacktoberfest Participation Rules](https://hacktoberfest.com/participa
 
 **No bugs found. No fixes applied. No build changes.**
 
+### Iteration 30 — 2026-03-17 — Milestone comprehensive QA (Website QA Agent, iteration 30)
+
+**Test scope**: All 23 pages at `http://localhost:5001`. Comprehensive final check covering HTTP status, OG images, favicon, sitemap completeness, and broken links.
+
+**Results: 5/5 checks pass.**
+
+| # | Check | Result | Detail |
+|---|---|---|---|
+| 1 | All 23 pages return HTTP 200 | **PASS** | 23/23 pages return 200 |
+| 2 | All OG images render | **PASS** | 23/23 pages have `og:image` meta tag; all image URLs return HTTP 200 |
+| 3 | Favicon works | **PASS** | `/icon` (32x32 PNG) and `/apple-icon` (180x180 PNG) both return 200; HTML `<link rel="icon">` and `<link rel="apple-touch-icon">` present and correct |
+| 4 | Sitemap complete | **PASS** | `/sitemap.xml` contains all 23 URLs; 0 missing |
+| 5 | No broken links | **PASS** | 30 unique internal link paths extracted from all 23 pages; 0 broken (all return 200) |
+
+**Pages verified (23/23):** `/`, `/about`, `/ai-disclosure-generator`, `/ai-governance`, `/blog`, `/blog/colorado-ai-act`, `/blog/eu-ai-act-deadline`, `/blog/gdpr-for-developers`, `/blog/generate-privacy-policy-from-code`, `/blog/hipaa-for-developers`, `/blog/privacy-policy-for-saas`, `/blog/soc2-for-startups`, `/changelog`, `/compare`, `/cookie-policy-generator`, `/data-privacy`, `/docs`, `/gdpr-compliance`, `/hipaa-compliance`, `/pricing`, `/privacy-policy-generator`, `/soc2-compliance`, `/terms-of-service-generator`.
+
+**OG image detail**: 8 pages have custom OG images (homepage, ai-governance, 4 compliance pages, 3 newer blog posts with route-specific opengraph-image generators). The remaining 15 pages inherit the root `/opengraph-image` from the layout. All 23 resolve to HTTP 200.
+
+**Favicon note**: `/favicon.ico` returns 404 (no static file). This is expected -- Next.js serves the icon via the dynamic `icon.tsx` route at `/icon`, which the HTML `<link rel="icon">` tag correctly references. All modern browsers follow the `<link>` tag. Not a bug.
+
+**No bugs found. No fixes applied. No build changes.**
+
 ### Iteration 28 — 2026-03-17 — Docker and Containerization Research
 
 #### Should Codepliant offer a Docker image?
@@ -6900,3 +7017,13 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - MCP server, GitHub Action, Docker support
   - puppeteer moved to optionalDependencies
 - **Next step**: `git push origin v1.1.0` to trigger release workflow
+
+### Iteration 30.1 — 2026-03-17 — 4000 TEST MILESTONE
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4114/4114 passing, 0 failures (was 3986, added 128 new tests)
+- **4000 TEST MILESTONE ACHIEVED** — 4114 total tests, surpassing the 4000 target
+- **Tests added this iteration**:
+  - `src/generator/incident-severity-matrix.test.ts` (48 tests): basic output, context values (company, dpoEmail, securityEmail, fallbacks), all five severity levels P0-P4, response time requirements, escalation paths, communication requirements, communication channels, per-service impact assessment table (data at risk, compromised severity, outage severity, regulatory impact), category-specific incident scenarios (AI, payment, auth, database/storage, analytics with inclusion/exclusion), severity decision tree, regulatory response timelines (GDPR, PCI DSS conditional, EU AI Act conditional), incident response roles, Codepliant disclaimer, full-scenario with all categories
+  - `src/generator/data-lifecycle-diagram.test.ts` (40 tests): null returns (empty services, unsupported categories), basic output, context values, lifecycle overview section, mermaid diagram structure (subgraphs, styling), all seven data types (identity/auth, payment, analytics, AI, email/communication, monitoring/technical, database-storage/user-content), retention periods per category, retention summary table, detailed lifecycle per data type, lifecycle stage details, multiple data types coexistence, deduplication of same-category services, multiple sources listing, disclaimer, full seven-type scenario, mermaid styling count
+  - `src/generator/compliance-communication-plan.test.ts` (40 tests): null return for empty services, basic output, context values (company, contactEmail, dpoName, dpoEmail, placeholders), communication objectives, stakeholder communication matrix (all 10 roles, escalation status), communication calendar (regular cadence + event-driven), escalation matrix (4 levels), communication templates A/B/C, conditional Template D (AI with risk level), conditional Template E (payment), recommended channels with automation examples, RACI matrix with abbreviation legend, communication effectiveness metrics, contact section, Codepliant disclaimer with service count, full scenario with all sections numbered
