@@ -32,8 +32,9 @@ export function scanGitHubActions(projectPath: string): DetectedService[] {
 
     // Detect deployment-related actions
     const actionPatterns: { pattern: RegExp; name: string; category: DetectedService["category"]; dataCollected: string[] }[] = [
-      { pattern: /uses:\s*['"]?aws-actions\/configure-aws-credentials/i, name: "AWS", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
-      { pattern: /uses:\s*['"]?google-github-actions\/auth/i, name: "Google Cloud", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
+      { pattern: /uses:\s*['"]?actions\/upload-artifact/i, name: "GitHub Artifacts", category: "storage", dataCollected: ["build artifacts", "CI/CD outputs"] },
+      { pattern: /uses:\s*['"]?aws-actions\//i, name: "AWS (via GitHub Actions)", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
+      { pattern: /uses:\s*['"]?google-github-actions\//i, name: "GCP (via GitHub Actions)", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
       { pattern: /uses:\s*['"]?azure\/login/i, name: "Azure", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
       { pattern: /uses:\s*['"]?docker\/login-action/i, name: "Docker Hub", category: "other", dataCollected: ["container images"] },
       { pattern: /uses:\s*['"]?codecov\/codecov-action/i, name: "Codecov", category: "monitoring", dataCollected: ["code coverage data"] },
@@ -48,6 +49,26 @@ export function scanGitHubActions(projectPath: string): DetectedService[] {
           category: ap.category,
           evidence: [{ type: "code_pattern", file: filePath, detail: `Found ${ap.name} action in ${file}` }],
           dataCollected: ap.dataCollected,
+          isDataProcessor: false,
+        });
+      }
+    }
+
+    // Detect cloud providers from secret references
+    const secretPatterns: { pattern: RegExp; name: string; category: DetectedService["category"]; dataCollected: string[] }[] = [
+      { pattern: /secrets\.AWS_/i, name: "AWS (via GitHub Actions)", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
+      { pattern: /secrets\.GCP_|secrets\.GOOGLE_/i, name: "GCP (via GitHub Actions)", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
+      { pattern: /secrets\.AZURE_/i, name: "Azure", category: "storage", dataCollected: ["deployment artifacts", "cloud infrastructure"] },
+    ];
+
+    for (const sp of secretPatterns) {
+      if (sp.pattern.test(content) && !detectedActions.has(sp.name)) {
+        detectedActions.add(sp.name);
+        services.push({
+          name: sp.name,
+          category: sp.category,
+          evidence: [{ type: "code_pattern", file: filePath, detail: `Found ${sp.name} secrets in ${file}` }],
+          dataCollected: sp.dataCollected,
           isDataProcessor: false,
         });
       }
