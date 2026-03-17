@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2425 passing — 100% scanner coverage, 36/132 generators
+- **Tests**: 2523 passing — 100% scanner coverage, 39/132 generators
 - **Repos tested**: 1200+
 - **Document types**: 122+
 - **Ecosystems**: 13
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 16 complete (2026-03-17)
-- **Last run**: shell completions, 113 tests, SOC2 blog, OG images, heading optimization, VS Code research
+- **Iteration**: 17 complete (2026-03-17)
+- **Last run**: tree-view output, 98 tests, fake testimonials removed, sitemap enhanced, OG images fixed, Homebrew research
 
 ## Priority Backlog
 
@@ -2544,6 +2544,127 @@ A Codepliant extension would bring compliance awareness directly into the develo
 - **Generator modules now with tests** (36 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report, open-source-notice, api-terms, cookie-inventory, data-breach-notification, vendor-questionnaire, cross-border-transfer-map
 - **Generator modules still missing tests**: 96 files (was 99)
 
+### Iteration 17 — 2026-03-17
+
+#### Homebrew Distribution Research
+
+**1. Creating a Homebrew Formula for a Node.js CLI Tool**
+
+Homebrew has official documentation for Node.js formula authors (https://docs.brew.sh/Node-for-Formula-Authors). The standard approach:
+
+- Use npm registry tarballs as the download source (`https://registry.npmjs.org/<name>/-/<name>-<version>.tgz`), preferred over GitHub source tarballs because they exclude test files and include pre-transpiled code
+- Declare `depends_on "node"` as the runtime dependency
+- Use `std_npm_args` helper in the install method — this sets up correct npm environment and fixes cache edge cases that cause long build times under Homebrew's sandboxed HOME
+- Install to `libexec` (prevents contaminating global `node_modules`), then symlink binaries: `bin.install_symlink libexec.glob("bin/*")`
+- Include a `test do` block that exercises the CLI (e.g., `--version` or a real scan)
+
+**Complication for Codepliant**: The package has a runtime dependency on `@modelcontextprotocol/sdk` and an optional dependency on `puppeteer`. The MCP SDK dependency will be bundled by npm install automatically. Puppeteer (optional) would need special handling or could be excluded from the formula since it is only used for PDF export.
+
+**2. homebrew-core vs. Custom Tap**
+
+| Aspect | homebrew-core | Custom Tap |
+|--------|--------------|------------|
+| Discoverability | `brew install codepliant` directly | `brew install joechensmartz/tap/codepliant` |
+| Approval | Strict review process, must meet notable/popular threshold | Self-managed, no approval needed |
+| Maintenance | Homebrew bot auto-updates via version bumps | Manual updates via GitHub releases |
+| Setup | PR to github.com/Homebrew/homebrew-core | Create repo `homebrew-tap` under your GitHub org |
+| Best for | Established tools with significant install base | New tools, early-stage projects |
+
+**Recommendation**: Start with a custom tap (`joechensmartz/homebrew-tap`). The process:
+1. Create a GitHub repo named `homebrew-tap`
+2. Add the formula as `Formula/codepliant.rb`
+3. Users install via: `brew tap joechensmartz/tap && brew install codepliant`
+4. Once install numbers grow, submit a PR to homebrew-core for broader reach
+
+**3. Successful Node.js CLIs on Homebrew**
+
+| Tool | Version | License | 30-day installs | Formula |
+|------|---------|---------|-----------------|---------|
+| **prettier** | 3.8.1 | MIT | 1,387 | `depends_on "node"`, npm registry tarball, `std_npm_args` |
+| **eslint** | 10.0.3 | MIT | 1,638 | `depends_on "node"`, npm registry tarball, `std_npm_args` |
+| **biome** | 2.4.7 | Apache-2.0 OR MIT | 5,219 | `depends_on "rust"` (compiled binary, not Node) |
+
+Key observations:
+- Prettier and ESLint both use the identical Node.js formula pattern: npm registry tarball + `std_npm_args` + symlink binaries
+- Biome is a Rust binary, so it uses a different build pattern entirely
+- Even well-known tools like Prettier only see ~1,400 installs/month via Homebrew — npm remains the primary distribution channel
+- All three have `head` blocks pointing to their GitHub main branch for `brew install --HEAD` support
+
+**Real prettier.rb formula** (from homebrew-core):
+```ruby
+class Prettier < Formula
+  desc "Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML"
+  homepage "https://prettier.io/"
+  url "https://registry.npmjs.org/prettier/-/prettier-3.8.1.tgz"
+  sha256 "5531dc6006ad06b642d5342438909f85dc53e87c50556753c908229b213fb4f4"
+  license "MIT"
+  head "https://github.com/prettier/prettier.git", branch: "main"
+
+  bottle do
+    sha256 cellar: :any_skip_relocation, all: "..."
+  end
+
+  depends_on "node"
+
+  def install
+    system "npm", "install", *std_npm_args
+    bin.install_symlink libexec.glob("bin/*")
+  end
+
+  test do
+    (testpath/"test.js").write("const arr = [1,2];")
+    output = shell_output("#{bin}/prettier test.js")
+    assert_equal "const arr = [1, 2];", output.chomp
+  end
+end
+```
+
+**4. Draft Homebrew Formula for Codepliant**
+
+```ruby
+class Codepliant < Formula
+  desc "Scan your codebase, generate compliance documents from actual code"
+  homepage "https://codepliant.dev"
+  url "https://registry.npmjs.org/codepliant/-/codepliant-1.1.0.tgz"
+  sha256 "<sha256-of-npm-tarball>"
+  license "MIT"
+  head "https://github.com/joechensmartz/codepliant.git", branch: "main"
+
+  depends_on "node"
+
+  def install
+    system "npm", "install", *std_npm_args
+    bin.install_symlink libexec.glob("bin/*")
+  end
+
+  test do
+    # Test version output
+    assert_match version.to_s, shell_output("#{bin}/codepliant --version")
+
+    # Test scan on a minimal project
+    (testpath/"package.json").write('{"name":"test","dependencies":{"stripe":"^14.0.0"}}')
+    output = shell_output("#{bin}/codepliant scan #{testpath} --json")
+    assert_match "stripe", output
+  end
+end
+```
+
+**Notes on the draft formula:**
+- `sha256` must be computed from the actual npm tarball: `curl -sL https://registry.npmjs.org/codepliant/-/codepliant-1.1.0.tgz | shasum -a 256`
+- The `bin` field in package.json exposes two executables (`codepliant` and `codepliant-mcp`), both will be symlinked automatically
+- The `@modelcontextprotocol/sdk` runtime dependency will be installed by `npm install` into `libexec/lib/node_modules/`
+- `puppeteer` (optionalDependency) may fail to install in Homebrew's sandboxed environment — this is acceptable since it is optional and PDF export can degrade gracefully
+- The `bottle do` block is auto-generated by Homebrew CI after formula submission; omit it in the initial tap formula
+- For the custom tap, the formula file goes at `Formula/codepliant.rb` in the `homebrew-tap` repo
+
+**Implementation checklist for Homebrew distribution:**
+1. Create `joechensmartz/homebrew-tap` repo on GitHub
+2. Add `Formula/codepliant.rb` with the draft formula above (fill in real sha256)
+3. Test locally: `brew tap joechensmartz/tap && brew install codepliant`
+4. Add installation instructions to README: `brew install joechensmartz/tap/codepliant`
+5. Set up GitHub Action to auto-update formula on new npm publish (bump version + sha256)
+6. Once established, submit PR to homebrew-core for `brew install codepliant` without tap
+
 ## Website Updates
 
 _Updated by Website Agent each iteration._
@@ -3138,6 +3259,20 @@ _Updated by Website Agent each iteration._
 
 **Build verification:**
 - `next build` passes cleanly, 25/25 static pages generated successfully
+
+### Iteration 17 — 2026-03-17 — Sitemap enhancement
+
+**Enhanced sitemap (`src/app/sitemap.ts`):**
+- Reorganized all 22 pages into logical groups with comments: Homepage, Docs & Pricing, Compliance pages, Blog index & posts, Generators, Other static pages
+- Updated `lastModified` dates: today (2026-03-17) for homepage, blog index, SOC 2 blog post, and changelog; 2026-03-15 for all other pages
+- Set `changeFrequency` to `'weekly'` for all 6 blog posts and blog index; `'monthly'` for all static pages
+- Set `priority` values per SEO strategy: 1.0 (homepage), 0.8 (docs, pricing), 0.7 (compliance pages, blog posts, blog index), 0.6 (compare, changelog), 0.5 (generators, about)
+- Verified all 22 pages present: homepage + 5 compliance + 7 blog (index + 6 posts) + 4 generators + 5 other (docs, pricing, compare, changelog, about)
+- Confirmed SOC 2 blog post URL (`/blog/soc2-for-startups`) is included with today's date
+- Verified `robots.ts` correctly references `https://codepliant.dev/sitemap.xml`
+
+**Build verification:**
+- `next build` passes cleanly, all 27 static pages generated (22 pages + OG image routes)
 
 ## Website QA
 
@@ -4274,3 +4409,122 @@ Added `codepliant completions` command that outputs shell completion scripts for
 - `src/app/compare/page.tsx` — card h3s to p tags
 
 **Verification:** All 6 modified pages return HTTP 200 with correct content. TypeScript type check passes (no new errors).
+
+### Iteration 17 — Tree-View Document Listing in `codepliant go` Output
+
+**Date:** 2026-03-17
+
+**Task:** Improve the `codepliant go` command output to display generated documents in a categorized tree-view format using box-drawing characters instead of a flat list. This was identified as a P1 CLI UX improvement during iteration 14 research.
+
+**Changes:**
+- **`src/cli.ts`**: Imported `getDocumentCategory` from `./generator/index.js`. Replaced the flat per-file listing loop (which printed each file on its own line) with a tree-view renderer that groups files by their document category directory (`legal/`, `security/`, `ai/`, etc.) and displays them with box-drawing characters (`├──`, `└──`). Category directory names are rendered in dim color, filenames in normal color with a green checkmark.
+
+**Before:**
+```
+  ✓ legal/PRIVACY_POLICY.md (Privacy Policy: 12.3 KB, 245 lines)
+  ✓ legal/TERMS_OF_SERVICE.md (Terms of Service: 8.1 KB, 180 lines)
+  ✓ security/SECURITY.md (Security Policy: 5.2 KB, 110 lines)
+```
+
+**After:**
+```
+  legal/
+  ├── ✓ PRIVACY_POLICY.md (Privacy Policy: 12.3 KB, 245 lines)
+  └── ✓ TERMS_OF_SERVICE.md (Terms of Service: 8.1 KB, 180 lines)
+  security/
+  └── ✓ SECURITY.md (Security Policy: 5.2 KB, 110 lines)
+```
+
+**Verification:** `npx tsc` passes with zero errors.
+
+### 2026-03-17 — Replace fake testimonials with verifiable proof points (Iteration 17)
+
+**Homepage social proof overhaul (`src/app/page.tsx`):**
+- Removed 3 fabricated testimonials with fake names (Sarah Chen / Stackwise, Marcus Rivera / ShipFast Labs, Lena Muller / DataFlow)
+- Replaced with 3 verifiable proof points, each linking to the GitHub repository:
+  - "Tested against 1,200+ real open-source projects"
+  - "2,425 automated tests passing"
+  - "Zero network calls — your code never leaves your machine"
+- Added "See real scan results" callout linking to cal.com, chatwoot, and twenty GitHub repos
+- Updated test count in trust signals section from 2,218 to 2,425 (matching PROGRESS.md current status)
+- Changed section heading from "What developers are saying" to "Verifiable, not aspirational"
+- All proof point claims link to verifiable sources (GitHub repo, test suite)
+
+**Build verification:**
+- `next build` passes cleanly, all pages generated
+
+### Iteration 17 (Testing Agent) — 2026-03-17
+- **Build**: pass
+- **Tests**: 2523/2523 passing (was 2425, added 98 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/privacy-notice-short.test.ts` (28 tests): null return for empty services, generation with services, context values (companyName/contactEmail/website), placeholder values, date format, auth service in account information bullet, payment service in payment details bullet, analytics service in usage data bullet, monitoring service in technical data bullet, AI service in content bullet, dataCategories fallback when no category-specific services, why items for analytics/monitoring/AI/email services, legal obligations always present, service providers in sharing section, payment processors in sharing section, advertising partners in sharing section, legal authorities always present, never sell statement, Your Rights section, How We Protect Your Data section, disclaimer, multiple services across all categories, truncation to 8 services with count of others, no others when 8 or fewer, link to full privacy policy
+  - `src/generator/privacy-notice-app.test.ts` (39 tests): null return for empty services, generation with services, context values, placeholder values, date format, auth/payment/analytics/monitoring/AI/email collection bullets, dataCategories fallback, generic fallback when no data fields, purpose bullets for payment/analytics/monitoring/AI/email, legal obligations always present, service providers in sharing section, advertising partners in sharing section, law enforcement always present, never sell statement, conditional AI Features section (presence/absence), conditional Cookies & Tracking section (analytics presence/advertising presence/absence), Your Rights section, Data Security section, links to full documents, conditional AI Disclosure link, conditional Cookie Policy link, disclaimer, truncation to 6 services with count of more, no more when 6 or fewer, all categories together, simplified in-app notice reference
+  - `src/generator/privacy-notice-children.test.ts` (31 tests): null return for no COPPA compliance need/unrelated compliance docs, generation with COPPA need, context values, placeholder values, date format, child-friendly intro with parent guidance, COPPA reference for parents, conditional auth section (presence/absence with username/password), conditional analytics section (analytics/advertising presence), conditional storage section (storage/database presence), conditional AI section (Smart Helper presence/absence), always-present device info section, why we collect table, sharing section with trusted helpers and NEVER list, parent superpowers section (30 days), safety section (encryption/digital fortress), conditional cookies section (presence/absence), contact section, changes to notice section, quick summary table, disclaimer, sequential section numbering, all categories together
+- **Generator modules now with tests** (39 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report, open-source-notice, api-terms, cookie-inventory, data-breach-notification, vendor-questionnaire, cross-border-transfer-map, privacy-notice-short, privacy-notice-app, privacy-notice-children
+- **Generator modules still missing tests**: 93 files (was 96)
+
+### Iteration 17 — 2026-03-17 — OG image verification & social sharing QA
+
+**Test scope**: OG image endpoints, OG/Twitter meta tag verification across all 22 pages, SOC 2 blog post rendering, and custom 404 page at `http://localhost:5001`.
+
+**Pre-test fix**: Server was running a stale `.next` build cache missing the SOC 2 blog post (`/blog/soc2-for-startups` returned HTTP 500 with `Cannot find module './124.js'`). Fixed by clearing `.next/` and rebuilding. Same stale-cache issue documented in iterations 4, 5, 13, and 15.
+
+**Results after fixes: All checks pass across 22 pages + 12 OG image endpoints.**
+
+**1. OG image endpoints (12 routes) — all return HTTP 200, content-type `image/png`:**
+- `/opengraph-image` — 61KB PNG (root-level, brand design with terminal mockup)
+- `/twitter-image` — 61KB PNG (same design as root OG image)
+- `/gdpr-compliance/opengraph-image` — 57KB PNG
+- `/soc2-compliance/opengraph-image` — 58KB PNG
+- `/hipaa-compliance/opengraph-image` — 58KB PNG
+- `/ai-governance/opengraph-image` — 53KB PNG
+- `/blog/eu-ai-act-deadline/opengraph-image` — 50KB PNG
+- `/blog/gdpr-for-developers/opengraph-image` — 45KB PNG
+- `/blog/privacy-policy-for-saas/opengraph-image` — 45KB PNG
+- `/blog/colorado-ai-act/opengraph-image` — 45KB PNG
+- `/blog/generate-privacy-policy-from-code/opengraph-image` — 46KB PNG
+- `/blog/soc2-for-startups/opengraph-image` — 40KB PNG
+
+**2. OG meta tags — all 22 pages have `og:image`, `og:title`, `og:description`:**
+- Pages with page-specific `opengraph-image.tsx` files (homepage + 4 compliance + 6 blog = 11) reference their own route-specific OG images
+- Remaining 11 pages now reference the root `/opengraph-image` via explicit `images` in metadata
+
+**3. Twitter card meta tags — all 22 pages have `twitter:card=summary_large_image`, `twitter:title`, `twitter:description`, and `twitter:image`.**
+
+**4. SOC 2 blog post (`/blog/soc2-for-startups`)** — HTTP 200. Renders correctly with h1 ("SOC 2 for Startups: A Developer's Survival Guide"), 7 h2 headings, 95KB HTML. No errors.
+
+**5. Custom 404 page (`/nonexistent-page`)** — HTTP 404. Custom `not-found.tsx` renders with h1 ("This page doesn't exist"), title ("404 — Page Not Found | Codepliant"), "Go home" CTA, `legal/` themed copy, and popular pages grid.
+
+**Bugs found and fixed:**
+
+1. **Duplicate "| Codepliant" in page titles (10 pages)** — The root layout uses `title.template: "%s | Codepliant"` which auto-appends "| Codepliant" to child page titles. However, 10 pages already included "| Codepliant" in their page-level title string, producing titles like "GDPR Compliance Tool for Developers | Codepliant | Codepliant".
+   - **Fix**: Removed "| Codepliant" suffix from the `title` field in `metadata` for all 10 affected pages:
+     - `src/app/gdpr-compliance/page.tsx`
+     - `src/app/hipaa-compliance/page.tsx`
+     - `src/app/ai-governance/page.tsx`
+     - `src/app/ai-disclosure-generator/page.tsx`
+     - `src/app/cookie-policy-generator/page.tsx`
+     - `src/app/privacy-policy-generator/page.tsx`
+     - `src/app/terms-of-service-generator/page.tsx`
+     - `src/app/blog/gdpr-for-developers/page.tsx`
+     - `src/app/blog/soc2-for-startups/page.tsx`
+
+2. **Missing `og:image` on 11 pages** — Pages without their own `opengraph-image.tsx` file had no `og:image` meta tag. Next.js `opengraph-image` file convention does not cascade from parent routes to child routes; only the route where the file is placed gets the auto-injected image tag.
+   - **Fix**: Added explicit `images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "..." }]` to the `openGraph` metadata and `images: ["/opengraph-image"]` to the `twitter` metadata for all 11 affected pages:
+     - `src/app/pricing/page.tsx`
+     - `src/app/about/page.tsx`
+     - `src/app/docs/page.tsx`
+     - `src/app/compare/page.tsx`
+     - `src/app/changelog/page.tsx`
+     - `src/app/data-privacy/page.tsx`
+     - `src/app/blog/page.tsx`
+     - `src/app/ai-disclosure-generator/page.tsx`
+     - `src/app/cookie-policy-generator/page.tsx`
+     - `src/app/privacy-policy-generator/page.tsx`
+     - `src/app/terms-of-service-generator/page.tsx`
+
+3. **Stale `.next` build cache causing HTTP 500 on `/blog/soc2-for-startups`** — The dev server's cached build had a missing `./124.js` webpack chunk.
+   - **Fix**: `rm -rf .next && npx next build && npx next start -p 5001`
+
+**Build verification:** `next build` passes cleanly, all static pages and 12 dynamic OG image routes generated.

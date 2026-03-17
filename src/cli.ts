@@ -4,7 +4,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as readline from "readline";
 import { scan } from "./scanner/index.js";
-import { generateDocuments, writeDocuments } from "./generator/index.js";
+import { generateDocuments, writeDocuments, getDocumentCategory } from "./generator/index.js";
 import { loadConfig, saveConfig, configExists, validateConfig, VALID_JURISDICTIONS, type CodepliantConfig } from "./config.js";
 import { writeDocumentsInFormat, getOutputFormat, getLastPdfResult, writeCompliancePage, writeComplianceReport, writeExecutiveSummary, type OutputFormat } from "./output/index.js";
 import { generateCompliancePage } from "./output/compliance-page.js";
@@ -2112,20 +2112,47 @@ function runScanAndGenerate(
   let totalBytesGenerated = 0;
   const docCategoryMap = new Map<string, number>();
   const docCategorySizeMap = new Map<string, number>();
+  // Build tree-view data grouped by category
+  interface TreeFileEntry {
+    filename: string;
+    docName: string;
+    size: number;
+    lines: number;
+  }
+  const treeGroups = new Map<string, TreeFileEntry[]>();
+
   for (const file of writtenFiles) {
-    const relativePath = path.relative(absProjectPath, file);
     const content = fs.readFileSync(file, "utf-8");
     const size = Buffer.byteLength(content, "utf-8");
     const lines = countLines(content);
     totalLinesGenerated += lines;
     totalBytesGenerated += size;
-    const docName = docs.find(d => file.endsWith(d.filename))?.name || path.basename(file);
-    console.log(`  ${GREEN()}✓${RESET()} ${relativePath} ${DIM()}(${docName}: ${formatFileSize(size)}, ${lines} lines)${RESET()}`);
+    const filename = path.basename(file);
+    const docName = docs.find(d => file.endsWith(d.filename))?.name || filename;
 
     // Categorize the document
     const cat = classifyDocCategory(docName);
     docCategoryMap.set(cat, (docCategoryMap.get(cat) || 0) + 1);
     docCategorySizeMap.set(cat, (docCategorySizeMap.get(cat) || 0) + size);
+
+    const category = getDocumentCategory(filename) || "other";
+    if (!treeGroups.has(category)) {
+      treeGroups.set(category, []);
+    }
+    treeGroups.get(category)!.push({ filename, docName, size, lines });
+  }
+
+  // Render tree-view with box-drawing characters
+  const sortedCategories = [...treeGroups.keys()].sort();
+  for (const category of sortedCategories) {
+    const entries = treeGroups.get(category)!;
+    console.log(`  ${DIM()}${category}/${RESET()}`);
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+      const isLast = i === entries.length - 1;
+      const connector = isLast ? "└──" : "├──";
+      console.log(`  ${DIM()}${connector}${RESET()} ${GREEN()}✓${RESET()} ${entry.filename} ${DIM()}(${entry.docName}: ${formatFileSize(entry.size)}, ${entry.lines} lines)${RESET()}`);
+    }
   }
 
   // --- Generation Summary ---
