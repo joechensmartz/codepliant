@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 3496 passing — 100% scanner, 63/138 generators (46%)
+- **Tests**: 3581 passing — 100% scanner, 66/138 generators (48%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 25 complete (2026-03-17)
-- **Last run**: export command, 120 tests, npm discoverability, stats 3376, performance audit
+- **Iteration**: 26 complete (2026-03-17)
+- **Last run**: npm provenance, 85 tests, MCP publishing research, robots.txt AI rules, stats 3496
 
 ## Priority Backlog
 
@@ -3171,6 +3171,19 @@ npm search (powered by npms.io's algorithm) scores packages on three axes:
 - **Generator modules now with tests** (63 total, was 60)
 - **Generator modules still missing tests**: 75 files (was 78)
 
+### Iteration 26 — Generator Tests (privacy-policy-changelog, consent-record-template, security-awareness-program)
+
+- **Build**: pass
+- **Tests**: 3581/3581 passing (was 3496, added 85 new tests across 3 files)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/privacy-policy-changelog.test.ts` (23 tests): null return for no services, generation with services, context values (companyName/contactEmail/dpoName/dpoEmail/website), placeholder defaults, version history table with initial release entry, change type definitions (New data collection/New third-party service/Clarification), notification procedures (material changes with 30-day effective date, non-material changes), baseline section listing detected services and data categories, conditional processing features (AI/ML processing for ai category, Payment processing for payment, Analytics and tracking for analytics, Authentication for auth, Email communications for email, File/data storage for storage, Error monitoring for monitoring), absence of conditional features for unrelated categories, policy version archive section, review schedule with codepliant diff tip, contact section, Codepliant disclaimer with project name, alphabetical service name sorting, GDPR Art. 12-14 reference in header
+  - `src/generator/consent-record-template.test.ts` (27 tests): null return for no services, generation with services, context values (companyName/contactEmail/dpoEmail/website), placeholder defaults, dpoEmail fallback to contactEmail, GDPR Art. 7 reference in header, purpose section with Article 7(1), consent record fields table (consent_id/user_id/timestamp/consent_type/consent_action/ip_address/policy_version), conditional analytics consent type (present with analytics, absent without), conditional marketing and advertising consent types (present with analytics or advertising category), conditional AI consent type with explicit consent (present with ai, absent without), conditional payment consent type (present with payment, absent without), always-present consent types (essential/third_party/communication/profiling), collection methods table (web_form/cookie_banner/email_optin/api), example consent records (granted and withdrawn with consent_action values), GDPR compliance checklist (Demonstrable/Freely given/Withdrawable), storage and retention (AES-256/TLS 1.2), database schema example (CREATE TABLE consent_records), audit and review section with dpoEmail, contact section, Codepliant disclaimer, website context in example record URLs (/signup and /settings/privacy), comprehensive test with all conditional consent types
+  - `src/generator/security-awareness-program.test.ts` (35 tests): null return for no services, generation with services, context values (companyName/contactEmail/securityEmail/dpoName/dpoEmail), placeholder defaults, securityEmail fallback to contactEmail, program overview with objectives (SOC 2/ISO 27001/GDPR Art. 39), scope and audience table (All employees/Engineering/Executive team), conditional AI/ML engineers audience (present with ai, absent without), conditional Finance/billing audience with PCI DSS (present with payment, absent without), phishing awareness module (spear-phishing/simulation program/< 5% click rate), password hygiene module (16 characters/NIST 800-63B/password manager), incident reporting module with security email (STOP/REPORT/PRESERVE procedure), social engineering defence (pretexting/tailgating), device and endpoint security (full-disk encryption/VPN), data handling and classification (Public/Internal/Confidential/Restricted), conditional AI security module (present with ai: external AI tools warning/Acceptable AI Use Policy, absent without), conditional PCI DSS module (present with payment: never store card numbers, absent without), PCI module numbering (3.8 when AI also present, 3.7 when AI absent), monthly activities calendar (January-December/Cybersecurity Awareness Month), quarterly activities (Q1-Q4), metrics and KPIs (Training completion/Phishing click rate/MFA enrollment), training completion tracking with current year, non-compliance section (failed phishing simulation/48 hours), program governance section, tools and resources (LMS Platform/Phishing Simulator/Password Manager), related documents (INCIDENT_RESPONSE_PLAN/ACCESS_CONTROL_POLICY), conditional AI use policy in related documents (present with ai, absent without), Codepliant disclaimer, comprehensive test with all conditional sections
+- **Generator test coverage**: 66/138 generators now have dedicated tests (was 63/138)
+
+**Progress trajectory:** 798 (iter 1) -> 1341 (iter 6) -> 1752 (iter 10) -> 2605 (iter 18) -> 2759 (iter 19) -> 2867 (iter 20) -> 3037 (iter 21) -> 3177 (iter 22) -> 3496 (iter 25) -> 3581 (iter 26)
+
 ### Iteration 17 — 2026-03-17
 
 #### Homebrew Distribution Research
@@ -6321,3 +6334,180 @@ compliance documents based on what your code actually uses — not questionnaire
 | 4 | Blog posts all render | **PASS** | Blog index (`/blog`) lists all 7 posts. All 7 individual blog post pages return HTTP 200 with full content (97-135KB each) and correct `<h1>` tags: HIPAA for SaaS Developers, SOC 2 for Startups, EU AI Act, Privacy Policy for SaaS, GDPR for Developers, Colorado AI Act, Generate a Privacy Policy from Code |
 
 **Summary: 4/4 PASS. Site remains stable and launch-ready.**
+
+### Iteration 26 — 2026-03-17 — MCP Server Publishing Research
+
+#### 1. Official MCP Registry (registry.modelcontextprotocol.io)
+
+**Publisher CLI (`mcp-publisher`)**:
+- Built from the `modelcontextprotocol/registry` repo with `make publisher`
+- Binary at `./bin/mcp-publisher --help`
+- The registry API is at v0.1 (API freeze), still in preview
+
+**Authentication** (must prove namespace ownership):
+- **GitHub OAuth** — login as your GitHub user to publish under `io.github.<username>/<server-name>`
+- **GitHub OIDC** — automated publishing from GitHub Actions
+- **DNS verification** — prove domain ownership for custom namespaces (e.g., `codepliant.com/mcp`)
+- **HTTP verification** — domain ownership via HTTP challenge
+
+**Namespace**: To publish `io.github.joechensmartz/codepliant`, authenticate as that GitHub user. For a domain-based namespace like `codepliant.com/codepliant-mcp`, prove domain ownership via DNS/HTTP.
+
+**Status**: Registry is functional but still in preview. Breaking changes possible before GA.
+
+#### 2. mcp.so Listing
+
+**Submission process**: Create a GitHub issue via the "Submit" button in the mcp.so navigation bar.
+
+**Required metadata**:
+- Server name
+- Type (server)
+- GitHub repository URL
+- Server configuration (how to install/run)
+- Description
+
+**Also indexed**: avatar/logo, author name, GitHub URL, category, tags, license, language. The registry has 18,600+ servers listed.
+
+#### 3. Glama (glama.ai/mcp/servers)
+
+**Submission process**: Click "Add Server" button on the Glama MCP servers page. Less documented than mcp.so.
+
+**Metadata displayed on listings**: server name, description, author/org, license, categories, security/quality grades, GitHub repo link, OS compatibility, usage stats, verification status ("official"/"claimed"). Registry has 19,400+ servers.
+
+#### 4. Metadata Registries Require
+
+Common across all three:
+| Field | Required | Codepliant Value |
+|-------|----------|-----------------|
+| Name | Yes | `codepliant` |
+| Description | Yes | Scan your codebase, generate compliance documents. Privacy Policy, Terms of Service, AI Disclosure, Cookie Policy, DPA — all from your actual code. |
+| Repository URL | Yes | GitHub repo URL |
+| License | Yes | MIT |
+| Author | Yes | joechensmartz |
+| Category | Yes | Developer Tools / Compliance / Security |
+| Language | Yes | TypeScript |
+| Install command | Yes | `npx codepliant` or `npm install -g codepliant` |
+| MCP config | Yes | See draft below |
+
+#### 5. Draft MCP Server Listing for Codepliant
+
+**Title**: Codepliant — Code-Aware Compliance Document Generator
+
+**Short description**: Scan codebases to detect third-party services, data collection, and AI usage, then generate compliance documents (Privacy Policy, Terms of Service, AI Disclosure, Cookie Policy, DPA, AI Act Checklist, AI Model Card) directly from code analysis. Zero network calls, fully local.
+
+**Category**: Developer Tools, Compliance, Privacy, Legal
+
+**Tags**: compliance, privacy-policy, terms-of-service, gdpr, ccpa, ai-act, code-analysis, legal, mcp-server
+
+**MCP Configuration (Claude Desktop / claude_desktop_config.json)**:
+```json
+{
+  "mcpServers": {
+    "codepliant": {
+      "command": "npx",
+      "args": ["-y", "codepliant-mcp"]
+    }
+  }
+}
+```
+
+**Tools exposed** (6 tools, 1 resource):
+| Tool | Description |
+|------|-------------|
+| `scan_project` | Detect third-party services, data collection, AI usage; determine compliance needs |
+| `incremental_scan` | Re-scan only if files changed since last scan (cached results) |
+| `generate_compliance_docs` | Generate all 7 document types to `/legal/` directory |
+| `check_compliance` | Quick check: does the project have required compliance documents? |
+| `get_config` | Read `.codepliantrc.json` configuration |
+| `set_config` | Update configuration (company name, jurisdiction, DPO, etc.) |
+| Resource: `compliance_status` | JSON resource with current compliance state from most recent scan |
+
+**Key differentiators for listing copy**:
+- Zero network calls — everything runs locally, no data leaves the machine
+- No LLM/AI in the scanning — deterministic detection via 200+ service signatures
+- 13 ecosystems supported (Node.js, Python, Go, Ruby, Elixir, etc.)
+- 7 document types generated from actual code analysis
+- Supports GDPR, CCPA, EU AI Act, HIPAA frameworks
+
+#### 6. Recommended Publishing Sequence
+
+1. **Official Registry first** — `mcp-publisher` CLI with GitHub OAuth, namespace `io.github.joechensmartz/codepliant`
+2. **mcp.so second** — submit GitHub issue with metadata above
+3. **Glama third** — click "Add Server", fill in metadata
+4. **Add MCP install badge** to README and site docs page (e.g., "Install in Claude Desktop" button)
+5. **GitHub Actions OIDC** — automate registry updates on npm publish via CI
+
+### Iteration 26 — 2026-03-17 — npm provenance, tree-shaking, keywords
+
+**Goal**: Enable SLSA provenance for verified build badge, add tree-shaking hint, optimize keywords for npm search.
+
+**Changes made (3 files)**:
+
+| # | Task | File | Details |
+|---|------|------|---------|
+| 1 | npm provenance | `package.json` | Added `"publishConfig": { "provenance": true }` — enables SLSA provenance attestation when publishing from GitHub Actions |
+| 2 | CI provenance permission | `.github/workflows/release.yml` | Added `id-token: write` permission — required by npm for provenance signing via OIDC |
+| 3 | Tree-shaking | `package.json` | Added `"sideEffects": false` — tells bundlers all modules are safe to tree-shake |
+| 4 | Keywords optimization | `package.json` | Refined from 17 to 16 keywords. Removed low-value duplicates (`scanner`, `data-processing`, `eu-ai-act`, `mcp`). Added high-search-volume terms: `hipaa`, `soc2`, `policy-generator`. Final 16: compliance, privacy-policy, terms-of-service, gdpr, ccpa, ai-act, ai-disclosure, legal, code-analysis, cookie-policy, dpa, data-privacy, regulatory-compliance, hipaa, soc2, policy-generator |
+| 5 | Build verification | — | `npx tsc` passes cleanly with zero errors |
+
+**Provenance notes**: The release workflow already publishes from CI (`release.yml` triggers on `v*` tags). With `publishConfig.provenance: true` and the new `id-token: write` permission, the next `npm publish` from CI will automatically generate a SLSA provenance attestation. This adds a "Verified" badge on npmjs.com showing the package was built from the linked GitHub repository. Provenance does NOT work when publishing locally — it requires the GitHub Actions OIDC token.
+
+**Summary: 3 files modified, `npx tsc` passes, provenance ready for next release.**
+
+### Iteration 26 — 2026-03-17 — robots.ts hardening
+
+**Goal**: Audit and improve `src/app/robots.ts` for SEO correctness, internal route blocking, and AI crawler handling.
+
+**Findings (before changes)**:
+
+| # | Check | Result | Details |
+|---|-------|--------|---------|
+| 1 | Block internal/API routes | **FAIL** | No `disallow` entries at all — `/_next/` static assets and any future `/api/` routes were crawlable |
+| 2 | Sitemap reference | **PASS** | Correctly points to `https://codepliant.dev/sitemap.xml`, matching `sitemap.ts` |
+| 3 | AI crawler rules | **FAIL** | No explicit rules for GPTBot, Claude-Web, CCBot, Google-Extended, Amazonbot, or anthropic-ai |
+| 4 | Format for Google/Bing | **PASS** | Valid Next.js `MetadataRoute.Robots` format, but used a single `rules` object instead of an array |
+
+**Changes made (1 file)**: `src/app/robots.ts`
+
+- Added `disallow: ["/_next/", "/api/"]` to block crawling of Next.js internal assets and API routes
+- Converted `rules` from a single object to an array for multi-agent support
+- Added explicit `allow: "/"` with `disallow` rules for 6 AI crawlers: GPTBot, Claude-Web, CCBot, Google-Extended, Amazonbot, anthropic-ai
+- All AI crawlers are explicitly allowed to index public content (good for a compliance tool's discoverability) while still blocked from internal paths
+- Sitemap reference unchanged — already correct
+
+**Build verification**: `next build` passes cleanly, `robots.txt` listed as static prerender.
+
+**Summary: 1 file modified, 4 issues checked, 2 fixed. `next build` passes.**
+
+### Iteration 26 — 2026-03-17 — Sanity check (Website QA Agent, iteration 26)
+
+**Test scope**: Quick sanity check of all 23 pages at `http://localhost:5001`. Focus: HTTP status codes, blog post count, 500 errors, stats consistency with PROGRESS.md.
+
+**Results: 3/4 checks pass. 1 data inconsistency found (not fixed).**
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Homepage returns 200 | PASS |
+| 2 | Blog index shows 7 posts | PASS — 7 posts listed: hipaa-for-developers, soc2-for-startups, generate-privacy-policy-from-code, eu-ai-act-deadline, gdpr-for-developers, privacy-policy-for-saas, colorado-ai-act |
+| 3 | No 500 errors on any page | PASS — all 23 sitemap pages return HTTP 200 |
+| 4 | Stats on homepage match PROGRESS.md | **PARTIAL** — see details below |
+
+**Stats comparison (PROGRESS.md vs. homepage):**
+
+| Stat | PROGRESS.md | Homepage | Match? |
+|---|---|---|---|
+| Tests passing | 3,496 | 2,867 | **STALE** |
+| Document types | 123+ | 123+ | MATCH |
+| Ecosystems | 13 | 13 | MATCH |
+| Repos tested | 1,200+ | 1,200+ | MATCH |
+| Accuracy | 97.8% | 97.8% | MATCH |
+
+**Additional stale test counts found:**
+- `/about` shows "2,867" (should be 3,496)
+- `/changelog` shows "3,037" (should be 3,496)
+
+**Bugs found: 1 (not fixed)**
+
+1. **Stale test count across 3 pages** — Homepage and about page display "2,867 tests passing", changelog displays "3,037". PROGRESS.md reports 3,496 tests. This is a recurring issue documented in iterations 5, 6, 8, 11, 13, 18, and 19 — the test count drifts as new tests are added without updating the site source files.
+
+**No other issues found. No fixes applied. No build changes.**

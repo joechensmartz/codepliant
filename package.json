@@ -51,15 +51,14 @@
     "ai-act",
     "ai-disclosure",
     "legal",
-    "scanner",
     "code-analysis",
     "cookie-policy",
     "dpa",
-    "data-processing",
-    "mcp",
-    "eu-ai-act",
     "data-privacy",
-    "regulatory-compliance"
+    "regulatory-compliance",
+    "hipaa",
+    "soc2",
+    "policy-generator"
   ],
   "repository": {
     "type": "git",
@@ -71,6 +70,10 @@
   },
   "author": "",
   "license": "MIT",
+  "publishConfig": {
+    "provenance": true
+  },
+  "sideEffects": false,
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.5.0",
