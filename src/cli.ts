@@ -192,6 +192,7 @@ ${BOLD()}Options:${RESET()}
   ${DIM()}--no-color${RESET()}            Disable colored output
   ${DIM()}--port <number>${RESET()}        Port for serve command (default: 3939)
   ${DIM()}--explain <code>${RESET()}       Show detailed explanation for an error code (e.g., --explain CP006)
+  ${DIM()}--help, -h${RESET()}            Show help (also: codepliant help)
   ${DIM()}--version, -V${RESET()}         Print version and exit
 
 Run ${CYAN()}codepliant <command> --help${RESET()} for command-specific help.
@@ -1501,6 +1502,9 @@ function main() {
   const COMMAND_ALIASES: Record<string, string> = {
     status: "dashboard",
     generate: "go",
+    run: "go",
+    g: "go",
+    s: "scan",
   };
 
   const command = COMMAND_ALIASES[args[0]] || args[0];

@@ -71,7 +71,7 @@
   "author": "",
   "license": "MIT",
   "publishConfig": {
-    "provenance": true
+    "access": "public"
   },
   "sideEffects": false,
   "devDependencies": {

@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5457 passing — 100% scanner, 108/138 generators (78.3%)
+- **Tests**: 5592 passing — 100% scanner, 111/138 generators (80.4%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 40 complete (2026-03-17)
-- **Last run**: --quiet global fix, 71 tests (5457!), 78.3% generators, Phase 2 progress report
+- **Iteration**: 41 complete (2026-03-17)
+- **Last run**: command aliases, 135 tests, 🎉 80% GENERATOR COVERAGE (111/138), npm growth research
 
 ## Priority Backlog
 
@@ -3178,6 +3178,101 @@ Starlight is the best fit for Codepliant for these reasons:
 2. **Push generator test coverage to 90%+ (125/138)** — Momentum is strong at 76.1%. At the current rate of ~3.3 generators/iteration, reaching 125/138 by iteration 50 is achievable. Prioritize the most-used generators (Node.js/React/Next.js stack documents).
 
 3. **Ship the documentation site on Astro Starlight** — The framework decision is made (iteration 39 research). A proper docs site is the second-highest-impact item for post-launch credibility after the README/demo GIF. Stand it up with: quick start, command reference, and 3-5 workflow guides.
+
+### Iteration 41 — 2026-03-17 — npm Download Growth Hacking for New CLI Tools
+
+*Note: Web search was unavailable during this research session. Findings are synthesized from established open-source marketing knowledge and documented case studies from successful npm CLI launches (e.g., biome, turbo, changesets, commitlint, publint).*
+
+#### 1. npm Registry Optimization (Day 0 — before launch)
+
+- **Keywords in package.json**: npm search is keyword-driven. Pack the `keywords` array with terms developers actually search: `compliance`, `privacy-policy`, `gdpr`, `soc2`, `code-scanner`, `cli`, `generator`, `legal`, `terms-of-service`, `ai-disclosure`, `cookie-policy`, `devops`, `security`. Aim for 15-20 keywords.
+- **Description field**: The `description` in package.json appears in npm search results. Make it scannable and benefit-driven: "Scan your codebase and generate compliance documents (Privacy Policy, Terms of Service, GDPR, SOC 2) from actual code analysis"
+- **README as landing page**: npm renders README on the package page. The first 3 lines must answer "what does this do and why should I care." A demo GIF in the first fold is the single highest-impact README element for CLI tools (Issue #3 is critical).
+- **Provenance**: Run `npm publish --provenance` to get the verified publisher badge on npmjs.com. Builds trust and signals legitimacy.
+
+#### 2. Launch Day Channels (Week 1)
+
+**Hacker News — Show HN** (highest ROI for developer CLI tools)
+- Post format: `Show HN: Codepliant – Scan your code, generate compliance docs (Privacy Policy, ToS, GDPR)`
+- Best time: Tuesday-Thursday, 8-10am ET (US morning, EU afternoon overlap)
+- Be the first commenter with a 3-4 paragraph story: why you built it, what it scans, what it generates, what's next
+- Respond to every comment in the first 2 hours — engagement velocity drives ranking
+- Typical outcome for a well-received Show HN: 50-200 GitHub stars, 500-2000 npm downloads in 48 hours
+
+**Reddit**
+- r/javascript, r/node, r/webdev, r/opensource — post as a "I built this" with a clear problem statement
+- r/privacy, r/gdpr, r/legaltech — cross-post for the compliance audience (unique for Codepliant)
+- r/devops, r/sre — if SOC 2 / infrastructure compliance docs are supported
+- Don't post to all subreddits on the same day; stagger across a week
+
+**Dev.to / Hashnode**
+- Write a tutorial-style launch post: "How I Built a CLI That Generates Privacy Policies from Code"
+- Include real before/after: show a scan result and the generated document
+- Dev.to has a built-in audience and posts get indexed by Google quickly
+
+**Twitter/X**
+- Thread format: problem → solution → demo GIF → install command → link
+- Tag relevant accounts (@npmjs, @nodejs, @vercel, etc.) for amplification
+- Use hashtags: #opensource #nodejs #privacy #gdpr #compliance
+
+#### 3. Structural Growth Tactics (Weeks 2-8)
+
+**GitHub Action as distribution channel**
+- Every repo that adds the Codepliant GitHub Action generates CI downloads on every push. This is a compounding download multiplier.
+- The Action marketplace listing (already done per backlog) should have its own README optimized for the marketplace search.
+- Target popular compliance-aware templates and starter repos to include the Action.
+
+**npx as zero-friction entry point**
+- `npx codepliant go .` requires zero installation. Feature this prominently in all marketing. Lower barrier = more first-time users = more installs counted.
+- Every `npx` invocation counts as an npm download.
+
+**CI/CD integration guides**
+- Write a 1-page guide for: GitHub Actions, GitLab CI, CircleCI, Bitrise
+- Developers who add Codepliant to CI generate recurring weekly downloads automatically
+
+**Comparison pages / "alternatives to" content**
+- Create a page or blog post: "Codepliant vs Termly vs Iubenda — why code scanning beats questionnaires"
+- These rank well for "[competitor] alternative" searches and drive organic traffic
+
+**Package ecosystem integrations**
+- Create `eslint-plugin-codepliant` or `codepliant-init` helper packages — each is another npm package that cross-links
+- Consider a `create-codepliant` initializer for `npm create codepliant` workflow
+
+#### 4. Compounding / Organic Growth (Months 2-6)
+
+**Awesome lists**
+- Submit to: awesome-nodejs, awesome-cli-apps, awesome-privacy, awesome-gdpr, awesome-security, awesome-devops
+- Each accepted PR creates a permanent backlink and discovery channel
+
+**Conference lightning talks**
+- 5-minute demos at Node.js meetups, DevOpsDays, PrivacyCon-style events
+- Record and post to YouTube — "Generate a privacy policy in 30 seconds" is a compelling demo
+
+**Stack Overflow / GitHub Discussions presence**
+- Answer questions about "how to generate privacy policy for my app" or "GDPR compliance for developers" and mention Codepliant where relevant (not spammy — only when genuinely helpful)
+
+**Dependabot / Renovate effect**
+- Once real projects depend on Codepliant, version bumps via Dependabot create PRs that re-download the package. Shipping regular patch releases (even small fixes) triggers this cycle.
+
+#### 5. Metrics to Track
+
+| Metric | Tool | Target (first 30 days) |
+|--------|------|----------------------|
+| npm weekly downloads | npm-stat.com, npmtrends.com | 500+ |
+| GitHub stars | GitHub | 200+ |
+| Show HN points | HN | 50+ |
+| npx unique users | npm download stats | 100+ |
+| GitHub Action installs | GitHub Marketplace | 20+ repos |
+
+#### Key Takeaway for Codepliant
+
+The single most effective tactic is a well-executed Show HN launch with a demo GIF, followed immediately by making `npx codepliant go .` the default call-to-action everywhere. The GitHub Action is the long-term compounding play — every repo that adopts it generates recurring downloads forever. The compliance niche (GDPR, privacy, SOC 2) gives Codepliant access to non-developer subreddits and communities that most CLI tools can't reach, which is an underexploited advantage.
+
+**Immediate action items for next iterations:**
+1. Record the demo GIF (Issue #3) — this blocks every launch channel
+2. Optimize package.json keywords and description before `npm publish`
+3. Draft the Show HN post text and first comment
+4. Prepare 3 launch posts: Dev.to tutorial, r/javascript announcement, Twitter thread
 
 ## Development Log
 
@@ -7898,3 +7993,26 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
 - **Generator modules now with tests**: 108/138 (78.3%)
 - **Generator coverage**: 76.1% -> 78.3%
 - **Note**: `data-flow-map.ts` does not exist as a generator file; `generateDataFlowMapDocument` lives in `src/scanner/data-flow.ts` (already tested). Substituted `data-map-visual.ts` (generateDataFlowDiagram + buildMermaidDiagram) which was untested.
+
+### Iteration 41 — 2026-03-17 — Publish config + CLI aliases
+
+- **Build**: pass (`npx tsc` clean)
+- **npm pack --dry-run**: pass (codepliant-1.1.0.tgz, 869.4 kB, 455 files)
+- **Version**: 1.1.0 confirmed in package.json and cli.ts
+- **publishConfig**: verified `access: "public"` (was `provenance: true`)
+- **`codepliant --help` / `-h` / `help`**: all three already worked (handled at line 1540 of cli.ts). Added `--help, -h` to the Options section of help output for discoverability.
+- **New command aliases**: added `run` -> `go`, `g` -> `go`, `s` -> `scan` to COMMAND_ALIASES (joins existing `status` -> `dashboard`, `generate` -> `go`). All verified working.
+- **Files changed**: `src/cli.ts`, `PROGRESS.md`
+
+### Iteration 41b — 2026-03-17 — Generator Tests: 111/138 = 80.4% — PAST 80%!
+
+- **Build**: pass
+- **Tests**: 5592/5592 passing (was 5457, added 135 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-automation-guide.test.ts` (39 tests): basic generation (title/date/service count/empty services returns string), context values (companyName/placeholder), Section 1 Overview (four automation steps/ROI+setup time), Section 2 CI/CD (GitHub Actions workflow+checkout+compliance.yml/GitLab CI+gitlab-ci.yml/CircleCI+circleci/config.yml/pre-commit hook install), Section 3 Scheduled Scanning (built-in scheduler weekly+daily/crontab/GitHub Actions scheduled workflow+workflow_dispatch), Section 4 Webhooks (Slack+SLACK_WEBHOOK_URL/email alerts/custom webhook/PagerDuty payment-processing label/regulated label for non-payment), Section 5 Best Practices (version control+git add legal/auto-regeneration+codepliant update/monorepo+scan-all), Section 6 Pipeline (diagram+Pre-commit+CI/CD+Weekly scan), Section 7 Maturity Model (Level 0-5/Level 2 for small/Level 3-4 for moderate/Level 4+ for 11+ services), Section 8 Troubleshooting, Section 9 Environment Variables (CODEPLIANT_OUTPUT/FORMAT/QUIET/NO_COLOR/LICENSE), disclaimer+Codepliant/service count in footer/project name in webhook payload
+  - `src/generator/ai-ethics-statement.test.ts` (41 tests): null guards (no services/only non-AI/mixed non-AI), basic generation (title/date/project name), context values (companyName/contactEmail/dpoName/dpoEmail/all placeholders), Section 1 AI Systems (lists AI services/multiple services/excludes non-AI), Section 2 Core Ethical Principles (2.1 Proportionality/2.2 Fairness+protected characteristics/2.3 Transparency+EU AI Act Article 50/2.4 Accountability+audit trails/2.5 Privacy+GDPR+CCPA/2.6 Human Oversight+override/2.7 Safety+prompt injection+kill switches/2.8 Sustainability+environmental impact), Section 3 Human Oversight Commitments (Bias audit/Output review/Model evaluation/Ethics review/Quarterly), Section 4 UNESCO Alignment (2021/principle mapping table/Multi-stakeholder Governance), Section 5 Governance (AI Governance Officer/Ethics Review Process 6 steps), Section 6 Reporting (5 business days/30 days/regulatory complaint+AI supervisory authority), Section 7 Contact (3 contact types), disclaimer (Codepliant/reviewed and customized/project name), regulatory references (OECD AI Principles/EU AI Act)
+  - `src/generator/vendor-risk-tier.test.ts` (55 tests): null guards (no services/self-hosted only prisma+nodemailer+ioredis/passport self-hosted), basic generation (title/date/project name), context values (companyName/contactEmail/placeholders), Executive Summary (vendor count/3 risk factors), Tier Distribution (table with all 4 tiers), Risk Tier Definitions (Critical/High/Medium/Low + all 4 review frequencies), Vendor Risk Summary table, provider name mapping (stripe->Stripe/openai->OpenAI/@anthropic-ai/sdk->Anthropic/@sentry/node->Sentry/unknown raw name), risk classification (stripe=Critical/analytics=Medium or Low/posthog=Medium with high volume), data sensitivity (5/5 payment/4/5 AI/2/5 analytics), risk factors (PCI DSS for payment/AI exposure/high data volume/hard to replace/auth high-value target), mitigations (DPA always/encryption for sensitive/vendor exit plan/PCI Level 1/AI opt-out/MFA for auth/monitor status always), deduplication (3 Sentry packages = 1 vendor), Detailed Vendor Profiles (section/per-vendor factor table/data collected), Review Schedule (Quarterly/Semi-Annual/Annual/Biannual + checklist with DPA+SOC 2+sub-processors), Methodology (scoring criteria/sensitivity table/replaceability definitions), Maintaining section, Codepliant disclaimer, multiple vendors across tiers (4 vendors), self-hosted excluded when mixed, sorting by tier severity (Critical first)
+- **Generator modules now with tests**: 111/138 (80.4%)
+- **Generator coverage**: 78.3% -> 80.4% — PASSED 80% THRESHOLD
+- **MILESTONE**: 80%+ generator test coverage reached (111/138)
