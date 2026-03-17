@@ -10,9 +10,10 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/codepliant"><img src="https://img.shields.io/npm/v/codepliant?style=flat-square&color=blueviolet" alt="npm version" /></a>
-  <img src="https://img.shields.io/badge/tests-792%20passed-brightgreen?style=flat-square" alt="tests" />
-  <img src="https://img.shields.io/badge/ecosystems-10%2B-blue?style=flat-square" alt="ecosystems" />
-  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license" />
+  <a href="https://www.npmjs.com/package/codepliant"><img src="https://img.shields.io/npm/dm/codepliant?style=flat-square&color=orange" alt="npm downloads" /></a>
+  <img src="https://img.shields.io/badge/tests-3177%20passed-brightgreen?style=flat-square" alt="tests" />
+  <img src="https://img.shields.io/badge/ecosystems-13-blue?style=flat-square" alt="ecosystems" />
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/joechensmartz/codepliant?style=flat-square" alt="license" /></a>
 </p>
 
 ---
@@ -82,7 +83,7 @@ legal/
 └── guides/      Quick Start Guide, Automation Guide
 ```
 
-**120+ documents total.** Each one is personalized to your detected services, data fields, and infrastructure.
+**123+ documents total.** Each one is personalized to your detected services, data fields, and infrastructure.
 
 [Browse example output from cal.com (23 services detected) →](./examples/real-projects/cal-com/legal/)
 
@@ -136,7 +137,7 @@ legal/
 | "Do you collect email addresses?" — *I think so?* | Reads `email: String @unique` from your Prisma schema |
 | "Do you use AI?" — *Yes but what do I disclose?* | Detects OpenAI + Anthropic, generates Art. 50 disclosure |
 | "List your sub-processors" — *Uhh...* | Finds Stripe, Sentry, Resend — generates the full list |
-| 30 minutes of forms → generic template | 30 seconds → 120+ documents tailored to your code |
+| 30 minutes of forms → generic template | 30 seconds → 123+ documents tailored to your code |
 
 ---
 
@@ -213,7 +214,7 @@ Markdown (default), HTML, PDF, JSON, DOCX, Notion, Confluence, GitHub Pages, coo
 
 - [Example Output](./examples/sample-output/) — all output formats
 - [Real Project Scans](./examples/real-projects/) — 10 open-source projects with full generated docs
-- [Document Type Reference](./docs/document-types.md) — why each of the 120+ documents exists
+- [Document Type Reference](./docs/document-types.md) — why each of the 123+ documents exists
 - [Contributing](./CONTRIBUTING.md)
 - [Changelog](./CHANGELOG.md)
 
