@@ -2,7 +2,7 @@
 
 > This file is the shared coordination document for all automated agents.
 > Each agent reads this before starting work and updates their section when done.
-> Last updated: 2026-03-16
+> Last updated: 2026-03-17
 
 ## Current Status
 
@@ -12,8 +12,8 @@
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 29 complete (2026-03-17)
-- **Last run**: Dockerfile, 186 tests (3986!), Tidelift research, title SEO, stats 3800
+- **Iteration**: 30 complete (2026-03-17) — v1.1.0 TAGGED
+- **Last run**: v1.1.0 release finalization — tag created, all checks green
 
 ## Priority Backlog
 
@@ -6880,3 +6880,23 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - `src/generator/compliance-testing-plan.test.ts` (63 tests): null return for empty services, generation with services, ISO date, service count header, test categories, regulation references (GDPR/CCPA/PCI DSS); context values (companyName), placeholder default; Section 1 overview table (6 categories, priority levels); Section 2 consent flow (CF-001 through CF-005, GDPR Art. 7, analytics-specific consent conditional, advertising-specific consent conditional, consent withdrawal CW-001 through CW-004); Section 3 data deletion (DSAR DD-001 through DD-004, per-service deletion verification for all categories: payment/auth/analytics/AI/email/database/storage/monitoring/advertising/social/other, cascade deletion with service count); Section 4 access control (authentication AC-001 through AC-004, auth-specific tests conditional, RBAC AC-R-001 through AC-R-004, API security AC-API-001 through AC-API-004); Section 5 breach notification (detection BN-001 through BN-004, monitoring service tests conditional, notification timing with 72h, post-breach BN-P-001 through BN-P-003); Section 6 service-specific test matrix (consent Required/N/A per category, breach Required/Recommended per category); Section 7 test execution schedule; Section 8 test automation with GitHub Actions YAML; Codepliant disclaimer; combined 9-service scenario; single-service scenario
 - **Generator modules now with tests**: 75/138 (54%)
 - **Generator modules still missing tests**: 63 files
+
+### Iteration 30 — 2026-03-17 — v1.1.0 Release Finalization (MILESTONE)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 3986/3986 passing, 0 failures
+- **Verified version 1.1.0** in `package.json` (line 3) and `src/cli.ts` (line 41)
+- **CHANGELOG.md**: confirmed date `2026-03-17` already set for v1.1.0
+- **Git tag created**: `v1.1.0` (annotated) pointing to HEAD (`1ca35b5`)
+- **Release workflow**: `.github/workflows/release.yml` already handles tag-based npm publish with provenance, build verification, test run, and GitHub Release creation
+- **No code changes needed** — everything was already in release-ready state
+- **Summary of v1.1.0 since v1.0.0**:
+  - 123+ document types (up from 120+)
+  - 13 ecosystems (added Terraform, Django, Flutter, Swift, Kotlin)
+  - 3986 tests (up from 798 at v1.0.0, ~5x increase)
+  - 14 new CLI commands (wizard, sbom, health, diff, completions, lint, validate, certify, benchmark, etc.)
+  - 18 new generators (Impressum, EULA, Disclaimer, AI Ethics, DPO Handbook, Executive Dashboard, etc.)
+  - i18n framework (en/de/fr/es)
+  - MCP server, GitHub Action, Docker support
+  - puppeteer moved to optionalDependencies
+- **Next step**: `git push origin v1.1.0` to trigger release workflow
