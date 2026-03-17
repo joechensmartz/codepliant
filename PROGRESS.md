@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 2523 passing — 100% scanner coverage, 39/132 generators
+- **Tests**: 2605 passing — 100% scanner coverage, 42/132 generators
 - **Repos tested**: 1200+
 - **Document types**: 122+
 - **Ecosystems**: 13
 - **npm package size**: 831KB (puppeteer optional)
-- **Iteration**: 17 complete (2026-03-17)
-- **Last run**: tree-view output, 98 tests, fake testimonials removed, sitemap enhanced, OG images fixed, Homebrew research
+- **Iteration**: 18 complete (2026-03-17)
+- **Last run**: health command, 82 tests, HIPAA blog, canonical audit, data consistency fix, i18n research
 
 ## Priority Backlog
 
@@ -2300,7 +2300,87 @@ A Codepliant extension would bring compliance awareness directly into the develo
 2. Add file-save watching in v0.2 once performance characteristics are understood
 3. Consider LSP architecture in v0.3+ if incremental scanning is implemented in the core CLI
 
+### Iteration 18 — 2026-03-17
+
+#### Internationalization Strategy for Compliance Documents
+
+**1. Country/Language Demand for Compliance Tools**
+
+The global compliance software market is estimated at USD 36.22 billion in 2025, growing at a CAGR of 12.67% to reach USD 65.77 billion by 2030. Regional demand breakdown for the five target markets:
+
+| Country | Regulation | Market Signal | Language Priority |
+|---------|-----------|---------------|-------------------|
+| **Germany** | GDPR, BDSG | Largest EU compliance market; projected USD 0.36B by 2026. Strong enforcement culture with high DPA fine activity. | German (already supported) |
+| **France** | GDPR, Loi Informatique et Libertés | Second-largest EU market. CNIL is one of the most active DPAs in Europe. | French (already supported) |
+| **Brazil** | LGPD | Fastest-growing Latin American market. ANPD actively enforcing since 2023. DPO must communicate with ANPD and data subjects in Portuguese. | Portuguese (Brazilian) — **not yet supported** |
+| **Japan** | APPI (amended 2022) | Asia-Pacific is the fastest-growing compliance region globally. APPI requires privacy policies in Japanese for services targeting Japanese customers. | Japanese — **not yet supported** |
+| **India** | DPDP Act 2023 | Massive market. DPDP Act Section 5 requires privacy notices in English AND any of the 22 languages in the Eighth Schedule of the Constitution (Hindi, Bengali, Tamil, Telugu, etc.) as chosen by the data principal. | Hindi + English — **Hindi not yet supported** |
+
+**2. GDPR Article 12 Translation Requirements**
+
+Article 12(1) GDPR requires controllers to provide information "in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child."
+
+Key translation implications:
+
+- **No explicit multilingual mandate**, but the "appropriate measures" standard creates a de facto requirement: if a service is offered in a language, the privacy policy should be available in that language
+- If data subjects are unknown, the minimum standard is to provide information in all languages the service is offered in, plus the official languages of all markets served
+- When a data subject exercises rights in a language other than the controller's, the controller must respond in the relevant language if the data subject objectively does not understand the communication in the provided language
+- Translations must be accurate — not machine-translated boilerplate. The phraseology and syntax must make sense in the target language
+- Child-directed services face heightened scrutiny: "clear and plain language" for minors requires age-appropriate vocabulary in the local language
+
+**Practical implication for Codepliant**: Generated documents must use legally precise terminology in each target language, not just word-for-word translations. Template strings need legal review per language.
+
+**3. Competitor Multi-Language Approaches**
+
+**Iubenda:**
+- Supports 15+ languages: Czech, Danish, Dutch, US English, UK English, French, German, Greek, Italian, Polish, Portuguese (EU), Brazilian Portuguese, Russian, Spanish, Swedish
+- One-click translation: adding a language auto-generates the policy with the same services and data controller info
+- Changes to any language version auto-propagate to all other language versions (except custom service clauses)
+- Uses professional legal translators, not machine translation
+- Language switcher widget embeddable on customer sites
+- Pricing: multi-language requires the Advanced plan (~$29/month)
+
+**Termly:**
+- Supports 11+ languages for cookie policies: German, Spanish, Italian, French, Greek, Slovak, Czech, Brazilian Portuguese, UK English, Turkish, Arabic
+- Auto-detects visitor browser language and serves the matching policy version
+- Applies to all 9 policy types (privacy, cookies, ToS, etc.)
+- No manual intervention required — language switching is automatic based on `Accept-Language` header
+
+**Key competitor gap**: Neither Termly nor Iubenda generates documents from actual code analysis. Their translations are generic templates. Codepliant's code-aware generation (detecting actual services, data categories, and third-party integrations) combined with accurate translations would be a unique differentiator.
+
+**4. Language Expansion Recommendations (Beyond EN/DE/FR/ES)**
+
+Codepliant currently supports English, German, French, and Spanish. Recommended additions ranked by impact:
+
+| Priority | Language | Rationale | Regulatory Driver |
+|----------|----------|-----------|-------------------|
+| **P0** | Portuguese (Brazilian) | 214M population, LGPD enforcement active, DPO Portuguese requirement, fastest-growing LatAm market | LGPD Art. 41 (DPO communication), ANPD Resolution CD/ANPD No. 18 |
+| **P0** | Japanese | 125M population, APPI requires Japanese-language policies for Japan-targeting services, 3rd largest economy | APPI Art. 21 (purpose specification in Japanese) |
+| **P1** | Italian | 60M population, strong GDPR enforcement (Garante), iubenda's home market proves demand | GDPR Art. 12 |
+| **P1** | Dutch | Netherlands + Belgium (Flanders), high tech density, active DPA (Autoriteit Persoonsgegevens) | GDPR Art. 12 |
+| **P1** | Hindi | 600M+ speakers, DPDP Act mandates notices in Eighth Schedule languages, enormous addressable market | DPDP Act 2023, Section 5 |
+| **P2** | Polish | 38M population, rapidly growing tech sector, active UODO enforcement | GDPR Art. 12 |
+| **P2** | Korean | PIPA (Personal Information Protection Act), strong tech market, Samsung/LG ecosystem | PIPA Art. 30 |
+| **P2** | Arabic | 400M+ speakers across MENA, emerging data protection laws (Saudi PDPL, UAE Federal Decree-Law No. 45) | Saudi PDPL, UAE PDPL |
+| **P3** | Swedish, Danish, Czech | Smaller markets but high per-capita GDPR compliance spend, covered by competitors | GDPR Art. 12 |
+
+**Implementation strategy:**
+1. **Template architecture**: Separate legal text into locale files (`locales/pt-BR.json`, `locales/ja.json`, etc.) with ICU MessageFormat for plurals/gender
+2. **Legal review pipeline**: Each language needs review by a qualified legal professional in that jurisdiction — machine translation is insufficient for compliance documents
+3. **Locale detection**: Add `--locale` flag to CLI and auto-detect from project's `package.json` (e.g., `i18n.defaultLocale`) or system locale
+4. **Incremental rollout**: Ship PT-BR and JA first (P0), then IT/NL/HI (P1), then remaining languages
+5. **Community contributions**: Open locale files for community PRs with a legal review gate before merge
+
 ## Development Log
+
+**2026-03-17 — Comprehensive `codepliant health` command**
+- Rewrote `runHealth()` in `src/cli.ts` to provide a full project health check
+- Now scans the project to detect services, generates expected docs, and diffs against existing docs on disk
+- Shows a summary: services detected, docs generated, docs missing, docs stale
+- Added `--json` flag for machine-readable output (useful for CI pipelines)
+- Returns exit code 1 if any required docs are missing or stale, exit code 0 if healthy
+- Updated help text to document the new `--json` option
+- Build verified: `npx tsc` passes cleanly
 
 **2026-03-17 — Fuzzy command matching for CLI UX**
 - Added Levenshtein distance function and `suggestCommand()` in `src/cli.ts` (~35 lines)
@@ -2668,6 +2748,16 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — New blog post: HIPAA for SaaS Developers
+
+- Created `/blog/hipaa-for-developers` — comprehensive HIPAA guide targeting "HIPAA for developers" keyword
+- Covers: who needs HIPAA (not just healthcare — any app handling PHI), the 18 HIPAA identifiers, technical safeguards (encryption, audit logs, access controls), BAAs, and how Codepliant detects health-related services
+- Includes Article, FAQ, and BreadcrumbList JSON-LD structured data
+- Full SEO metadata: keywords, OG tags, Twitter cards, canonical URL
+- Added to blog index (top position) and sitemap.ts
+- CTA with `npx codepliant go`
+- `next build` passes cleanly, 28 static pages generated
 
 ### 2026-03-16 — SEO, content, and link fixes
 
@@ -3274,6 +3364,31 @@ _Updated by Website Agent each iteration._
 **Build verification:**
 - `next build` passes cleanly, all 27 static pages generated (22 pages + OG image routes)
 
+### Iteration 18 — 2026-03-17 — Canonical URL and lang audit
+
+**Audit scope**: All 22 pages checked for canonical URL correctness and `<html lang>` attribute.
+
+**Findings — all passing, no changes needed:**
+
+1. **`<html lang="en">`** — Correctly set in `src/app/layout.tsx` line 263. Applied to all pages via the root layout.
+
+2. **`metadataBase`** — Set to `new URL("https://codepliant.dev")` in root layout metadata (line 26). This is the base for all relative canonical URLs in Next.js.
+
+3. **`alternates.canonical` present on all 22 pages** — Every page.tsx exports metadata with `alternates: { canonical: "https://codepliant.dev/..." }`:
+   - Homepage: `https://codepliant.dev` (no trailing slash)
+   - All other pages: `https://codepliant.dev/<path>` (no trailing slashes)
+   - All 6 blog posts: `https://codepliant.dev/blog/<slug>`
+   - All 4 generators, 5 compliance pages, docs, pricing, compare, changelog, about, blog index
+
+4. **Domain consistency** — All 22 canonical URLs use `https://codepliant.dev` consistently. No mixed domains, no `www.` variants, no `http://` variants.
+
+5. **No trailing slash inconsistencies** — Zero pages have trailing slashes in their canonical URLs. The homepage canonical is `https://codepliant.dev` (not `https://codepliant.dev/`).
+
+6. **Self-referencing correctness** — Each page's canonical URL matches its actual route path exactly. No mismatches found.
+
+**Build verification:**
+- `next build` passes cleanly, all 27 routes generated (22 pages + OG image routes)
+
 ## Website QA
 
 ### Iteration 3 — 2026-03-16 — Playwright audit
@@ -3595,6 +3710,44 @@ All 20 pages load well under 2 seconds (all under 2ms). PASS.
 **Files modified:**
 - `src/app/layout.tsx` — skip-to-content link, ARIA labels on nav/footer, footer nav landmark, external link screen reader text
 - `src/app/globals.css` — `:focus-visible` outline, `.sr-only` utility class
+
+### Iteration 18 — 2026-03-17 — Data consistency final audit
+
+**Scope**: Cross-page audit of all stats, pricing references, and stale counts across all 22+ pages. Verified sitemap completeness and blog index listing.
+
+**Inconsistencies found and fixed:**
+
+1. **Tests count stale in 2 places** — Homepage hero showed "2,425" and about page showed "1,806". Correct value per PROGRESS.md: 2,523.
+   - **Fix**: Updated both to "2,523" in `src/app/page.tsx` and `src/app/about/page.tsx`.
+
+2. **Document types inconsistent across 7 files** — Found three stale values: "120+" (compare, pricing, changelog, data-privacy, docs), "121+" (about, blog index, docs tree-view), while homepage correctly had "122+".
+   - **Fix**: Updated all to "122+" in `src/app/compare/page.tsx` (7 occurrences), `src/app/pricing/page.tsx` (1), `src/app/changelog/page.tsx` (2), `src/app/data-privacy/page.tsx` (1), `src/app/docs/page.tsx` (2), `src/app/about/page.tsx` (1), `src/app/blog/page.tsx` (1).
+
+3. **Ecosystems count stale in 6 files** — Found "12" instead of "13" in pricing, about, docs, changelog (3 occurrences), and blog/generate-privacy-policy-from-code (2 occurrences). Updated ecosystem lists to include Flutter/Dart where ecosystems were enumerated.
+   - **Fix**: Updated all to "13" in `src/app/pricing/page.tsx`, `src/app/about/page.tsx`, `src/app/docs/page.tsx`, `src/app/changelog/page.tsx`, `src/app/blog/generate-privacy-policy-from-code/page.tsx`.
+
+4. **Changelog test count stale** — v1.1.0 entry said "expanded from 763 to 1,806 tests (119% increase)".
+   - **Fix**: Updated to "expanded from 763 to 2,523 tests (231% increase)".
+
+**Checks that passed (no issues):**
+
+- **Pricing**: $19/$49 consistent across all pages (pricing, homepage, compare) — 13 references, all correct.
+- **No stale "35+" or "25+" references**: None found anywhere.
+- **Blog index**: Lists all 7 posts (hipaa-for-developers, soc2-for-startups, generate-privacy-policy-from-code, eu-ai-act-deadline, gdpr-for-developers, privacy-policy-for-saas, colorado-ai-act). All 7 have corresponding page.tsx files.
+- **Sitemap**: Contains all 23 pages including new hipaa-for-developers blog post. Complete coverage confirmed.
+
+**Build verification:** `npx next build` passes cleanly.
+
+**Files modified (9 files):**
+- `src/app/page.tsx` — tests 2,425 -> 2,523
+- `src/app/about/page.tsx` — tests 1,806 -> 2,523, docs 121+ -> 122+, ecosystems 12 -> 13
+- `src/app/blog/page.tsx` — docs 121+ -> 122+
+- `src/app/pricing/page.tsx` — docs 120+ -> 122+, ecosystems 12 -> 13
+- `src/app/compare/page.tsx` — docs 120+ -> 122+ (7 occurrences)
+- `src/app/changelog/page.tsx` — docs 120+ -> 122+, ecosystems 12 -> 13, tests 1,806 -> 2,523
+- `src/app/data-privacy/page.tsx` — docs 120 -> 122
+- `src/app/docs/page.tsx` — docs 120/121+ -> 122+, ecosystems 12 -> 13
+- `src/app/blog/generate-privacy-policy-from-code/page.tsx` — ecosystems 12 -> 13
 
 ### Iteration 5 — 2026-03-16 (tests)
 - **Build**: pass (pre-existing cli.ts error unrelated to test files; JS emitted successfully)
@@ -4463,6 +4616,17 @@ Added `codepliant completions` command that outputs shell completion scripts for
   - `src/generator/privacy-notice-children.test.ts` (31 tests): null return for no COPPA compliance need/unrelated compliance docs, generation with COPPA need, context values, placeholder values, date format, child-friendly intro with parent guidance, COPPA reference for parents, conditional auth section (presence/absence with username/password), conditional analytics section (analytics/advertising presence), conditional storage section (storage/database presence), conditional AI section (Smart Helper presence/absence), always-present device info section, why we collect table, sharing section with trusted helpers and NEVER list, parent superpowers section (30 days), safety section (encryption/digital fortress), conditional cookies section (presence/absence), contact section, changes to notice section, quick summary table, disclaimer, sequential section numbering, all categories together
 - **Generator modules now with tests** (39 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report, open-source-notice, api-terms, cookie-inventory, data-breach-notification, vendor-questionnaire, cross-border-transfer-map, privacy-notice-short, privacy-notice-app, privacy-notice-children
 - **Generator modules still missing tests**: 93 files (was 96)
+
+### Iteration 18 (Testing Agent) — 2026-03-17
+- **Build**: pass
+- **Tests**: 2605/2605 passing (was 2523, added 82 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/data-portability-guide.test.ts` (23 tests): null return for unknown/no services, generation with known service (posthog), header with project name and organization, effective date, default placeholders, context values (companyName/contactEmail), DPO email conditional (presence/absence), Legal Basis section with GDPR Article 20, How to Request section with 30-day timeline, per-service export instructions (provider/formats/API endpoint/time estimate/steps), multiple services generating multiple sections, provider deduplication (Stripe Inc appears once for @stripe/stripe-js + stripe), Supported Export Formats table (JSON/CSV/XML), Implementation Checklist, Contact section, Codepliant disclaimer with project name, Google Analytics service handling, @clerk/nextjs service handling, next-auth service (first-party/no API), @supabase/supabase-js service handling, @segment/analytics-next service handling
+  - `src/generator/media-consent.test.ts` (24 tests): null return for non-storage/no services, generation with storage service, company name in header, effective date, default placeholders, context values (companyName/contactEmail/website), dpoEmail usage when provided, fallback to contactEmail for dpoEmail, storage service names listing, Introduction section, Types of Media Covered (photos/videos/audio/docs), Purpose of Collection checkboxes (Service Delivery/Marketing/Testimonials), Consent Declaration with license terms, Specific Permissions table, Duration of Consent section, Your Rights section (withdraw/access/deletion/restrict), Minors section, Data Protection with website link, Signature section with tables, Contact section, Codepliant disclaimer, non-storage services ignored, storage alongside other services
+  - `src/generator/responsible-disclosure.test.ts` (35 tests): null return for single non-security service/no services, generation triggers for auth/payment/database/monitoring/storage services, generation with 2+ non-security services, header with dates/organization/project, default placeholders, context values, securityEmail from context, securityEmail derived from contactEmail domain, Introduction section, Scope section (in-scope/out-of-scope), conditional auth/payment/storage rows in scope table, exclusion of service rows when absent, How to Report section, bugBountyUrl in reporting (presence/absence), Vulnerability Categories CVSS table, Priority Areas conditional (auth/payment/storage presence/absence), Safe Harbor section, Response Timeline section (24h/3d/5d/resolution targets), Bug Bounty section with reward table when configured, Recognition section, Contact section, bugBountyUrl in contact section, disclose.io disclaimer, sequential section numbering without/with bug bounty, multiple service types in scope
+- **Generator modules now with tests** (42 total): access-control-policy, change-management, customization, data-dictionary, env-example, executive-briefing, generator, privacy-policy, terms-of-service, cookie-policy, ai-disclosure, dpa, incident-response, security-policy, acceptable-use, refund-policy, encryption-policy, backup-policy, disaster-recovery, audit-log-policy, business-continuity, compliance-roadmap, sla, iso27001, consent-guide, eula, record-of-processing, dpo-handbook, regulatory-updates, vendor-exit-plan, privacy-by-design, transparency-report, open-source-notice, api-terms, cookie-inventory, data-breach-notification, vendor-questionnaire, cross-border-transfer-map, privacy-notice-short, privacy-notice-app, privacy-notice-children, data-portability-guide, media-consent, responsible-disclosure
+- **Generator modules still missing tests**: 90 files (was 93)
 
 ### Iteration 17 — 2026-03-17 — OG image verification & social sharing QA
 

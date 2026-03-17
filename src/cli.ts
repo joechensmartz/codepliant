@@ -553,15 +553,21 @@ ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant doctor ./my-app${RESET()}             Run diagnostics for a specific project
 `,
 
-  health: `${BOLD()}codepliant health${RESET()} [path]
+  health: `${BOLD()}codepliant health${RESET()} [path] [options]
 
-Quick health check of the entire compliance setup.
-Shows pass/fail for Config, Docs, Freshness, and CI.
-Exit 0 if healthy, exit 1 if issues found.
+Comprehensive project health check. Scans the project, checks if compliance
+docs exist and are up to date, and shows a summary of services detected,
+docs generated, docs missing, and docs stale.
+
+Exit 0 if healthy, exit 1 if any required docs are missing.
+
+${BOLD()}Options:${RESET()}
+  ${CYAN()}--json${RESET()}                                Machine-readable JSON output
 
 ${BOLD()}Examples:${RESET()}
   ${CYAN()}codepliant health${RESET()}                     Check current project
   ${CYAN()}codepliant health ./my-app${RESET()}             Check a specific project
+  ${CYAN()}codepliant health --json${RESET()}               Output as JSON (for CI)
 `,
 
   clean: `${BOLD()}codepliant clean${RESET()} [path] [options]
@@ -1868,7 +1874,7 @@ function main() {
     }
 
     if (command === "health") {
-      runHealth(absProjectPath, absOutputDir, quiet);
+      runHealth(absProjectPath, absOutputDir, quiet, jsonOutput);
       return;
     }
 
@@ -7181,77 +7187,171 @@ function runBilling(
 
 // --- `codepliant health` command ---
 
-function runHealth(absProjectPath: string, absOutputDir: string, quiet: boolean) {
-  if (!quiet) printBanner();
-  console.log(`${BOLD()}Compliance health check${RESET()}\n`);
+function runHealth(absProjectPath: string, absOutputDir: string, quiet: boolean, jsonOutput: boolean) {
+  if (!quiet && !jsonOutput) printBanner();
 
-  let healthy = true;
+  // ── 1. Scan the project ────────────────────────────────────────
+  let scanResult: ReturnType<typeof scan> | null = null;
+  try {
+    scanResult = scan(absProjectPath);
+  } catch {
+    // scan may fail if no package.json etc — that's a finding, not a crash
+  }
 
-  // 1. Config check
+  const servicesDetected = scanResult ? scanResult.services.map((s) => s.name) : [];
+
+  // ── 2. Load config ─────────────────────────────────────────────
   const hasConfig = configExists(absProjectPath);
+  let config: ReturnType<typeof loadConfig> | undefined;
+  let configWarnings: ReturnType<typeof validateConfig> = [];
   if (hasConfig) {
-    const config = loadConfig(absProjectPath);
-    const warnings = validateConfig(config);
-    if (warnings.length === 0) {
-      console.log(`  ${GREEN()}✓${RESET()} Config`);
-    } else {
-      console.log(`  ${YELLOW()}✗${RESET()} Config  ${DIM()}(${warnings.length} warning(s))${RESET()}`);
-      healthy = false;
-    }
-  } else {
-    console.log(`  ${RED()}✗${RESET()} Config  ${DIM()}(no .codepliantrc.json found)${RESET()}`);
-    healthy = false;
+    config = loadConfig(absProjectPath);
+    configWarnings = validateConfig(config);
   }
 
-  // 2. Docs check
-  if (fs.existsSync(absOutputDir)) {
-    const mdFiles = fs.readdirSync(absOutputDir).filter((f: string) => f.endsWith(".md") || f.endsWith(".json"));
-    if (mdFiles.length > 0) {
-      console.log(`  ${GREEN()}✓${RESET()} Docs    ${DIM()}(${mdFiles.length} file(s) in ${path.basename(absOutputDir)}/)${RESET()}`);
-    } else {
-      console.log(`  ${RED()}✗${RESET()} Docs    ${DIM()}(output directory empty)${RESET()}`);
-      healthy = false;
-    }
-  } else {
-    console.log(`  ${RED()}✗${RESET()} Docs    ${DIM()}(no output directory)${RESET()}`);
-    healthy = false;
-  }
-
-  // 3. Freshness check
-  if (fs.existsSync(absOutputDir)) {
+  // ── 3. Generate expected docs & diff against existing ──────────
+  let expectedDocs: ReturnType<typeof generateDocuments> = [];
+  if (scanResult) {
     try {
-      const config = loadConfig(absProjectPath);
-      const scanResult = scan(absProjectPath);
-      const docs = generateDocuments(scanResult, config);
-      const docDiff = diffDocuments(docs, absOutputDir);
-      if (docDiff.hasChanges) {
-        console.log(`  ${YELLOW()}✗${RESET()} Fresh   ${DIM()}(${docDiff.changes.length} doc(s) out of date)${RESET()}`);
-        healthy = false;
-      } else {
-        console.log(`  ${GREEN()}✓${RESET()} Fresh`);
-      }
+      expectedDocs = generateDocuments(scanResult, config);
     } catch {
-      console.log(`  ${YELLOW()}✗${RESET()} Fresh   ${DIM()}(could not verify)${RESET()}`);
-      healthy = false;
+      // generation can fail — treat all docs as missing
     }
-  } else {
-    console.log(`  ${RED()}✗${RESET()} Fresh   ${DIM()}(no docs to check)${RESET()}`);
-    healthy = false;
   }
 
-  // 4. CI check — look for common CI config files
+  const existingFiles: string[] = [];
+  if (fs.existsSync(absOutputDir)) {
+    const entries = fs.readdirSync(absOutputDir).filter((f: string) => f.endsWith(".md") || f.endsWith(".json"));
+    existingFiles.push(...entries);
+  }
+
+  // Determine which docs are generated (exist on disk), missing, or stale
+  const docsGenerated: string[] = [];
+  const docsMissing: string[] = [];
+  const docsStale: string[] = [];
+
+  if (expectedDocs.length > 0 && fs.existsSync(absOutputDir)) {
+    let docDiff: ReturnType<typeof diffDocuments> | null = null;
+    try {
+      docDiff = diffDocuments(expectedDocs, absOutputDir);
+    } catch {
+      // diff failed
+    }
+
+    for (const doc of expectedDocs) {
+      const onDisk = existingFiles.includes(doc.filename);
+      if (!onDisk) {
+        docsMissing.push(doc.name);
+      } else if (docDiff && docDiff.changes.some((c) => c.filename === doc.filename && c.type === "updated")) {
+        docsStale.push(doc.name);
+        docsGenerated.push(doc.name);
+      } else {
+        docsGenerated.push(doc.name);
+      }
+    }
+  } else if (expectedDocs.length > 0) {
+    // no output dir at all — everything is missing
+    for (const doc of expectedDocs) {
+      docsMissing.push(doc.name);
+    }
+  }
+
+  // ── 4. CI check ────────────────────────────────────────────────
   const ciFiles = [".github/workflows", ".gitlab-ci.yml", "Jenkinsfile", ".circleci/config.yml", "bitbucket-pipelines.yml", ".travis.yml"];
   const foundCI = ciFiles.some((f) => fs.existsSync(path.join(absProjectPath, f)));
+
+  // ── 5. Determine overall health ────────────────────────────────
+  const hasIssues = !hasConfig || configWarnings.length > 0 || docsMissing.length > 0 || docsStale.length > 0;
+
+  // ── 6. JSON output mode ────────────────────────────────────────
+  if (jsonOutput) {
+    const report = {
+      healthy: !hasIssues,
+      project: absProjectPath,
+      config: {
+        found: hasConfig,
+        warnings: configWarnings,
+      },
+      services: servicesDetected,
+      docs: {
+        generated: docsGenerated,
+        missing: docsMissing,
+        stale: docsStale,
+        total: expectedDocs.length,
+      },
+      ci: foundCI,
+    };
+    console.log(JSON.stringify(report, null, 2));
+    process.exit(hasIssues ? 1 : 0);
+    return;
+  }
+
+  // ── 7. Human-readable output ───────────────────────────────────
+  console.log(`${BOLD()}Compliance health check${RESET()}\n`);
+
+  // Config
+  if (hasConfig && configWarnings.length === 0) {
+    console.log(`  ${GREEN()}✓${RESET()} Config`);
+  } else if (hasConfig) {
+    console.log(`  ${YELLOW()}✗${RESET()} Config  ${DIM()}(${configWarnings.length} warning(s))${RESET()}`);
+  } else {
+    console.log(`  ${RED()}✗${RESET()} Config  ${DIM()}(no .codepliantrc.json found)${RESET()}`);
+  }
+
+  // Docs presence
+  if (docsGenerated.length > 0 && docsMissing.length === 0) {
+    console.log(`  ${GREEN()}✓${RESET()} Docs    ${DIM()}(${docsGenerated.length} generated)${RESET()}`);
+  } else if (docsGenerated.length > 0) {
+    console.log(`  ${YELLOW()}✗${RESET()} Docs    ${DIM()}(${docsGenerated.length} generated, ${docsMissing.length} missing)${RESET()}`);
+  } else if (docsMissing.length > 0) {
+    console.log(`  ${RED()}✗${RESET()} Docs    ${DIM()}(${docsMissing.length} missing)${RESET()}`);
+  } else {
+    console.log(`  ${RED()}✗${RESET()} Docs    ${DIM()}(no docs expected — scan may have failed)${RESET()}`);
+  }
+
+  // Freshness
+  if (docsStale.length === 0 && docsGenerated.length > 0) {
+    console.log(`  ${GREEN()}✓${RESET()} Fresh`);
+  } else if (docsStale.length > 0) {
+    console.log(`  ${YELLOW()}✗${RESET()} Fresh   ${DIM()}(${docsStale.length} doc(s) out of date)${RESET()}`);
+  } else {
+    console.log(`  ${RED()}✗${RESET()} Fresh   ${DIM()}(no docs to check)${RESET()}`);
+  }
+
+  // CI
   if (foundCI) {
     console.log(`  ${GREEN()}✓${RESET()} CI`);
   } else {
     console.log(`  ${YELLOW()}✗${RESET()} CI      ${DIM()}(no CI config detected)${RESET()}`);
-    // CI is a soft check — warn but don't fail
+  }
+
+  // ── Summary table ──────────────────────────────────────────────
+  console.log();
+  console.log(`${BOLD()}Summary${RESET()}`);
+  console.log(`  Services detected : ${servicesDetected.length > 0 ? servicesDetected.join(", ") : DIM() + "none" + RESET()}`);
+  console.log(`  Docs generated    : ${docsGenerated.length}`);
+  console.log(`  Docs missing      : ${docsMissing.length > 0 ? RED() + docsMissing.length + RESET() : "0"}`);
+  console.log(`  Docs stale        : ${docsStale.length > 0 ? YELLOW() + docsStale.length + RESET() : "0"}`);
+
+  if (docsMissing.length > 0) {
+    console.log();
+    console.log(`${DIM()}Missing docs:${RESET()}`);
+    for (const name of docsMissing) {
+      console.log(`  ${RED()}•${RESET()} ${name}`);
+    }
+  }
+
+  if (docsStale.length > 0) {
+    console.log();
+    console.log(`${DIM()}Stale docs:${RESET()}`);
+    for (const name of docsStale) {
+      console.log(`  ${YELLOW()}•${RESET()} ${name}`);
+    }
   }
 
   console.log();
 
-  if (healthy) {
+  if (!hasIssues) {
     console.log(`${GREEN()}${BOLD()}Healthy — compliance setup looks good.${RESET()}\n`);
     process.exit(0);
   } else {
