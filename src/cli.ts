@@ -6643,6 +6643,17 @@ function runCompare(path1: string, path2: string, quiet: boolean, jsonOutput: bo
   const docsOnlyInB = docsB.filter((d) => !docFilenamesA.has(d.filename));
   const sharedDocs = docsA.filter((d) => docFilenamesB.has(d.filename));
 
+  // Find shared docs whose generated content would differ
+  const docMapB = new Map(docsB.map((d) => [d.filename, d]));
+  const differingDocs = sharedDocs.filter((dA) => {
+    const dB = docMapB.get(dA.filename);
+    return dB && dA.content !== dB.content;
+  }).map((d) => d.filename);
+  const identicalDocs = sharedDocs.filter((dA) => {
+    const dB = docMapB.get(dA.filename);
+    return dB && dA.content === dB.content;
+  }).map((d) => d.filename);
+
   const needsA = new Set(resultA.complianceNeeds.map((n) => n.document));
   const needsB = new Set(resultB.complianceNeeds.map((n) => n.document));
 
@@ -6657,6 +6668,8 @@ function runCompare(path1: string, path2: string, quiet: boolean, jsonOutput: bo
         docsOnlyInA: docsOnlyInA.map((d) => d.filename),
         docsOnlyInB: docsOnlyInB.map((d) => d.filename),
         sharedDocs: sharedDocs.map((d) => d.filename),
+        differingDocs,
+        identicalDocs,
       },
     }, null, 2));
     process.exit(0);
@@ -6701,6 +6714,18 @@ function runCompare(path1: string, path2: string, quiet: boolean, jsonOutput: bo
     console.log(`\n${BOLD()}Documents only in ${resultB.projectName}:${RESET()}`);
     for (const d of docsOnlyInB) {
       console.log(`  ${CYAN()}B${RESET()} ${d.name} ${DIM()}(${d.filename})${RESET()}`);
+    }
+  }
+  if (differingDocs.length > 0) {
+    console.log(`\n${BOLD()}Documents that would differ (${differingDocs.length}):${RESET()}`);
+    for (const filename of differingDocs) {
+      console.log(`  ${YELLOW()}~${RESET()} ${filename}`);
+    }
+  }
+  if (identicalDocs.length > 0) {
+    console.log(`\n${BOLD()}Identical documents (${identicalDocs.length}):${RESET()}`);
+    for (const filename of identicalDocs) {
+      console.log(`  ${GREEN()}=${RESET()} ${filename}`);
     }
   }
 

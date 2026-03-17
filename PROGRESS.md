@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 4478 passing — 100% scanner, 87/138 generators (63.0%)
+- **Tests**: 4601 passing — 100% scanner, 90/138 generators (65.2%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 33 complete (2026-03-17)
-- **Last run**: --explain errors, 134 tests, 63% generators, 2026 deadlines research, CSS verified
+- **Iteration**: 34 complete (2026-03-17)
+- **Last run**: compare enhanced, 123 tests, 65.2% generators, developer forum research, --explain errors
 
 ## Priority Backlog
 
@@ -3031,6 +3031,52 @@ These are not competitors but adjacent tools that Codepliant could integrate wit
 | NIS2 Full Enforcement | October 17, 2026 | July–August 2026 | Security documentation guide, NIS2 readiness checklist |
 
 **Key takeaway**: All three deadlines align with Codepliant's core value proposition — scanning code to generate accurate compliance documents. The July 1 US state privacy wave is the most immediate and directly maps to Codepliant's existing privacy policy generator. The August 2 EU AI Act deadline maps to the AI Disclosure generator. The NIS2 deadline is a stretch opportunity that could motivate a security-practices document generator.
+
+### Iteration 34 — 2026-03-17 — Most Requested Features for Compliance CLI Tools on Developer Forums
+
+Surveyed Hacker News threads (Compliance as Code, EasyCheck Show HN, open-source compliance-as-code for crypto), Reddit r/devops and r/netsec discussions, and 2026 DevSecOps trend analyses to identify what developers most frequently ask for in compliance CLI tooling.
+
+#### Top 7 Most Requested Features
+
+1. **Automated SBOM generation tied to code** — Developers want Software Bill of Materials generated directly from dependency scans, not maintained as a separate manual artifact. Tools like Syft are popular but developers want this baked into compliance workflows, not bolted on. Codepliant relevance: HIGH — the scanner already parses `package.json` and imports; emitting an SBOM is a natural extension.
+
+2. **Multi-framework mapping from a single scan** — The number one frustration is running separate tools for SOC 2, ISO 27001, GDPR, and state privacy laws. Developers want one scan that maps findings to multiple frameworks simultaneously. Codepliant relevance: MEDIUM — currently generates separate document types; a `--frameworks` flag mapping detections to specific regulatory requirements would differentiate.
+
+3. **CI/CD pipeline integration as a first-class citizen** — Developers want compliance checks that run as GitHub Actions / GitLab CI steps and fail builds on policy violations, not just generate reports after the fact. Pre-deployment gates are repeatedly requested. Codepliant relevance: HIGH — the existing GitHub Action (`codepliant-action`) already exists; adding exit codes for policy violations (e.g., "detected analytics without cookie consent mechanism") would address this directly.
+
+4. **Drift detection between code reality and compliance docs** — A recurring pain point: compliance documents go stale the moment code changes. Developers want a tool that diffs the current scan against the last-generated documents and alerts on gaps. Codepliant relevance: HIGH — store scan results as a baseline JSON, then `codepliant diff` compares current scan to baseline and flags new services/data flows not reflected in docs.
+
+5. **Jurisdiction-aware output** — On HN's compliance-as-code threads, developers ask for geographic coverage: which jurisdictions does the tool cover, and can it generate jurisdiction-specific variants of the same document? US-only is insufficient; EU, UK, Singapore, Brazil, and Australia are repeatedly mentioned. Codepliant relevance: MEDIUM — the privacy policy generator could accept a `--jurisdictions` flag to include/exclude jurisdiction-specific clauses (CCPA, GDPR, LGPD, PDPA).
+
+6. **Cost-accessible tooling for small teams** — Enterprise compliance platforms (Drata, Vanta, Secureframe) cost $10K-$50K/year. Developers at startups and small teams repeatedly ask for open-source or affordable alternatives. Phrases like "a 5-person startup cannot justify $20K annually for compliance software" appear across forums. Codepliant relevance: HIGH — this is exactly Codepliant's positioning as a free, open-source, zero-dependency CLI.
+
+7. **Sustainability of rule maintenance** — HN commenters specifically question how open-source compliance tools will keep rules synchronized with evolving regulations over 3-9 month cycles. The concern is that initial releases are promising but rot quickly. Codepliant relevance: MEDIUM — consider a community-contributed `signatures/` directory or a lightweight update mechanism for service signatures and document templates.
+
+#### Notable Emerging Themes
+
+- **AI-generated code blind spots**: 81% of security leaders admit they lack visibility into where AI-generated code lives in their codebase. Compliance tools that can flag AI-authored sections (via git blame + Copilot/Cursor metadata) are starting to be discussed.
+- **Compliance theater backlash**: Reddit security communities express strong frustration with "checkbox compliance" that does not reflect actual security posture. Tools that scan real code artifacts rather than self-reported questionnaires are seen as the antidote.
+- **Policy-as-code convergence**: OPA, Sigstore, and Trivy are becoming the de facto DevSecOps triad. Compliance CLI tools that output OPA-compatible policy bundles or integrate with Sigstore for artifact signing gain immediate credibility.
+
+#### Actionable Recommendations for Codepliant Roadmap
+
+| Priority | Feature | Effort | Impact |
+|----------|---------|--------|--------|
+| P0 | `codepliant diff` — drift detection between scans | Medium | Solves #1 pain point of stale docs |
+| P1 | `--jurisdictions` flag for privacy policy | Low | Addresses geographic coverage gap |
+| P1 | SBOM export (`--sbom cyclonedx`) | Medium | Aligns with supply chain security trend |
+| P2 | Exit codes for CI policy gates | Low | Makes GitHub Action more useful |
+| P2 | Multi-framework mapping output | High | Major differentiator but complex |
+| P3 | OPA-compatible policy bundle export | High | DevSecOps ecosystem integration |
+
+**Sources**:
+- [Compliance as Code — HN discussion](https://news.ycombinator.com/item?id=43174552)
+- [Show HN: EasyCheck — lightweight compliance automation](https://news.ycombinator.com/item?id=47070873)
+- [Show HN: Open-source compliance-as-code for crypto](https://news.ycombinator.com/item?id=44697890)
+- [DevSecOps Trends 2026 — Practical DevSecOps](https://www.practical-devsecops.com/devsecops-trends-2026/)
+- [Reddit cybersecurity discussions analysis 2026](https://elnion.com/2026/01/27/from-phishing-to-ai-chaos-what-my-analysis-of-all-reddit-cybersecurity-discussions-so-far-in-2026-revealed/)
+- [Top 12 Policy as Code Tools in 2026 — Spacelift](https://spacelift.io/blog/policy-as-code-tools)
+- [Compliance Automation Tools 2026 — Cynomi](https://cynomi.com/learn/compliance-automation-tools/)
 
 ## Development Log
 
@@ -7264,3 +7310,26 @@ Tidelift is a subscription platform where enterprises pay $100-$150/developer/ye
   - `src/generator/data-processing-inventory.test.ts` (44 tests): null return for empty services and unrecognized categories, generation with single/multiple services, context values (company name, contact email, DPO name/email, EU Representative conditional, website conditional, placeholders), date format, next review date, GDPR Article 30 reference, processing activities for all 9 categories (auth/analytics/payment/email/ai/monitoring/storage/advertising/database), sequential PA IDs, Processing Activities Summary (risk level counts, DPIA warning singular/plural for high-risk, international transfer count, automated decision-making count), Overview Table with truncated data types, Legal Basis Summary grouping, International Data Transfers section (with/without transfers), Review & Maintenance section, Codepliant attribution, review disclaimer, comprehensive test with all 9 service categories
 - **Generator modules now with tests**: 87/138 (63.0%)
 - **Generator coverage**: 60.9% → 63.0%
+
+### Iteration 34 — 2026-03-17 — Enhanced `codepliant compare` command
+
+- **Build**: pass (`npx tsc` clean)
+- **What changed**: Enhanced the existing `compare` command to show which shared documents would have differing content between two projects
+- **Details**:
+  - Added content comparison for documents that exist in both projects — identifies which docs would differ vs which are identical
+  - JSON output now includes `differingDocs` and `identicalDocs` arrays
+  - Text output shows "Documents that would differ" (with `~` marker) and "Identical documents" (with `=` marker)
+  - Useful for comparing environments (staging vs production) or monitoring compliance drift
+- **Files changed**: `src/cli.ts` — `runCompare()` function
+
+### Iteration 34 — 2026-03-17 — Generator Tests (90/138 = 65.2%)
+
+- **Build**: pass (`npx tsc` clean)
+- **Tests**: 4601/4601 passing (was 4478, added 123 new tests)
+- **Failing tests**: none
+- **Tests added this iteration**:
+  - `src/generator/compliance-policy-index.test.ts` (42 tests): null returns (no docs, undefined, empty array), basic output (header, date format, project name), context values (company name, placeholder), total document and category counts, category grouping for all 12 categories (Privacy & Data Protection, AI & Machine Learning, Security, Incident Management, Vendor & Third-Party Management, Cookies & Consent, Compliance Frameworks, Legal & Terms, Organizational, Reporting & Communication, Risk Management, Guides & References) plus Other fallback, Summary table (header, per-category count, total), category descriptions (known categories, Other fallback), document tables (name, filename in backticks), alphabetical sort within category, category ordering (defined order, Other last), How to Use section (quick start link, audit references, DSAR reference, vendor evaluation reference), Codepliant attribution, legal review disclaimer, comprehensive 13-document scenario across all 12 categories
+  - `src/generator/privacy-dashboard-config.test.ts` (40 tests): null returns (no services, empty array), valid JSON output with newline, top-level fields (version 1.0.0, ISO timestamp, project name), context values (company, contact email, DPO name/email, placeholders), dashboard settings (title with company name, description, consent management toggle, export/deletion/history flags), data categories for all 9 service types (analytics, auth/account, payment, email/communications, monitoring/technical, ai/ai_interactions, storage/user_content, database/stored_data, advertising), deduplication of same-category services, multi-source listing, consent options (essential always first with opted_in, analytics/advertising/AI/marketing conditional with opted_out, exclusion test, category_ids filtering), all 6 data endpoints (export/delete/consent/access/rectify/restrict with auth), all 6 user rights (GDPR articles, CCPA references), comprehensive 9-service scenario
+  - `src/generator/cookie-consent-config.test.ts` (41 tests): null returns (no services, database-only, storage-only, email-only, monitoring-only), valid JSON for analytics and auth services with newline, top-level fields (version 1.0.0, ISO timestamp, project name), context values (company name, placeholder), consent settings (explicit consent, first visit, DNT, cookie name/duration, position), all 4 cookie categories (strictly_necessary required/enabled, functional/analytics/advertising disabled), provider mapping for 8 known providers (Google Analytics, posthog, mixpanel, Meta Pixel, Google Ads, @sentry/browser, stripe, hotjar) with correct category_ids and privacy policy URLs, auth services as strictly_necessary with session cookie generation, provider deduplication, CMP integration mappings (OneTrust C0001-C0004, CookieYes necessary/advertisement, Cookiebot necessary/preferences/statistics/marketing), comprehensive 8-service scenario, advertising-only generation
+- **Generator modules now with tests**: 90/138 (65.2%)
+- **Generator coverage**: 63.0% → 65.2%
