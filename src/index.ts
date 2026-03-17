@@ -116,3 +116,5 @@ export type { CommunitySignature, SignatureRepo } from "./community/signatures-r
 
 export { generateComplianceGapAnalysis } from "./generator/compliance-gap-analysis.js";
 export { generateKeyPersonRiskAssessment } from "./generator/key-person-risk.js";
+
+export { generateEULA } from "./generator/eula.js";
