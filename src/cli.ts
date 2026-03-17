@@ -10389,25 +10389,28 @@ ${CYAN()}${BOLD()}  ╔═══════════════════
 ${BOLD()}Mission:${RESET()}
   Codepliant scans your actual source code and generates every
   compliance document your project needs — Privacy Policy, Terms of
-  Service, AI Disclosure, DPA, and 120+ more — in under a second.
+  Service, AI Disclosure, DPA, and 123+ more — in under a second.
   No questionnaires. No network calls. No AI. Purely deterministic.
 
-${BOLD()}Version:${RESET()}     ${VERSION}
-${BOLD()}License:${RESET()}     MIT — free forever
-${BOLD()}Runtime:${RESET()}     Zero network calls, everything runs locally
+${BOLD()}Version:${RESET()}       ${VERSION}
+${BOLD()}License:${RESET()}       MIT — free forever
+${BOLD()}Runtime:${RESET()}       Zero network calls, everything runs locally
+
+${BOLD()}Capabilities:${RESET()}
+  ${GREEN()}Ecosystems:${RESET()}    13 ${DIM()}(Node, Python, Go, Rust, Ruby, Java, .NET, PHP, Elixir, Flutter, Swift, Kotlin, Terraform)${RESET()}
+  ${GREEN()}Doc types:${RESET()}     123+ ${DIM()}(138 generators)${RESET()}
+  ${GREEN()}Scanners:${RESET()}      43 ${DIM()}(dependencies, ORM schemas, API routes, env files, tracking, infrastructure, and more)${RESET()}
+  ${GREEN()}Generators:${RESET()}    138 ${DIM()}(privacy, security, AI governance, data protection, compliance checklists, and more)${RESET()}
+  ${GREEN()}Tests:${RESET()}         5,700+ passing
 
 ${BOLD()}Links:${RESET()}
+  ${CYAN()}Homepage:${RESET()}  https://codepliant.dev
   ${CYAN()}GitHub:${RESET()}    https://github.com/joechensmartz/codepliant
-  ${CYAN()}Website:${RESET()}   https://github.com/joechensmartz/codepliant#readme
-  ${CYAN()}Issues:${RESET()}    https://github.com/joechensmartz/codepliant/issues
   ${CYAN()}NPM:${RESET()}       https://www.npmjs.com/package/codepliant
-
-${BOLD()}Stats:${RESET()}
-  120+ document types | 30+ scanners | 55+ CLI commands
-  10+ ecosystems | 13+ output formats | 4 languages
+  ${CYAN()}Issues:${RESET()}    https://github.com/joechensmartz/codepliant/issues
 
 ${BOLD()}Credits:${RESET()}
-  Built with \u2764\uFE0F by the open-source community.
+  Built by the open-source community.
   ${DIM()}Contributions welcome — see CONTRIBUTING.md${RESET()}
 
 ${BOLD()}Quick Start:${RESET()}

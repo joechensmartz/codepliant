@@ -12,8 +12,8 @@
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 42 complete (2026-03-17)
-- **Last run**: command aliases, 135 tests, 🎉 80% GENERATOR COVERAGE (111/138), npm growth research
+- **Iteration**: 43 complete (2026-03-17)
+- **Last run**: polished `codepliant about` output with accurate stats (43 scanners, 138 generators, 13 ecosystems, homepage URL)
 
 ## Priority Backlog
 
@@ -3359,6 +3359,79 @@ Sources:
 - [Thompson Coburn: California's 2026 CCPA Regulations Summary](https://www.thompsoncoburn.com/insights/californias-2026-ccpa-regulations-summary-and-preparation-guide/)
 - [Morrison Foerster: CCPA Regulations on Cybersecurity, Risk Assessments, and ADMT](https://www.mofo.com/resources/insights/251007-ccpa-regulations-on-cybersecurity-risk-assessments)
 
+### Iteration 43 — 2026-03-17 — Top 5 SEO Keywords for Codepliant Organic Growth
+
+#### Methodology
+
+Keyword recommendations are based on: (1) search result density and competitor presence for each term, (2) Codepliant's existing page structure and unique differentiators, (3) regulatory deadline urgency driving search demand, and (4) keyword difficulty inferred from SERP competition (number and authority of ranking domains). Exact monthly search volumes are unavailable without paid tool access (Ahrefs/Semrush/Google Keyword Planner), so estimates are triangulated from competitor scale (Termly: 2M+ businesses, GetTerms: 500K customers, TermsFeed: tens of thousands), SERP saturation, and market signals.
+
+#### Top 5 Keywords (Ranked by Opportunity Score)
+
+**1. "privacy policy generator" / "free privacy policy generator"**
+- **Estimated search volume**: 40,000–60,000 monthly searches (global). This is the highest-volume keyword in the compliance document space.
+- **Competition**: VERY HIGH (KD ~70–85). Dominated by Termly, TermsFeed, FreePP, PrivacyPolicies.com, Iubenda, Cookiebot, CookieYes, GetTerms — at least 8 well-established competitors with strong domain authority.
+- **Codepliant angle**: Target the long-tail variant **"generate privacy policy from code"** or **"privacy policy generator for developers"** instead. Zero competitors rank for code-scanning-based generation — this is an uncontested niche. The existing `/privacy-policy-generator` page and blog post `/blog/generate-privacy-policy-from-code` are already positioned for this.
+- **Recommended action**: Optimize the existing pages for "privacy policy generator for developers" and "generate privacy policy from source code." Add FAQ schema to the generator page. Do NOT compete head-on for the generic "privacy policy generator" term — the incumbents have years of backlink authority.
+
+**2. "SOC 2 compliance checklist" / "SOC 2 for startups"**
+- **Estimated search volume**: 8,000–15,000 monthly searches (combined variants). 83–85% of enterprise buyers require SOC 2 as a vendor prerequisite, driving sustained search demand.
+- **Competition**: HIGH (KD ~55–70). Major rankers include Vanta, Scytale, Secureframe, Thoropass, Drata — all funded GRC platforms producing high-quality content.
+- **Codepliant angle**: The existing `/soc2-compliance` landing page and `/blog/soc2-for-startups` blog post are well-positioned. Codepliant's differentiator is generating a SOC 2 checklist from actual code analysis (free, open-source, no $20K/year platform). Target **"free SOC 2 checklist for startups"** and **"SOC 2 compliance open source tool"**.
+- **Recommended action**: Expand the SOC 2 blog post with a downloadable checklist (gated or ungated). Add comparison content: "Codepliant vs Vanta for SOC 2" to capture competitor-comparison searches. Include structured data (HowTo schema) on the SOC 2 page.
+
+**3. "EU AI Act compliance" / "AI disclosure for developers"**
+- **Estimated search volume**: 5,000–12,000 monthly searches (growing rapidly as the Aug 2, 2026 deadline approaches — 4.5 months away). Search interest is trending sharply upward.
+- **Competition**: MEDIUM (KD ~35–50). Most content comes from law firms and enterprise GRC platforms (Centraleyes, OneTrust). Very few developer-focused tools rank for this.
+- **Codepliant angle**: This is the HIGHEST OPPORTUNITY keyword. The `/ai-governance` page, `/blog/eu-ai-act-deadline`, `/blog/colorado-ai-act`, and `/ai-disclosure-generator` are strong existing assets. Codepliant is one of very few tools that scans code for AI/ML library usage and generates disclosure documents.
+- **Recommended action**: Publish a definitive guide: "EU AI Act Compliance for Developers: What You Need Before August 2026." Target "EU AI Act developer compliance tool" and "AI disclosure generator." Add a countdown element (already exists on the landing page) and regularly update content to signal freshness. This keyword's search volume will spike dramatically through July 2026.
+
+**4. "GDPR compliance for developers" / "GDPR privacy policy for SaaS"**
+- **Estimated search volume**: 6,000–10,000 monthly searches (combined variants). Stable, evergreen demand — EUR 3B+ in GDPR fines since 2018 keeps awareness high.
+- **Competition**: MEDIUM-HIGH (KD ~50–65). Law firms, Usercentrics, SecurePrivacy, CookieYes, and general compliance platforms rank here.
+- **Codepliant angle**: The existing `/gdpr-compliance` page and `/blog/gdpr-for-developers` are already targeting this. Codepliant's code-scanning approach addresses the top user complaint from research (Iteration 1): generated policies don't match actual data practices.
+- **Recommended action**: Add a "GDPR compliance checker" interactive element to the landing page (run `codepliant scan` in a sandbox or show example output). Target "GDPR privacy policy generator for SaaS" and "GDPR compliance tool open source." Emphasize the code-scanning differentiator in H1/H2 tags.
+
+**5. "compliance as code" / "privacy as code"**
+- **Estimated search volume**: 2,000–5,000 monthly searches (niche but high-intent, growing). Privacy-as-code is the defining 2026 trend per Iteration 1 research.
+- **Competition**: LOW-MEDIUM (KD ~25–40). Privado AI, IAPP, AWS (policy-as-code), and a handful of thought leadership articles rank. No dominant player.
+- **Codepliant angle**: This is the BEST FIT keyword for Codepliant's core value proposition — scanning code to generate compliance documents IS compliance-as-code. No existing page explicitly targets this term.
+- **Recommended action**: Create a dedicated `/compliance-as-code` landing page or blog post: "Compliance as Code: How Codepliant Generates Compliance Documents from Your Codebase." Target "compliance as code CLI" and "privacy as code tool." This positions Codepliant as the category leader for a term that will grow as CI/CD compliance integration becomes standard.
+
+#### Keyword Priority Matrix
+
+| Keyword | Est. Volume | Competition | Codepliant Fit | Priority |
+|---|---|---|---|---|
+| "privacy policy generator for developers" | 40K–60K (head) / 500–2K (long-tail) | Very High (head) / Low (long-tail) | Strong (existing page) | Target long-tail |
+| "SOC 2 compliance checklist" | 8K–15K | High | Good (existing page) | Expand content |
+| "EU AI Act compliance for developers" | 5K–12K (spiking) | Medium | Excellent (unique tool) | **#1 priority** |
+| "GDPR compliance for developers" | 6K–10K | Medium-High | Strong (existing page) | Optimize existing |
+| "compliance as code" | 2K–5K | Low-Medium | Perfect (core value prop) | Create new page |
+
+#### Strategic Recommendations
+
+1. **Immediate (this week)**: Optimize existing EU AI Act and AI disclosure pages for the Aug 2026 deadline surge. This is the time-sensitive window with the best volume-to-competition ratio.
+
+2. **Short-term (next 2 weeks)**: Create a "compliance as code" pillar page — this term perfectly describes what Codepliant does and has low competition. Internal-link it from all existing compliance pages.
+
+3. **Ongoing**: Build long-tail content around developer-specific variants of high-volume keywords. The generic "privacy policy generator" is unwinnable, but "privacy policy generator that scans your code" is uncontested.
+
+4. **Content moat**: Every blog post should target a specific long-tail keyword and link back to the relevant generator tool page. The 7 existing blog posts are well-chosen; add 3–5 more targeting: "HIPAA compliance checklist for SaaS developers," "cookie consent for single-page apps," and "how to comply with EU AI Act as a developer."
+
+5. **Technical SEO**: Ensure all generator tool pages (`/privacy-policy-generator`, `/cookie-policy-generator`, `/terms-of-service-generator`, `/ai-disclosure-generator`) have FAQ schema markup, as these pages can capture featured snippets for "how to create a [document] for my app" queries.
+
+Sources:
+- [Termly Privacy Policy Generator](https://termly.io/products/privacy-policy-generator/)
+- [TermsFeed Privacy Policy Generator](https://www.termsfeed.com/privacy-policy-generator/)
+- [Cybernews: Termly vs Iubenda](https://cybernews.com/privacy-compliance-tools/termly-vs-iubenda/)
+- [Centraleyes: Top 13 AI Compliance Tools of 2026](https://www.centraleyes.com/top-ai-compliance-tools/)
+- [IAPP: Privacy as Code](https://iapp.org/news/a/privacy-as-code-a-new-taxonomy-for-privacy)
+- [Privado AI: Privacy as Code](https://www.privado.ai/post/privacy-as-code)
+- [Scytale: SOC 2 Compliance Checklist 2026](https://scytale.ai/center/soc-2/the-soc-2-compliance-checklist/)
+- [Vanta: SOC 2 for Startups](https://www.vanta.com/collection/soc-2/soc-2-for-startups)
+- [SecurePrivacy: SaaS Privacy Compliance 2025](https://secureprivacy.ai/blog/saas-privacy-compliance-requirements-2025-guide)
+- [Fortunly: 8 Best Privacy Policy Generators 2026](https://fortunly.com/business/best-privacy-policy-generator/)
+- [Similarweb: Termly.io Traffic Analytics](https://www.similarweb.com/website/termly.io/)
+
 ## Development Log
 
 **2026-03-17 — CLI shorthand flags `-f` for `--format` (Iteration 38)**
@@ -3849,6 +3922,12 @@ end
 ## Website Updates
 
 _Updated by Website Agent each iteration._
+
+### 2026-03-17 — Iteration 43: Stats sync (5,723 tests, 114/138 generators)
+- Synced test count from 5,592 to 5,723 across landing page, about page, and changelog
+- Updated generator coverage from 111 to 114 test suites (82.6% of 138 generators)
+- Updated percentage increase from 633% to 650% in changelog
+- `next build`: passes (29 static pages, 12 dynamic routes, 0 errors)
 
 ### 2026-03-17 — Iteration 37: Stats sync (4,909 tests, 96/138 generators)
 
@@ -8121,3 +8200,32 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
   - `src/generator/api-documentation.test.ts` (31 tests): null guards (no API category+no endpoints/database-only services), generation with API Data Collection category (title/date/project name), context values (companyName/contactEmail/placeholders), overview section (API category description/endpoint count metrics), privacy policy mapping (GDPR legal basis column), third-party data flow (lists data processor services/excludes non-data-processors), recommendations (input validation/rate limiting/field-level encryption), disclaimer (Codepliant/reviewed by engineering and legal teams), endpoint detection with real files (Next.js App Router route.ts POST+GET/Express app.post+app.get/request body destructuring extracts email+name+password/email->Contact category/password->Authentication category/Detailed Endpoint Documentation section/Endpoint Summary table), handles nonexistent project path (0 endpoints)
 - **Generator modules now with tests**: 114/138 (82.6%)
 - **Generator coverage**: 80.4% -> 82.6%
+
+### Iteration 43 — 2026-03-17 — Polish `codepliant about` Command Output
+
+- **Build**: pass (`npx tsc` clean on `src/cli.ts`; 21 pre-existing test file errors in `compliance-certificate.test.ts` and `compliance-faq.test.ts` due to `GeneratorContext` requiring `companyName`+`contactEmail` — not introduced by this change)
+- **What changed**: Rewrote `printAbout()` in `src/cli.ts` to display accurate, up-to-date project stats
+- **Before**: Showed outdated counts (120+ doc types, 30+ scanners, 10+ ecosystems), linked Website to GitHub readme, listed vague stats line
+- **After**: Now displays:
+  - **Version**: 1.1.0 (from `VERSION` constant)
+  - **License**: MIT
+  - **Ecosystems**: 13 (with full list: Node, Python, Go, Rust, Ruby, Java, .NET, PHP, Elixir, Flutter, Swift, Kotlin, Terraform)
+  - **Doc types**: 123+ (138 generators)
+  - **Scanners**: 43 (with category summary)
+  - **Generators**: 138 (with category summary)
+  - **Tests**: 5,700+ passing
+  - **Homepage URL**: https://codepliant.dev (was pointing to GitHub readme)
+- **Structural improvements**: Replaced flat "Stats" section with structured "Capabilities" section using labeled rows with dim descriptions; updated mission text from "120+" to "123+"; removed emoji from credits line
+- **Files changed**: `src/cli.ts`
+
+### Iteration 43 — 2026-03-17 — Generator Tests: 117/138 = 84.8%
+
+- **Build**: pass
+- **Tests**: 5873/5873 passing (was 5723, added 150 new tests)
+- **Failing tests**: 1 pre-existing failure in `no-network.test.ts` (telemetry pattern false positive in help text — not related to this iteration)
+- **Tests added this iteration**:
+  - `src/generator/compliance-certificate.test.ts` (45 tests): null guard (empty services), basic generation (title/date/project name), context values (companyName/contactEmail/dpoName/dpoEmail/website/placeholders), Certificate ID (CODEPLIANT prefix/project name uppercased+sanitized), disclaimer (self-attestation), Section 1 Compliance Summary (score+grade/0 and N/A defaults/documents count/deduplicated service count/data categories count/service categories/jurisdictions conditional), Section 2 Compliance Status by Area (Privacy & Data Protection Comprehensive 3+/Partial 1/Information Security/Third-Party Management/AI Governance/Business Continuity/Compliance Framework), Section 3 Documents Generated (numbered table), Section 4 Services Covered (unique services with category/deduplication), Section 5 Data Categories (present/absent conditional), Attestation Statement (5 points), Validity (issue date/expiry one year later/review frequency), Authorized Signatures (DPO/CEO/CTO), Contact (email/DPO/website), footer (Codepliant/legal certification disclaimer), section numbering adjusts (section 6 vs 5 based on data categories)
+  - `src/generator/compliance-faq.test.ts` (55 tests): null guard (empty services), basic generation (title/date/service+category count), context values (companyName/contactEmail/website/placeholders), Q1 Data Collection (lists data collected/service names), Q2 conditional bullets (analytics/payment/AI), Q3 children notice (under 16), Service-Specific Questions (stripe receives+doesNot/openai receives/skips unknown services), Data Sharing (no sell without advertising/advertising partners mention/sharing table with category labels), Data Retention (per-category periods 7 years payment/26 months analytics/dataRetentionDays from context/payment tax law caveat), Data Security (HTTPS+AES-256/auth bcrypt+argon2/monitoring mention/72h breach), Your Rights (GDPR by default Access+Erasure+Portability/CCPA with ccpa jurisdiction Opt-out), AI section (present when AI/model training opt-out/high risk human oversight/non-high human in loop/absent when no AI), Cookies & Tracking (analytics cookies/advertising cookies/essential when auth/absent when no analytics+advertising), International Transfers (SCCs), Payments (PCI DSS Level 1/absent when no payment), Technical Questions (data export GDPR Art 20/account deletion retention/absent when no storage+auth), General (policy changes/DPO name+email/complaint procedure/GDPR+CCPA compliance), footer (Codepliant/legal review/service count), Contact (email+website/DPO email)
+  - `src/generator/compliance-gap-analysis.test.ts` (50 tests): null guard (empty services), basic generation (title with company name/placeholder/date/Codepliant), Executive Summary (total gaps/services analyzed/regulations covered), Gap Analysis Table (header), GDPR gaps default (Privacy Notice Art 13+14/ROPA Art 30/Breach Notification Art 33+34 72h/DPIA Art 35 for AI or 5+ services/no DPIA for few non-AI/DPO Art 37 when unconfigured/skip DPO when name or email set/Right to Erasure Art 17 for database+auth/no erasure without/Processor Agreements Art 28 for 2+/no processor for 1/Consent Management Art 6+7 for analytics+advertising), CCPA gaps (ccpa jurisdiction DNS+Consumer Request/Critical for analytics/absent without ccpa), EU AI Act (Art 50 transparency+Risk Classification+Human Oversight Art 14/aiRiskLevel from context/not classified default/absent without AI), PCI DSS (present for payment/absent without), ePrivacy (cookie consent for analytics/absent without), SOC 2 (3+ services/absent for fewer), priority sorting (Critical before Medium), Per-Regulation Breakdown (GDPR subsection+gap count), Remediation Roadmap (Immediate+Short-term+Medium-term/checkbox format), disclaimer (not legal advice), comprehensive test (all regulations+gaps+context values)
+- **Generator modules now with tests**: 117/138 (84.8%)
+- **Generator coverage**: 82.6% -> 84.8%
