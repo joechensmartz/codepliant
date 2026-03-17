@@ -13,6 +13,7 @@ import { scanJavaDependencies } from "./java.js";
 import { scanDotnetDependencies } from "./dotnet.js";
 import { scanPrismaSchema } from "./schema.js";
 import { scanDjangoModels } from "./django-models.js";
+import { scanDjangoSettings } from "./django-settings.js";
 import { scanGoStructs } from "./go-structs.js";
 import { scanSqlalchemyModels } from "./sqlalchemy-models.js";
 import { scanTypeormModels } from "./typeorm-models.js";
@@ -444,6 +445,7 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
   const envServices = safeRun("Env vars", () => scanEnvFiles(absPath), []);
   const trackingServices = safeRun("Tracking", () => scanTracking(absPath, allFiles), []);
   const frameworkImplicitServices = safeRun("Framework implicit", () => scanFrameworkImplicit(absPath), []);
+  const djangoSettingsServices = safeRun("Django settings", () => scanDjangoSettings(absPath), []);
   const dockerComposeServices = safeRun("Docker Compose services", () => scanDockerComposeServices(absPath), []);
   const githubActionsServices = safeRun("GitHub Actions", () => scanGitHubActions(absPath), []);
   const webSocketServices = safeRun("WebSockets", () => scanWebSockets(absPath, allFiles), []);
@@ -469,7 +471,7 @@ export function scan(projectPath: string, options?: ScanOptions): ScanResult & {
     }
   }
 
-  for (const svcList of [depServices, pythonServices, goServices, rubyServices, elixirServices, phpServices, rustServices, javaServices, dotnetServices, importServices, envServices, trackingServices, frameworkImplicitServices, dockerComposeServices, githubActionsServices, webSocketServices, fileUploadServices, cachingServices, graphqlEndpointServices, ...pluginScanResults]) {
+  for (const svcList of [depServices, pythonServices, goServices, rubyServices, elixirServices, phpServices, rustServices, javaServices, dotnetServices, importServices, envServices, trackingServices, frameworkImplicitServices, djangoSettingsServices, dockerComposeServices, githubActionsServices, webSocketServices, fileUploadServices, cachingServices, graphqlEndpointServices, ...pluginScanResults]) {
     mergeServicesIntoMap(serviceMap, svcList);
   }
 
