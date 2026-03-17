@@ -971,6 +971,291 @@ ${BOLD()}Usage:${RESET()}
   ${CYAN()}codepliant completions --shell fish > ~/.config/fish/completions/codepliant.fish${RESET()}
   ${CYAN()}codepliant completions${RESET()}                              Auto-detect shell
 `,
+
+  quickstart: `${BOLD()}codepliant quickstart${RESET()} [path] [options]
+
+Show a quick start guide based on scan results. Recommends next steps
+specific to your project's detected services and ecosystem.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant quickstart${RESET()}                  Guide for current project
+  ${CYAN()}codepliant quickstart ./my-app${RESET()}          Guide for a specific project
+`,
+
+  completeness: `${BOLD()}codepliant completeness${RESET()} [path] [options]
+
+Show percentage of recommended compliance docs that currently exist.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant completeness${RESET()}                Check current project
+  ${CYAN()}codepliant completeness ./my-app${RESET()}        Check a specific project
+`,
+
+  migrate: `${BOLD()}codepliant migrate${RESET()} [path] [options]
+
+Show new document types available after a Codepliant upgrade.
+Compares your existing docs against newly available generators.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant migrate${RESET()}                     Check for new document types
+`,
+
+  metrics: `${BOLD()}codepliant metrics${RESET()} [path] [options]
+
+Show all compliance metrics in one view. Designed for standup reporting —
+includes services detected, documents generated, compliance score, and trends.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant metrics${RESET()}                     Show metrics for current project
+  ${CYAN()}codepliant metrics ./my-app${RESET()}             Show metrics for a specific project
+  ${CYAN()}codepliant metrics --json${RESET()}               JSON output for dashboards
+`,
+
+  "check-config": `${BOLD()}codepliant check-config${RESET()} [path]
+
+Validate the .codepliant.json config file against the schema.
+Shows completeness percentage and highlights missing or invalid fields.
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant check-config${RESET()}                Validate config in current directory
+  ${CYAN()}codepliant check-config ./my-app${RESET()}        Validate config in a specific project
+`,
+
+  config: `${BOLD()}codepliant config${RESET()} <show>
+
+View the current Codepliant configuration.
+
+${BOLD()}Subcommands:${RESET()}
+  ${CYAN()}show${RESET()}        Pretty-print current .codepliant.json
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant config show${RESET()}                  Show current configuration
+`,
+
+  format: `${BOLD()}codepliant format${RESET()} <file> [options]
+
+Convert a single Markdown file to HTML.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: same as input file)
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant format ./legal/PRIVACY_POLICY.md${RESET()}
+  ${CYAN()}codepliant format ./legal/TERMS_OF_SERVICE.md -o ./public${RESET()}
+`,
+
+  pdf: `${BOLD()}codepliant pdf${RESET()} <file> [options]
+
+Generate a PDF for a single Markdown document. Requires Puppeteer.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: same as input file)
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant pdf ./legal/PRIVACY_POLICY.md${RESET()}
+  ${CYAN()}codepliant pdf ./legal/TERMS_OF_SERVICE.md -o ./public${RESET()}
+`,
+
+  onboard: `${BOLD()}codepliant onboard${RESET()} [path]
+
+Guided onboarding for new projects. Walks through initial setup,
+scanning, and document generation with explanations at each step.
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant onboard${RESET()}                    Onboard current project
+  ${CYAN()}codepliant onboard ./my-app${RESET()}            Onboard a specific project
+`,
+
+  audit: `${BOLD()}codepliant audit${RESET()} [path] [options]
+
+Run a comprehensive self-audit and generate AUDIT_REPORT.md.
+Checks all compliance areas and produces a detailed findings report.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant audit${RESET()}                      Audit current project
+  ${CYAN()}codepliant audit ./my-app${RESET()}              Audit a specific project
+  ${CYAN()}codepliant audit --json${RESET()}                JSON output for CI
+`,
+
+  archive: `${BOLD()}codepliant archive${RESET()} [path] [options]
+
+Archive the current legal/ directory with a timestamp.
+Creates a timestamped copy before regenerating documents.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory to archive (default: ./legal)
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant archive${RESET()}                    Archive current documents
+`,
+
+  "version-check": `${BOLD()}codepliant version-check${RESET()}
+
+Check if a newer version of Codepliant is available on npm.
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant version-check${RESET()}               Check for updates
+`,
+
+  "list-docs": `${BOLD()}codepliant list-docs${RESET()} [path] [options]
+
+List all document types that Codepliant can generate,
+highlighting which ones are relevant to your project.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant list-docs${RESET()}                   List all document types
+  ${CYAN()}codepliant list-docs --json${RESET()}             JSON output
+`,
+
+  changelog: `${BOLD()}codepliant changelog${RESET()}
+
+Show version history of Codepliant.
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant changelog${RESET()}                   Show version history
+`,
+
+  todo: `${BOLD()}codepliant todo${RESET()} [path] [options]
+
+Show all actionable compliance items as a todo list.
+Prioritized by urgency and regulatory deadlines.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant todo${RESET()}                        Show todo list for current project
+  ${CYAN()}codepliant todo --json${RESET()}                  JSON output for task trackers
+`,
+
+  benchmark: `${BOLD()}codepliant benchmark${RESET()} [path] [options]
+
+Compare your project's compliance score against industry averages.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--json${RESET()}                Output as JSON
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant benchmark${RESET()}                   Benchmark current project
+  ${CYAN()}codepliant benchmark ./my-app${RESET()}           Benchmark a specific project
+`,
+
+  preview: `${BOLD()}codepliant preview${RESET()} <file> [options]
+
+Preview a specific compliance document in the terminal with paged output.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant preview PRIVACY_POLICY.md${RESET()}   Preview privacy policy
+  ${CYAN()}codepliant preview TERMS_OF_SERVICE.md${RESET()}  Preview terms of service
+`,
+
+  reset: `${BOLD()}codepliant reset${RESET()} [path]
+
+Reset all Codepliant state (scores, usage tracking, todo items).
+Prompts for confirmation unless --force is used.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--force${RESET()}               Skip confirmation prompt
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant reset${RESET()}                       Reset state (with confirmation)
+  ${CYAN()}codepliant reset --force${RESET()}                Reset without confirmation
+`,
+
+  certify: `${BOLD()}codepliant certify${RESET()} [path] [options]
+
+Generate a dated compliance certificate for sharing.
+Creates a signed document attesting to compliance status at a point in time.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant certify${RESET()}                     Generate certificate
+  ${CYAN()}codepliant certify -o ./public${RESET()}          Output to public directory
+`,
+
+  snapshot: `${BOLD()}codepliant snapshot${RESET()} [path] [options]
+
+Save the current compliance state as a timestamped snapshot.
+Useful for tracking compliance status over time.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Document directory (default: ./legal)
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant snapshot${RESET()}                    Save snapshot
+`,
+
+  about: `${BOLD()}codepliant about${RESET()}
+
+Show project info, mission, credits, and links.
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant about${RESET()}                       Show about info
+`,
+
+  sbom: `${BOLD()}codepliant sbom${RESET()} [path] [options]
+
+Generate a CycloneDX Software Bill of Materials (SBOM) from dependency scan.
+
+${BOLD()}Options:${RESET()}
+  ${DIM()}--output, -o <dir>${RESET()}    Output directory (default: ./legal)
+  ${DIM()}--quiet, -q${RESET()}           Minimal output
+  ${DIM()}--verbose, -v${RESET()}         Show per-scanner timing breakdown
+  ${DIM()}--no-color${RESET()}            Disable colored output
+
+${BOLD()}Examples:${RESET()}
+  ${CYAN()}codepliant sbom${RESET()}                        Generate SBOM for current project
+  ${CYAN()}codepliant sbom ./my-app${RESET()}                Generate SBOM for a specific project
+  ${CYAN()}codepliant sbom -o ./compliance${RESET()}         Output to custom directory
+`,
   };
 }
 
@@ -1541,7 +1826,26 @@ function main() {
     process.exit(0);
   }
 
-  if (!command || command === "help" || command === "--help" || command === "-h") {
+  if (!command || command === "--help" || command === "-h") {
+    printBanner();
+    printUsage();
+    process.exit(0);
+  }
+
+  // `codepliant help` or `codepliant help <command>`
+  if (command === "help") {
+    const subcommand = args[1];
+    if (subcommand) {
+      const resolved = COMMAND_ALIASES[subcommand] || subcommand;
+      const COMMAND_HELP = getCommandHelp();
+      const helpText = COMMAND_HELP[resolved];
+      if (helpText) {
+        console.log(`\n${helpText}`);
+        process.exit(0);
+      }
+      // No specific help for this command — show general usage with a note
+      console.log(`\n${DIM()}No detailed help available for "${subcommand}". Showing general usage.${RESET()}\n`);
+    }
     printBanner();
     printUsage();
     process.exit(0);

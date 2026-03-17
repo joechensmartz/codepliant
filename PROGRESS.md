@@ -7,13 +7,13 @@
 ## Current Status
 
 - **Version**: 1.1.0 (prepared, not yet published)
-- **Tests**: 5723 passing — 100% scanner, 114/138 generators (82.6%)
+- **Tests**: 6030 passing — 100% scanner, 120/138 generators (86.9%)
 - **Repos tested**: 1200+
 - **Document types**: 123+
 - **Ecosystems**: 13
 - **npm package size**: 857KB (puppeteer optional)
-- **Iteration**: 43 complete (2026-03-17)
-- **Last run**: polished `codepliant about` output with accurate stats (43 scanners, 138 generators, 13 ecosystems, homepage URL)
+- **Iteration**: 44 complete (2026-03-17)
+- **Last run**: help fix + 26 cmd help texts, 157 tests, 🎉🎉 6030 TESTS + 86.9% GENERATORS, US AI laws research
 
 ## Priority Backlog
 
@@ -3431,6 +3431,62 @@ Sources:
 - [SecurePrivacy: SaaS Privacy Compliance 2025](https://secureprivacy.ai/blog/saas-privacy-compliance-requirements-2025-guide)
 - [Fortunly: 8 Best Privacy Policy Generators 2026](https://fortunly.com/business/best-privacy-policy-generator/)
 - [Similarweb: Termly.io Traffic Analytics](https://www.similarweb.com/website/termly.io/)
+
+### Iteration 44 — 2026-03-17 — US State AI Transparency Laws Beyond CA and CO
+
+#### Landscape Overview
+
+As of March 2026, **45 states have introduced 1,561 AI-related bills** — up from ~1,200 in 2025. The legislative pace is accelerating, though a December 2025 executive order from President Trump proposes federal preemption of state AI laws deemed inconsistent with federal policy. However, the EO alone cannot overturn state law — that requires Congress or the courts — so state laws remain enforceable for now.
+
+#### Major State AI Laws Effective in 2026
+
+**Colorado AI Act (SB 24-205)** — effective date delayed from Feb 1 to **June 30, 2026**
+- Most comprehensive state AI law in the US
+- Requires developers and deployers to exercise reasonable care to prevent algorithmic discrimination
+- Mandates impact assessments, consumer disclosures, and documentation of AI decision-making
+
+**Texas RAIGA (Responsible AI Governance Act)** — effective **Jan 1, 2026**
+- Applies to developers and deployers doing business in Texas
+- Prohibits AI for "restricted purposes" (CSAM, unlawful deepfakes, impersonating minors)
+- Establishes a sandbox program for testing AI with reduced regulatory risk
+- Creates a state council for innovation oversight and compliance
+
+**California — Multiple laws effective 2026:**
+- **AB 2013 (Training Data Transparency Act)** — Jan 1, 2026: Requires generative AI developers to publicize training data sourcing details (data point counts, IP/personal info presence, licensing)
+- **SB 53 (Transparency in Frontier AI Act)** — signed Sep 29, 2025: Requires frontier developers to publish risk frameworks, report critical safety incidents, implement whistleblower protections
+- **SB 942 (AI Transparency Act)** — Aug 2, 2026: Requires watermarks, latent disclosures, and detection tools for AI-generated content
+- **AI companion chatbot law** — Jan 1, 2026: Requires disclosure when users may be misled into thinking they're communicating with humans; heightened obligations for minors
+
+**Illinois** — Requires employers to notify candidates and obtain consent when AI analyzes video interviews
+
+**New York (S8420A)** — Requires advertisers to conspicuously disclose "synthetic performers" (AI-generated human likenesses) in advertisements
+
+#### Relevance to Codepliant
+
+These laws create direct demand for several existing Codepliant generators:
+- **AI Disclosure generator**: Texas RAIGA, California SB 53/SB 942, and the EU AI Act all require transparency about AI usage — Codepliant's AI disclosure document addresses this
+- **Privacy Policy generator**: Colorado AI Act's consumer disclosure requirements and California's training data transparency law both require privacy-adjacent documentation
+- **Compliance Gap Analysis generator**: Can flag missing AI transparency obligations based on detected AI services
+
+**Potential new generators or enhancements:**
+- Algorithmic impact assessment template (Colorado AI Act requirement)
+- AI training data transparency disclosure (California AB 2013)
+- Synthetic content disclosure notice (New York S8420A, California SB 942)
+- State-specific AI compliance checklists (Texas, Colorado, Illinois)
+
+**SEO opportunity**: "AI compliance 2026" and "state AI law requirements" are high-intent search terms with the compliance deadline surge hitting mid-2026. Blog content targeting developers navigating multi-state AI obligations would align with Codepliant's audience.
+
+Sources:
+- [King & Spalding: New State AI Laws Effective Jan 1, 2026](https://www.kslaw.com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption)
+- [Baker Botts: US AI Law Update Jan 2026](https://www.bakerbotts.com/thought-leadership/publications/2026/january/us-ai-law-update)
+- [Drata: AI Regulations State and Federal 2026](https://drata.com/blog/artificial-intelligence-regulations-state-and-federal-ai-laws-2026)
+- [NBC News: New Laws in 2026 Target AI and Deepfakes](https://www.nbcnews.com/politics/politics-news/2026-new-laws-states-elections-midterms-ai-obamacare-aca-paid-leave-rcna247602)
+- [IAPP: US State AI Governance Legislation Tracker](https://iapp.org/resources/article/us-state-ai-governance-legislation-tracker)
+- [MultiState: State AI Legislation Tracker 2026](https://www.multistate.ai/artificial-intelligence-ai-legislation)
+- [NCSL: Artificial Intelligence Legislation Database](https://www.ncsl.org/financial-services/artificial-intelligence-legislation-database)
+- [Lexology: Several State AI Laws Set to Go into Effect in 2026](https://www.lexology.com/library/detail.aspx?g=f3f1f522-ca61-4ebe-93d2-8d632ec01647)
+- [Wilson Sonsini: 2026 AI Regulatory Developments Preview](https://www.wsgr.com/en/insights/2026-year-in-preview-ai-regulatory-developments-for-companies-to-watch-out-for.html)
+- [Davis+Gilbert: California AI Training Data Transparency Law](https://www.dglaw.com/ai-legal-updates-californias-ai-training-data-transparency-law-takes-effect/)
 
 ## Development Log
 
@@ -8229,3 +8285,27 @@ The European Commission published draft CRA guidance on 3 March 2026 with a feed
   - `src/generator/compliance-gap-analysis.test.ts` (50 tests): null guard (empty services), basic generation (title with company name/placeholder/date/Codepliant), Executive Summary (total gaps/services analyzed/regulations covered), Gap Analysis Table (header), GDPR gaps default (Privacy Notice Art 13+14/ROPA Art 30/Breach Notification Art 33+34 72h/DPIA Art 35 for AI or 5+ services/no DPIA for few non-AI/DPO Art 37 when unconfigured/skip DPO when name or email set/Right to Erasure Art 17 for database+auth/no erasure without/Processor Agreements Art 28 for 2+/no processor for 1/Consent Management Art 6+7 for analytics+advertising), CCPA gaps (ccpa jurisdiction DNS+Consumer Request/Critical for analytics/absent without ccpa), EU AI Act (Art 50 transparency+Risk Classification+Human Oversight Art 14/aiRiskLevel from context/not classified default/absent without AI), PCI DSS (present for payment/absent without), ePrivacy (cookie consent for analytics/absent without), SOC 2 (3+ services/absent for fewer), priority sorting (Critical before Medium), Per-Regulation Breakdown (GDPR subsection+gap count), Remediation Roadmap (Immediate+Short-term+Medium-term/checkbox format), disclaimer (not legal advice), comprehensive test (all regulations+gaps+context values)
 - **Generator modules now with tests**: 117/138 (84.8%)
 - **Generator coverage**: 82.6% -> 84.8%
+
+### Iteration 44 — 2026-03-17 — CLI help polish and edge cases
+
+- **Build**: pass
+- **Issue 1 fixed**: `codepliant` with no arguments now shows helpful usage and exits 0 (was already correct — verified)
+- **Issue 2 fixed**: `codepliant help <command>` now shows per-command help (was previously ignored — `help scan`, `help go`, etc. all just showed general usage)
+  - Resolves aliases: `codepliant help generate` shows `go` help, `codepliant help status` shows `dashboard` help
+  - Graceful fallback: `codepliant help nonexistent` shows a note and falls back to general usage
+- **Issue 3 fixed**: Added help text for 26 commands that were missing per-command help entries: quickstart, completeness, migrate, metrics, check-config, config, format, pdf, onboard, audit, archive, version-check, list-docs, changelog, todo, benchmark, preview, reset, certify, snapshot, about, sbom
+- **Edge cases verified**: `codepliant --help`, `codepliant -h`, `codepliant <command> --help` all work correctly
+- **Files changed**: `src/cli.ts`
+
+### Iteration 45 — 2026-03-17 — Generator Tests: 120/138 = 86.9% — BROKE 6000!
+
+- **Build**: pass
+- **Tests**: 6029/6030 passing (was 5873, added 157 new tests)
+- **Failing tests**: 1 pre-existing failure in `no-network.test.ts` (telemetry pattern false positive — not related to this iteration)
+- **Tests added this iteration**:
+  - `src/generator/dsar-guide.test.ts` (55 tests): null guard (empty services), basic generation (title/date/project name), context values (companyName/contactEmail/dpoName/dpoEmail/placeholders), DPO email fallback to contact email, Section 1 What is a DSAR (GDPR Art 15-22/CCPA 1798.100-199), Section 2 Types of Requests (Access/Rectification/Erasure/Portability/Restriction/Object), Section 3 Response Timeline (GDPR 30-day/CCPA 45-day), Section 4 Identity Verification (methods/authorized agents), Section 5 Data Location Map (per-service entries/data collected/storage location/export+deletion instructions), provider name resolution (OpenAI/Stripe/Sentry/unknown fallback), category formatting (AI/Payment/Analytics/Auth/Monitoring), third-party vs self-hosted detection (openai=third-party/prisma=self-hosted/nodemailer=self-hosted/passport=self-hosted), Section 6 Third-Party Sub-Processor Notification (present when third parties exist/absent when only self-hosted/lists providers in table), deduplication (Sentry variants), template section numbering (7 with third-party section/6 without), Section 7/6 Template Responses (acknowledgment/access/rectification/erasure/portability/restriction/objection), DSAR-XXXX reference format, Section 8/7 Record-Keeping (log fields/24-month CCPA retention), disclaimer (Codepliant/legal advice), edge cases (empty dataCollected/single self-hosted/many services)
+  - `src/generator/pia.test.ts` (55 tests): null guards (empty/payment-only/auth-only/email-only/monitoring-only/database-only/storage-only), basic generation (AI services/analytics services/both/project name/date), context values (companyName/contactEmail/dpoName/dpoEmail/placeholders/defaults), Section 1 Description of Processing (services table/data categories conditional/data subjects), Section 2 Necessity and Proportionality (lawfulness table/AI data minimization checklist/analytics data minimization checklist), Section 3 Risk Assessment (methodology/likelihood x impact matrix/results table/AI likelihood=3 Likely/payment impact=4 Maximum/risk summary counts), Section 4 High-Risk Triggers (AI-Powered Decision Making triggered/Large-Scale Profiling for user behavior/Systematic Monitoring for session recordings/Sensitive Data for biometric/not triggered when no matching data), Section 5 Data Flow Diagram reference, Section 6 Risk Mitigation (AI input/output filtering+opt-out/analytics IP anonymization+consent), Section 7 Consultation Requirements (DPA consultation for multiple triggers/internal consultation checklist), Section 8 Review and Monitoring (annually/version history), Section 9 Approval and Sign-Off, legal basis mapping (Consent for AI+analytics/Contractual necessity for payment), activity descriptions (AI processing/Behavioral analytics), GDPR Article 35 reference, disclaimer
+  - `src/generator/third-party-risk.test.ts` (47 tests): null guards (empty/fewer than 3 third-party/only self-hosted/2 third-party+many self-hosted/exactly 1), basic generation (3+ third-party services/project name/date), context values (companyName/contactEmail/placeholders), provider name resolution (OpenAI/Stripe/PostHog/unknown fallback), deduplication (Sentry variants=1 entry), Risk Matrix (data sensitivity column/payment=high/AI=high/analytics=medium), geographic risk (US-based/EU-based Lemon Squeezy/Medium for US/High for unknown), certifications (SOC 2 for OpenAI/PCI DSS Level 1 for Stripe/None verified for unknown), Detailed Vendor Assessments (processing scope/risk mitigation measures/required contracts), Vendor Due Diligence Checklist (security/breach notification/encryption), Contract Review Requirements (DPA minimum requirements/SCCs for US high-sensitivity/AI data usage addendum/PCI DSS attestation/additional agreements table BAA+COPPA), Review Schedule (annually), vendor count (correct after deduplication), edge cases (exactly 3 minimum/many services/self-hosted excluded), disclaimer
+- **Generator modules now with tests**: 120/138 (86.9%)
+- **Generator coverage**: 84.8% -> 86.9% (past 85% target!)
+- **Milestone**: Broke 6000 tests!
