@@ -16,10 +16,6 @@
   <a href="./LICENSE"><img src="https://img.shields.io/github/license/joechensmartz/codepliant?style=flat-square" alt="license" /></a>
 </p>
 
-<p align="center">
-  <img src="./assets/demo.gif" width="700" alt="Codepliant demo" />
-</p>
-
 ---
 
 ## Quick Start
