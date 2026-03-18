@@ -1999,7 +1999,7 @@ function main() {
   }
 
   // Validate project path with actionable error messages
-  if (command !== "help" && command !== "init" && command !== "wizard" && command !== "serve" && command !== "auth" && command !== "audit-trail" && command !== "explain" && command !== "upgrade" && command !== "activate" && command !== "deactivate" && command !== "onboard" && command !== "billing") {
+  if (command !== "help" && command !== "init" && command !== "wizard" && command !== "serve" && command !== "auth" && command !== "audit-trail" && command !== "explain" && command !== "upgrade" && command !== "activate" && command !== "deactivate" && command !== "onboard" && command !== "billing" && command !== "pdf" && command !== "format") {
     if (!fs.existsSync(absProjectPath)) {
       console.error(`${RED()}[CP006] Error: "${absProjectPath}" does not exist.${RESET()}`);
       console.error(`${DIM()}Check the path and try again. Run ${CYAN()}codepliant --explain CP006${RESET()}${DIM()} for more info.${RESET()}`);
