@@ -1,0 +1,117 @@
+<h1>Backup Policy</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Backup Policy</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</p></li>
+<li><p>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</p></li>
+<li><p>Encryption Policy (<code>ENCRYPTION_POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<p>This Backup Policy defines the backup schedules, retention periods, recovery procedures, and testing requirements for all data stores used by <strong>Acme Inc</strong>'s <strong>nextjs-saas-example</strong> application. It supports compliance with GDPR Article 32 (availability and resilience), SOC 2 A1.2 (backup and recovery), and ISO 27001 Annex A.12.3 (information backup).</p>
+<h2>1. Backup Schedule per Data Store</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Store</p></th><th><p>Backup Method</p></th><th><p>Schedule</p></th><th><p>Point-in-Time Recovery</p></th></tr>
+<tr><td><p>Application configuration</p></td><td><p>Version control (Git)</p></td><td><p>On every change</p></td><td><p>Full history via Git</p></td></tr>
+<tr><td><p>Secrets and credentials</p></td><td><p>Secrets manager snapshot</p></td><td><p>On every rotation</p></td><td><p>Via secrets manager versioning</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Retention Periods</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Store</p></th><th><p>Daily Backups</p></th><th><p>Weekly Backups</p></th><th><p>Monthly Backups</p></th><th><p>Annual Backups</p></th></tr>
+<tr><td><p>Audit logs</p></td><td><p>90 days</p></td><td><p>1 year</p></td><td><p>1 year</p></td><td><p>7 years</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>PCI DSS Note:</strong> Payment-related data backups must comply with PCI DSS Requirement 3 retention limits. Do not retain cardholder data beyond business need. Encrypted backup media must be tracked and securely destroyed when retention period expires.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>2.1 Retention Exceptions</h3>
+<ul>
+<li><p><strong>Legal hold:</strong> Backups may be retained beyond standard periods if required by legal proceedings</p></li>
+<li><p><strong>Regulatory requirement:</strong> Industry-specific regulations may mandate longer retention (e.g., HIPAA 6 years, SOX 7 years)</p></li>
+<li><p><strong>Data subject request:</strong> GDPR deletion requests apply to backups; establish a process to track and purge from backup rotations</p></li>
+</ul>
+<h2>3. Recovery Procedures</h2>
+<h2>4. Recovery Testing Schedule</h2>
+<p>Regular recovery testing ensures that backups are viable and the team is prepared for data recovery scenarios.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Test Type</p></th><th><p>Frequency</p></th><th><p>Scope</p></th><th><p>Success Criteria</p></th></tr>
+<tr><td><p>Backup integrity check</p></td><td><p>Daily (automated)</p></td><td><p>All data stores</p></td><td><p>Backup completes without errors; checksums valid</p></td></tr>
+<tr><td><p>Single-table restore</p></td><td><p>Monthly</p></td><td><p>Each primary database</p></td><td><p>Table restored to staging; data matches source</p></td></tr>
+<tr><td><p>Full database restore</p></td><td><p>Quarterly</p></td><td><p>Each primary database</p></td><td><p>Complete database restored to staging; application functional</p></td></tr>
+<tr><td><p>Point-in-time recovery</p></td><td><p>Quarterly</p></td><td><p>Databases with PITR</p></td><td><p>Restore to specific timestamp; data consistent to that point</p></td></tr>
+<tr><td><p>Cross-region restore</p></td><td><p>Semi-annually</p></td><td><p>All data stores</p></td><td><p>Restore from backup region; acceptable RTO achieved</p></td></tr>
+<tr><td><p>Full disaster recovery</p></td><td><p>Annually</p></td><td><p>All data stores + application</p></td><td><p>Full application operational from backups; RTO/RPO met</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>4.1 Test Documentation</h3>
+<p>Each recovery test must document:</p>
+<ul>
+<li><p>[ ] Date and time of test</p></li>
+<li><p>[ ] Data store tested</p></li>
+<li><p>[ ] Backup used (ID / timestamp)</p></li>
+<li><p>[ ] Recovery time achieved (actual RTO)</p></li>
+<li><p>[ ] Data loss window (actual RPO)</p></li>
+<li><p>[ ] Pass/fail result</p></li>
+<li><p>[ ] Issues encountered and remediation</p></li>
+<li><p>[ ] Tester name and sign-off</p></li>
+</ul>
+<h2>5. Backup Security</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Requirement</p></th><th><p>Standard</p></th></tr>
+<tr><td><p>Encryption at rest</p></td><td><p>AES-256 for all backup data</p></td></tr>
+<tr><td><p>Encryption in transit</p></td><td><p>TLS 1.2+ for backup transfers</p></td></tr>
+<tr><td><p>Access control</p></td><td><p>Backup access limited to authorized personnel; MFA required</p></td></tr>
+<tr><td><p>Backup separation</p></td><td><p>Backups stored in a separate account/region from production</p></td></tr>
+<tr><td><p>Immutability</p></td><td><p>Object lock / WORM storage for compliance-critical backups</p></td></tr>
+<tr><td><p>Monitoring</p></td><td><p>Alerting on backup failures, unexpected access, or deletion</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>6. Roles and Responsibilities</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Responsibility</p></th></tr>
+<tr><td><p>Database Administrator / DevOps</p></td><td><p>Configure and monitor backup jobs; execute restores</p></td></tr>
+<tr><td><p>Engineering Lead</p></td><td><p>Approve recovery procedures; validate test results</p></td></tr>
+<tr><td><p>Security Team</p></td><td><p>Audit backup encryption and access controls</p></td></tr>
+<tr><td><p>Compliance Officer</p></td><td><p>Verify retention periods meet regulatory requirements</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>7. Policy Review</h2>
+<p>This backup policy must be reviewed:</p>
+<ul>
+<li><p>At minimum <strong>quarterly</strong></p></li>
+<li><p>When new data stores are added or removed</p></li>
+<li><p>After any data loss incident</p></li>
+<li><p>After each recovery test to incorporate lessons learned</p></li>
+</ul>
+<p>For questions about this policy, contact <strong>legal@acme.com</strong>.</p>
+<hr />
+<p><em>This Backup Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Backup schedules and retention periods should be reviewed and customized by your engineering and compliance teams based on actual infrastructure and regulatory requirements.</em></p>

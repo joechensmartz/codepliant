@@ -136,8 +136,9 @@ export function writeGithubWiki(
   fs.writeFileSync(sidebarPath, generateSidebar(docs, config), "utf-8");
   writtenFiles.push(sidebarPath);
 
-  // Write individual document pages
+  // Write individual document pages (skip non-Markdown files)
   for (const doc of docs) {
+    if (!doc.filename.endsWith(".md")) continue;
     const pageName = toWikiPageName(doc.filename);
     const pagePath = path.join(wikiDir, `${pageName}.md`);
     const content = prepareWikiContent(doc);

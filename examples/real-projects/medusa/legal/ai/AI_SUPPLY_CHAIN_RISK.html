@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI SUPPLY CHAIN RISK — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AI SUPPLY CHAIN RISK</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="ai-supply-chain-risk-assessment">AI Supply Chain Risk Assessment</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> root</p>
+<p><strong>Overall Supply Chain Risk:</strong> High</p>
+<hr>
+<p>This document assesses the business continuity risks arising from <strong>[Your Company Name]'s</strong> dependencies on third-party AI service providers. It identifies single points of failure, pricing risks, migration paths, and contingency plans aligned with <strong>NIST AI RMF</strong> (Govern 1.6), <strong>EU AI Act</strong> (Art. 16(f)), and <strong>ISO/IEC 42001</strong> supply chain management requirements.</p>
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p>[Your Company Name] currently depends on <strong>1 AI service(s)</strong> from <strong>1 provider(s)</strong> for core product functionality. This creates supply chain dependencies that must be actively managed.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AI Services Detected</td><td style="text-align:left">1</td></tr>
+<tr><td style="text-align:left">Unique Providers</td><td style="text-align:left">1</td></tr>
+<tr><td style="text-align:left">Overall Risk Level</td><td style="text-align:left"><strong>High</strong></td></tr>
+<tr><td style="text-align:left">Single-Provider Dependency</td><td style="text-align:left">Yes (CRITICAL)</td></tr>
+<tr><td style="text-align:left">Estimated Monthly AI Spend</td><td style="text-align:left">$100–$5,000</td></tr>
+<tr><td style="text-align:left">Migration Plans Documented</td><td style="text-align:left">See Section 4</td></tr>
+</tbody>
+</table>
+<blockquote><strong>WARNING:</strong> All AI functionality depends on a single provider (OpenAI). A provider outage, pricing change, or API deprecation would affect 100% of AI features. Diversification is strongly recommended.</blockquote>
+<h2 id="2-provider-risk-profiles">2. Provider Risk Profiles</h2>
+<h3 id="openai">OpenAI</h3>
+<p><strong>Detected as:</strong> openai</p>
+<p><strong>Data sent:</strong> user prompts, conversation history, generated content</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Risk Factor</th><th style="text-align:left">Assessment</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Provider Tier</td><td style="text-align:left">Major</td></tr>
+<tr><td style="text-align:left">Headquarters</td><td style="text-align:left">United States (San Francisco, CA)</td></tr>
+<tr><td style="text-align:left">Lock-In Risk</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">API Stability Risk</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Pricing Model</td><td style="text-align:left">Per-token usage-based, tiered rate limits</td></tr>
+<tr><td style="text-align:left">Migration Complexity</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Data Residency</td><td style="text-align:left">US, EU (Azure OpenAI)</td></tr>
+</tbody>
+</table>
+<p><strong>Known Risk Factors:</strong></p>
+<ul>
+<li>Model deprecation cycles (GPT-3.5 → GPT-4 migration required)</li>
+<li>Rate limit changes without advance notice</li>
+<li>Pricing increases on flagship models</li>
+</ul>
+<p><strong>Alternatives:</strong></p>
+<ul>
+<li>Anthropic (Claude)</li>
+<li>Google (Gemini)</li>
+<li>Mistral AI</li>
+<li>Cohere</li>
+<li>Meta (Llama, self-hosted)</li>
+</ul>
+<h2 id="3-risk-scenarios">3. Risk Scenarios</h2>
+<h3 id="scenario-a-provider-outage-hours-to-days">Scenario A: Provider Outage (Hours to Days)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Impact Area</th><th style="text-align:left">Details</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Affected Features</td><td style="text-align:left">All AI-powered functionality</td></tr>
+<tr><td style="text-align:left">User Impact</td><td style="text-align:left">Complete loss of AI functionality</td></tr>
+<tr><td style="text-align:left">Revenue Impact</td><td style="text-align:left">Depends on AI feature criticality to user retention</td></tr>
+<tr><td style="text-align:left">Estimated Recovery</td><td style="text-align:left">Automatic when provider restores service</td></tr>
+</tbody>
+</table>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li>Implement circuit breakers with graceful degradation</li>
+<li>Cache recent AI responses for read-heavy features</li>
+<li>Display user-friendly fallback states</li>
+<li>Monitor provider status pages and set up alerts</li>
+</ul>
+<h3 id="scenario-b-pricing-increase-3090-days-notice">Scenario B: Pricing Increase (30–90 Days Notice)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Impact Area</th><th style="text-align:left">Details</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Estimated Current Spend</td><td style="text-align:left">$100–$5,000 /month</td></tr>
+<tr><td style="text-align:left">Impact of 2x Price Increase</td><td style="text-align:left">May require feature repricing or margin reduction</td></tr>
+<tr><td style="text-align:left">Impact of 5x Price Increase</td><td style="text-align:left">Likely requires provider migration or feature removal</td></tr>
+</tbody>
+</table>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li>Negotiate enterprise contracts with price caps</li>
+<li>Maintain abstraction layer to enable provider switching</li>
+<li>Budget 20% contingency for AI costs</li>
+<li>Evaluate self-hosted alternatives for high-volume use cases</li>
+</ul>
+<h3 id="scenario-c-api-deprecation-312-months-notice">Scenario C: API Deprecation (3–12 Months Notice)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Impact Area</th><th style="text-align:left">Details</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Engineering Effort</td><td style="text-align:left">2–8 weeks depending on abstraction quality</td></tr>
+<tr><td style="text-align:left">Testing Required</td><td style="text-align:left">Full regression + output quality validation</td></tr>
+<tr><td style="text-align:left">Data Migration</td><td style="text-align:left">Prompt templates, fine-tuning data, evaluation sets</td></tr>
+</tbody>
+</table>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li>Use provider-agnostic abstraction layer (e.g., LiteLLM, LangChain)</li>
+<li>Maintain model evaluation benchmarks for quality comparison</li>
+<li>Document all prompt engineering and fine-tuning assets</li>
+</ul>
+<h3 id="scenario-d-provider-shutdown-or-acquisition">Scenario D: Provider Shutdown or Acquisition</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Impact Area</th><th style="text-align:left">Details</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Notice Period</td><td style="text-align:left">May be as short as 30 days</td></tr>
+<tr><td style="text-align:left">Data Retrieval</td><td style="text-align:left">Must ensure all training data and fine-tuned models are exported</td></tr>
+<tr><td style="text-align:left">Migration Timeline</td><td style="text-align:left">4–12 weeks for full migration</td></tr>
+</tbody>
+</table>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li>Never store unique training data exclusively with a provider</li>
+<li>Maintain local copies of all fine-tuning datasets</li>
+<li>Pre-qualify at least one alternative provider per AI capability</li>
+</ul>
+<h2 id="4-migration-playbook">4. Migration Playbook</h2>
+<p>For each AI provider, the following migration strategy should be maintained:</p>
+<h3 id="migrating-away-from-openai">Migrating Away from OpenAI</h3>
+<p><strong>Complexity:</strong> Medium</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Evaluate alternatives:</strong> Anthropic (Claude), Google (Gemini), Mistral AI</li>
+<li><strong>Abstract the integration:</strong> Ensure all AI calls go through an abstraction layer</li>
+<li><strong>Benchmark quality:</strong> Run evaluation suite against alternative providers</li>
+<li><strong>Migrate prompts:</strong> Adapt prompt templates for new provider's strengths</li>
+<li><strong>Parallel testing:</strong> Run both providers in shadow mode for 1–2 weeks</li>
+<li><strong>Gradual rollout:</strong> Shift 10% → 50% → 100% of traffic</li>
+<li><strong>Monitor quality:</strong> Track output quality metrics post-migration</li>
+</ol>
+<p><strong>Estimated Timeline:</strong> 3–6 weeks</p>
+<h2 id="5-recommendations">5. Recommendations</h2>
+<ol>
+<li>Implement a provider-agnostic AI abstraction layer to reduce switching costs</li>
+<li><strong>CRITICAL:</strong> Diversify beyond OpenAI — evaluate at least one alternative for each AI capability</li>
+<li>Establish AI cost budgets with alerts at 80% and 100% thresholds</li>
+<li>Maintain a model evaluation benchmark suite for rapid provider comparison</li>
+<li>Negotiate enterprise agreements with SLA guarantees and price caps</li>
+<li>Store all training data, fine-tuning datasets, and prompt libraries locally</li>
+<li>Add circuit breakers and graceful degradation for all AI features</li>
+<li>Monitor provider changelogs and deprecation notices weekly</li>
+<li>Conduct annual AI supply chain risk review</li>
+</ol>
+<h2 id="6-ongoing-monitoring-checklist">6. Ongoing Monitoring Checklist</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Check</th><th style="text-align:left">Frequency</th><th style="text-align:left">Owner</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Review provider status page and uptime</td><td style="text-align:left">Weekly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Check for API deprecation notices</td><td style="text-align:left">Weekly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Review AI cost trends</td><td style="text-align:left">Monthly</td><td style="text-align:left">Finance / Engineering</td></tr>
+<tr><td style="text-align:left">Test failover to alternative provider</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Update migration playbooks</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Full supply chain risk reassessment</td><td style="text-align:left">Annually</td><td style="text-align:left">CTO / CISO</td></tr>
+<tr><td style="text-align:left">Benchmark output quality across providers</td><td style="text-align:left">Semi-annually</td><td style="text-align:left">ML / Product</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>Generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> on 2026-03-16. This is an automated risk assessment based on code analysis. Provider profiles are based on publicly available information and should be verified against current provider terms and conditions. This document should be reviewed by qualified risk management and legal counsel.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<h1>Data Portability Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Portability Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<hr />
+<p>This guide documents how to exercise the <strong>right to data portability</strong> under GDPR Article 20. Data portability allows data subjects to receive their personal data in a structured, commonly used, and machine-readable format, and to transmit that data to another controller without hindrance.</p>
+<h2>Legal Basis</h2>
+<p><strong>GDPR Article 20 — Right to Data Portability:</strong></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>1. The data subject shall have the right to receive the personal data concerning him or her, which he or she has provided to a controller, in a structured, commonly used and machine-readable format and have the right to transmit those data to another controller without hindrance from the controller to which the personal data have been provided.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>2. In exercising his or her right to data portability, the data subject shall have the right to have the personal data transmitted directly from one controller to another, where technically feasible.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>When Data Portability Applies</h3>
+<p>The right to data portability applies when:</p>
+<ul>
+<li><p>Processing is based on <strong>consent</strong> (Art. 6(1)(a)) or <strong>contract</strong> (Art. 6(1)(b))</p></li>
+<li><p>Processing is carried out by <strong>automated means</strong></p></li>
+<li><p>The data was <strong>provided by the data subject</strong> (directly or through observation)</p></li>
+</ul>
+<p>It does <strong>not</strong> apply to:</p>
+<ul>
+<li><p>Data processed under legitimate interest or legal obligation</p></li>
+<li><p>Inferred or derived data (e.g., analytics scores, risk assessments)</p></li>
+<li><p>Data that would adversely affect the rights of others</p></li>
+</ul>
+<h2>How to Request Your Data</h2>
+<p>To request a copy of your personal data in a portable format:</p>
+<ol>
+<li><p><strong>Email:</strong> Send a request to legal@acme.com or the DPO at dpo@acme-saas.com</p></li>
+<li><p><strong>Subject line:</strong> "Data Portability Request"</p></li>
+<li><p><strong>Include:</strong> Your name, account identifier (email or user ID), and the specific data you want exported</p></li>
+<li><p><strong>Response time:</strong> We will respond within <strong>30 days</strong> of receiving your request (GDPR Art. 12(3))</p></li>
+<li><p><strong>Format:</strong> Data will be provided in JSON or CSV format unless you request otherwise</p></li>
+</ol>
+<p>If you prefer, you may request that we transmit your data directly to another controller. We will do so where technically feasible.</p>
+<h2>Per-Service Export Instructions</h2>
+<p>The following services process personal data in this application. Each section provides specific export instructions and API endpoints for retrieving your data.</p>
+<h3>Supabase Inc</h3>
+<p><strong>Service:</strong> @supabase/supabase-js</p>
+<p><strong>Export Formats:</strong> JSON, CSV, SQL</p>
+<p><strong>Export URL:</strong> https://app.supabase.com/project/{ref}/settings</p>
+<p><strong>API Endpoint:</strong> <code>https://{ref}.supabase.co/rest/v1/{table}?select=*</code></p>
+<p><strong>Estimated Time:</strong> API responses immediate</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p>Log in to Supabase Dashboard</p></li>
+<li><p>Navigate to your project settings</p></li>
+<li><p>Use the Table Editor to export specific tables as CSV</p></li>
+<li><p>Use the Supabase REST API (PostgREST) for programmatic data export</p></li>
+</ol>
+<h3>PostHog Inc</h3>
+<p><strong>Service:</strong> posthog</p>
+<p><strong>Export Formats:</strong> JSON, CSV</p>
+<p><strong>Export URL:</strong> https://app.posthog.com/project/settings > Data Management</p>
+<p><strong>API Endpoint:</strong> <code>https://app.posthog.com/api/projects/{project_id}/events</code></p>
+<p><strong>Estimated Time:</strong> API responses immediate; bulk exports within 1 hour</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p>Log in to PostHog dashboard</p></li>
+<li><p>Navigate to Data Management > Exports</p></li>
+<li><p>Create a data export for the desired date range</p></li>
+<li><p>Use the PostHog API /api/projects/{id}/events for programmatic access</p></li>
+</ol>
+<h3>Stripe Inc</h3>
+<p><strong>Service:</strong> stripe</p>
+<p><strong>Export Formats:</strong> JSON, CSV</p>
+<p><strong>Export URL:</strong> https://dashboard.stripe.com/settings/data</p>
+<p><strong>API Endpoint:</strong> <code>https://api.stripe.com/v1/customers/{id}</code></p>
+<p><strong>Estimated Time:</strong> API responses immediate; full export within 48 hours</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p>Log in to Stripe Dashboard</p></li>
+<li><p>Navigate to Settings > Data & Privacy</p></li>
+<li><p>Use the Stripe API to export customer and payment data</p></li>
+</ol>
+<h2>Supported Export Formats</h2>
+<p>Per GDPR Article 20, data must be provided in a <strong>structured, commonly used, and machine-readable format</strong>. We support:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Format</p></th><th><p>Description</p></th><th><p>Machine-Readable</p></th><th><p>Interoperable</p></th></tr>
+<tr><td><p>JSON</p></td><td><p>JavaScript Object Notation</p></td><td><p>Yes</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>CSV</p></td><td><p>Comma-Separated Values</p></td><td><p>Yes</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>XML</p></td><td><p>Extensible Markup Language</p></td><td><p>Yes</p></td><td><p>Yes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>All exports include metadata headers (export date, data subject ID, scope) to facilitate import into other systems.</p>
+<h2>Implementation Checklist</h2>
+<p>The following checklist ensures your data portability implementation meets GDPR requirements:</p>
+<ul>
+<li><p>[ ] Data export API endpoint is implemented and accessible</p></li>
+<li><p>[ ] Export includes all personal data provided by the data subject</p></li>
+<li><p>[ ] Export format is structured, commonly used, and machine-readable</p></li>
+<li><p>[ ] Direct transmission to another controller is supported where feasible</p></li>
+<li><p>[ ] Portability requests are tracked and responded to within 30 days</p></li>
+<li><p>[ ] Authentication verifies the identity of the requesting data subject</p></li>
+<li><p>[ ] Export excludes third-party personal data (to protect others' rights)</p></li>
+<li><p>[ ] Sub-processor data is included or referenced with retrieval instructions</p></li>
+</ul>
+<h2>Contact</h2>
+<p>For data portability requests or questions about your right to data portability, contact:</p>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+<li><p><strong>Data Protection Officer:</strong> dpo@acme-saas.com</p></li>
+</ul>
+<p>You also have the right to lodge a complaint with your local data protection supervisory authority if you believe your data portability rights have not been respected.</p>
+<hr />
+<p><em>This data portability guide was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. It should be reviewed by your legal and engineering teams to ensure completeness and accuracy. Export instructions may change as third-party services update their APIs and dashboards.</em></p>

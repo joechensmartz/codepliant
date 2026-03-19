@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~26 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 339 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="security-recommendations">Security Recommendations</h2>
+<ul>
+<li><strong>[CRITICAL]</strong> Public env vars with secret-looking names (exposed to client): NEXT<em>PUBLIC</em>POSTHOG<em>KEY, NEXT</em>PUBLIC<em>ZENDESK</em>KEY, NEXT<em>PUBLIC</em>HELPSCOUT<em>KEY, NEXT</em>PUBLIC<em>FRESHCHAT</em>TOKEN, NEXT<em>PUBLIC</em>CLOUDFLARE<em>SITEKEY, NEXT</em>PUBLIC<em>VAPID</em>PUBLIC_KEY</li>
+</ul>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>API<em>KEY</em>PREFIX</code></td><td style="text-align:left">.env.example, apps/api/v1/lib/helpers/verifyApiKey.ts, apps/api/v1/pages/api/api-keys/_post.ts, packages/features/ee/api-keys/lib/findValidApiKey.ts, packages/features/ee/api-keys/repositories/PrismaApiKeyRepository.ts, packages/trpc/server/routers/viewer/apiKeys/create.handler.ts, scripts/seed.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>SECRET</code></td><td style="text-align:left">packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTH<em>BEARER</em>TOKEN_CLOUDFLARE</code></td><td style="text-align:left">packages/lib/domainManager/deploymentServices/cloudflare.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTH<em>BEARER</em>TOKEN_VERCEL</code></td><td style="text-align:left">.env.example, packages/lib/domainManager/deploymentServices/vercel.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AVATARAPI_PASSWORD</code></td><td style="text-align:left">.env.example, apps/web/app/api/auth/signup/handlers/calcomSignupHandler.ts, apps/web/app/api/auth/signup/handlers/selfHostedHandler.ts, packages/features/auth/signup/utils/prefillAvatar.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AXIOM_TOKEN</code></td><td style="text-align:left">apps/api/v2/src/lib/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>B2<em>APPLICATION</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/app/api/compliance/download/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>B2<em>APPLICATION</em>KEY_ID</code></td><td style="text-align:left">.env.example, apps/web/app/api/compliance/download/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BASECAMP3<em>CLIENT</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>SIGNATURE</em>TOKEN</code></td><td style="text-align:left">.env.example, packages/features/ee/common/server/LicenseKeyService.test.ts, packages/features/ee/deployment/lib/getDeploymentKey.ts, packages/trpc/server/routers/viewer/admin/createCoupon.handler.ts, packages/trpc/server/routers/viewer/admin/createSelfHostedLicenseKey.handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>VIDEO</em>RECORDING<em>TOKEN</em>SECRET</code></td><td style="text-align:left">.env.example, packages/lib/videoTokens.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>ADMIN</em>API_KEY</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>APP</em>CREDENTIAL<em>ENCRYPTION</em>KEY</code></td><td style="text-align:left">.env.example, apps/api/v1/pages/api/credential-sync/<em>patch.ts, apps/api/v1/pages/api/credential-sync/</em>post.ts, apps/web/app/api/webhook/app-credential/route.ts, example-apps/credential-sync/constants.ts, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>CREDENTIAL</em>SYNC_ENDPOINT</code></td><td style="text-align:left">.env.example, packages/app-store/<em>utils/oauth/parseRefreshTokenResponse.ts, packages/app-store/</em>utils/oauth/refreshOAuthTokens.ts, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>CREDENTIAL</em>SYNC<em>HEADER</em>NAME</code></td><td style="text-align:left">.env.example, apps/api/v1/lib/helpers/verifyCredentialSyncEnabled.ts, example-apps/credential-sync/constants.ts, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>CREDENTIAL</em>SYNC_SECRET</code></td><td style="text-align:left">.env.example, apps/api/v1/lib/helpers/verifyCredentialSyncEnabled.ts, example-apps/credential-sync/constants.ts, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>LICENSE</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/server/lib/setup/getServerSideProps.tsx, packages/features/ee/deployment/lib/getDeploymentKey.ts, packages/lib/telemetry.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>SERVICE</em>ACCOUNT<em>ENCRYPTION</em>KEY</code></td><td style="text-align:left">.env.example, vitest.config.mts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALENDSO<em>ENCRYPTION</em>KEY</code></td><td style="text-align:left">.env.example, apps/api/v2/src/ee/calendars/services/apple-calendar.service.ts, apps/api/v2/src/ee/calendars/services/ics-feed.service.ts, apps/web/next.config.ts, apps/web/app/api/auth/oauth/refreshToken/route.ts, apps/web/app/api/auth/oauth/token/route.ts, apps/web/app/api/auth/two-factor/totp/disable/route.ts, apps/web/app/api/auth/two-factor/totp/enable/route.ts, apps/web/app/api/auth/two-factor/totp/setup/route.ts, apps/web/app/api/link/route.ts, apps/web/app/api/sync/helpscout/route.ts, apps/web/playwright/login.2fa.e2e.ts, apps/web/playwright/lib/testUtils.ts, apps/web/playwright/oauth/oauth-refresh-tokens.e2e.ts, apps/web/server/lib/auth/login/getServerSideProps.tsx, packages/app-store/applecalendar/api/add.ts, packages/app-store/caldavcalendar/api/add.ts, packages/app-store/closecom/lib/CrmService.ts, packages/app-store/exchange2013calendar/api/add.ts, packages/app-store/exchange2013calendar/lib/CalendarService.ts, packages/app-store/exchange2016calendar/api/add.ts, packages/app-store/exchange2016calendar/lib/CalendarService.ts, packages/app-store/exchangecalendar/api/<em>postAdd.ts, packages/app-store/exchangecalendar/lib/CalendarService.ts, packages/app-store/ics-feedcalendar/api/add.ts, packages/app-store/ics-feedcalendar/lib/CalendarService.ts, packages/app-store/sendgrid/api/</em>postAdd.ts, packages/app-store/sendgrid/lib/CalendarService.ts, packages/emails/src/templates/OrganizerRequestEmail.tsx, packages/features/auth/lib/next-auth-options.test.ts, packages/features/auth/lib/next-auth-options.ts, packages/features/auth/lib/oAuthAuthorization.ts, packages/features/auth/lib/signJwt.ts, packages/features/auth/lib/verifyCodeUnAuthenticated.ts, packages/features/auth/lib/verifyEmail.ts, packages/features/bookings/lib/EventManager.test.ts, packages/features/bookings/lib/EventManager.ts, packages/features/calendars/lib/getCalendarsEvents.ts, packages/features/ee/deployment/lib/getDeploymentKey.ts, packages/features/ee/sso/lib/jackson.ts, packages/features/oauth/services/OAuthService.ts, packages/lib/CalendarService.ts, packages/lib/server/PiiHasher.ts, packages/testing/src/lib/bookingScenario/setupAndTeardown.ts, packages/trpc/server/routers/viewer/deploymentSetup/update.handler.ts, packages/trpc/server/routers/viewer/me/deleteMe.handler.ts, packages/trpc/server/routers/viewer/organizations/setPassword.handler.ts, packages/trpc/server/routers/viewer/organizations/verifyCode.handler.ts, packages/trpc/server/routers/viewer/workflows/verifyEmailCode.handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOSECOM<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example, packages/lib/CloseCom.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE<em>TURNSTILE</em>SECRET</code></td><td style="text-align:left">.env.example, packages/lib/server/checkCfTurnstileToken.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE<em>URL</em>SCANNER<em>API</em>TOKEN</code></td><td style="text-align:left">packages/features/ee/workflows/lib/urlScanner.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CRON<em>API</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/cron-tester.ts, apps/web/app/api/cron/bookingReminder/route.ts, apps/web/app/api/cron/calendar-subscriptions/route.ts, apps/web/app/api/cron/calendar-subscriptions-cleanup/route.ts, apps/web/app/api/cron/changeTimeZone/route.ts, apps/web/app/api/cron/checkSmsPrices/route.ts, apps/web/app/api/cron/credentials/route.ts, apps/web/app/api/cron/downgradeUsers/route.ts, apps/web/app/api/cron/monthlyDigestEmail/route.ts, apps/web/app/api/cron/selected-calendars/route.ts, apps/web/app/api/cron/syncAppMeta/route.ts, apps/web/app/api/cron/webhookTriggers/route.ts, packages/app-store/routing-forms/cron/queuedFormResponseCleanup.ts, packages/features/ee/workflows/api/scheduleEmailReminders.ts, packages/features/ee/workflows/api/scheduleSMSReminders.test.ts, packages/features/ee/workflows/api/scheduleSMSReminders.ts, packages/features/ee/workflows/api/scheduleWhatsappReminders.test.ts, packages/features/ee/workflows/api/scheduleWhatsappReminders.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CRON_SECRET</code></td><td style="text-align:left">apps/web/cron-tester.ts, apps/web/app/api/cron/calendar-subscriptions/route.ts, apps/web/app/api/cron/calendar-subscriptions-cleanup/route.ts, apps/web/app/api/cron/credentials/route.ts, apps/web/app/api/cron/selected-calendars/route.ts, packages/app-store/routing-forms/cron/queuedFormResponseCleanup.ts, packages/features/tasker/api/cleanup.ts, packages/features/tasker/api/cron.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DAILY<em>API</em>KEY</code></td><td style="text-align:left">vitest.config.mts, apps/web/playwright/reschedule.e2e.ts, packages/app-store/dailyvideo/_metadata.ts, packages/app-store/dailyvideo/lib/VideoApiAdapter.ts, packages/app-store/dailyvideo/lib/scripts/deleteRecordings.ts, packages/testing/src/lib/bookingScenario/setupAndTeardown.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DAILY<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">apps/web/app/api/recorded-daily-video/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEVIN<em>API</em>KEY</code></td><td style="text-align:left">scripts/devin/delete-all-devin-knowledge.ts, scripts/devin/export-devin-knowledge.ts, scripts/devin/sync-knowledge-to-devin.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DUB<em>API</em>KEY</code></td><td style="text-align:left">.env.example, packages/features/auth/lib/dub.ts, packages/features/auth/lib/next-auth-options.ts, packages/features/ee/workflows/lib/reminders/utils.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>APPLE<em>CALENDAR</em>PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>CALCOM<em>GCAL</em>KEYS</code></td><td style="text-align:left">.env.example, packages/app-store/googlecalendar/tests/google-calendar.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>CALCOM<em>QA</em>GCAL_CREDENTIALS</code></td><td style="text-align:left">.env.example, scripts/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>CALCOM<em>QA</em>PASSWORD</code></td><td style="text-align:left">.env.example, packages/app-store/googlecalendar/tests/google-calendar.e2e.ts, scripts/seed.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>OIDC<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>OIDC<em>USER</em>PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>SAML<em>ADMIN</em>PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>SERVER</em>PASSWORD</code></td><td style="text-align:left">packages/lib/serverConfig.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GIPHY<em>API</em>KEY</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>API</em>CREDENTIALS</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, apps/web/server/lib/constants.ts, packages/app-store/googlecalendar/<em>metadata.ts, packages/app-store/googlevideo/</em>metadata.ts, packages/features/auth/lib/next-auth-options.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>CALENDAR</em>API_KEY</code></td><td style="text-align:left">.env.example, packages/lib/holidays/GoogleCalendarClient.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>CLIENT</em>SECRET</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>REFRESH</em>TOKEN</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>WEBHOOK</em>TOKEN</code></td><td style="text-align:left">.env.example, packages/features/calendar-subscription/adapters/GoogleCalendarSubscription.adapter.ts, packages/features/calendar-subscription/adapters/<strong>tests</strong>/GoogleCalendarSubscriptionAdapter.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HUBSPOT<em>CLIENT</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HUDDLE01<em>API</em>TOKEN</code></td><td style="text-align:left">.env.example, packages/app-store/huddle01video/lib/VideoApiAdapter.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IFFY<em>API</em>KEY</code></td><td style="text-align:left">.env.example, packages/features/tasker/tasks/scanWorkflowBody.test.ts, packages/features/tasker/tasks/scanWorkflowBody.ts, packages/features/tasker/tasks/test/scanWorkflowBody.test.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTERCOM<em>API</em>TOKEN</code></td><td style="text-align:left">.env.example, apps/web/app/api/support/conversation/route.ts, apps/web/modules/ee/support/lib/intercom/intercom.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTERCOM_SECRET</code></td><td style="text-align:left">.env.example, apps/web/app/api/support/hash/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LARK<em>OPEN</em>APP_SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LARK<em>OPEN</em>VERIFICATION_TOKEN</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LINGO<em>DOT</em>DEV<em>API</em>KEY</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MICROSOFT<em>WEBHOOK</em>TOKEN</code></td><td style="text-align:left">.env.example, packages/features/calendar-subscription/adapters/Office365CalendarSubscription.adapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MS<em>GRAPH</em>CLIENT_SECRET</code></td><td style="text-align:left">packages/features/auth/lib/outlook.test.ts, packages/features/auth/lib/outlook.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXTAUTH_SECRET</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, packages/app-store/<em>utils/oauth/decodeOAuthState.ts, packages/app-store/</em>utils/oauth/encodeOAuthState.ts, packages/app-store/stripepayment/lib/VerificationTokenService.test.ts, packages/app-store/stripepayment/lib/VerificationTokenService.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OAUTH2<em>CLIENT</em>SECRET_PLAIN</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/api/oauth2-user.ts, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RESEND<em>API</em>KEY</code></td><td style="text-align:left">packages/lib/serverConfig.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RETELL<em>AI</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/app/api/webhooks/retell-ai/route.ts, packages/features/calAIPhone/AIPhoneServiceRegistry.ts, packages/features/calAIPhone/providers/retellAI/RetellSDKClient.test.ts, packages/features/calAIPhone/providers/retellAI/RetellSDKClient.ts, packages/lib/retellAIFetcher.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RETELL<em>AI</em>TEST<em>CAL</em>API_KEY</code></td><td style="text-align:left">.env.example, packages/features/calAIPhone/providers/retellAI/services/AgentService.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SALESFORCE<em>CONSUMER</em>KEY</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SALESFORCE<em>CONSUMER</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>CLIENT</em>SECRET_VERIFIER</code></td><td style="text-align:left">.env.example, packages/features/ee/sso/lib/saml.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEED<em>OAUTH2</em>CLIENT<em>SECRET</em>HASHED</code></td><td style="text-align:left">.env.example, scripts/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEED<em>PLATFORM</em>OAUTH<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example, scripts/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENDGRID<em>API</em>KEY</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/api/scheduleEmailReminders.ts, packages/features/ee/workflows/lib/reminders/providers/sendgridProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENDGRID<em>SYNC</em>API_KEY</code></td><td style="text-align:left">.env.example, packages/lib/Sendgrid.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>AUTH</em>TOKEN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>API</em>KEY</code></td><td style="text-align:left">apps/api/v2/src/modules/stripe/utils/newStripeInstance.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>PRIVATE</em>KEY</code></td><td style="text-align:left">.env.example, vitest.config.mts, apps/web/playwright/lib/testUtils.ts, packages/app-store/<em>utils/stripe.ts, packages/app-store/stripepayment/</em>metadata.ts, packages/app-store/stripepayment/lib/PaymentService.ts, packages/app-store/stripepayment/lib/server.ts, packages/features/ee/billing/active-user/seed-active-user-test.ts, packages/features/ee/billing/di/modules/StripeClient.ts, packages/features/ee/billing/service/dueInvoice/cleanup-proration-test.ts, packages/features/ee/billing/service/dueInvoice/seed-proration-test.ts, packages/features/ee/billing/service/highWaterMark/seed-hwm-test.ts, packages/features/ee/billing/service/highWaterMark/<strong>tests</strong>/HighWaterMarkStripe.integration-test.ts, packages/features/ee/payments/server/stripe.ts, packages/lib/constants.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">.env.example, apps/web/playwright/fixtures/users.ts, packages/features/ee/payments/api/webhook.ts, packages/testing/src/lib/bookingScenario/setupAndTeardown.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET_APPS</code></td><td style="text-align:left">.env.example, apps/web/pages/api/integrations/subscriptions/webhook.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET_BILLING</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/api/webhook/__handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TANDEM<em>CLIENT</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>DEV</em>VERCEL<em>ACCESS</em>TOKEN</code></td><td style="text-align:left">packages/features/trigger.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example, apps/api/v2/src/vercel-webhook.controller.e2e-spec.ts, apps/api/v2/src/vercel-webhook.controller.ts, packages/lib/tasker/Tasker.test.ts, packages/lib/tasker/Tasker.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO_TOKEN</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UNKEY<em>ROOT</em>KEY</code></td><td style="text-align:left">.env.example, packages/lib/checkRateLimitAndThrowError.test.ts, packages/testing/src/lib/bookingScenario/setupAndTeardown.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UPSTASH<em>REDIS</em>REST_TOKEN</code></td><td style="text-align:left">packages/features/ee/api-keys/lib/autoLock.test.ts, packages/features/ee/api-keys/lib/autoLock.ts, packages/features/redis/RedisService.ts, packages/features/redis/di/redisModule.ts, packages/features/slots/handleNotificationWhenNoSlots.test.ts, packages/features/slots/handleNotificationWhenNoSlots.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VAPID<em>PRIVATE</em>KEY</code></td><td style="text-align:left">.env.example, packages/features/notifications/sendNotification.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERCEL<em>PROMOTE</em>WEBHOOK_SECRET</code></td><td style="text-align:left">apps/api/v2/src/vercel-webhook.controller.e2e-spec.ts, apps/api/v2/src/vercel-webhook.guard.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITAL<em>API</em>KEY</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITAL<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>X<em>CAL</em>SECRET_KEY</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/api/managed-user.ts, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZOHOCRM<em>CLIENT</em>SECRET</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZOOM<em>CLIENT</em>SECRET</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZOOM<em>REFRESH</em>TOKEN</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>DATABASE<em>CHUNK</em>SIZE</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DATABASE<em>DIRECT</em>URL</code></td><td style="text-align:left">.env.example, packages/prisma/auto-migrations.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>DATABASE_URL</code></td><td style="text-align:left">.env.example, packages/kysely/index.ts, packages/prisma/auto-migrations.ts, packages/prisma/index.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>INSIGHTS<em>DATABASE</em>URL</code></td><td style="text-align:left">.env.example, packages/prisma/index.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS_URL</code></td><td style="text-align:left">apps/api/v2/src/app.module.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>DATABASE</em>URL</code></td><td style="text-align:left">.env.example, packages/features/ee/sso/lib/saml.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UPSTASH<em>REDIS</em>REST_URL</code></td><td style="text-align:left">packages/features/ee/api-keys/lib/autoLock.test.ts, packages/features/ee/api-keys/lib/autoLock.ts, packages/features/redis/RedisService.ts, packages/features/redis/di/redisModule.ts, packages/features/slots/handleNotificationWhenNoSlots.test.ts, packages/features/slots/handleNotificationWhenNoSlots.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code><em>_NEXT</em>I18N_SUPPORT</code></td><td style="text-align:left">packages/platform/atoms/vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOWED_HOSTNAMES</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>API_PORT</code></td><td style="text-align:left">apps/api/v2/src/config/app.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>API_URL</code></td><td style="text-align:left">packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DOCS_URL</code></td><td style="text-align:left">apps/api/v2/src/middleware/app.redirects.middleware.ts, apps/api/v2/src/swagger/generate-swagger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>OIDC<em>PROVIDER</em>DOMAIN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>SERVER</em>HOST</code></td><td style="text-align:left">.env.example, packages/lib/serverConfig.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>SERVER</em>PORT</code></td><td style="text-align:left">.env.example, packages/lib/serverConfig.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EMBED<em>PUBLIC</em>EMBED<em>LIB</em>URL</code></td><td style="text-align:left">packages/embeds/vite.config.js, packages/embeds/embed-core/src/preview.ts, packages/embeds/embed-snippet/src/index.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMBED<em>PUBLIC</em>VERCEL_URL</code></td><td style="text-align:left">packages/embeds/vite.config.js, packages/embeds/embed-core/src/embed.ts, packages/embeds/embed-snippet/src/index.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMBED<em>PUBLIC</em>WEBAPP_URL</code></td><td style="text-align:left">packages/embeds/vite.config.js, packages/embeds/embed-core/src/embed.test.ts, packages/embeds/embed-core/src/embed.ts, packages/embeds/embed-core/src/preview.ts, packages/embeds/embed-snippet/src/index.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENVIRONMENT_URL</code></td><td style="text-align:left"><strong>checks</strong>/calcom-dashboard.check.js, <strong>checks</strong>/csp-login.spec.ts, <strong>checks</strong>/location-link.check.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EXCHANGE<em>DEFAULT</em>EWS_URL</code></td><td style="text-align:left">apps/web/components/apps/exchange2013calendar/Setup.tsx, apps/web/components/apps/exchange2016calendar/Setup.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>WEBHOOK</em>URL</code></td><td style="text-align:left">.env.example, packages/features/calendar-subscription/adapters/GoogleCalendarSubscription.adapter.ts, packages/features/calendar-subscription/adapters/<strong>tests</strong>/GoogleCalendarSubscriptionAdapter.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOCAL<em>TESTING</em>DOMAIN_VERCEL</code></td><td style="text-align:left">packages/features/ee/organizations/lib/orgDomains.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MICROSOFT<em>WEBHOOK</em>URL</code></td><td style="text-align:left">.env.example, packages/features/calendar-subscription/adapters/Office365CalendarSubscription.adapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXTAUTH<em>COOKIE</em>DOMAIN</code></td><td style="text-align:left">.env.example, packages/lib/default-cookies.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXTAUTH_URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, packages/features/auth/lib/next-auth-options.ts, packages/features/auth/lib/sendVerificationRequest.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ORGANIZER<em>EMAIL</em>EXEMPT_DOMAINS</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAYWRIGHT<em>TEST</em>BASE_URL</code></td><td style="text-align:left">apps/web/playwright/lib/next-server.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILWAY<em>STATIC</em>URL</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RENDER<em>EXTERNAL</em>URL</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RESERVED_SUBDOMAINS</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>TANDEM<em>BASE</em>URL</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>API</em>URL</code></td><td style="text-align:left">.env.example, packages/lib/tasker/Tasker.test.ts, packages/lib/tasker/Tasker.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>USERNAME<em>BLACKLIST</em>URL</code></td><td style="text-align:left">packages/lib/server/username.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERCEL_URL</code></td><td style="text-align:left">apps/web/getNextjsOrgRewriteConfig.ts, apps/web/next.config.ts, apps/web/app/_trpc/trpc-client.ts, packages/embeds/vite.config.js, packages/lib/constants.ts, packages/lib/domainManager/organization.ts, packages/trpc/react/trpc.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="public-client-side">Public / Client-side</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>API<em>HITPAY</em>PRODUCTION</code></td><td style="text-align:left">packages/app-store/hitpay/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>API<em>HITPAY</em>SANDBOX</code></td><td style="text-align:left">packages/app-store/hitpay/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>API<em>V2</em>ROOT_URL</code></td><td style="text-align:left">apps/api/v1/next.config.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>API<em>V2</em>URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, apps/web/app/(booking-page-wrapper)/team/[slug]/[type]/queries.ts, apps/web/lib/team/[slug]/[type]/getServerSideProps.tsx</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>APP_NAME</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>AVAILABILITY<em>SCHEDULE</em>INTERVAL</code></td><td style="text-align:left">.env.example, packages/features/schedules/components/ScheduleComponent.tsx, packages/features/schedules/lib/slots.test.ts, packages/features/schedules/lib/slots.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>BODY_SCRIPTS</code></td><td style="text-align:left">.env.example, apps/web/app/(use-page-wrapper)/layout.tsx, apps/web/playwright/booking-pages.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>BOOKER<em>NUMBER</em>OF<em>DAYS</em>TO_LOAD</code></td><td style="text-align:left">.env.example, apps/web/modules/bookings/components/HavingTroubleFindingTime.tsx, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>CAL<em>AI</em>PHONE<em>NUMBER</em>MONTHLY_PRICE</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>CALCOM<em>API</em>URL</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/_app.tsx, packages/platform/examples/base/src/pages/api/managed-user.ts, packages/platform/examples/base/src/pages/api/oauth2-user.ts, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>CALCOM_VERSION</code></td><td style="text-align:left">packages/lib/constants.ts, packages/platform/atoms/vite.config.ts, packages/ui/components/icon/IconSprites.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>CLOUDFLARE_SITEKEY</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>CLOUDFLARE<em>USE</em>TURNSTILE<em>IN</em>BOOKER</code></td><td style="text-align:left">.env.example, apps/web/pages/api/book/event.ts, apps/web/pages/api/book/recurring-event.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>COMPANY_NAME</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>DISABLE_SIGNUP</code></td><td style="text-align:left">.env.example, apps/web/app/api/auth/signup/route.ts, apps/web/lib/signup/getServerSideProps.tsx, apps/web/modules/auth/login-view.tsx, apps/web/playwright/signup.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>DUB<em>PROGRAM</em>ID</code></td><td style="text-align:left">.env.example, apps/web/app/api/user/referrals-token/route.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>EMBED<em>FINGER</em>PRINT</code></td><td style="text-align:left">packages/embeds/vite.config.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>EMBED<em>LIB</em>URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, packages/embeds/vite.config.js, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>EMBED_VERSION</code></td><td style="text-align:left">packages/embeds/vite.config.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>ENABLE<em>PROFILE</em>SWITCHER</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>FORMBRICKS<em>ENVIRONMENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/modules/formbricks/hooks/useFormbricks.ts, apps/web/modules/formbricks/lib/trackFormbricksAction.ts, packages/lib/formbricks.ts, packages/trpc/server/routers/viewer/feedback/_router.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>FORMBRICKS<em>HOST</em>URL</code></td><td style="text-align:left">.env.example, apps/web/modules/formbricks/hooks/useFormbricks.ts, apps/web/modules/formbricks/lib/trackFormbricksAction.ts, packages/lib/formbricks.ts, packages/trpc/server/routers/viewer/feedback/_router.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>FRESHCHAT_HOST</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/support/lib/freshchat/FreshChatScript.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>FRESHCHAT_TOKEN</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/support/lib/freshchat/FreshChatScript.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>GTM_ID</code></td><td style="text-align:left">apps/web/components/GTM.tsx, apps/web/modules/signup-view.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>HEAD_SCRIPTS</code></td><td style="text-align:left">.env.example, apps/web/app/(use-page-wrapper)/layout.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>HELPSCOUT_KEY</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/support/lib/helpscout/HelpscoutMenuItem.tsx, apps/web/modules/ee/support/lib/helpscout/provider.tsx, apps/web/modules/ee/support/lib/helpscout/providerDynamic.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>HOSTED<em>CAL</em>FEATURES</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>INTERCOM<em>APP</em>ID</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/support/lib/intercom/provider.tsx, apps/web/modules/ee/support/lib/intercom/providerDynamic.tsx, apps/web/modules/ee/support/lib/intercom/useIntercom.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>INVALIDATE<em>AVAILABLE</em>SLOTS<em>ON</em>BOOKING_FORM</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>IS_E2E</code></td><td style="text-align:left">.env.example, apps/api/v2/src/modules/stripe/stripe.service.ts, apps/web/app/api/recorded-daily-video/route.ts, apps/web/app/e2e/session-warmup/page.tsx, apps/web/lib/app-providers.tsx, apps/web/modules/signup-view.tsx, apps/web/modules/auth/components/Turnstile.tsx, apps/web/modules/ee/organizations/lib/onboardingStore.ts, apps/web/modules/feature-flags/hooks/useFlags.ts, packages/app-store/analytics.services.generated.ts, packages/app-store/calendar.services.generated.ts, packages/app-store/video.adapters.generated.ts, packages/app-store/routing-forms/getEventTypeRedirectUrl.ts, packages/app-store/stripepayment/api/add.ts, packages/app-store/stripepayment/pages/setup/<em>getServerSideProps.ts, packages/app-store/stripepayment/pages/setup/<strong>tests</strong>/</em>getServerSideProps.test.ts, packages/app-store-cli/src/build.ts, packages/emails/templates/_base-email.ts, packages/embeds/vite.config.js, packages/embeds/embed-core/src/preview.ts, packages/features/auth/lib/next-auth-options.ts, packages/features/ee/common/server/LicenseKeyService.test.ts, packages/features/ee/common/server/LicenseKeyService.ts, packages/features/ee/organizations/lib/orgDomains.ts, packages/features/ee/organizations/lib/service/onboarding/OrganizationOnboardingFactory.ts, packages/features/ee/organizations/lib/service/onboarding/<strong>tests</strong>/OrganizationOnboardingFactory.test.ts, packages/features/ee/payments/api/webhook.ts, packages/features/ee/workflows/lib/reminders/providers/sendgridProvider.ts, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts, packages/features/profile/lib/checkRegularUsername.ts, packages/lib/constants.ts, packages/lib/ssrfProtection.ts, packages/lib/telemetry.ts, packages/lib/server/checkCfTurnstileToken.ts, packages/trpc/server/routers/viewer/deploymentSetup/validateLicense.handler.ts, packages/trpc/server/routers/viewer/organizations/verifyCode.handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>IS<em>PREMIUM</em>NEW_PLAN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>LOGGER_LEVEL</code></td><td style="text-align:left">.env.example, apps/web/app/_trpc/trpc-client.ts, packages/lib/logger.ts, packages/prisma/index.ts, packages/trpc/react/trpc.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>MINUTES<em>TO</em>BOOK</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>OAUTH2<em>CLIENT</em>ID</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/_app.tsx, packages/platform/examples/base/src/pages/api/oauth2-user.ts, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>OAUTH2_MODE</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/_app.tsx, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>ORG<em>SELF</em>SERVE_ENABLED</code></td><td style="text-align:left">apps/web/playwright/organization/organization-creation-flows.e2e.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>ORGANIZATIONS<em>MIN</em>SELF<em>SERVE</em>SEATS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>ORGANIZATIONS<em>SELF</em>SERVE<em>PRICE</em>NEW</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>POSTHOG_HOST</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/posthog/provider.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>POSTHOG_KEY</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/posthog/provider.tsx, apps/web/modules/ee/posthog/providerDynamic.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>QUERY<em>AVAILABLE</em>SLOTS<em>INTERVAL</em>SECONDS</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>QUERY<em>RESERVATION</em>INTERVAL_SECONDS</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>QUERY<em>RESERVATION</em>STALE<em>TIME</em>SECONDS</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>QUICK<em>AVAILABILITY</em>ROLLOUT</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SENDER_ID</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SENDGRID<em>SENDER</em>NAME</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SENTRY_DSN</code></td><td style="text-align:left">.env.example, apps/api/v1/instrumentation.ts, apps/api/v1/next.config.js, apps/web/instrumentation.ts, apps/web/sentry.edge.config.ts, apps/web/sentry.server.config.ts, packages/features/ee/api-keys/lib/autoLock.ts, packages/lib/sentryWrapper.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SENTRY<em>DSN</em>CLIENT</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SINGLE<em>ORG</em>MODE_ENABLED</code></td><td style="text-align:left">apps/web/test/lib/next-config.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SINGLE<em>ORG</em>SLUG</code></td><td style="text-align:left">.env.example, apps/web/getNextjsOrgRewriteConfig.ts, apps/web/next.config.ts, packages/features/ee/organizations/lib/service/onboarding/BillingEnabledOrgOnboardingService.ts, packages/features/ee/organizations/lib/service/onboarding/SelfHostedOnboardingService.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>CREDITS</em>PRICE_ID</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/api/webhook/_checkout.session.completed.ts, packages/lib/constants.ts, packages/trpc/server/routers/viewer/credits/buyCredits.handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>NEW<em>PLAN</em>PRICE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>PLAN_PRICE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>PLAN<em>PRICE</em>MONTHLY</code></td><td style="text-align:left">packages/app-store/stripepayment/lib/constants.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>PLAN<em>PRODUCT</em>ID</code></td><td style="text-align:left">packages/app-store/stripepayment/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PRO</em>PLAN_PRICE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>PUBLIC</em>KEY</code></td><td style="text-align:left">apps/web/playwright/lib/testUtils.ts, packages/app-store/stripepayment/_metadata.ts, packages/app-store/stripepayment/lib/client/getStripe.ts, packages/lib/constants.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>STRIPE<em>TEAM</em>MONTHLY<em>PRICE</em>ID</code></td><td style="text-align:left">packages/app-store/stripepayment/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SUPPORT<em>MAIL</em>ADDRESS</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>TEAM_IMPERSONATION</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/teams/components/MemberList.tsx, packages/features/ee/impersonation/lib/ImpersonationProvider.test.ts, packages/features/ee/impersonation/lib/ImpersonationProvider.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>UNIT_TESTS</code></td><td style="text-align:left">packages/emails/templates/_base-email.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>VAPID<em>PUBLIC</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/modules/notifications/components/WebPushContext.tsx, packages/features/notifications/sendNotification.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>VERCEL<em>GIT</em>COMMIT_SHA</code></td><td style="text-align:left">packages/platform/atoms/vite.config.ts, packages/ui/components/credits/Credits.tsx, packages/ui/components/icon/IconSprites.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>VERCEL_URL</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>VERCEL<em>USE</em>BOTID<em>IN</em>BOOKER</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts, apps/web/next.config.ts, packages/features/bot-detection/BotDetectionService.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>WEBAPP_URL</code></td><td style="text-align:left">.env.example, playwright.config.ts, vitest.config.mts, apps/api/v2/src/ee/event-types-private-links/services/private-links.service.ts, apps/web/getNextjsOrgRewriteConfig.ts, apps/web/next.config.ts, apps/web/app/_trpc/trpc-client.ts, apps/web/components/apps/alby/Setup.tsx, apps/web/components/apps/wipemycalother/confirmDialog.tsx, apps/web/modules/signup-view.tsx, apps/web/modules/bookings/components/event-meta/AvailableEventLocations.tsx, apps/web/modules/ee/common/components/PoweredBy.tsx, apps/web/modules/settings/my-account/profile-view.tsx, apps/web/playwright/lib/next-server.ts, apps/web/server/lib/auth/sso/[provider]/getServerSideProps.tsx, apps/web/test/lib/next-config.test.ts, packages/emails/templates/organizer-request-email.ts, packages/embeds/vite.config.js, packages/features/auth/lib/passwordResetRequest.ts, packages/features/calendar-subscription/adapters/GoogleCalendarSubscription.adapter.ts, packages/lib/constants.ts, packages/platform/atoms/vite.config.ts, packages/prisma/seed-pbac-only.ts, packages/trpc/react/trpc.ts, packages/trpc/server/routers/viewer/admin/sendPasswordReset.handler.ts, packages/trpc/server/routers/viewer/slots/reserveSlot.handler.test.ts, packages/trpc/server/routers/viewer/sso/get.handler.ts, packages/trpc/server/routers/viewer/sso/update.handler.ts, packages/trpc/server/routers/viewer/sso/updateOIDC.handler.ts, packages/ui/components/icon/IconSprites.tsx, scripts/seed-pbac-organization.ts, scripts/seed-utils.ts, scripts/seed.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>WEBSITE<em>PRIVACY</em>POLICY_URL</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>WEBSITE<em>TERMS</em>URL</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>WEBSITE_URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, apps/web/components/setup/AdminUser.tsx, apps/web/components/ui/UsernameAvailability/PremiumTextfield.tsx, apps/web/modules/signup-view.tsx, apps/web/modules/ee/organizations/components/OtherTeamListItem.tsx, apps/web/modules/event-types/components/CreateEventTypeDialog.tsx, apps/web/modules/event-types/components/DuplicateDialog.tsx, apps/web/modules/settings/admin/impersonation-view.tsx, apps/web/modules/settings/teams/[id]/event-types-view.tsx, apps/web/playwright/lib/next-server.ts, packages/emails/src/templates/MonthlyDigestEmail.tsx, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>X<em>CAL</em>ID</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/_app.tsx, packages/platform/examples/base/src/pages/api/managed-user.ts, packages/platform/examples/base/src/pages/api/refresh.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>ZENDESK_KEY</code></td><td style="text-align:left">.env.example, apps/web/modules/ee/support/lib/zendesk/ZendeskMenuItem.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITE<em>BOOKER</em>EMBED<em>API</em>URL</code></td><td style="text-align:left">packages/platform/atoms/booker-embed/BookerEmbed.tsx, packages/platform/atoms/router/Router.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITE<em>BOOKER</em>EMBED<em>OAUTH</em>CLIENT_ID</code></td><td style="text-align:left">packages/platform/atoms/booker-embed/BookerEmbed.tsx</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code><em>_NEXT</em>MANUAL<em>TRAILING</em>SLASH</code></td><td style="text-align:left">packages/platform/atoms/vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code><em>_NEXT</em>ROUTER_BASEPATH</code></td><td style="text-align:left">packages/platform/atoms/vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code><em>_NEXT</em>TRAILING_SLASH</code></td><td style="text-align:left">packages/platform/atoms/vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code><em>CAL</em>INTERNAL<em>PAST</em>BOOKING<em>RESCHEDULE</em>CHANGE<em>TEAM</em>IDS</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ANALYZE</code></td><td style="text-align:left">apps/web/next.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>APPLE<em>CONNECT</em>APP<em>SPECIFIC</em>PASSCODE</code></td><td style="text-align:left">packages/platform/examples/base/tests/connect-atoms/apple-connect.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>APPLE_ID</code></td><td style="text-align:left">packages/platform/examples/base/tests/connect-atoms/apple-connect.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>ID</code></td><td style="text-align:left">packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>ID<em>BOOKER</em>EMBED</code></td><td style="text-align:left">packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ATOMS<em>E2E</em>ORG_ID</code></td><td style="text-align:left">packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AVATARAPI_USERNAME</code></td><td style="text-align:left">.env.example, apps/web/app/api/auth/signup/handlers/calcomSignupHandler.ts, apps/web/app/api/auth/signup/handlers/selfHostedHandler.ts, packages/features/auth/signup/utils/prefillAvatar.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWAITING<em>PAYMENT</em>EMAIL<em>DELAY</em>MINUTES</code></td><td style="text-align:left">.env.example, packages/app-store/stripepayment/lib/PaymentService.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AXIOM_DATASET</code></td><td style="text-align:left">apps/api/v2/src/lib/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>B2<em>BUCKET</em>ID</code></td><td style="text-align:left">.env.example, apps/web/app/api/compliance/download/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>B2<em>BUCKET</em>NAME</code></td><td style="text-align:left">.env.example, apps/web/app/api/compliance/download/route.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BASECAMP3<em>CLIENT</em>ID</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BASECAMP3<em>USER</em>AGENT</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BLACKLISTED<em>GUEST</em>EMAILS</code></td><td style="text-align:left">.env.example, packages/features/bookings/lib/handleNewBooking/checkIfBookerEmailIsBlocked.ts, packages/features/bookings/lib/handleNewBooking/test/booking-validations.test.ts, packages/features/bookings/lib/service/RegularBookingService.ts, packages/trpc/server/routers/publicViewer/checkIfUserEmailVerificationRequired.handler.ts, packages/trpc/server/routers/viewer/bookings/addGuests.handler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BOOKING<em>LOGGING</em>EVENT_IDS</code></td><td style="text-align:left">packages/features/bookings/lib/isEventTypeLoggingEnabled.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BOOKING<em>LOGGING</em>USER<em>OR</em>TEAM_NAME</code></td><td style="text-align:left">packages/features/bookings/lib/isEventTypeLoggingEnabled.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUILD_STANDALONE</code></td><td style="text-align:left">apps/web/next.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>AI</em>CALL<em>RATE</em>PER_MINUTE</code></td><td style="text-align:left">.env.example, apps/web/app/api/webhooks/retell-ai/route.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>VIDEO</em>ASSUME<em>ROLE</em>ARN</code></td><td style="text-align:left">.env.example, packages/app-store/dailyvideo/lib/VideoApiAdapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>VIDEO</em>BUCKET_NAME</code></td><td style="text-align:left">.env.example, packages/app-store/dailyvideo/lib/VideoApiAdapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>VIDEO</em>BUCKET_REGION</code></td><td style="text-align:left">.env.example, packages/app-store/dailyvideo/lib/VideoApiAdapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAL<em>VIDEO</em>MEETING<em>LINK</em>FOR_TESTING</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALCOM_ENV</code></td><td style="text-align:left">apps/api/v1/next.config.js, apps/web/next.config.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>PRIVATE</em>API_ROUTE</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CALCOM<em>TELEMETRY</em>DISABLED</code></td><td style="text-align:left">.env.example, packages/lib/telemetry.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CI</code></td><td style="text-align:left">playwright.config.ts, apps/api/v2/jest-e2e.ts, apps/api/v2/test/jest.setup-e2e.ts, apps/web/lib/daily-webhook/tests/recorded-daily-video.test.ts, apps/web/pages/api/book/recurring-event.test.ts, packages/app-store/googlecalendar/lib/<strong>tests</strong>/CalendarService.test.ts, packages/features/bookings/lib/handleNewBooking/global-booking-limits.test.ts, packages/features/bookings/lib/handleNewBooking/test/booking-limits.test.ts, packages/features/bookings/lib/handleNewBooking/test/complex-schedules.test.ts, packages/features/bookings/lib/handleNewBooking/test/date-overrides.test.ts, packages/features/bookings/lib/handleNewBooking/test/delegation-credential.test.ts, packages/features/bookings/lib/handleNewBooking/test/dynamic-group-booking.test.ts, packages/features/bookings/lib/handleNewBooking/test/email-verification-booking.test.ts, packages/features/bookings/lib/handleNewBooking/test/fresh-booking.test.ts, packages/features/bookings/lib/handleNewBooking/test/post-booking-handling.test.ts, packages/features/bookings/lib/handleNewBooking/test/reschedule.test.ts, packages/features/bookings/lib/handleNewBooking/test/round-robin-no-hosts.test.ts, packages/features/bookings/lib/handleNewBooking/test/spam-booking.integration-test.ts, packages/features/bookings/lib/handleNewBooking/test/webhook-producer-booking-requested.test.ts, packages/features/bookings/lib/handleNewBooking/test/workflow-notifications.test.ts, packages/features/bookings/lib/handleNewBooking/test/team-bookings/collective-reschedule-destination-calendar.test.ts, packages/features/bookings/lib/handleNewBooking/test/team-bookings/collective-scheduling.test.ts, packages/features/bookings/lib/service/RecurringBookingService.test.ts, packages/features/tasker/tasks/triggerNoShow/triggerGuestNoShow.test.ts, packages/features/tasker/tasks/triggerNoShow/triggerHostNoShow.test.ts, packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOSECOM<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, packages/lib/CloseCom.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE<em>ACCOUNT</em>ID</code></td><td style="text-align:left">packages/features/ee/workflows/lib/urlScanner.ts, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE_DNS</code></td><td style="text-align:left">packages/lib/domainManager/organization.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE<em>VERCEL</em>CNAME</code></td><td style="text-align:left">packages/lib/domainManager/deploymentServices/cloudflare.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CLOUDFLARE<em>ZONE</em>ID</code></td><td style="text-align:left">packages/lib/domainManager/deploymentServices/cloudflare.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CRON<em>ENABLE</em>APP_SYNC</code></td><td style="text-align:left">.env.example, apps/web/app/api/cron/syncAppMeta/route.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CSP_POLICY</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, apps/web/proxy.ts, apps/web/lib/csp.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DAILY<em>SCALE</em>PLAN</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DAILY<em>VIDEO</em>REGION</code></td><td style="text-align:left">packages/app-store/dailyvideo/lib/VideoApiAdapter.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEBUG</code></td><td style="text-align:left">packages/app-store-cli/src/utils/execSync.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DIRECTORY<em>IDS</em>TO_LOG</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>DEV</em>SERVER</code></td><td style="text-align:left">apps/web/playwright/lib/next-server.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>APPLE<em>CALENDAR</em>EMAIL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>CALCOM<em>QA</em>EMAIL</code></td><td style="text-align:left">.env.example, packages/app-store/googlecalendar/tests/google-calendar.e2e.ts, scripts/seed.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>MAILHOG_ENABLED</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>OIDC<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>OIDC<em>USER</em>EMAIL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E<em>TEST</em>SAML<em>ADMIN</em>EMAIL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EDGE_CONFIG</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL_FROM</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts, apps/web/app/(use-page-wrapper)/auth/verify/page.tsx, packages/features/auth/lib/sendVerificationRequest.ts, packages/lib/serverConfig.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>FROM</em>NAME</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EMAIL_SERVER</code></td><td style="text-align:left">packages/lib/serverConfig.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>SERVER</em>USER</code></td><td style="text-align:left">packages/lib/serverConfig.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMBED<em>PUBLIC</em>EMBED<em>FINGER</em>PRINT</code></td><td style="text-align:left">packages/embeds/vite.config.js, packages/embeds/embed-core/src/embed.ts, packages/embeds/embed-core/src/preview.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMBED<em>PUBLIC</em>EMBED_VERSION</code></td><td style="text-align:left">packages/embeds/vite.config.js, packages/embeds/embed-core/src/embed.ts, packages/embeds/embed-core/src/preview.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>ASYNC</em>TASKER</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ENTERPRISE_SLUGS</code></td><td style="text-align:left">packages/features/ee/billing/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FORMBRICKS<em>FEEDBACK</em>SURVEY_ID</code></td><td style="text-align:left">.env.example, packages/lib/formbricks.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>ADS</em>ENABLED</code></td><td style="text-align:left">.env.example, packages/lib/tracking/server.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>CLIENT</em>ID</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>LOGIN</em>ENABLED</code></td><td style="text-align:left">.env.example, apps/web/server/lib/constants.ts, packages/features/auth/lib/next-auth-options.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>HEROKU<em>APP</em>NAME</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HUBSPOT<em>CLIENT</em>ID</code></td><td style="text-align:left">packages/app-store/hubspot/_metadata.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTEGRATION<em>TEST</em>MODE</code></td><td style="text-align:left">vitest.config.mts, apps/web/app/api/recorded-daily-video/route.ts, packages/emails/templates/_base-email.ts, packages/embeds/embed-core/src/EmbedElement.ts, packages/embeds/embed-core/src/embed.ts, packages/embeds/embed-core/src/embed-iframe/lib/utils.ts, packages/features/bookings/lib/getBookingFields.ts, packages/features/ee/organizations/lib/orgDomains.ts, packages/features/ee/workflows/lib/reminders/providers/sendgridProvider.ts, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts, packages/trpc/server/routers/viewer/slots/util.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTEGRATION_TESTS</code></td><td style="text-align:left">packages/testing/src/setupVitest.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IP_BANLIST</code></td><td style="text-align:left">packages/lib/getIP.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IS_E2E</code></td><td style="text-align:left">packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LARK<em>OPEN</em>APP_ID</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LINKEDIN<em>ADS</em>ENABLED</code></td><td style="text-align:left">.env.example, packages/lib/tracking/server.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>LOG_LEVEL</code></td><td style="text-align:left">apps/api/v2/src/lib/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOGGER<em>BRIDGE</em>LOG_LEVEL</code></td><td style="text-align:left">apps/api/v2/src/lib/logger.bridge.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MOCK<em>PAYMENT</em>APP_ENABLED</code></td><td style="text-align:left">apps/web/playwright/payment.e2e.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MS<em>GRAPH</em>CLIENT_ID</code></td><td style="text-align:left">packages/features/auth/lib/outlook.test.ts, packages/features/auth/lib/outlook.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT_RUNTIME</code></td><td style="text-align:left">apps/api/v1/instrumentation.ts, apps/web/instrumentation.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NODE_ENV</code></td><td style="text-align:left">apps/api/v1/next.config.js, apps/api/v1/pages/api/teams/_post.ts, apps/api/v2/src/app.module.ts, apps/api/v2/src/main.ts, apps/api/v2/src/lib/logger.ts, apps/web/instrumentation-client.ts, apps/web/instrumentation.ts, apps/web/next.config.ts, apps/web/app/layout.tsx, apps/web/app/api/defaultResponderForAppDir.ts, apps/web/app/e2e/session-warmup/page.tsx, apps/web/modules/ee/common/components/LicenseRequired.tsx, apps/web/modules/ee/posthog/provider.tsx, packages/features/calAIPhone/AIPhoneServiceRegistry.ts, packages/features/calAIPhone/initializeRegistry.ts, packages/features/ee/payments/server/stripe.ts, packages/features/ee/teams/lib/payments.ts, packages/features/tasker/index.ts, packages/i18n/next-i18next.config.js, packages/lib/constants.ts, packages/lib/env.ts, packages/lib/piiFreeData.ts, packages/lib/sentryWrapper.ts, packages/lib/server/defaultResponder.ts, packages/lib/server/perfObserver.ts, packages/platform/atoms/vite.config.ts, packages/platform/examples/base/src/lib/prismaClient.ts, packages/prisma/index.ts, packages/trpc/server/createNextApiHandler.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OAUTH2<em>REDIRECT</em>URI</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/api/oauth2-user.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORG<em>MONTHLY</em>CREDITS</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/credit-service.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORGANIZATION_ID</code></td><td style="text-align:left">packages/platform/examples/base/src/pages/api/managed-user.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORGANIZATIONS_AUTOLINK</code></td><td style="text-align:left">.env.example, packages/features/auth/lib/next-auth-options.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORGANIZATIONS_ENABLED</code></td><td style="text-align:left">.env.example, apps/web/next.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OUTLOOK<em>LOGIN</em>ENABLED</code></td><td style="text-align:left">.env.example, packages/features/auth/lib/outlook.test.ts, packages/features/auth/lib/outlook.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>PAYMENT<em>FEE</em>FIXED</code></td><td style="text-align:left">apps/web/playwright/lib/testUtils.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PAYMENT<em>FEE</em>PERCENTAGE</code></td><td style="text-align:left">apps/web/playwright/lib/testUtils.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PGSSLMODE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLATFORM<em>ENTERPRISE</em>SLUGS</code></td><td style="text-align:left">packages/features/ee/billing/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAYWRIGHT_HEADLESS</code></td><td style="text-align:left">playwright.config.ts, packages/platform/examples/base/playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PROJECT<em>ID</em>VERCEL</code></td><td style="text-align:left">.env.example, packages/lib/domainManager/deploymentServices/vercel.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PWDEBUG</code></td><td style="text-align:left">playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RETELL<em>AI</em>TEST<em>EVENT</em>TYPE_MAP</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RETELL<em>AI</em>TEST_MODE</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SALESFORCE<em>GRAPHQL</em>DELAY_MS</code></td><td style="text-align:left">.env.example, packages/app-store/salesforce/lib/graphql/SalesforceGraphQLClient.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SALESFORCE<em>GRAPHQL</em>MAX<em>DELAY</em>MS</code></td><td style="text-align:left">.env.example, packages/app-store/salesforce/lib/graphql/SalesforceGraphQLClient.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SALESFORCE<em>GRAPHQL</em>MAX_RETRIES</code></td><td style="text-align:left">.env.example, packages/app-store/salesforce/lib/graphql/SalesforceGraphQLClient.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SAML_ADMINS</code></td><td style="text-align:left">.env.example, packages/features/ee/sso/lib/saml.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEED<em>OAUTH2</em>CLIENT_ID</code></td><td style="text-align:left">.env.example, scripts/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEED<em>PLATFORM</em>OAUTH<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, scripts/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEND<em>FEEDBACK</em>EMAIL</code></td><td style="text-align:left">.env.example, packages/emails/templates/feedback-email.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENDGRID_EMAIL</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/api/scheduleEmailReminders.ts, packages/features/ee/workflows/lib/reminders/providers/sendgridProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DEBUG</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts, apps/web/sentry.edge.config.ts, apps/web/sentry.server.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">apps/api/v2/src/instrument.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>MAX</em>SPANS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_ORG</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_PROJECT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>REPLAYS</em>ON<em>ERROR</em>SAMPLE_RATE</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>REPLAYS</em>SESSION<em>SAMPLE</em>RATE</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>SAMPLE</em>RATE</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts, apps/web/sentry.edge.config.ts, apps/web/sentry.server.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>TRACES</em>SAMPLE_RATE</code></td><td style="text-align:left">.env.example, apps/web/instrumentation-client.ts, apps/web/sentry.edge.config.ts, apps/web/sentry.server.config.ts, packages/lib/sentryWrapper.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SKIP<em>DB</em>MIGRATIONS</code></td><td style="text-align:left">packages/prisma/auto-migrations.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SLOTS<em>CACHE</em>TTL</code></td><td style="text-align:left">packages/trpc/server/routers/viewer/slots/util.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/playwright/lib/testUtils.ts, packages/app-store/stripepayment/_metadata.ts, packages/lib/constants.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>ORG</em>ANNUAL<em>PRICE</em>ID</code></td><td style="text-align:left">.env.example, packages/features/ee/teams/lib/payments.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>ORG</em>MONTHLY<em>PRICE</em>ID</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/active-user/seed-active-user-test.ts, packages/features/ee/billing/service/highWaterMark/seed-hwm-test.ts, packages/features/ee/teams/lib/payments.ts, packages/trpc/server/routers/viewer/organizations/createWithPaymentIntent.handler.test.ts, packages/trpc/server/routers/viewer/organizations/intentToCreateOrg.handler.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>ORG</em>PRODUCT_ID</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/api/webhook/_invoice.paid.ts, packages/features/ee/organizations/lib/OrganizationPaymentService.ts, packages/trpc/server/routers/viewer/organizations/createWithPaymentIntent.handler.test.ts, packages/trpc/server/routers/viewer/organizations/intentToCreateOrg.handler.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>ORG</em>TRIAL_DAYS</code></td><td style="text-align:left">.env.example, packages/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>PHONE</em>NUMBER<em>MONTHLY</em>PRICE_ID</code></td><td style="text-align:left">.env.example, packages/app-store/stripepayment/lib/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>TEAM</em>ANNUAL<em>PRICE</em>ID</code></td><td style="text-align:left">.env.example, packages/features/ee/teams/lib/payments.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>TEAM</em>MONTHLY<em>PRICE</em>ID</code></td><td style="text-align:left">.env.example, apps/api/v1/pages/api/teams/_post.ts, packages/features/ee/billing/credit-service.ts, packages/features/ee/billing/service/highWaterMark/seed-hwm-test.ts, packages/features/ee/billing/service/highWaterMark/<strong>tests</strong>/HighWaterMarkStripe.integration-test.ts, packages/features/ee/teams/lib/payments.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>TEAM</em>PRODUCT_ID</code></td><td style="text-align:left">.env.example, packages/features/ee/billing/api/webhook/<em>customer.subscription.deleted.ts, packages/features/ee/billing/api/webhook/</em>invoice.paid.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TANDEM<em>CLIENT</em>ID</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TASKER<em>ENABLE</em>EMAILS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>TASKER<em>ENABLE</em>WEBHOOKS</code></td><td style="text-align:left">.env.example, packages/features/webhooks/lib/sendOrSchedulePayload.ts, packages/features/webhooks/lib/service/WebhookService.test.ts, packages/features/webhooks/lib/service/WebhookService.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>TEAM<em>ID</em>VERCEL</code></td><td style="text-align:left">.env.example, packages/lib/domainManager/deploymentServices/vercel.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TELEMETRY_DEBUG</code></td><td style="text-align:left">packages/lib/telemetry.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>DEV</em>PROJECT_REF</code></td><td style="text-align:left">.env.example, packages/features/trigger.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>DEV</em>VERCEL<em>PROJECT</em>ID</code></td><td style="text-align:left">packages/features/trigger.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER<em>DEV</em>VERCEL<em>TEAM</em>ID</code></td><td style="text-align:left">packages/features/trigger.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRIGGER_VERSION</code></td><td style="text-align:left">apps/api/v2/src/main.ts, apps/api/v2/src/vercel-webhook.controller.e2e-spec.ts, apps/api/v2/src/vercel-webhook.controller.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>MESSAGING</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>OPT</em>OUT_ENABLED</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/service/workflowOptOutService.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>PHONE</em>NUMBER</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO_SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>VERIFY</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>WHATSAPP</em>CANCELLED<em>CONTENT</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/templates/whatsapp/ContentSidMapping.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>WHATSAPP</em>COMPLETED<em>CONTENT</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/templates/whatsapp/ContentSidMapping.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>WHATSAPP</em>PHONE_NUMBER</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/providers/twilioProvider.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>WHATSAPP</em>REMINDER<em>CONTENT</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/templates/whatsapp/ContentSidMapping.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWILIO<em>WHATSAPP</em>RESCHEDULED<em>CONTENT</em>SID</code></td><td style="text-align:left">.env.example, packages/features/ee/workflows/lib/reminders/templates/whatsapp/ContentSidMapping.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TZ</code></td><td style="text-align:left">.env.example, vitest.config.mts, vitest.workspace.ts, packages/lib/isOutOfBounds.timezone.test.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>USE_POOL</code></td><td style="text-align:left">packages/platform/libraries/vite.config.js, packages/prisma/index.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERCEL</code></td><td style="text-align:left">apps/api/v2/src/bootstrap.ts, apps/api/v2/src/main.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERCEL_ENV</code></td><td style="text-align:left">apps/web/pages/_document.tsx</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITAL<em>DEVELOPMENT</em>MODE</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITAL_REGION</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VITEST_MODE</code></td><td style="text-align:left">vitest.config.mts, vitest.workspace.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZAPIER<em>INVITE</em>LINK</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZOHOCRM<em>CLIENT</em>ID</code></td><td style="text-align:left">scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ZOOM<em>CLIENT</em>ID</code></td><td style="text-align:left">example-apps/credential-sync/constants.ts, scripts/seed-app-store.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code><em>_NEXT</em>I18N_SUPPORT</code></li>
+<li><code><em>_NEXT</em>MANUAL<em>TRAILING</em>SLASH</code></li>
+<li><code><em>_NEXT</em>ROUTER_BASEPATH</code></li>
+<li><code><em>_NEXT</em>TRAILING_SLASH</code></li>
+<li><code><em>CAL</em>INTERNAL<em>PAST</em>BOOKING<em>RESCHEDULE</em>CHANGE<em>TEAM</em>IDS</code></li>
+<li><code>ANALYZE</code></li>
+<li><code>API_PORT</code></li>
+<li><code>ATOMS<em>E2E</em>API_URL</code></li>
+<li><code>ATOMS<em>E2E</em>APPLE<em>CONNECT</em>APP<em>SPECIFIC</em>PASSCODE</code></li>
+<li><code>ATOMS<em>E2E</em>APPLE_ID</code></li>
+<li><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>ID</code></li>
+<li><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>ID<em>BOOKER</em>EMBED</code></li>
+<li><code>ATOMS<em>E2E</em>OAUTH<em>CLIENT</em>SECRET</code></li>
+<li><code>ATOMS<em>E2E</em>ORG_ID</code></li>
+<li><code>AUTH<em>BEARER</em>TOKEN_CLOUDFLARE</code></li>
+<li><code>AXIOM_DATASET</code></li>
+<li><code>AXIOM_TOKEN</code></li>
+<li><code>BASECAMP3<em>CLIENT</em>ID</code></li>
+<li><code>BASECAMP3<em>CLIENT</em>SECRET</code></li>
+<li><code>BASECAMP3<em>USER</em>AGENT</code></li>
+<li><code>BOOKING<em>LOGGING</em>EVENT_IDS</code></li>
+<li><code>BOOKING<em>LOGGING</em>USER<em>OR</em>TEAM_NAME</code></li>
+<li><code>BUILD_STANDALONE</code></li>
+<li><code>CALCOM<em>ADMIN</em>API_KEY</code></li>
+<li><code>CALCOM_ENV</code></li>
+<li><code>CI</code></li>
+<li><code>CLOUDFLARE<em>ACCOUNT</em>ID</code></li>
+<li><code>CLOUDFLARE_DNS</code></li>
+<li><code>CLOUDFLARE<em>URL</em>SCANNER<em>API</em>TOKEN</code></li>
+<li><code>CLOUDFLARE<em>VERCEL</em>CNAME</code></li>
+<li><code>CLOUDFLARE<em>ZONE</em>ID</code></li>
+<li><code>CRON_SECRET</code></li>
+<li><code>DAILY<em>API</em>KEY</code></li>
+<li><code>DAILY<em>SCALE</em>PLAN</code></li>
+<li><code>DAILY<em>VIDEO</em>REGION</code></li>
+<li><code>DAILY<em>WEBHOOK</em>SECRET</code></li>
+<li><code>DEBUG</code></li>
+<li><code>DEVIN<em>API</em>KEY</code></li>
+<li><code>DOCS_URL</code></li>
+<li><code>E2E<em>DEV</em>SERVER</code></li>
+<li><code>EMAIL_SERVER</code></li>
+<li><code>EMAIL<em>SERVER</em>PASSWORD</code></li>
+<li><code>EMAIL<em>SERVER</em>USER</code></li>
+<li><code>EMBED<em>PUBLIC</em>EMBED<em>FINGER</em>PRINT</code></li>
+<li><code>EMBED<em>PUBLIC</em>EMBED<em>LIB</em>URL</code></li>
+<li><code>EMBED<em>PUBLIC</em>EMBED_VERSION</code></li>
+<li><code>EMBED<em>PUBLIC</em>VERCEL_URL</code></li>
+<li><code>EMBED<em>PUBLIC</em>WEBAPP_URL</code></li>
+<li><code>ENTERPRISE_SLUGS</code></li>
+<li><code>ENVIRONMENT_URL</code></li>
+<li><code>EXCHANGE<em>DEFAULT</em>EWS_URL</code></li>
+<li><code>GIPHY<em>API</em>KEY</code></li>
+<li><code>GOOGLE<em>CLIENT</em>ID</code></li>
+<li><code>GOOGLE<em>CLIENT</em>SECRET</code></li>
+<li><code>GOOGLE<em>REFRESH</em>TOKEN</code></li>
+<li><code>HEROKU<em>APP</em>NAME</code></li>
+<li><code>HUBSPOT<em>CLIENT</em>ID</code></li>
+<li><code>HUBSPOT<em>CLIENT</em>SECRET</code></li>
+<li><code>INTEGRATION<em>TEST</em>MODE</code></li>
+<li><code>INTEGRATION_TESTS</code></li>
+<li><code>IP_BANLIST</code></li>
+<li><code>IS_E2E</code></li>
+<li><code>LARK<em>OPEN</em>APP_ID</code></li>
+<li><code>LARK<em>OPEN</em>APP_SECRET</code></li>
+<li><code>LARK<em>OPEN</em>VERIFICATION_TOKEN</code></li>
+<li><code>LOCAL<em>TESTING</em>DOMAIN_VERCEL</code></li>
+<li><code>LOG_LEVEL</code></li>
+<li><code>LOGGER<em>BRIDGE</em>LOG_LEVEL</code></li>
+<li><code>MOCK<em>PAYMENT</em>APP_ENABLED</code></li>
+<li><code>MS<em>GRAPH</em>CLIENT_ID</code></li>
+<li><code>MS<em>GRAPH</em>CLIENT_SECRET</code></li>
+<li><code>NEXT<em>PUBLIC</em>API<em>HITPAY</em>PRODUCTION</code></li>
+<li><code>NEXT<em>PUBLIC</em>API<em>HITPAY</em>SANDBOX</code></li>
+<li><code>NEXT<em>PUBLIC</em>API<em>V2</em>ROOT_URL</code></li>
+<li><code>NEXT<em>PUBLIC</em>CALCOM<em>API</em>URL</code></li>
+<li><code>NEXT<em>PUBLIC</em>CALCOM_VERSION</code></li>
+<li><code>NEXT<em>PUBLIC</em>EMBED<em>FINGER</em>PRINT</code></li>
+<li><code>NEXT<em>PUBLIC</em>EMBED_VERSION</code></li>
+<li><code>NEXT<em>PUBLIC</em>ENABLE<em>PROFILE</em>SWITCHER</code></li>
+<li><code>NEXT<em>PUBLIC</em>GTM_ID</code></li>
+<li><code>NEXT<em>PUBLIC</em>OAUTH2<em>CLIENT</em>ID</code></li>
+<li><code>NEXT<em>PUBLIC</em>OAUTH2_MODE</code></li>
+<li><code>NEXT<em>PUBLIC</em>ORG<em>SELF</em>SERVE_ENABLED</code></li>
+<li><code>NEXT<em>PUBLIC</em>SINGLE<em>ORG</em>MODE_ENABLED</code></li>
+<li><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>PLAN<em>PRICE</em>MONTHLY</code></li>
+<li><code>NEXT<em>PUBLIC</em>STRIPE<em>PREMIUM</em>PLAN<em>PRODUCT</em>ID</code></li>
+<li><code>NEXT<em>PUBLIC</em>STRIPE<em>PUBLIC</em>KEY</code></li>
+<li><code>NEXT<em>PUBLIC</em>STRIPE<em>TEAM</em>MONTHLY<em>PRICE</em>ID</code></li>
+<li><code>NEXT<em>PUBLIC</em>UNIT_TESTS</code></li>
+<li><code>NEXT<em>PUBLIC</em>VERCEL<em>GIT</em>COMMIT_SHA</code></li>
+<li><code>NEXT<em>PUBLIC</em>VERCEL_URL</code></li>
+<li><code>NEXT<em>PUBLIC</em>X<em>CAL</em>ID</code></li>
+<li><code>NEXT_RUNTIME</code></li>
+<li><code>NODE_ENV</code></li>
+<li><code>OAUTH2<em>CLIENT</em>SECRET_PLAIN</code></li>
+<li><code>OAUTH2<em>REDIRECT</em>URI</code></li>
+<li><code>ORGANIZATION_ID</code></li>
+<li><code>ORGANIZER<em>EMAIL</em>EXEMPT_DOMAINS</code></li>
+<li><code>PAYMENT<em>FEE</em>FIXED</code></li>
+<li><code>PAYMENT<em>FEE</em>PERCENTAGE</code></li>
+<li><code>PLATFORM<em>ENTERPRISE</em>SLUGS</code></li>
+<li><code>PLAYWRIGHT_HEADLESS</code></li>
+<li><code>PLAYWRIGHT<em>TEST</em>BASE_URL</code></li>
+<li><code>PWDEBUG</code></li>
+<li><code>RAILWAY<em>STATIC</em>URL</code></li>
+<li><code>REDIS_URL</code></li>
+<li><code>RENDER<em>EXTERNAL</em>URL</code></li>
+<li><code>RESEND<em>API</em>KEY</code></li>
+<li><code>SALESFORCE<em>CONSUMER</em>KEY</code></li>
+<li><code>SALESFORCE<em>CONSUMER</em>SECRET</code></li>
+<li><code>SENTRY_DSN</code></li>
+<li><code>SKIP<em>DB</em>MIGRATIONS</code></li>
+<li><code>SLOTS<em>CACHE</em>TTL</code></li>
+<li><code>STRIPE<em>API</em>KEY</code></li>
+<li><code>TANDEM<em>BASE</em>URL</code></li>
+<li><code>TANDEM<em>CLIENT</em>ID</code></li>
+<li><code>TANDEM<em>CLIENT</em>SECRET</code></li>
+<li><code>TELEMETRY_DEBUG</code></li>
+<li><code>TRIGGER<em>DEV</em>VERCEL<em>ACCESS</em>TOKEN</code></li>
+<li><code>TRIGGER<em>DEV</em>VERCEL<em>PROJECT</em>ID</code></li>
+<li><code>TRIGGER<em>DEV</em>VERCEL<em>TEAM</em>ID</code></li>
+<li><code>TRIGGER_VERSION</code></li>
+<li><code>UPSTASH<em>REDIS</em>REST_TOKEN</code></li>
+<li><code>UPSTASH<em>REDIS</em>REST_URL</code></li>
+<li><code>USE_POOL</code></li>
+<li><code>USERNAME<em>BLACKLIST</em>URL</code></li>
+<li><code>VERCEL</code></li>
+<li><code>VERCEL_ENV</code></li>
+<li><code>VERCEL<em>PROMOTE</em>WEBHOOK_SECRET</code></li>
+<li><code>VERCEL_URL</code></li>
+<li><code>VITAL<em>API</em>KEY</code></li>
+<li><code>VITAL<em>DEVELOPMENT</em>MODE</code></li>
+<li><code>VITAL_REGION</code></li>
+<li><code>VITAL<em>WEBHOOK</em>SECRET</code></li>
+<li><code>VITE<em>BOOKER</em>EMBED<em>API</em>URL</code></li>
+<li><code>VITE<em>BOOKER</em>EMBED<em>OAUTH</em>CLIENT_ID</code></li>
+<li><code>VITEST_MODE</code></li>
+<li><code>X<em>CAL</em>SECRET_KEY</code></li>
+<li><code>ZAPIER<em>INVITE</em>LINK</code></li>
+<li><code>ZOHOCRM<em>CLIENT</em>ID</code></li>
+<li><code>ZOHOCRM<em>CLIENT</em>SECRET</code></li>
+<li><code>ZOOM<em>CLIENT</em>ID</code></li>
+<li><code>ZOOM<em>CLIENT</em>SECRET</code></li>
+<li><code>ZOOM<em>REFRESH</em>TOKEN</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>109 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 109 hardcoded secret(s) detected in source code: Hardcoded Password, Hardcoded Secret, Hardcoded Bearer Token. Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v1/test/lib/booking-references.integration-test.ts</code></td><td style="text-align:left">387</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v1/test/lib/booking-references.integration-test.ts</code></td><td style="text-align:left">416</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v1/test/lib/booking-references.integration-test.ts</code></td><td style="text-align:left">425</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v1/test/lib/booking-references.integration-test.ts</code></td><td style="text-align:left">454</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v1/test/lib/booking-references.integration-test.ts</code></td><td style="text-align:left">468</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/vercel-webhook.controller.e2e-spec.ts</code></td><td style="text-align:left">12</td><td style="text-align:left"><code>const WEBHOOK_SECRET = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/booking-access-auth.e2e-spec.ts</code></td><td style="text-align:left">87</td><td style="text-align:left"><code>ownerApiKey = </code>cal<em>test</em>${ownerKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/booking-access-auth.e2e-spec.ts</code></td><td style="text-align:left">93</td><td style="text-align:left"><code>unauthorizedApiKey = </code>cal<em>test</em>${unauthorizedKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/booking-access-auth.e2e-spec.ts</code></td><td style="text-align:left">139</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/reassign-bookings.e2e-spec.ts</code></td><td style="text-align:left">128</td><td style="text-align:left"><code>teamUser1ApiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/reassign-bookings.e2e-spec.ts</code></td><td style="text-align:left">131</td><td style="text-align:left"><code>teamUser2ApiKey = </code>cal<em>test</em>${keyString2}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/user-bookings.e2e-spec.ts</code></td><td style="text-align:left">3152</td><td style="text-align:left"><code>meetingPassword: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/emails/team-emails.e2e-spec.ts</code></td><td style="text-align:left">170</td><td style="text-align:left"><code>const member1ApiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Bearer Token</td><td style="text-align:left"><code>apps/api/v2/src/ee/calendars/controllers/calendars.controller.e2e-spec.ts</code></td><td style="text-align:left">127</td><td style="text-align:left"><code>.set("[REDACTED]", </code>Bearer invalid<em>access</em>token<code>)</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Bearer Token</td><td style="text-align:left"><code>apps/api/v2/src/ee/gcal/gcal.controller.e2e-spec.ts</code></td><td style="text-align:left">94</td><td style="text-align:left"><code>.set("[REDACTED]", </code>Bearer invalid<em>access</em>token<code>)</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/auth/oauth2/controllers/oauth2.controller.e2e-spec.ts</code></td><td style="text-align:left">58</td><td style="text-align:left"><code>client_secret: "test-secret",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/auth/oauth2/controllers/oauth2.controller.e2e-spec.ts</code></td><td style="text-align:left">89</td><td style="text-align:left"><code>const testClientSecret = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/auth/oauth2/controllers/oauth2.controller.e2e-spec.ts</code></td><td style="text-align:left">302</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/auth/oauth2/controllers/oauth2.controller.e2e-spec.ts</code></td><td style="text-align:left">412</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/auth/oauth2/controllers/oauth2.controller.e2e-spec.ts</code></td><td style="text-align:left">468</td><td style="text-align:left"><code>const testClientSecret = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/oauth-clients/controllers/oauth-clients/responses/CreateOAuthClientResponse.dto.ts</code></td><td style="text-align:left">16</td><td style="text-align:left"><code>clientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/delegation-credentials/organizations-delegation-credential.controller.e2e-spec.ts</code></td><td style="text-align:left">99</td><td style="text-align:left"><code>apiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/organizations/organizations-organizations.controller.e2e-spec.ts</code></td><td style="text-align:left">184</td><td style="text-align:left"><code>const apiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">169</td><td style="text-align:left"><code>legacyOrgAdminApiKey = </code>cal<em>test</em>${legacyOrgAdminKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">175</td><td style="text-align:left"><code>legacyOrgMemberApiKey = </code>cal<em>test</em>${legacyOrgMemberKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">181</td><td style="text-align:left"><code>pbacOrgUserWithRolePermissionApiKey = </code>cal<em>test</em>${pbacOrgUserWithRolePermissionKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">185</td><td style="text-align:left"><code>pbacOrgUserWithoutRolePermissionApiKey = </code>cal<em>test</em>${pbacOrgUserWithoutRolePermissionKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">191</td><td style="text-align:left"><code>nonOrgUserApiKey = </code>cal<em>test</em>${nonOrgUserKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/organizations-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">313</td><td style="text-align:left"><code>const noRoleApiKey = </code>cal<em>test</em>${noRoleKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/roles/permissions/organizations-roles-permissions.controller.e2e-spec.ts</code></td><td style="text-align:left">89</td><td style="text-align:left"><code>pbacOrgUserWithRolePermissionApiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/memberships/e2e/organizations-teams-memberships-guard.controller.e2e-spec.ts</code></td><td style="text-align:left">109</td><td style="text-align:left"><code>orgApiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">183</td><td style="text-align:left"><code>legacyOrgAdminApiKey = </code>cal<em>test</em>${legacyOrgAdminKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">189</td><td style="text-align:left"><code>legacyOrgMemberApiKey = </code>cal<em>test</em>${legacyOrgMemberKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">195</td><td style="text-align:left"><code>pbacOrgUserWithRolePermissionApiKey = </code>cal<em>test</em>${pbacOrgUserWithRolePermissionKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">199</td><td style="text-align:left"><code>pbacOrgUserWithoutRolePermissionApiKey = </code>cal<em>test</em>${pbacOrgUserWithoutRolePermissionKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">205</td><td style="text-align:left"><code>nonOrgUserApiKey = </code>cal<em>test</em>${nonOrgUserKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/organizations-teams-roles.controller.e2e-spec.ts</code></td><td style="text-align:left">278</td><td style="text-align:left"><code>const noRoleApiKey = </code>cal<em>test</em>${noRoleKeyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/src/modules/organizations/teams/roles/permissions/organizations-teams-roles-permissions.controller.e2e-spec.ts</code></td><td style="text-align:left">98</td><td style="text-align:left"><code>pbacOrgUserWithRolePermissionApiKey = </code>cal<em>test</em>${keyString}<code>;</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/test/setEnvVars.ts</code></td><td style="text-align:left">11</td><td style="text-align:left"><code>NEXTAUTH_SECRET: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/test/setEnvVars.ts</code></td><td style="text-align:left">12</td><td style="text-align:left"><code>JWT_SECRET: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/test/setEnvVars.ts</code></td><td style="text-align:left">15</td><td style="text-align:left"><code>STRIPE<em>API</em>KEY: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/api/v2/test/setEnvVars.ts</code></td><td style="text-align:left">16</td><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET: "whsec_51J4",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/app/api/cron/credentials/route.ts</code></td><td style="text-align:left">80</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/modules/webhooks/components/WebhookForm.tsx</code></td><td style="text-align:left">576</td><td style="text-align:left"><code>value={changeSecret ? newSecret : "••••••••••••"}</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/playwright/booking-race-condition.e2e.ts</code></td><td style="text-align:left">142</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/impersonation.e2e.ts</code></td><td style="text-align:left">15</td><td style="text-align:left"><code>password: "ADMINadmin2022!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/playwright/payment-apps.e2e.ts</code></td><td style="text-align:left">60</td><td style="text-align:left"><code>webhook<em>endpoint</em>secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/playwright/payment-apps.e2e.ts</code></td><td style="text-align:left">106</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/playwright/payment-apps.e2e.ts</code></td><td style="text-align:left">303</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/playwright/payment-apps.e2e.ts</code></td><td style="text-align:left">350</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/signup.e2e.ts</code></td><td style="text-align:left">123</td><td style="text-align:left"><code>const originalPassword = "OriginalPass99!";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/signup.e2e.ts</code></td><td style="text-align:left">124</td><td style="text-align:left"><code>const attackerPassword = "AttackerPass99!";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/signup.e2e.ts</code></td><td style="text-align:left">203</td><td style="text-align:left"><code>password: "Password99!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/signup.e2e.ts</code></td><td style="text-align:left">317</td><td style="text-align:left"><code>password: "Password99!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/team/team-invitation.e2e.ts</code></td><td style="text-align:left">84</td><td style="text-align:left"><code>password: "P4ssw0rd!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/delegationCredential.ts</code></td><td style="text-align:left">93</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/_utils/oauth/getCurrentTokenObject.ts</code></td><td style="text-align:left">14</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/googlecalendar/lib/<strong>mocks</strong>/getGoogleAppKeys.ts</code></td><td style="text-align:left">6</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/googlecalendar/lib/<strong>mocks</strong>/googleapis.ts</code></td><td style="text-align:left">69</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/googlecalendar/lib/<strong>mocks</strong>/googleapis.ts</code></td><td style="text-align:left">77</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/googlecalendar/lib/<strong>tests</strong>/utils.ts</code></td><td style="text-align:left">28</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/app-store/tests/<strong>mocks</strong>/OAuthManager.ts</code></td><td style="text-align:left">36</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/auth/lib/ErrorCode.ts</code></td><td style="text-align:left">2</td><td style="text-align:left"><code>IncorrectEmailPassword = "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/auth/lib/ErrorCode.ts</code></td><td style="text-align:left">4</td><td style="text-align:left"><code>IncorrectPassword = "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/auth/lib/ErrorCode.ts</code></td><td style="text-align:left">5</td><td style="text-align:left"><code>UserMissingPassword = "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/auth/signup/handlers/<strong>tests</strong>/mocks/signup.factories.ts</code></td><td style="text-align:left">55</td><td style="text-align:left"><code>password: "ValidPassword123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calAIPhone/index.ts</code></td><td style="text-align:left">72</td><td style="text-align:left"><code>calApiKey: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calAIPhone/index.ts</code></td><td style="text-align:left">94</td><td style="text-align:left"><code>apiKey: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calAIPhone/providers/retellAI/index.ts</code></td><td style="text-align:left">108</td><td style="text-align:left"><code>calApiKey: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calAIPhone/providers/retellAI/index.ts</code></td><td style="text-align:left">153</td><td style="text-align:left"><code>const provider = factory.create({ apiKey: "[REDACTED]" });</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calAIPhone/providers/retellAI/index.ts</code></td><td style="text-align:left">156</td><td style="text-align:left"><code>calApiKey: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/calendar-subscription/lib/<strong>mocks</strong>/delegationCredential.ts</code></td><td style="text-align:left">5</td><td style="text-align:left"><code>key: { access_token: "test-token" },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/ee/billing/organizations/stub-organization-billing.ts</code></td><td style="text-align:left">28</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/ee/billing/service/dueInvoice/seed-proration-test.ts</code></td><td style="text-align:left">41</td><td style="text-align:left"><code>const TEST_PASSWORD = "password123";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/features/ee/billing/service/highWaterMark/seed-hwm-test.ts</code></td><td style="text-align:left">49</td><td style="text-align:left"><code>const TEST_PASSWORD = "password123";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/ee/billing/service/proration/<strong>tests</strong>/MonthlyProrationService.integration-test.ts</code></td><td style="text-align:left">54</td><td style="text-align:left"><code>createPaymentIntent: vi.fn().mockResolvedValue({ id: "pi<em>test</em>123", client<em>secret: "secret</em>123" }),</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/features/webhooks/lib/service/<strong>tests</strong>/fixtures.ts</code></td><td style="text-align:left">80</td><td style="text-align:left"><code>secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/platform/constants/api.ts</code></td><td style="text-align:left">20</td><td style="text-align:left"><code>export const INVALID<em>ACCESS</em>TOKEN = "Invalid Access Token.";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/platform/constants/api.ts</code></td><td style="text-align:left">29</td><td style="text-align:left"><code>export const INVALID<em>API</em>KEY = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1229</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1488</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1497</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1505</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1516</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1527</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1538</td><td style="text-align:left"><code>client_secret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1880</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1893</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1911</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">1940</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">2049</td><td style="text-align:left"><code>password: "MOCK_PASS",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/bookingScenario.ts</code></td><td style="text-align:left">2566</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>packages/testing/src/lib/bookingScenario/setupAndTeardown.ts</code></td><td style="text-align:left">11</td><td style="text-align:left"><code>process.env.STRIPE<em>WEBHOOK</em>SECRET = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-huge-event-types.ts</code></td><td style="text-align:left">45</td><td style="text-align:left"><code>password: </code>enterprise-member-${i + 1}<code>,</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-huge-event-types.ts</code></td><td style="text-align:left">84</td><td style="text-align:left"><code>password: "enterprise",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-pbac-organization.ts</code></td><td style="text-align:left">330</td><td style="text-align:left"><code>password: "pbac-owner-2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-pbac-organization.ts</code></td><td style="text-align:left">353</td><td style="text-align:left"><code>password: "events-2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-pbac-organization.ts</code></td><td style="text-align:left">376</td><td style="text-align:left"><code>password: "analytics-2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-pbac-organization.ts</code></td><td style="text-align:left">399</td><td style="text-align:left"><code>password: "coordinator-2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed-pbac-organization.ts</code></td><td style="text-align:left">422</td><td style="text-align:left"><code>password: "support-2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">803</td><td style="text-align:left"><code>password: "delete-me",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">812</td><td style="text-align:left"><code>password: "onboarding",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">822</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1127</td><td style="text-align:left"><code>password: "teamfree",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1146</td><td style="text-align:left"><code>password: "ADMINadmin2022!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1197</td><td style="text-align:left"><code>password: "PLATFORMadmin2024!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1207</td><td style="text-align:left"><code>password: "teampro2",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1216</td><td style="text-align:left"><code>password: "teampro3",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>scripts/seed.ts</code></td><td style="text-align:left">1225</td><td style="text-align:left"><code>password: "teampro4",</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~13 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 160 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="security-recommendations">Security Recommendations</h2>
+<ul>
+<li><strong>[WARNING]</strong> No .env.example file found. Create one to document required environment variables for new contributors.</li>
+</ul>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></td><td style="text-align:left">.env.development, .env.test</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></td><td style="text-align:left">.env.development, .env.test</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></td><td style="text-align:left">.env.development, .env.test</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>ACCESS</em>KEY_ID</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>SECRET</em>ACCESS_KEY</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>STORAGE</em>ACCESS_KEY</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>EMAIL</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>FIRST</em>NAME_KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>IMAGE</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>LAST</em>NAME_KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>LOCATION</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>NAME</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>NICKNAME</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>PHONE</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>UID</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MIGRATION<em>IGNORE</em>INVALID<em>OTP</em>SECRET</code></td><td style="text-align:left">db/post<em>migrate/20240307180905</em>migrate<em>devise</em>two<em>factor</em>secrets.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>CLIENT</em>SECRET</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>SEND</em>SCOPE<em>TO</em>TOKEN_ENDPOINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>TOKEN</em>ENDPOINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>PRIVATE</em>KEY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SECRET<em>KEY</em>BASE_DUMMY</code></td><td style="text-align:left">config/initializers/active<em>record</em>encryption.rb, db/post<em>migrate/20240307180905</em>migrate<em>devise</em>two<em>factor</em>secrets.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_PASSWORD</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT<em>TEMP</em>URL_KEY</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>REDIS_DRIVER</code></td><td style="text-align:left">lib/mastodon/redis_configuration.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS_NAMESPACE</code></td><td style="text-align:left">config/initializers/deprecations.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>AZURE<em>ALIAS</em>HOST</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>CALLBACK</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS_HOST</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>LOGIN</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>LOGOUT</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS_PORT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS_URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>VALIDATE</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CDN_HOST</code></td><td style="text-align:left">config/environments/development.rb, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>DOMAIN</em>LISTS<em>APPLY</em>AFTER_CONFIRMATION</code></td><td style="text-align:left">app/models/user.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOCAL_DOMAIN</code></td><td style="text-align:left">.env.test, app/helpers/self<em>destruct</em>helper.rb, db/seeds/04_admin.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>MASTODON<em>PROMETHEUS</em>EXPORTER_ENABLED</code></td><td style="text-align:left">config/puma.rb, config/initializers/prometheus_exporter.rb, config/initializers/sidekiq.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MASTODON<em>PROMETHEUS</em>EXPORTER_LOCAL</code></td><td style="text-align:left">config/puma.rb, config/initializers/prometheus_exporter.rb, config/initializers/sidekiq.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MASTODON<em>PROMETHEUS</em>EXPORTER<em>SIDEKIQ</em>DETAILED_METRICS</code></td><td style="text-align:left">config/initializers/sidekiq.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MASTODON<em>PROMETHEUS</em>EXPORTER<em>WEB</em>DETAILED_METRICS</code></td><td style="text-align:left">config/initializers/prometheus_exporter.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>AUTH</em>ENDPOINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>END</em>SESSION_ENDPOINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_HOST</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_PORT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>USER</em>INFO_ENDPOINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PORT</code></td><td style="text-align:left">streaming/index.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REPLICA<em>DB</em>HOST</code></td><td style="text-align:left">app/helpers/database_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>ALIAS</em>HOST</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>CLOUDFRONT</em>HOST</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3_ENDPOINT</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ACS</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>IDP</em>SSO<em>TARGET</em>URL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STREAMING<em>API</em>BASE_URL</code></td><td style="text-align:left">spec/rails_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT<em>AUTH</em>URL</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT<em>OBJECT</em>URL</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ALLOW<em>ACCESS</em>TO<em>HIDDEN</em>SERVICE</code></td><td style="text-align:left">config/initializers/http<em>client</em>proxy.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOW<em>UNSAFE</em>AUTH<em>PROVIDER</em>REATTACH</code></td><td style="text-align:left">app/models/concerns/user/omniauthable.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOWED<em>PRIVATE</em>ADDRESSES</code></td><td style="text-align:left">config/initializers/allowed<em>private</em>addresses.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ANALYZE<em>BUNDLE</em>SIZE</code></td><td style="text-align:left">vite.config.mts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>CONTAINER</em>NAME</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE_ENABLED</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>STORAGE</em>ACCOUNT</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BACKTRACE</code></td><td style="text-align:left">config/initializers/backtrace<em>silencers.rb, lib/mastodon/sidekiq</em>middleware.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BIND</code></td><td style="text-align:left">streaming/index.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUNDLE_GEMFILE</code></td><td style="text-align:left">config/boot.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>CA</em>PATH</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>DISABLE</em>SSL_VERIFICATION</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS_SSL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CAS<em>UID</em>FIELD</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CI</code></td><td style="text-align:left">vite.config.mts, config/environments/test.rb, spec/rails_helper.rb, spec/support/capybara.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEBUG<em>STREAMING</em>SERVER</code></td><td style="text-align:left">spec/support/streaming<em>server</em>manager.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEFAULT_LOCALE</code></td><td style="text-align:left">config/initializers/i18n.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEV</code></td><td style="text-align:left">app/javascript/mastodon/utils/environment.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE<em>AUTOMATIC</em>SWITCHING<em>TO</em>APPROVED_REGISTRATIONS</code></td><td style="text-align:left">app/workers/scheduler/auto<em>close</em>registrations_scheduler.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE<em>FOLLOWERS</em>SYNCHRONIZATION</code></td><td style="text-align:left">app/controllers/activitypub/inboxes<em>controller.rb, app/workers/activitypub/delivery</em>worker.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE<em>FORGERY</em>REQUEST_PROTECTION</code></td><td style="text-align:left">config/environments/development.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISALLOW<em>UNAUTHENTICATED</em>API_ACCESS</code></td><td style="text-align:left">app/controllers/api/base<em>controller.rb, app/serializers/webfinger</em>serializer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>SIDEKIQ</em>UNIQUE<em>JOBS</em>UI</code></td><td style="text-align:left">config/routes.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ES_ENABLED</code></td><td style="text-align:left">config/initializers/chewy.rb, config/initializers/deprecations.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ES_PREFIX</code></td><td style="text-align:left">config/initializers/deprecations.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ES_PRESET</code></td><td style="text-align:left">config/initializers/chewy.rb, lib/chewy/index_extensions.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FORCE<em>DEFAULT</em>LOCALE</code></td><td style="text-align:left">app/controllers/concerns/localized.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GITHUB_ACTIONS</code></td><td style="text-align:left">spec/spec_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GITHUB_RSPEC</code></td><td style="text-align:left">spec/spec_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HEROKU</code></td><td style="text-align:left">config/environments/development.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LDAP_ENABLED</code></td><td style="text-align:left">config/initializers/devise.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LDAP<em>TLS</em>NO_VERIFY</code></td><td style="text-align:left">config/initializers/devise.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LDAP<em>UID</em>CONVERSION_ENABLED</code></td><td style="text-align:left">config/initializers/devise.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOCAL_HTTPS</code></td><td style="text-align:left">.env.test, config/initializers/1_hosts.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>MAX<em>SESSION</em>ACTIVATIONS</code></td><td style="text-align:left">config/initializers/session_activations.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MAX_THREADS</code></td><td style="text-align:left">app/lib/redis<em>connection.rb, lib/mastodon/redis</em>configuration.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NODE_ENV</code></td><td style="text-align:left">.env.test, app/javascript/mastodon/utils/environment.ts, streaming/index.js</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>CLIENT</em>AUTH_METHOD</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>CLIENT</em>ID</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_DISCOVERY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_DISPLAY</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>HTTP</em>SCHEME</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>IDP</em>LOGOUT<em>REDIRECT</em>URI</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_ISSUER</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>JWKS</em>URI</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_PROMPT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>REDIRECT</em>URI</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>RESPONSE</em>MODE</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>RESPONSE</em>TYPE</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_SCOPE</code></td><td style="text-align:left">config/initializers/3<em>omniauth.rb, spec/requests/omniauth</em>callbacks_spec.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>SEND</em>NONCE</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>UID</em>FIELD</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>USE</em>PKCE</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OMNIAUTH_ONLY</code></td><td style="text-align:left">app/controllers/application<em>controller.rb, app/controllers/concerns/web</em>app<em>controller</em>concern.rb, app/helpers/application<em>helper.rb, app/helpers/registration</em>helper.rb, app/lib/content<em>security</em>policy.rb, app/serializers/initial<em>state</em>serializer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ONE<em>CLICK</em>SSO_LOGIN</code></td><td style="text-align:left">app/controllers/concerns/web<em>app</em>controller<em>concern.rb, app/lib/content</em>security<em>policy.rb, app/serializers/initial</em>state_serializer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PAM_ENABLED</code></td><td style="text-align:left">app/models/concerns/user/pam<em>authenticable.rb, config/application.rb, config/environments/test.rb, config/initializers/devise.rb, spec/controllers/auth/sessions</em>controller_spec.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PROD</code></td><td style="text-align:left">app/javascript/mastodon/utils/environment.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PROXY<em>PROTO</em>V1</code></td><td style="text-align:left">config/puma.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS_ENV</code></td><td style="text-align:left">spec/rails_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>SERVE</em>STATIC_FILES</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REMOTE_DEV</code></td><td style="text-align:left">config/environments/development.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REPLICA<em>DB</em>NAME</code></td><td style="text-align:left">app/helpers/database_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3_BUCKET</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>ENABLE</em>CHECKSUM_MODE</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3_ENABLED</code></td><td style="text-align:left">config/initializers/1_hosts.rb, config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>FORCE</em>SINGLE_REQUEST</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>OVERRIDE</em>PATH_STYLE</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3_PERMISSION</code></td><td style="text-align:left">app/models/backup.rb, app/services/update<em>media</em>attachments<em>permissions</em>service.rb, config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>STORAGE</em>CLASS</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ALLOWED</em>CLOCK_DRIFT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS_EMAIL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>FIRST</em>NAME</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>FULL</em>NAME</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>LAST</em>NAME</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS_UID</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS_VERIFIED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>VERIFIED</em>EMAIL</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML_CERT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>IDP</em>CERT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>IDP</em>CERT_FINGERPRINT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>IDP</em>CERT<em>FINGERPRINT</em>VALIDATOR</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>IDP</em>SSO<em>TARGET</em>PARAMS</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML_ISSUER</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>NAME</em>IDENTIFIER_FORMAT</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>SECURITY</em>WANT<em>ASSERTION</em>ENCRYPTED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>SECURITY</em>WANT<em>ASSERTION</em>SIGNED</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>UID</em>ATTRIBUTE</code></td><td style="text-align:left">config/initializers/3_omniauth.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENDFILE_HEADER</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SINGLE<em>USER</em>MODE</code></td><td style="text-align:left">config/initializers/single<em>user</em>mode.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SKIP<em>POST</em>DEPLOYMENT_MIGRATIONS</code></td><td style="text-align:left">lib/mastodon/database.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>FROM</em>ADDRESS</code></td><td style="text-align:left">config/initializers/devise.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SOCKET</code></td><td style="text-align:left">config/puma.rb, streaming/index.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_CONTAINER</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_ENABLED</code></td><td style="text-align:left">config/initializers/1<em>hosts.rb, config/initializers/fog</em>connection_cache.rb, config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT<em>PROJECT</em>ID</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_REGION</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_TENANT</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SWIFT_USERNAME</code></td><td style="text-align:left">config/initializers/paperclip.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRUSTED<em>PROXY</em>IP</code></td><td style="text-align:left">config/environments/production.rb, streaming/index.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>USER</code></td><td style="text-align:left">lib/mastodon/migration_helpers.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VAGRANT</code></td><td style="text-align:left">config/environments/development.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VIPS<em>BLOCK</em>UNTRUSTED</code></td><td style="text-align:left">config/initializers/vips.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></li>
+<li><code>ALLOW<em>ACCESS</em>TO<em>HIDDEN</em>SERVICE</code></li>
+<li><code>ALLOW<em>UNSAFE</em>AUTH<em>PROVIDER</em>REATTACH</code></li>
+<li><code>ALLOWED<em>PRIVATE</em>ADDRESSES</code></li>
+<li><code>ANALYZE<em>BUNDLE</em>SIZE</code></li>
+<li><code>AWS<em>ACCESS</em>KEY_ID</code></li>
+<li><code>AWS<em>SECRET</em>ACCESS_KEY</code></li>
+<li><code>AZURE<em>ALIAS</em>HOST</code></li>
+<li><code>AZURE<em>CONTAINER</em>NAME</code></li>
+<li><code>AZURE_ENABLED</code></li>
+<li><code>AZURE<em>STORAGE</em>ACCESS_KEY</code></li>
+<li><code>AZURE<em>STORAGE</em>ACCOUNT</code></li>
+<li><code>BACKTRACE</code></li>
+<li><code>BIND</code></li>
+<li><code>BUNDLE_GEMFILE</code></li>
+<li><code>CAS<em>CA</em>PATH</code></li>
+<li><code>CAS<em>CALLBACK</em>URL</code></li>
+<li><code>CAS<em>DISABLE</em>SSL_VERIFICATION</code></li>
+<li><code>CAS<em>EMAIL</em>KEY</code></li>
+<li><code>CAS<em>FIRST</em>NAME_KEY</code></li>
+<li><code>CAS_HOST</code></li>
+<li><code>CAS<em>IMAGE</em>KEY</code></li>
+<li><code>CAS<em>LAST</em>NAME_KEY</code></li>
+<li><code>CAS<em>LOCATION</em>KEY</code></li>
+<li><code>CAS<em>LOGIN</em>URL</code></li>
+<li><code>CAS<em>LOGOUT</em>URL</code></li>
+<li><code>CAS<em>NAME</em>KEY</code></li>
+<li><code>CAS<em>NICKNAME</em>KEY</code></li>
+<li><code>CAS<em>PHONE</em>KEY</code></li>
+<li><code>CAS_PORT</code></li>
+<li><code>CAS<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></li>
+<li><code>CAS_SSL</code></li>
+<li><code>CAS<em>UID</em>FIELD</code></li>
+<li><code>CAS<em>UID</em>KEY</code></li>
+<li><code>CAS_URL</code></li>
+<li><code>CAS<em>VALIDATE</em>URL</code></li>
+<li><code>CDN_HOST</code></li>
+<li><code>CI</code></li>
+<li><code>DEBUG<em>STREAMING</em>SERVER</code></li>
+<li><code>DEFAULT_LOCALE</code></li>
+<li><code>DEV</code></li>
+<li><code>DISABLE<em>AUTOMATIC</em>SWITCHING<em>TO</em>APPROVED_REGISTRATIONS</code></li>
+<li><code>DISABLE<em>FOLLOWERS</em>SYNCHRONIZATION</code></li>
+<li><code>DISABLE<em>FORGERY</em>REQUEST_PROTECTION</code></li>
+<li><code>DISALLOW<em>UNAUTHENTICATED</em>API_ACCESS</code></li>
+<li><code>EMAIL<em>DOMAIN</em>LISTS<em>APPLY</em>AFTER_CONFIRMATION</code></li>
+<li><code>ENABLE<em>SIDEKIQ</em>UNIQUE<em>JOBS</em>UI</code></li>
+<li><code>ES_ENABLED</code></li>
+<li><code>ES_PREFIX</code></li>
+<li><code>ES_PRESET</code></li>
+<li><code>FORCE<em>DEFAULT</em>LOCALE</code></li>
+<li><code>GITHUB_ACTIONS</code></li>
+<li><code>GITHUB_RSPEC</code></li>
+<li><code>HEROKU</code></li>
+<li><code>LDAP_ENABLED</code></li>
+<li><code>LDAP<em>TLS</em>NO_VERIFY</code></li>
+<li><code>LDAP<em>UID</em>CONVERSION_ENABLED</code></li>
+<li><code>LOCAL_DOMAIN</code></li>
+<li><code>LOCAL_HTTPS</code></li>
+<li><code>MASTODON<em>PROMETHEUS</em>EXPORTER_ENABLED</code></li>
+<li><code>MASTODON<em>PROMETHEUS</em>EXPORTER_LOCAL</code></li>
+<li><code>MASTODON<em>PROMETHEUS</em>EXPORTER<em>SIDEKIQ</em>DETAILED_METRICS</code></li>
+<li><code>MASTODON<em>PROMETHEUS</em>EXPORTER<em>WEB</em>DETAILED_METRICS</code></li>
+<li><code>MAX<em>SESSION</em>ACTIVATIONS</code></li>
+<li><code>MAX_THREADS</code></li>
+<li><code>MIGRATION<em>IGNORE</em>INVALID<em>OTP</em>SECRET</code></li>
+<li><code>NODE_ENV</code></li>
+<li><code>OIDC<em>AUTH</em>ENDPOINT</code></li>
+<li><code>OIDC<em>CLIENT</em>AUTH_METHOD</code></li>
+<li><code>OIDC<em>CLIENT</em>ID</code></li>
+<li><code>OIDC<em>CLIENT</em>SECRET</code></li>
+<li><code>OIDC_DISCOVERY</code></li>
+<li><code>OIDC_DISPLAY</code></li>
+<li><code>OIDC<em>END</em>SESSION_ENDPOINT</code></li>
+<li><code>OIDC_HOST</code></li>
+<li><code>OIDC<em>HTTP</em>SCHEME</code></li>
+<li><code>OIDC<em>IDP</em>LOGOUT<em>REDIRECT</em>URI</code></li>
+<li><code>OIDC_ISSUER</code></li>
+<li><code>OIDC<em>JWKS</em>URI</code></li>
+<li><code>OIDC_PORT</code></li>
+<li><code>OIDC_PROMPT</code></li>
+<li><code>OIDC<em>REDIRECT</em>URI</code></li>
+<li><code>OIDC<em>RESPONSE</em>MODE</code></li>
+<li><code>OIDC<em>RESPONSE</em>TYPE</code></li>
+<li><code>OIDC_SCOPE</code></li>
+<li><code>OIDC<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></li>
+<li><code>OIDC<em>SEND</em>NONCE</code></li>
+<li><code>OIDC<em>SEND</em>SCOPE<em>TO</em>TOKEN_ENDPOINT</code></li>
+<li><code>OIDC<em>TOKEN</em>ENDPOINT</code></li>
+<li><code>OIDC<em>UID</em>FIELD</code></li>
+<li><code>OIDC<em>USE</em>PKCE</code></li>
+<li><code>OIDC<em>USER</em>INFO_ENDPOINT</code></li>
+<li><code>OMNIAUTH_ONLY</code></li>
+<li><code>ONE<em>CLICK</em>SSO_LOGIN</code></li>
+<li><code>PAM_ENABLED</code></li>
+<li><code>PORT</code></li>
+<li><code>PROD</code></li>
+<li><code>PROXY<em>PROTO</em>V1</code></li>
+<li><code>RAILS_ENV</code></li>
+<li><code>RAILS<em>SERVE</em>STATIC_FILES</code></li>
+<li><code>REDIS_DRIVER</code></li>
+<li><code>REDIS_NAMESPACE</code></li>
+<li><code>REMOTE_DEV</code></li>
+<li><code>REPLICA<em>DB</em>HOST</code></li>
+<li><code>REPLICA<em>DB</em>NAME</code></li>
+<li><code>S3<em>ALIAS</em>HOST</code></li>
+<li><code>S3_BUCKET</code></li>
+<li><code>S3<em>CLOUDFRONT</em>HOST</code></li>
+<li><code>S3<em>ENABLE</em>CHECKSUM_MODE</code></li>
+<li><code>S3_ENABLED</code></li>
+<li><code>S3_ENDPOINT</code></li>
+<li><code>S3<em>FORCE</em>SINGLE_REQUEST</code></li>
+<li><code>S3<em>OVERRIDE</em>PATH_STYLE</code></li>
+<li><code>S3_PERMISSION</code></li>
+<li><code>S3<em>STORAGE</em>CLASS</code></li>
+<li><code>SAML<em>ACS</em>URL</code></li>
+<li><code>SAML<em>ALLOWED</em>CLOCK_DRIFT</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS_EMAIL</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>FIRST</em>NAME</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>FULL</em>NAME</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>LAST</em>NAME</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS_UID</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS_VERIFIED</code></li>
+<li><code>SAML<em>ATTRIBUTES</em>STATEMENTS<em>VERIFIED</em>EMAIL</code></li>
+<li><code>SAML_CERT</code></li>
+<li><code>SAML<em>IDP</em>CERT</code></li>
+<li><code>SAML<em>IDP</em>CERT_FINGERPRINT</code></li>
+<li><code>SAML<em>IDP</em>CERT<em>FINGERPRINT</em>VALIDATOR</code></li>
+<li><code>SAML<em>IDP</em>SSO<em>TARGET</em>PARAMS</code></li>
+<li><code>SAML<em>IDP</em>SSO<em>TARGET</em>URL</code></li>
+<li><code>SAML_ISSUER</code></li>
+<li><code>SAML<em>NAME</em>IDENTIFIER_FORMAT</code></li>
+<li><code>SAML<em>PRIVATE</em>KEY</code></li>
+<li><code>SAML<em>SECURITY</em>ASSUME<em>EMAIL</em>IS_VERIFIED</code></li>
+<li><code>SAML<em>SECURITY</em>WANT<em>ASSERTION</em>ENCRYPTED</code></li>
+<li><code>SAML<em>SECURITY</em>WANT<em>ASSERTION</em>SIGNED</code></li>
+<li><code>SAML<em>UID</em>ATTRIBUTE</code></li>
+<li><code>SECRET<em>KEY</em>BASE_DUMMY</code></li>
+<li><code>SENDFILE_HEADER</code></li>
+<li><code>SINGLE<em>USER</em>MODE</code></li>
+<li><code>SKIP<em>POST</em>DEPLOYMENT_MIGRATIONS</code></li>
+<li><code>SMTP<em>FROM</em>ADDRESS</code></li>
+<li><code>SOCKET</code></li>
+<li><code>STREAMING<em>API</em>BASE_URL</code></li>
+<li><code>SWIFT<em>AUTH</em>URL</code></li>
+<li><code>SWIFT_CONTAINER</code></li>
+<li><code>SWIFT_ENABLED</code></li>
+<li><code>SWIFT<em>OBJECT</em>URL</code></li>
+<li><code>SWIFT_PASSWORD</code></li>
+<li><code>SWIFT<em>PROJECT</em>ID</code></li>
+<li><code>SWIFT_REGION</code></li>
+<li><code>SWIFT<em>TEMP</em>URL_KEY</code></li>
+<li><code>SWIFT_TENANT</code></li>
+<li><code>SWIFT_USERNAME</code></li>
+<li><code>TRUSTED<em>PROXY</em>IP</code></li>
+<li><code>USER</code></li>
+<li><code>VAGRANT</code></li>
+<li><code>VIPS<em>BLOCK</em>UNTRUSTED</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>34 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 34 hardcoded secret(s) detected in source code: Hardcoded Password, Private Key (PEM), Hardcoded Secret. Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>app/models/login_activity.rb</code></td><td style="text-align:left">21</td><td style="text-align:left"><code>enum :authentication<em>method, { password: 'password', otp: 'otp', webauthn: 'webauthn', sign</em>in_token: "[REDACTED]", o...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>db/seeds/04_admin.rb</code></td><td style="text-align:left">12</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">90</td><td style="text-align:left"><code>current_password: 'something',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">101</td><td style="text-align:left"><code>password: 'new password',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">114</td><td style="text-align:left"><code>password: 'new password',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">127</td><td style="text-align:left"><code>password: 'new password',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">129</td><td style="text-align:left"><code>current_password: 'something',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">181</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">199</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">212</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">234</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">259</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">282</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">306</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/registrations<em>controller</em>spec.rb</code></td><td style="text-align:left">326</td><td style="text-align:left"><code>post :create, params: { user: { account_attributes: { username: 'test' }, email: 'test@example.com', password: '12345678...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/sessions<em>controller</em>spec.rb</code></td><td style="text-align:left">100</td><td style="text-align:left"><code>let(:user) { Fabricate(:user, email: 'foo@bar.com', password: 'abcdefgh') }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/sessions<em>controller</em>spec.rb</code></td><td style="text-align:left">214</td><td style="text-align:left"><code>Fabricate(:user, email: 'x@y.com', password: 'abcdefgh', otp<em>required</em>for<em>login: true, otp</em>secret: User.generate<em>otp</em>sec...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/sessions<em>controller</em>spec.rb</code></td><td style="text-align:left">236</td><td style="text-align:left"><code>Fabricate(:user, email: 'z@y.com', password: 'abcdefgh', otp<em>required</em>for<em>login: true, otp</em>secret: User.generate<em>otp</em>sec...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/auth/sessions<em>controller</em>spec.rb</code></td><td style="text-align:left">354</td><td style="text-align:left"><code>Fabricate(:user, email: 'x@y.com', password: 'abcdefgh', otp<em>required</em>for<em>login: true, otp</em>secret: User.generate<em>otp</em>sec...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/concerns/challengable<em>concern</em>spec.rb</code></td><td style="text-align:left">113</td><td style="text-align:left"><code>post :bar, params: { form<em>challenge: { current</em>password: "[REDACTED]" } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Private Key (PEM)</td><td style="text-align:left"><code>spec/fabricators/fasp/provider_fabricator.rb</code></td><td style="text-align:left">9</td><td style="text-align:left"><code>server<em>private</em>key_pem  "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEICDjlajhVb8XfzyTchQWKraMKwtQW+r4opoAg7V3kw1Q\n...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/lib/mastodon/email<em>configuration</em>helper_spec.rb</code></td><td style="text-align:left">15</td><td style="text-align:left"><code>password: 'mastodon',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/lib/mastodon/redis<em>configuration</em>spec.rb</code></td><td style="text-align:left">178</td><td style="text-align:left"><code>ClimateControl.modify REDIS<em>PASSWORD: 'testpass', REDIS</em>HOST: "[REDACTED]", REDIS<em>PORT: '3333', REDIS</em>DB: '3' do</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/models/user_spec.rb</code></td><td style="text-align:left">18</td><td style="text-align:left"><code>user = Fabricate(:user, otp_secret: '123123123')</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/models/user_spec.rb</code></td><td style="text-align:left">259</td><td style="text-align:left"><code>user = Fabricate.build(:user, otp_secret: 'oldotpcode')</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Private Key (PEM)</td><td style="text-align:left"><code>spec/requests/signature<em>verification</em>spec.rb</code></td><td style="text-align:left">18</td><td style="text-align:left"><code>-----BEGIN RSA PRIVATE KEY-----</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/accounts_spec.rb</code></td><td style="text-align:left">74</td><td style="text-align:left"><code>post "[REDACTED]", headers: headers, params: { username: 'test', password: '12345678', email: 'hello@world.tld', a...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/accounts_spec.rb</code></td><td style="text-align:left">101</td><td style="text-align:left"><code>post "[REDACTED]", headers: headers, params: { password: '12345678', email: 'hello@world.tld', agreement: 'true' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/requests/api/v1/streaming_spec.rb</code></td><td style="text-align:left">33</td><td style="text-align:left"><code>get "[REDACTED]", headers: headers, params: { access_token: 'deadbeef', stream: 'public' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/auth/challenges_spec.rb</code></td><td style="text-align:left">27</td><td style="text-align:left"><code>post "[REDACTED]", params: { form<em>challenge: { return</em>to: return<em>to, current</em>password: 'hhfggjjd562' } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/auth/sessions/security<em>key</em>options_spec.rb</code></td><td style="text-align:left">9</td><td style="text-align:left"><code>Fabricate(:user, email: 'x@y.com', password: 'abcdefgh', otp<em>required</em>for<em>login: true, otp</em>secret: User.generate<em>otp</em>sec...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/services/app<em>sign</em>up<em>service</em>spec.rb</code></td><td style="text-align:left">9</td><td style="text-align:left"><code>let(:good_params) { { username: 'alice', password: '12345678', email: 'good@email.com', agreement: true } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/system/settings/migration/redirects_spec.rb</code></td><td style="text-align:left">6</td><td style="text-align:left"><code>let!(:user) { Fabricate(:user, password: 'testtest') }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/workers/web/push<em>notification</em>worker_spec.rb</code></td><td style="text-align:left">25</td><td style="text-align:left"><code>shared_secret: "\t\xA7&\x85\t\xC5m\b\xA8\xA7\xF8B{1\xADk\xE1y'm\xEDE\xEC\xDD\xEDj\xB3$s\xA9\xDA\xF0",</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

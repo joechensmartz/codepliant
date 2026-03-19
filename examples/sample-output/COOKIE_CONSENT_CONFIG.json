@@ -1,0 +1,119 @@
+<h1>Cookie Consent Configuration</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<p>{</p>
+<p>"version": "1.0.0",</p>
+<p>"generated_at": "2026-03-18T17:08:50.873Z",</p>
+<p>"project": "nextjs-saas-example",</p>
+<p>"company": "Acme Inc",</p>
+<p>"consent_settings": {</p>
+<p>"require<em>explicit</em>consent": true,</p>
+<p>"show<em>on</em>first_visit": true,</p>
+<p>"respect_dnt": true,</p>
+<p>"cookie<em>name": "cookie</em>consent",</p>
+<p>"cookie<em>duration</em>days": 365,</p>
+<p>"position": "bottom"</p>
+<p>},</p>
+<p>"categories": [</p>
+<p>{</p>
+<p>"id": "strictly_necessary",</p>
+<p>"name": "Strictly Necessary",</p>
+<p>"description": "Essential cookies required for the website to function. These cannot be disabled.",</p>
+<p>"required": true,</p>
+<p>"default_state": "enabled"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "functional",</p>
+<p>"name": "Functional",</p>
+<p>"description": "Cookies that enable enhanced functionality like live chat, error tracking, and personalization.",</p>
+<p>"required": false,</p>
+<p>"default_state": "disabled"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "analytics",</p>
+<p>"name": "Analytics",</p>
+<p>"description": "Cookies that help us understand how visitors interact with our website by collecting anonymous usage data.",</p>
+<p>"required": false,</p>
+<p>"default_state": "disabled"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "advertising",</p>
+<p>"name": "Advertising",</p>
+<p>"description": "Cookies used to deliver relevant advertisements and track ad campaign performance.",</p>
+<p>"required": false,</p>
+<p>"default_state": "disabled"</p>
+<p>}</p>
+<p>],</p>
+<p>"providers": [</p>
+<p>{</p>
+<p>"name": "@sentry/node",</p>
+<p>"category_id": "functional",</p>
+<p>"provider": "Sentry (Functional Software Inc)",</p>
+<p>"purpose": "Server-side error tracking",</p>
+<p>"cookies": [],</p>
+<p>"duration": "N/A",</p>
+<p>"privacy<em>policy</em>url": "https://sentry.io/privacy/"</p>
+<p>},</p>
+<p>{</p>
+<p>"name": "posthog",</p>
+<p>"category_id": "analytics",</p>
+<p>"provider": "PostHog Inc",</p>
+<p>"purpose": "Product analytics, session recording, and feature flags",</p>
+<p>"cookies": [</p>
+<p>"ph_*",</p>
+<p>"distinct_id"</p>
+<p>],</p>
+<p>"duration": "Up to 1 year",</p>
+<p>"privacy<em>policy</em>url": "https://posthog.com/privacy"</p>
+<p>},</p>
+<p>{</p>
+<p>"name": "stripe",</p>
+<p>"category<em>id": "strictly</em>necessary",</p>
+<p>"provider": "Stripe Inc",</p>
+<p>"purpose": "Payment processing (required for transactions)",</p>
+<p>"cookies": [</p>
+<p>"<em>_stripe</em>mid",</p>
+<p>"<em>_stripe</em>sid"</p>
+<p>],</p>
+<p>"duration": "Up to 1 year",</p>
+<p>"privacy<em>policy</em>url": "https://stripe.com/privacy"</p>
+<p>},</p>
+<p>{</p>
+<p>"name": "@supabase/supabase-js",</p>
+<p>"category<em>id": "strictly</em>necessary",</p>
+<p>"provider": "@supabase/supabase-js",</p>
+<p>"purpose": "Authentication and session management",</p>
+<p>"cookies": [</p>
+<p>"<em>supabase</em>supabase<em>js</em>session"</p>
+<p>],</p>
+<p>"duration": "Session",</p>
+<p>"privacy<em>policy</em>url": ""</p>
+<p>}</p>
+<p>],</p>
+<p>"cmp_integration": {</p>
+<p>"onetrust": {</p>
+<p>"category_mapping": {</p>
+<p>"strictly_necessary": "C0001",</p>
+<p>"functional": "C0003",</p>
+<p>"analytics": "C0002",</p>
+<p>"advertising": "C0004"</p>
+<p>}</p>
+<p>},</p>
+<p>"cookieyes": {</p>
+<p>"category_mapping": {</p>
+<p>"strictly_necessary": "necessary",</p>
+<p>"functional": "functional",</p>
+<p>"analytics": "analytics",</p>
+<p>"advertising": "advertisement"</p>
+<p>}</p>
+<p>},</p>
+<p>"cookiebot": {</p>
+<p>"category_mapping": {</p>
+<p>"strictly_necessary": "necessary",</p>
+<p>"functional": "preferences",</p>
+<p>"analytics": "statistics",</p>
+<p>"advertising": "marketing"</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>

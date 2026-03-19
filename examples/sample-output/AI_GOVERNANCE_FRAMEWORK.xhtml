@@ -1,0 +1,343 @@
+<h1>AI Governance Framework</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>AI Governance Framework</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>AI Risk Classification:</strong> Limited Risk</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>AI Disclosure (<code>AI_DISCLOSURE.md</code>)</p></li>
+<li><p>AI Model Card (<code>AI<em>MODEL</em>CARD.md</code>)</p></li>
+<li><p>Acceptable AI Use Policy (<code>ACCEPTABLE<em>AI</em>USE_POLICY.md</code>)</p></li>
+<li><p>Risk Register (<code>RISK_REGISTER.md</code>)</p></li>
+</ul>
+<hr />
+<p>This AI Governance Framework establishes the policies, roles, and controls for the responsible development, deployment, and operation of AI systems within <strong>Acme Inc</strong>. It is aligned with the <strong>EU AI Act</strong> (Regulation (EU) 2024/1689) and the <strong>NIST AI Risk Management Framework</strong> (AI RMF 1.0).</p>
+<h2>1. Scope and Applicability</h2>
+<p>This framework applies to all AI systems developed, deployed, or procured by the organization, including:</p>
+<ul>
+<li><p><strong>openai</strong> — user prompts, conversation history, generated content</p></li>
+</ul>
+<p>This includes both internally developed AI models and third-party AI services accessed via APIs.</p>
+<h2>2. Regulatory Alignment</h2>
+<h3>2.1 EU AI Act</h3>
+<p>The EU AI Act establishes a risk-based regulatory framework for AI systems. This project is classified as follows:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Aspect</p></th><th><p>Classification</p></th></tr>
+<tr><td><p>Risk Level</p></td><td><p>Limited</p></td></tr>
+<tr><td><p>Transparency Obligations</p></td><td><p>Full transparency required</p></td></tr>
+<tr><td><p>Conformity Assessment</p></td><td><p>Self-assessment</p></td></tr>
+<tr><td><p>Registration</p></td><td><p>Not required</p></td></tr>
+<tr><td><p>Human Oversight</p></td><td><p>Recommended</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>2.2 NIST AI RMF</h3>
+<p>The NIST AI Risk Management Framework organizes AI risk management into four functions:</p>
+<ol>
+<li><p><strong>GOVERN</strong> — Establish and maintain AI risk management policies and processes</p></li>
+<li><p><strong>MAP</strong> — Identify and contextualize AI risks in the application domain</p></li>
+<li><p><strong>MEASURE</strong> — Analyze, assess, and track AI risks using quantitative and qualitative methods</p></li>
+<li><p><strong>MANAGE</strong> — Prioritize and act on AI risks to maximize benefits and minimize harms</p></li>
+</ol>
+<h2>3. Roles and Responsibilities</h2>
+<h3>3.1 AI Governance Officer</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Responsibility</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Policy ownership</p></td><td><p>Owns and maintains this AI Governance Framework</p></td></tr>
+<tr><td><p>Risk oversight</p></td><td><p>Reviews and approves AI risk assessments before deployment</p></td></tr>
+<tr><td><p>Regulatory compliance</p></td><td><p>Ensures compliance with EU AI Act and applicable regulations</p></td></tr>
+<tr><td><p>Incident escalation</p></td><td><p>Primary escalation point for AI-related incidents</p></td></tr>
+<tr><td><p>Vendor assessment</p></td><td><p>Evaluates AI service providers for compliance and risk</p></td></tr>
+<tr><td><p>Reporting</p></td><td><p>Provides quarterly AI governance reports to leadership</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.2 Development Team</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Responsibility</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Implementation</p></td><td><p>Implements AI features following this framework's controls</p></td></tr>
+<tr><td><p>Testing</p></td><td><p>Conducts bias testing, accuracy evaluation, and safety checks</p></td></tr>
+<tr><td><p>Documentation</p></td><td><p>Maintains technical documentation for AI components</p></td></tr>
+<tr><td><p>Monitoring</p></td><td><p>Implements monitoring for model drift, errors, and anomalies</p></td></tr>
+<tr><td><p>Data quality</p></td><td><p>Ensures training and input data meets quality standards</p></td></tr>
+<tr><td><p>Security</p></td><td><p>Implements prompt injection defenses and output filtering</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.3 Compliance Team</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Responsibility</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Data protection</p></td><td><p>Coordinates with DPO (Jane Mueller, dpo@acme-saas.com) on AI data processing</p></td></tr>
+<tr><td><p>Impact assessment</p></td><td><p>Conducts AI Impact Assessments (AIIA) and DPIAs for AI systems</p></td></tr>
+<tr><td><p>Audit support</p></td><td><p>Supports internal and external audits of AI systems</p></td></tr>
+<tr><td><p>Record keeping</p></td><td><p>Maintains records required by EU AI Act Article 12</p></td></tr>
+<tr><td><p>User rights</p></td><td><p>Handles data subject requests related to AI processing</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.4 Executive Leadership</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Responsibility</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Strategic direction</p></td><td><p>Sets organizational AI strategy and risk appetite</p></td></tr>
+<tr><td><p>Resource allocation</p></td><td><p>Provides resources for AI governance and compliance</p></td></tr>
+<tr><td><p>Accountability</p></td><td><p>Bears ultimate accountability for AI system outcomes</p></td></tr>
+<tr><td><p>Culture</p></td><td><p>Promotes a culture of responsible AI development</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. AI Development Lifecycle Controls</h2>
+<h3>4.1 Planning & Design</h3>
+<ul>
+<li><p>[ ] Define the intended purpose and scope of the AI system</p></li>
+<li><p>[ ] Conduct an initial risk classification (minimal / limited / high / unacceptable)</p></li>
+<li><p>[ ] Identify affected stakeholders and potential impacts</p></li>
+<li><p>[ ] Complete an AI Impact Assessment (AIIA)</p></li>
+<li><p>[ ] Document data requirements and lawful basis for processing</p></li>
+<li><p>[ ] Define success metrics, fairness criteria, and acceptable error rates</p></li>
+<li><p>[ ] Establish human oversight mechanisms appropriate to the risk level</p></li>
+</ul>
+<h3>4.2 Data Preparation</h3>
+<ul>
+<li><p>[ ] Verify lawful basis for data collection and processing (GDPR Art. 6)</p></li>
+<li><p>[ ] Assess data quality, completeness, and representativeness</p></li>
+<li><p>[ ] Document data provenance and any preprocessing steps</p></li>
+<li><p>[ ] Implement data minimization — use only data necessary for the purpose</p></li>
+<li><p>[ ] Check for historical biases in training data</p></li>
+<li><p>[ ] Establish data versioning and lineage tracking</p></li>
+</ul>
+<h3>4.3 Development & Training</h3>
+<ul>
+<li><p>[ ] Follow secure development practices (input validation, output filtering)</p></li>
+<li><p>[ ] Implement prompt injection defenses for LLM-based systems</p></li>
+<li><p>[ ] Document model architecture, hyperparameters, and training methodology</p></li>
+<li><p>[ ] Conduct initial bias and fairness testing during development</p></li>
+<li><p>[ ] Implement logging for all AI inputs and outputs</p></li>
+<li><p>[ ] Version control all model artifacts and configurations</p></li>
+</ul>
+<h3>4.4 Testing & Validation</h3>
+<ul>
+<li><p>[ ] Conduct comprehensive accuracy and performance testing</p></li>
+<li><p>[ ] Execute bias and fairness testing across demographic groups (see Section 7)</p></li>
+<li><p>[ ] Perform adversarial testing (prompt injection, data poisoning, evasion)</p></li>
+<li><p>[ ] Validate against edge cases and boundary conditions</p></li>
+<li><p>[ ] Conduct human evaluation of AI outputs for quality and safety</p></li>
+<li><p>[ ] Test graceful degradation and fallback mechanisms</p></li>
+<li><p>[ ] Document all test results and maintain test evidence</p></li>
+</ul>
+<h3>4.5 Deployment</h3>
+<ul>
+<li><p>[ ] Complete pre-deployment risk review and sign-off</p></li>
+<li><p>[ ] Implement staged rollout (canary / percentage-based deployment)</p></li>
+<li><p>[ ] Configure monitoring, alerting, and anomaly detection</p></li>
+<li><p>[ ] Establish rollback procedures and kill switches</p></li>
+<li><p>[ ] Notify users that AI is being used (EU AI Act transparency obligation)</p></li>
+<li><p>[ ] Update privacy policy and AI disclosure documents</p></li>
+</ul>
+<h3>4.6 Monitoring & Maintenance</h3>
+<ul>
+<li><p>[ ] Monitor model performance metrics continuously</p></li>
+<li><p>[ ] Track for model drift (data drift and concept drift)</p></li>
+<li><p>[ ] Review AI outputs regularly for quality, safety, and bias</p></li>
+<li><p>[ ] Conduct periodic re-evaluation (minimum quarterly)</p></li>
+<li><p>[ ] Update documentation when models or configurations change</p></li>
+<li><p>[ ] Respond to and investigate AI-related incidents per the Incident Response Plan</p></li>
+</ul>
+<h2>5. Model Evaluation Criteria</h2>
+<p>All AI models (including third-party API services) must be evaluated against the following criteria before deployment and during periodic reviews:</p>
+<h3>5.1 Performance Metrics</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Metric</p></th><th><p>Minimum Threshold</p></th><th><p>Measurement Method</p></th></tr>
+<tr><td><p>Accuracy / Task Success Rate</p></td><td><p>[Define per use case]</p></td><td><p>Automated testing against labeled dataset</p></td></tr>
+<tr><td><p>Latency (p95)</p></td><td><p>[Define SLA]</p></td><td><p>Application performance monitoring</p></td></tr>
+<tr><td><p>Availability</p></td><td><p>99.9%</p></td><td><p>Uptime monitoring</p></td></tr>
+<tr><td><p>Error Rate</p></td><td><p>< 5% (adjust per criticality)</p></td><td><p>Error tracking and logging</p></td></tr>
+<tr><td><p>Hallucination Rate</p></td><td><p>< 2% for factual claims</p></td><td><p>Human evaluation sampling</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.2 Safety and Security</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Requirement</p></th></tr>
+<tr><td><p>Prompt injection resistance</p></td><td><p>Tested with standard attack vectors; no data leakage</p></td></tr>
+<tr><td><p>Output filtering</p></td><td><p>Harmful, illegal, or inappropriate content blocked</p></td></tr>
+<tr><td><p>Data leakage prevention</p></td><td><p>No PII or confidential data in model outputs unless authorized</p></td></tr>
+<tr><td><p>Authentication</p></td><td><p>All AI API calls authenticated and authorized</p></td></tr>
+<tr><td><p>Rate limiting</p></td><td><p>Implemented to prevent abuse and cost overruns</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.3 Vendor Evaluation (Third-Party AI Services)</h3>
+<p>For each detected AI service, evaluate:</p>
+<h4>openai</h4>
+<ul>
+<li><p>[ ] Data processing agreement (DPA) in place</p></li>
+<li><p>[ ] Data residency and transfer mechanisms confirmed</p></li>
+<li><p>[ ] Training data usage policy reviewed (opt-out confirmed if available)</p></li>
+<li><p>[ ] SOC 2 Type II or equivalent certification verified</p></li>
+<li><p>[ ] Incident notification SLA confirmed</p></li>
+<li><p>[ ] Model versioning and deprecation policy understood</p></li>
+</ul>
+<h2>6. AI Risk Assessment Matrix</h2>
+<h3>6.1 Risk Categories (EU AI Act)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Risk Level</p></th><th><p>Definition</p></th><th><p>Requirements</p></th><th><p>Examples</p></th></tr>
+<tr><td><p><strong>Unacceptable</strong></p></td><td><p>AI systems that pose clear threats to safety, livelihoods, or rights</p></td><td><p>Prohibited</p></td><td><p>Social scoring, real-time biometric surveillance</p></td></tr>
+<tr><td><p><strong>High</strong></p></td><td><p>AI systems that significantly impact health, safety, or fundamental rights</p></td><td><p>Conformity assessment, registration, human oversight, logging</p></td><td><p>Credit scoring, hiring, healthcare diagnosis</p></td></tr>
+<tr><td><p><strong>Limited</strong></p></td><td><p>AI systems that interact with humans or generate content</p></td><td><p>Transparency obligations (user notification)</p></td><td><p>Chatbots, content generation, emotion detection</p></td></tr>
+<tr><td><p><strong>Minimal</strong></p></td><td><p>AI systems with minimal risk to rights or safety</p></td><td><p>No mandatory requirements (voluntary codes of conduct)</p></td><td><p>Spam filters, game AI, search ranking</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>6.2 Project Risk Assessment</h3>
+<p>Based on the detected AI services and their usage patterns, this project is classified as <strong>limited risk</strong>.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Action Required:</strong> Limited-risk AI systems must comply with transparency obligations. Users must be informed they are interacting with AI, and AI-generated content must be labeled as such.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>7. Bias Testing Requirements</h2>
+<h3>7.1 Testing Obligations</h3>
+<p>AI systems must be tested for bias before initial deployment and at regular intervals. The EU AI Act (Article 10) requires that training, validation, and testing datasets be:</p>
+<ul>
+<li><p>Representative of the intended user population</p></li>
+<li><p>Free from errors and data quality issues</p></li>
+<li><p>Assessed for biases that could lead to discriminatory outcomes</p></li>
+</ul>
+<h3>7.2 Protected Characteristics</h3>
+<p>Test for differential impact across the following protected characteristics (per EU anti-discrimination law and jurisdiction-specific requirements):</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Characteristic</p></th><th><p>Testing Approach</p></th></tr>
+<tr><td><p>Race / Ethnicity</p></td><td><p>Compare outputs across diverse demographic inputs</p></td></tr>
+<tr><td><p>Gender / Gender Identity</p></td><td><p>Test with gender-varied inputs; check for stereotyping</p></td></tr>
+<tr><td><p>Age</p></td><td><p>Verify no age-based discrimination in outputs</p></td></tr>
+<tr><td><p>Disability</p></td><td><p>Test accessibility and equitable treatment</p></td></tr>
+<tr><td><p>Religion / Belief</p></td><td><p>Check for religious bias in content generation</p></td></tr>
+<tr><td><p>Sexual Orientation</p></td><td><p>Verify inclusive and non-discriminatory outputs</p></td></tr>
+<tr><td><p>Nationality / National Origin</p></td><td><p>Test for geographic or nationality-based bias</p></td></tr>
+<tr><td><p>Socioeconomic Status</p></td><td><p>Check for class-based bias in recommendations or decisions</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.3 Testing Methodology</h3>
+<ol>
+<li><p><strong>Baseline evaluation</strong> — Establish performance metrics across demographic groups</p></li>
+<li><p><strong>Counterfactual testing</strong> — Swap protected attributes and verify consistent outcomes</p></li>
+<li><p><strong>Red teaming</strong> — Dedicated adversarial testing to elicit biased responses</p></li>
+<li><p><strong>User feedback analysis</strong> — Monitor production feedback for bias reports</p></li>
+<li><p><strong>Quantitative metrics</strong> — Calculate demographic parity, equalized odds, and calibration across groups</p></li>
+</ol>
+<h3>7.4 Testing Schedule</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Trigger</p></th><th><p>Action Required</p></th></tr>
+<tr><td><p>Pre-deployment</p></td><td><p>Full bias testing suite</p></td></tr>
+<tr><td><p>Model update / version change</p></td><td><p>Re-run bias tests on new model</p></td></tr>
+<tr><td><p>Quarterly</p></td><td><p>Scheduled bias review using production data</p></td></tr>
+<tr><td><p>Incident report</p></td><td><p>Ad-hoc bias investigation</p></td></tr>
+<tr><td><p>Regulatory request</p></td><td><p>Full audit documentation</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.5 Remediation</h3>
+<p>When bias is detected:</p>
+<ol>
+<li><p>Document the bias finding, affected groups, and severity</p></li>
+<li><p>Assess whether to disable the feature, add guardrails, or retrain</p></li>
+<li><p>Implement mitigation (prompt engineering, output filtering, model fine-tuning)</p></li>
+<li><p>Re-test to verify the bias has been addressed</p></li>
+<li><p>Update this framework and related documentation</p></li>
+<li><p>If the bias caused harm, follow the Incident Response Plan</p></li>
+</ol>
+<h2>8. Transparency and Documentation Requirements</h2>
+<h3>8.1 User-Facing Transparency</h3>
+<ul>
+<li><p>Users must be informed when they are interacting with an AI system (EU AI Act Art. 50)</p></li>
+<li><p>AI-generated content must be clearly labeled as such</p></li>
+<li><p>Users must have access to meaningful information about the logic involved</p></li>
+<li><p>Opt-out mechanisms should be provided where technically feasible</p></li>
+</ul>
+<h3>8.2 Technical Documentation (EU AI Act Annex IV)</h3>
+<p>Maintain the following documentation for each AI system:</p>
+<ul>
+<li><p>[ ] General description of the AI system and its intended purpose</p></li>
+<li><p>[ ] Description of the elements of the AI system and its development process</p></li>
+<li><p>[ ] Detailed information about monitoring, functioning, and control</p></li>
+<li><p>[ ] Description of the risk management system</p></li>
+<li><p>[ ] Data governance and management practices</p></li>
+<li><p>[ ] Performance metrics and testing results</p></li>
+<li><p>[ ] Description of human oversight measures</p></li>
+</ul>
+<h2>9. AI-Specific Incident Response</h2>
+<p>AI-related incidents must be handled according to the organization's Incident Response Plan with the following additional considerations:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Incident Type</p></th><th><p>Severity</p></th><th><p>Immediate Action</p></th></tr>
+<tr><td><p>Data leak via AI processing</p></td><td><p>Critical</p></td><td><p>Disable AI feature, assess data exposure</p></td></tr>
+<tr><td><p>Systematic bias detected</p></td><td><p>High</p></td><td><p>Implement output filtering, conduct investigation</p></td></tr>
+<tr><td><p>Prompt injection exploit</p></td><td><p>High</p></td><td><p>Block attack vector, review all affected outputs</p></td></tr>
+<tr><td><p>Model producing harmful content</p></td><td><p>High</p></td><td><p>Disable feature, apply content filters</p></td></tr>
+<tr><td><p>Performance degradation / drift</p></td><td><p>Medium</p></td><td><p>Investigate root cause, consider rollback</p></td></tr>
+<tr><td><p>User complaint about AI accuracy</p></td><td><p>Low-Medium</p></td><td><p>Review specific case, update training data</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>For incidents involving high-risk AI systems under the EU AI Act, the following additional reporting obligations apply:</p>
+<ul>
+<li><p>Report serious incidents to the relevant national market surveillance authority</p></li>
+<li><p>Notify the AI provider (for third-party AI services)</p></li>
+<li><p>Document corrective actions and timeline</p></li>
+</ul>
+<h2>10. Review and Audit Schedule</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Activity</p></th><th><p>Frequency</p></th><th><p>Responsible</p></th></tr>
+<tr><td><p>Framework review and update</p></td><td><p>Annually</p></td><td><p>AI Governance Officer</p></td></tr>
+<tr><td><p>AI risk assessment review</p></td><td><p>Quarterly</p></td><td><p>AI Governance Officer + Development Team</p></td></tr>
+<tr><td><p>Bias testing</p></td><td><p>Quarterly + pre-deployment</p></td><td><p>Development Team</p></td></tr>
+<tr><td><p>Model performance review</p></td><td><p>Monthly</p></td><td><p>Development Team</p></td></tr>
+<tr><td><p>Vendor compliance check</p></td><td><p>Annually</p></td><td><p>Compliance Team</p></td></tr>
+<tr><td><p>Internal AI audit</p></td><td><p>Annually</p></td><td><p>Compliance Team</p></td></tr>
+<tr><td><p>Regulatory landscape review</p></td><td><p>Quarterly</p></td><td><p>Compliance Team</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>11. Contact</h2>
+<p>For questions about this AI Governance Framework, contact:</p>
+<ul>
+<li><p><strong>AI Governance Officer:</strong> [Name] ([email])</p></li>
+<li><p><strong>Data Protection Officer:</strong> Jane Mueller (dpo@acme-saas.com)</p></li>
+<li><p><strong>General inquiries:</strong> legal@acme.com</p></li>
+</ul>
+<hr />
+<p><em>This AI Governance Framework was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. It should be reviewed and customized by your legal, compliance, and AI governance teams before adoption.</em></p>

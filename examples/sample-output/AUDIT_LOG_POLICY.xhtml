@@ -1,0 +1,170 @@
+<h1>Audit Log Policy</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Audit Log Policy</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Company:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</p></li>
+<li><p>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</p></li>
+<li><p>Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<h2>1. Purpose</h2>
+<p>This policy defines what events are logged across the <strong>nextjs-saas-example</strong> application, how long logs are retained, and who has access to audit data. It supports compliance with GDPR Article 30 (records of processing activities), SOC 2 Trust Service Criteria (CC7.2 — monitoring), and internal security requirements.</p>
+<h2>2. Scope</h2>
+<p>This policy applies to all logging and monitoring systems integrated into the application, including error tracking, analytics, authentication logs, and transaction records.</p>
+<hr />
+<h2>3. Events Logged</h2>
+<p>The following table describes the categories of events logged by each detected service:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Events Logged</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>Application errors; Unhandled exceptions; Performance transactions; User context (IP, browser)</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>Page views; Feature flag evaluations; User actions; Session recordings</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>Application events, user interactions, system metrics</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>Application events, user interactions, system metrics</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>Application events, user interactions, system metrics</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.1 Standard Application Events</h3>
+<p>In addition to service-specific events, the following application events should be logged:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Event Category</p></th><th><p>Examples</p></th><th><p>Severity</p></th></tr>
+<tr><td><p>Authentication</p></td><td><p>Login, logout, password reset, MFA enrollment</p></td><td><p>High</p></td></tr>
+<tr><td><p>Authorization</p></td><td><p>Permission changes, role assignments, access denials</p></td><td><p>High</p></td></tr>
+<tr><td><p>Data Access</p></td><td><p>Record views, exports, bulk downloads</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Data Modification</p></td><td><p>Create, update, delete operations on personal data</p></td><td><p>High</p></td></tr>
+<tr><td><p>System Administration</p></td><td><p>Config changes, deployment events, service restarts</p></td><td><p>High</p></td></tr>
+<tr><td><p>Security Events</p></td><td><p>Failed login attempts, IP blocks, rate limit triggers</p></td><td><p>Critical</p></td></tr>
+<tr><td><p>User Account</p></td><td><p>Registration, profile updates, account deletion</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>API Access</p></td><td><p>API key creation, OAuth token grants, webhook events</p></td><td><p>Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>4. Retention Periods</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Log Category</p></th><th><p>Retention Period</p></th><th><p>Justification</p></th></tr>
+<tr><td><p>Monitoring logs</p></td><td><p>30 days (error logs), 90 days (performance data)</p></td><td><p>Operational debugging and performance optimization</p></td></tr>
+<tr><td><p>Analytics logs</p></td><td><p>26 months (industry default, configurable)</p></td><td><p>Product insights and trend analysis</p></td></tr>
+<tr><td><p>Auth logs</p></td><td><p>Duration of account + 30 days after deletion</p></td><td><p>Security compliance and access auditing</p></td></tr>
+<tr><td><p>Payment logs</p></td><td><p>7 years (financial regulation requirement)</p></td><td><p>Financial regulation (tax, accounting, anti-fraud)</p></td></tr>
+<tr><td><p>Security/audit logs</p></td><td><p>1 year minimum</p></td><td><p>Regulatory compliance and incident investigation</p></td></tr>
+<tr><td><p>Access logs</p></td><td><p>90 days</p></td><td><p>Operational debugging and security review</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>4.1 Retention Rules</h3>
+<ol>
+<li><p><strong>Minimum retention:</strong> Security-critical logs must be retained for at least 1 year</p></li>
+<li><p><strong>Maximum retention:</strong> Personal data in logs must not be retained beyond the stated period without legal basis</p></li>
+<li><p><strong>Automated deletion:</strong> Log rotation and TTL policies must be configured to enforce retention limits</p></li>
+<li><p><strong>Legal holds:</strong> Retention periods may be extended when required for legal proceedings or regulatory investigations</p></li>
+<li><p><strong>Anonymization:</strong> Where possible, logs should be anonymized after the active retention period</p></li>
+</ol>
+<hr />
+<h2>5. Access Controls</h2>
+<h3>5.1 Role-Based Access</h3>
+<p><strong>Monitoring Logs:</strong></p>
+<ul>
+<li><p>Engineering team: Full read access to error and performance logs</p></li>
+<li><p>On-call engineers: Real-time alert access</p></li>
+<li><p>Security team: Audit log access for incident investigation</p></li>
+<li><p>Management: Aggregated dashboard access only</p></li>
+</ul>
+<p><strong>Analytics Logs:</strong></p>
+<ul>
+<li><p>Product team: Full analytics dashboard access</p></li>
+<li><p>Marketing team: Campaign and conversion metrics</p></li>
+<li><p>Engineering team: Technical metrics and debugging data</p></li>
+<li><p>Executives: High-level KPI dashboards only</p></li>
+</ul>
+<p><strong>Auth Logs:</strong></p>
+<ul>
+<li><p>Security team: Authentication event audit logs</p></li>
+<li><p>Engineering team: Debugging access (time-limited)</p></li>
+<li><p>Compliance team: Access review audit trail</p></li>
+<li><p>No individual user credentials accessible to any team</p></li>
+</ul>
+<p><strong>Payment Logs:</strong></p>
+<ul>
+<li><p>Finance team: Transaction records and billing data</p></li>
+<li><p>Support team: Order lookup (masked payment details)</p></li>
+<li><p>Security team: Fraud detection logs</p></li>
+<li><p>PCI DSS scope: Only authorized personnel with need-to-know</p></li>
+</ul>
+<h3>5.2 Access Principles</h3>
+<ol>
+<li><p><strong>Least privilege:</strong> Team members only access logs necessary for their role</p></li>
+<li><p><strong>Need-to-know:</strong> Access to sensitive logs (auth, payment) requires explicit approval</p></li>
+<li><p><strong>Time-limited:</strong> Debug access grants expire automatically after 24 hours</p></li>
+<li><p><strong>Audited:</strong> All access to audit logs is itself logged (meta-audit)</p></li>
+<li><p><strong>No PII in dashboards:</strong> Shared dashboards must not display personally identifiable information</p></li>
+</ol>
+<h3>5.3 Access Review Schedule</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Review Type</p></th><th><p>Frequency</p></th><th><p>Responsible Party</p></th></tr>
+<tr><td><p>Access permissions audit</p></td><td><p>Quarterly</p></td><td><p>Security team</p></td></tr>
+<tr><td><p>Log access review</p></td><td><p>Monthly</p></td><td><p>Engineering lead</p></td></tr>
+<tr><td><p>Service account audit</p></td><td><p>Quarterly</p></td><td><p>DevOps team</p></td></tr>
+<tr><td><p>Compliance review</p></td><td><p>Annually</p></td><td><p>Compliance officer</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>6. Log Integrity & Security</h2>
+<h3>6.1 Protection Measures</h3>
+<ul>
+<li><p><strong>Encryption in transit:</strong> All log data transmitted over TLS 1.2+</p></li>
+<li><p><strong>Encryption at rest:</strong> Log storage encrypted using AES-256 or equivalent</p></li>
+<li><p><strong>Immutability:</strong> Audit logs must be append-only; modification or deletion requires elevated privileges and is itself logged</p></li>
+<li><p><strong>Centralization:</strong> Logs should be forwarded to a centralized logging system separate from application servers</p></li>
+<li><p><strong>Backup:</strong> Critical audit logs backed up to a separate storage system</p></li>
+</ul>
+<h3>6.2 Tampering Detection</h3>
+<ul>
+<li><p>Log entries must include timestamps from a trusted time source</p></li>
+<li><p>Integrity checksums should be computed for log batches</p></li>
+<li><p>Anomalous gaps in log sequences must trigger alerts</p></li>
+</ul>
+<hr />
+<h2>7. Incident Response Integration</h2>
+<p>Audit logs are a critical input to the incident response process:</p>
+<ol>
+<li><p><strong>Detection:</strong> Monitoring alerts trigger based on log patterns (error spikes, auth failures)</p></li>
+<li><p><strong>Investigation:</strong> Security team uses audit logs to reconstruct event timelines</p></li>
+<li><p><strong>Containment:</strong> Access logs help identify affected systems and users</p></li>
+<li><p><strong>Notification:</strong> Log data informs breach notification requirements (GDPR 72-hour window)</p></li>
+<li><p><strong>Post-mortem:</strong> Audit trail supports root cause analysis</p></li>
+</ol>
+<p>For the full incident response plan, see <strong>INCIDENT<em>RESPONSE</em>PLAN.md</strong>.</p>
+<hr />
+<h2>8. Policy Review</h2>
+<p>This audit log policy should be reviewed:</p>
+<ul>
+<li><p><strong>Quarterly</strong> as part of the security review cycle</p></li>
+<li><p><strong>When adding</strong> new monitoring or analytics services</p></li>
+<li><p><strong>After a security incident</strong> to identify logging gaps</p></li>
+<li><p><strong>When regulatory requirements</strong> change</p></li>
+</ul>
+<p>For questions about this policy, contact legal@acme.com.</p>
+<hr />
+<p><em>This Audit Log Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>

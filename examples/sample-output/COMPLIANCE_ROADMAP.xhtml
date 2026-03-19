@@ -1,0 +1,286 @@
+<h1>Compliance Roadmap</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance Roadmap</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>A phased implementation plan for Acme Inc.</strong></p>
+<p>Go from zero to fully compliant in 8 weeks.</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><em>Generated on 2026-03-18 | 8 services detected</em></p>
+<hr />
+<h2>Overview</h2>
+<p>This roadmap breaks compliance implementation into four phases, prioritized by legal risk and regulatory deadlines. Each phase builds on the previous one.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Phase</p></th><th><p>Timeline</p></th><th><p>Focus</p></th><th><p>Priority</p></th></tr>
+<tr><td><p>Phase 1</p></td><td><p>Week 1</p></td><td><p>Essential Legal Documents</p></td><td><p><strong>Critical</strong></p></td></tr>
+<tr><td><p>Phase 2</p></td><td><p>Weeks 2-4</p></td><td><p>Security & Incident Response</p></td><td><p><strong>High</strong></p></td></tr>
+<tr><td><p>Phase 3</p></td><td><p>Month 2</p></td><td><p>Advanced Compliance & Audit</p></td><td><p><strong>Medium</strong></p></td></tr>
+<tr><td><p>Phase 4</p></td><td><p>Ongoing</p></td><td><p>Monitoring, Updates & Reviews</p></td><td><p><strong>Continuous</strong></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Phase 1: Essential Documents (Week 1)</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Goal:</strong> Get the minimum viable legal documents published on your website.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>These documents carry the highest legal risk if missing. Without them, you are exposed to regulatory fines and user complaints.</p>
+<h3>Week 1, Days 1-2: Privacy & Terms</h3>
+<ul>
+<li><p>[ ] <strong>Review and publish Privacy Policy</strong> (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Replace all placeholder values (<code>[Your Company Name]</code>, <code>[your-email@example.com]</code>)</p></li>
+<li><p>Verify all 8 detected services are correctly listed</p></li>
+<li><p>Add to website footer</p></li>
+<li><p>GDPR Art. 13 requires this to be accessible before data collection</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review and publish Terms of Service</strong> (<code>TERMS<em>OF</em>SERVICE.md</code>)</p></li>
+<li><p>Customize limitation of liability amounts</p></li>
+<li><p>Review arbitration clause (modify for your jurisdiction)</p></li>
+<li><p>Add to website footer alongside Privacy Policy</p></li>
+</ul>
+<h3>Week 1, Day 3: Cookie Compliance</h3>
+<ul>
+<li><p>[ ] <strong>Publish Cookie Policy</strong> (<code>COOKIE_POLICY.md</code>)</p></li>
+<li><p>Verify all detected cookies are listed</p></li>
+<li><p>Cross-reference with <code>COOKIE_INVENTORY.md</code></p></li>
+<li><p>ePrivacy Directive requires consent before non-essential cookies</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Deploy cookie consent banner</strong></p></li>
+<li><p>Import <code>COOKIE<em>CONSENT</em>CONFIG.json</code> into your CMP</p></li>
+<li><p>Test consent flow: banner appears, preferences saved, cookies blocked until consent</p></li>
+<li><p>Verify banner appears on first visit in EU/UK</p></li>
+</ul>
+<h3>Week 1, Day 4: AI Compliance</h3>
+<ul>
+<li><p>[ ] <strong>Publish AI Disclosure</strong> (<code>AI_DISCLOSURE.md</code>)</p></li>
+<li><p>EU AI Act Art. 50 — must disclose AI system usage to users</p></li>
+<li><p>Deadline: <strong>August 2, 2026</strong> (but implement early)</p></li>
+<li><p>Link from main product page, not just buried in legal docs</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review AI Model Card</strong> (<code>AI<em>MODEL</em>CARD.md</code>)</p></li>
+<li><p>Document model capabilities, limitations, and intended use</p></li>
+<li><p>Required for high-risk AI systems under EU AI Act Art. 53</p></li>
+</ul>
+<h3>Week 1, Day 5: Payment Compliance</h3>
+<ul>
+<li><p>[ ] <strong>Publish Refund Policy</strong> (<code>REFUND_POLICY.md</code>)</p></li>
+<li><p>Required in EU (14-day cooling-off period for digital services)</p></li>
+<li><p>Customize refund window and process for your business model</p></li>
+</ul>
+<h3>Week 1 Checklist</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Status</p></th><th><p>Published</p></th><th><p>URL</p></th></tr>
+<tr><td><p>Privacy Policy</p></td><td><p>☐ Reviewed</p></td><td><p>☐ Published</p></td><td><p><code>/privacy</code></p></td></tr>
+<tr><td><p>Terms of Service</p></td><td><p>☐ Reviewed</p></td><td><p>☐ Published</p></td><td><p><code>/terms</code></p></td></tr>
+<tr><td><p>Cookie Policy</p></td><td><p>☐ Reviewed</p></td><td><p>☐ Published</p></td><td><p><code>/cookies</code></p></td></tr>
+<tr><td><p>Cookie Consent Banner</p></td><td><p>☐ Configured</p></td><td><p>☐ Deployed</p></td><td><p>—</p></td></tr>
+<tr><td><p>AI Disclosure</p></td><td><p>☐ Reviewed</p></td><td><p>☐ Published</p></td><td><p><code>/ai-disclosure</code></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Phase 2: Security & Incident Response (Weeks 2-4)</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Goal:</strong> Establish security documentation and breach response procedures.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>If a data breach occurs without these documents, response time increases dramatically and regulatory penalties are higher.</p>
+<h3>Week 2: Security Foundations</h3>
+<ul>
+<li><p>[ ] <strong>Finalize Security Policy</strong> (<code>SECURITY.md</code>)</p></li>
+<li><p>Publish as <code>SECURITY.md</code> in your repository root</p></li>
+<li><p>This is the first document security researchers look for</p></li>
+<li><p>Include responsible disclosure contact</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Establish Incident Response Plan</strong> (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</p></li>
+<li><p>Assign incident response team roles</p></li>
+<li><p>Set up communication channels (on-call, Slack channel, etc.)</p></li>
+<li><p>GDPR requires 72-hour breach notification to supervisory authority</p></li>
+<li><p>Run a tabletop exercise within 30 days</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review Responsible Disclosure Policy</strong> (<code>RESPONSIBLE<em>DISCLOSURE</em>POLICY.md</code>)</p></li>
+<li><p>Set up security@https://acme-saas.com email</p></li>
+<li><p>Consider a bug bounty program (HackerOne, Bugcrowd)</p></li>
+</ul>
+<h3>Week 3: Access & Change Control</h3>
+<ul>
+<li><p>[ ] <strong>Implement Access Control Policy</strong> (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</p></li>
+<li><p>Enforce MFA for all team members</p></li>
+<li><p>Review service account permissions</p></li>
+<li><p>Document role-based access matrix</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Formalize Change Management</strong> (<code>CHANGE<em>MANAGEMENT</em>POLICY.md</code>)</p></li>
+<li><p>Require code review for all changes</p></li>
+<li><p>Document deployment procedures</p></li>
+<li><p>Establish rollback procedures</p></li>
+</ul>
+<h3>Week 4: Data Protection</h3>
+<ul>
+<li><p>[ ] <strong>Set up Data Subject Request process</strong> (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</p></li>
+<li><p>Create internal DSAR handling workflow</p></li>
+<li><p>GDPR requires response within 30 days</p></li>
+<li><p>Document data export and deletion procedures</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review Data Retention Policy</strong> (<code>DATA<em>RETENTION</em>POLICY.md</code>)</p></li>
+<li><p>Define retention periods for each data category</p></li>
+<li><p>Implement automated deletion where possible</p></li>
+<li><p>Document exceptions and legal holds</p></li>
+</ul>
+<hr />
+<h2>Phase 3: Advanced Compliance & Audit Readiness (Month 2)</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Goal:</strong> Prepare for investor due diligence, SOC 2 audit, and advanced regulatory requirements.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>SOC 2 Preparation</h3>
+<ul>
+<li><p>[ ] <strong>Complete SOC 2 Readiness Checklist</strong> (<code>SOC2<em>READINESS</em>CHECKLIST.md</code>)</p></li>
+<li><p>Map controls to Trust Service Criteria</p></li>
+<li><p>Identify gaps in current implementation</p></li>
+<li><p>Begin evidence collection</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review ISO 27001 Checklist</strong> (<code>ISO<em>27001</em>CHECKLIST.md</code>)</p></li>
+<li><p>Align with Annex A controls</p></li>
+<li><p>Document existing controls</p></li>
+<li><p>Plan gap remediation</p></li>
+</ul>
+<h3>Data Processing & Transfers</h3>
+<ul>
+<li><p>[ ] <strong>Finalize Data Processing Agreements</strong> (<code>DATA<em>PROCESSING</em>AGREEMENT.md</code>)</p></li>
+<li><p>Send DPA to all 8 detected sub-processors</p></li>
+<li><p>Collect signed copies</p></li>
+<li><p>Review <code>VENDOR_CONTACTS.md</code> for DPA contact details</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Complete Privacy Impact Assessment</strong> (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Required for AI-based processing under GDPR Art. 35</p></li>
+<li><p>Document risks and mitigations</p></li>
+<li><p>Review with DPO or legal counsel</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Review Transfer Impact Assessment</strong> (<code>TRANSFER<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Map all international data transfers</p></li>
+<li><p>Ensure Standard Contractual Clauses are in place</p></li>
+<li><p>Document supplementary measures (Schrems II)</p></li>
+</ul>
+<h3>Vendor Management</h3>
+<ul>
+<li><p>[ ] <strong>Complete Vendor Risk Assessments</strong> (<code>THIRD<em>PARTY</em>RISK_ASSESSMENT.md</code>)</p></li>
+<li><p>Assess each detected sub-processor</p></li>
+<li><p>Use <code>VENDOR<em>SECURITY</em>QUESTIONNAIRE.md</code> for evaluations</p></li>
+<li><p>Score and document vendor risks</p></li>
+</ul>
+<ul>
+<li><p>[ ] <strong>Establish Vendor Onboarding Process</strong> (<code>VENDOR<em>ONBOARDING</em>CHECKLIST.md</code>)</p></li>
+<li><p>Define approval workflow for new vendors</p></li>
+<li><p>Require DPA before integration</p></li>
+<li><p>Set review cadence</p></li>
+</ul>
+<hr />
+<h2>Phase 4: Ongoing Monitoring & Maintenance</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Goal:</strong> Keep compliance current as your codebase evolves.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Automated Monitoring</h3>
+<ul>
+<li><p>[ ] <strong>Set up CI/CD compliance checks</strong></p></li>
+</ul>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[  # .github/workflows/compliance.yml
+  - uses: joechensmartz/codepliant@v220
+    with:
+      fail-on-missing: true]]></ac:plain-text-body>
+</ac:structured-macro>
+<ul>
+<li><p>[ ] <strong>Install pre-commit hook</strong></p></li>
+</ul>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[  npx codepliant hook install]]></ac:plain-text-body>
+</ac:structured-macro>
+<ul>
+<li><p>[ ] <strong>Schedule periodic scans</strong></p></li>
+</ul>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[  npx codepliant schedule install --frequency weekly]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>Review Cadence</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Frequency</p></th><th><p>Action</p></th><th><p>Owner</p></th><th><p>Command</p></th></tr>
+<tr><td><p><strong>Weekly</strong></p></td><td><p>Check compliance dashboard</p></td><td><p>Engineering lead</p></td><td><p><code>codepliant dashboard</code></p></td></tr>
+<tr><td><p><strong>Monthly</strong></p></td><td><p>Re-scan and update documents</p></td><td><p>Engineering lead</p></td><td><p><code>codepliant update</code></p></td></tr>
+<tr><td><p><strong>Quarterly</strong></p></td><td><p>Full compliance report</p></td><td><p>CTO/CISO</p></td><td><p><code>codepliant report</code></p></td></tr>
+<tr><td><p><strong>Semi-annual</strong></p></td><td><p>Vendor review cycle</p></td><td><p>Security team</p></td><td><p>Manual review</p></td></tr>
+<tr><td><p><strong>Annual</strong></p></td><td><p>Complete compliance review</p></td><td><p>DPO/Legal</p></td><td><p><code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Trigger-Based Updates</h3>
+<p>Re-run <code>npx codepliant go</code> whenever you:</p>
+<ul>
+<li><p>Add a new third-party service or dependency</p></li>
+<li><p>Change authentication providers</p></li>
+<li><p>Add AI/ML capabilities</p></li>
+<li><p>Expand to new markets/jurisdictions</p></li>
+<li><p>Change data storage or processing patterns</p></li>
+<li><p>Update pricing or terms</p></li>
+</ul>
+<hr />
+<h2>Progress Tracker</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Phase</p></th><th><p>Target Date</p></th><th><p>Status</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Phase 1: Essential Documents</p></td><td><p>Week 1</p></td><td><p>☐ Not started</p></td><td><p></p></td></tr>
+<tr><td><p>Phase 2: Security & IR</p></td><td><p>Weeks 2-4</p></td><td><p>☐ Not started</p></td><td><p></p></td></tr>
+<tr><td><p>Phase 3: Advanced Compliance</p></td><td><p>Month 2</p></td><td><p>☐ Not started</p></td><td><p></p></td></tr>
+<tr><td><p>Phase 4: Ongoing Monitoring</p></td><td><p>Continuous</p></td><td><p>☐ Not started</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Regulatory Deadlines</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Regulation</p></th><th><p>Deadline</p></th><th><p>Impact</p></th><th><p>Your Status</p></th></tr>
+<tr><td><p>GDPR</p></td><td><p><strong>In effect</strong></p></td><td><p>Fines up to 4% global revenue / EUR 20M</p></td><td><p>☐ Review required</p></td></tr>
+<tr><td><p>EU AI Act</p></td><td><p><strong>August 2, 2026</strong></p></td><td><p>Fines up to EUR 35M / 7% global revenue</p></td><td><p>☐ Preparation needed</p></td></tr>
+<tr><td><p>ePrivacy Directive</p></td><td><p><strong>In effect</strong></p></td><td><p>Cookie consent requirements</p></td><td><p>☐ Review required</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>Generated by Codepliant v410.0.0 on 2026-03-18.</em></p>
+<p><em>This roadmap is personalized to your detected stack (8 services). Re-run <code>npx codepliant go</code> after changes to update.</em></p>
+<p><em>This document should be reviewed by a qualified compliance professional.</em></p>

@@ -1,0 +1,250 @@
+<h1>Privacy Dashboard Configuration</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<p>{</p>
+<p>"version": "1.0.0",</p>
+<p>"generated_at": "2026-03-18T17:08:50.873Z",</p>
+<p>"project": "nextjs-saas-example",</p>
+<p>"company": "Acme Inc",</p>
+<p>"contact_email": "legal@acme.com",</p>
+<p>"dpo": {</p>
+<p>"name": "Jane Mueller",</p>
+<p>"email": "dpo@acme-saas.com"</p>
+<p>},</p>
+<p>"dashboard_settings": {</p>
+<p>"title": "Acme Inc — My Data",</p>
+<p>"description": "View, export, and manage your personal data at Acme Inc.",</p>
+<p>"show<em>data</em>categories": true,</p>
+<p>"show<em>consent</em>management": true,</p>
+<p>"show<em>data</em>export": true,</p>
+<p>"show<em>data</em>deletion": true,</p>
+<p>"show<em>processing</em>history": true</p>
+<p>},</p>
+<p>"data_categories": [</p>
+<p>{</p>
+<p>"id": "technical",</p>
+<p>"name": "Technical Data",</p>
+<p>"description": "Error logs, performance metrics, and diagnostic data collected to maintain and improve service reliability.",</p>
+<p>"legal_basis": "Legitimate interest (Art. 6(1)(f) GDPR)",</p>
+<p>"retention_period": "90 days",</p>
+<p>"user<em>can</em>delete": false,</p>
+<p>"user<em>can</em>export": false,</p>
+<p>"sources": [</p>
+<p>"@sentry/node"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "account",</p>
+<p>"name": "Account Data",</p>
+<p>"description": "Information you provide when creating and managing your account, including email address, name, and authentication credentials.",</p>
+<p>"legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",</p>
+<p>"retention_period": "Duration of account + 30 days",</p>
+<p>"user<em>can</em>delete": true,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"@supabase/supabase-js"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "ai_interactions",</p>
+<p>"name": "AI Interaction Data",</p>
+<p>"description": "Inputs, outputs, and metadata from interactions with AI-powered features. May be used to improve model performance.",</p>
+<p>"legal_basis": "Consent (Art. 6(1)(a) GDPR)",</p>
+<p>"retention_period": "30 days (configurable)",</p>
+<p>"user<em>can</em>delete": true,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"openai"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "analytics",</p>
+<p>"name": "Analytics Data",</p>
+<p>"description": "Usage data collected to understand how you interact with our service, including page views, clicks, and session duration.",</p>
+<p>"legal_basis": "Legitimate interest (Art. 6(1)(f) GDPR)",</p>
+<p>"retention_period": "26 months",</p>
+<p>"user<em>can</em>delete": true,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"posthog"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "stored_data",</p>
+<p>"name": "Stored Data",</p>
+<p>"description": "Structured data stored in databases as part of service operation.",</p>
+<p>"legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",</p>
+<p>"retention_period": "Duration of account + 30 days",</p>
+<p>"user<em>can</em>delete": true,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"prisma"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "communications",</p>
+<p>"name": "Communication Data",</p>
+<p>"description": "Email addresses and communication preferences used to send transactional and marketing messages.",</p>
+<p>"legal_basis": "Consent / Legitimate interest",</p>
+<p>"retention_period": "Until unsubscribe + 30 days",</p>
+<p>"user<em>can</em>delete": true,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"resend"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "payment",</p>
+<p>"name": "Payment Data",</p>
+<p>"description": "Billing and transaction information processed for purchases, including payment method details (handled by our payment processor).",</p>
+<p>"legal_basis": "Contract performance (Art. 6(1)(b) GDPR)",</p>
+<p>"retention_period": "7 years (legal requirement)",</p>
+<p>"user<em>can</em>delete": false,</p>
+<p>"user<em>can</em>export": true,</p>
+<p>"sources": [</p>
+<p>"stripe",</p>
+<p>"stripe-ios"</p>
+<p>]</p>
+<p>}</p>
+<p>],</p>
+<p>"consent_options": [</p>
+<p>{</p>
+<p>"id": "essential_consent",</p>
+<p>"name": "Essential Services",</p>
+<p>"description": "Required for the service to function. Cannot be disabled.",</p>
+<p>"required": true,</p>
+<p>"default<em>state": "opted</em>in",</p>
+<p>"category_ids": [</p>
+<p>"account",</p>
+<p>"payment",</p>
+<p>"stored_data"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "analytics_consent",</p>
+<p>"name": "Analytics",</p>
+<p>"description": "Allow us to collect anonymous usage data to improve our service.",</p>
+<p>"required": false,</p>
+<p>"default<em>state": "opted</em>out",</p>
+<p>"category_ids": [</p>
+<p>"analytics"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "ai<em>training</em>consent",</p>
+<p>"name": "AI Improvement",</p>
+<p>"description": "Allow your interactions with AI features to be used for model improvement.",</p>
+<p>"required": false,</p>
+<p>"default<em>state": "opted</em>out",</p>
+<p>"category_ids": [</p>
+<p>"ai_interactions"</p>
+<p>]</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "marketing_consent",</p>
+<p>"name": "Marketing Communications",</p>
+<p>"description": "Receive product updates, tips, and promotional offers via email.",</p>
+<p>"required": false,</p>
+<p>"default<em>state": "opted</em>out",</p>
+<p>"category_ids": [</p>
+<p>"communications"</p>
+<p>]</p>
+<p>}</p>
+<p>],</p>
+<p>"data_endpoints": [</p>
+<p>{</p>
+<p>"action": "export",</p>
+<p>"method": "POST",</p>
+<p>"path": "/api/privacy/export",</p>
+<p>"description": "Request a full export of your personal data in machine-readable format (JSON/CSV).",</p>
+<p>"requires_auth": true</p>
+<p>},</p>
+<p>{</p>
+<p>"action": "delete",</p>
+<p>"method": "POST",</p>
+<p>"path": "/api/privacy/delete",</p>
+<p>"description": "Request deletion of your account and all associated personal data.",</p>
+<p>"requires_auth": true</p>
+<p>},</p>
+<p>{</p>
+<p>"action": "consent",</p>
+<p>"method": "PUT",</p>
+<p>"path": "/api/privacy/consent",</p>
+<p>"description": "Update your consent preferences for optional data processing.",</p>
+<p>"requires_auth": true</p>
+<p>},</p>
+<p>{</p>
+<p>"action": "access",</p>
+<p>"method": "GET",</p>
+<p>"path": "/api/privacy/data",</p>
+<p>"description": "View a summary of all personal data we hold about you.",</p>
+<p>"requires_auth": true</p>
+<p>},</p>
+<p>{</p>
+<p>"action": "rectify",</p>
+<p>"method": "PUT",</p>
+<p>"path": "/api/privacy/rectify",</p>
+<p>"description": "Request correction of inaccurate personal data.",</p>
+<p>"requires_auth": true</p>
+<p>},</p>
+<p>{</p>
+<p>"action": "restrict",</p>
+<p>"method": "POST",</p>
+<p>"path": "/api/privacy/restrict",</p>
+<p>"description": "Request restriction of processing for specific data categories.",</p>
+<p>"requires_auth": true</p>
+<p>}</p>
+<p>],</p>
+<p>"rights": [</p>
+<p>{</p>
+<p>"id": "right_access",</p>
+<p>"name": "Right of Access",</p>
+<p>"description": "You can request a copy of all personal data we hold about you.",</p>
+<p>"regulation": "GDPR Art. 15 / CCPA Sec. 1798.100",</p>
+<p>"endpoint": "/api/privacy/data"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "right_rectification",</p>
+<p>"name": "Right to Rectification",</p>
+<p>"description": "You can request correction of inaccurate personal data.",</p>
+<p>"regulation": "GDPR Art. 16",</p>
+<p>"endpoint": "/api/privacy/rectify"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "right_erasure",</p>
+<p>"name": "Right to Erasure",</p>
+<p>"description": "You can request deletion of your personal data (right to be forgotten).",</p>
+<p>"regulation": "GDPR Art. 17 / CCPA Sec. 1798.105",</p>
+<p>"endpoint": "/api/privacy/delete"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "right_portability",</p>
+<p>"name": "Right to Data Portability",</p>
+<p>"description": "You can request your data in a structured, machine-readable format.",</p>
+<p>"regulation": "GDPR Art. 20",</p>
+<p>"endpoint": "/api/privacy/export"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "right_restriction",</p>
+<p>"name": "Right to Restrict Processing",</p>
+<p>"description": "You can request that we limit how we process your data.",</p>
+<p>"regulation": "GDPR Art. 18",</p>
+<p>"endpoint": "/api/privacy/restrict"</p>
+<p>},</p>
+<p>{</p>
+<p>"id": "right_object",</p>
+<p>"name": "Right to Object",</p>
+<p>"description": "You can object to processing based on legitimate interest or direct marketing.",</p>
+<p>"regulation": "GDPR Art. 21",</p>
+<p>"endpoint": "/api/privacy/consent"</p>
+<p>}</p>
+<p>]</p>
+<p>}</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>DSAR Handling Guide (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</p></li>
+<li><p>Consent Management Guide (<code>CONSENT<em>MANAGEMENT</em>GUIDE.md</code>)</p></li>
+<li><p>Cookie Consent Configuration (<code>COOKIE<em>CONSENT</em>CONFIG.json</code>)</p></li>
+<li><p>Data Portability Guide (<code>DATA<em>PORTABILITY</em>GUIDE.md</code>)</p></li>
+</ul>

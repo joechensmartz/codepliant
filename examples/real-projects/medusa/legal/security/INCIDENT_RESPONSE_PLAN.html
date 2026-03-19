@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INCIDENT RESPONSE PLAN — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>INCIDENT RESPONSE PLAN</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="incident-response-plan">Incident Response Plan</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p>This document outlines the incident response procedures for <strong>[Your Company Name]</strong>. It covers detection, classification, notification, investigation, remediation, and post-incident review.</p>
+<h2 id="1-incident-classification">1. Incident Classification</h2>
+<p>All security incidents and data breaches are classified by severity to determine the appropriate response timeline and escalation path.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Description</th><th style="text-align:left">Response Time</th><th style="text-align:left">Examples</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Critical (P1)</strong></td><td style="text-align:left">Active data breach with confirmed data exfiltration or system compromise</td><td style="text-align:left">Immediate (within 1 hour)</td><td style="text-align:left">Unauthorized access to production database, ransomware, leaked credentials actively exploited</td></tr>
+<tr><td style="text-align:left"><strong>High (P2)</strong></td><td style="text-align:left">Confirmed security incident with potential data exposure</td><td style="text-align:left">Within 4 hours</td><td style="text-align:left">Vulnerability actively being exploited, unauthorized access detected, suspected data leak</td></tr>
+<tr><td style="text-align:left"><strong>Medium (P3)</strong></td><td style="text-align:left">Security event requiring investigation</td><td style="text-align:left">Within 24 hours</td><td style="text-align:left">Unusual access patterns, failed intrusion attempts, misconfiguration discovered</td></tr>
+<tr><td style="text-align:left"><strong>Low (P4)</strong></td><td style="text-align:left">Minor security event or policy violation</td><td style="text-align:left">Within 72 hours</td><td style="text-align:left">Phishing attempt blocked, minor policy violation, non-sensitive data exposure</td></tr>
+</tbody>
+</table>
+<h2 id="2-detection-and-reporting-procedures">2. Detection and Reporting Procedures</h2>
+<h3 id="how-to-report-an-incident">How to Report an Incident</h3>
+<p>Any employee, contractor, or third party who discovers or suspects a security incident must report it immediately:</p>
+<ol>
+<li><strong>Email:</strong> [[your-email@example.com]](mailto:[your-email@example.com])</li>
+<li><strong>Escalation:</strong> Contact the DPO at [[dpo@example.com]](mailto:[dpo@example.com])</li>
+<li><strong>Do NOT</strong> attempt to investigate or remediate the issue independently</li>
+<li><strong>Do NOT</strong> communicate about the incident on public channels</li>
+</ol>
+<h3 id="information-to-include">Information to Include</h3>
+<ul>
+<li>Date and time the incident was discovered</li>
+<li>Description of what occurred</li>
+<li>Systems, services, or data affected</li>
+<li>How the incident was detected</li>
+<li>Any actions already taken</li>
+<li>Contact information of the reporter</li>
+</ul>
+<h2 id="3-gdpr-72-hour-notification-requirement">3. GDPR 72-Hour Notification Requirement</h2>
+<p>Under Article 33 of the GDPR, personal data breaches must be reported to the relevant supervisory authority <strong>within 72 hours</strong> of becoming aware of the breach, unless the breach is unlikely to result in a risk to the rights and freedoms of individuals.</p>
+<h3 id="timeline">Timeline</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Milestone</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Breach discovered</td><td style="text-align:left">T = 0</td></tr>
+<tr><td style="text-align:left">Internal assessment complete</td><td style="text-align:left">T + 24 hours</td></tr>
+<tr><td style="text-align:left">Decision on notification obligation</td><td style="text-align:left">T + 36 hours</td></tr>
+<tr><td style="text-align:left">Supervisory authority notified</td><td style="text-align:left">T + 72 hours (maximum)</td></tr>
+<tr><td style="text-align:left">Affected individuals notified (if high risk)</td><td style="text-align:left">Without undue delay</td></tr>
+</tbody>
+</table>
+<p>If notification cannot be made within 72 hours, the reasons for the delay must be documented and communicated to the authority.</p>
+<h2 id="4-authority-notification-template">4. Authority Notification Template</h2>
+<p>Use the following template when notifying the supervisory authority of a personal data breach:</p>
+<pre><code>PERSONAL DATA BREACH NOTIFICATION
+=================================
+
+Organization: [Your Company Name]
+DPO / Contact: [Data Protection Officer Name] ([dpo@example.com])
+Website: [https://yoursite.com]
+
+Date and time breach was discovered: [DATE/TIME]
+Date and time breach occurred (if known): [DATE/TIME]
+
+Nature of the breach:
+  [ ] Confidentiality breach (unauthorized disclosure)
+  [ ] Integrity breach (unauthorized alteration)
+  [ ] Availability breach (unauthorized loss of access)
+
+Categories of personal data affected:
+  [ ] Names               [ ] Email addresses
+  [ ] Phone numbers       [ ] Physical addresses
+  [ ] Financial data      [ ] Health data
+  [ ] Authentication data [ ] Other: ___________
+
+Approximate number of data subjects affected: [NUMBER]
+Approximate number of records affected: [NUMBER]
+
+Description of likely consequences:
+[DESCRIBE POTENTIAL IMPACT ON DATA SUBJECTS]
+
+Measures taken or proposed to address the breach:
+[DESCRIBE CONTAINMENT AND REMEDIATION STEPS]
+
+Measures taken to mitigate adverse effects:
+[DESCRIBE MITIGATION ACTIONS]</code></pre>
+<h2 id="5-user-notification-template">5. User Notification Template</h2>
+<p>When a breach is likely to result in a high risk to the rights and freedoms of individuals (GDPR Article 34), affected users must be notified directly. Use the following template:</p>
+<pre><code>Subject: Important Security Notice from [Your Company Name]
+
+Dear [User Name],
+
+We are writing to inform you of a security incident at [Your Company Name] that may have affected your personal data.
+
+WHAT HAPPENED:
+[Brief, clear description of the incident]
+
+WHAT DATA WAS AFFECTED:
+[List the specific types of personal data involved]
+
+WHAT WE ARE DOING:
+[Describe the steps taken to contain and remediate the breach]
+
+WHAT YOU CAN DO:
+- Change your password immediately
+- Enable two-factor authentication if not already active
+- Monitor your accounts for suspicious activity
+- [Additional specific recommendations]
+
+CONTACT US:
+If you have questions, please contact us at [your-email@example.com].
+
+We sincerely apologize for this incident and are taking all necessary
+steps to prevent a recurrence.
+
+Sincerely,
+[Your Company Name]</code></pre>
+<h2 id="6-investigation-procedures">6. Investigation Procedures</h2>
+<p>Upon confirmation of a security incident, the incident response team must:</p>
+<h3 id="61-containment">6.1 Containment</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Isolate affected systems from the network</li>
+<li><input type="checkbox" disabled> Revoke compromised credentials and API keys</li>
+<li><input type="checkbox" disabled> Block malicious IP addresses or accounts</li>
+<li><input type="checkbox" disabled> Preserve forensic evidence (logs, snapshots, memory dumps)</li>
+<li><input type="checkbox" disabled> Activate backup communication channels if primary channels are compromised</li>
+</ul>
+<h3 id="62-investigation">6.2 Investigation</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Determine the root cause of the incident</li>
+<li><input type="checkbox" disabled> Identify all affected systems, services, and data</li>
+<li><input type="checkbox" disabled> Determine the scope of data exposure</li>
+<li><input type="checkbox" disabled> Review access logs and audit trails</li>
+<li><input type="checkbox" disabled> Interview relevant personnel</li>
+<li><input type="checkbox" disabled> Document timeline of events</li>
+<li><input type="checkbox" disabled> Engage external forensic specialists if needed</li>
+</ul>
+<h2 id="7-remediation-steps">7. Remediation Steps</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Patch or fix the vulnerability that led to the incident</li>
+<li><input type="checkbox" disabled> Rotate all potentially compromised secrets, keys, and tokens</li>
+<li><input type="checkbox" disabled> Force password resets for affected user accounts</li>
+<li><input type="checkbox" disabled> Update firewall rules and access controls</li>
+<li><input type="checkbox" disabled> Deploy additional monitoring on affected systems</li>
+<li><input type="checkbox" disabled> Verify that the attack vector is fully closed</li>
+<li><input type="checkbox" disabled> Conduct a follow-up scan to confirm no persistence mechanisms remain</li>
+<li><input type="checkbox" disabled> Update security documentation and runbooks</li>
+</ul>
+<h2 id="8-post-incident-review">8. Post-Incident Review</h2>
+<p>A post-incident review (blameless post-mortem) must be conducted within <strong>5 business days</strong> of incident resolution.</p>
+<h3 id="review-agenda">Review Agenda</h3>
+<ol>
+<li><strong>Timeline reconstruction</strong> — What happened, and when?</li>
+<li><strong>Root cause analysis</strong> — Why did it happen?</li>
+<li><strong>Detection assessment</strong> — How was the incident detected? Could it have been detected sooner?</li>
+<li><strong>Response evaluation</strong> — Was the response effective? What worked well?</li>
+<li><strong>Gap identification</strong> — What controls, processes, or tools were missing?</li>
+<li><strong>Action items</strong> — Concrete tasks with owners and deadlines to prevent recurrence</li>
+</ol>
+<h3 id="documentation">Documentation</h3>
+<p>The post-incident report must include:</p>
+<ul>
+<li>Incident summary and severity classification</li>
+<li>Complete timeline of events</li>
+<li>Root cause and contributing factors</li>
+<li>Data impact assessment</li>
+<li>Remediation actions taken</li>
+<li>Lessons learned</li>
+<li>Preventive action items with owners and due dates</li>
+</ul>
+<h2 id="9-contact-list">9. Contact List</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Name</th><th style="text-align:left">Email</th><th style="text-align:left">Responsibility</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Incident Response Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[[your-email@example.com]](mailto:[your-email@example.com])</td><td style="text-align:left">Overall incident coordination</td></tr>
+<tr><td style="text-align:left">Data Protection Officer</td><td style="text-align:left">[Data Protection Officer Name]</td><td style="text-align:left">[[dpo@example.com]](mailto:[dpo@example.com])</td><td style="text-align:left">GDPR compliance, authority notification</td></tr>
+<tr><td style="text-align:left">Engineering Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td><td style="text-align:left">Technical investigation and remediation</td></tr>
+<tr><td style="text-align:left">Legal Counsel</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td><td style="text-align:left">Legal obligations, regulatory response</td></tr>
+<tr><td style="text-align:left">Communications Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td><td style="text-align:left">User notification, public communications</td></tr>
+<tr><td style="text-align:left">Executive Sponsor</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td><td style="text-align:left">Final decision authority</td></tr>
+</tbody>
+</table>
+<h2 id="10-ai-incident-handling">10. AI Incident Handling</h2>
+<p>This project integrates with AI services. The following additional procedures apply to AI-related incidents.</p>
+<h3 id="ai-specific-incident-types">AI-Specific Incident Types</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Incident Type</th><th style="text-align:left">Description</th><th style="text-align:left">Severity</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Data leak via AI</strong></td><td style="text-align:left">User data or sensitive information exposed through AI model inputs/outputs</td><td style="text-align:left">Critical (P1)</td></tr>
+<tr><td style="text-align:left"><strong>Prompt injection</strong></td><td style="text-align:left">Malicious prompts bypass safety controls to extract data or alter behavior</td><td style="text-align:left">High (P2)</td></tr>
+<tr><td style="text-align:left"><strong>Bias incident</strong></td><td style="text-align:left">AI produces discriminatory, harmful, or biased outputs at scale</td><td style="text-align:left">High (P2)</td></tr>
+<tr><td style="text-align:left"><strong>Hallucination impact</strong></td><td style="text-align:left">AI generates false information that causes user harm or legal liability</td><td style="text-align:left">Medium–High</td></tr>
+<tr><td style="text-align:left"><strong>Model manipulation</strong></td><td style="text-align:left">Adversarial inputs cause the AI to produce unauthorized outputs</td><td style="text-align:left">High (P2)</td></tr>
+</tbody>
+</table>
+<h3 id="ai-incident-response-steps">AI Incident Response Steps</h3>
+<ol>
+<li><strong>Contain</strong> — Disable or throttle the affected AI feature immediately</li>
+<li><strong>Assess data exposure</strong> — Determine if user data was leaked to or through the AI service</li>
+<li><strong>Review AI provider logs</strong> — Request audit logs from the AI service provider</li>
+<li><strong>Evaluate downstream impact</strong> — Assess whether AI outputs were stored, shared, or acted upon</li>
+<li><strong>Notify AI provider</strong> — Report the incident to the AI service provider per your agreement</li>
+<li><strong>Update safeguards</strong> — Strengthen input validation, output filtering, and prompt guardrails</li>
+<li><strong>Document</strong> — Record the incident with specific attention to data flow through AI services</li>
+</ol>
+<h2 id="11-pci-dss-incident-procedures">11. PCI DSS Incident Procedures</h2>
+<p>This project processes payment data. The following PCI DSS-specific procedures apply to incidents involving cardholder data.</p>
+<h3 id="pci-incident-requirements">PCI Incident Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Immediately contain and limit the exposure of cardholder data</li>
+<li><input type="checkbox" disabled> Notify your payment processor (e.g., Stripe, PayPal) within <strong>24 hours</strong> of discovering a breach</li>
+<li><input type="checkbox" disabled> Notify the relevant card brands (Visa, Mastercard, etc.) per their specific timelines</li>
+<li><input type="checkbox" disabled> Engage a PCI Forensic Investigator (PFI) if required by the card brands</li>
+<li><input type="checkbox" disabled> Preserve all evidence for forensic investigation</li>
+<li><input type="checkbox" disabled> Do NOT restart or alter compromised systems until forensic evidence is collected</li>
+</ul>
+<h3 id="payment-data-breach-checklist">Payment Data Breach Checklist</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Confirm whether primary account numbers (PANs) were exposed</li>
+<li><input type="checkbox" disabled> Determine if CVV/CVC or PIN data was compromised</li>
+<li><input type="checkbox" disabled> Verify that cardholder data was being handled per PCI DSS requirements</li>
+<li><input type="checkbox" disabled> Document all compromised merchant IDs and terminal IDs</li>
+<li><input type="checkbox" disabled> Prepare for potential PCI DSS re-certification</li>
+</ul>
+<h2 id="review-notes">Review Notes</h2>
+<h3 id="what-a-lawyer-should-check">What a lawyer should check</h3>
+<ul>
+<li>Verify notification timelines meet GDPR 72-hour requirement</li>
+<li>Confirm escalation procedures are realistic</li>
+<li>Check that all required roles are assigned</li>
+<li>Ensure breach notification templates are jurisdiction-appropriate</li>
+</ul>
+<h3 id="auto-generated-vs-needs-human-input">Auto-generated vs. needs human input</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Section</th><th style="text-align:left">Status</th><th style="text-align:left">Confidence</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Response procedures</td><td style="text-align:left">Standard template</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Notification timelines</td><td style="text-align:left">Based on GDPR requirements</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Team assignments</td><td style="text-align:left">Placeholder — needs completion</td><td style="text-align:left">N/A</td></tr>
+</tbody>
+</table>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Security Policy (<code>SECURITY.md</code>)</li>
+<li>Data Breach Notification Templates (<code>DATA<em>BREACH</em>NOTIFICATION_TEMPLATE.md</code>)</li>
+<li>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</li>
+<li>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</li>
+</ul>
+<hr>
+<p><em>This incident response plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>root</strong> codebase. It should be reviewed and customized by your legal and security teams before adoption.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

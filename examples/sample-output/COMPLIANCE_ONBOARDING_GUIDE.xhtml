@@ -1,0 +1,187 @@
+<h1>Compliance Onboarding Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance Onboarding Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Acme Inc</strong> — New Employee Compliance Onboarding</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Generated on 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a></p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Welcome</h2>
+<p>Welcome to Acme Inc. This guide will help you understand your compliance responsibilities from day one. Data protection and security are everyone's responsibility — not just the legal team's.</p>
+<p><strong>Why this matters:</strong> Our application processes user data through multiple services and platforms. Every team member who touches code, data, or infrastructure must understand the rules that govern how we handle that data.</p>
+<h2>2. Key Contacts</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Contact</p></th></tr>
+<tr><td><p><strong>Privacy / Compliance Lead</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>Data Protection Officer (DPO)</strong></p></td><td><p>Jane Mueller (dpo@acme-saas.com)</p></td></tr>
+<tr><td><p><strong>Security Team</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>Incident Reporting</strong></p></td><td><p>legal@acme.com — report immediately, do not wait</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Rule of thumb:</strong> If you are unsure whether something involves personal data or a compliance obligation, ask. It is always better to ask first than to fix a breach later.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Services That Process User Data</h2>
+<p>The following third-party services have been detected in our codebase. Each one processes user data and is covered by our compliance documentation:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Processed</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Error Monitoring</p></td><td><p>error data, stack traces, user context, device information, IP address</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>email, password hash, session data, user metadata</p></td></tr>
+<tr><td><p>openai</p></td><td><p>AI Service</p></td><td><p>user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Analytics</p></td><td><p>user behavior, session recordings, feature flag usage, device information</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>Database</p></td><td><p>user data as defined in schema</p></td></tr>
+<tr><td><p>resend</p></td><td><p>Email Service</p></td><td><p>email addresses, email content</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Payment Processing</p></td><td><p>payment information, billing address, email, transaction history</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>payment information, billing address, email, transaction history</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Total services:</strong> 8. Before integrating a new service, check with the compliance lead to ensure it is added to our sub-processor list and covered by a Data Processing Agreement.</p>
+<h2>4. Required Reading — Priority Order</h2>
+<p>Read these documents in order. Each phase builds on the previous one.</p>
+<h3>Day 1 — Immediate</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Why You Need It</p></th></tr>
+<tr><td><p><a href="./PRIVACY_POLICY.md">Privacy Policy</a></p></td><td><p>Understand what user data the company collects and how it is processed</p></td></tr>
+<tr><td><p><a href="./ACCEPTABLE<em>USE</em>POLICY.md">Acceptable Use Policy</a></p></td><td><p>Know what is and is not permitted when using company systems</p></td></tr>
+<tr><td><p><a href="./SECURITY.md">Security Policy</a></p></td><td><p>Understand baseline security expectations (passwords, MFA, device handling)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Week 1 — Core Compliance</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Why You Need It</p></th></tr>
+<tr><td><p><a href="./DATA<em>PROTECTION</em>POLICY.md">Data Protection Policy</a></p></td><td><p>Learn how the company classifies and handles personal data</p></td></tr>
+<tr><td><p><a href="./INCIDENT<em>RESPONSE</em>PLAN.md">Incident Response Plan</a></p></td><td><p>Know what to do if you discover a data breach or security incident</p></td></tr>
+<tr><td><p><a href="./ACCESS<em>CONTROL</em>POLICY.md">Access Control Policy</a></p></td><td><p>Understand role-based access, least privilege, and how to request permissions</p></td></tr>
+<tr><td><p><a href="./EMPLOYEE<em>PRIVACY</em>NOTICE.md">Employee Privacy Notice</a></p></td><td><p>Understand what data the company collects about you as an employee</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Week 2 — Operational</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Why You Need It</p></th></tr>
+<tr><td><p><a href="./DATA<em>RETENTION</em>POLICY.md">Data Retention Policy</a></p></td><td><p>Know how long data is kept and when it must be deleted</p></td></tr>
+<tr><td><p><a href="./DSAR<em>HANDLING</em>GUIDE.md">DSAR Handling Guide</a></p></td><td><p>Know how to handle data subject access requests from users</p></td></tr>
+<tr><td><p><a href="./CHANGE<em>MANAGEMENT</em>POLICY.md">Change Management Policy</a></p></td><td><p>Follow proper procedures for code changes and deployments</p></td></tr>
+<tr><td><p><a href="./CONSENT<em>MANAGEMENT</em>GUIDE.md">Consent Management Guide</a></p></td><td><p>Understand how user consent is collected and managed</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Month 1 — Deep Dive</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Why You Need It</p></th></tr>
+<tr><td><p><a href="./DATA<em>PROCESSING</em>AGREEMENT.md">Data Processing Agreement</a></p></td><td><p>Understand contractual obligations with data processors</p></td></tr>
+<tr><td><p><a href="./SUBPROCESSOR_LIST.md">Sub-Processor List</a></p></td><td><p>Know which third-party services process user data</p></td></tr>
+<tr><td><p><a href="./COMPLIANCE_ROADMAP.md">Compliance Roadmap</a></p></td><td><p>Understand the company's compliance goals and timeline</p></td></tr>
+<tr><td><p><a href="./RISK_REGISTER.md">Risk Register</a></p></td><td><p>Review identified compliance risks and mitigation strategies</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>AI-Specific Reading (Required for AI Team Members)</h3>
+<p>Our application uses AI services. If you work on AI features or use AI tools in your workflow, these are mandatory:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Why You Need It</p></th></tr>
+<tr><td><p><a href="./AI_DISCLOSURE.md">AI Disclosure</a></p></td><td><p>Understand how AI usage is disclosed to end users (EU AI Act Art. 50)</p></td></tr>
+<tr><td><p><a href="./ACCEPTABLE<em>AI</em>USE_POLICY.md">Acceptable AI Use Policy</a></p></td><td><p>Know the rules for using AI tools in your work</p></td></tr>
+<tr><td><p><a href="./AI<em>GOVERNANCE</em>FRAMEWORK.md">AI Governance Framework</a></p></td><td><p>Understand the oversight structure for AI systems</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. Key Policies — Quick Reference</h2>
+<h3>Data Handling Rules</h3>
+<ul>
+<li><p><strong>Never</strong> store personal data in logs, comments, or debug output</p></li>
+<li><p><strong>Never</strong> share production data in Slack, email, or tickets</p></li>
+<li><p><strong>Never</strong> copy production data to development environments without anonymization</p></li>
+<li><p><strong>Always</strong> use the minimum amount of data necessary for your task</p></li>
+<li><p><strong>Always</strong> encrypt personal data in transit and at rest</p></li>
+</ul>
+<h3>Access & Authentication</h3>
+<ul>
+<li><p>Enable MFA on all accounts (corporate and third-party services)</p></li>
+<li><p>Use unique, strong passwords via the company password manager</p></li>
+<li><p>Never share credentials or API keys via email, Slack, or code commits</p></li>
+<li><p>Request only the access permissions you need — least privilege principle</p></li>
+</ul>
+<h3>Incident Response</h3>
+<p>If you discover or suspect a data breach or security incident:</p>
+<ol>
+<li><p><strong>Report immediately</strong> — contact the security team within 1 hour</p></li>
+<li><p><strong>Do not attempt to fix it yourself</strong> unless you are on the incident response team</p></li>
+<li><p><strong>Preserve evidence</strong> — do not delete logs, emails, or files related to the incident</p></li>
+<li><p><strong>Document everything</strong> — note the time, what you observed, and what actions you took</p></li>
+</ol>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Under GDPR, we have <strong>72 hours</strong> to report certain breaches to supervisory authorities. The clock starts when we become aware — that means your speed in reporting matters.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Payment Data (PCI DSS)</h3>
+<ul>
+<li><p>Never log, screenshot, or store raw payment card numbers</p></li>
+<li><p>Payment data is handled exclusively through our payment processor (see Sub-Processor List)</p></li>
+<li><p>If you encounter raw payment data anywhere in the system, report it immediately</p></li>
+</ul>
+<h3>AI Usage Rules</h3>
+<ul>
+<li><p>Do not input sensitive personal data (PII, health data, financial data) into AI tools unless explicitly authorized</p></li>
+<li><p>All AI-generated outputs must be reviewed by a human before being used in decisions affecting users</p></li>
+<li><p>AI tool usage must comply with the Acceptable AI Use Policy</p></li>
+<li><p>Users must be informed when they are interacting with AI systems (EU AI Act Art. 50)</p></li>
+</ul>
+<h2>6. Onboarding Checklist</h2>
+<p>Complete these items within your first 30 days:</p>
+<ul>
+<li><p>[ ] Read all Day 1 documents (Privacy Policy, AUP, Security Policy)</p></li>
+<li><p>[ ] Enable MFA on all corporate accounts</p></li>
+<li><p>[ ] Set up the company password manager</p></li>
+<li><p>[ ] Read all Week 1 documents (Data Protection, Incident Response, Access Control)</p></li>
+<li><p>[ ] Complete security awareness training (if available)</p></li>
+<li><p>[ ] Review the services list above — understand which ones you interact with</p></li>
+<li><p>[ ] Read all Week 2 documents (Data Retention, DSAR, Change Management)</p></li>
+<li><p>[ ] Read all Month 1 documents (DPA, Sub-Processors, Roadmap, Risk Register)</p></li>
+<li><p>[ ] Read AI-specific documents (if applicable to your role)</p></li>
+<li><p>[ ] Sign the Compliance Acknowledgment (contact compliance lead)</p></li>
+<li><p>[ ] Know how to report an incident — save the contact info from Section 2</p></li>
+</ul>
+<h2>7. Frequently Asked Questions</h2>
+<p><strong>Q: I found personal data in a log file. What do I do?</strong></p>
+<p>A: Report it to the security team immediately. Do not delete the log — they will handle remediation and assess whether it constitutes a breach.</p>
+<p><strong>Q: A user asked me to delete their data. What do I do?</strong></p>
+<p>A: Forward the request to the compliance lead. Do not delete data yourself — there is a formal DSAR process that must be followed (see DSAR Handling Guide).</p>
+<p><strong>Q: I want to add a new third-party service to the project. Do I need approval?</strong></p>
+<p>A: Yes. Any new service that processes user data must be reviewed by the compliance lead before integration. It needs a DPA review and must be added to the sub-processor list.</p>
+<p><strong>Q: Can I use ChatGPT / Claude / other AI tools for work?</strong></p>
+<p>A: Yes, within the boundaries of our Acceptable AI Use Policy. Do not input sensitive personal data. All outputs must be reviewed before use.</p>
+<p><strong>Q: Where do I find all compliance documents?</strong></p>
+<p>A: All documents are in the <code>legal/</code> directory of the project repository. Start with the Compliance Policy Index for a full listing.</p>
+<hr />
+<p><em>This Compliance Onboarding Guide was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It should be reviewed by your compliance and HR teams before distribution to new employees.</em></p>

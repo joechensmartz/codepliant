@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA PORTABILITY GUIDE — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA PORTABILITY GUIDE</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~4 min read</p>
+    </header>
+    <h1 id="data-portability-guide">Data Portability Guide</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> maybe</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<hr>
+<p>This guide documents how to exercise the <strong>right to data portability</strong> under GDPR Article 20. Data portability allows data subjects to receive their personal data in a structured, commonly used, and machine-readable format, and to transmit that data to another controller without hindrance.</p>
+<h2 id="legal-basis">Legal Basis</h2>
+<p><strong>GDPR Article 20 — Right to Data Portability:</strong></p>
+<blockquote>1. The data subject shall have the right to receive the personal data concerning him or her, which he or she has provided to a controller, in a structured, commonly used and machine-readable format and have the right to transmit those data to another controller without hindrance from the controller to which the personal data have been provided.</blockquote>
+<p>></p>
+<blockquote>2. In exercising his or her right to data portability, the data subject shall have the right to have the personal data transmitted directly from one controller to another, where technically feasible.</blockquote>
+<h3 id="when-data-portability-applies">When Data Portability Applies</h3>
+<p>The right to data portability applies when:</p>
+<ul>
+<li>Processing is based on <strong>consent</strong> (Art. 6(1)(a)) or <strong>contract</strong> (Art. 6(1)(b))</li>
+<li>Processing is carried out by <strong>automated means</strong></li>
+<li>The data was <strong>provided by the data subject</strong> (directly or through observation)</li>
+</ul>
+<p>It does <strong>not</strong> apply to:</p>
+<ul>
+<li>Data processed under legitimate interest or legal obligation</li>
+<li>Inferred or derived data (e.g., analytics scores, risk assessments)</li>
+<li>Data that would adversely affect the rights of others</li>
+</ul>
+<h2 id="how-to-request-your-data">How to Request Your Data</h2>
+<p>To request a copy of your personal data in a portable format:</p>
+<ol>
+<li><strong>Email:</strong> Send a request to [your-email@example.com]</li>
+<li><strong>Subject line:</strong> "Data Portability Request"</li>
+<li><strong>Include:</strong> Your name, account identifier (email or user ID), and the specific data you want exported</li>
+<li><strong>Response time:</strong> We will respond within <strong>30 days</strong> of receiving your request (GDPR Art. 12(3))</li>
+<li><strong>Format:</strong> Data will be provided in JSON or CSV format unless you request otherwise</li>
+</ol>
+<p>If you prefer, you may request that we transmit your data directly to another controller. We will do so where technically feasible.</p>
+<h2 id="per-service-export-instructions">Per-Service Export Instructions</h2>
+<p>The following services process personal data in this application. Each section provides specific export instructions and API endpoints for retrieving your data.</p>
+<h3 id="stripe-inc">Stripe Inc</h3>
+<p><strong>Service:</strong> stripe</p>
+<p><strong>Export Formats:</strong> JSON, CSV</p>
+<p><strong>Export URL:</strong> https://dashboard.stripe.com/settings/data</p>
+<p><strong>API Endpoint:</strong> <code>https://api.stripe.com/v1/customers/{id}</code></p>
+<p><strong>Estimated Time:</strong> API responses immediate; full export within 48 hours</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Log in to Stripe Dashboard</li>
+<li>Navigate to Settings > Data & Privacy</li>
+<li>Use the Stripe API to export customer and payment data</li>
+</ol>
+<h2 id="supported-export-formats">Supported Export Formats</h2>
+<p>Per GDPR Article 20, data must be provided in a <strong>structured, commonly used, and machine-readable format</strong>. We support:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Format</th><th style="text-align:left">Description</th><th style="text-align:left">Machine-Readable</th><th style="text-align:left">Interoperable</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">JSON</td><td style="text-align:left">JavaScript Object Notation</td><td style="text-align:left">Yes</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">CSV</td><td style="text-align:left">Comma-Separated Values</td><td style="text-align:left">Yes</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">XML</td><td style="text-align:left">Extensible Markup Language</td><td style="text-align:left">Yes</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<p>All exports include metadata headers (export date, data subject ID, scope) to facilitate import into other systems.</p>
+<h2 id="implementation-checklist">Implementation Checklist</h2>
+<p>The following checklist ensures your data portability implementation meets GDPR requirements:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Data export API endpoint is implemented and accessible</li>
+<li><input type="checkbox" disabled> Export includes all personal data provided by the data subject</li>
+<li><input type="checkbox" disabled> Export format is structured, commonly used, and machine-readable</li>
+<li><input type="checkbox" disabled> Direct transmission to another controller is supported where feasible</li>
+<li><input type="checkbox" disabled> Portability requests are tracked and responded to within 30 days</li>
+<li><input type="checkbox" disabled> Authentication verifies the identity of the requesting data subject</li>
+<li><input type="checkbox" disabled> Export excludes third-party personal data (to protect others' rights)</li>
+<li><input type="checkbox" disabled> Sub-processor data is included or referenced with retrieval instructions</li>
+</ul>
+<h2 id="contact">Contact</h2>
+<p>For data portability requests or questions about your right to data portability, contact:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<p>You also have the right to lodge a complaint with your local data protection supervisory authority if you believe your data portability rights have not been respected.</p>
+<hr>
+<p><em>This data portability guide was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>maybe</strong> codebase. It should be reviewed by your legal and engineering teams to ensure completeness and accuracy. Export instructions may change as third-party services update their APIs and dashboards.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

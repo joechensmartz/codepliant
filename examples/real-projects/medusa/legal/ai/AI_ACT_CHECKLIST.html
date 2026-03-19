@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI ACT CHECKLIST — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AI ACT CHECKLIST</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~4 min read</p>
+    </header>
+    <h1 id="eu-ai-act-compliance-checklist">EU AI Act Compliance Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> root</p>
+<p><strong>Risk Classification:</strong> Limited</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>AI Disclosure (<code>AI_DISCLOSURE.md</code>)</li>
+<li>AI Model Card (<code>AI<em>MODEL</em>CARD.md</code>)</li>
+<li>AI Governance Framework (<code>AI<em>GOVERNANCE</em>FRAMEWORK.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This checklist is based on the EU Artificial Intelligence Act (Regulation (EU) 2024/1689). Full transparency obligations take effect on <strong>2 August 2026</strong>. Use this checklist to track your compliance progress.</blockquote>
+<p><strong>AI Services Detected:</strong> openai</p>
+<h2 id="transparency">Transparency</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Users are clearly informed when they are interacting with an AI system (Art. 50(1))</li>
+<li><input type="checkbox" disabled> AI disclosure statement is published and accessible from the application</li>
+<li><input type="checkbox" disabled> AI disclosure is provided at or before the user's first interaction with AI features (Art. 50(5))</li>
+<li><input type="checkbox" disabled> Disclosure meets accessibility standards per Directive (EU) 2019/882</li>
+<li><input type="checkbox" disabled> AI-generated content is clearly labelled as such to users</li>
+<li><input type="checkbox" disabled> Synthetic media (images, audio, video) is disclosed as AI-generated (Art. 50(4))</li>
+<li><input type="checkbox" disabled> AI-generated text published to inform the public is labelled as artificially generated</li>
+<li><input type="checkbox" disabled> Users are informed about the limitations and potential inaccuracies of AI outputs</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Complete inventory of all AI systems used in the application is maintained</li>
+<li><input type="checkbox" disabled> Each AI system's purpose, provider, and data processed is documented</li>
+<li><input type="checkbox" disabled> AI provider agreements and data processing terms are reviewed and on file</li>
+<li><input type="checkbox" disabled> Data processing records (GDPR Art. 30) include AI service providers</li>
+<li><input type="checkbox" disabled> AI disclosure statement is reviewed and updated at least annually</li>
+<li><input type="checkbox" disabled> Changes to AI systems or providers are reflected in documentation within 30 days</li>
+<li><input type="checkbox" disabled> Records of AI risk classification rationale are maintained</li>
+</ul>
+<h2 id="human-oversight">Human Oversight</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> AI features do not make autonomous decisions with legal or similarly significant effects</li>
+<li><input type="checkbox" disabled> A process exists for users to request human review of AI-assisted decisions</li>
+<li><input type="checkbox" disabled> Staff responsible for human review are identified and trained</li>
+<li><input type="checkbox" disabled> Response time for human review requests is defined and communicated</li>
+<li><input type="checkbox" disabled> AI outputs that may affect user rights are subject to human verification before action</li>
+<li><input type="checkbox" disabled> Override mechanisms exist to correct or reverse AI-generated decisions</li>
+<li><input type="checkbox" disabled> Regular audits of AI decision quality are conducted</li>
+</ul>
+<h2 id="incident-reporting">Incident Reporting</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Process exists to identify and report serious AI-related incidents</li>
+<li><input type="checkbox" disabled> Contact information for relevant national supervisory authority is on file</li>
+<li><input type="checkbox" disabled> Incident reporting timeline is defined (serious incidents must be reported promptly)</li>
+<li><input type="checkbox" disabled> Internal escalation procedure for AI malfunctions or harmful outputs is established</li>
+<li><input type="checkbox" disabled> Log of AI-related incidents and corrective actions is maintained</li>
+<li><input type="checkbox" disabled> Users have a clear channel to report concerns about AI behaviour</li>
+</ul>
+<h2 id="content-marking-art-502">Content Marking (Art. 50(2))</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Technical mechanism is implemented to mark AI-generated content as machine-readable</li>
+<li><input type="checkbox" disabled> Marking method is interoperable with standard detection tools</li>
+<li><input type="checkbox" disabled> Marking is applied at the point of content generation</li>
+<li><input type="checkbox" disabled> C2PA content credentials, watermarking, or equivalent metadata standard is adopted</li>
+<li><input type="checkbox" disabled> Compliance with the EU Code of Practice on marking AI-generated content is verified</li>
+<li><input type="checkbox" disabled> Marking cannot be easily removed or circumvented by end users</li>
+</ul>
+<h2 id="data-protection">Data Protection</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Data processing agreements are in place with all AI service providers</li>
+<li><input type="checkbox" disabled> Cross-border data transfer safeguards are documented (SCCs, EU-US DPF, adequacy decisions)</li>
+<li><input type="checkbox" disabled> Data minimisation principle is applied to data sent to AI providers</li>
+<li><input type="checkbox" disabled> Data retention policies for AI interaction data are defined</li>
+<li><input type="checkbox" disabled> Users can request deletion of their data from AI processing pipelines</li>
+<li><input type="checkbox" disabled> Privacy impact assessment (DPIA) has been conducted for AI features</li>
+<li><input type="checkbox" disabled> AI provider data processing policies are reviewed for GDPR compliance</li>
+</ul>
+<hr>
+<p><em>This checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is intended as a compliance tracking aid and should be reviewed by a legal professional. The EU AI Act requirements may evolve as implementing acts and codes of practice are finalised.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

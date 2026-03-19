@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUICK START COMPLIANCE GUIDE — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>QUICK START COMPLIANCE GUIDE</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~4 min read</p>
+    </header>
+    <h1 id="quick-start-compliance-guide">Quick Start Compliance Guide</h1>
+<blockquote><strong>You just ran codepliant.</strong> Here's what to do next. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><em>Generated for [Your Company Name] on 2026-03-16</em></p>
+<hr>
+<h2 id="your-scan-detected-16-services">Your scan detected 16 service(s)</h2>
+<p><strong>Services found:</strong> @ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @aws-sdk/client-s3, @sentry/node, @vercel/ai, drizzle, googleapis, ioredis, nodemailer, openai, passport, passport-google-oauth20, passport-microsoft, redis, stripe</p>
+<p>Codepliant has generated your compliance documents in the <code>legal/</code> directory. Follow the steps below to go from "generated" to "deployed."</p>
+<hr>
+<h2 id="step-1-review-your-privacy-policy">Step 1: Review Your Privacy Policy</h2>
+<p>Your <code>PRIVACY_POLICY.md</code> has been tailored to your actual code. It mentions every service detected by name — not generic placeholders.</p>
+<p><strong>What to do:</strong></p>
+<ol>
+<li>Open <code>legal/PRIVACY_POLICY.md</code></li>
+<li>Search for <code>[Your Company Name]</code> and replace with your actual company name</li>
+<li>Search for <code>[your-email@example.com]</code> and replace with your privacy contact email</li>
+<li>Review each section — especially "Third-Party Services" and "Data Collection"</li>
+<li>Have a lawyer review before publishing (the document includes a disclaimer)</li>
+</ol>
+<blockquote><strong>AI Notice:</strong> Your project uses AI services. Review <code>AI_DISCLOSURE.md</code> carefully — the EU AI Act (effective August 2, 2026) requires specific disclosures.</blockquote>
+<p><strong>Estimated time:</strong> 15-30 minutes</p>
+<p><a href="./PRIVACY_POLICY.md">View Privacy Policy →</a></p>
+<hr>
+<h2 id="step-2-add-documents-to-your-website">Step 2: Add Documents to Your Website</h2>
+<p>Your compliance documents need to be publicly accessible. Here's how to add them for your stack:</p>
+<h3 id="any-framework">Any Framework</h3>
+<pre><code># Generate HTML versions for easy embedding
+npx codepliant go --format html
+
+# Copy to your public/static directory
+cp legal/*.html public/legal/</code></pre>
+<blockquote><strong>Pro tip:</strong> Run <code>npx codepliant go --format html</code> to generate ready-to-serve HTML versions of all documents.</blockquote>
+<hr>
+<h2 id="step-3-set-up-cookie-consent">Step 3: Set Up Cookie Consent</h2>
+<p>No analytics or advertising cookies were detected in your project. If you add any in the future, re-run <code>npx codepliant go</code> and this section will update with specific instructions.</p>
+<hr>
+<h2 id="step-4-configure-cicd">Step 4: Configure CI/CD</h2>
+<p>Keep your compliance documents in sync with your code. When you add a new service, your docs should update automatically.</p>
+<h3 id="github-actions-recommended">GitHub Actions (recommended)</h3>
+<pre><code># .github/workflows/compliance.yml
+name: Compliance Check
+on: [push, pull_request]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: joechensmartz/codepliant@v220
+        with:
+          fail-on-missing: true</code></pre>
+<p>This will:</p>
+<ul>
+<li>Scan your code on every push and PR</li>
+<li>Fail the build if compliance docs are missing or outdated</li>
+<li>Comment on PRs with compliance impact</li>
+</ul>
+<h3 id="gitlab-ci">GitLab CI</h3>
+<pre><code>compliance:
+  image: node:20
+  script:
+    - npx codepliant check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == &quot;merge_request_event&quot;</code></pre>
+<h3 id="pre-commit-hook">Pre-commit Hook</h3>
+<pre><code># Install a git hook that checks compliance before every commit
+npx codepliant hook install</code></pre>
+<hr>
+<h2 id="step-5-ongoing-maintenance">Step 5: Ongoing Maintenance</h2>
+<p>Compliance is not "set and forget." Here's your maintenance schedule:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Frequency</th><th style="text-align:left">Action</th><th style="text-align:left">Command</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Every commit</td><td style="text-align:left">Auto-check via CI/CD</td><td style="text-align:left"><code>codepliant check</code></td></tr>
+<tr><td style="text-align:left">Weekly</td><td style="text-align:left">Review compliance dashboard</td><td style="text-align:left"><code>codepliant dashboard</code></td></tr>
+<tr><td style="text-align:left">Monthly</td><td style="text-align:left">Re-scan and update docs</td><td style="text-align:left"><code>codepliant update</code></td></tr>
+<tr><td style="text-align:left">Quarterly</td><td style="text-align:left">Full compliance review</td><td style="text-align:left"><code>codepliant report</code></td></tr>
+<tr><td style="text-align:left">Annually</td><td style="text-align:left">Annual review checklist</td><td style="text-align:left">See <code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="quick-reference">Quick Reference</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Purpose</th><th style="text-align:left">Location</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Privacy Policy</td><td style="text-align:left">What data you collect and why</td><td style="text-align:left"><code>legal/PRIVACY_POLICY.md</code></td></tr>
+<tr><td style="text-align:left">Terms of Service</td><td style="text-align:left">Rules for using your product</td><td style="text-align:left"><code>legal/TERMS<em>OF</em>SERVICE.md</code></td></tr>
+<tr><td style="text-align:left">AI Disclosure</td><td style="text-align:left">EU AI Act Article 50 compliance</td><td style="text-align:left"><code>legal/AI_DISCLOSURE.md</code></td></tr>
+<tr><td style="text-align:left">Refund Policy</td><td style="text-align:left">Refund and cancellation terms</td><td style="text-align:left"><code>legal/REFUND_POLICY.md</code></td></tr>
+<tr><td style="text-align:left">Security Policy</td><td style="text-align:left">How you protect user data</td><td style="text-align:left"><code>legal/SECURITY.md</code></td></tr>
+<tr><td style="text-align:left">Incident Response</td><td style="text-align:left">What happens during a breach</td><td style="text-align:left"><code>legal/INCIDENT<em>RESPONSE</em>PLAN.md</code></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="need-help">Need Help?</h2>
+<ul>
+<li><strong>Re-scan after changes:</strong> <code>npx codepliant go</code></li>
+<li><strong>Check compliance status:</strong> <code>npx codepliant dashboard</code></li>
+<li><strong>Validate documents:</strong> <code>npx codepliant validate</code></li>
+<li><strong>Get a compliance report:</strong> <code>npx codepliant report</code></li>
+</ul>
+<hr>
+<p><em>Generated by Codepliant v220.0.0 on 2026-03-16.</em></p>
+<p><em>This guide is personalized to your detected stack. Re-run <code>npx codepliant go</code> after adding new services to keep it updated.</em></p>
+<p><em>Compliance documents should be reviewed by a qualified legal professional before publication.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

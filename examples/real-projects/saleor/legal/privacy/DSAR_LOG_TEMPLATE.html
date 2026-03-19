@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSAR LOG TEMPLATE — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DSAR LOG TEMPLATE</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="data-subject-access-request-dsar-log">Data Subject Access Request (DSAR) Log</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>DPO / Privacy Contact:</strong> [dpo@example.com]</p>
+<p><strong>Created:</strong> 2026-03-16</p>
+<p><strong>Applicable Regulations:</strong> GDPR</p>
+<hr>
+<blockquote>This template provides a structured log for recording and tracking all Data Subject Access Requests (DSARs). Maintaining this log is required under GDPR Article 12(5) to demonstrate compliance with data subject rights obligations. Each request must be documented from receipt through completion.</blockquote>
+<h2 id="request-type-reference">Request Type Reference</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Code</th><th style="text-align:left">Type</th><th style="text-align:left">Deadline (days)</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ACC</td><td style="text-align:left">Access (Art. 15)</td><td style="text-align:left">30</td><td style="text-align:left">Subject requests copy of their personal data</td></tr>
+<tr><td style="text-align:left">ERA</td><td style="text-align:left">Erasure (Art. 17)</td><td style="text-align:left">30</td><td style="text-align:left">Subject requests deletion of their personal data</td></tr>
+<tr><td style="text-align:left">REC</td><td style="text-align:left">Rectification (Art. 16)</td><td style="text-align:left">30</td><td style="text-align:left">Subject requests correction of inaccurate data</td></tr>
+<tr><td style="text-align:left">POR</td><td style="text-align:left">Portability (Art. 20)</td><td style="text-align:left">30</td><td style="text-align:left">Subject requests data in machine-readable format</td></tr>
+<tr><td style="text-align:left">RES</td><td style="text-align:left">Restriction (Art. 18)</td><td style="text-align:left">30</td><td style="text-align:left">Subject requests restriction of processing</td></tr>
+<tr><td style="text-align:left">OBJ</td><td style="text-align:left">Objection (Art. 21)</td><td style="text-align:left">30</td><td style="text-align:left">Subject objects to processing</td></tr>
+</tbody>
+</table>
+<h2 id="status-values">Status Values</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Status</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Received</td><td style="text-align:left">Request received, awaiting identity verification</td></tr>
+<tr><td style="text-align:left">Verifying</td><td style="text-align:left">Identity verification in progress</td></tr>
+<tr><td style="text-align:left">In Progress</td><td style="text-align:left">Verified; gathering data or executing request</td></tr>
+<tr><td style="text-align:left">Extended</td><td style="text-align:left">Deadline extended (complex request, max +60 days GDPR / +45 days CCPA)</td></tr>
+<tr><td style="text-align:left">Completed</td><td style="text-align:left">Request fulfilled, response sent to subject</td></tr>
+<tr><td style="text-align:left">Denied</td><td style="text-align:left">Request denied with documented reason (e.g. manifestly unfounded)</td></tr>
+<tr><td style="text-align:left">Closed</td><td style="text-align:left">Completed and archived</td></tr>
+</tbody>
+</table>
+<h2 id="dsar-log">DSAR Log</h2>
+<blockquote>Copy and append a new row for each incoming request.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Date Received</th><th style="text-align:left">Type</th><th style="text-align:left">Data Subject</th><th style="text-align:left">Channel</th><th style="text-align:left">Status</th><th style="text-align:left">Due Date</th><th style="text-align:left">Completed</th><th style="text-align:left">Handler</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR-001</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Email / Form / Phone</td><td style="text-align:left">Received</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">DSAR-002</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Email / Form / Phone</td><td style="text-align:left">Received</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">DSAR-003</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Email / Form / Phone</td><td style="text-align:left">Received</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">DSAR-004</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Email / Form / Phone</td><td style="text-align:left">Received</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">DSAR-005</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Email / Form / Phone</td><td style="text-align:left">Received</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h2 id="identity-verification-log">Identity Verification Log</h2>
+<blockquote>Before processing any DSAR, verify the identity of the requester to prevent unauthorised disclosure.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">DSAR ID</th><th style="text-align:left">Verification Method</th><th style="text-align:left">Verified By</th><th style="text-align:left">Verified Date</th><th style="text-align:left">Outcome</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR-001</td><td style="text-align:left">ID document / Account login / Knowledge-based</td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Confirmed / Denied</td></tr>
+<tr><td style="text-align:left">DSAR-002</td><td style="text-align:left">ID document / Account login / Knowledge-based</td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Confirmed / Denied</td></tr>
+<tr><td style="text-align:left">DSAR-003</td><td style="text-align:left">ID document / Account login / Knowledge-based</td><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Confirmed / Denied</td></tr>
+</tbody>
+</table>
+<h2 id="data-locations-by-service">Data Locations by Service</h2>
+<blockquote>When fulfilling a DSAR, data must be gathered from all services that store personal data.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Collected</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">boto3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+<tr><td style="text-align:left">Django Channels</td><td style="text-align:left">other</td><td style="text-align:left">real-time user data, connection metadata, channel group data, WebSocket messages</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+<tr><td style="text-align:left">django-admin</td><td style="text-align:left">auth</td><td style="text-align:left">admin panel access, staff user accounts</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+<tr><td style="text-align:left">django-sessions</td><td style="text-align:left">auth</td><td style="text-align:left">session cookies, CSRF tokens</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">Export / Delete / Rectify</td></tr>
+</tbody>
+</table>
+<h2 id="response-tracking">Response Tracking</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">DSAR ID</th><th style="text-align:left">Response Date</th><th style="text-align:left">Response Method</th><th style="text-align:left">Data Provided</th><th style="text-align:left">Exemptions Applied</th><th style="text-align:left">Sent By</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR-001</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Email / Portal / Post</td><td style="text-align:left">Yes / Partial</td><td style="text-align:left">None / Art. 17(3)</td><td style="text-align:left"><strong><em></strong></em>_</td></tr>
+<tr><td style="text-align:left">DSAR-002</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Email / Portal / Post</td><td style="text-align:left">Yes / Partial</td><td style="text-align:left">None / Art. 17(3)</td><td style="text-align:left"><strong><em></strong></em>_</td></tr>
+<tr><td style="text-align:left">DSAR-003</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Email / Portal / Post</td><td style="text-align:left">Yes / Partial</td><td style="text-align:left">None / Art. 17(3)</td><td style="text-align:left"><strong><em></strong></em>_</td></tr>
+</tbody>
+</table>
+<h2 id="deadline-extensions">Deadline Extensions</h2>
+<blockquote>GDPR allows a 60-day extension for complex requests (Art. 12(3)). CCPA allows a 45-day extension. Extensions must be communicated to the data subject within the original deadline.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">DSAR ID</th><th style="text-align:left">Original Due Date</th><th style="text-align:left">Extended Due Date</th><th style="text-align:left">Reason</th><th style="text-align:left">Subject Notified</th><th style="text-align:left">Notified Date</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left">Complex request / Multiple systems</td><td style="text-align:left">Yes / No</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td></tr>
+</tbody>
+</table>
+<h2 id="denial-log">Denial Log</h2>
+<blockquote>Requests may be denied if manifestly unfounded or excessive (GDPR Art. 12(5)). Document the reason and inform the data subject of their right to complain to a supervisory authority.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">DSAR ID</th><th style="text-align:left">Denial Date</th><th style="text-align:left">Reason</th><th style="text-align:left">Legal Basis</th><th style="text-align:left">Subject Informed</th><th style="text-align:left">Supervisory Authority Info Provided</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">Art. 12(5) / Art. 17(3)</td><td style="text-align:left">Yes</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h2 id="monthly-dsar-summary">Monthly DSAR Summary</h2>
+<blockquote>Complete this section at the end of each month to track DSAR volume and performance.</blockquote>
+<h3 id="month-__________-year-__________">Month: <strong><em></strong><strong></em></strong> Year: <strong><em></strong><strong></em></strong></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Total requests received</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Access requests (ACC)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Erasure requests (ERA)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Rectification requests (REC)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Portability requests (POR)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Restriction requests (RES)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Objection requests (OBJ)</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Completed within deadline</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Completed with extension</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Denied</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Still open</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Average response time (days)</td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<p><strong>Reported by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2 id="quarterly-dsar-report">Quarterly DSAR Report</h2>
+<h3 id="quarter-q__-year-__________">Quarter: Q<strong> Year: </strong><strong><em></strong></em>__</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Month</th><th style="text-align:left">Received</th><th style="text-align:left">Completed</th><th style="text-align:left">On-Time %</th><th style="text-align:left">Avg Response (days)</th><th style="text-align:left">Denied</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left"><strong>Total</strong></td><td style="text-align:left"><strong><em>_</em></strong></td><td style="text-align:left"><strong><em>_</em></strong></td><td style="text-align:left"><strong><em>_</em></strong>%</td><td style="text-align:left"><strong><em>_</em></strong></td><td style="text-align:left"><strong><em>_</em></strong></td></tr>
+</tbody>
+</table>
+<p><strong>Trends and Observations:</strong></p>
+<ol>
+<li><em>_</em></li>
+<li><em>_</em></li>
+<li><em>_</em></li>
+</ol>
+<p><strong>Reviewed by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2 id="response-deadlines-reference">Response Deadlines Reference</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Regulation</th><th style="text-align:left">Standard Deadline</th><th style="text-align:left">Maximum Extension</th><th style="text-align:left">Total Maximum</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">GDPR</td><td style="text-align:left">30 days</td><td style="text-align:left">+60 days (complex)</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">UK GDPR</td><td style="text-align:left">30 days</td><td style="text-align:left">+60 days (complex)</td><td style="text-align:left">90 days</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This DSAR Log Template was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It implements record-keeping requirements under GDPR Article 12(5) and CCPA operational tracking. Adapt this template to your specific organisational needs and have it reviewed by your data protection officer or legal counsel.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

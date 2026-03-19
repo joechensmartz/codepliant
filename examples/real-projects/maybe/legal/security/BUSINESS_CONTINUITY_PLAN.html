@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUSINESS CONTINUITY PLAN — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>BUSINESS CONTINUITY PLAN</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~10 min read</p>
+    </header>
+    <h1 id="business-continuity-plan">Business Continuity Plan</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> maybe</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</li>
+<li>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</li>
+<li>Backup Policy (<code>BACKUP_POLICY.md</code>)</li>
+</ul>
+<hr>
+<p>This Business Continuity Plan (BCP) defines recovery objectives, failover procedures, and communication protocols for <strong>[Your Company Name]</strong>'s <strong>maybe</strong> application. It ensures that critical services can be restored within acceptable timeframes following an outage, disaster, or other disruptive event.</p>
+<h2 id="1-recovery-objectives-by-service">1. Recovery Objectives by Service</h2>
+<p>Recovery Time Objective (RTO) defines the maximum acceptable downtime. Recovery Point Objective (RPO) defines the maximum acceptable data loss window.</p>
+<h3 id="11-critical-services-rto-1-hour-rpo-05-minutes">1.1 Critical Services (RTO: 1 hour, RPO: 0–5 minutes)</h3>
+<p>Services whose outage immediately prevents users from accessing core functionality.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">RTO</th><th style="text-align:left">RPO</th><th style="text-align:left">Recovery Strategy</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">Authentication</td><td style="text-align:left">1 hour</td><td style="text-align:left">0 minutes</td><td style="text-align:left">Session cache failover; extend existing tokens</td></tr>
+<tr><td style="text-align:left">plaid</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">1 hour</td><td style="text-align:left">0 minutes</td><td style="text-align:left">Transaction queue with retry; idempotency keys</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">1 hour</td><td style="text-align:left">0 minutes</td><td style="text-align:left">Transaction queue with retry; idempotency keys</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">Database</td><td style="text-align:left">1 hour</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Automated replica promotion; point-in-time recovery</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">Database</td><td style="text-align:left">1 hour</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Automated replica promotion; point-in-time recovery</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">Database</td><td style="text-align:left">1 hour</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Automated replica promotion; point-in-time recovery</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">Database</td><td style="text-align:left">1 hour</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Automated replica promotion; point-in-time recovery</td></tr>
+</tbody>
+</table>
+<h3 id="12-high-priority-services-rto-4-hours-rpo-1-hour">1.2 High Priority Services (RTO: 4 hours, RPO: 1 hour)</h3>
+<p>Services that support core functionality but have workarounds available.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">RTO</th><th style="text-align:left">RPO</th><th style="text-align:left">Recovery Strategy</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">Email</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Queue with retry; alternative SMTP provider</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Queue with retry; alternative SMTP provider</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Email</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Queue with retry; alternative SMTP provider</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">Storage</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Cross-region replication; CDN fallback</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">Storage</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Cross-region replication; CDN fallback</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">Storage</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Cross-region replication; CDN fallback</td></tr>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">4 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Graceful degradation; disable AI features</td></tr>
+</tbody>
+</table>
+<h3 id="13-standard-services-rto-24-hours-rpo-24-hours">1.3 Standard Services (RTO: 24 hours, RPO: 24 hours)</h3>
+<p>Services whose outage is noticeable but does not prevent core operations.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">RTO</th><th style="text-align:left">RPO</th><th style="text-align:left">Recovery Strategy</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">sentry-ruby</td><td style="text-align:left">Monitoring</td><td style="text-align:left">24 hours</td><td style="text-align:left">24 hours</td><td style="text-align:left">Secondary monitoring; manual checks</td></tr>
+</tbody>
+</table>
+<h2 id="2-infrastructure-overview">2. Infrastructure Overview</h2>
+<p>Cloud provider details should be documented here. Run a cloud scan to auto-populate.</p>
+<h3 id="22-architecture-diagram">2.2 Architecture Diagram</h3>
+<pre><code>[TODO: Insert or link to architecture diagram showing:]
+- Application servers and their locations
+- Database servers and replication topology
+- CDN and edge locations
+- Third-party service dependencies
+- Network connectivity and failover paths</code></pre>
+<h2 id="3-failover-procedures">3. Failover Procedures</h2>
+<h3 id="31-database-failover">3.1 Database Failover</h3>
+<p>Detected database service(s): ActiveRecord, pg, rails-activerecord, redis</p>
+<ol>
+<li><strong>Detection</strong> — Automated monitoring detects database unavailability</li>
+<li><strong>Assessment</strong> — Determine if the outage is transient (retry) or persistent (failover)</li>
+<li><strong>Failover Execution</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Promote read replica to primary (if using replication)</li>
+<li><input type="checkbox" disabled> Update connection strings / DNS records</li>
+<li><input type="checkbox" disabled> Verify application connectivity to new primary</li>
+<li><input type="checkbox" disabled> Validate data integrity after failover</li>
+</ul>
+<ol>
+<li><strong>Communication</strong> — Notify engineering team and update status page</li>
+<li><strong>Recovery</strong> — Rebuild failed node and re-establish replication</li>
+</ol>
+<h3 id="32-application-failover">3.2 Application Failover</h3>
+<ol>
+<li><strong>Detection</strong> — Health check failures trigger failover</li>
+<li><strong>Traffic Routing</strong> — Load balancer / DNS routes traffic to healthy instances</li>
+<li><strong>Scaling</strong> — Auto-scale additional instances if capacity is reduced</li>
+<li><strong>Verification</strong> — Confirm application functionality in failover state</li>
+</ol>
+<h3 id="33-authentication-service-failover">3.3 Authentication Service Failover</h3>
+<p>Detected auth service(s): rails-sessions</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> If third-party auth is unavailable, evaluate enabling cached session validation</li>
+<li><input type="checkbox" disabled> Extend existing session tokens to prevent mass logouts</li>
+<li><input type="checkbox" disabled> Display maintenance notice on login page</li>
+<li><input type="checkbox" disabled> Monitor auth provider status page for restoration timeline</li>
+<li><input type="checkbox" disabled> Once restored, force session refresh for security</li>
+</ul>
+<h3 id="34-payment-service-failover">3.4 Payment Service Failover</h3>
+<p>Detected payment service(s): plaid, stripe</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Queue pending transactions for retry when service is restored</li>
+<li><input type="checkbox" disabled> Display user-facing message about temporary payment unavailability</li>
+<li><input type="checkbox" disabled> Do NOT attempt to reprocess payments without idempotency keys</li>
+<li><input type="checkbox" disabled> Notify finance team of any transactions in uncertain state</li>
+<li><input type="checkbox" disabled> After restoration, reconcile all queued transactions</li>
+</ul>
+<h3 id="35-ai-service-failover">3.5 AI Service Failover</h3>
+<p>Detected AI service(s): ruby-openai</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Activate graceful degradation (disable AI features, show fallback content)</li>
+<li><input type="checkbox" disabled> Queue AI requests for processing when service is restored (if applicable)</li>
+<li><input type="checkbox" disabled> Display user-facing notice that AI features are temporarily unavailable</li>
+<li><input type="checkbox" disabled> Monitor AI provider status page for restoration timeline</li>
+</ul>
+<h2 id="4-backup-strategy">4. Backup Strategy</h2>
+<h3 id="41-backup-schedule">4.1 Backup Schedule</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Type</th><th style="text-align:left">Frequency</th><th style="text-align:left">Retention</th><th style="text-align:left">Storage Location</th><th style="text-align:left">Encryption</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Production database</td><td style="text-align:left">Continuous (streaming) + daily snapshot</td><td style="text-align:left">30 days</td><td style="text-align:left">[Backup region]</td><td style="text-align:left">AES-256 at rest</td></tr>
+<tr><td style="text-align:left">User-uploaded files</td><td style="text-align:left">Daily incremental, weekly full</td><td style="text-align:left">90 days</td><td style="text-align:left">[Backup region]</td><td style="text-align:left">AES-256 at rest</td></tr>
+<tr><td style="text-align:left">Application configuration</td><td style="text-align:left">On every change (version control)</td><td style="text-align:left">Indefinite</td><td style="text-align:left">Git repository</td><td style="text-align:left">In transit (TLS)</td></tr>
+<tr><td style="text-align:left">Secrets and credentials</td><td style="text-align:left">On rotation</td><td style="text-align:left">Current + 1 previous</td><td style="text-align:left">Secret manager</td><td style="text-align:left">Envelope encryption</td></tr>
+<tr><td style="text-align:left">Audit logs</td><td style="text-align:left">Daily export</td><td style="text-align:left">1 year minimum</td><td style="text-align:left">[Compliance storage]</td><td style="text-align:left">AES-256 at rest</td></tr>
+</tbody>
+</table>
+<h3 id="42-backup-verification">4.2 Backup Verification</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Automated backup verification runs daily (check backup completeness and integrity)</li>
+<li><input type="checkbox" disabled> Monthly restore drill — restore from backup to a staging environment</li>
+<li><input type="checkbox" disabled> Quarterly full disaster recovery test (see Section 8)</li>
+<li><input type="checkbox" disabled> Document all backup test results and any issues found</li>
+</ul>
+<h2 id="5-communication-plan">5. Communication Plan</h2>
+<h3 id="51-internal-communication">5.1 Internal Communication</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Notify</th><th style="text-align:left">Channel</th><th style="text-align:left">Timeline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Critical (P1)</td><td style="text-align:left">All engineering + leadership</td><td style="text-align:left">Slack/Teams war room + phone</td><td style="text-align:left">Immediately</td></tr>
+<tr><td style="text-align:left">High (P2)</td><td style="text-align:left">Engineering lead + on-call</td><td style="text-align:left">Slack/Teams channel</td><td style="text-align:left">Within 30 minutes</td></tr>
+<tr><td style="text-align:left">Medium (P3)</td><td style="text-align:left">Engineering team</td><td style="text-align:left">Slack/Teams channel</td><td style="text-align:left">Within 2 hours</td></tr>
+<tr><td style="text-align:left">Low (P4)</td><td style="text-align:left">Relevant team</td><td style="text-align:left">Ticket / async update</td><td style="text-align:left">Within 24 hours</td></tr>
+</tbody>
+</table>
+<h3 id="52-external-communication">5.2 External Communication</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Audience</th><th style="text-align:left">Channel</th><th style="text-align:left">Responsibility</th><th style="text-align:left">Template</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Users / Customers</td><td style="text-align:left">Status page + in-app banner</td><td style="text-align:left">Communications Lead</td><td style="text-align:left">See 5.4</td></tr>
+<tr><td style="text-align:left">Enterprise clients</td><td style="text-align:left">Direct email / Slack</td><td style="text-align:left">Account Management</td><td style="text-align:left">See 5.4</td></tr>
+<tr><td style="text-align:left">Regulators (if data breach)</td><td style="text-align:left">Formal notification</td><td style="text-align:left">DPO / Legal</td><td style="text-align:left">See Incident Response Plan</td></tr>
+<tr><td style="text-align:left">Partners / Vendors</td><td style="text-align:left">Email</td><td style="text-align:left">Business Operations</td><td style="text-align:left">As needed</td></tr>
+</tbody>
+</table>
+<h3 id="53-escalation-path">5.3 Escalation Path</h3>
+<pre><code>On-call Engineer
+    └─&gt; Engineering Lead
+          └─&gt; VP of Engineering
+                └─&gt; CTO / CEO
+                      └─&gt; Board (if material impact)</code></pre>
+<h3 id="54-status-update-templates">5.4 Status Update Templates</h3>
+<p><strong>Initial notification:</strong></p>
+<pre><code>[[Your Company Name]] Service Disruption — [Service Name]
+
+We are currently experiencing issues with [affected service/feature].
+Our engineering team is investigating and working to restore service.
+
+Impact: [Description of user impact]
+Started: [Time in UTC]
+Next update: [Time — within 1 hour for P1/P2]</code></pre>
+<p><strong>Resolution notification:</strong></p>
+<pre><code>[[Your Company Name]] Resolved — [Service Name]
+
+The issue affecting [service/feature] has been resolved.
+
+Duration: [Total downtime]
+Root cause: [Brief description]
+Next steps: [Any follow-up actions users need to take]</code></pre>
+<h2 id="6-roles-and-responsibilities">6. Roles and Responsibilities</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Primary Responsibility</th><th style="text-align:left">Backup</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Incident Commander</td><td style="text-align:left">Overall coordination of BCP activation</td><td style="text-align:left">[Backup name]</td></tr>
+<tr><td style="text-align:left">Technical Lead</td><td style="text-align:left">Directs technical recovery efforts</td><td style="text-align:left">[Backup name]</td></tr>
+<tr><td style="text-align:left">Communications Lead</td><td style="text-align:left">Manages internal and external communications</td><td style="text-align:left">[Backup name]</td></tr>
+<tr><td style="text-align:left">Operations Lead</td><td style="text-align:left">Infrastructure and deployment management</td><td style="text-align:left">[Backup name]</td></tr>
+<tr><td style="text-align:left">Data Protection Officer</td><td style="text-align:left">Assesses data impact and regulatory obligations</td><td style="text-align:left">[Backup name]</td></tr>
+</tbody>
+</table>
+<h2 id="7-third-party-dependency-map">7. Third-Party Dependency Map</h2>
+<p>The following third-party services are critical to application operation:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Impact if Unavailable</th><th style="text-align:left">Alternative / Workaround</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">other</td><td style="text-align:left">Feature degradation</td><td style="text-align:left">Evaluate per service</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">other</td><td style="text-align:left">Feature degradation</td><td style="text-align:left">Evaluate per service</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">email</td><td style="text-align:left">Transactional emails delayed or undelivered</td><td style="text-align:left">Alternative email provider; manual send</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">storage</td><td style="text-align:left">File uploads/downloads unavailable</td><td style="text-align:left">CDN cache; deferred uploads</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">database</td><td style="text-align:left">Data reads/writes unavailable</td><td style="text-align:left">Read replica; cached responses</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">storage</td><td style="text-align:left">File uploads/downloads unavailable</td><td style="text-align:left">CDN cache; deferred uploads</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">storage</td><td style="text-align:left">File uploads/downloads unavailable</td><td style="text-align:left">CDN cache; deferred uploads</td></tr>
+<tr><td style="text-align:left">intercom-ruby</td><td style="text-align:left">other</td><td style="text-align:left">Feature degradation</td><td style="text-align:left">Evaluate per service</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">Transactional emails delayed or undelivered</td><td style="text-align:left">Alternative email provider; manual send</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">database</td><td style="text-align:left">Data reads/writes unavailable</td><td style="text-align:left">Read replica; cached responses</td></tr>
+<tr><td style="text-align:left">plaid</td><td style="text-align:left">payment</td><td style="text-align:left">Payment processing halted</td><td style="text-align:left">Queue transactions for later processing</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">other</td><td style="text-align:left">Feature degradation</td><td style="text-align:left">Evaluate per service</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">email</td><td style="text-align:left">Transactional emails delayed or undelivered</td><td style="text-align:left">Alternative email provider; manual send</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">database</td><td style="text-align:left">Data reads/writes unavailable</td><td style="text-align:left">Read replica; cached responses</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">auth</td><td style="text-align:left">Users cannot sign in or register</td><td style="text-align:left">Cached sessions; manual verification</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">Data reads/writes unavailable</td><td style="text-align:left">Read replica; cached responses</td></tr>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">ai</td><td style="text-align:left">AI-powered features unavailable</td><td style="text-align:left">Disable AI features; show static content</td></tr>
+<tr><td style="text-align:left">sentry-ruby</td><td style="text-align:left">monitoring</td><td style="text-align:left">Blind to errors and performance issues</td><td style="text-align:left">Manual log review; secondary tools</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">other</td><td style="text-align:left">Feature degradation</td><td style="text-align:left">Evaluate per service</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">Payment processing halted</td><td style="text-align:left">Queue transactions for later processing</td></tr>
+</tbody>
+</table>
+<h2 id="8-testing-and-drills">8. Testing and Drills</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Exercise</th><th style="text-align:left">Frequency</th><th style="text-align:left">Scope</th><th style="text-align:left">Participants</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Tabletop exercise</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Walk through BCP scenarios verbally</td><td style="text-align:left">All BCP role holders</td></tr>
+<tr><td style="text-align:left">Backup restore drill</td><td style="text-align:left">Monthly</td><td style="text-align:left">Restore from backup to staging</td><td style="text-align:left">Engineering team</td></tr>
+<tr><td style="text-align:left">Failover test</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Trigger controlled failover</td><td style="text-align:left">Engineering + Operations</td></tr>
+<tr><td style="text-align:left">Full DR simulation</td><td style="text-align:left">Annually</td><td style="text-align:left">Simulate complete outage, activate BCP</td><td style="text-align:left">All teams</td></tr>
+<tr><td style="text-align:left">Communication drill</td><td style="text-align:left">Semi-annually</td><td style="text-align:left">Test notification chains and templates</td><td style="text-align:left">All BCP role holders</td></tr>
+</tbody>
+</table>
+<p>After each drill, document:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> What worked well</li>
+<li><input type="checkbox" disabled> What needs improvement</li>
+<li><input type="checkbox" disabled> Action items with owners and deadlines</li>
+<li><input type="checkbox" disabled> Updates to this BCP based on lessons learned</li>
+</ul>
+<h2 id="9-plan-maintenance">9. Plan Maintenance</h2>
+<p>This Business Continuity Plan must be reviewed and updated:</p>
+<ul>
+<li>After any significant infrastructure change</li>
+<li>After any actual incident or outage</li>
+<li>After each DR drill or tabletop exercise</li>
+<li>At minimum quarterly</li>
+<li>When adding or removing critical third-party services</li>
+</ul>
+<p>For questions about this plan, contact <strong>[your-email@example.com]</strong>.</p>
+<hr>
+<p><em>This Business Continuity Plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>maybe</strong> codebase. Recovery objectives and procedures should be reviewed and customized by your engineering and operations teams based on actual infrastructure and business requirements.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA SUBJECT RIGHTS PORTAL — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA SUBJECT RIGHTS PORTAL</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~13 min read</p>
+    </header>
+    <h1 id="data-subject-rights-portal-specification">Data Subject Rights Portal — Specification</h1>
+<blockquote><strong>Self-service privacy portal for [Your Company Name]</strong> Enables data subjects to exercise their privacy rights under GDPR, CCPA, and other regulations. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><em>Generated on 2026-03-16 | 11 services detected | 28 data categories</em></p>
+<hr>
+<h2 id="1-overview">1. Overview</h2>
+<p>This document specifies a self-service Data Subject Rights Portal that allows users to:</p>
+<ol>
+<li><strong>View their data</strong> — See all personal data collected and processed</li>
+<li><strong>Download their data</strong> — Export a machine-readable copy (GDPR Art. 20)</li>
+<li><strong>Delete their account</strong> — Request complete erasure (GDPR Art. 17)</li>
+<li><strong>Manage consent</strong> — Granularly control data processing preferences</li>
+</ol>
+<p>The portal satisfies:</p>
+<ul>
+<li><strong>GDPR</strong> Articles 12-23 (Data Subject Rights)</li>
+<li><strong>Best practice</strong> for transparent data handling</li>
+</ul>
+<hr>
+<h2 id="2-portal-features">2. Portal Features</h2>
+<h3 id="21-my-data-dashboard">2.1 My Data Dashboard</h3>
+<p>Users see a summary of all personal data held by [Your Company Name]:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Category</th><th style="text-align:left">Source</th><th style="text-align:left">Retention</th><th style="text-align:left">Actions</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">user identity, user behavior, page views</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">email addresses, email content</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">search queries, search result clicks, user search behavior</td><td style="text-align:left">algoliasearch</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">cookies, cookie data</td><td style="text-align:left">cookie-parser</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">session cookies, session data</td><td style="text-align:left">express-session</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">cached data, session data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">uploaded files, file metadata, potential PII in uploaded content</td><td style="text-align:left">Multer</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">openai</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">user behavior, session recordings, feature flag usage</td><td style="text-align:left">posthog</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+<tr><td style="text-align:left">payment information, billing address, email</td><td style="text-align:left">stripe</td><td style="text-align:left">Per retention policy</td><td style="text-align:left">View, Export, Delete</td></tr>
+</tbody>
+</table>
+<h3 id="22-view-data">2.2 View Data</h3>
+<p>The "View My Data" page displays:</p>
+<ul>
+<li><strong>Profile information</strong> — Name, email, account details</li>
+<li><strong>Activity history</strong> — Login history, actions taken</li>
+<li><strong>Third-party data</strong> — Data shared with sub-processors</li>
+<li><strong>Analytics data</strong> — Browsing behavior, page views, session duration</li>
+<li><strong>AI interaction data</strong> — Prompts, responses, usage patterns</li>
+<li><strong>Payment data</strong> — Transaction history (card details are masked)</li>
+</ul>
+<p>Each data item shows:</p>
+<ul>
+<li>When it was collected</li>
+<li>Why it was collected (lawful basis)</li>
+<li>Who has access to it</li>
+<li>When it will be deleted</li>
+</ul>
+<h3 id="23-download-data-data-portability">2.3 Download Data (Data Portability)</h3>
+<p><strong>GDPR Art. 20</strong> requires data to be provided in a structured, commonly used, machine-readable format.</p>
+<p><strong>Export formats available:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Format</th><th style="text-align:left">Use Case</th><th style="text-align:left">Contents</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">JSON</td><td style="text-align:left">Developer / migration</td><td style="text-align:left">Complete structured data</td></tr>
+<tr><td style="text-align:left">CSV</td><td style="text-align:left">Spreadsheet analysis</td><td style="text-align:left">Tabular data per category</td></tr>
+<tr><td style="text-align:left">PDF</td><td style="text-align:left">Human-readable archive</td><td style="text-align:left">Formatted summary report</td></tr>
+</tbody>
+</table>
+<p><strong>Export process:</strong></p>
+<ol>
+<li>User clicks "Download My Data"</li>
+<li>System queues an export job (may take up to 48 hours for large datasets)</li>
+<li>User receives email notification when export is ready</li>
+<li>Download link expires after 7 days</li>
+<li>Export is encrypted with a one-time password sent separately</li>
+</ol>
+<h3 id="24-delete-account-right-to-erasure">2.4 Delete Account (Right to Erasure)</h3>
+<p><strong>GDPR Art. 17</strong> grants the right to erasure ("right to be forgotten").</p>
+<p><strong>Deletion workflow:</strong></p>
+<pre><code>User requests deletion
+        │
+        ▼
+  ┌─────────────┐
+  │ Confirm via  │
+  │ email / 2FA  │
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐     ┌──────────────────┐
+  │  14-day      │────▶│ User can cancel   │
+  │  grace period│     │ during this time  │
+  └──────┬──────┘     └──────────────────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Soft delete  │  Account deactivated, data marked for deletion
+  └──────┬──────┘
+         │
+         ▼ (30 days)
+  ┌─────────────┐
+  │ Hard delete  │  Data permanently erased from all systems
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────────────────────────────────┐
+  │ Notify sub-processors to delete as well │
+  └─────────────────────────────────────────┘</code></pre>
+<p><strong>Exceptions to deletion</strong> (data that must be retained):</p>
+<ul>
+<li>Legal obligations (tax records, invoices)</li>
+<li>Fraud prevention data</li>
+<li>Legitimate interest overrides (documented and justified)</li>
+<li>Payment transaction records (required by financial regulations)</li>
+</ul>
+<h3 id="25-manage-consent">2.5 Manage Consent</h3>
+<p>Users can granularly control consent for each processing purpose:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Processing Purpose</th><th style="text-align:left">Default</th><th style="text-align:left">User Control</th><th style="text-align:left">Legal Basis</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Essential service operation</td><td style="text-align:left">On (locked)</td><td style="text-align:left">Cannot disable</td><td style="text-align:left">Contract</td></tr>
+<tr><td style="text-align:left">Analytics & performance</td><td style="text-align:left">Off</td><td style="text-align:left">Toggle</td><td style="text-align:left">Consent</td></tr>
+<tr><td style="text-align:left">Marketing & advertising</td><td style="text-align:left">Off</td><td style="text-align:left">Toggle</td><td style="text-align:left">Consent</td></tr>
+<tr><td style="text-align:left">AI model training</td><td style="text-align:left">Off</td><td style="text-align:left">Toggle</td><td style="text-align:left">Consent</td></tr>
+<tr><td style="text-align:left">AI-powered features</td><td style="text-align:left">On</td><td style="text-align:left">Toggle</td><td style="text-align:left">Legitimate interest</td></tr>
+<tr><td style="text-align:left">Email communications</td><td style="text-align:left">Off</td><td style="text-align:left">Toggle</td><td style="text-align:left">Consent</td></tr>
+<tr><td style="text-align:left">Third-party data sharing</td><td style="text-align:left">Off</td><td style="text-align:left">Toggle</td><td style="text-align:left">Consent</td></tr>
+</tbody>
+</table>
+<p><strong>Consent changes take effect:</strong></p>
+<ul>
+<li>Immediately for new data collection</li>
+<li>Within 24 hours for ongoing processing</li>
+<li>Sub-processors notified within 48 hours</li>
+</ul>
+<hr>
+<h2 id="3-api-endpoints-specification">3. API Endpoints Specification</h2>
+<p>Base URL: <code>https://yourcompany.com/api/v1/privacy</code></p>
+<h3 id="31-authentication">3.1 Authentication</h3>
+<p>All endpoints require authentication via Bearer token or session cookie.</p>
+<pre><code>Authorization: Bearer &lt;user_access_token&gt;</code></pre>
+<h3 id="32-view-data">3.2 View Data</h3>
+<pre><code>GET /api/v1/privacy/my-data</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;subject_id&quot;: &quot;usr_123&quot;,
+  &quot;data_categories&quot;: [
+    {
+      &quot;category&quot;: &quot;profile&quot;,
+      &quot;items&quot;: [
+        { &quot;field&quot;: &quot;email&quot;, &quot;value&quot;: &quot;user@example.com&quot;, &quot;collected_at&quot;: &quot;2025-01-15&quot;, &quot;source&quot;: &quot;registration&quot;, &quot;lawful_basis&quot;: &quot;contract&quot; }
+      ]
+    },
+    {
+      &quot;category&quot;: &quot;activity&quot;,
+      &quot;items&quot;: [
+        { &quot;field&quot;: &quot;last_login&quot;, &quot;value&quot;: &quot;2025-06-01T10:30:00Z&quot;, &quot;collected_at&quot;: &quot;2025-06-01&quot;, &quot;source&quot;: &quot;system&quot;, &quot;lawful_basis&quot;: &quot;legitimate_interest&quot; }
+      ]
+    }
+  ],
+  &quot;third_party_sharing&quot;: [
+    { &quot;processor&quot;: &quot;@aws-sdk/client-s3&quot;, &quot;data_shared&quot;: [&quot;uploaded files&quot;,&quot;file metadata&quot;], &quot;purpose&quot;: &quot;service_operation&quot; },
+    { &quot;processor&quot;: &quot;@segment/analytics-next&quot;, &quot;data_shared&quot;: [&quot;user identity&quot;,&quot;user behavior&quot;], &quot;purpose&quot;: &quot;service_operation&quot; },
+    { &quot;processor&quot;: &quot;@sendgrid/mail&quot;, &quot;data_shared&quot;: [&quot;email addresses&quot;,&quot;email content&quot;], &quot;purpose&quot;: &quot;service_operation&quot; }
+  ]
+}</code></pre>
+<h3 id="33-download-data-export">3.3 Download Data (Export)</h3>
+<pre><code>POST /api/v1/privacy/export
+Content-Type: application/json
+
+{
+  &quot;format&quot;: &quot;json&quot;,        // &quot;json&quot; | &quot;csv&quot; | &quot;pdf&quot;
+  &quot;categories&quot;: [&quot;all&quot;],   // or specific: [&quot;profile&quot;, &quot;activity&quot;, &quot;payments&quot;]
+  &quot;date_range&quot;: {
+    &quot;from&quot;: &quot;2024-01-01&quot;,
+    &quot;to&quot;: &quot;2025-12-31&quot;
+  }
+}</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;export_id&quot;: &quot;exp_abc123&quot;,
+  &quot;status&quot;: &quot;queued&quot;,
+  &quot;estimated_completion&quot;: &quot;2025-06-01T12:00:00Z&quot;,
+  &quot;notification_email&quot;: &quot;user@example.com&quot;
+}</code></pre>
+<pre><code>GET /api/v1/privacy/export/:export_id</code></pre>
+<p><strong>Response (when ready):</strong></p>
+<pre><code>{
+  &quot;export_id&quot;: &quot;exp_abc123&quot;,
+  &quot;status&quot;: &quot;ready&quot;,
+  &quot;download_url&quot;: &quot;/api/v1/privacy/export/exp_abc123/download&quot;,
+  &quot;expires_at&quot;: &quot;2025-06-08T12:00:00Z&quot;,
+  &quot;size_bytes&quot;: 245760,
+  &quot;checksum&quot;: &quot;sha256:abc123...&quot;
+}</code></pre>
+<h3 id="34-delete-account">3.4 Delete Account</h3>
+<pre><code>POST /api/v1/privacy/delete-account
+Content-Type: application/json
+
+{
+  &quot;confirmation&quot;: &quot;DELETE_MY_ACCOUNT&quot;,
+  &quot;reason&quot;: &quot;no_longer_needed&quot;,       // optional
+  &quot;feedback&quot;: &quot;Switching to another service&quot;  // optional
+}</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;deletion_id&quot;: &quot;del_xyz789&quot;,
+  &quot;status&quot;: &quot;pending_confirmation&quot;,
+  &quot;confirmation_email_sent&quot;: true,
+  &quot;grace_period_ends&quot;: &quot;2025-06-15T00:00:00Z&quot;,
+  &quot;hard_delete_date&quot;: &quot;2025-07-15T00:00:00Z&quot;
+}</code></pre>
+<pre><code>POST /api/v1/privacy/delete-account/:deletion_id/confirm</code></pre>
+<pre><code>POST /api/v1/privacy/delete-account/:deletion_id/cancel</code></pre>
+<h3 id="35-manage-consent">3.5 Manage Consent</h3>
+<pre><code>GET /api/v1/privacy/consent</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;subject_id&quot;: &quot;usr_123&quot;,
+  &quot;consents&quot;: [
+    { &quot;purpose&quot;: &quot;essential&quot;, &quot;granted&quot;: true, &quot;locked&quot;: true, &quot;updated_at&quot;: &quot;2025-01-01&quot; },
+    { &quot;purpose&quot;: &quot;analytics&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-03-15&quot; },
+    { &quot;purpose&quot;: &quot;marketing&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-03-15&quot; },
+    { &quot;purpose&quot;: &quot;ai_features&quot;, &quot;granted&quot;: true, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-02-01&quot; },
+    { &quot;purpose&quot;: &quot;third_party_sharing&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-01-01&quot; }
+  ]
+}</code></pre>
+<pre><code>PATCH /api/v1/privacy/consent
+Content-Type: application/json
+
+{
+  &quot;consents&quot;: [
+    { &quot;purpose&quot;: &quot;analytics&quot;, &quot;granted&quot;: true },
+    { &quot;purpose&quot;: &quot;marketing&quot;, &quot;granted&quot;: false }
+  ]
+}</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;updated&quot;: 2,
+  &quot;effective_immediately&quot;: [&quot;analytics&quot;],
+  &quot;effective_within_24h&quot;: [&quot;marketing&quot;],
+  &quot;consent_record_id&quot;: &quot;cr_def456&quot;
+}</code></pre>
+<h3 id="36-request-history">3.6 Request History</h3>
+<pre><code>GET /api/v1/privacy/requests</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;requests&quot;: [
+    { &quot;id&quot;: &quot;req_001&quot;, &quot;type&quot;: &quot;export&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;created_at&quot;: &quot;2025-05-01&quot;, &quot;completed_at&quot;: &quot;2025-05-01&quot; },
+    { &quot;id&quot;: &quot;req_002&quot;, &quot;type&quot;: &quot;consent_change&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;created_at&quot;: &quot;2025-05-15&quot;, &quot;completed_at&quot;: &quot;2025-05-15&quot; }
+  ]
+}</code></pre>
+<hr>
+<h2 id="4-ui-wireframe-description">4. UI Wireframe Description</h2>
+<h3 id="41-portal-layout">4.1 Portal Layout</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  [Your Company Name] — Privacy Center                            │
+├─────────────┬───────────────────────────────────────────┤
+│             │                                           │
+│  📋 My Data │   [Active Tab Content Area]               │
+│             │                                           │
+│  📥 Export  │   Shows data tables, export options,      │
+│             │   consent toggles, or deletion flow       │
+│  🗑️ Delete  │   depending on selected tab.              │
+│             │                                           │
+│  ⚙️ Consent │                                           │
+│             │                                           │
+│  📜 History │                                           │
+│             │                                           │
+│  ❓ Help    │                                           │
+│             │                                           │
+├─────────────┴───────────────────────────────────────────┤
+│  Contact DPO: [your-email@example.com]                               │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="42-my-data-tab">4.2 My Data Tab</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  My Data                                     [Refresh]  │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Profile Information                          [Expand]  │
+│  ├─ Email: u***@example.com                             │
+│  ├─ Name: J*** D***                                     │
+│  └─ Account created: 2025-01-15                         │
+│                                                         │
+│  Activity Data                                [Expand]  │
+│  ├─ Last login: 2 hours ago                             │
+│  ├─ Total sessions: 142                                 │
+│  └─ Data points: 1,247                                  │
+│                                                         │
+│  Third-Party Services (11 connected)       │
+│  ├─ @aws-sdk/client-s3: uploaded files, file metadata
+│  ├─ @segment/analytics-next: user identity, user behavior
+│  ├─ @sendgrid/mail: email addresses, email content
+│  ├─ algoliasearch: search queries, search result clicks
+│  ├─ cookie-parser: cookies, cookie data
+│  └─ ... and 6 more
+│                                                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="43-export-tab">4.3 Export Tab</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Export My Data                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Format:    (●) JSON    ( ) CSV    ( ) PDF              │
+│                                                         │
+│  Categories:                                            │
+│  [✓] All data                                           │
+│  [✓] Profile information                                │
+│  [✓] Activity history                                   │
+│  [✓] Third-party sharing records                        │
+│  [ ] Only data from last 12 months                      │
+│                                                         │
+│  Date range: [2024-01-01] to [2025-12-31]               │
+│                                                         │
+│  ┌─────────────────────────────────────────┐            │
+│  │  ⚠️ Export may take up to 48 hours.     │            │
+│  │  You'll receive an email when ready.    │            │
+│  └─────────────────────────────────────────┘            │
+│                                                         │
+│                        [Request Export]                  │
+│                                                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="44-delete-account-tab">4.4 Delete Account Tab</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Delete My Account                                      │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌─────────────────────────────────────────┐            │
+│  │  ⚠️ This action is irreversible after   │            │
+│  │  the 14-day grace period.               │            │
+│  └─────────────────────────────────────────┘            │
+│                                                         │
+│  What happens when you delete your account:             │
+│                                                         │
+│  • 14-day grace period (you can cancel)                 │
+│  • All personal data queued for deletion                │
+│  • Sub-processors notified to delete your data          │
+│  • Some data retained for legal obligations             │
+│                                                         │
+│  Reason (optional):                                     │
+│  [No longer using the service          ▾]               │
+│                                                         │
+│  Type &quot;DELETE&quot; to confirm: [____________]               │
+│                                                         │
+│                [Cancel]   [Delete My Account]            │
+│                                                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="45-consent-management-tab">4.5 Consent Management Tab</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Manage Consent Preferences                             │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Essential Services              [ON]  (required)       │
+│  Core functionality, authentication, security           │
+│                                                         │
+│  ─────────────────────────────────────────────────────  │
+│                                                         │
+│  Analytics &amp; Performance         [OFF] (toggle)         │
+│  Usage statistics, performance monitoring               │
+│                                                         │
+│  Marketing Communications        [OFF] (toggle)         │
+│  Promotional emails, newsletters                        │
+│                                                         │
+│  Third-Party Data Sharing        [OFF] (toggle)         │
+│  Sharing data with partner services                     │
+│                                                         │
+│  AI-Powered Features             [ON]  (toggle)         │
+│  AI recommendations, content generation                 │
+│                                                         │
+│  AI Model Training               [OFF] (toggle)         │
+│  Using your data to improve AI models                   │
+│                                                         │
+│                                                         │
+│  Last updated: 2026-03-16                                  │
+│                                                         │
+│                        [Save Preferences]               │
+│                                                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<hr>
+<h2 id="5-implementation-checklist">5. Implementation Checklist</h2>
+<h3 id="phase-1-core-portal-week-1-2">Phase 1: Core Portal (Week 1-2)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Set up authentication for privacy portal</li>
+<li><input type="checkbox" disabled> Implement <code>GET /api/v1/privacy/my-data</code> endpoint</li>
+<li><input type="checkbox" disabled> Build "My Data" dashboard UI</li>
+<li><input type="checkbox" disabled> Add data aggregation from all 11 connected services</li>
+<li><input type="checkbox" disabled> Implement rate limiting (max 10 requests/minute per user)</li>
+</ul>
+<h3 id="phase-2-data-export-week-3">Phase 2: Data Export (Week 3)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement export queue system</li>
+<li><input type="checkbox" disabled> Add JSON export format</li>
+<li><input type="checkbox" disabled> Add CSV export format</li>
+<li><input type="checkbox" disabled> Add PDF export format</li>
+<li><input type="checkbox" disabled> Implement encrypted download links</li>
+<li><input type="checkbox" disabled> Add email notifications for export completion</li>
+<li><input type="checkbox" disabled> Set 7-day expiry on download links</li>
+</ul>
+<h3 id="phase-3-account-deletion-week-4">Phase 3: Account Deletion (Week 4)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement deletion request flow</li>
+<li><input type="checkbox" disabled> Add email confirmation step</li>
+<li><input type="checkbox" disabled> Build 14-day grace period with cancellation</li>
+<li><input type="checkbox" disabled> Implement soft delete (deactivation)</li>
+<li><input type="checkbox" disabled> Implement hard delete (30 days after soft delete)</li>
+<li><input type="checkbox" disabled> Add sub-processor deletion notifications</li>
+<li><input type="checkbox" disabled> Document exceptions to deletion (legal holds)</li>
+</ul>
+<h3 id="phase-4-consent-management-week-5">Phase 4: Consent Management (Week 5)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Build consent preference storage</li>
+<li><input type="checkbox" disabled> Implement granular consent toggles</li>
+<li><input type="checkbox" disabled> Add consent change propagation to sub-processors</li>
+<li><input type="checkbox" disabled> Implement consent audit log</li>
+<li><input type="checkbox" disabled> Add consent receipt generation (GDPR Art. 7)</li>
+</ul>
+<h3 id="phase-5-audit-compliance-week-6">Phase 5: Audit & Compliance (Week 6)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Add comprehensive audit logging for all portal actions</li>
+<li><input type="checkbox" disabled> Implement request history tracking</li>
+<li><input type="checkbox" disabled> Build admin dashboard for DPO oversight</li>
+<li><input type="checkbox" disabled> Load test all endpoints</li>
+<li><input type="checkbox" disabled> Security audit (pen test portal endpoints)</li>
+<li><input type="checkbox" disabled> Document SLA for request fulfillment (GDPR: 30 days max)</li>
+</ul>
+<hr>
+<h2 id="6-security-requirements">6. Security Requirements</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Requirement</th><th style="text-align:left">Implementation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Authentication</td><td style="text-align:left">Multi-factor required for destructive actions</td></tr>
+<tr><td style="text-align:left">Encryption</td><td style="text-align:left">TLS 1.3 in transit, AES-256 at rest</td></tr>
+<tr><td style="text-align:left">Rate limiting</td><td style="text-align:left">10 req/min per user, 100 req/hour</td></tr>
+<tr><td style="text-align:left">Audit logging</td><td style="text-align:left">All actions logged with IP, timestamp, user agent</td></tr>
+<tr><td style="text-align:left">Data masking</td><td style="text-align:left">PII partially masked in "View" mode by default</td></tr>
+<tr><td style="text-align:left">Export encryption</td><td style="text-align:left">One-time password sent via separate channel</td></tr>
+<tr><td style="text-align:left">Session management</td><td style="text-align:left">Auto-logout after 15 min inactivity on portal</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-compliance-mapping">7. Compliance Mapping</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Right</th><th style="text-align:left">GDPR Article</th><th style="text-align:left">CCPA Section</th><th style="text-align:left">Portal Feature</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Right to Access</td><td style="text-align:left">Art. 15</td><td style="text-align:left">§1798.100</td><td style="text-align:left">My Data tab</td></tr>
+<tr><td style="text-align:left">Right to Portability</td><td style="text-align:left">Art. 20</td><td style="text-align:left">§1798.100</td><td style="text-align:left">Export tab (JSON/CSV)</td></tr>
+<tr><td style="text-align:left">Right to Erasure</td><td style="text-align:left">Art. 17</td><td style="text-align:left">§1798.105</td><td style="text-align:left">Delete Account tab</td></tr>
+<tr><td style="text-align:left">Right to Rectification</td><td style="text-align:left">Art. 16</td><td style="text-align:left">—</td><td style="text-align:left">My Data > Edit</td></tr>
+<tr><td style="text-align:left">Right to Restrict Processing</td><td style="text-align:left">Art. 18</td><td style="text-align:left">—</td><td style="text-align:left">Consent toggles</td></tr>
+<tr><td style="text-align:left">Right to Object</td><td style="text-align:left">Art. 21</td><td style="text-align:left">§1798.120</td><td style="text-align:left">Consent toggles</td></tr>
+<tr><td style="text-align:left">Right to Withdraw Consent</td><td style="text-align:left">Art. 7(3)</td><td style="text-align:left">—</td><td style="text-align:left">Consent toggles</td></tr>
+<tr><td style="text-align:left">Right to Non-Discrimination</td><td style="text-align:left">—</td><td style="text-align:left">§1798.125</td><td style="text-align:left">Service remains same</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-response-time-slas">8. Response Time SLAs</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Request Type</th><th style="text-align:left">GDPR Deadline</th><th style="text-align:left">Target SLA</th><th style="text-align:left">Escalation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">View data</td><td style="text-align:left">30 days</td><td style="text-align:left">< 24 hours</td><td style="text-align:left">Auto</td></tr>
+<tr><td style="text-align:left">Export data</td><td style="text-align:left">30 days</td><td style="text-align:left">< 48 hours</td><td style="text-align:left">DPO at day 20</td></tr>
+<tr><td style="text-align:left">Delete account</td><td style="text-align:left">30 days</td><td style="text-align:left">14 days + 30 days</td><td style="text-align:left">DPO at day 20</td></tr>
+<tr><td style="text-align:left">Consent change</td><td style="text-align:left">Immediate</td><td style="text-align:left">< 24 hours</td><td style="text-align:left">Auto</td></tr>
+<tr><td style="text-align:left">Rectification</td><td style="text-align:left">30 days</td><td style="text-align:left">< 48 hours</td><td style="text-align:left">DPO at day 20</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This specification was auto-generated by Codepliant based on 11 detected services in your codebase. Implement this portal to give your users full control over their personal data.</em></p>
+<p><em>Contact: [your-email@example.com] | DPO: [your-email@example.com]</em></p>
+<hr>
+<blockquote><strong>Disclaimer:</strong> This specification is a starting point. Have your legal and engineering teams review before implementation. Codepliant generates specifications based on code analysis — legal review is always recommended.</blockquote>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

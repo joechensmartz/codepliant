@@ -1,0 +1,552 @@
+<h1>DSAR Handling Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>DSAR Handling Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Data Controller:</strong> Acme Inc</p>
+<p><strong>Data Protection Officer:</strong> Jane Mueller (dpo@acme-saas.com)</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Vendor Contacts Directory (<code>VENDOR_CONTACTS.md</code>)</p></li>
+<li><p>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</p></li>
+<li><p>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</p></li>
+</ul>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>This guide provides step-by-step procedures for handling Data Subject Access Requests (DSARs) under the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA). It is tailored to the <strong>nextjs-saas-example</strong> application based on automated code analysis.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>1. What is a DSAR?</h2>
+<p>A <strong>Data Subject Access Request (DSAR)</strong> is a request made by an individual (the "data subject") to exercise their rights over their personal data. These rights are established under:</p>
+<ul>
+<li><p><strong>GDPR Articles 15-22</strong> (European Union)</p></li>
+<li><p><strong>CCPA/CPRA Sections 1798.100-1798.199</strong> (California, USA)</p></li>
+</ul>
+<p>Data subjects have the right to know what personal data is collected about them, how it is used, and to request changes or deletion of that data. Organizations must respond to these requests within legally mandated timeframes.</p>
+<h3>Legal Basis</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Right</p></th><th><p>GDPR Article</p></th><th><p>CCPA Section</p></th></tr>
+<tr><td><p>Right of Access</p></td><td><p>Art. 15</p></td><td><p>§1798.100, §1798.110</p></td></tr>
+<tr><td><p>Right to Rectification</p></td><td><p>Art. 16</p></td><td><p>§1798.106</p></td></tr>
+<tr><td><p>Right to Erasure ("Right to be Forgotten")</p></td><td><p>Art. 17</p></td><td><p>§1798.105</p></td></tr>
+<tr><td><p>Right to Data Portability</p></td><td><p>Art. 20</p></td><td><p>§1798.100</p></td></tr>
+<tr><td><p>Right to Restriction of Processing</p></td><td><p>Art. 18</p></td><td><p>N/A</p></td></tr>
+<tr><td><p>Right to Object</p></td><td><p>Art. 21</p></td><td><p>§1798.120 (opt-out of sale/sharing)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>2. Types of DSAR Requests</h2>
+<h3>2.1 Access Request (GDPR Art. 15 / CCPA §1798.110)</h3>
+<p>The data subject requests a copy of all personal data you hold about them, including:</p>
+<ul>
+<li><p>Categories of data processed</p></li>
+<li><p>Purposes of processing</p></li>
+<li><p>Recipients or categories of recipients</p></li>
+<li><p>Retention periods</p></li>
+<li><p>Source of the data (if not collected directly)</p></li>
+</ul>
+<h3>2.2 Rectification Request (GDPR Art. 16)</h3>
+<p>The data subject requests correction of inaccurate personal data or completion of incomplete data.</p>
+<h3>2.3 Erasure Request (GDPR Art. 17 / CCPA §1798.105)</h3>
+<p>The data subject requests deletion of their personal data. This right applies when:</p>
+<ul>
+<li><p>Data is no longer necessary for the original purpose</p></li>
+<li><p>Consent is withdrawn</p></li>
+<li><p>The data subject objects and there are no overriding legitimate grounds</p></li>
+<li><p>Data was unlawfully processed</p></li>
+</ul>
+<p><strong>Exceptions:</strong> You may retain data required for legal compliance, exercise of legal claims, or public interest.</p>
+<h3>2.4 Data Portability Request (GDPR Art. 20 / CCPA §1798.100)</h3>
+<p>The data subject requests their data in a structured, commonly used, machine-readable format (e.g., JSON, CSV) for transfer to another controller.</p>
+<h3>2.5 Restriction of Processing (GDPR Art. 18)</h3>
+<p>The data subject requests that processing be limited (data is stored but not actively processed) while:</p>
+<ul>
+<li><p>Accuracy is contested</p></li>
+<li><p>Processing is unlawful but the subject opposes erasure</p></li>
+<li><p>The controller no longer needs the data but the subject needs it for legal claims</p></li>
+</ul>
+<h3>2.6 Right to Object (GDPR Art. 21 / CCPA §1798.120)</h3>
+<p>The data subject objects to processing based on legitimate interests, direct marketing, or profiling. For CCPA, this includes the right to opt out of the sale or sharing of personal information.</p>
+<hr />
+<h2>3. Response Timeline</h2>
+<h3>GDPR Timeline</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Step</p></th><th><p>Deadline</p></th></tr>
+<tr><td><p>Acknowledge receipt</p></td><td><p>Within 3 business days</p></td></tr>
+<tr><td><p>Verify identity</p></td><td><p>Within 5 business days</p></td></tr>
+<tr><td><p>Respond to request</p></td><td><p><strong>30 calendar days</strong> from receipt</p></td></tr>
+<tr><td><p>Extension (complex requests)</p></td><td><p>Up to <strong>60 additional days</strong> (90 days total) with notification to the data subject</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>CCPA/CPRA Timeline</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Step</p></th><th><p>Deadline</p></th></tr>
+<tr><td><p>Acknowledge receipt</p></td><td><p>Within <strong>10 business days</strong></p></td></tr>
+<tr><td><p>Verify identity</p></td><td><p>Within 10 business days</p></td></tr>
+<tr><td><p>Respond to request</p></td><td><p><strong>45 calendar days</strong> from receipt</p></td></tr>
+<tr><td><p>Extension (if necessary)</p></td><td><p>Up to <strong>45 additional days</strong> (90 days total) with notification to the consumer</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Key Differences</h3>
+<ul>
+<li><p><strong>GDPR:</strong> 30-day default, extendable to 90 days for complex requests</p></li>
+<li><p><strong>CCPA:</strong> 45-day default, extendable to 90 days</p></li>
+<li><p><strong>Both:</strong> Extensions require notifying the data subject with reasons for the delay</p></li>
+<li><p><strong>GDPR:</strong> First copy is free; subsequent copies may incur a reasonable fee</p></li>
+<li><p><strong>CCPA:</strong> Requests must be fulfilled free of charge (up to 2 requests per 12-month period)</p></li>
+</ul>
+<hr />
+<h2>4. Identity Verification Requirements</h2>
+<p>Before processing any DSAR, you <strong>must</strong> verify the identity of the requester to prevent unauthorized disclosure of personal data.</p>
+<h3>Verification Methods</h3>
+<ol>
+<li><p><strong>Existing Account Holders:</strong></p></li>
+</ol>
+<ul>
+<li><p>Require the request to be submitted from the registered email address</p></li>
+<li><p>Send a verification email with a one-time confirmation link</p></li>
+<li><p>Require re-authentication through the application's login flow</p></li>
+</ul>
+<ol>
+<li><p><strong>Non-Account Holders / Unverifiable Requests:</strong></p></li>
+</ol>
+<ul>
+<li><p>Request two or more pieces of identifying information that match your records</p></li>
+<li><p>Examples: full name, email, account number, recent transaction details</p></li>
+<li><p>If identity cannot be verified, notify the requester within the response deadline and explain what additional information is needed</p></li>
+</ul>
+<ol>
+<li><p><strong>Authorized Agents (CCPA):</strong></p></li>
+</ol>
+<ul>
+<li><p>Verify the agent's authorization (signed permission or power of attorney)</p></li>
+<li><p>Verify the identity of the consumer on whose behalf the request is made</p></li>
+<li><p>Exception: no consumer verification needed if the agent has a valid power of attorney</p></li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+<li><p>Record the verification method used for each request</p></li>
+<li><p>Document any failed verification attempts</p></li>
+<li><p>Retain verification records for the duration required by applicable law</p></li>
+</ul>
+<hr />
+<h2>5. Service-Specific Data Location Map</h2>
+<p>The following map was auto-generated from code analysis of <strong>nextjs-saas-example</strong>. It shows where personal data is stored, how to export it, how to delete it, and which third parties must be notified.</p>
+<h3>Sentry</h3>
+<ul>
+<li><p><strong>Category:</strong> Monitoring / Error Tracking</p></li>
+<li><p><strong>Data collected:</strong> error data, stack traces, user context, device information, IP address</p></li>
+<li><p><strong>Storage location:</strong> Error tracking / APM platform</p></li>
+<li><p><strong>How to export:</strong> Search error tracking data for entries containing the user's identifier. Export any user context, breadcrumbs, or session data.</p></li>
+<li><p><strong>How to delete:</strong> Delete user-identifiable data from error logs and session recordings. Most monitoring tools offer GDPR deletion endpoints.</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact Sentry to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>Supabase</h3>
+<ul>
+<li><p><strong>Category:</strong> Authentication / Identity</p></li>
+<li><p><strong>Data collected:</strong> email, password hash, session data, user metadata</p></li>
+<li><p><strong>Storage location:</strong> Authentication store (database or third-party auth provider)</p></li>
+<li><p><strong>How to export:</strong> Export user profile data from the authentication provider's admin panel or API. Include account metadata, login history, and linked social accounts.</p></li>
+<li><p><strong>How to delete:</strong> Delete the user account and all associated sessions, tokens, and profile data through the auth provider's API or admin panel.</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact Supabase to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>OpenAI</h3>
+<ul>
+<li><p><strong>Category:</strong> AI / Machine Learning</p></li>
+<li><p><strong>Data collected:</strong> user prompts, conversation history, generated content</p></li>
+<li><p><strong>Storage location:</strong> Third-party AI provider servers (data transmitted via API)</p></li>
+<li><p><strong>How to export:</strong> Query the AI provider's API or admin dashboard for stored conversation logs and user data. Check if the provider offers a data export endpoint.</p></li>
+<li><p><strong>How to delete:</strong> Delete stored conversations and user data via the AI provider's API or dashboard. Confirm deletion of any fine-tuning data that included user content.</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact OpenAI to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>PostHog</h3>
+<ul>
+<li><p><strong>Category:</strong> Analytics / Tracking</p></li>
+<li><p><strong>Data collected:</strong> user behavior, session recordings, feature flag usage, device information</p></li>
+<li><p><strong>Storage location:</strong> Third-party analytics platform (cloud-hosted)</p></li>
+<li><p><strong>How to export:</strong> Use the analytics platform's data export or API to extract user-level event data. Check for GDPR-specific export tools in the admin dashboard.</p></li>
+<li><p><strong>How to delete:</strong> Use the analytics platform's data deletion API or GDPR tools to remove user-level data. Some platforms offer automatic deletion by user ID.</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact PostHog to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>Prisma (database ORM)</h3>
+<ul>
+<li><p><strong>Category:</strong> Database / Data Store</p></li>
+<li><p><strong>Data collected:</strong> user data as defined in schema</p></li>
+<li><p><strong>Storage location:</strong> Application database (self-hosted or managed)</p></li>
+<li><p><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</p></li>
+<li><p><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</p></li>
+<li><p><strong>Third-party notification required:</strong> No (self-hosted)</p></li>
+</ul>
+<h3>Resend</h3>
+<ul>
+<li><p><strong>Category:</strong> Email / Communication</p></li>
+<li><p><strong>Data collected:</strong> email addresses, email content</p></li>
+<li><p><strong>Storage location:</strong> Email service provider infrastructure</p></li>
+<li><p><strong>How to export:</strong> Export recipient data and email engagement history from the email provider's dashboard or API. Include suppression lists and preferences.</p></li>
+<li><p><strong>How to delete:</strong> Remove the user from all mailing lists, delete their contact record, and add them to the suppression list to prevent future emails.</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact Resend to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>Stripe</h3>
+<ul>
+<li><p><strong>Category:</strong> Payment Processing</p></li>
+<li><p><strong>Data collected:</strong> payment information, billing address, email, transaction history</p></li>
+<li><p><strong>Storage location:</strong> Third-party payment processor (PCI-compliant environment)</p></li>
+<li><p><strong>How to export:</strong> Use the payment provider's dashboard or API to export customer records, invoices, and transaction history. Most providers offer CSV/JSON export.</p></li>
+<li><p><strong>How to delete:</strong> Request data deletion through the payment provider's API or support. Note: transaction records may be retained for legal/tax compliance (typically 7 years).</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact Stripe to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<h3>stripe-ios</h3>
+<ul>
+<li><p><strong>Category:</strong> Payment Processing</p></li>
+<li><p><strong>Data collected:</strong> payment information, billing address, email, transaction history</p></li>
+<li><p><strong>Storage location:</strong> Third-party payment processor (PCI-compliant environment)</p></li>
+<li><p><strong>How to export:</strong> Use the payment provider's dashboard or API to export customer records, invoices, and transaction history. Most providers offer CSV/JSON export.</p></li>
+<li><p><strong>How to delete:</strong> Request data deletion through the payment provider's API or support. Note: transaction records may be retained for legal/tax compliance (typically 7 years).</p></li>
+<li><p><strong>Third-party notification required:</strong> Yes — contact stripe-ios to forward the DSAR or use their GDPR/privacy API</p></li>
+</ul>
+<hr />
+<h2>6. Third-Party Sub-Processor Notification</h2>
+<p>When fulfilling erasure or access requests, you must notify the following third-party sub-processors (GDPR Art. 19):</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Sub-Processor</p></th><th><p>Category</p></th><th><p>Action Required</p></th></tr>
+<tr><td><p>Sentry</p></td><td><p>Monitoring / Error Tracking</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>Supabase</p></td><td><p>Authentication / Identity</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>OpenAI</p></td><td><p>AI / Machine Learning</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>PostHog</p></td><td><p>Analytics / Tracking</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>Resend</p></td><td><p>Email / Communication</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>Stripe</p></td><td><p>Payment Processing</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>Forward DSAR; confirm deletion/export</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li><p>Forward the DSAR to each relevant sub-processor listed above</p></li>
+<li><p>Set a follow-up reminder for 14 days to confirm completion</p></li>
+<li><p>Document each sub-processor's response</p></li>
+<li><p>Inform the data subject of any sub-processors that could not comply, and the reasons</p></li>
+</ol>
+<hr />
+<h2>7. Template Responses</h2>
+<h3>7.1 Acknowledgment of Receipt</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Thank you for your data subject access request received on [Date]. We have assigned reference number <strong>[DSAR-XXXX]</strong> to your request.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We will verify your identity and respond within the applicable legal timeframe (30 days under GDPR / 45 days under CCPA).</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>If we need additional information to verify your identity, we will contact you within 5 business days.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+<p>legal@acme.com</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.2 Access Request Response</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Following your access request dated [Date], please find attached a copy of all personal data we hold about you. This includes:</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>- [List categories of data provided]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>The data is provided in [JSON/CSV] format. The purposes of processing, categories of recipients, and retention periods are described in our Privacy Policy at [URL].</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>If you have any questions or believe this response is incomplete, please contact us at legal@acme.com.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.3 Rectification Confirmation</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We have updated the following personal data as requested on [Date]:</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>- [Field]: [Old Value] → [New Value]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>These changes have been applied across all our systems and any relevant third-party processors have been notified.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.4 Erasure Confirmation</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We confirm that your personal data has been deleted from our systems as of [Date]. This includes data held by the following services:</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>- [List services where data was deleted]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Please note the following exceptions, where data is retained for legal compliance:</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>- [List any retained data and the legal basis for retention]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Third-party sub-processors have been notified and have confirmed deletion.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.5 Portability Response</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Please find attached your personal data in a structured, machine-readable format (JSON/CSV) as requested under your right to data portability.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>The attached file contains all personal data you provided to us directly. If you would like this data transmitted directly to another controller, please provide their contact details and we will facilitate the transfer where technically feasible.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.6 Restriction Confirmation</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We have restricted the processing of your personal data as requested on [Date]. Your data will be stored but not actively processed until:</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>- [State the condition for lifting the restriction]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We will inform you before the restriction is lifted.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.7 Objection Acknowledgment</h3>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Dear [Data Subject Name],</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>We acknowledge your objection to the processing of your personal data for [purpose], received on [Date].</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>[We have ceased processing your data for this purpose. / We have reviewed your objection and believe there are compelling legitimate grounds for continued processing. The grounds are: (explain).]</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Regards,</p>
+<p>Acme Inc</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>8. Record-Keeping Requirements</h2>
+<p>You must maintain a log of all DSARs received and how they were handled. This is required under GDPR Article 30 (Records of Processing Activities) and demonstrates compliance.</p>
+<h3>Required DSAR Log Fields</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Reference Number</p></td><td><p>Unique identifier (e.g., DSAR-2026-001)</p></td></tr>
+<tr><td><p>Date Received</p></td><td><p>When the request was received</p></td></tr>
+<tr><td><p>Requester Identity</p></td><td><p>Name, email, or other identifier (after verification)</p></td></tr>
+<tr><td><p>Request Type</p></td><td><p>Access, Rectification, Erasure, Portability, Restriction, or Objection</p></td></tr>
+<tr><td><p>Verification Method</p></td><td><p>How the requester's identity was verified</p></td></tr>
+<tr><td><p>Verification Date</p></td><td><p>When identity was confirmed</p></td></tr>
+<tr><td><p>Response Deadline</p></td><td><p>Calculated deadline (30 days GDPR / 45 days CCPA)</p></td></tr>
+<tr><td><p>Extension Applied</p></td><td><p>Whether an extension was needed and the reason</p></td></tr>
+<tr><td><p>Services Queried</p></td><td><p>Which services/databases were searched</p></td></tr>
+<tr><td><p>Third Parties Notified</p></td><td><p>Which sub-processors were contacted</p></td></tr>
+<tr><td><p>Response Date</p></td><td><p>When the response was sent to the data subject</p></td></tr>
+<tr><td><p>Outcome</p></td><td><p>Completed, Partially Completed, Denied (with reason)</p></td></tr>
+<tr><td><p>Retained by</p></td><td><p>Staff member responsible</p></td></tr>
+<tr><td><p>Notes</p></td><td><p>Any additional context</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Retention of DSAR Records</h3>
+<ul>
+<li><p><strong>Minimum retention:</strong> 3 years from the date of the response (recommended)</p></li>
+<li><p><strong>GDPR:</strong> No specific retention period mandated, but records must demonstrate compliance</p></li>
+<li><p><strong>CCPA:</strong> Businesses must maintain records of CCPA requests for at least <strong>24 months</strong></p></li>
+<li><p>Store DSAR records securely with access limited to authorized personnel</p></li>
+</ul>
+<h3>Regular Review</h3>
+<ul>
+<li><p>Review DSAR handling procedures at least <strong>annually</strong></p></li>
+<li><p>Update this guide whenever new services or data stores are added to the application</p></li>
+<li><p>Conduct DSAR response drills to ensure staff readiness</p></li>
+</ul>
+<hr />
+<p><em>This DSAR Handling Guide was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis of the <strong>nextjs-saas-example</strong> project. The service-specific data location map is derived from detected dependencies and may not capture all data stores. This document is a template and must be reviewed by a legal professional and your Data Protection Officer. It does not constitute legal advice.</em></p>

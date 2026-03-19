@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA RETENTION SCHEDULE VISUAL — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA RETENTION SCHEDULE VISUAL</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~3 min read</p>
+    </header>
+    <h1 id="data-retention-schedule-visual">Data Retention Schedule — Visual</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> @documenso/root</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<hr>
+<blockquote>This document provides a visual Gantt-chart representation of data retention timelines for every service category detected in your project. Use it alongside the <a href="DATA<em>RETENTION</em>POLICY.md">Data Retention Policy</a> for a complete picture.</blockquote>
+<h2 id="retention-timeline">Retention Timeline</h2>
+<pre><code>gantt
+    title Data Retention Timelines
+    dateFormat YYYY-MM-DD
+    axisFormat %Y
+    todayMarker off
+    section Legend
+    Collection date             :milestone, m1, 2026-03-16, 0d
+    section Authentication
+    Until deletion (~10y cap)    :crit, auth, 2026-03-16, 3650d
+    section Database
+    Until deletion (~10y cap)    :crit, database, 2026-03-16, 3650d
+    section Payment Processing
+    7 years    :crit, payment, 2026-03-16, 2555d
+    section Email Service
+    3 years    :active, email, 2026-03-16, 1095d
+    section Analytics
+    2 years    :active, analytics, 2026-03-16, 790d
+    section Other
+    1 year    :active, other, 2026-03-16, 365d
+    section AI Service
+    90 days    :done, ai, 2026-03-16, 90d</code></pre>
+<h2 id="retention-summary">Retention Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Retention Period</th><th style="text-align:left">Days</th><th style="text-align:left">Risk Level</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Authentication</td><td style="text-align:left">Until deletion (~10y cap)</td><td style="text-align:left">3650</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Database</td><td style="text-align:left">Until deletion (~10y cap)</td><td style="text-align:left">3650</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Payment Processing</td><td style="text-align:left">7 years</td><td style="text-align:left">2555</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Email Service</td><td style="text-align:left">3 years</td><td style="text-align:left">1095</td><td style="text-align:left">Moderate</td></tr>
+<tr><td style="text-align:left">Analytics</td><td style="text-align:left">2 years</td><td style="text-align:left">790</td><td style="text-align:left">Moderate</td></tr>
+<tr><td style="text-align:left">Other</td><td style="text-align:left">1 year</td><td style="text-align:left">365</td><td style="text-align:left">Moderate</td></tr>
+<tr><td style="text-align:left">AI Service</td><td style="text-align:left">90 days</td><td style="text-align:left">90</td><td style="text-align:left">Low</td></tr>
+</tbody>
+</table>
+<h2 id="expiry-timeline">Expiry Timeline</h2>
+<pre><code>timeline
+    title When does data expire?
+    2036-03-13 : Authentication — Until deletion (~10y cap)
+    2036-03-13 : Database — Until deletion (~10y cap)
+    2033-03-14 : Payment Processing — 7 years
+    2029-03-15 : Email Service — 3 years
+    2028-05-14 : Analytics — 2 years
+    2027-03-16 : Other — 1 year
+    2026-06-14 : AI Service — 90 days</code></pre>
+<h2 id="data-lifecycle-phases">Data Lifecycle Phases</h2>
+<pre><code>flowchart LR
+    A[Collection] --&gt; B[Processing]
+    B --&gt; C[Storage]
+    C --&gt; D{Retention\nPeriod\nExpired?}
+    D --&gt;|No| C
+    D --&gt;|Yes| E[Anonymise\nor Delete]
+    E --&gt; F[Purge\nfrom Backups]
+    F --&gt; G[Confirm\nDeletion]</code></pre>
+<p>Each data category follows this lifecycle. The retention period (shown in the Gantt chart above) governs how long data remains in the <strong>Storage</strong> phase before progressing to deletion.</p>
+<h2 id="retention-risk-heat-map">Retention Risk Heat Map</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Risk Level</th><th style="text-align:left">Categories</th><th style="text-align:left">Recommended Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>High</strong> (7+ years)</td><td style="text-align:left">Authentication, Database, Payment Processing</td><td style="text-align:left">Verify legal obligation; minimise where possible</td></tr>
+<tr><td style="text-align:left"><strong>Moderate</strong> (1–7 years)</td><td style="text-align:left">Email Service, Analytics, Other</td><td style="text-align:left">Review annually; ensure consent is current</td></tr>
+<tr><td style="text-align:left"><strong>Low</strong> (< 1 year)</td><td style="text-align:left">AI Service</td><td style="text-align:left">Automated purge in place</td></tr>
+</tbody>
+</table>
+<h2 id="contact">Contact</h2>
+<p>For questions about data retention schedules:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This Data Retention Schedule Visual was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Retention periods are based on regulatory best practices and should be reviewed by your legal and compliance teams.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

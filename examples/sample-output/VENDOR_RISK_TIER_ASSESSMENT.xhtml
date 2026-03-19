@@ -1,0 +1,326 @@
+<h1>Vendor Risk Tier Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Vendor Risk Tier Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Assessment contact:</strong> legal@acme.com</p>
+<hr />
+<h2>Executive Summary</h2>
+<p>This assessment classifies <strong>7 third-party vendors</strong> detected in the <strong>nextjs-saas-example</strong> codebase into risk tiers based on three factors:</p>
+<ol>
+<li><p><strong>Data Sensitivity</strong> — The type and sensitivity of personal data the vendor processes</p></li>
+<li><p><strong>Data Volume</strong> — The scale of data processing (transaction volume, user base coverage)</p></li>
+<li><p><strong>Replaceability</strong> — How difficult it would be to migrate away from the vendor</p></li>
+</ol>
+<h3>Tier Distribution</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Tier</p></th><th><p>Count</p></th><th><p>Review Frequency</p></th></tr>
+<tr><td><p>Critical</p></td><td><p>2</p></td><td><p>Quarterly (every 3 months)</p></td></tr>
+<tr><td><p>High</p></td><td><p>0</p></td><td><p>Semi-annually (every 6 months)</p></td></tr>
+<tr><td><p>Medium</p></td><td><p>3</p></td><td><p>Annually (every 12 months)</p></td></tr>
+<tr><td><p>Low</p></td><td><p>2</p></td><td><p>Biannually (every 24 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Risk Tier Definitions</h2>
+<h3>Critical Risk</h3>
+<p>Vendors processing highly sensitive data (financial, health, biometric) at scale with limited replaceability. A failure or breach at this vendor would have immediate, severe impact on business operations and regulatory compliance.</p>
+<p><strong>Review frequency:</strong> Quarterly (every 3 months)</p>
+<h3>High Risk</h3>
+<p>Vendors processing personal data with significant volume or sensitivity. Vendor disruption would materially impact service delivery or compliance posture.</p>
+<p><strong>Review frequency:</strong> Semi-annually (every 6 months)</p>
+<h3>Medium Risk</h3>
+<p>Vendors processing limited personal data or operational data. Alternatives exist and migration would be manageable within a reasonable timeframe.</p>
+<p><strong>Review frequency:</strong> Annually (every 12 months)</p>
+<h3>Low Risk</h3>
+<p>Vendors processing minimal or no personal data, or providing easily replaceable commodity services. Limited compliance exposure.</p>
+<p><strong>Review frequency:</strong> Biannually (every 24 months)</p>
+<hr />
+<h2>Vendor Risk Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Vendor</p></th><th><p>Category</p></th><th><p>Tier</p></th><th><p>Sensitivity</p></th><th><p>Volume</p></th><th><p>Replaceability</p></th><th><p>Review Frequency</p></th></tr>
+<tr><td><p><strong>Supabase</strong></p></td><td><p>auth</p></td><td><p>Critical !!!</p></td><td><p>4/5</p></td><td><p>High</p></td><td><p>Difficult</p></td><td><p>Quarterly (every 3 months)</p></td></tr>
+<tr><td><p><strong>Stripe</strong></p></td><td><p>payment</p></td><td><p>Critical !!!</p></td><td><p>5/5</p></td><td><p>High</p></td><td><p>Difficult</p></td><td><p>Quarterly (every 3 months)</p></td></tr>
+<tr><td><p><strong>OpenAI</strong></p></td><td><p>ai</p></td><td><p>Medium !</p></td><td><p>4/5</p></td><td><p>Medium</p></td><td><p>Moderate</p></td><td><p>Annually (every 12 months)</p></td></tr>
+<tr><td><p><strong>PostHog</strong></p></td><td><p>analytics</p></td><td><p>Medium !</p></td><td><p>2/5</p></td><td><p>High</p></td><td><p>Easy</p></td><td><p>Annually (every 12 months)</p></td></tr>
+<tr><td><p><strong>stripe-ios</strong></p></td><td><p>payment</p></td><td><p>Medium !</p></td><td><p>5/5</p></td><td><p>Medium</p></td><td><p>Moderate</p></td><td><p>Annually (every 12 months)</p></td></tr>
+<tr><td><p><strong>Sentry</strong></p></td><td><p>monitoring</p></td><td><p>Low -</p></td><td><p>2/5</p></td><td><p>Low</p></td><td><p>Easy</p></td><td><p>Biannually (every 24 months)</p></td></tr>
+<tr><td><p><strong>Resend</strong></p></td><td><p>email</p></td><td><p>Low -</p></td><td><p>3/5</p></td><td><p>Medium</p></td><td><p>Easy</p></td><td><p>Biannually (every 24 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Detailed Vendor Risk Profiles</h2>
+<h3>Critical Risk Vendors</h3>
+<h4>Supabase</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>auth</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Critical</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>4/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>High</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Difficult</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Quarterly (every 3 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> email, password hash, session data, user metadata</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>Processes highly sensitive personal data</p></li>
+<li><p>High data volume — large-scale processing</p></li>
+<li><p>Difficult to replace — deep integration dependency</p></li>
+<li><p>Identity/credential data — high-value target for attackers</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Verify encryption at rest and in transit</p></li>
+<li><p>[ ] Conduct annual security questionnaire</p></li>
+<li><p>[ ] Implement data minimization controls</p></li>
+<li><p>[ ] Document vendor exit plan and data migration procedure</p></li>
+<li><p>[ ] Verify MFA support and credential storage practices</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h4>Stripe</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>payment</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Critical</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>5/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>High</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Difficult</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Quarterly (every 3 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> payment information, billing address, email, transaction history</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>Processes highly sensitive personal data</p></li>
+<li><p>High data volume — large-scale processing</p></li>
+<li><p>Difficult to replace — deep integration dependency</p></li>
+<li><p>Subject to PCI DSS requirements</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Verify encryption at rest and in transit</p></li>
+<li><p>[ ] Conduct annual security questionnaire</p></li>
+<li><p>[ ] Implement data minimization controls</p></li>
+<li><p>[ ] Document vendor exit plan and data migration procedure</p></li>
+<li><p>[ ] Verify PCI DSS Level 1 compliance certificate</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h3>Medium Risk Vendors</h3>
+<h4>OpenAI</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>ai</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>4/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Moderate</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Annually (every 12 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> user prompts, conversation history, generated content</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>Processes highly sensitive personal data</p></li>
+<li><p>AI processing — potential for unintended data exposure</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Verify encryption at rest and in transit</p></li>
+<li><p>[ ] Conduct annual security questionnaire</p></li>
+<li><p>[ ] Confirm opt-out of model training; review data retention policy</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h4>PostHog</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>analytics</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>2/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>High</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Easy</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Annually (every 12 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> user behavior, session recordings, feature flag usage, device information</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>High data volume — large-scale processing</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Implement data minimization controls</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h4>stripe-ios</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>payment</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>5/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Moderate</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Annually (every 12 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> payment information, billing address, email, transaction history</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>Processes highly sensitive personal data</p></li>
+<li><p>Subject to PCI DSS requirements</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Verify encryption at rest and in transit</p></li>
+<li><p>[ ] Conduct annual security questionnaire</p></li>
+<li><p>[ ] Verify PCI DSS Level 1 compliance certificate</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h3>Low Risk Vendors</h3>
+<h4>Sentry</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>monitoring</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Low</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>2/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>Low</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Easy</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Biannually (every 24 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> error data, stack traces, user context, device information, IP address</p>
+<p><strong>Risk factors:</strong></p>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<h4>Resend</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>email</p></td></tr>
+<tr><td><p><strong>Risk Tier</strong></p></td><td><p>Low</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>3/5</p></td></tr>
+<tr><td><p><strong>Data Volume</strong></p></td><td><p>Medium</p></td></tr>
+<tr><td><p><strong>Replaceability</strong></p></td><td><p>Easy</p></td></tr>
+<tr><td><p><strong>Review Frequency</strong></p></td><td><p>Biannually (every 24 months)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data collected:</strong> email addresses, email content</p>
+<p><strong>Risk factors:</strong></p>
+<ul>
+<li><p>Processes personal data</p></li>
+</ul>
+<p><strong>Recommended mitigations:</strong></p>
+<ul>
+<li><p>[ ] Ensure DPA is signed and current</p></li>
+<li><p>[ ] Verify encryption at rest and in transit</p></li>
+<li><p>[ ] Monitor vendor status page and security advisories</p></li>
+</ul>
+<hr />
+<h2>Review Schedule</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Review Type</p></th><th><p>Next Due</p></th><th><p>Vendors</p></th></tr>
+<tr><td><p>Quarterly Review</p></td><td><p>2026-06-18</p></td><td><p>Supabase, Stripe</p></td></tr>
+<tr><td><p>Semi-Annual Review</p></td><td><p>2026-09-18</p></td><td><p>None</p></td></tr>
+<tr><td><p>Annual Review</p></td><td><p>2027-03-18</p></td><td><p>OpenAI, PostHog, stripe-ios</p></td></tr>
+<tr><td><p>Biannual Review</p></td><td><p>2028-03-17</p></td><td><p>Sentry, Resend</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Review Checklist</h3>
+<p>For each scheduled review, complete the following:</p>
+<ul>
+<li><p>[ ] Verify DPA is current and signed</p></li>
+<li><p>[ ] Review vendor's latest SOC 2 / ISO 27001 report (if applicable)</p></li>
+<li><p>[ ] Check for security incidents or breaches reported by the vendor</p></li>
+<li><p>[ ] Verify data processing activities match documented purposes</p></li>
+<li><p>[ ] Confirm sub-processor list has not changed unexpectedly</p></li>
+<li><p>[ ] Review vendor's privacy policy for material changes</p></li>
+<li><p>[ ] Test data deletion / DSAR fulfillment process</p></li>
+<li><p>[ ] Update this assessment with any changes to risk factors</p></li>
+</ul>
+<hr />
+<h2>Methodology</h2>
+<h3>Scoring Criteria</h3>
+<p><strong>Data Sensitivity (1-5):</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Score</p></th><th><p>Description</p></th><th><p>Examples</p></th></tr>
+<tr><td><p>5</p></td><td><p>Financial / health data</p></td><td><p>Payment processors, health APIs</p></td></tr>
+<tr><td><p>4</p></td><td><p>Identity / credential data</p></td><td><p>Auth providers, AI services (may process PII)</p></td></tr>
+<tr><td><p>3</p></td><td><p>Personal / contact data</p></td><td><p>Email services, databases, file storage</p></td></tr>
+<tr><td><p>2</p></td><td><p>Behavioral / technical data</p></td><td><p>Analytics, monitoring, advertising</p></td></tr>
+<tr><td><p>1</p></td><td><p>Minimal / no personal data</p></td><td><p>Utility services, CDNs</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Data Volume:</strong></p>
+<ul>
+<li><p><strong>High</strong> — Processes data for all or most users at scale</p></li>
+<li><p><strong>Medium</strong> — Processes moderate amounts of personal data</p></li>
+<li><p><strong>Low</strong> — Processes minimal data volume</p></li>
+</ul>
+<p><strong>Replaceability:</strong></p>
+<ul>
+<li><p><strong>Easy</strong> — Commodity service; multiple alternatives; migration within days</p></li>
+<li><p><strong>Moderate</strong> — Some integration depth; migration within weeks</p></li>
+<li><p><strong>Difficult</strong> — Deep integration; data lock-in; migration requires months of planning</p></li>
+</ul>
+<h3>Tier Calculation</h3>
+<p>Risk tier is determined by a composite score combining all three factors. Vendors processing sensitive data at high volume with difficult replaceability receive the highest risk classification.</p>
+<hr />
+<h2>Maintaining This Assessment</h2>
+<ul>
+<li><p><strong>Review frequency:</strong> This assessment should be regenerated whenever vendors are added or removed</p></li>
+<li><p><strong>Ownership:</strong> Data Protection Officer / Security Team</p></li>
+<li><p><strong>Update process:</strong> Re-run Codepliant to regenerate from current codebase, then review and validate tier assignments</p></li>
+<li><p><strong>Override:</strong> If a vendor's auto-assigned tier does not reflect your specific context, document the override and rationale</p></li>
+</ul>
+<hr />
+<p><em>This vendor risk tier assessment was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Risk tiers are based on general heuristics and should be validated against your organization's specific risk appetite and vendor relationships.</em></p>

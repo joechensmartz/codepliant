@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE MATURITY ASSESSMENT — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE MATURITY ASSESSMENT</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="compliance-maturity-assessment">Compliance Maturity Assessment</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Assessment Date:</strong> 2026-03-16</p>
+<p><strong>Assessor:</strong> [NAME / TITLE]</p>
+<p>This self-assessment questionnaire evaluates compliance program maturity across six domains. Each question is scored on a 1–5 scale. Questions marked <code>[AUTO]</code> have been pre-filled based on automated code analysis. Review and adjust all scores before finalizing.</p>
+<h2 id="scoring-guide">Scoring Guide</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Score</th><th style="text-align:left">Level</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Initial</td><td style="text-align:left">Ad-hoc, no formal process</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Developing</td><td style="text-align:left">Basic processes exist but inconsistently applied</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Defined</td><td style="text-align:left">Documented processes, consistently followed</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Managed</td><td style="text-align:left">Measured, monitored, and continuously improved</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Optimized</td><td style="text-align:left">Industry-leading, fully automated and integrated</td></tr>
+</tbody>
+</table>
+<h2 id="maturity-summary">Maturity Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Domain</th><th style="text-align:left">Auto-Score</th><th style="text-align:left">Questions Assessed</th><th style="text-align:left">Maturity Level</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Governance & Leadership</td><td style="text-align:left">2.8/5.0 [███░░]</td><td style="text-align:left">4/9</td><td style="text-align:left">Defined (Level 3)</td></tr>
+<tr><td style="text-align:left">Privacy & Data Protection</td><td style="text-align:left">3.0/5.0 [███░░]</td><td style="text-align:left">6/9</td><td style="text-align:left">Defined (Level 3)</td></tr>
+<tr><td style="text-align:left">Information Security</td><td style="text-align:left">2.5/5.0 [███░░]</td><td style="text-align:left">4/9</td><td style="text-align:left">Defined (Level 3)</td></tr>
+<tr><td style="text-align:left">Vendor & Third-Party Risk</td><td style="text-align:left">3.0/5.0 [███░░]</td><td style="text-align:left">3/8</td><td style="text-align:left">Defined (Level 3)</td></tr>
+<tr><td style="text-align:left">AI Governance & Ethics</td><td style="text-align:left">5.0/5.0 [█████]</td><td style="text-align:left">3/8</td><td style="text-align:left">Optimized (Level 5)</td></tr>
+<tr><td style="text-align:left">Incident Response & Business Continuity</td><td style="text-align:left">3.0/5.0 [███░░]</td><td style="text-align:left">3/7</td><td style="text-align:left">Defined (Level 3)</td></tr>
+</tbody>
+</table>
+<p><strong>Overall Maturity Score:</strong> 3.1/5.0 — <strong>Defined (Level 3)</strong></p>
+<p><strong>Questions Auto-Assessed:</strong> 23/50 (46%)</p>
+<p><strong>Questions Requiring Manual Assessment:</strong> 27</p>
+<p><strong>Maximum Possible Score:</strong> 250 (50 questions × 5 points)</p>
+<h2 id="governance-leadership">Governance & Leadership</h2>
+<blockquote>Organizational commitment to compliance, executive sponsorship, and program management.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">GOV-01</td><td style="text-align:left">Is there a formal compliance program with executive sponsorship?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Compliance documentation generated via automated scanning</td></tr>
+<tr><td style="text-align:left">GOV-02</td><td style="text-align:left">Are compliance policies documented, approved, and distributed to all staff?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Automated compliance scanning provides baseline policy framework</td></tr>
+<tr><td style="text-align:left">GOV-03</td><td style="text-align:left">Is there a dedicated compliance officer or team?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">GOV-04</td><td style="text-align:left">Is the scope of compliance obligations clearly defined?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] 6 services detected — compliance scope is well-defined</td></tr>
+<tr><td style="text-align:left">GOV-05</td><td style="text-align:left">Are compliance roles and responsibilities assigned across the organization?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">GOV-06</td><td style="text-align:left">Is compliance training provided to all employees at least annually?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">GOV-07</td><td style="text-align:left">Are compliance policies reviewed and updated at least annually?</td><td style="text-align:left">[AUTO] 2</td><td style="text-align:left">[AUTO] Automated compliance document generation provides baseline documentation</td></tr>
+<tr><td style="text-align:left">GOV-08</td><td style="text-align:left">Is there a compliance committee or steering group that meets regularly?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">GOV-09</td><td style="text-align:left">Are compliance metrics reported to the board or senior leadership?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="privacy-data-protection">Privacy & Data Protection</h2>
+<blockquote>Data privacy program maturity, GDPR/CCPA readiness, and data subject rights handling.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">PRI-01</td><td style="text-align:left">Is there a comprehensive, up-to-date privacy policy?</td><td style="text-align:left">[AUTO] 4</td><td style="text-align:left">[AUTO] Privacy policy auto-generated from code analysis</td></tr>
+<tr><td style="text-align:left">PRI-02</td><td style="text-align:left">Is there a complete data inventory/flow map of all personal data processing?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Data flow map generated from detected services</td></tr>
+<tr><td style="text-align:left">PRI-03</td><td style="text-align:left">Is there a documented process for handling data subject access requests (DSARs)?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] DSAR handling guide generated</td></tr>
+<tr><td style="text-align:left">PRI-04</td><td style="text-align:left">Is consent obtained and recorded for all data processing requiring it?</td><td style="text-align:left">[AUTO] 2</td><td style="text-align:left">[AUTO] No analytics/tracking detected — consent management may still be needed</td></tr>
+<tr><td style="text-align:left">PRI-05</td><td style="text-align:left">Are data protection impact assessments (DPIAs) conducted for high-risk processing?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">PRI-06</td><td style="text-align:left">Is there a documented data retention policy with defined retention periods?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Data retention policy auto-generated</td></tr>
+<tr><td style="text-align:left">PRI-07</td><td style="text-align:left">Is there a lawful basis assessment for each data processing activity?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">PRI-08</td><td style="text-align:left">Is a Record of Processing Activities (ROPA) maintained and current?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Record of processing activities generated (GDPR Art. 30)</td></tr>
+<tr><td style="text-align:left">PRI-09</td><td style="text-align:left">Are cross-border data transfers assessed and safeguarded (e.g., SCCs, adequacy decisions)?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="information-security">Information Security</h2>
+<blockquote>Technical and organizational security controls, vulnerability management, and access control.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">SEC-01</td><td style="text-align:left">Is authentication required for all system access, with MFA for privileged accounts?</td><td style="text-align:left">[AUTO] 4</td><td style="text-align:left">[AUTO] Authentication service detected: django-admin, django-sessions</td></tr>
+<tr><td style="text-align:left">SEC-02</td><td style="text-align:left">Is there continuous security monitoring and alerting in place?</td><td style="text-align:left">[AUTO] 1</td><td style="text-align:left">[AUTO] No monitoring service detected</td></tr>
+<tr><td style="text-align:left">SEC-03</td><td style="text-align:left">Is there a documented access control policy with role-based access?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">SEC-04</td><td style="text-align:left">Are regular vulnerability scans and penetration tests conducted?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Vulnerability scanning included in compliance toolchain</td></tr>
+<tr><td style="text-align:left">SEC-05</td><td style="text-align:left">Is there a secure software development lifecycle (SDLC) with code review?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">SEC-06</td><td style="text-align:left">Is data encrypted at rest and in transit?</td><td style="text-align:left">[AUTO] 2</td><td style="text-align:left">[AUTO] Database service detected (redis) — encryption at rest needs manual verification</td></tr>
+<tr><td style="text-align:left">SEC-07</td><td style="text-align:left">Are security patches applied within defined SLAs?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">SEC-08</td><td style="text-align:left">Is there network segmentation between production and development environments?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">SEC-09</td><td style="text-align:left">Are audit logs maintained, protected from tampering, and reviewed regularly?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="vendor-third-party-risk">Vendor & Third-Party Risk</h2>
+<blockquote>Third-party risk management, vendor due diligence, and sub-processor oversight.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">VEN-01</td><td style="text-align:left">Is there a complete inventory of all third-party services and sub-processors?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] 6 third-party services detected and inventoried</td></tr>
+<tr><td style="text-align:left">VEN-02</td><td style="text-align:left">Are Data Processing Agreements (DPAs) in place with all sub-processors?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Sub-processor list auto-generated from code analysis</td></tr>
+<tr><td style="text-align:left">VEN-03</td><td style="text-align:left">Is vendor due diligence performed before onboarding new services?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">VEN-04</td><td style="text-align:left">Are third-party risk assessments conducted and documented?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Third-party risk assessment generated</td></tr>
+<tr><td style="text-align:left">VEN-05</td><td style="text-align:left">Is there a vendor exit strategy for critical third-party dependencies?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">VEN-06</td><td style="text-align:left">Are sub-processor changes communicated to affected data subjects?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">VEN-07</td><td style="text-align:left">Are vendor SLAs monitored and reviewed at least annually?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">VEN-08</td><td style="text-align:left">Is there a process for revoking vendor access upon contract termination?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="ai-governance-ethics">AI Governance & Ethics</h2>
+<blockquote>AI risk management, transparency, fairness, and compliance with AI regulations (EU AI Act, etc.).</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AI-01</td><td style="text-align:left">Is there an inventory of all AI/ML systems with risk classifications?</td><td style="text-align:left">[AUTO] 5</td><td style="text-align:left">[AUTO] No AI services detected — N/A</td></tr>
+<tr><td style="text-align:left">AI-02</td><td style="text-align:left">Is AI usage disclosed to end users with clear explanations?</td><td style="text-align:left">[AUTO] 5</td><td style="text-align:left">[AUTO] No AI services detected — N/A</td></tr>
+<tr><td style="text-align:left">AI-03</td><td style="text-align:left">Are AI outputs monitored for bias, accuracy, and safety?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">AI-04</td><td style="text-align:left">Is there a process for users to opt out of AI-driven decisions?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">AI-05</td><td style="text-align:left">Is there an AI governance framework aligned with regulations (EU AI Act, NIST AI RMF)?</td><td style="text-align:left">[AUTO] 5</td><td style="text-align:left">[AUTO] No AI services detected — N/A</td></tr>
+<tr><td style="text-align:left">AI-06</td><td style="text-align:left">Are AI model cards or system documentation maintained?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">AI-07</td><td style="text-align:left">Is human oversight provided for high-risk AI decisions?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">AI-08</td><td style="text-align:left">Are AI training data sources documented and assessed for legality?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="incident-response-business-continuity">Incident Response & Business Continuity</h2>
+<blockquote>Incident detection, response, communication, and recovery capabilities.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Question</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">INC-01</td><td style="text-align:left">Is there a documented and tested incident response plan?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Incident response plan auto-generated</td></tr>
+<tr><td style="text-align:left">INC-02</td><td style="text-align:left">Are breach notification templates prepared per applicable jurisdiction?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Data breach notification templates generated per jurisdiction</td></tr>
+<tr><td style="text-align:left">INC-03</td><td style="text-align:left">Is there a dedicated incident response team with clear escalation paths?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">INC-04</td><td style="text-align:left">Is there an incident severity classification system?</td><td style="text-align:left">[AUTO] 3</td><td style="text-align:left">[AUTO] Incident severity matrix generated (P0-P4)</td></tr>
+<tr><td style="text-align:left">INC-05</td><td style="text-align:left">Are post-incident reviews conducted with lessons learned?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">INC-06</td><td style="text-align:left">Is there a business continuity plan with defined RTO/RPO?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+<tr><td style="text-align:left">INC-07</td><td style="text-align:left">Are disaster recovery procedures tested at least annually?</td><td style="text-align:left">[ ] <em>_</em></td><td style="text-align:left">[MANUAL]</td><td></td></tr>
+</tbody>
+</table>
+<h2 id="improvement-action-plan">Improvement Action Plan</h2>
+<p>Based on the assessment results, prioritize the following areas:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Priority</th><th style="text-align:left">Domain</th><th style="text-align:left">Current</th><th style="text-align:left">Target</th><th style="text-align:left">Action Required</th><th style="text-align:left">Owner</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Information Security</td><td style="text-align:left">2.5</td><td style="text-align:left">3.5</td><td style="text-align:left">[DESCRIBE ACTIONS]</td><td style="text-align:left">[OWNER]</td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Governance & Leadership</td><td style="text-align:left">2.8</td><td style="text-align:left">3.8</td><td style="text-align:left">[DESCRIBE ACTIONS]</td><td style="text-align:left">[OWNER]</td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Privacy & Data Protection</td><td style="text-align:left">3.0</td><td style="text-align:left">4.0</td><td style="text-align:left">[DESCRIBE ACTIONS]</td><td style="text-align:left">[OWNER]</td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Vendor & Third-Party Risk</td><td style="text-align:left">3.0</td><td style="text-align:left">4.0</td><td style="text-align:left">[DESCRIBE ACTIONS]</td><td style="text-align:left">[OWNER]</td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Incident Response & Business Continuity</td><td style="text-align:left">3.0</td><td style="text-align:left">4.0</td><td style="text-align:left">[DESCRIBE ACTIONS]</td><td style="text-align:left">[OWNER]</td><td style="text-align:left">[DATE]</td></tr>
+</tbody>
+</table>
+<h2 id="assessment-sign-off">Assessment Sign-Off</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Name</th><th style="text-align:left">Signature</th><th style="text-align:left">Date</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Assessor</td><td style="text-align:left">[NAME]</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong>_</strong></td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">Compliance Officer</td><td style="text-align:left">[NAME]</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong>_</strong></td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">Executive Sponsor</td><td style="text-align:left">[NAME]</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong>_</strong></td><td style="text-align:left">[DATE]</td></tr>
+</tbody>
+</table>
+<h2 id="next-assessment">Next Assessment</h2>
+<p>Recommended next assessment date: <strong>2026-06-14</strong> (quarterly cadence).</p>
+<hr>
+<p><em>This compliance maturity assessment was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>saleor</strong> codebase. Auto-scored questions should be verified by your compliance team. This assessment does not constitute legal advice or formal certification.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

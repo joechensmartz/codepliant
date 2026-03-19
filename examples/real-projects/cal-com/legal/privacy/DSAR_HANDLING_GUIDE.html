@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSAR HANDLING GUIDE — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DSAR HANDLING GUIDE</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~21 min read</p>
+    </header>
+    <h1 id="dsar-handling-guide">DSAR Handling Guide</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> calcom-monorepo</p>
+<p><strong>Data Controller:</strong> [Your Company Name]</p>
+<p><strong>Data Protection Officer:</strong> [DPO Name] ([your-email@example.com])</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Vendor Contacts Directory (<code>VENDOR_CONTACTS.md</code>)</li>
+<li>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</li>
+<li>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This guide provides step-by-step procedures for handling Data Subject Access Requests (DSARs) under the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA). It is tailored to the <strong>calcom-monorepo</strong> application based on automated code analysis.</blockquote>
+<hr>
+<h2 id="1-what-is-a-dsar">1. What is a DSAR?</h2>
+<p>A <strong>Data Subject Access Request (DSAR)</strong> is a request made by an individual (the "data subject") to exercise their rights over their personal data. These rights are established under:</p>
+<ul>
+<li><strong>GDPR Articles 15-22</strong> (European Union)</li>
+<li><strong>CCPA/CPRA Sections 1798.100-1798.199</strong> (California, USA)</li>
+</ul>
+<p>Data subjects have the right to know what personal data is collected about them, how it is used, and to request changes or deletion of that data. Organizations must respond to these requests within legally mandated timeframes.</p>
+<h3 id="legal-basis">Legal Basis</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Right</th><th style="text-align:left">GDPR Article</th><th style="text-align:left">CCPA Section</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Right of Access</td><td style="text-align:left">Art. 15</td><td style="text-align:left">§1798.100, §1798.110</td></tr>
+<tr><td style="text-align:left">Right to Rectification</td><td style="text-align:left">Art. 16</td><td style="text-align:left">§1798.106</td></tr>
+<tr><td style="text-align:left">Right to Erasure ("Right to be Forgotten")</td><td style="text-align:left">Art. 17</td><td style="text-align:left">§1798.105</td></tr>
+<tr><td style="text-align:left">Right to Data Portability</td><td style="text-align:left">Art. 20</td><td style="text-align:left">§1798.100</td></tr>
+<tr><td style="text-align:left">Right to Restriction of Processing</td><td style="text-align:left">Art. 18</td><td style="text-align:left">N/A</td></tr>
+<tr><td style="text-align:left">Right to Object</td><td style="text-align:left">Art. 21</td><td style="text-align:left">§1798.120 (opt-out of sale/sharing)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-types-of-dsar-requests">2. Types of DSAR Requests</h2>
+<h3 id="21-access-request-gdpr-art-15-ccpa-1798110">2.1 Access Request (GDPR Art. 15 / CCPA §1798.110)</h3>
+<p>The data subject requests a copy of all personal data you hold about them, including:</p>
+<ul>
+<li>Categories of data processed</li>
+<li>Purposes of processing</li>
+<li>Recipients or categories of recipients</li>
+<li>Retention periods</li>
+<li>Source of the data (if not collected directly)</li>
+</ul>
+<h3 id="22-rectification-request-gdpr-art-16">2.2 Rectification Request (GDPR Art. 16)</h3>
+<p>The data subject requests correction of inaccurate personal data or completion of incomplete data.</p>
+<h3 id="23-erasure-request-gdpr-art-17-ccpa-1798105">2.3 Erasure Request (GDPR Art. 17 / CCPA §1798.105)</h3>
+<p>The data subject requests deletion of their personal data. This right applies when:</p>
+<ul>
+<li>Data is no longer necessary for the original purpose</li>
+<li>Consent is withdrawn</li>
+<li>The data subject objects and there are no overriding legitimate grounds</li>
+<li>Data was unlawfully processed</li>
+</ul>
+<p><strong>Exceptions:</strong> You may retain data required for legal compliance, exercise of legal claims, or public interest.</p>
+<h3 id="24-data-portability-request-gdpr-art-20-ccpa-1798100">2.4 Data Portability Request (GDPR Art. 20 / CCPA §1798.100)</h3>
+<p>The data subject requests their data in a structured, commonly used, machine-readable format (e.g., JSON, CSV) for transfer to another controller.</p>
+<h3 id="25-restriction-of-processing-gdpr-art-18">2.5 Restriction of Processing (GDPR Art. 18)</h3>
+<p>The data subject requests that processing be limited (data is stored but not actively processed) while:</p>
+<ul>
+<li>Accuracy is contested</li>
+<li>Processing is unlawful but the subject opposes erasure</li>
+<li>The controller no longer needs the data but the subject needs it for legal claims</li>
+</ul>
+<h3 id="26-right-to-object-gdpr-art-21-ccpa-1798120">2.6 Right to Object (GDPR Art. 21 / CCPA §1798.120)</h3>
+<p>The data subject objects to processing based on legitimate interests, direct marketing, or profiling. For CCPA, this includes the right to opt out of the sale or sharing of personal information.</p>
+<hr>
+<h2 id="3-response-timeline">3. Response Timeline</h2>
+<h3 id="gdpr-timeline">GDPR Timeline</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Step</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Acknowledge receipt</td><td style="text-align:left">Within 3 business days</td></tr>
+<tr><td style="text-align:left">Verify identity</td><td style="text-align:left">Within 5 business days</td></tr>
+<tr><td style="text-align:left">Respond to request</td><td style="text-align:left"><strong>30 calendar days</strong> from receipt</td></tr>
+<tr><td style="text-align:left">Extension (complex requests)</td><td style="text-align:left">Up to <strong>60 additional days</strong> (90 days total) with notification to the data subject</td></tr>
+</tbody>
+</table>
+<h3 id="ccpacpra-timeline">CCPA/CPRA Timeline</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Step</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Acknowledge receipt</td><td style="text-align:left">Within <strong>10 business days</strong></td></tr>
+<tr><td style="text-align:left">Verify identity</td><td style="text-align:left">Within 10 business days</td></tr>
+<tr><td style="text-align:left">Respond to request</td><td style="text-align:left"><strong>45 calendar days</strong> from receipt</td></tr>
+<tr><td style="text-align:left">Extension (if necessary)</td><td style="text-align:left">Up to <strong>45 additional days</strong> (90 days total) with notification to the consumer</td></tr>
+</tbody>
+</table>
+<h3 id="key-differences">Key Differences</h3>
+<ul>
+<li><strong>GDPR:</strong> 30-day default, extendable to 90 days for complex requests</li>
+<li><strong>CCPA:</strong> 45-day default, extendable to 90 days</li>
+<li><strong>Both:</strong> Extensions require notifying the data subject with reasons for the delay</li>
+<li><strong>GDPR:</strong> First copy is free; subsequent copies may incur a reasonable fee</li>
+<li><strong>CCPA:</strong> Requests must be fulfilled free of charge (up to 2 requests per 12-month period)</li>
+</ul>
+<hr>
+<h2 id="4-identity-verification-requirements">4. Identity Verification Requirements</h2>
+<p>Before processing any DSAR, you <strong>must</strong> verify the identity of the requester to prevent unauthorized disclosure of personal data.</p>
+<h3 id="verification-methods">Verification Methods</h3>
+<ol>
+<li><strong>Existing Account Holders:</strong></li>
+</ol>
+<ul>
+<li>Require the request to be submitted from the registered email address</li>
+<li>Send a verification email with a one-time confirmation link</li>
+<li>Require re-authentication through the application's login flow</li>
+</ul>
+<ol>
+<li><strong>Non-Account Holders / Unverifiable Requests:</strong></li>
+</ol>
+<ul>
+<li>Request two or more pieces of identifying information that match your records</li>
+<li>Examples: full name, email, account number, recent transaction details</li>
+<li>If identity cannot be verified, notify the requester within the response deadline and explain what additional information is needed</li>
+</ul>
+<ol>
+<li><strong>Authorized Agents (CCPA):</strong></li>
+</ol>
+<ul>
+<li>Verify the agent's authorization (signed permission or power of attorney)</li>
+<li>Verify the identity of the consumer on whose behalf the request is made</li>
+<li>Exception: no consumer verification needed if the agent has a valid power of attorney</li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li>Record the verification method used for each request</li>
+<li>Document any failed verification attempts</li>
+<li>Retain verification records for the duration required by applicable law</li>
+</ul>
+<hr>
+<h2 id="5-service-specific-data-location-map">5. Service-Specific Data Location Map</h2>
+<p>The following map was auto-generated from code analysis of <strong>calcom-monorepo</strong>. It shows where personal data is stored, how to export it, how to delete it, and which third parties must be notified.</p>
+<h3 id="hubspot">HubSpot</h3>
+<ul>
+<li><strong>Category:</strong> Third-Party Service</li>
+<li><strong>Data collected:</strong> contact information, email addresses, names, phone numbers, company data, deal information, engagement history</li>
+<li><strong>Storage location:</strong> Third-party service infrastructure</li>
+<li><strong>How to export:</strong> Consult the service provider's documentation for data export procedures. Contact their DPO if no self-service export is available.</li>
+<li><strong>How to delete:</strong> Contact the service provider to request deletion of all personal data. Document the request and any response received.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact HubSpot to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="sendgrid">SendGrid</h3>
+<ul>
+<li><strong>Category:</strong> Email / Communication</li>
+<li><strong>Data collected:</strong> email addresses, email content</li>
+<li><strong>Storage location:</strong> Email service provider infrastructure</li>
+<li><strong>How to export:</strong> Export recipient data and email engagement history from the email provider's dashboard or API. Include suppression lists and preferences.</li>
+<li><strong>How to delete:</strong> Remove the user from all mailing lists, delete their contact record, and add them to the suppression list to prevent future emails.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact SendGrid to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="sentry">Sentry</h3>
+<ul>
+<li><strong>Category:</strong> Monitoring / Error Tracking</li>
+<li><strong>Data collected:</strong> error data, stack traces, user context, device information, IP address, performance profiles</li>
+<li><strong>Storage location:</strong> Error tracking / APM platform</li>
+<li><strong>How to export:</strong> Search error tracking data for entries containing the user's identifier. Export any user context, breadcrumbs, or session data.</li>
+<li><strong>How to delete:</strong> Delete user-identifiable data from error logs and session recordings. Most monitoring tools offer GDPR deletion endpoints.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Sentry to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="upstash-redis">Upstash Redis</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> cached data, session data</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Upstash Redis to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="google-analytics">Google Analytics</h3>
+<ul>
+<li><strong>Category:</strong> Analytics / Tracking</li>
+<li><strong>Data collected:</strong> page views, user behavior, device information, IP address, location data</li>
+<li><strong>Storage location:</strong> Third-party analytics platform (cloud-hosted)</li>
+<li><strong>How to export:</strong> Use the analytics platform's data export or API to extract user-level event data. Check for GDPR-specific export tools in the admin dashboard.</li>
+<li><strong>How to delete:</strong> Use the analytics platform's data deletion API or GDPR tools to remove user-level data. Some platforms offer automatic deletion by user ID.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Google Analytics to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="google-tag-manager">Google Tag Manager</h3>
+<ul>
+<li><strong>Category:</strong> Analytics / Tracking</li>
+<li><strong>Data collected:</strong> page views, user behavior, custom events, device information, third-party tag data</li>
+<li><strong>Storage location:</strong> Third-party analytics platform (cloud-hosted)</li>
+<li><strong>How to export:</strong> Use the analytics platform's data export or API to extract user-level event data. Check for GDPR-specific export tools in the admin dashboard.</li>
+<li><strong>How to delete:</strong> Use the analytics platform's data deletion API or GDPR tools to remove user-level data. Some platforms offer automatic deletion by user ID.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Google Tag Manager to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="google-auth">Google Auth</h3>
+<ul>
+<li><strong>Category:</strong> Authentication / Identity</li>
+<li><strong>Data collected:</strong> OAuth tokens, Google profile data, email</li>
+<li><strong>Storage location:</strong> Authentication store (database or third-party auth provider)</li>
+<li><strong>How to export:</strong> Export user profile data from the authentication provider's admin panel or API. Include account metadata, login history, and linked social accounts.</li>
+<li><strong>How to delete:</strong> Delete the user account and all associated sessions, tokens, and profile data through the auth provider's API or admin panel.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Google Auth to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="google-apis">Google APIs</h3>
+<ul>
+<li><strong>Category:</strong> Third-Party Service</li>
+<li><strong>Data collected:</strong> user data via Google APIs, calendar data, email data, profile information</li>
+<li><strong>Storage location:</strong> Third-party service infrastructure</li>
+<li><strong>How to export:</strong> Consult the service provider's documentation for data export procedures. Contact their DPO if no self-service export is available.</li>
+<li><strong>How to delete:</strong> Contact the service provider to request deletion of all personal data. Document the request and any response received.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Google APIs to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="intercom">Intercom</h3>
+<ul>
+<li><strong>Category:</strong> Third-Party Service</li>
+<li><strong>Data collected:</strong> user profiles, email, name, conversations, user behavior, company data</li>
+<li><strong>Storage location:</strong> Third-party service infrastructure</li>
+<li><strong>How to export:</strong> Consult the service provider's documentation for data export procedures. Contact their DPO if no self-service export is available.</li>
+<li><strong>How to delete:</strong> Contact the service provider to request deletion of all personal data. Document the request and any response received.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Intercom to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="redis">Redis</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> cached data, session data</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<h3 id="nextauthjs">NextAuth.js</h3>
+<ul>
+<li><strong>Category:</strong> Authentication / Identity</li>
+<li><strong>Data collected:</strong> email, name, profile picture, OAuth tokens, session data</li>
+<li><strong>Storage location:</strong> Authentication store (database or third-party auth provider)</li>
+<li><strong>How to export:</strong> Export user profile data from the authentication provider's admin panel or API. Include account metadata, login history, and linked social accounts.</li>
+<li><strong>How to delete:</strong> Delete the user account and all associated sessions, tokens, and profile data through the auth provider's API or admin panel.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<h3 id="nodemailer-self-hosted">Nodemailer (self-hosted)</h3>
+<ul>
+<li><strong>Category:</strong> Email / Communication</li>
+<li><strong>Data collected:</strong> email addresses, email content</li>
+<li><strong>Storage location:</strong> Email service provider infrastructure</li>
+<li><strong>How to export:</strong> Export recipient data and email engagement history from the email provider's dashboard or API. Include suppression lists and preferences.</li>
+<li><strong>How to delete:</strong> Remove the user from all mailing lists, delete their contact record, and add them to the suppression list to prevent future emails.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<h3 id="passportjs">Passport.js</h3>
+<ul>
+<li><strong>Category:</strong> Authentication / Identity</li>
+<li><strong>Data collected:</strong> email, name, OAuth tokens, session data</li>
+<li><strong>Storage location:</strong> Authentication store (database or third-party auth provider)</li>
+<li><strong>How to export:</strong> Export user profile data from the authentication provider's admin panel or API. Include account metadata, login history, and linked social accounts.</li>
+<li><strong>How to delete:</strong> Delete the user account and all associated sessions, tokens, and profile data through the auth provider's API or admin panel.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<h3 id="plausible-analytics">Plausible Analytics</h3>
+<ul>
+<li><strong>Category:</strong> Analytics / Tracking</li>
+<li><strong>Data collected:</strong> page views, referrer data, device information</li>
+<li><strong>Storage location:</strong> Third-party analytics platform (cloud-hosted)</li>
+<li><strong>How to export:</strong> Use the analytics platform's data export or API to extract user-level event data. Check for GDPR-specific export tools in the admin dashboard.</li>
+<li><strong>How to delete:</strong> Use the analytics platform's data deletion API or GDPR tools to remove user-level data. Some platforms offer automatic deletion by user ID.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Plausible Analytics to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="postgresql">PostgreSQL</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> application data, user records</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact PostgreSQL to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="postgresql-env">PostgreSQL (env)</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> application data, user records</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact PostgreSQL (env) to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="posthog">PostHog</h3>
+<ul>
+<li><strong>Category:</strong> Analytics / Tracking</li>
+<li><strong>Data collected:</strong> user behavior, session recordings, feature flag usage, device information</li>
+<li><strong>Storage location:</strong> Third-party analytics platform (cloud-hosted)</li>
+<li><strong>How to export:</strong> Use the analytics platform's data export or API to extract user-level event data. Check for GDPR-specific export tools in the admin dashboard.</li>
+<li><strong>How to delete:</strong> Use the analytics platform's data deletion API or GDPR tools to remove user-level data. Some platforms offer automatic deletion by user ID.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact PostHog to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="prisma-database-orm">Prisma (database ORM)</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> user data as defined in schema</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<h3 id="redis-env">Redis (env)</h3>
+<ul>
+<li><strong>Category:</strong> Database / Data Store</li>
+<li><strong>Data collected:</strong> session data, cache data</li>
+<li><strong>Storage location:</strong> Application database (self-hosted or managed)</li>
+<li><strong>How to export:</strong> Run a database query filtered by the user's unique identifier to extract all records containing their personal data across all relevant tables.</li>
+<li><strong>How to delete:</strong> Delete all database records containing the user's personal data. Run cascading deletes across related tables. Verify deletion in backups per retention policy.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Redis (env) to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="stripe">Stripe</h3>
+<ul>
+<li><strong>Category:</strong> Payment Processing</li>
+<li><strong>Data collected:</strong> payment information, billing address, email, transaction history</li>
+<li><strong>Storage location:</strong> Third-party payment processor (PCI-compliant environment)</li>
+<li><strong>How to export:</strong> Use the payment provider's dashboard or API to export customer records, invoices, and transaction history. Most providers offer CSV/JSON export.</li>
+<li><strong>How to delete:</strong> Request data deletion through the payment provider's API or support. Note: transaction records may be retained for legal/tax compliance (typically 7 years).</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Stripe to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="twilio">Twilio</h3>
+<ul>
+<li><strong>Category:</strong> Third-Party Service</li>
+<li><strong>Data collected:</strong> phone numbers, SMS message content, voice call metadata, call recordings</li>
+<li><strong>Storage location:</strong> Third-party service infrastructure</li>
+<li><strong>How to export:</strong> Consult the service provider's documentation for data export procedures. Contact their DPO if no self-service export is available.</li>
+<li><strong>How to delete:</strong> Contact the service provider to request deletion of all personal data. Document the request and any response received.</li>
+<li><strong>Third-party notification required:</strong> Yes — contact Twilio to forward the DSAR or use their GDPR/privacy API</li>
+</ul>
+<h3 id="web-push-self-hosted">Web Push (self-hosted)</h3>
+<ul>
+<li><strong>Category:</strong> Third-Party Service</li>
+<li><strong>Data collected:</strong> push subscription endpoints, device tokens, notification content</li>
+<li><strong>Storage location:</strong> Third-party service infrastructure</li>
+<li><strong>How to export:</strong> Consult the service provider's documentation for data export procedures. Contact their DPO if no self-service export is available.</li>
+<li><strong>How to delete:</strong> Contact the service provider to request deletion of all personal data. Document the request and any response received.</li>
+<li><strong>Third-party notification required:</strong> No (self-hosted)</li>
+</ul>
+<hr>
+<h2 id="6-third-party-sub-processor-notification">6. Third-Party Sub-Processor Notification</h2>
+<p>When fulfilling erasure or access requests, you must notify the following third-party sub-processors (GDPR Art. 19):</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Sub-Processor</th><th style="text-align:left">Category</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HubSpot</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">SendGrid</td><td style="text-align:left">Email / Communication</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Sentry</td><td style="text-align:left">Monitoring / Error Tracking</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Upstash Redis</td><td style="text-align:left">Database / Data Store</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Google Analytics</td><td style="text-align:left">Analytics / Tracking</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Analytics / Tracking</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Google Auth</td><td style="text-align:left">Authentication / Identity</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Google APIs</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Intercom</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Analytics / Tracking</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">PostgreSQL</td><td style="text-align:left">Database / Data Store</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">Database / Data Store</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">PostHog</td><td style="text-align:left">Analytics / Tracking</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Redis (env)</td><td style="text-align:left">Database / Data Store</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+<tr><td style="text-align:left">Twilio</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">Forward DSAR; confirm deletion/export</td></tr>
+</tbody>
+</table>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li>Forward the DSAR to each relevant sub-processor listed above</li>
+<li>Set a follow-up reminder for 14 days to confirm completion</li>
+<li>Document each sub-processor's response</li>
+<li>Inform the data subject of any sub-processors that could not comply, and the reasons</li>
+</ol>
+<hr>
+<h2 id="7-template-responses">7. Template Responses</h2>
+<h3 id="71-acknowledgment-of-receipt">7.1 Acknowledgment of Receipt</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Thank you for your data subject access request received on [Date]. We have assigned reference number <strong>[DSAR-XXXX]</strong> to your request.</blockquote>
+<p>></p>
+<blockquote>We will verify your identity and respond within the applicable legal timeframe (30 days under GDPR / 45 days under CCPA).</blockquote>
+<p>></p>
+<blockquote>If we need additional information to verify your identity, we will contact you within 5 business days.</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name] [your-email@example.com]</blockquote>
+<h3 id="72-access-request-response">7.2 Access Request Response</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>Following your access request dated [Date], please find attached a copy of all personal data we hold about you. This includes:</blockquote>
+<p>></p>
+<blockquote>- [List categories of data provided]</blockquote>
+<p>></p>
+<blockquote>The data is provided in [JSON/CSV] format. The purposes of processing, categories of recipients, and retention periods are described in our Privacy Policy at [URL].</blockquote>
+<p>></p>
+<blockquote>If you have any questions or believe this response is incomplete, please contact us at [your-email@example.com].</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<h3 id="73-rectification-confirmation">7.3 Rectification Confirmation</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>We have updated the following personal data as requested on [Date]:</blockquote>
+<p>></p>
+<blockquote>- [Field]: [Old Value] → [New Value]</blockquote>
+<p>></p>
+<blockquote>These changes have been applied across all our systems and any relevant third-party processors have been notified.</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<h3 id="74-erasure-confirmation">7.4 Erasure Confirmation</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>We confirm that your personal data has been deleted from our systems as of [Date]. This includes data held by the following services:</blockquote>
+<p>></p>
+<blockquote>- [List services where data was deleted]</blockquote>
+<p>></p>
+<blockquote>Please note the following exceptions, where data is retained for legal compliance:</blockquote>
+<p>></p>
+<blockquote>- [List any retained data and the legal basis for retention]</blockquote>
+<p>></p>
+<blockquote>Third-party sub-processors have been notified and have confirmed deletion.</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<h3 id="75-portability-response">7.5 Portability Response</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>Please find attached your personal data in a structured, machine-readable format (JSON/CSV) as requested under your right to data portability.</blockquote>
+<p>></p>
+<blockquote>The attached file contains all personal data you provided to us directly. If you would like this data transmitted directly to another controller, please provide their contact details and we will facilitate the transfer where technically feasible.</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<h3 id="76-restriction-confirmation">7.6 Restriction Confirmation</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>We have restricted the processing of your personal data as requested on [Date]. Your data will be stored but not actively processed until:</blockquote>
+<p>></p>
+<blockquote>- [State the condition for lifting the restriction]</blockquote>
+<p>></p>
+<blockquote>We will inform you before the restriction is lifted.</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<h3 id="77-objection-acknowledgment">7.7 Objection Acknowledgment</h3>
+<blockquote>Dear [Data Subject Name],</blockquote>
+<p>></p>
+<blockquote>Re: DSAR Reference <strong>[DSAR-XXXX]</strong></blockquote>
+<p>></p>
+<blockquote>We acknowledge your objection to the processing of your personal data for [purpose], received on [Date].</blockquote>
+<p>></p>
+<blockquote>[We have ceased processing your data for this purpose. / We have reviewed your objection and believe there are compelling legitimate grounds for continued processing. The grounds are: (explain).]</blockquote>
+<p>></p>
+<blockquote>Regards, [Your Company Name]</blockquote>
+<hr>
+<h2 id="8-record-keeping-requirements">8. Record-Keeping Requirements</h2>
+<p>You must maintain a log of all DSARs received and how they were handled. This is required under GDPR Article 30 (Records of Processing Activities) and demonstrates compliance.</p>
+<h3 id="required-dsar-log-fields">Required DSAR Log Fields</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Reference Number</td><td style="text-align:left">Unique identifier (e.g., DSAR-2026-001)</td></tr>
+<tr><td style="text-align:left">Date Received</td><td style="text-align:left">When the request was received</td></tr>
+<tr><td style="text-align:left">Requester Identity</td><td style="text-align:left">Name, email, or other identifier (after verification)</td></tr>
+<tr><td style="text-align:left">Request Type</td><td style="text-align:left">Access, Rectification, Erasure, Portability, Restriction, or Objection</td></tr>
+<tr><td style="text-align:left">Verification Method</td><td style="text-align:left">How the requester's identity was verified</td></tr>
+<tr><td style="text-align:left">Verification Date</td><td style="text-align:left">When identity was confirmed</td></tr>
+<tr><td style="text-align:left">Response Deadline</td><td style="text-align:left">Calculated deadline (30 days GDPR / 45 days CCPA)</td></tr>
+<tr><td style="text-align:left">Extension Applied</td><td style="text-align:left">Whether an extension was needed and the reason</td></tr>
+<tr><td style="text-align:left">Services Queried</td><td style="text-align:left">Which services/databases were searched</td></tr>
+<tr><td style="text-align:left">Third Parties Notified</td><td style="text-align:left">Which sub-processors were contacted</td></tr>
+<tr><td style="text-align:left">Response Date</td><td style="text-align:left">When the response was sent to the data subject</td></tr>
+<tr><td style="text-align:left">Outcome</td><td style="text-align:left">Completed, Partially Completed, Denied (with reason)</td></tr>
+<tr><td style="text-align:left">Retained by</td><td style="text-align:left">Staff member responsible</td></tr>
+<tr><td style="text-align:left">Notes</td><td style="text-align:left">Any additional context</td></tr>
+</tbody>
+</table>
+<h3 id="retention-of-dsar-records">Retention of DSAR Records</h3>
+<ul>
+<li><strong>Minimum retention:</strong> 3 years from the date of the response (recommended)</li>
+<li><strong>GDPR:</strong> No specific retention period mandated, but records must demonstrate compliance</li>
+<li><strong>CCPA:</strong> Businesses must maintain records of CCPA requests for at least <strong>24 months</strong></li>
+<li>Store DSAR records securely with access limited to authorized personnel</li>
+</ul>
+<h3 id="regular-review">Regular Review</h3>
+<ul>
+<li>Review DSAR handling procedures at least <strong>annually</strong></li>
+<li>Update this guide whenever new services or data stores are added to the application</li>
+<li>Conduct DSAR response drills to ensure staff readiness</li>
+</ul>
+<hr>
+<p><em>This DSAR Handling Guide was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis of the <strong>calcom-monorepo</strong> project. The service-specific data location map is derived from detected dependencies and may not capture all data stores. This document is a template and must be reviewed by a legal professional and your Data Protection Officer. It does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

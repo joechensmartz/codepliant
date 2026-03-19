@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~12 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 120 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>AVALARA_PASSWORD</code></td><td style="text-align:left">saleor/plugins/avatax/tests/conftest.py, saleor/plugins/avatax/tests/test_tasks.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>ACCESS</em>KEY_ID</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>SECRET</em>ACCESS_KEY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>ACCOUNT</em>KEY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS_CREDENTIALS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RESET<em>PASSWORD</em>LOCK_TIME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RSA<em>PRIVATE</em>KEY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RSA<em>PRIVATE</em>PASSWORD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SECRET_KEY</code></td><td style="text-align:left">.env.example, saleor/settings.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SENDGRID_PASSWORD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TOKEN<em>UPDATE</em>LAST<em>LOGIN</em>THRESHOLD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>REDIS_URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ALLOWED<em>CLIENT</em>HOSTS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOWED<em>GRAPHQL</em>ORIGINS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOWED_HOSTS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>MEDIA</em>CUSTOM_DOMAIN</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>S3</em>ENDPOINT_URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>S3</em>URL_PROTOCOL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>STATIC</em>CUSTOM_DOMAIN</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CACHE_URL</code></td><td style="text-align:left">.env.example, saleor/settings.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CELERY<em>BROKER</em>URL</code></td><td style="text-align:left">.env.example, saleor/settings.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>CLOUDAMQP_URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DASHBOARD_URL</code></td><td style="text-align:left">.env.example, saleor/core/views.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EMAIL_URL</code></td><td style="text-align:left">.env.example, saleor/settings.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>EXPORT<em>FILES</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>CUSTOM</em>ENDPOINT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>MEDIA</em>CUSTOM_ENDPOINT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MEDIA_URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>BROKER</em>URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>REPORT</em>PERIOD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PYTEST<em>DB</em>URL</code></td><td style="text-align:left">conftest.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STATIC_URL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STOREFRONT_URL</code></td><td style="text-align:left">saleor/core/views.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>USER<em>EMAIL</em>URL</code></td><td style="text-align:left">saleor/settings.py, saleor/plugins/migrations/0007<em>add</em>user<em>emails</em>configuration.py</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ANONYMOUS<em>CHECKOUTS</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION_DELAY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION<em>OLDEST</em>MODIFIED</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AVALARA_USERNAME</code></td><td style="text-align:left">saleor/plugins/avatax/tests/conftest.py, saleor/plugins/avatax/tests/test_tasks.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>DEFAULT</em>ACL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS_LOCATION</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>MEDIA</em>BUCKET_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>MEDIA</em>PRIVATE<em>BUCKET</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>S3</em>REGION_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>STORAGE</em>BUCKET_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>ACCOUNT</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE_CONTAINER</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>CONTAINER</em>PRIVATE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE_SSL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BEAT<em>EXPIRE</em>ORDERS<em>AFTER</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BEAT<em>PRICE</em>RECALCULATION_SCHEDULE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BEAT<em>UPDATE</em>SEARCH_FREQUENCY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BREAKER<em>BOARD</em>DRY<em>RUN</em>SYNC_EVENTS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BREAKER<em>BOARD</em>SYNC_EVENTS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CACHE_TIMEOUT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CELERY<em>RESULT</em>BACKEND</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CELERY<em>WORKER</em>PREFETCH_MULTIPLIER</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>COMPLETION</em>LOCK_TIME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>DELIVERY</em>OPTIONS_TTL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>PRICES</em>TTL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>SEARCH</em>UPDATE<em>PARALLEL</em>TASKS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>TTL</em>BEFORE<em>RELEASING</em>FUNDS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHECKOUT<em>WEBHOOK</em>EVENTS<em>CELERY</em>QUEUE_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>COLLECTION<em>PRODUCT</em>UPDATED<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CONFIRMATION<em>EMAIL</em>LOCK_TIME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DATA<em>MIGRATIONS</em>TASKS<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DB<em>CONN</em>MAX_AGE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEFAULT<em>CHANNEL</em>SLUG</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEFAULT_COUNTRY</code></td><td style="text-align:left">saleor/settings.py, saleor/channel/migrations/0001_initial.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEFAULT_CURRENCY</code></td><td style="text-align:left">saleor/checkout/migrations/0021<em>django</em>price<em>2.py, saleor/core/utils/random</em>data.py, saleor/discount/migrations/0002<em>voucher.py, saleor/discount/migrations/0003</em>auto<em>20160207</em>0534.py, saleor/discount/migrations/0004<em>auto</em>20170206<em>0407.py, saleor/discount/migrations/0007</em>auto<em>20180108</em>0814.py, saleor/discount/migrations/0017<em>django</em>price<em>2.py, saleor/discount/migrations/0022</em>sale<em>channel</em>listing.py, saleor/giftcard/models.py, saleor/giftcard/migrations/0002<em>auto</em>20190814<em>0413.py, saleor/order/migrations/0072</em>django<em>price</em>2.py, saleor/payment/migrations/0002<em>transfer</em>payment<em>to</em>payment<em>method.py, saleor/product/migrations/0106</em>django<em>prices</em>2.py, saleor/product/migrations/0135<em>collection</em>channel<em>listing.py, saleor/shipping/migrations/0017</em>django<em>price</em>2.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEFAULT<em>FROM</em>EMAIL</code></td><td style="text-align:left">.env.example, saleor/settings.py</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>DELETE<em>APP</em>TTL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DJANGO<em>SUPERUSER</em></code></td><td style="text-align:left">saleor/account/management/commands/createsuperuser.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EDITOR<em>JS</em>LISTS<em>MAX</em>DEPTH</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMPTY<em>CHECKOUTS</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENABLE_SSL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EVENT<em>DELIVERY</em>ATTEMPT<em>RESPONSE</em>SIZE_LIMIT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EVENT<em>PAYLOAD</em>DELETE_PERIOD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EVENT<em>PAYLOAD</em>DELETE<em>TASK</em>TIME_LIMIT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FEDERATED<em>QUERY</em>MAX_ENTITIES</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GIFTS<em>LIMIT</em>PER_RULE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GRAPHQL<em>CACHE</em>SUFFIX</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GRAPHQL<em>QUERY</em>MAX_COMPLEXITY</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>BUCKET</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>DEFAULT</em>ACL</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS_EXPIRATION</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS_LOCATION</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>MEDIA</em>BUCKET_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>MEDIA</em>PRIVATE<em>BUCKET</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GS<em>PROJECT</em>ID</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HARD<em>MEMORY</em>LIMIT<em>IN</em>MB</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HTTP<em>IP</em>FILTER<em>ALLOW</em>LOOPBACK_IPS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>INTERNAL_IPS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>JWT<em>MANAGER</em>PATH</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>JWT<em>TTL</em>ACCESS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>JWT<em>TTL</em>APP_ACCESS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>JWT<em>TTL</em>REFRESH</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>JWT<em>TTL</em>REQUEST<em>EMAIL</em>CHANGE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MAX<em>USER</em>ADDRESSES</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OAUTH<em>UPDATE</em>LAST<em>LOGIN</em>THRESHOLD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>BUFFER</em>BATCH_SIZE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>BUFFER</em>SIZE_LIMIT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>BUFFER</em>TIMEOUT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OBSERVABILITY<em>MAX</em>PAYLOAD_SIZE</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORDER<em>RULES</em>LIMIT</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ORDER<em>WEBHOOK</em>EVENTS<em>CELERY</em>QUEUE_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REAL<em>IP</em>ENVIRON</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SEND<em>USAGE</em>TELEMETRY<em>AFTER</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENDGRID_USERNAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SOFT<em>MEMORY</em>LIMIT<em>IN</em>MB</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TELEMETRY<em>SLOW</em>GRAPHQL<em>OPERATION</em>THRESHOLD</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TRANSACTION<em>BATCH</em>FOR<em>RELEASING</em>FUNDS</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UPDATE<em>SEARCH</em>VECTOR<em>INDEX</em>QUEUE_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UPLOAD<em>ADDITIONAL</em>ALLOWED<em>MIME</em>TYPES</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>USER<em>CHECKOUTS</em>TIMEDELTA</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>WEBHOOK<em>CELERY</em>QUEUE_NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>WEBHOOK<em>DEFERRED</em>PAYLOAD<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>WEBHOOK<em>PUBSUB</em>CELERY<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>WEBHOOK<em>SQS</em>CELERY<em>QUEUE</em>NAME</code></td><td style="text-align:left">saleor/settings.py</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>ALLOWED<em>CLIENT</em>HOSTS</code></li>
+<li><code>ALLOWED<em>GRAPHQL</em>ORIGINS</code></li>
+<li><code>ALLOWED_HOSTS</code></li>
+<li><code>ANONYMOUS<em>CHECKOUTS</em>TIMEDELTA</code></li>
+<li><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION_DELAY</code></li>
+<li><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION<em>OLDEST</em>MODIFIED</code></li>
+<li><code>AUTOMATIC<em>CHECKOUT</em>COMPLETION<em>QUEUE</em>NAME</code></li>
+<li><code>AVALARA_PASSWORD</code></li>
+<li><code>AVALARA_USERNAME</code></li>
+<li><code>AWS<em>ACCESS</em>KEY_ID</code></li>
+<li><code>AWS<em>DEFAULT</em>ACL</code></li>
+<li><code>AWS_LOCATION</code></li>
+<li><code>AWS<em>MEDIA</em>BUCKET_NAME</code></li>
+<li><code>AWS<em>MEDIA</em>CUSTOM_DOMAIN</code></li>
+<li><code>AWS<em>MEDIA</em>PRIVATE<em>BUCKET</em>NAME</code></li>
+<li><code>AWS<em>S3</em>ENDPOINT_URL</code></li>
+<li><code>AWS<em>S3</em>REGION_NAME</code></li>
+<li><code>AWS<em>S3</em>URL_PROTOCOL</code></li>
+<li><code>AWS<em>SECRET</em>ACCESS_KEY</code></li>
+<li><code>AWS<em>STATIC</em>CUSTOM_DOMAIN</code></li>
+<li><code>AWS<em>STORAGE</em>BUCKET_NAME</code></li>
+<li><code>AZURE<em>ACCOUNT</em>KEY</code></li>
+<li><code>AZURE<em>ACCOUNT</em>NAME</code></li>
+<li><code>AZURE_CONTAINER</code></li>
+<li><code>AZURE<em>CONTAINER</em>PRIVATE</code></li>
+<li><code>AZURE_SSL</code></li>
+<li><code>BEAT<em>EXPIRE</em>ORDERS<em>AFTER</em>TIMEDELTA</code></li>
+<li><code>BEAT<em>PRICE</em>RECALCULATION_SCHEDULE</code></li>
+<li><code>BEAT<em>UPDATE</em>SEARCH_FREQUENCY</code></li>
+<li><code>BREAKER<em>BOARD</em>DRY<em>RUN</em>SYNC_EVENTS</code></li>
+<li><code>BREAKER<em>BOARD</em>SYNC_EVENTS</code></li>
+<li><code>CACHE_TIMEOUT</code></li>
+<li><code>CELERY<em>RESULT</em>BACKEND</code></li>
+<li><code>CELERY<em>WORKER</em>PREFETCH_MULTIPLIER</code></li>
+<li><code>CHECKOUT<em>COMPLETION</em>LOCK_TIME</code></li>
+<li><code>CHECKOUT<em>DELIVERY</em>OPTIONS_TTL</code></li>
+<li><code>CHECKOUT<em>PRICES</em>TTL</code></li>
+<li><code>CHECKOUT<em>SEARCH</em>UPDATE<em>PARALLEL</em>TASKS</code></li>
+<li><code>CHECKOUT<em>TTL</em>BEFORE<em>RELEASING</em>FUNDS</code></li>
+<li><code>CHECKOUT<em>WEBHOOK</em>EVENTS<em>CELERY</em>QUEUE_NAME</code></li>
+<li><code>CLOUDAMQP_URL</code></li>
+<li><code>COLLECTION<em>PRODUCT</em>UPDATED<em>QUEUE</em>NAME</code></li>
+<li><code>CONFIRMATION<em>EMAIL</em>LOCK_TIME</code></li>
+<li><code>DATA<em>MIGRATIONS</em>TASKS<em>QUEUE</em>NAME</code></li>
+<li><code>DB<em>CONN</em>MAX_AGE</code></li>
+<li><code>DEFAULT<em>CHANNEL</em>SLUG</code></li>
+<li><code>DEFAULT_COUNTRY</code></li>
+<li><code>DEFAULT_CURRENCY</code></li>
+<li><code>DELETE<em>APP</em>TTL</code></li>
+<li><code>DJANGO<em>SUPERUSER</em></code></li>
+<li><code>EDITOR<em>JS</em>LISTS<em>MAX</em>DEPTH</code></li>
+<li><code>EMPTY<em>CHECKOUTS</em>TIMEDELTA</code></li>
+<li><code>ENABLE_SSL</code></li>
+<li><code>EVENT<em>DELIVERY</em>ATTEMPT<em>RESPONSE</em>SIZE_LIMIT</code></li>
+<li><code>EVENT<em>PAYLOAD</em>DELETE_PERIOD</code></li>
+<li><code>EVENT<em>PAYLOAD</em>DELETE<em>TASK</em>TIME_LIMIT</code></li>
+<li><code>EXPORT<em>FILES</em>TIMEDELTA</code></li>
+<li><code>FEDERATED<em>QUERY</em>MAX_ENTITIES</code></li>
+<li><code>GIFTS<em>LIMIT</em>PER_RULE</code></li>
+<li><code>GRAPHQL<em>CACHE</em>SUFFIX</code></li>
+<li><code>GRAPHQL<em>QUERY</em>MAX_COMPLEXITY</code></li>
+<li><code>GS<em>BUCKET</em>NAME</code></li>
+<li><code>GS_CREDENTIALS</code></li>
+<li><code>GS<em>CUSTOM</em>ENDPOINT</code></li>
+<li><code>GS<em>DEFAULT</em>ACL</code></li>
+<li><code>GS_EXPIRATION</code></li>
+<li><code>GS_LOCATION</code></li>
+<li><code>GS<em>MEDIA</em>BUCKET_NAME</code></li>
+<li><code>GS<em>MEDIA</em>CUSTOM_ENDPOINT</code></li>
+<li><code>GS<em>MEDIA</em>PRIVATE<em>BUCKET</em>NAME</code></li>
+<li><code>GS<em>PROJECT</em>ID</code></li>
+<li><code>HARD<em>MEMORY</em>LIMIT<em>IN</em>MB</code></li>
+<li><code>INTERNAL_IPS</code></li>
+<li><code>JWT<em>MANAGER</em>PATH</code></li>
+<li><code>JWT<em>TTL</em>ACCESS</code></li>
+<li><code>JWT<em>TTL</em>APP_ACCESS</code></li>
+<li><code>JWT<em>TTL</em>REFRESH</code></li>
+<li><code>JWT<em>TTL</em>REQUEST<em>EMAIL</em>CHANGE</code></li>
+<li><code>MAX<em>USER</em>ADDRESSES</code></li>
+<li><code>MEDIA_URL</code></li>
+<li><code>OAUTH<em>UPDATE</em>LAST<em>LOGIN</em>THRESHOLD</code></li>
+<li><code>OBSERVABILITY<em>BROKER</em>URL</code></li>
+<li><code>OBSERVABILITY<em>BUFFER</em>BATCH_SIZE</code></li>
+<li><code>OBSERVABILITY<em>BUFFER</em>SIZE_LIMIT</code></li>
+<li><code>OBSERVABILITY<em>BUFFER</em>TIMEOUT</code></li>
+<li><code>OBSERVABILITY<em>MAX</em>PAYLOAD_SIZE</code></li>
+<li><code>OBSERVABILITY<em>REPORT</em>PERIOD</code></li>
+<li><code>ORDER<em>RULES</em>LIMIT</code></li>
+<li><code>ORDER<em>WEBHOOK</em>EVENTS<em>CELERY</em>QUEUE_NAME</code></li>
+<li><code>PYTEST<em>DB</em>URL</code></li>
+<li><code>REAL<em>IP</em>ENVIRON</code></li>
+<li><code>REDIS_URL</code></li>
+<li><code>RESET<em>PASSWORD</em>LOCK_TIME</code></li>
+<li><code>RSA<em>PRIVATE</em>KEY</code></li>
+<li><code>RSA<em>PRIVATE</em>PASSWORD</code></li>
+<li><code>SEND<em>USAGE</em>TELEMETRY<em>AFTER</em>TIMEDELTA</code></li>
+<li><code>SENDGRID_PASSWORD</code></li>
+<li><code>SENDGRID_USERNAME</code></li>
+<li><code>SENTRY_DSN</code></li>
+<li><code>SOFT<em>MEMORY</em>LIMIT<em>IN</em>MB</code></li>
+<li><code>STATIC_URL</code></li>
+<li><code>STOREFRONT_URL</code></li>
+<li><code>TELEMETRY<em>SLOW</em>GRAPHQL<em>OPERATION</em>THRESHOLD</code></li>
+<li><code>TOKEN<em>UPDATE</em>LAST<em>LOGIN</em>THRESHOLD</code></li>
+<li><code>TRANSACTION<em>BATCH</em>FOR<em>RELEASING</em>FUNDS</code></li>
+<li><code>UPDATE<em>SEARCH</em>VECTOR<em>INDEX</em>QUEUE_NAME</code></li>
+<li><code>UPLOAD<em>ADDITIONAL</em>ALLOWED<em>MIME</em>TYPES</code></li>
+<li><code>USER<em>CHECKOUTS</em>TIMEDELTA</code></li>
+<li><code>USER<em>EMAIL</em>URL</code></li>
+<li><code>WEBHOOK<em>CELERY</em>QUEUE_NAME</code></li>
+<li><code>WEBHOOK<em>DEFERRED</em>PAYLOAD<em>QUEUE</em>NAME</code></li>
+<li><code>WEBHOOK<em>PUBSUB</em>CELERY<em>QUEUE</em>NAME</code></li>
+<li><code>WEBHOOK<em>SQS</em>CELERY<em>QUEUE</em>NAME</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>78 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 78 hardcoded secret(s) detected in source code: Hardcoded Password, Hardcoded Secret, Private Key (PEM). Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/error_codes.py</code></td><td style="text-align:left">17</td><td style="text-align:left"><code>INVALID_PASSWORD = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/test_throttling.py</code></td><td style="text-align:left">22</td><td style="text-align:left"><code>CORRECT_PASSWORD = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/test_throttling.py</code></td><td style="text-align:left">23</td><td style="text-align:left"><code>INCORRECT_PASSWORD = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">74</td><td style="text-align:left"><code>user._password = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">91</td><td style="text-align:left"><code>user._password = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">107</td><td style="text-align:left"><code>customer<em>user3.</em>password = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">129</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">142</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/account/tests/fixtures/user.py</code></td><td style="text-align:left">148</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/core/notify.py</code></td><td style="text-align:left">28</td><td style="text-align:left"><code>ACCOUNT<em>SET</em>CUSTOMER_PASSWORD = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/core/notify.py</code></td><td style="text-align:left">59</td><td style="text-align:left"><code>ACCOUNT<em>SET</em>STAFF_PASSWORD = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/core/notify.py</code></td><td style="text-align:left">60</td><td style="text-align:left"><code>ACCOUNT<em>STAFF</em>RESET_PASSWORD = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/core/utils/random_data.py</code></td><td style="text-align:left">120</td><td style="text-align:left"><code>DUMMY<em>STAFF</em>PASSWORD = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/test<em>account</em>utils.py</code></td><td style="text-align:left">401</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/test<em>account</em>utils.py</code></td><td style="text-align:left">453</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/bulk<em>mutations/test</em>staff<em>bulk</em>delete.py</code></td><td style="text-align:left">280</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/bulk<em>mutations/test</em>staff<em>bulk</em>delete.py</code></td><td style="text-align:left">338</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>password</em>change.py</code></td><td style="text-align:left">21</td><td style="text-align:left"><code>new_password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>password</em>change.py</code></td><td style="text-align:left">83</td><td style="text-align:left"><code>new_password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>password</em>change.py</code></td><td style="text-align:left">103</td><td style="text-align:left"><code>new_password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>password</em>change.py</code></td><td style="text-align:left">125</td><td style="text-align:left"><code>new_password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>set</em>password.py</code></td><td style="text-align:left">42</td><td style="text-align:left"><code>email="testSetPassword1@example.com", password="[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>set</em>password.py</code></td><td style="text-align:left">45</td><td style="text-align:left"><code>password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>set</em>password.py</code></td><td style="text-align:left">79</td><td style="text-align:left"><code>password="[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/authentication/test<em>set</em>password.py</code></td><td style="text-align:left">84</td><td style="text-align:left"><code>password = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/account/tests/mutations/permission<em>group/test</em>permission<em>group</em>update.py</code></td><td style="text-align:left">1181</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/core/tests/test_graphql.py</code></td><td style="text-align:left">46</td><td style="text-align:left"><code>tokenCreate(email: "admin@example.com", password: "password") {</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/graphql/csv/tests/queries/test<em>export</em>files.py</code></td><td style="text-align:left">155</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">134</td><td style="text-align:left"><code>webhook_object.secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">167</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">225</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">284</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">348</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">398</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">424</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">496</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">517</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">573</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">594</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">670</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">691</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">767</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">788</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">865</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">890</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">968</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">995</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">1046</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">1063</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test_plugin.py</code></td><td style="text-align:left">1114</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test<em>plugin</em>deprecated.py</code></td><td style="text-align:left">24</td><td style="text-align:left"><code>client_secret = "[REDACTED]"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test<em>plugin</em>deprecated.py</code></td><td style="text-align:left">78</td><td style="text-align:left"><code>api<em>key="secret</em>key",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test<em>stripe</em>api.py</code></td><td style="text-align:left">36</td><td style="text-align:left"><code>api_key = "incorrect"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/payment/gateways/stripe/tests/test<em>stripe</em>api.py</code></td><td style="text-align:left">45</td><td style="text-align:left"><code>api<em>key = "correct</em>key"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/plugins/base_plugin.py</code></td><td style="text-align:left">79</td><td style="text-align:left"><code>PASSWORD = "Password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid_connect/tests/conftest.py</code></td><td style="text-align:left">53</td><td style="text-align:left"><code>client_secret="[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Private Key (PEM)</td><td style="text-align:left"><code>saleor/plugins/openid_connect/tests/conftest.py</code></td><td style="text-align:left">149</td><td style="text-align:left"><code>private_key = """-----BEGIN RSA PRIVATE KEY-----</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>plugin.py</code></td><td style="text-align:left">1132</td><td style="text-align:left"><code>client<em>secret="c</em>secret",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">643</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">691</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">736</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">780</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">833</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>saleor/plugins/openid<em>connect/tests/test</em>utils.py</code></td><td style="text-align:left">885</td><td style="text-align:left"><code>access_token="fake-token",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/plugins/user<em>email/tests/test</em>plugin.py</code></td><td style="text-align:left">369</td><td style="text-align:left"><code>USER<em>EMAIL</em>HOST_PASSWORD="[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Private Key (PEM)</td><td style="text-align:left"><code>saleor/tests/settings.py</code></td><td style="text-align:left">55</td><td style="text-align:left"><code>RSA<em>PRIVATE</em>KEY = """-----BEGIN RSA PRIVATE KEY-----</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/conftest.py</code></td><td style="text-align:left">52</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/conftest.py</code></td><td style="text-align:left">64</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/conftest.py</code></td><td style="text-align:left">92</td><td style="text-align:left"><code>password="password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>login</em>throttling.py</code></td><td style="text-align:left">66</td><td style="text-align:left"><code>user_password = "Test1234!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>login</em>throttling.py</code></td><td style="text-align:left">84</td><td style="text-align:left"><code>invalid_password = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>create<em>account</em>without<em>email</em>confirmation.py</code></td><td style="text-align:left">45</td><td style="text-align:left"><code>test_password = "password!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>login<em>before</em>email_confirmation.py</code></td><td style="text-align:left">46</td><td style="text-align:left"><code>test_password = "Password!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>not<em>be</em>able<em>to</em>create<em>account</em>with<em>existing</em>email.py</code></td><td style="text-align:left">43</td><td style="text-align:left"><code>user_password = "Test1234!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>not<em>be</em>able<em>to</em>create<em>account</em>with<em>existing</em>email.py</code></td><td style="text-align:left">55</td><td style="text-align:left"><code>new_password = "Password1!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>not<em>be</em>able<em>to</em>login<em>with</em>invalid_credentials.py</code></td><td style="text-align:left">54</td><td style="text-align:left"><code>user_password = "Test1234!"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/account/account/test<em>should</em>not<em>be</em>able<em>to</em>login<em>with</em>invalid_credentials.py</code></td><td style="text-align:left">71</td><td style="text-align:left"><code>invalid_password = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>saleor/tests/e2e/checkout/test<em>guest</em>checkout<em>should</em>be<em>assigned</em>to<em>user</em>after<em>creating</em>the_account.py</code></td><td style="text-align:left">129</td><td style="text-align:left"><code>password = "Test1234!"</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

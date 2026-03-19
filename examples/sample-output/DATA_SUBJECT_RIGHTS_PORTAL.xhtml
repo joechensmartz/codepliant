@@ -1,0 +1,583 @@
+<h1>Data Subject Rights Portal</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Subject Rights Portal — Specification</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Self-service privacy portal for Acme Inc</strong></p>
+<p>Enables data subjects to exercise their privacy rights under GDPR, CCPA, and other regulations.</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><em>Generated on 2026-03-18 | 8 services detected | 21 data categories</em></p>
+<hr />
+<h2>1. Overview</h2>
+<p>This document specifies a self-service Data Subject Rights Portal that allows users to:</p>
+<ol>
+<li><p><strong>View their data</strong> — See all personal data collected and processed</p></li>
+<li><p><strong>Download their data</strong> — Export a machine-readable copy (GDPR Art. 20)</p></li>
+<li><p><strong>Delete their account</strong> — Request complete erasure (GDPR Art. 17)</p></li>
+<li><p><strong>Manage consent</strong> — Granularly control data processing preferences</p></li>
+</ol>
+<p>The portal satisfies:</p>
+<ul>
+<li><p><strong>GDPR</strong> Articles 12-23 (Data Subject Rights)</p></li>
+<li><p><strong>Best practice</strong> for transparent data handling</p></li>
+</ul>
+<hr />
+<h2>2. Portal Features</h2>
+<h3>2.1 My Data Dashboard</h3>
+<p>Users see a summary of all personal data held by Acme Inc:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Category</p></th><th><p>Source</p></th><th><p>Retention</p></th><th><p>Actions</p></th></tr>
+<tr><td><p>error data, stack traces, user context</p></td><td><p>@sentry/node</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>email, password hash, session data</p></td><td><p>@supabase/supabase-js</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>user prompts, conversation history, generated content</p></td><td><p>openai</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>user behavior, session recordings, feature flag usage</p></td><td><p>posthog</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>user data as defined in schema</p></td><td><p>prisma</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>email addresses, email content</p></td><td><p>resend</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>payment information, billing address, email</p></td><td><p>stripe</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+<tr><td><p>payment information, billing address, email</p></td><td><p>stripe-ios</p></td><td><p>Per retention policy</p></td><td><p>View, Export, Delete</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>2.2 View Data</h3>
+<p>The "View My Data" page displays:</p>
+<ul>
+<li><p><strong>Profile information</strong> — Name, email, account details</p></li>
+<li><p><strong>Activity history</strong> — Login history, actions taken</p></li>
+<li><p><strong>Third-party data</strong> — Data shared with sub-processors</p></li>
+<li><p><strong>Analytics data</strong> — Browsing behavior, page views, session duration</p></li>
+<li><p><strong>AI interaction data</strong> — Prompts, responses, usage patterns</p></li>
+<li><p><strong>Payment data</strong> — Transaction history (card details are masked)</p></li>
+</ul>
+<p>Each data item shows:</p>
+<ul>
+<li><p>When it was collected</p></li>
+<li><p>Why it was collected (lawful basis)</p></li>
+<li><p>Who has access to it</p></li>
+<li><p>When it will be deleted</p></li>
+</ul>
+<h3>2.3 Download Data (Data Portability)</h3>
+<p><strong>GDPR Art. 20</strong> requires data to be provided in a structured, commonly used, machine-readable format.</p>
+<p><strong>Export formats available:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Format</p></th><th><p>Use Case</p></th><th><p>Contents</p></th></tr>
+<tr><td><p>JSON</p></td><td><p>Developer / migration</p></td><td><p>Complete structured data</p></td></tr>
+<tr><td><p>CSV</p></td><td><p>Spreadsheet analysis</p></td><td><p>Tabular data per category</p></td></tr>
+<tr><td><p>PDF</p></td><td><p>Human-readable archive</p></td><td><p>Formatted summary report</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Export process:</strong></p>
+<ol>
+<li><p>User clicks "Download My Data"</p></li>
+<li><p>System queues an export job (may take up to 48 hours for large datasets)</p></li>
+<li><p>User receives email notification when export is ready</p></li>
+<li><p>Download link expires after 7 days</p></li>
+<li><p>Export is encrypted with a one-time password sent separately</p></li>
+</ol>
+<h3>2.4 Delete Account (Right to Erasure)</h3>
+<p><strong>GDPR Art. 17</strong> grants the right to erasure ("right to be forgotten").</p>
+<p><strong>Deletion workflow:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[User requests deletion
+        │
+        ▼
+  ┌─────────────┐
+  │ Confirm via  │
+  │ email / 2FA  │
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐     ┌──────────────────┐
+  │  14-day      │────▶│ User can cancel   │
+  │  grace period│     │ during this time  │
+  └──────┬──────┘     └──────────────────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Soft delete  │  Account deactivated, data marked for deletion
+  └──────┬──────┘
+         │
+         ▼ (30 days)
+  ┌─────────────┐
+  │ Hard delete  │  Data permanently erased from all systems
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────────────────────────────────┐
+  │ Notify sub-processors to delete as well │
+  └─────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Exceptions to deletion</strong> (data that must be retained):</p>
+<ul>
+<li><p>Legal obligations (tax records, invoices)</p></li>
+<li><p>Fraud prevention data</p></li>
+<li><p>Legitimate interest overrides (documented and justified)</p></li>
+<li><p>Payment transaction records (required by financial regulations)</p></li>
+</ul>
+<h3>2.5 Manage Consent</h3>
+<p>Users can granularly control consent for each processing purpose:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Processing Purpose</p></th><th><p>Default</p></th><th><p>User Control</p></th><th><p>Legal Basis</p></th></tr>
+<tr><td><p>Essential service operation</p></td><td><p>On (locked)</p></td><td><p>Cannot disable</p></td><td><p>Contract</p></td></tr>
+<tr><td><p>Analytics & performance</p></td><td><p>Off</p></td><td><p>Toggle</p></td><td><p>Consent</p></td></tr>
+<tr><td><p>Marketing & advertising</p></td><td><p>Off</p></td><td><p>Toggle</p></td><td><p>Consent</p></td></tr>
+<tr><td><p>AI model training</p></td><td><p>Off</p></td><td><p>Toggle</p></td><td><p>Consent</p></td></tr>
+<tr><td><p>AI-powered features</p></td><td><p>On</p></td><td><p>Toggle</p></td><td><p>Legitimate interest</p></td></tr>
+<tr><td><p>Email communications</p></td><td><p>Off</p></td><td><p>Toggle</p></td><td><p>Consent</p></td></tr>
+<tr><td><p>Third-party data sharing</p></td><td><p>Off</p></td><td><p>Toggle</p></td><td><p>Consent</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Consent changes take effect:</strong></p>
+<ul>
+<li><p>Immediately for new data collection</p></li>
+<li><p>Within 24 hours for ongoing processing</p></li>
+<li><p>Sub-processors notified within 48 hours</p></li>
+</ul>
+<hr />
+<h2>3. API Endpoints Specification</h2>
+<p>Base URL: <code>https://acme-saas.com/api/v1/privacy</code></p>
+<h3>3.1 Authentication</h3>
+<p>All endpoints require authentication via Bearer token or session cookie.</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Authorization: Bearer &lt;user_access_token&gt;]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.2 View Data</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[GET /api/v1/privacy/my-data]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;subject_id&quot;: &quot;usr_123&quot;,
+  &quot;data_categories&quot;: [
+    {
+      &quot;category&quot;: &quot;profile&quot;,
+      &quot;items&quot;: [
+        { &quot;field&quot;: &quot;email&quot;, &quot;value&quot;: &quot;user@example.com&quot;, &quot;collected_at&quot;: &quot;2025-01-15&quot;, &quot;source&quot;: &quot;registration&quot;, &quot;lawful_basis&quot;: &quot;contract&quot; }
+      ]
+    },
+    {
+      &quot;category&quot;: &quot;activity&quot;,
+      &quot;items&quot;: [
+        { &quot;field&quot;: &quot;last_login&quot;, &quot;value&quot;: &quot;2025-06-01T10:30:00Z&quot;, &quot;collected_at&quot;: &quot;2025-06-01&quot;, &quot;source&quot;: &quot;system&quot;, &quot;lawful_basis&quot;: &quot;legitimate_interest&quot; }
+      ]
+    }
+  ],
+  &quot;third_party_sharing&quot;: [
+    { &quot;processor&quot;: &quot;@sentry/node&quot;, &quot;data_shared&quot;: [&quot;error data&quot;,&quot;stack traces&quot;], &quot;purpose&quot;: &quot;service_operation&quot; },
+    { &quot;processor&quot;: &quot;@supabase/supabase-js&quot;, &quot;data_shared&quot;: [&quot;email&quot;,&quot;password hash&quot;], &quot;purpose&quot;: &quot;service_operation&quot; },
+    { &quot;processor&quot;: &quot;openai&quot;, &quot;data_shared&quot;: [&quot;user prompts&quot;,&quot;conversation history&quot;], &quot;purpose&quot;: &quot;service_operation&quot; }
+  ]
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.3 Download Data (Export)</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[POST /api/v1/privacy/export
+Content-Type: application/json
+
+{
+  &quot;format&quot;: &quot;json&quot;,        // &quot;json&quot; | &quot;csv&quot; | &quot;pdf&quot;
+  &quot;categories&quot;: [&quot;all&quot;],   // or specific: [&quot;profile&quot;, &quot;activity&quot;, &quot;payments&quot;]
+  &quot;date_range&quot;: {
+    &quot;from&quot;: &quot;2024-01-01&quot;,
+    &quot;to&quot;: &quot;2025-12-31&quot;
+  }
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;export_id&quot;: &quot;exp_abc123&quot;,
+  &quot;status&quot;: &quot;queued&quot;,
+  &quot;estimated_completion&quot;: &quot;2025-06-01T12:00:00Z&quot;,
+  &quot;notification_email&quot;: &quot;user@example.com&quot;
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[GET /api/v1/privacy/export/:export_id]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response (when ready):</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;export_id&quot;: &quot;exp_abc123&quot;,
+  &quot;status&quot;: &quot;ready&quot;,
+  &quot;download_url&quot;: &quot;/api/v1/privacy/export/exp_abc123/download&quot;,
+  &quot;expires_at&quot;: &quot;2025-06-08T12:00:00Z&quot;,
+  &quot;size_bytes&quot;: 245760,
+  &quot;checksum&quot;: &quot;sha256:abc123...&quot;
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.4 Delete Account</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[POST /api/v1/privacy/delete-account
+Content-Type: application/json
+
+{
+  &quot;confirmation&quot;: &quot;DELETE_MY_ACCOUNT&quot;,
+  &quot;reason&quot;: &quot;no_longer_needed&quot;,       // optional
+  &quot;feedback&quot;: &quot;Switching to another service&quot;  // optional
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;deletion_id&quot;: &quot;del_xyz789&quot;,
+  &quot;status&quot;: &quot;pending_confirmation&quot;,
+  &quot;confirmation_email_sent&quot;: true,
+  &quot;grace_period_ends&quot;: &quot;2025-06-15T00:00:00Z&quot;,
+  &quot;hard_delete_date&quot;: &quot;2025-07-15T00:00:00Z&quot;
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[POST /api/v1/privacy/delete-account/:deletion_id/confirm]]></ac:plain-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[POST /api/v1/privacy/delete-account/:deletion_id/cancel]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.5 Manage Consent</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[GET /api/v1/privacy/consent]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;subject_id&quot;: &quot;usr_123&quot;,
+  &quot;consents&quot;: [
+    { &quot;purpose&quot;: &quot;essential&quot;, &quot;granted&quot;: true, &quot;locked&quot;: true, &quot;updated_at&quot;: &quot;2025-01-01&quot; },
+    { &quot;purpose&quot;: &quot;analytics&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-03-15&quot; },
+    { &quot;purpose&quot;: &quot;marketing&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-03-15&quot; },
+    { &quot;purpose&quot;: &quot;ai_features&quot;, &quot;granted&quot;: true, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-02-01&quot; },
+    { &quot;purpose&quot;: &quot;third_party_sharing&quot;, &quot;granted&quot;: false, &quot;locked&quot;: false, &quot;updated_at&quot;: &quot;2025-01-01&quot; }
+  ]
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[PATCH /api/v1/privacy/consent
+Content-Type: application/json
+
+{
+  &quot;consents&quot;: [
+    { &quot;purpose&quot;: &quot;analytics&quot;, &quot;granted&quot;: true },
+    { &quot;purpose&quot;: &quot;marketing&quot;, &quot;granted&quot;: false }
+  ]
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;updated&quot;: 2,
+  &quot;effective_immediately&quot;: [&quot;analytics&quot;],
+  &quot;effective_within_24h&quot;: [&quot;marketing&quot;],
+  &quot;consent_record_id&quot;: &quot;cr_def456&quot;
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.6 Request History</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">http</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[GET /api/v1/privacy/requests]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Response:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;requests&quot;: [
+    { &quot;id&quot;: &quot;req_001&quot;, &quot;type&quot;: &quot;export&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;created_at&quot;: &quot;2025-05-01&quot;, &quot;completed_at&quot;: &quot;2025-05-01&quot; },
+    { &quot;id&quot;: &quot;req_002&quot;, &quot;type&quot;: &quot;consent_change&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;created_at&quot;: &quot;2025-05-15&quot;, &quot;completed_at&quot;: &quot;2025-05-15&quot; }
+  ]
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>4. UI Wireframe Description</h2>
+<h3>4.1 Portal Layout</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[┌─────────────────────────────────────────────────────────┐
+│  Acme Inc — Privacy Center                            │
+├─────────────┬───────────────────────────────────────────┤
+│             │                                           │
+│  📋 My Data │   [Active Tab Content Area]               │
+│             │                                           │
+│  📥 Export  │   Shows data tables, export options,      │
+│             │   consent toggles, or deletion flow       │
+│  🗑️ Delete  │   depending on selected tab.              │
+│             │                                           │
+│  ⚙️ Consent │                                           │
+│             │                                           │
+│  📜 History │                                           │
+│             │                                           │
+│  ❓ Help    │                                           │
+│             │                                           │
+├─────────────┴───────────────────────────────────────────┤
+│  Contact DPO: dpo@acme-saas.com                               │
+└─────────────────────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.2 My Data Tab</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[┌─────────────────────────────────────────────────────────┐
+│  My Data                                     [Refresh]  │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Profile Information                          [Expand]  │
+│  ├─ Email: u***@example.com                             │
+│  ├─ Name: J*** D***                                     │
+│  └─ Account created: 2025-01-15                         │
+│                                                         │
+│  Activity Data                                [Expand]  │
+│  ├─ Last login: 2 hours ago                             │
+│  ├─ Total sessions: 142                                 │
+│  └─ Data points: 1,247                                  │
+│                                                         │
+│  Third-Party Services (8 connected)       │
+│  ├─ @sentry/node: error data, stack traces
+│  ├─ @supabase/supabase-js: email, password hash
+│  ├─ openai: user prompts, conversation history
+│  ├─ posthog: user behavior, session recordings
+│  ├─ prisma: user data as defined in schema
+│  └─ ... and 3 more
+│                                                         │
+└─────────────────────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.3 Export Tab</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[┌─────────────────────────────────────────────────────────┐
+│  Export My Data                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Format:    (●) JSON    ( ) CSV    ( ) PDF              │
+│                                                         │
+│  Categories:                                            │
+│  [✓] All data                                           │
+│  [✓] Profile information                                │
+│  [✓] Activity history                                   │
+│  [✓] Third-party sharing records                        │
+│  [ ] Only data from last 12 months                      │
+│                                                         │
+│  Date range: [2024-01-01] to [2025-12-31]               │
+│                                                         │
+│  ┌─────────────────────────────────────────┐            │
+│  │  ⚠️ Export may take up to 48 hours.     │            │
+│  │  You&apos;ll receive an email when ready.    │            │
+│  └─────────────────────────────────────────┘            │
+│                                                         │
+│                        [Request Export]                  │
+│                                                         │
+└─────────────────────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.4 Delete Account Tab</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[┌─────────────────────────────────────────────────────────┐
+│  Delete My Account                                      │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌─────────────────────────────────────────┐            │
+│  │  ⚠️ This action is irreversible after   │            │
+│  │  the 14-day grace period.               │            │
+│  └─────────────────────────────────────────┘            │
+│                                                         │
+│  What happens when you delete your account:             │
+│                                                         │
+│  • 14-day grace period (you can cancel)                 │
+│  • All personal data queued for deletion                │
+│  • Sub-processors notified to delete your data          │
+│  • Some data retained for legal obligations             │
+│                                                         │
+│  Reason (optional):                                     │
+│  [No longer using the service          ▾]               │
+│                                                         │
+│  Type &quot;DELETE&quot; to confirm: [____________]               │
+│                                                         │
+│                [Cancel]   [Delete My Account]            │
+│                                                         │
+└─────────────────────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.5 Consent Management Tab</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[┌─────────────────────────────────────────────────────────┐
+│  Manage Consent Preferences                             │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Essential Services              [ON]  (required)       │
+│  Core functionality, authentication, security           │
+│                                                         │
+│  ─────────────────────────────────────────────────────  │
+│                                                         │
+│  Analytics &amp; Performance         [OFF] (toggle)         │
+│  Usage statistics, performance monitoring               │
+│                                                         │
+│  Marketing Communications        [OFF] (toggle)         │
+│  Promotional emails, newsletters                        │
+│                                                         │
+│  Third-Party Data Sharing        [OFF] (toggle)         │
+│  Sharing data with partner services                     │
+│                                                         │
+│  AI-Powered Features             [ON]  (toggle)         │
+│  AI recommendations, content generation                 │
+│                                                         │
+│  AI Model Training               [OFF] (toggle)         │
+│  Using your data to improve AI models                   │
+│                                                         │
+│                                                         │
+│  Last updated: 2026-03-18                                  │
+│                                                         │
+│                        [Save Preferences]               │
+│                                                         │
+└─────────────────────────────────────────────────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>5. Implementation Checklist</h2>
+<h3>Phase 1: Core Portal (Week 1-2)</h3>
+<ul>
+<li><p>[ ] Set up authentication for privacy portal</p></li>
+<li><p>[ ] Implement <code>GET /api/v1/privacy/my-data</code> endpoint</p></li>
+<li><p>[ ] Build "My Data" dashboard UI</p></li>
+<li><p>[ ] Add data aggregation from all 8 connected services</p></li>
+<li><p>[ ] Implement rate limiting (max 10 requests/minute per user)</p></li>
+</ul>
+<h3>Phase 2: Data Export (Week 3)</h3>
+<ul>
+<li><p>[ ] Implement export queue system</p></li>
+<li><p>[ ] Add JSON export format</p></li>
+<li><p>[ ] Add CSV export format</p></li>
+<li><p>[ ] Add PDF export format</p></li>
+<li><p>[ ] Implement encrypted download links</p></li>
+<li><p>[ ] Add email notifications for export completion</p></li>
+<li><p>[ ] Set 7-day expiry on download links</p></li>
+</ul>
+<h3>Phase 3: Account Deletion (Week 4)</h3>
+<ul>
+<li><p>[ ] Implement deletion request flow</p></li>
+<li><p>[ ] Add email confirmation step</p></li>
+<li><p>[ ] Build 14-day grace period with cancellation</p></li>
+<li><p>[ ] Implement soft delete (deactivation)</p></li>
+<li><p>[ ] Implement hard delete (30 days after soft delete)</p></li>
+<li><p>[ ] Add sub-processor deletion notifications</p></li>
+<li><p>[ ] Document exceptions to deletion (legal holds)</p></li>
+</ul>
+<h3>Phase 4: Consent Management (Week 5)</h3>
+<ul>
+<li><p>[ ] Build consent preference storage</p></li>
+<li><p>[ ] Implement granular consent toggles</p></li>
+<li><p>[ ] Add consent change propagation to sub-processors</p></li>
+<li><p>[ ] Implement consent audit log</p></li>
+<li><p>[ ] Add consent receipt generation (GDPR Art. 7)</p></li>
+</ul>
+<h3>Phase 5: Audit & Compliance (Week 6)</h3>
+<ul>
+<li><p>[ ] Add comprehensive audit logging for all portal actions</p></li>
+<li><p>[ ] Implement request history tracking</p></li>
+<li><p>[ ] Build admin dashboard for DPO oversight</p></li>
+<li><p>[ ] Load test all endpoints</p></li>
+<li><p>[ ] Security audit (pen test portal endpoints)</p></li>
+<li><p>[ ] Document SLA for request fulfillment (GDPR: 30 days max)</p></li>
+</ul>
+<hr />
+<h2>6. Security Requirements</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Requirement</p></th><th><p>Implementation</p></th></tr>
+<tr><td><p>Authentication</p></td><td><p>Multi-factor required for destructive actions</p></td></tr>
+<tr><td><p>Encryption</p></td><td><p>TLS 1.3 in transit, AES-256 at rest</p></td></tr>
+<tr><td><p>Rate limiting</p></td><td><p>10 req/min per user, 100 req/hour</p></td></tr>
+<tr><td><p>Audit logging</p></td><td><p>All actions logged with IP, timestamp, user agent</p></td></tr>
+<tr><td><p>Data masking</p></td><td><p>PII partially masked in "View" mode by default</p></td></tr>
+<tr><td><p>Export encryption</p></td><td><p>One-time password sent via separate channel</p></td></tr>
+<tr><td><p>Session management</p></td><td><p>Auto-logout after 15 min inactivity on portal</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>7. Compliance Mapping</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Right</p></th><th><p>GDPR Article</p></th><th><p>CCPA Section</p></th><th><p>Portal Feature</p></th></tr>
+<tr><td><p>Right to Access</p></td><td><p>Art. 15</p></td><td><p>§1798.100</p></td><td><p>My Data tab</p></td></tr>
+<tr><td><p>Right to Portability</p></td><td><p>Art. 20</p></td><td><p>§1798.100</p></td><td><p>Export tab (JSON/CSV)</p></td></tr>
+<tr><td><p>Right to Erasure</p></td><td><p>Art. 17</p></td><td><p>§1798.105</p></td><td><p>Delete Account tab</p></td></tr>
+<tr><td><p>Right to Rectification</p></td><td><p>Art. 16</p></td><td><p>—</p></td><td><p>My Data > Edit</p></td></tr>
+<tr><td><p>Right to Restrict Processing</p></td><td><p>Art. 18</p></td><td><p>—</p></td><td><p>Consent toggles</p></td></tr>
+<tr><td><p>Right to Object</p></td><td><p>Art. 21</p></td><td><p>§1798.120</p></td><td><p>Consent toggles</p></td></tr>
+<tr><td><p>Right to Withdraw Consent</p></td><td><p>Art. 7(3)</p></td><td><p>—</p></td><td><p>Consent toggles</p></td></tr>
+<tr><td><p>Right to Non-Discrimination</p></td><td><p>—</p></td><td><p>§1798.125</p></td><td><p>Service remains same</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>8. Response Time SLAs</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Request Type</p></th><th><p>GDPR Deadline</p></th><th><p>Target SLA</p></th><th><p>Escalation</p></th></tr>
+<tr><td><p>View data</p></td><td><p>30 days</p></td><td><p>< 24 hours</p></td><td><p>Auto</p></td></tr>
+<tr><td><p>Export data</p></td><td><p>30 days</p></td><td><p>< 48 hours</p></td><td><p>DPO at day 20</p></td></tr>
+<tr><td><p>Delete account</p></td><td><p>30 days</p></td><td><p>14 days + 30 days</p></td><td><p>DPO at day 20</p></td></tr>
+<tr><td><p>Consent change</p></td><td><p>Immediate</p></td><td><p>< 24 hours</p></td><td><p>Auto</p></td></tr>
+<tr><td><p>Rectification</p></td><td><p>30 days</p></td><td><p>< 48 hours</p></td><td><p>DPO at day 20</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>This specification was auto-generated by Codepliant based on 8 detected services in your codebase. Implement this portal to give your users full control over their personal data.</em></p>
+<p><em>Contact: legal@acme.com | DPO: dpo@acme-saas.com</em></p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Disclaimer:</strong> This specification is a starting point. Have your legal and engineering teams review before implementation. Codepliant generates specifications based on code analysis — legal review is always recommended.</p>
+</ac:rich-text-body>
+</ac:structured-macro>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE ONBOARDING GUIDE — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE ONBOARDING GUIDE</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="compliance-onboarding-guide">Compliance Onboarding Guide</h1>
+<blockquote><strong>[Your Company Name]</strong> — New Employee Compliance Onboarding</blockquote>
+<p>></p>
+<blockquote>Generated on 2026-03-16 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="1-welcome">1. Welcome</h2>
+<p>Welcome to [Your Company Name]. This guide will help you understand your compliance responsibilities from day one. Data protection and security are everyone's responsibility — not just the legal team's.</p>
+<p><strong>Why this matters:</strong> Our application processes user data through multiple services and platforms. Every team member who touches code, data, or infrastructure must understand the rules that govern how we handle that data.</p>
+<h2 id="2-key-contacts">2. Key Contacts</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Contact</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Privacy / Compliance Lead</strong></td><td style="text-align:left">[your-email@example.com]</td></tr>
+<tr><td style="text-align:left"><strong>Security Team</strong></td><td style="text-align:left">[your-email@example.com]</td></tr>
+<tr><td style="text-align:left"><strong>Incident Reporting</strong></td><td style="text-align:left">[your-email@example.com] — report immediately, do not wait</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Rule of thumb:</strong> If you are unsure whether something involves personal data or a compliance obligation, ask. It is always better to ask first than to fix a breach later.</blockquote>
+<h2 id="3-services-that-process-user-data">3. Services That Process User Data</h2>
+<p>The following third-party services have been detected in our codebase. Each one processes user data and is covered by our compliance documentation:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Processed</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">Other</td><td style="text-align:left">real-time user data, connection metadata, channel subscriptions, WebSocket messages</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">Other</td><td style="text-align:left">session cookies, session data, CSRF tokens</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">File Storage</td><td style="text-align:left">uploaded files, file metadata, storage service credentials, potential PII in uploaded content</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">Database</td><td style="text-align:left">user data as defined in schema, timestamps, associations</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">File Storage</td><td style="text-align:left">uploaded files, file metadata, storage references</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">File Storage</td><td style="text-align:left">uploaded files, file metadata</td></tr>
+<tr><td style="text-align:left">intercom-ruby</td><td style="text-align:left">Other</td><td style="text-align:left">user profiles, email, name, conversations, user behavior</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">Database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">plaid</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">bank account data, transaction history, account balances, financial institution data</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">Other</td><td style="text-align:left">IP addresses, request metadata</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">Database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">Authentication</td><td style="text-align:left">session cookies, CSRF tokens</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">Database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">sentry-ruby</td><td style="text-align:left">Error Monitoring</td><td style="text-align:left">error data, stack traces, user context, device information</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">Other</td><td style="text-align:left">job data, user data processed in background jobs</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">payment information, billing address, email, transaction history</td></tr>
+</tbody>
+</table>
+<p><strong>Total services:</strong> 20. Before integrating a new service, check with the compliance lead to ensure it is added to our sub-processor list and covered by a Data Processing Agreement.</p>
+<h2 id="4-required-reading-priority-order">4. Required Reading — Priority Order</h2>
+<p>Read these documents in order. Each phase builds on the previous one.</p>
+<h3 id="day-1-immediate">Day 1 — Immediate</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Why You Need It</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><a href="./PRIVACY_POLICY.md">Privacy Policy</a></td><td style="text-align:left">Understand what user data the company collects and how it is processed</td></tr>
+<tr><td style="text-align:left"><a href="./ACCEPTABLE<em>USE</em>POLICY.md">Acceptable Use Policy</a></td><td style="text-align:left">Know what is and is not permitted when using company systems</td></tr>
+<tr><td style="text-align:left"><a href="./SECURITY.md">Security Policy</a></td><td style="text-align:left">Understand baseline security expectations (passwords, MFA, device handling)</td></tr>
+</tbody>
+</table>
+<h3 id="week-1-core-compliance">Week 1 — Core Compliance</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Why You Need It</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><a href="./DATA<em>PROTECTION</em>POLICY.md">Data Protection Policy</a></td><td style="text-align:left">Learn how the company classifies and handles personal data</td></tr>
+<tr><td style="text-align:left"><a href="./INCIDENT<em>RESPONSE</em>PLAN.md">Incident Response Plan</a></td><td style="text-align:left">Know what to do if you discover a data breach or security incident</td></tr>
+<tr><td style="text-align:left"><a href="./ACCESS<em>CONTROL</em>POLICY.md">Access Control Policy</a></td><td style="text-align:left">Understand role-based access, least privilege, and how to request permissions</td></tr>
+<tr><td style="text-align:left"><a href="./EMPLOYEE<em>PRIVACY</em>NOTICE.md">Employee Privacy Notice</a></td><td style="text-align:left">Understand what data the company collects about you as an employee</td></tr>
+</tbody>
+</table>
+<h3 id="week-2-operational">Week 2 — Operational</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Why You Need It</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><a href="./DATA<em>RETENTION</em>POLICY.md">Data Retention Policy</a></td><td style="text-align:left">Know how long data is kept and when it must be deleted</td></tr>
+<tr><td style="text-align:left"><a href="./DSAR<em>HANDLING</em>GUIDE.md">DSAR Handling Guide</a></td><td style="text-align:left">Know how to handle data subject access requests from users</td></tr>
+<tr><td style="text-align:left"><a href="./CHANGE<em>MANAGEMENT</em>POLICY.md">Change Management Policy</a></td><td style="text-align:left">Follow proper procedures for code changes and deployments</td></tr>
+<tr><td style="text-align:left"><a href="./CONSENT<em>MANAGEMENT</em>GUIDE.md">Consent Management Guide</a></td><td style="text-align:left">Understand how user consent is collected and managed</td></tr>
+</tbody>
+</table>
+<h3 id="month-1-deep-dive">Month 1 — Deep Dive</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Why You Need It</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><a href="./DATA<em>PROCESSING</em>AGREEMENT.md">Data Processing Agreement</a></td><td style="text-align:left">Understand contractual obligations with data processors</td></tr>
+<tr><td style="text-align:left"><a href="./SUBPROCESSOR_LIST.md">Sub-Processor List</a></td><td style="text-align:left">Know which third-party services process user data</td></tr>
+<tr><td style="text-align:left"><a href="./COMPLIANCE_ROADMAP.md">Compliance Roadmap</a></td><td style="text-align:left">Understand the company's compliance goals and timeline</td></tr>
+<tr><td style="text-align:left"><a href="./RISK_REGISTER.md">Risk Register</a></td><td style="text-align:left">Review identified compliance risks and mitigation strategies</td></tr>
+</tbody>
+</table>
+<h3 id="ai-specific-reading-required-for-ai-team-members">AI-Specific Reading (Required for AI Team Members)</h3>
+<p>Our application uses AI services. If you work on AI features or use AI tools in your workflow, these are mandatory:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Why You Need It</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><a href="./AI_DISCLOSURE.md">AI Disclosure</a></td><td style="text-align:left">Understand how AI usage is disclosed to end users (EU AI Act Art. 50)</td></tr>
+<tr><td style="text-align:left"><a href="./ACCEPTABLE<em>AI</em>USE_POLICY.md">Acceptable AI Use Policy</a></td><td style="text-align:left">Know the rules for using AI tools in your work</td></tr>
+<tr><td style="text-align:left"><a href="./AI<em>GOVERNANCE</em>FRAMEWORK.md">AI Governance Framework</a></td><td style="text-align:left">Understand the oversight structure for AI systems</td></tr>
+</tbody>
+</table>
+<h2 id="5-key-policies-quick-reference">5. Key Policies — Quick Reference</h2>
+<h3 id="data-handling-rules">Data Handling Rules</h3>
+<ul>
+<li><strong>Never</strong> store personal data in logs, comments, or debug output</li>
+<li><strong>Never</strong> share production data in Slack, email, or tickets</li>
+<li><strong>Never</strong> copy production data to development environments without anonymization</li>
+<li><strong>Always</strong> use the minimum amount of data necessary for your task</li>
+<li><strong>Always</strong> encrypt personal data in transit and at rest</li>
+</ul>
+<h3 id="access-authentication">Access & Authentication</h3>
+<ul>
+<li>Enable MFA on all accounts (corporate and third-party services)</li>
+<li>Use unique, strong passwords via the company password manager</li>
+<li>Never share credentials or API keys via email, Slack, or code commits</li>
+<li>Request only the access permissions you need — least privilege principle</li>
+</ul>
+<h3 id="incident-response">Incident Response</h3>
+<p>If you discover or suspect a data breach or security incident:</p>
+<ol>
+<li><strong>Report immediately</strong> — contact the security team within 1 hour</li>
+<li><strong>Do not attempt to fix it yourself</strong> unless you are on the incident response team</li>
+<li><strong>Preserve evidence</strong> — do not delete logs, emails, or files related to the incident</li>
+<li><strong>Document everything</strong> — note the time, what you observed, and what actions you took</li>
+</ol>
+<blockquote>Under GDPR, we have <strong>72 hours</strong> to report certain breaches to supervisory authorities. The clock starts when we become aware — that means your speed in reporting matters.</blockquote>
+<h3 id="payment-data-pci-dss">Payment Data (PCI DSS)</h3>
+<ul>
+<li>Never log, screenshot, or store raw payment card numbers</li>
+<li>Payment data is handled exclusively through our payment processor (see Sub-Processor List)</li>
+<li>If you encounter raw payment data anywhere in the system, report it immediately</li>
+</ul>
+<h3 id="ai-usage-rules">AI Usage Rules</h3>
+<ul>
+<li>Do not input sensitive personal data (PII, health data, financial data) into AI tools unless explicitly authorized</li>
+<li>All AI-generated outputs must be reviewed by a human before being used in decisions affecting users</li>
+<li>AI tool usage must comply with the Acceptable AI Use Policy</li>
+<li>Users must be informed when they are interacting with AI systems (EU AI Act Art. 50)</li>
+</ul>
+<h2 id="6-onboarding-checklist">6. Onboarding Checklist</h2>
+<p>Complete these items within your first 30 days:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Read all Day 1 documents (Privacy Policy, AUP, Security Policy)</li>
+<li><input type="checkbox" disabled> Enable MFA on all corporate accounts</li>
+<li><input type="checkbox" disabled> Set up the company password manager</li>
+<li><input type="checkbox" disabled> Read all Week 1 documents (Data Protection, Incident Response, Access Control)</li>
+<li><input type="checkbox" disabled> Complete security awareness training (if available)</li>
+<li><input type="checkbox" disabled> Review the services list above — understand which ones you interact with</li>
+<li><input type="checkbox" disabled> Read all Week 2 documents (Data Retention, DSAR, Change Management)</li>
+<li><input type="checkbox" disabled> Read all Month 1 documents (DPA, Sub-Processors, Roadmap, Risk Register)</li>
+<li><input type="checkbox" disabled> Read AI-specific documents (if applicable to your role)</li>
+<li><input type="checkbox" disabled> Sign the Compliance Acknowledgment (contact compliance lead)</li>
+<li><input type="checkbox" disabled> Know how to report an incident — save the contact info from Section 2</li>
+</ul>
+<h2 id="7-frequently-asked-questions">7. Frequently Asked Questions</h2>
+<p><strong>Q: I found personal data in a log file. What do I do?</strong></p>
+<p>A: Report it to the security team immediately. Do not delete the log — they will handle remediation and assess whether it constitutes a breach.</p>
+<p><strong>Q: A user asked me to delete their data. What do I do?</strong></p>
+<p>A: Forward the request to the compliance lead. Do not delete data yourself — there is a formal DSAR process that must be followed (see DSAR Handling Guide).</p>
+<p><strong>Q: I want to add a new third-party service to the project. Do I need approval?</strong></p>
+<p>A: Yes. Any new service that processes user data must be reviewed by the compliance lead before integration. It needs a DPA review and must be added to the sub-processor list.</p>
+<p><strong>Q: Can I use ChatGPT / Claude / other AI tools for work?</strong></p>
+<p>A: Yes, within the boundaries of our Acceptable AI Use Policy. Do not input sensitive personal data. All outputs must be reviewed before use.</p>
+<p><strong>Q: Where do I find all compliance documents?</strong></p>
+<p>A: All documents are in the <code>legal/</code> directory of the project repository. Start with the Compliance Policy Index for a full listing.</p>
+<hr>
+<p><em>This Compliance Onboarding Guide was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It should be reviewed by your compliance and HR teams before distribution to new employees.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

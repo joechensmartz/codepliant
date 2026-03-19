@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Recovery Plan — Acme Inc</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Disaster Recovery Plan</h1>
+      <p class="meta">Acme Inc &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="disaster-recovery-plan">Disaster Recovery Plan</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> Acme Inc <strong>Next Review Date:</strong> 2027-03-18</blockquote>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</li>
+<li>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</li>
+<li>Backup Policy (<code>BACKUP_POLICY.md</code>)</li>
+</ul>
+<hr>
+<p>This Disaster Recovery Plan (DRP) defines the procedures for recovering <strong>Acme Inc</strong>'s <strong>nextjs-saas-example</strong> application from catastrophic failures, including complete infrastructure loss, data corruption, security breaches, and natural disasters. It complements the Business Continuity Plan (BCP) and Incident Response Plan.</p>
+<h2 id="1-disaster-scenarios-and-classification">1. Disaster Scenarios and Classification</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Severity</th><th style="text-align:left">RTO Target</th><th style="text-align:left">RPO Target</th><th style="text-align:left">Trigger</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Complete data center / region outage</td><td style="text-align:left">Critical</td><td style="text-align:left">4 hours</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Cloud provider outage, natural disaster</td></tr>
+<tr><td style="text-align:left">Database corruption or loss</td><td style="text-align:left">Critical</td><td style="text-align:left">2 hours</td><td style="text-align:left">5 minutes</td><td style="text-align:left">Hardware failure, human error, malicious action</td></tr>
+<tr><td style="text-align:left">Ransomware / security breach</td><td style="text-align:left">Critical</td><td style="text-align:left">4 hours</td><td style="text-align:left">0 minutes (from clean backup)</td><td style="text-align:left">Cyberattack</td></tr>
+<tr><td style="text-align:left">Application deployment failure</td><td style="text-align:left">High</td><td style="text-align:left">1 hour</td><td style="text-align:left">0 minutes</td><td style="text-align:left">Bad deployment, configuration error</td></tr>
+<tr><td style="text-align:left">Third-party service permanent shutdown</td><td style="text-align:left">High</td><td style="text-align:left">24 hours</td><td style="text-align:left">1 hour</td><td style="text-align:left">Vendor bankruptcy, API deprecation</td></tr>
+<tr><td style="text-align:left">DNS / CDN failure</td><td style="text-align:left">High</td><td style="text-align:left">2 hours</td><td style="text-align:left">N/A</td><td style="text-align:left">DNS provider outage, DDoS</td></tr>
+<tr><td style="text-align:left">Data corruption (silent)</td><td style="text-align:left">Medium</td><td style="text-align:left">24 hours</td><td style="text-align:left">Depends on detection time</td><td style="text-align:left">Software bug, migration error</td></tr>
+</tbody>
+</table>
+<h2 id="2-recovery-procedures-per-service">2. Recovery Procedures per Service</h2>
+<h3 id="21-database-services">2.1 Database Services</h3>
+<p><strong>Affected services:</strong> prisma</p>
+<p><strong>Full Recovery Procedure:</strong></p>
+<ol>
+<li><strong>Assess</strong> — Determine scope of data loss or corruption</li>
+</ol>
+<ul>
+<li>Check last known good backup timestamp</li>
+<li>Identify affected tables/collections</li>
+<li>Estimate data loss window</li>
+</ul>
+<ol>
+<li><strong>Provision</strong> — Stand up replacement database infrastructure</li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Create new database instance in recovery region</li>
+<li><input type="checkbox" disabled> Configure networking, security groups, and access controls</li>
+<li><input type="checkbox" disabled> Apply encryption settings matching production</li>
+</ul>
+<ol>
+<li><strong>Restore</strong> — Recover data from backups</li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify most recent valid backup</li>
+<li><input type="checkbox" disabled> Restore full backup to new instance</li>
+<li><input type="checkbox" disabled> Apply WAL/binlog/oplog for point-in-time recovery</li>
+<li><input type="checkbox" disabled> Verify row counts and data integrity checksums</li>
+</ul>
+<ol>
+<li><strong>Reconnect</strong> — Point application to recovered database</li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Update connection strings / DNS records</li>
+<li><input type="checkbox" disabled> Verify application connectivity</li>
+<li><input type="checkbox" disabled> Run smoke tests against recovered data</li>
+</ul>
+<ol>
+<li><strong>Validate</strong> — Confirm recovery completeness</li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Compare record counts with last known backup metrics</li>
+<li><input type="checkbox" disabled> Verify critical data integrity (user accounts, transactions)</li>
+<li><input type="checkbox" disabled> Test all CRUD operations</li>
+</ul>
+<h3 id="22-authentication-services">2.2 Authentication Services</h3>
+<p><strong>Affected services:</strong> @supabase/supabase-js</p>
+<p><strong>Recovery Procedure:</strong></p>
+<ol>
+<li><strong>If self-hosted auth:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Restore auth database from backup</li>
+<li><input type="checkbox" disabled> Rotate all signing keys and session secrets</li>
+<li><input type="checkbox" disabled> Invalidate all existing sessions (force re-login)</li>
+<li><input type="checkbox" disabled> Verify OAuth callback URLs are correctly configured</li>
+</ul>
+<ol>
+<li><strong>If third-party auth provider:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Verify provider status and connectivity</li>
+<li><input type="checkbox" disabled> Re-configure API keys if compromised</li>
+<li><input type="checkbox" disabled> Update redirect/callback URLs if domain changed</li>
+<li><input type="checkbox" disabled> Test login flows (email/password, OAuth, MFA)</li>
+</ul>
+<ol>
+<li><strong>Post-recovery:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Force password reset if credential compromise is suspected</li>
+<li><input type="checkbox" disabled> Review and revoke suspicious sessions</li>
+<li><input type="checkbox" disabled> Notify affected users</li>
+</ul>
+<h3 id="23-payment-services">2.3 Payment Services</h3>
+<p><strong>Affected services:</strong> stripe, stripe-ios</p>
+<p><strong>Recovery Procedure:</strong></p>
+<ol>
+<li><strong>Assess transaction state:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify any in-flight transactions at time of disaster</li>
+<li><input type="checkbox" disabled> Check payment processor dashboard for transaction status</li>
+<li><input type="checkbox" disabled> Document any transactions in uncertain state</li>
+</ul>
+<ol>
+<li><strong>Restore payment integration:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Verify payment processor API keys (rotate if compromised)</li>
+<li><input type="checkbox" disabled> Verify webhook endpoints are receiving events</li>
+<li><input type="checkbox" disabled> Re-process any failed webhook deliveries</li>
+</ul>
+<ol>
+<li><strong>Reconciliation:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Compare internal transaction records with payment processor</li>
+<li><input type="checkbox" disabled> Resolve any discrepancies</li>
+<li><input type="checkbox" disabled> Notify finance team of any gaps</li>
+<li><input type="checkbox" disabled> Use idempotency keys to safely retry uncertain transactions</li>
+</ul>
+<h3 id="24-ai-services">2.4 AI Services</h3>
+<p><strong>Affected services:</strong> openai</p>
+<p><strong>Recovery Procedure:</strong></p>
+<ol>
+<li>[ ] Verify AI provider API status and connectivity</li>
+<li>[ ] Re-configure API keys if compromised</li>
+<li>[ ] Restore any cached AI model configurations or fine-tuning data from backup</li>
+<li>[ ] Re-enable AI features gradually (canary rollout)</li>
+<li>[ ] Verify AI output quality before full restoration</li>
+</ol>
+<h3 id="25-email-services">2.5 Email Services</h3>
+<p><strong>Affected services:</strong> resend</p>
+<p><strong>Recovery Procedure:</strong></p>
+<ol>
+<li>[ ] Verify email provider status and credentials</li>
+<li>[ ] Verify DNS records (SPF, DKIM, DMARC) point to correct provider</li>
+<li>[ ] Re-process any queued transactional emails</li>
+<li>[ ] Test email delivery to multiple providers (Gmail, Outlook, etc.)</li>
+</ol>
+<h3 id="26-application-infrastructure">2.6 Application Infrastructure</h3>
+<p><strong>Recovery Procedure:</strong></p>
+<ol>
+<li><strong>Infrastructure provisioning:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Provision compute resources in recovery region</li>
+<li><input type="checkbox" disabled> Configure networking, load balancers, and DNS</li>
+<li><input type="checkbox" disabled> Deploy application from latest known-good container image or build</li>
+</ul>
+<ol>
+<li><strong>Configuration:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Restore environment variables from secrets manager</li>
+<li><input type="checkbox" disabled> Update service connection strings to recovered infrastructure</li>
+<li><input type="checkbox" disabled> Configure SSL/TLS certificates</li>
+</ul>
+<ol>
+<li><strong>Deployment:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Deploy application manually or via deployment script</li>
+<li><input type="checkbox" disabled> Run health checks and smoke tests</li>
+<li><input type="checkbox" disabled> Verify all external integrations are connected</li>
+</ul>
+<ol>
+<li><strong>DNS cutover:</strong></li>
+</ol>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Update DNS records to point to recovery infrastructure</li>
+<li><input type="checkbox" disabled> Verify DNS propagation</li>
+<li><input type="checkbox" disabled> Monitor traffic routing</li>
+</ul>
+<h2 id="3-communication-templates">3. Communication Templates</h2>
+<h3 id="31-internal-disaster-declaration">3.1 Internal — Disaster Declaration</h3>
+<pre><code>DISASTER RECOVERY ACTIVATION — Acme Inc
+============================================
+
+Severity: [CRITICAL / HIGH]
+Declared by: [Name]
+Date/Time: [UTC timestamp]
+
+SITUATION:
+[Description of the disaster — what happened, what is affected]
+
+IMPACT:
+- Services affected: [list]
+- Estimated data loss: [timeframe]
+- Estimated recovery time: [hours]
+
+ACTIONS REQUIRED:
+1. All DR team members report to [war room / Slack channel]
+2. Begin recovery procedures per Disaster Recovery Plan Section 2
+3. Status updates every [30 minutes / 1 hour]
+
+DR TEAM LEAD: [Name]
+COMMUNICATION LEAD: [Name]</code></pre>
+<h3 id="32-external-customer-notification-major-outage">3.2 External — Customer Notification (Major Outage)</h3>
+<pre><code>Subject: Acme Inc Service Disruption — Recovery in Progress
+
+Dear [Customer / Users],
+
+We are currently experiencing a significant service disruption affecting nextjs-saas-example.
+Our disaster recovery procedures have been activated and our team is working
+to restore all services as quickly as possible.
+
+CURRENT STATUS:
+- Services affected: [list affected features]
+- Estimated time to recovery: [timeframe]
+- Data impact: [none / potential data loss of X minutes]
+
+WHAT WE ARE DOING:
+- [Brief description of recovery actions]
+- We will provide updates every [timeframe] on our status page
+
+WHAT YOU CAN DO:
+- [Any actions users should take]
+- Monitor our status page at [URL] for real-time updates
+
+For urgent inquiries, contact legal@acme.com.
+
+We apologize for the inconvenience and thank you for your patience.
+
+Sincerely,
+Acme Inc</code></pre>
+<h3 id="33-external-recovery-complete-notification">3.3 External — Recovery Complete Notification</h3>
+<pre><code>Subject: Acme Inc — Services Restored
+
+Dear [Customer / Users],
+
+We are pleased to confirm that all services have been restored following
+the service disruption on [date].
+
+SUMMARY:
+- Disruption duration: [start time] to [end time] UTC
+- Root cause: [brief description]
+- Data impact: [none / details of any data loss]
+- Services affected: [list]
+
+ACTIONS TAKEN:
+- [What was done to recover]
+- [What is being done to prevent recurrence]
+
+IF YOU NOTICE ISSUES:
+- [Any steps users should take to verify their data]
+- Contact legal@acme.com if you experience any problems
+
+We sincerely apologize for the disruption and are committed to
+preventing future incidents of this nature.
+
+Sincerely,
+Acme Inc</code></pre>
+<h3 id="34-regulatory-notification-if-data-breach">3.4 Regulatory Notification (If Data Breach)</h3>
+<p>If the disaster involves a personal data breach, follow the <strong>Incident Response Plan</strong> notification procedures (GDPR 72-hour requirement). The disaster recovery communication does NOT replace regulatory breach notification obligations.</p>
+<h2 id="4-disaster-recovery-testing-schedule">4. Disaster Recovery Testing Schedule</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Test Type</th><th style="text-align:left">Frequency</th><th style="text-align:left">Scope</th><th style="text-align:left">Participants</th><th style="text-align:left">Duration</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Tabletop exercise</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Walk through DR scenarios and decision points</td><td style="text-align:left">DR team, engineering leads</td><td style="text-align:left">2 hours</td></tr>
+<tr><td style="text-align:left">Backup restore drill</td><td style="text-align:left">Monthly</td><td style="text-align:left">Restore single data store from backup</td><td style="text-align:left">Database admin, on-call engineer</td><td style="text-align:left">2–4 hours</td></tr>
+<tr><td style="text-align:left">Partial failover test</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Fail over one service to recovery infrastructure</td><td style="text-align:left">Engineering team</td><td style="text-align:left">4 hours</td></tr>
+<tr><td style="text-align:left">Full DR simulation</td><td style="text-align:left">Annually</td><td style="text-align:left">Simulate complete infrastructure loss and recovery</td><td style="text-align:left">All DR team members</td><td style="text-align:left">1 full day</td></tr>
+<tr><td style="text-align:left">Communication drill</td><td style="text-align:left">Semi-annually</td><td style="text-align:left">Test notification chains, templates, and status page</td><td style="text-align:left">DR team, communications</td><td style="text-align:left">1 hour</td></tr>
+<tr><td style="text-align:left">Runbook validation</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Verify all runbook steps are current and accurate</td><td style="text-align:left">Engineering team</td><td style="text-align:left">2 hours</td></tr>
+</tbody>
+</table>
+<h3 id="41-test-success-criteria">4.1 Test Success Criteria</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Target</th><th style="text-align:left">Measurement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Recovery Time (actual)</td><td style="text-align:left">Within declared RTO</td><td style="text-align:left">Time from disaster declaration to service restoration</td></tr>
+<tr><td style="text-align:left">Recovery Point (actual)</td><td style="text-align:left">Within declared RPO</td><td style="text-align:left">Difference between disaster time and recovered data timestamp</td></tr>
+<tr><td style="text-align:left">Data integrity</td><td style="text-align:left">100%</td><td style="text-align:left">Checksum validation of recovered data</td></tr>
+<tr><td style="text-align:left">Service functionality</td><td style="text-align:left">All critical flows pass</td><td style="text-align:left">Smoke test pass rate</td></tr>
+<tr><td style="text-align:left">Communication delivery</td><td style="text-align:left">All stakeholders notified</td><td style="text-align:left">Notification receipt confirmation</td></tr>
+</tbody>
+</table>
+<h2 id="5-disaster-recovery-team">5. Disaster Recovery Team</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Primary</th><th style="text-align:left">Backup</th><th style="text-align:left">Responsibility</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DR Commander</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Declares disaster; coordinates recovery; makes go/no-go decisions</td></tr>
+<tr><td style="text-align:left">Technical Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Directs technical recovery procedures</td></tr>
+<tr><td style="text-align:left">Database Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Database backup restoration and validation</td></tr>
+<tr><td style="text-align:left">Infrastructure Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Infrastructure provisioning and networking</td></tr>
+<tr><td style="text-align:left">Communications Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Internal and external communications</td></tr>
+<tr><td style="text-align:left">Security Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Security assessment; credential rotation; breach evaluation</td></tr>
+<tr><td style="text-align:left">Executive Sponsor</td><td style="text-align:left">[Name]</td><td style="text-align:left">[Backup]</td><td style="text-align:left">Business decisions; budget approval; regulatory liaison</td></tr>
+</tbody>
+</table>
+<h2 id="6-related-documents">6. Related Documents</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Document</th><th style="text-align:left">Relationship</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Business Continuity Plan</td><td style="text-align:left">Parent plan; DR is a subset of BCP</td></tr>
+<tr><td style="text-align:left">Incident Response Plan</td><td style="text-align:left">Invoked when disaster involves a security incident</td></tr>
+<tr><td style="text-align:left">Backup Policy</td><td style="text-align:left">Defines backup schedules and retention that DR relies on</td></tr>
+<tr><td style="text-align:left">Encryption Policy</td><td style="text-align:left">Defines encryption requirements for recovered infrastructure</td></tr>
+<tr><td style="text-align:left">Change Management Policy</td><td style="text-align:left">Governs the deployment of recovery changes</td></tr>
+</tbody>
+</table>
+<h2 id="7-plan-maintenance">7. Plan Maintenance</h2>
+<p>This Disaster Recovery Plan must be reviewed and updated:</p>
+<ul>
+<li>After every DR test or drill (incorporate lessons learned)</li>
+<li>After any actual disaster recovery event</li>
+<li>When infrastructure or services change significantly</li>
+<li>At minimum <strong>semi-annually</strong></li>
+</ul>
+<p>For questions about this plan, contact <strong>legal@acme.com</strong>.</p>
+<hr>
+<p><em>This Disaster Recovery Plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Recovery procedures should be reviewed and customized by your engineering and operations teams based on actual infrastructure, RPO/RTO requirements, and business priorities.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

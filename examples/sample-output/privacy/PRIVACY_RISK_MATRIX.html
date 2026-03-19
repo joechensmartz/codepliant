@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Risk Matrix — Acme Inc</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Privacy Risk Matrix</h1>
+      <p class="meta">Acme Inc &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="privacy-risk-matrix">Privacy Risk Matrix</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> Acme Inc <strong>Generated:</strong> 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> <strong>Next Review Date:</strong> 2027-03-18</blockquote>
+<p>This document provides a visual risk assessment of all detected data processing activities,</p>
+<p>scored by likelihood and impact, with specific mitigation actions for each risk.</p>
+<h2 id="executive-summary">Executive Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Count</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">🔴 Critical</td><td style="text-align:left">3</td><td style="text-align:left">Immediate remediation — escalate to leadership</td></tr>
+<tr><td style="text-align:left">🟠 High</td><td style="text-align:left">3</td><td style="text-align:left">Address within 30 days</td></tr>
+<tr><td style="text-align:left">🟡 Medium</td><td style="text-align:left">1</td><td style="text-align:left">Address within 90 days</td></tr>
+<tr><td style="text-align:left"><strong>Total</strong></td><td style="text-align:left"><strong>7</strong></td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h2 id="visual-risk-matrix">Visual Risk Matrix</h2>
+<p>Each cell shows the risk IDs that fall at that likelihood/impact intersection.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Likelihood \ Impact</th><th style="text-align:left">1 - Negligible</th><th style="text-align:left">2 - Minor</th><th style="text-align:left">3 - Moderate</th><th style="text-align:left">4 - Major</th><th style="text-align:left">5 - Severe</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>5</strong> - Almost Certain</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><strong>4</strong> - Likely</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">🟠PR-001</td><td style="text-align:left">🔴PR-004, 🔴PR-007</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><strong>3</strong> - Possible</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">🟡PR-006</td><td style="text-align:left">🟠PR-005</td><td style="text-align:left">🔴PR-002</td></tr>
+<tr><td style="text-align:left"><strong>2</strong> - Unlikely</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">🟠PR-003</td></tr>
+<tr><td style="text-align:left"><strong>1</strong> - Rare</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+</tbody>
+</table>
+<h3 id="scoring-legend">Scoring Legend</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Score Range</th><th style="text-align:left">Level</th><th style="text-align:left">Color</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">15–25</td><td style="text-align:left">Critical</td><td style="text-align:left">🔴</td></tr>
+<tr><td style="text-align:left">10–14</td><td style="text-align:left">High</td><td style="text-align:left">🟠</td></tr>
+<tr><td style="text-align:left">5–9</td><td style="text-align:left">Medium</td><td style="text-align:left">🟡</td></tr>
+<tr><td style="text-align:left">1–4</td><td style="text-align:left">Low</td><td style="text-align:left">🟢</td></tr>
+</tbody>
+</table>
+<h2 id="risk-register">Risk Register</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Processing Activity</th><th style="text-align:left">Likelihood</th><th style="text-align:left">Impact</th><th style="text-align:left">Score</th><th style="text-align:left">Level</th><th style="text-align:left">Services</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">PR-004</td><td style="text-align:left">AI/ML data processing and model inference</td><td style="text-align:left">4 (Likely)</td><td style="text-align:left">4 (Major)</td><td style="text-align:left">16</td><td style="text-align:left">🔴 Critical</td><td style="text-align:left">openai</td></tr>
+<tr><td style="text-align:left">PR-007</td><td style="text-align:left">International data transfers to third-party processors</td><td style="text-align:left">4 (Likely)</td><td style="text-align:left">4 (Major)</td><td style="text-align:left">16</td><td style="text-align:left">🔴 Critical</td><td style="text-align:left">@sentry/node, @supabase/supabase-js, openai, posthog, prisma, resend, stripe, stripe-ios</td></tr>
+<tr><td style="text-align:left">PR-002</td><td style="text-align:left">User authentication and identity management</td><td style="text-align:left">3 (Possible)</td><td style="text-align:left">5 (Severe)</td><td style="text-align:left">15</td><td style="text-align:left">🔴 Critical</td><td style="text-align:left">@supabase/supabase-js</td></tr>
+<tr><td style="text-align:left">PR-001</td><td style="text-align:left">User behavior tracking and analytics</td><td style="text-align:left">4 (Likely)</td><td style="text-align:left">3 (Moderate)</td><td style="text-align:left">12</td><td style="text-align:left">🟠 High</td><td style="text-align:left">posthog</td></tr>
+<tr><td style="text-align:left">PR-005</td><td style="text-align:left">Persistent data storage and retrieval</td><td style="text-align:left">3 (Possible)</td><td style="text-align:left">4 (Major)</td><td style="text-align:left">12</td><td style="text-align:left">🟠 High</td><td style="text-align:left">prisma</td></tr>
+<tr><td style="text-align:left">PR-003</td><td style="text-align:left">Payment processing and financial data handling</td><td style="text-align:left">2 (Unlikely)</td><td style="text-align:left">5 (Severe)</td><td style="text-align:left">10</td><td style="text-align:left">🟠 High</td><td style="text-align:left">stripe, stripe-ios</td></tr>
+<tr><td style="text-align:left">PR-006</td><td style="text-align:left">Email communications and marketing</td><td style="text-align:left">3 (Possible)</td><td style="text-align:left">3 (Moderate)</td><td style="text-align:left">9</td><td style="text-align:left">🟡 Medium</td><td style="text-align:left">resend</td></tr>
+</tbody>
+</table>
+<h2 id="risk-details-and-mitigations">Risk Details and Mitigations</h2>
+<h3 id="pr-004-aiml-data-processing-and-model-inference-">PR-004: AI/ML data processing and model inference 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (16/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> openai</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>user prompts</li>
+<li>generated outputs</li>
+<li>training data</li>
+<li>usage patterns</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement data minimization — send only necessary data to AI services</li>
+<li><input type="checkbox" disabled> Review AI provider data retention and training policies</li>
+<li><input type="checkbox" disabled> Add opt-out for AI features that process personal data</li>
+<li><input type="checkbox" disabled> Conduct AI-specific DPIA under GDPR Art. 35</li>
+<li><input type="checkbox" disabled> Implement human oversight for high-risk AI decisions</li>
+<li><input type="checkbox" disabled> Log all AI processing for audit trail</li>
+</ul>
+<h3 id="pr-007-international-data-transfers-to-third-party-processors-">PR-007: International data transfers to third-party processors 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (16/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> @sentry/node, @supabase/supabase-js, openai, posthog, prisma, resend, stripe, stripe-ios</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>all personal data shared with external services</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Execute Data Processing Agreements (DPAs) with all processors</li>
+<li><input type="checkbox" disabled> Verify Standard Contractual Clauses (SCCs) are in place</li>
+<li><input type="checkbox" disabled> Conduct Transfer Impact Assessments for non-EU transfers</li>
+<li><input type="checkbox" disabled> Monitor processor compliance with agreed safeguards</li>
+<li><input type="checkbox" disabled> Maintain an up-to-date sub-processor register</li>
+</ul>
+<h3 id="pr-002-user-authentication-and-identity-management-">PR-002: User authentication and identity management 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (15/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 5/5 (Severe)</p>
+<p><strong>Affected Services:</strong> @supabase/supabase-js</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>email addresses</li>
+<li>passwords/hashes</li>
+<li>OAuth tokens</li>
+<li>session data</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce bcrypt/argon2 password hashing with sufficient rounds</li>
+<li><input type="checkbox" disabled> Implement MFA for all user accounts</li>
+<li><input type="checkbox" disabled> Set session timeout and token rotation policies</li>
+<li><input type="checkbox" disabled> Monitor for credential stuffing attacks</li>
+<li><input type="checkbox" disabled> Implement account lockout after failed attempts</li>
+</ul>
+<h3 id="pr-001-user-behavior-tracking-and-analytics-">PR-001: User behavior tracking and analytics 🟠</h3>
+<p><strong>Risk Level:</strong> High (12/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 3/5 (Moderate)</p>
+<p><strong>Affected Services:</strong> posthog</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>IP addresses</li>
+<li>device fingerprints</li>
+<li>browsing history</li>
+<li>click patterns</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement cookie consent management platform (CMP)</li>
+<li><input type="checkbox" disabled> Anonymize IP addresses before storage</li>
+<li><input type="checkbox" disabled> Set data retention limits (max 26 months for GA4)</li>
+<li><input type="checkbox" disabled> Provide opt-out mechanism in privacy settings</li>
+<li><input type="checkbox" disabled> Conduct regular audit of tracked events</li>
+</ul>
+<h3 id="pr-005-persistent-data-storage-and-retrieval-">PR-005: Persistent data storage and retrieval 🟠</h3>
+<p><strong>Risk Level:</strong> High (12/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> prisma</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>user profiles</li>
+<li>application data</li>
+<li>metadata</li>
+<li>logs</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enable encryption at rest for all database instances</li>
+<li><input type="checkbox" disabled> Implement field-level encryption for sensitive columns</li>
+<li><input type="checkbox" disabled> Enforce least-privilege access controls</li>
+<li><input type="checkbox" disabled> Enable audit logging for data access</li>
+<li><input type="checkbox" disabled> Implement automated backup with tested recovery</li>
+<li><input type="checkbox" disabled> Set data retention schedules with automated deletion</li>
+</ul>
+<h3 id="pr-003-payment-processing-and-financial-data-handling-">PR-003: Payment processing and financial data handling 🟠</h3>
+<p><strong>Risk Level:</strong> High (10/25)</p>
+<p><strong>Likelihood:</strong> 2/5 (Unlikely)</p>
+<p><strong>Impact:</strong> 5/5 (Severe)</p>
+<p><strong>Affected Services:</strong> stripe, stripe-ios</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>credit card tokens</li>
+<li>billing addresses</li>
+<li>transaction history</li>
+<li>financial identifiers</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Use PCI DSS compliant payment processor with tokenization</li>
+<li><input type="checkbox" disabled> Never store raw card numbers — use hosted payment forms</li>
+<li><input type="checkbox" disabled> Implement fraud detection and monitoring</li>
+<li><input type="checkbox" disabled> Conduct annual PCI compliance self-assessment</li>
+<li><input type="checkbox" disabled> Encrypt all financial data at rest and in transit</li>
+</ul>
+<h3 id="pr-006-email-communications-and-marketing-">PR-006: Email communications and marketing 🟡</h3>
+<p><strong>Risk Level:</strong> Medium (9/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 3/5 (Moderate)</p>
+<p><strong>Affected Services:</strong> resend</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li>email addresses</li>
+<li>communication content</li>
+<li>engagement metrics</li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement double opt-in for marketing emails</li>
+<li><input type="checkbox" disabled> Provide one-click unsubscribe in all communications</li>
+<li><input type="checkbox" disabled> Maintain suppression lists across all email services</li>
+<li><input type="checkbox" disabled> Encrypt email content containing personal data</li>
+<li><input type="checkbox" disabled> Audit email service provider DPAs annually</li>
+</ul>
+<hr>
+<p><em>This privacy risk matrix is generated from automated code analysis and should be reviewed by qualified privacy and legal professionals. Risk scores are indicative and should be validated against your organization's specific risk appetite and context. This does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

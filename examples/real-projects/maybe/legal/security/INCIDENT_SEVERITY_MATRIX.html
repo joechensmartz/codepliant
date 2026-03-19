@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INCIDENT SEVERITY MATRIX — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>INCIDENT SEVERITY MATRIX</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~10 min read</p>
+    </header>
+    <h1 id="incident-severity-matrix">Incident Severity Matrix</h1>
+<blockquote><strong>Severity classification and response framework for [Your Company Name].</strong> 20 services | Generated on 2026-03-16 <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<hr>
+<h2 id="purpose">Purpose</h2>
+<p>This matrix defines severity levels for security incidents and service disruptions. It establishes response times, escalation paths, and communication requirements to ensure consistent and rapid incident handling.</p>
+<hr>
+<h2 id="1-severity-level-definitions">1. Severity Level Definitions</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Name</th><th style="text-align:left">Definition</th><th style="text-align:left">Examples</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>Catastrophic</strong></td><td style="text-align:left">Complete system compromise, active data exfiltration, or regulatory breach affecting all users</td><td style="text-align:left">Production database breach, ransomware encrypting all systems, leaked master encryption keys, complete auth bypass</td></tr>
+<tr><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>Critical</strong></td><td style="text-align:left">Major security incident with confirmed data exposure or significant service degradation</td><td style="text-align:left">Unauthorized access to PII, API key compromise with data access, partial service outage affecting >50% users</td></tr>
+<tr><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>High</strong></td><td style="text-align:left">Security incident with potential data exposure or moderate service impact</td><td style="text-align:left">Vulnerability actively exploited, unauthorized access detected but contained, service degradation affecting <50% users</td></tr>
+<tr><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left"><strong>Medium</strong></td><td style="text-align:left">Security event requiring investigation with limited immediate impact</td><td style="text-align:left">Suspicious access patterns, failed intrusion attempts, configuration drift detected, minor data quality issues</td></tr>
+<tr><td style="text-align:left"><strong>P4</strong></td><td style="text-align:left"><strong>Low</strong></td><td style="text-align:left">Minor security event or policy violation with no data impact</td><td style="text-align:left">Phishing attempt blocked, minor policy violation, non-sensitive log exposure, informational security alert</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-response-time-requirements">2. Response Time Requirements</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Acknowledge</th><th style="text-align:left">Triage</th><th style="text-align:left">Initial Response</th><th style="text-align:left">Resolution Target</th><th style="text-align:left">Post-Mortem</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">5 minutes</td><td style="text-align:left">15 minutes</td><td style="text-align:left">30 minutes</td><td style="text-align:left">4 hours</td><td style="text-align:left">Within 24 hours</td></tr>
+<tr><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">15 minutes</td><td style="text-align:left">30 minutes</td><td style="text-align:left">1 hour</td><td style="text-align:left">8 hours</td><td style="text-align:left">Within 48 hours</td></tr>
+<tr><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">30 minutes</td><td style="text-align:left">1 hour</td><td style="text-align:left">4 hours</td><td style="text-align:left">24 hours</td><td style="text-align:left">Within 5 business days</td></tr>
+<tr><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">2 hours</td><td style="text-align:left">4 hours</td><td style="text-align:left">24 hours</td><td style="text-align:left">72 hours</td><td style="text-align:left">Within 10 business days</td></tr>
+<tr><td style="text-align:left"><strong>P4</strong></td><td style="text-align:left">24 hours</td><td style="text-align:left">48 hours</td><td style="text-align:left">72 hours</td><td style="text-align:left">1 week</td><td style="text-align:left">Monthly review</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-escalation-paths">3. Escalation Paths</h2>
+<h3 id="p0-catastrophic">P0 — Catastrophic</h3>
+<pre><code>Discoverer
+  └─&gt; Security On-Call (immediate)
+       └─&gt; CTO / CISO (within 5 min)
+            └─&gt; CEO + Legal Counsel (within 15 min)
+                 └─&gt; Board notification (within 1 hour)
+                      └─&gt; Regulatory authority (within 72 hours per GDPR)</code></pre>
+<h3 id="p1-critical">P1 — Critical</h3>
+<pre><code>Discoverer
+  └─&gt; Security On-Call (within 15 min)
+       └─&gt; Engineering Lead + Security Lead (within 30 min)
+            └─&gt; CTO / CISO (within 1 hour)
+                 └─&gt; DPO for data breach assessment</code></pre>
+<h3 id="p2-high">P2 — High</h3>
+<pre><code>Discoverer
+  └─&gt; Security On-Call (within 30 min)
+       └─&gt; Engineering Lead (within 1 hour)
+            └─&gt; CTO (if escalation needed)</code></pre>
+<h3 id="p3p4-mediumlow">P3/P4 — Medium/Low</h3>
+<pre><code>Discoverer
+  └─&gt; Security channel / ticket
+       └─&gt; Security team triage (next business day for P4)</code></pre>
+<hr>
+<h2 id="4-communication-requirements">4. Communication Requirements</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Internal Comms</th><th style="text-align:left">Customer Comms</th><th style="text-align:left">Regulatory Notification</th><th style="text-align:left">Public Disclosure</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">All-hands war room, executive updates every 30 min</td><td style="text-align:left">Status page + direct email within 1 hour</td><td style="text-align:left">Within 72 hours (GDPR Art. 33) to [[dpo@example.com]](mailto:[dpo@example.com])</td><td style="text-align:left">If data breach confirmed, within 72 hours</td></tr>
+<tr><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Security + engineering channel, executive update hourly</td><td style="text-align:left">Status page update, affected users notified within 24 hours</td><td style="text-align:left">Assess within 36 hours, notify if required</td><td style="text-align:left">Only if legally required</td></tr>
+<tr><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Security channel, engineering lead notified</td><td style="text-align:left">Status page if user-facing impact</td><td style="text-align:left">Assess within 72 hours</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">Security ticket, weekly summary</td><td style="text-align:left">No</td><td style="text-align:left">No (unless investigation escalates)</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><strong>P4</strong></td><td style="text-align:left">Security ticket</td><td style="text-align:left">No</td><td style="text-align:left">No</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-communication-channels">5. Communication Channels</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Channel</th><th style="text-align:left">Used For</th><th style="text-align:left">Access</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Security email ([[your-email@example.com]](mailto:[your-email@example.com]))</td><td style="text-align:left">External reports, regulatory correspondence</td><td style="text-align:left">Security team</td></tr>
+<tr><td style="text-align:left">#security-incidents (Slack/Teams)</td><td style="text-align:left">Real-time incident coordination</td><td style="text-align:left">Security + engineering</td></tr>
+<tr><td style="text-align:left">War room (video call)</td><td style="text-align:left">P0/P1 live coordination</td><td style="text-align:left">All responders</td></tr>
+<tr><td style="text-align:left">Incident management tool</td><td style="text-align:left">Ticket tracking, timeline documentation</td><td style="text-align:left">All staff</td></tr>
+<tr><td style="text-align:left">Status page</td><td style="text-align:left">Customer-facing incident updates</td><td style="text-align:left">Public</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-per-service-impact-assessment">6. Per-Service Impact Assessment</h2>
+<p>Severity classification when each detected service is compromised or experiences an outage.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">If Compromised</th><th style="text-align:left">If Outage</th><th style="text-align:left">Data at Risk</th><th style="text-align:left">Regulatory Impact</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">other</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">real-time user data, connection metadata, channel subscriptions</td><td style="text-align:left">Assess per data processed</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">other</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">session cookies, session data, CSRF tokens</td><td style="text-align:left">Assess per data processed</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">email</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">CAN-SPAM, GDPR Art. 33/34</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">storage</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">uploaded files, file metadata, storage service credentials</td><td style="text-align:left">GDPR Art. 33/34 if PII stored</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">database</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">user data as defined in schema, timestamps, associations</td><td style="text-align:left">GDPR Art. 33/34, data breach notification</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">storage</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">uploaded files, file metadata, storage references</td><td style="text-align:left">GDPR Art. 33/34 if PII stored</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">storage</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">GDPR Art. 33/34 if PII stored</td></tr>
+<tr><td style="text-align:left">intercom-ruby</td><td style="text-align:left">other</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">user profiles, email, name</td><td style="text-align:left">Assess per data processed</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">CAN-SPAM, GDPR Art. 33/34</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">database</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">GDPR Art. 33/34, data breach notification</td></tr>
+<tr><td style="text-align:left">plaid</td><td style="text-align:left">payment</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">bank account data, transaction history, account balances</td><td style="text-align:left">PCI DSS, GDPR Art. 33/34</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">other</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">IP addresses, request metadata</td><td style="text-align:left">Assess per data processed</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">email</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">CAN-SPAM, GDPR Art. 33/34</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">database</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">GDPR Art. 33/34, data breach notification</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">auth</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">session cookies, CSRF tokens</td><td style="text-align:left">GDPR Art. 33/34, credential breach notification</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">cached data, session data</td><td style="text-align:left">GDPR Art. 33/34, data breach notification</td></tr>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">ai</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">EU AI Act, GDPR Art. 22 (automated decisions)</td></tr>
+<tr><td style="text-align:left">sentry-ruby</td><td style="text-align:left">monitoring</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">error data, stack traces, user context</td><td style="text-align:left">Minimal direct regulatory impact</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">other</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">job data, user data processed in background jobs</td><td style="text-align:left">Assess per data processed</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">payment information, billing address, email</td><td style="text-align:left">PCI DSS, GDPR Art. 33/34</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-category-specific-incident-scenarios">7. Category-Specific Incident Scenarios</h2>
+<h3 id="ai-services">AI Services</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Severity</th><th style="text-align:left">Response Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">User PII leaked through AI prompts</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">Disable AI feature, assess data exposure, notify affected users</td></tr>
+<tr><td style="text-align:left">Prompt injection bypasses safety controls</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Throttle AI endpoint, deploy input validation fix, audit recent outputs</td></tr>
+<tr><td style="text-align:left">AI model produces biased/discriminatory output</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Document instances, add guardrails, notify AI ethics team</td></tr>
+<tr><td style="text-align:left">AI service provider data breach</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Assess data shared with provider, rotate API keys, review DPA obligations</td></tr>
+<tr><td style="text-align:left">AI hallucination causes user harm</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Add output disclaimers, review and strengthen validation layer</td></tr>
+</tbody>
+</table>
+<h3 id="payment-services">Payment Services</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Severity</th><th style="text-align:left">Response Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Cardholder data exposed</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">Isolate systems, notify payment processor within 24h, engage PCI forensic investigator</td></tr>
+<tr><td style="text-align:left">Payment processing outage</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Activate backup processor, communicate to affected customers</td></tr>
+<tr><td style="text-align:left">Fraudulent transactions detected</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Flag accounts, review transaction logs, strengthen fraud detection</td></tr>
+<tr><td style="text-align:left">PCI DSS compliance gap discovered</td><td style="text-align:left"><strong>P3</strong></td><td style="text-align:left">Document gap, create remediation plan, assess risk</td></tr>
+</tbody>
+</table>
+<h3 id="authentication-services">Authentication Services</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Severity</th><th style="text-align:left">Response Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Complete auth bypass discovered</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">Disable affected auth flow, force re-authentication, rotate all sessions</td></tr>
+<tr><td style="text-align:left">Credential stuffing attack in progress</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Enable rate limiting, lock affected accounts, force password resets</td></tr>
+<tr><td style="text-align:left">OAuth token leak</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Revoke leaked tokens, rotate secrets, audit access logs</td></tr>
+<tr><td style="text-align:left">Auth provider outage</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Activate fallback auth, communicate login issues to users</td></tr>
+</tbody>
+</table>
+<h3 id="database-storage-services">Database & Storage Services</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Severity</th><th style="text-align:left">Response Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Database exposed to internet</td><td style="text-align:left"><strong>P0</strong></td><td style="text-align:left">Restrict network access immediately, audit data access logs, rotate credentials</td></tr>
+<tr><td style="text-align:left">Unauthorized database query detected</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Revoke access, investigate query scope, assess data exposure</td></tr>
+<tr><td style="text-align:left">Storage bucket misconfiguration</td><td style="text-align:left"><strong>P1</strong></td><td style="text-align:left">Lock down permissions, audit exposed files, notify if PII exposed</td></tr>
+<tr><td style="text-align:left">Database corruption / data loss</td><td style="text-align:left"><strong>P2</strong></td><td style="text-align:left">Activate backup restoration, assess data integrity</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-severity-decision-tree">8. Severity Decision Tree</h2>
+<p>Use this decision tree to classify incidents when severity is unclear:</p>
+<pre><code>Is there confirmed data exfiltration or complete system compromise?
+  ├─ YES → P0 (Catastrophic)
+  └─ NO
+       Is there confirmed unauthorized access to PII or critical systems?
+       ├─ YES → P1 (Critical)
+       └─ NO
+            Is there an active exploit or significant service degradation?
+            ├─ YES → P2 (High)
+            └─ NO
+                 Is investigation required to determine impact?
+                 ├─ YES → P3 (Medium)
+                 └─ NO → P4 (Low)</code></pre>
+<hr>
+<h2 id="9-regulatory-response-timelines">9. Regulatory Response Timelines</h2>
+<p>Mandatory notification deadlines by regulation for data breach incidents (P0/P1).</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Regulation</th><th style="text-align:left">Authority Notification</th><th style="text-align:left">Individual Notification</th><th style="text-align:left">Key Requirement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">GDPR (Art. 33/34)</td><td style="text-align:left"><strong>72 hours</strong></td><td style="text-align:left">Without undue delay (high risk)</td><td style="text-align:left">Must document all breaches regardless of notification</td></tr>
+<tr><td style="text-align:left">UK GDPR</td><td style="text-align:left"><strong>72 hours</strong></td><td style="text-align:left">Without undue delay (high risk)</td><td style="text-align:left">Notify ICO via online portal</td></tr>
+<tr><td style="text-align:left">CCPA/CPRA</td><td style="text-align:left">Varies by state</td><td style="text-align:left">Without unreasonable delay</td><td style="text-align:left">AG notification for 500+ CA residents</td></tr>
+<tr><td style="text-align:left">PCI DSS</td><td style="text-align:left"><strong>24 hours</strong> (to processor)</td><td style="text-align:left">As required</td><td style="text-align:left">Engage PCI Forensic Investigator (PFI)</td></tr>
+<tr><td style="text-align:left">EU AI Act</td><td style="text-align:left">As required by severity</td><td style="text-align:left">Depends on risk level</td><td style="text-align:left">Additional obligations for high-risk AI systems</td></tr>
+<tr><td style="text-align:left">ePrivacy</td><td style="text-align:left">Per member state law</td><td style="text-align:left">Per member state law</td><td style="text-align:left">Cookie/tracking specific requirements</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-incident-response-roles">10. Incident Response Roles</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">P0 Responsibility</th><th style="text-align:left">P1-P2 Responsibility</th><th style="text-align:left">P3-P4 Responsibility</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Incident Commander</strong></td><td style="text-align:left">Leads war room, all decisions</td><td style="text-align:left">Coordinates response</td><td style="text-align:left">Reviews report</td></tr>
+<tr><td style="text-align:left"><strong>Security Lead</strong></td><td style="text-align:left">Active investigation, containment</td><td style="text-align:left">Investigation lead</td><td style="text-align:left">Triages tickets</td></tr>
+<tr><td style="text-align:left"><strong>Engineering Lead</strong></td><td style="text-align:left">Emergency fixes, system isolation</td><td style="text-align:left">Deploys fixes</td><td style="text-align:left">Assigns fixes</td></tr>
+<tr><td style="text-align:left"><strong>DPO</strong> ([[dpo@example.com]](mailto:[dpo@example.com]))</td><td style="text-align:left">Regulatory notification decision</td><td style="text-align:left">Breach assessment</td><td style="text-align:left">Monthly review</td></tr>
+<tr><td style="text-align:left"><strong>Communications Lead</strong></td><td style="text-align:left">Customer + public messaging</td><td style="text-align:left">Status page updates</td><td style="text-align:left">No action</td></tr>
+<tr><td style="text-align:left"><strong>Legal Counsel</strong></td><td style="text-align:left">Regulatory response, evidence preservation</td><td style="text-align:left">Legal assessment</td><td style="text-align:left">No action</td></tr>
+<tr><td style="text-align:left"><strong>Executive Sponsor</strong></td><td style="text-align:left">Final authority, board comms</td><td style="text-align:left">Informed, escalation</td><td style="text-align:left">Informed via report</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This incident severity matrix was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>maybe</strong> codebase (20 services detected). Customize response times, escalation paths, and roles to match your organization's structure. This document should be reviewed by your security team and legal counsel before adoption.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

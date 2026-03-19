@@ -1,0 +1,256 @@
+<h1>Change Management Policy</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Change Management Policy</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Company:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Security Policy (<code>SECURITY.md</code>)</p></li>
+<li><p>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</p></li>
+<li><p>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</p></li>
+</ul>
+<hr />
+<h2>1. Purpose</h2>
+<p>This policy establishes the change management process for the <strong>nextjs-saas-example</strong> application. It defines requirements for code review, testing, deployment approval, rollback procedures, and change documentation. It supports compliance with SOC 2 CC8.1 (Change Management), ISO 27001 Annex A.12.1.2, and GDPR Article 32 (security of processing).</p>
+<h2>2. Scope</h2>
+<p>This policy applies to all changes to:</p>
+<ul>
+<li><p>Application source code</p></li>
+<li><p>Infrastructure configuration</p></li>
+<li><p>Database schemas and migrations</p></li>
+<li><p>Third-party service integrations</p></li>
+<li><p>Environment variables and secrets</p></li>
+<li><p>CI/CD pipeline configurations</p></li>
+</ul>
+<hr />
+<h2>3. CI/CD Infrastructure</h2>
+<p>No CI/CD configuration was detected in the project. <strong>It is strongly recommended</strong> to implement a CI/CD pipeline for:</p>
+<ol>
+<li><p>Automated testing before deployment</p></li>
+<li><p>Consistent deployment procedures</p></li>
+<li><p>Audit trail for all changes</p></li>
+<li><p>Rollback capabilities</p></li>
+</ol>
+<hr />
+<h2>4. Change Categories</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Description</p></th><th><p>Approval Required</p></th><th><p>Examples</p></th></tr>
+<tr><td><p>Standard</p></td><td><p>Routine changes following established procedures</p></td><td><p>Peer review</p></td><td><p>Bug fixes, minor UI changes, dependency updates</p></td></tr>
+<tr><td><p>Normal</p></td><td><p>Changes requiring additional review and testing</p></td><td><p>Lead + peer review</p></td><td><p>New features, API changes, schema migrations</p></td></tr>
+<tr><td><p>Emergency</p></td><td><p>Critical fixes for production incidents</p></td><td><p>Post-deployment review</p></td><td><p>Security patches, data breach mitigation, service outages</p></td></tr>
+<tr><td><p>Major</p></td><td><p>Significant architectural or infrastructure changes</p></td><td><p>CTO/VP Engineering + team lead</p></td><td><p>Database migrations, service rewrites, infrastructure changes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>5. Code Review Requirements</h2>
+<h3>5.1 Review Standards</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Requirement</p></th><th><p>Standard</p></th><th><p>Applies To</p></th></tr>
+<tr><td><p>Minimum reviewers</p></td><td><p>1 peer reviewer</p></td><td><p>All changes</p></td></tr>
+<tr><td><p>Additional reviewers</p></td><td><p>2 reviewers</p></td><td><p>Changes to auth, payment, PII handling</p></td></tr>
+<tr><td><p>Review response time</p></td><td><p>Within 1 business day</p></td><td><p>Standard changes</p></td></tr>
+<tr><td><p>Review response time</p></td><td><p>Within 4 hours</p></td><td><p>Emergency changes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.2 Review Checklist</h3>
+<p>Every code review must verify:</p>
+<ul>
+<li><p>[ ] Code follows project coding standards and patterns</p></li>
+<li><p>[ ] Unit tests cover new functionality and edge cases</p></li>
+<li><p>[ ] No hardcoded secrets, credentials, or PII in code</p></li>
+<li><p>[ ] Database migrations are reversible</p></li>
+<li><p>[ ] API changes maintain backward compatibility (or are versioned)</p></li>
+<li><p>[ ] Error handling is comprehensive (no swallowed exceptions)</p></li>
+<li><p>[ ] Logging does not include sensitive data (passwords, tokens, PII)</p></li>
+<li><p>[ ] Dependencies are from trusted sources with acceptable licenses</p></li>
+<li><p>[ ] Payment-related changes comply with PCI DSS requirements</p></li>
+<li><p>[ ] No credit card data is logged or stored in plaintext</p></li>
+<li><p>[ ] AI model changes include updated model cards and disclosures</p></li>
+<li><p>[ ] AI input/output handling follows data minimization principles</p></li>
+<li><p>[ ] Authentication changes follow OWASP guidelines</p></li>
+<li><p>[ ] Session management changes maintain security properties</p></li>
+</ul>
+<h3>5.3 Automated Checks</h3>
+<p>The following automated checks should gate all pull requests:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Check</p></th><th><p>Purpose</p></th><th><p>Required to Pass</p></th></tr>
+<tr><td><p>Unit tests</p></td><td><p>Prevent regressions</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Integration tests</p></td><td><p>Verify system behavior</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Linting</p></td><td><p>Code quality and style</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Type checking</p></td><td><p>Type safety</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Security scanning</p></td><td><p>Vulnerability detection</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>License compliance</p></td><td><p>Open source license audit</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Build verification</p></td><td><p>Compilation success</p></td><td><p>Yes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>6. Deployment Approval Process</h2>
+<h3>6.1 Approval Matrix</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Change Category</p></th><th><p>Approvers</p></th><th><p>Environment</p></th></tr>
+<tr><td><p>Standard</p></td><td><p>Automated (CI passes)</p></td><td><p>Staging, then Production</p></td></tr>
+<tr><td><p>Normal</p></td><td><p>Team lead approval</p></td><td><p>Staging, then Production</p></td></tr>
+<tr><td><p>Emergency</p></td><td><p>Any senior engineer (post-review within 24h)</p></td><td><p>Direct to Production</p></td></tr>
+<tr><td><p>Major</p></td><td><p>CTO/VP Engineering + affected team leads</p></td><td><p>Staging (extended soak), then Production</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>6.2 Deployment Steps</h3>
+<ol>
+<li><p><strong>Pre-deployment</strong></p></li>
+</ol>
+<ul>
+<li><p>All automated checks pass (CI green)</p></li>
+<li><p>Code review approved by required reviewers</p></li>
+<li><p>Deployment plan documented (for Normal/Major changes)</p></li>
+<li><p>Rollback plan verified</p></li>
+</ul>
+<ol>
+<li><p><strong>Staging deployment</strong></p></li>
+</ol>
+<ul>
+<li><p>Deploy to staging environment</p></li>
+<li><p>Run smoke tests and integration tests</p></li>
+<li><p>Verify no performance regressions</p></li>
+<li><p>Minimum soak time: 1 hour (Standard), 24 hours (Normal), 48 hours (Major)</p></li>
+</ul>
+<ol>
+<li><p><strong>Production deployment</strong></p></li>
+</ol>
+<ul>
+<li><p>Deploy during approved maintenance window (or progressively via canary/blue-green)</p></li>
+<li><p>Monitor error rates, latency, and key metrics</p></li>
+<li><p>Verify health checks pass</p></li>
+<li><p>Confirm no user-facing regressions</p></li>
+</ul>
+<ol>
+<li><p><strong>Post-deployment</strong></p></li>
+</ol>
+<ul>
+<li><p>Update change log</p></li>
+<li><p>Notify stakeholders</p></li>
+<li><p>Monitor for 1 hour minimum post-deploy</p></li>
+</ul>
+<hr />
+<h2>7. Rollback Procedures</h2>
+<h3>7.1 Rollback Triggers</h3>
+<p>A rollback must be initiated when:</p>
+<ul>
+<li><p>Error rate increases by more than <strong>5x</strong> baseline</p></li>
+<li><p>Response time increases by more than <strong>3x</strong> baseline</p></li>
+<li><p>Any <strong>data integrity</strong> issue is detected</p></li>
+<li><p>Any <strong>security vulnerability</strong> is discovered in the deployed change</p></li>
+<li><p>Core user flows are <strong>broken</strong> (login, checkout, data access)</p></li>
+</ul>
+<h3>7.2 Rollback Process</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Step</p></th><th><p>Action</p></th><th><p>Responsible</p></th></tr>
+<tr><td><p>1</p></td><td><p>Confirm rollback decision</p></td><td><p>On-call engineer + team lead</p></td></tr>
+<tr><td><p>2</p></td><td><p>Initiate rollback (revert deployment)</p></td><td><p>On-call engineer</p></td></tr>
+<tr><td><p>3</p></td><td><p>Verify rollback success (health checks, smoke tests)</p></td><td><p>On-call engineer</p></td></tr>
+<tr><td><p>4</p></td><td><p>Notify stakeholders</p></td><td><p>Engineering lead</p></td></tr>
+<tr><td><p>5</p></td><td><p>Create post-mortem ticket</p></td><td><p>Engineering lead</p></td></tr>
+<tr><td><p>6</p></td><td><p>Root cause analysis within 48 hours</p></td><td><p>Responsible team</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.3 Rollback Methods</h3>
+<ul>
+<li><p><strong>Git revert:</strong> Create a revert commit and deploy through normal pipeline</p></li>
+<li><p><strong>Database rollback:</strong> Execute reverse migration scripts (must be tested pre-deployment)</p></li>
+<li><p><strong>Feature flag:</strong> Disable feature flag to hide change without code rollback</p></li>
+</ul>
+<hr />
+<h2>8. Change Log Requirements</h2>
+<h3>8.1 Required Documentation</h3>
+<p>Every change must be documented with:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Description</p></th><th><p>Example</p></th></tr>
+<tr><td><p>Change ID</p></td><td><p>Unique identifier</p></td><td><p>CHG-2026-0042</p></td></tr>
+<tr><td><p>Date</p></td><td><p>Date of deployment</p></td><td><p>2026-03-15</p></td></tr>
+<tr><td><p>Author</p></td><td><p>Who made the change</p></td><td><p>jane@company.com</p></td></tr>
+<tr><td><p>Category</p></td><td><p>Standard / Normal / Emergency / Major</p></td><td><p>Normal</p></td></tr>
+<tr><td><p>Description</p></td><td><p>What changed and why</p></td><td><p>Added subscription billing via Stripe</p></td></tr>
+<tr><td><p>Impact</p></td><td><p>Systems, services, or data affected</p></td><td><p>Payment flow, user billing data</p></td></tr>
+<tr><td><p>Approver</p></td><td><p>Who approved the change</p></td><td><p>john@company.com</p></td></tr>
+<tr><td><p>Rollback plan</p></td><td><p>How to undo if needed</p></td><td><p>Revert PR #123, run migration down</p></td></tr>
+<tr><td><p>Status</p></td><td><p>Planned / In Progress / Completed / Rolled Back</p></td><td><p>Completed</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>8.2 Change Log Format</h3>
+<p>Maintain a <code>CHANGELOG.md</code> in the repository root using <a href="https://keepachangelog.com/">Keep a Changelog</a> format:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">markdown</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[## [1.2.0] - 2026-03-15
+### Added
+- Subscription billing via Stripe
+### Changed
+- Updated user profile API to include billing status
+### Fixed
+- Session timeout not respecting configured duration]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>9. Compliance Requirements</h2>
+<h3>9.1 Audit Trail</h3>
+<ol>
+<li><p>All changes must be traceable through version control commits</p></li>
+<li><p>Deployment logs must be retained for a minimum of <strong>1 year</strong></p></li>
+<li><p>Approval records must be preserved (PR reviews, deployment approvals)</p></li>
+<li><p>Emergency changes must have <strong>retroactive review</strong> within 24 hours</p></li>
+</ol>
+<h3>9.2 Separation of Duties</h3>
+<ol>
+<li><p>The person who writes code should <strong>not</strong> be the sole person who approves it</p></li>
+<li><p>Production deployment access should be <strong>limited</strong> to authorized personnel</p></li>
+<li><p>Database migration execution should require <strong>separate approval</strong> from code changes</p></li>
+</ol>
+<h3>9.3 Regulatory Alignment</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Regulation</p></th><th><p>Change Management Requirement</p></th></tr>
+<tr><td><p>SOC 2 CC8.1</p></td><td><p>Changes are authorized, designed, developed, configured, documented, tested, approved, and implemented</p></td></tr>
+<tr><td><p>ISO 27001 A.12.1.2</p></td><td><p>Change management procedures for information processing facilities</p></td></tr>
+<tr><td><p>GDPR Art. 32</p></td><td><p>Appropriate technical measures including ability to restore availability after incidents</p></td></tr>
+<tr><td><p>PCI DSS 6.5</p></td><td><p>Address common coding vulnerabilities in software development processes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>10. Policy Review</h2>
+<p>This change management policy should be reviewed:</p>
+<ul>
+<li><p><strong>Quarterly</strong> as part of the security and compliance review cycle</p></li>
+<li><p><strong>When CI/CD infrastructure changes</strong> (new platforms, tools, or workflows)</p></li>
+<li><p><strong>After a failed deployment</strong> or rollback to identify process gaps</p></li>
+<li><p><strong>When regulatory requirements</strong> change</p></li>
+</ul>
+<p>For questions about this policy, contact legal@acme.com.</p>
+<hr />
+<p><em>This Change Management Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI DISCLOSURE — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AI DISCLOSURE</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~7 min read</p>
+    </header>
+    <h1 id="ai-disclosure-statement">AI Disclosure Statement</h1>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> twenty</p>
+<hr>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This AI Disclosure Statement is provided by [Your Company Name] in compliance with the European Union Artificial Intelligence Act (Regulation (EU) 2024/1689), which establishes harmonised rules on artificial intelligence. Full transparency obligations under the EU AI Act take effect on <strong>2 August 2026</strong>.</p>
+<p>This document describes the AI systems used in this application, how they are classified under the EU AI Act risk framework, what data they process, and what rights you have in relation to AI-assisted features.</p>
+<h2 id="2-ai-systems-inventory">2. AI Systems Inventory</h2>
+<p>This application integrates the following AI systems:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">AI Service</th><th style="text-align:left">Provider</th><th style="text-align:left">Data Processed</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">AI processing</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">AI processing</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">AI processing</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">@vercel/ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">AI processing</td></tr>
+<tr><td style="text-align:left">openai</td><td style="text-align:left">OpenAI</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Natural language processing, content generation</td></tr>
+</tbody>
+</table>
+<h2 id="3-risk-classification">3. Risk Classification</h2>
+<p>Under the EU AI Act, AI systems are classified into risk categories that determine the applicable obligations. Based on analysis of the AI services used in this application:</p>
+<p><strong>Classification: Limited Risk</strong></p>
+<p>This application's use of AI is classified as <strong>limited risk</strong> because AI services interact directly with users (e.g., processing user prompts, generating content, or providing AI-assisted responses). Limited-risk AI systems are subject to transparency obligations under Article 50 of the EU AI Act.</p>
+<h3 id="applicable-obligations">Applicable Obligations</h3>
+<ul>
+<li>Users must be informed when interacting with an AI system (Art. 50(1))</li>
+<li>AI-generated content must be disclosed and machine-readably marked (Art. 50(2))</li>
+<li>Synthetic media (deepfakes) must be labelled (Art. 50(4))</li>
+<li>Disclosure must be accessible and provided at first interaction (Art. 50(5))</li>
+<li>Emotion recognition systems must inform exposed individuals (Art. 50(3))</li>
+</ul>
+<h2 id="4-transparency-obligations">4. Transparency Obligations</h2>
+<p>In accordance with Article 50 of the EU AI Act, we inform you of the following:</p>
+<h3 id="41-ai-interaction-disclosure">4.1 AI Interaction Disclosure</h3>
+<p>When you interact with AI-powered features of this application, you are communicating with an AI system, not a human. AI features are clearly identified within the application.</p>
+<h3 id="42-ai-limitations">4.2 AI Limitations</h3>
+<ul>
+<li>AI-generated outputs may not always be accurate, complete, or unbiased</li>
+<li>AI responses are based on the training data and capabilities of the underlying models</li>
+<li>AI features are designed to assist, not to replace professional judgment</li>
+</ul>
+<h3 id="43-first-interaction-disclosure-art-505">4.3 First-Interaction Disclosure (Art. 50(5))</h3>
+<p>Under Article 50(5), users must be informed at the point of first interaction with the AI system, in a clear and distinguishable manner, meeting accessibility standards (Directive (EU) 2019/882).</p>
+<p><strong>Recommended implementation for this application:</strong></p>
+<ul>
+<li>Display a notice before the user first interacts with AI features</li>
+<li>Include an AI indicator icon or badge on AI-generated content</li>
+<li>Link to this full disclosure from the in-app notification</li>
+</ul>
+<h2 id="5-ai-generated-content">5. AI-Generated Content</h2>
+<h3 id="51-synthetic-content-disclosure">5.1 Synthetic Content Disclosure</h3>
+<p>This application generates synthetic content (text, and potentially other media) using AI. All content produced by AI features is artificial and should not be treated as human-authored.</p>
+<h3 id="52-machine-readable-marking-art-502">5.2 Machine-Readable Marking (Art. 50(2))</h3>
+<p>Article 50(2) of the EU AI Act requires that AI-generated content be marked in a machine-readable format so that it can be identified as artificially generated or manipulated.</p>
+<p><strong>Technical implementation:</strong></p>
+<ul>
+<li>AI-generated outputs should be marked using machine-readable metadata (e.g., C2PA content credentials, watermarking, or embedded flags)</li>
+<li>Marking should be applied at the point of generation and be interoperable with detection tools</li>
+<li>The EU Code of Practice on marking and labelling AI-generated content provides guidance on compliant marking methods</li>
+</ul>
+<blockquote><strong>Action required:</strong> Implement a technical mechanism to mark AI-generated outputs in accordance with Article 50(2). Consult the EU Code of Practice on AI-generated content labelling (final version expected 2026) for guidance on compliant marking methods.</blockquote>
+<h2 id="6-data-processing-by-ai">6. Data Processing by AI</h2>
+<h3 id="61-what-data-is-sent-to-ai-providers">6.1 What Data Is Sent to AI Providers</h3>
+<p>The following data may be sent to third-party AI service providers for processing:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Type</th><th style="text-align:left">AI Providers Receiving Data</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user prompts</td><td style="text-align:left">@ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, OpenAI</td></tr>
+<tr><td style="text-align:left">conversation history</td><td style="text-align:left">@ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, OpenAI</td></tr>
+<tr><td style="text-align:left">generated content</td><td style="text-align:left">@ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, OpenAI</td></tr>
+</tbody>
+</table>
+<h3 id="62-data-retention">6.2 Data Retention</h3>
+<ul>
+<li>We do not use your data to train or fine-tune AI models</li>
+<li>Data may be temporarily retained by AI providers for abuse prevention and service improvement</li>
+<li>AI interaction data is typically retained for up to 90 days, subject to each provider's data processing policies</li>
+</ul>
+<h3 id="63-cross-border-transfers">6.3 Cross-Border Transfers</h3>
+<p>Data sent to AI providers may be transferred to and processed in countries outside the European Economic Area (EEA), including the United States. Where such transfers occur, appropriate safeguards are in place, including Standard Contractual Clauses (SCCs) and, where applicable, EU-US Data Privacy Framework certification.</p>
+<h2 id="7-human-oversight">7. Human Oversight</h2>
+<p>In accordance with the EU AI Act's requirements for human oversight of AI systems:</p>
+<ul>
+<li>AI features are designed to assist users, not to make autonomous decisions</li>
+<li>Users maintain full control over whether to accept, modify, or reject AI-generated outputs</li>
+<li>Critical decisions should not be based solely on AI outputs without human review</li>
+<li>Users can request human review of any AI-assisted decision that affects them</li>
+</ul>
+<h3 id="how-to-request-human-review">How to Request Human Review</h3>
+<p>If an AI-powered feature of this application produces a decision or output that affects you, you have the right to request that a human reviews the decision. To request human review:</p>
+<ul>
+<li>Contact us at [your-email@example.com]</li>
+<li>Describe the AI-assisted decision or output in question</li>
+<li>We will have a qualified person review the matter and respond within a reasonable timeframe</li>
+</ul>
+<h2 id="8-user-rights-regarding-ai">8. User Rights Regarding AI</h2>
+<p>Under the EU AI Act and applicable data protection laws, you have the right to:</p>
+<ul>
+<li><strong>Know</strong> when you are interacting with an AI system</li>
+<li><strong>Understand</strong> how your data is used in AI processing</li>
+<li><strong>Opt out</strong> of AI-powered features where technically feasible</li>
+<li><strong>Request information</strong> about the logic involved in AI decisions that affect you</li>
+<li><strong>Request human review</strong> of AI-assisted decisions that produce legal or similarly significant effects</li>
+<li><strong>Contest</strong> AI-generated decisions and express your point of view</li>
+<li><strong>Lodge complaints</strong> with your local data protection authority or the relevant national AI supervisory authority</li>
+</ul>
+<p>To exercise any of these rights, contact us at [your-email@example.com].</p>
+<h2 id="9-ai-provider-policies">9. AI Provider Policies</h2>
+<p>The following AI providers process data on behalf of this application. We encourage you to review their privacy and data handling policies:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Provider</th><th style="text-align:left">Privacy Policy</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left"><a href="#">Privacy & Data Policy</a></td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left"><a href="#">Privacy & Data Policy</a></td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left"><a href="#">Privacy & Data Policy</a></td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left"><a href="#">Privacy & Data Policy</a></td></tr>
+<tr><td style="text-align:left">OpenAI</td><td style="text-align:left"><a href="https://openai.com/policies/privacy-policy">Privacy & Data Policy</a></td></tr>
+</tbody>
+</table>
+<h2 id="10-compliance-checklist">10. Compliance Checklist</h2>
+<p>The following checklist summarises key EU AI Act compliance actions for this application:</p>
+<h3 id="transparency">Transparency</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Users are informed when interacting with AI features</li>
+<li><input type="checkbox" disabled> AI-generated content is clearly labelled</li>
+<li><input type="checkbox" disabled> This AI Disclosure document is accessible from the application</li>
+<li><input type="checkbox" disabled> Disclosure is provided at or before first AI interaction</li>
+</ul>
+<h3 id="content-marking">Content Marking</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> AI-generated outputs include machine-readable marking (Art. 50(2))</li>
+<li><input type="checkbox" disabled> Marking method is interoperable with standard detection tools</li>
+<li><input type="checkbox" disabled> Synthetic media is labelled as AI-generated (Art. 50(4))</li>
+</ul>
+<h3 id="human-oversight">Human Oversight</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Process exists for users to request human review of AI decisions</li>
+<li><input type="checkbox" disabled> Staff are trained to handle human review requests</li>
+<li><input type="checkbox" disabled> AI features do not make autonomous decisions with legal or significant effects</li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> AI systems inventory is complete and up to date</li>
+<li><input type="checkbox" disabled> Data processing records include AI providers</li>
+<li><input type="checkbox" disabled> AI provider agreements are reviewed and signed</li>
+<li><input type="checkbox" disabled> This disclosure is reviewed and updated regularly</li>
+</ul>
+<h2 id="11-contact">11. Contact</h2>
+<p>For questions about our use of AI systems or to exercise your rights under the EU AI Act, please contact:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<p>For complaints regarding AI systems, you may also contact your national supervisory authority responsible for the enforcement of the EU AI Act.</p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

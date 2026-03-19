@@ -1,0 +1,158 @@
+<h1>Quick Start Compliance Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Quick Start Compliance Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>You just ran codepliant.</strong> Here's what to do next.</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><em>Generated for Acme Inc on 2026-03-18</em></p>
+<hr />
+<h2>Your scan detected 8 service(s)</h2>
+<p><strong>Services found:</strong> @sentry/node, @supabase/supabase-js, openai, posthog, prisma, resend, stripe, stripe-ios</p>
+<p>Codepliant has generated your compliance documents in the <code>legal/</code> directory. Follow the steps below to go from "generated" to "deployed."</p>
+<hr />
+<h2>Step 1: Review Your Privacy Policy</h2>
+<p>Your <code>PRIVACY_POLICY.md</code> has been tailored to your actual code. It mentions every service detected by name — not generic placeholders.</p>
+<p><strong>What to do:</strong></p>
+<ol>
+<li><p>Open <code>legal/PRIVACY_POLICY.md</code></p></li>
+<li><p>Search for <code>[Your Company Name]</code> and replace with your actual company name</p></li>
+<li><p>Search for <code>[your-email@example.com]</code> and replace with your privacy contact email</p></li>
+<li><p>Review each section — especially "Third-Party Services" and "Data Collection"</p></li>
+<li><p>Have a lawyer review before publishing (the document includes a disclaimer)</p></li>
+</ol>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>AI Notice:</strong> Your project uses AI services. Review <code>AI_DISCLOSURE.md</code> carefully — the EU AI Act (effective August 2, 2026) requires specific disclosures.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Estimated time:</strong> 15-30 minutes</p>
+<p><a href="./PRIVACY_POLICY.md">View Privacy Policy →</a></p>
+<hr />
+<h2>Step 2: Add Documents to Your Website</h2>
+<p>Your compliance documents need to be publicly accessible. Here's how to add them for your stack:</p>
+<h3>Any Framework</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Generate HTML versions for easy embedding
+npx codepliant go --format html
+
+# Copy to your public/static directory
+cp legal/*.html public/legal/]]></ac:plain-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Pro tip:</strong> Run <code>npx codepliant go --format html</code> to generate ready-to-serve HTML versions of all documents.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Step 3: Set Up Cookie Consent</h2>
+<p>Your project uses analytics services that set cookies. You need a cookie consent banner to comply with GDPR and ePrivacy Directive.</p>
+<p><strong>Your <code>COOKIE<em>CONSENT</em>CONFIG.json</code> is ready.</strong> It contains machine-readable cookie definitions for popular consent management platforms.</p>
+<h3>Option A: Use a CMP (recommended)</h3>
+<p>Import your cookie config into one of these platforms:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Platform</p></th><th><p>Free Tier</p></th><th><p>Setup</p></th></tr>
+<tr><td><p><a href="https://www.cookieyes.com">CookieYes</a></p></td><td><p>Up to 100 pages</p></td><td><p>Copy <code>COOKIE<em>CONSENT</em>CONFIG.json</code></p></td></tr>
+<tr><td><p><a href="https://www.cookiebot.com">Cookiebot</a></p></td><td><p>Up to 100 pages</p></td><td><p>Import cookie declarations</p></td></tr>
+<tr><td><p><a href="https://www.onetrust.com">OneTrust</a></p></td><td><p>Enterprise</p></td><td><p>Use cookie inventory</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Option B: Build your own</h3>
+<p>Use the <code>COOKIE_INVENTORY.md</code> as a reference to build a custom consent banner. Your inventory lists every cookie by name, purpose, duration, and category.</p>
+<hr />
+<h2>Step 4: Configure CI/CD</h2>
+<p>Keep your compliance documents in sync with your code. When you add a new service, your docs should update automatically.</p>
+<h3>GitHub Actions (recommended)</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# .github/workflows/compliance.yml
+name: Compliance Check
+on: [push, pull_request]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: joechensmartz/codepliant@v220
+        with:
+          fail-on-missing: true]]></ac:plain-text-body>
+</ac:structured-macro>
+<p>This will:</p>
+<ul>
+<li><p>Scan your code on every push and PR</p></li>
+<li><p>Fail the build if compliance docs are missing or outdated</p></li>
+<li><p>Comment on PRs with compliance impact</p></li>
+</ul>
+<h3>GitLab CI</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[compliance:
+  image: node:20
+  script:
+    - npx codepliant check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == &quot;merge_request_event&quot;]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>Pre-commit Hook</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Install a git hook that checks compliance before every commit
+npx codepliant hook install]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Step 5: Ongoing Maintenance</h2>
+<p>Compliance is not "set and forget." Here's your maintenance schedule:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Frequency</p></th><th><p>Action</p></th><th><p>Command</p></th></tr>
+<tr><td><p>Every commit</p></td><td><p>Auto-check via CI/CD</p></td><td><p><code>codepliant check</code></p></td></tr>
+<tr><td><p>Weekly</p></td><td><p>Review compliance dashboard</p></td><td><p><code>codepliant dashboard</code></p></td></tr>
+<tr><td><p>Monthly</p></td><td><p>Re-scan and update docs</p></td><td><p><code>codepliant update</code></p></td></tr>
+<tr><td><p>Quarterly</p></td><td><p>Full compliance review</p></td><td><p><code>codepliant report</code></p></td></tr>
+<tr><td><p>Annually</p></td><td><p>Annual review checklist</p></td><td><p>See <code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Quick Reference</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Document</p></th><th><p>Purpose</p></th><th><p>Location</p></th></tr>
+<tr><td><p>Privacy Policy</p></td><td><p>What data you collect and why</p></td><td><p><code>legal/PRIVACY_POLICY.md</code></p></td></tr>
+<tr><td><p>Terms of Service</p></td><td><p>Rules for using your product</p></td><td><p><code>legal/TERMS<em>OF</em>SERVICE.md</code></p></td></tr>
+<tr><td><p>AI Disclosure</p></td><td><p>EU AI Act Article 50 compliance</p></td><td><p><code>legal/AI_DISCLOSURE.md</code></p></td></tr>
+<tr><td><p>Cookie Policy</p></td><td><p>Cookie usage and consent</p></td><td><p><code>legal/COOKIE_POLICY.md</code></p></td></tr>
+<tr><td><p>Refund Policy</p></td><td><p>Refund and cancellation terms</p></td><td><p><code>legal/REFUND_POLICY.md</code></p></td></tr>
+<tr><td><p>Security Policy</p></td><td><p>How you protect user data</p></td><td><p><code>legal/SECURITY.md</code></p></td></tr>
+<tr><td><p>Incident Response</p></td><td><p>What happens during a breach</p></td><td><p><code>legal/INCIDENT<em>RESPONSE</em>PLAN.md</code></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Need Help?</h2>
+<ul>
+<li><p><strong>Re-scan after changes:</strong> <code>npx codepliant go</code></p></li>
+<li><p><strong>Check compliance status:</strong> <code>npx codepliant dashboard</code></p></li>
+<li><p><strong>Validate documents:</strong> <code>npx codepliant validate</code></p></li>
+<li><p><strong>Get a compliance report:</strong> <code>npx codepliant report</code></p></li>
+</ul>
+<hr />
+<p><em>Generated by Codepliant v220.0.0 on 2026-03-18.</em></p>
+<p><em>This guide is personalized to your detected stack. Re-run <code>npx codepliant go</code> after adding new services to keep it updated.</em></p>
+<p><em>Compliance documents should be reviewed by a qualified legal professional before publication.</em></p>

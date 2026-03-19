@@ -320,6 +320,9 @@ export function writeConfluenceExport(
   const writtenFiles: string[] = [];
 
   for (const doc of docs) {
+    // Skip non-Markdown files (e.g., .json config files)
+    if (!doc.filename.endsWith(".md")) continue;
+
     const xhtml = markdownToConfluenceXhtml(doc.content);
     const page = wrapInConfluencePage(doc.name, xhtml, companyName, lastUpdated);
 
@@ -336,7 +339,7 @@ export function writeConfluenceExport(
     `<hr />`,
     `<h2>Documents</h2>`,
     `<ul>`,
-    ...docs.map(doc => {
+    ...docs.filter(doc => doc.filename.endsWith(".md")).map(doc => {
       const filename = doc.filename.replace(/\.md$/, ".xhtml");
       return `<li><p><a href="./${filename}">${escapeXml(doc.name)}</a></p></li>`;
     }),

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIVACY ENGINEERING GUIDE — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>PRIVACY ENGINEERING GUIDE</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~11 min read</p>
+    </header>
+    <h1 id="privacy-engineering-guide">Privacy Engineering Guide</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Audience:</strong> Software engineers, DevOps, security engineers</p>
+<p><strong>Purpose:</strong> Technical implementation guide for privacy by design</p>
+<p>This guide provides actionable engineering patterns for implementing privacy by design across the [Your Company Name] technology stack. Each section is tailored to the 22 service(s) detected in the codebase and includes code examples, configuration recommendations, and testing strategies.</p>
+<hr>
+<h2 id="1-data-masking-patterns">1. Data Masking Patterns</h2>
+<p>Data masking ensures sensitive data is obfuscated in logs, error reports, and non-production environments.</p>
+<h3 id="11-pii-masking-utility">1.1 PII Masking Utility</h3>
+<pre><code>/**
+ * Mask personally identifiable information before logging or display.
+ * Use this anywhere PII might appear in logs, error messages, or analytics.
+ */
+function maskPII(value: string, type: &quot;email&quot; | &quot;phone&quot; | &quot;name&quot; | &quot;ip&quot; | &quot;card&quot;): string {
+  switch (type) {
+    case &quot;email&quot;: {
+      const [local, domain] = value.split(&quot;@&quot;);
+      return local[0] + &quot;***@&quot; + domain;
+    }
+    case &quot;phone&quot;:
+      return value.slice(0, 3) + &quot;****&quot; + value.slice(-2);
+    case &quot;name&quot;:
+      return value[0] + &quot;***&quot;;
+    case &quot;ip&quot;:
+      return value.split(&quot;.&quot;).slice(0, 2).join(&quot;.&quot;) + &quot;.x.x&quot;;
+    case &quot;card&quot;:
+      return &quot;****-****-****-&quot; + value.slice(-4);
+    default:
+      return &quot;***&quot;;
+  }
+}</code></pre>
+<h3 id="12-log-sanitization-middleware">1.2 Log Sanitization Middleware</h3>
+<pre><code>/**
+ * Middleware that strips PII from request logs.
+ * Insert before your logging layer.
+ */
+function sanitizeLogEntry(entry: Record&lt;string, unknown&gt;): Record&lt;string, unknown&gt; {
+  const sensitiveKeys = [&quot;email&quot;, &quot;password&quot;, &quot;ssn&quot;, &quot;token&quot;, &quot;creditCard&quot;,
+    &quot;phoneNumber&quot;, &quot;address&quot;, &quot;dateOfBirth&quot;, &quot;authorization&quot;];
+  const sanitized = { ...entry };
+  for (const key of Object.keys(sanitized)) {
+    if (sensitiveKeys.some(sk =&gt; key.toLowerCase().includes(sk.toLowerCase()))) {
+      sanitized[key] = &quot;[REDACTED]&quot;;
+    }
+  }
+  return sanitized;
+}</code></pre>
+<hr>
+<h2 id="2-encryption-patterns">2. Encryption Patterns</h2>
+<h3 id="21-encryption-at-rest">2.1 Encryption at Rest</h3>
+<p>All personal data must be encrypted at rest. Use envelope encryption where possible.</p>
+<pre><code>import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from &quot;crypto&quot;;
+
+const ALGORITHM = &quot;aes-256-gcm&quot;;
+
+function encrypt(plaintext: string, masterKey: string): string {
+  const iv = randomBytes(16);
+  const key = scryptSync(masterKey, &quot;salt&quot;, 32); // Use proper salt in production
+  const cipher = createCipheriv(ALGORITHM, key, iv);
+  let encrypted = cipher.update(plaintext, &quot;utf8&quot;, &quot;hex&quot;);
+  encrypted += cipher.final(&quot;hex&quot;);
+  const authTag = cipher.getAuthTag().toString(&quot;hex&quot;);
+  return iv.toString(&quot;hex&quot;) + &quot;:&quot; + authTag + &quot;:&quot; + encrypted;
+}
+
+function decrypt(ciphertext: string, masterKey: string): string {
+  const [ivHex, authTagHex, encrypted] = ciphertext.split(&quot;:&quot;);
+  const iv = Buffer.from(ivHex, &quot;hex&quot;);
+  const authTag = Buffer.from(authTagHex, &quot;hex&quot;);
+  const key = scryptSync(masterKey, &quot;salt&quot;, 32);
+  const decipher = createDecipheriv(ALGORITHM, key, iv);
+  decipher.setAuthTag(authTag);
+  let decrypted = decipher.update(encrypted, &quot;hex&quot;, &quot;utf8&quot;);
+  decrypted += decipher.final(&quot;utf8&quot;);
+  return decrypted;
+}</code></pre>
+<h3 id="22-encryption-in-transit">2.2 Encryption in Transit</h3>
+<ul>
+<li>Enforce TLS 1.2+ on all service connections</li>
+<li>Enable HSTS headers with a minimum <code>max-age</code> of 31536000</li>
+<li>Pin certificates for internal service-to-service communication</li>
+<li>Use mTLS for service mesh traffic where possible</li>
+</ul>
+<h3 id="23-database-connection-encryption">2.3 Database Connection Encryption</h3>
+<ul>
+<li><strong>ActiveRecord</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>ioredis</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>pg</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>PostgreSQL</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>PostgreSQL (env)</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>rails-activerecord</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>redis</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li><strong>Redis</strong>: Enforce SSL/TLS on all connections (<code>sslmode=require</code> or equivalent)</li>
+<li>Rotate database credentials on a 90-day cycle</li>
+<li>Use IAM-based authentication where supported (e.g., AWS RDS IAM auth)</li>
+</ul>
+<hr>
+<h2 id="3-access-control-patterns">3. Access Control Patterns</h2>
+<h3 id="31-role-based-access-control-rbac">3.1 Role-Based Access Control (RBAC)</h3>
+<pre><code>type Role = &quot;admin&quot; | &quot;editor&quot; | &quot;viewer&quot; | &quot;service-account&quot;;
+
+interface Permission {
+  resource: string;
+  actions: (&quot;read&quot; | &quot;write&quot; | &quot;delete&quot; | &quot;admin&quot;)[];
+}
+
+const ROLE_PERMISSIONS: Record&lt;Role, Permission[]&gt; = {
+  admin: [{ resource: &quot;*&quot;, actions: [&quot;read&quot;, &quot;write&quot;, &quot;delete&quot;, &quot;admin&quot;] }],
+  editor: [{ resource: &quot;content&quot;, actions: [&quot;read&quot;, &quot;write&quot;] },
+           { resource: &quot;users&quot;, actions: [&quot;read&quot;] }],
+  viewer: [{ resource: &quot;*&quot;, actions: [&quot;read&quot;] }],
+  &quot;service-account&quot;: [{ resource: &quot;api&quot;, actions: [&quot;read&quot;, &quot;write&quot;] }],
+};
+
+function hasPermission(role: Role, resource: string, action: string): boolean {
+  const perms = ROLE_PERMISSIONS[role];
+  return perms.some(p =&gt;
+    (p.resource === &quot;*&quot; || p.resource === resource) &amp;&amp;
+    p.actions.includes(action as any)
+  );
+}</code></pre>
+<h3 id="32-principle-of-least-privilege">3.2 Principle of Least Privilege</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Layer</th><th style="text-align:left">Guideline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">API keys</td><td style="text-align:left">Scope to minimum required endpoints; rotate every 90 days</td></tr>
+<tr><td style="text-align:left">Database users</td><td style="text-align:left">Create per-service accounts with table-level grants</td></tr>
+<tr><td style="text-align:left">Cloud IAM</td><td style="text-align:left">Use service-specific roles, never use <code>*</code> in resource policies</td></tr>
+<tr><td style="text-align:left">OAuth scopes</td><td style="text-align:left">Request minimum scopes; re-prompt for escalated access</td></tr>
+<tr><td style="text-align:left">File system</td><td style="text-align:left">Application processes run as non-root with read-only mounts</td></tr>
+</tbody>
+</table>
+<h3 id="33-authentication-service-hardening">3.3 Authentication Service Hardening</h3>
+<h4 id="devise">devise</h4>
+<ul>
+<li>Enforce MFA for all user accounts</li>
+<li>Set session timeout to 30 minutes for sensitive operations</li>
+<li>Implement account lockout after 5 failed attempts</li>
+<li>Log all authentication events for audit trail</li>
+<li>Use secure, HttpOnly, SameSite cookies for session tokens</li>
+</ul>
+<h4 id="omniauth">omniauth</h4>
+<ul>
+<li>Enforce MFA for all user accounts</li>
+<li>Set session timeout to 30 minutes for sensitive operations</li>
+<li>Implement account lockout after 5 failed attempts</li>
+<li>Log all authentication events for audit trail</li>
+<li>Use secure, HttpOnly, SameSite cookies for session tokens</li>
+</ul>
+<h4 id="pundit">pundit</h4>
+<ul>
+<li>Enforce MFA for all user accounts</li>
+<li>Set session timeout to 30 minutes for sensitive operations</li>
+<li>Implement account lockout after 5 failed attempts</li>
+<li>Log all authentication events for audit trail</li>
+<li>Use secure, HttpOnly, SameSite cookies for session tokens</li>
+</ul>
+<h4 id="rails-sessions">rails-sessions</h4>
+<ul>
+<li>Enforce MFA for all user accounts</li>
+<li>Set session timeout to 30 minutes for sensitive operations</li>
+<li>Implement account lockout after 5 failed attempts</li>
+<li>Log all authentication events for audit trail</li>
+<li>Use secure, HttpOnly, SameSite cookies for session tokens</li>
+</ul>
+<hr>
+<h2 id="4-per-service-privacy-implementation">4. Per-Service Privacy Implementation</h2>
+<p>The following table maps each detected service to specific privacy engineering actions:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Minimization Action</th><th style="text-align:left">Encryption Requirement</th><th style="text-align:left">Access Control</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>ActionCable</strong></td><td style="text-align:left">other</td><td style="text-align:left">Review data collected; document purpose and retention</td><td style="text-align:left">TLS in transit; encrypt PII at rest</td><td style="text-align:left">Principle of least privilege; document access grants</td></tr>
+<tr><td style="text-align:left"><strong>ActionController::Cookies</strong></td><td style="text-align:left">other</td><td style="text-align:left">Review data collected; document purpose and retention</td><td style="text-align:left">TLS in transit; encrypt PII at rest</td><td style="text-align:left">Principle of least privilege; document access grants</td></tr>
+<tr><td style="text-align:left"><strong>ActionMailer</strong></td><td style="text-align:left">email</td><td style="text-align:left">Store only transactional addresses; purge marketing lists</td><td style="text-align:left">TLS for SMTP; encrypt stored templates with PII</td><td style="text-align:left">Marketing team only for campaigns; devs for transactional</td></tr>
+<tr><td style="text-align:left"><strong>Active Storage</strong></td><td style="text-align:left">storage</td><td style="text-align:left">Classify and tag PII objects; auto-expire temporary uploads</td><td style="text-align:left">SSE (AES-256); enforce HTTPS-only access</td><td style="text-align:left">Bucket policies; no public access; pre-signed URLs</td></tr>
+<tr><td style="text-align:left"><strong>ActiveRecord</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>ActiveStorage</strong></td><td style="text-align:left">storage</td><td style="text-align:left">Classify and tag PII objects; auto-expire temporary uploads</td><td style="text-align:left">SSE (AES-256); enforce HTTPS-only access</td><td style="text-align:left">Bucket policies; no public access; pre-signed URLs</td></tr>
+<tr><td style="text-align:left"><strong>aws-sdk-s3</strong></td><td style="text-align:left">storage</td><td style="text-align:left">Classify and tag PII objects; auto-expire temporary uploads</td><td style="text-align:left">SSE (AES-256); enforce HTTPS-only access</td><td style="text-align:left">Bucket policies; no public access; pre-signed URLs</td></tr>
+<tr><td style="text-align:left"><strong>devise</strong></td><td style="text-align:left">auth</td><td style="text-align:left">Collect only required profile fields; limit OAuth scopes</td><td style="text-align:left">Encrypt tokens and credentials at rest; TLS in transit</td><td style="text-align:left">Admin-only config; audit all auth events</td></tr>
+<tr><td style="text-align:left"><strong>ioredis</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>omniauth</strong></td><td style="text-align:left">auth</td><td style="text-align:left">Collect only required profile fields; limit OAuth scopes</td><td style="text-align:left">Encrypt tokens and credentials at rest; TLS in transit</td><td style="text-align:left">Admin-only config; audit all auth events</td></tr>
+<tr><td style="text-align:left"><strong>pg</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>PostgreSQL</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>PostgreSQL (env)</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>pundit</strong></td><td style="text-align:left">auth</td><td style="text-align:left">Collect only required profile fields; limit OAuth scopes</td><td style="text-align:left">Encrypt tokens and credentials at rest; TLS in transit</td><td style="text-align:left">Admin-only config; audit all auth events</td></tr>
+<tr><td style="text-align:left"><strong>rack-attack</strong></td><td style="text-align:left">other</td><td style="text-align:left">Review data collected; document purpose and retention</td><td style="text-align:left">TLS in transit; encrypt PII at rest</td><td style="text-align:left">Principle of least privilege; document access grants</td></tr>
+<tr><td style="text-align:left"><strong>rails-actionmailer</strong></td><td style="text-align:left">email</td><td style="text-align:left">Store only transactional addresses; purge marketing lists</td><td style="text-align:left">TLS for SMTP; encrypt stored templates with PII</td><td style="text-align:left">Marketing team only for campaigns; devs for transactional</td></tr>
+<tr><td style="text-align:left"><strong>rails-activerecord</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>rails-sessions</strong></td><td style="text-align:left">auth</td><td style="text-align:left">Collect only required profile fields; limit OAuth scopes</td><td style="text-align:left">Encrypt tokens and credentials at rest; TLS in transit</td><td style="text-align:left">Admin-only config; audit all auth events</td></tr>
+<tr><td style="text-align:left"><strong>redis</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>Redis</strong></td><td style="text-align:left">database</td><td style="text-align:left">Encrypt PII columns; implement column-level access</td><td style="text-align:left">TDE or volume encryption; TLS for connections</td><td style="text-align:left">Per-service DB users; no shared credentials</td></tr>
+<tr><td style="text-align:left"><strong>sidekiq</strong></td><td style="text-align:left">other</td><td style="text-align:left">Review data collected; document purpose and retention</td><td style="text-align:left">TLS in transit; encrypt PII at rest</td><td style="text-align:left">Principle of least privilege; document access grants</td></tr>
+<tr><td style="text-align:left"><strong>ws (WebSocket)</strong></td><td style="text-align:left">other</td><td style="text-align:left">Review data collected; document purpose and retention</td><td style="text-align:left">TLS in transit; encrypt PII at rest</td><td style="text-align:left">Principle of least privilege; document access grants</td></tr>
+</tbody>
+</table>
+<h3 id="44-email-services">4.4 Email Services</h3>
+<p><strong>Detected:</strong> ActionMailer, rails-actionmailer</p>
+<ul>
+<li>Use transactional email only — no marketing without explicit consent</li>
+<li>Implement unsubscribe headers (RFC 8058) on all emails</li>
+<li>Do not include sensitive data in email bodies (use secure links instead)</li>
+<li>Validate recipient addresses to prevent data leakage to wrong recipients</li>
+</ul>
+<h3 id="45-storage-services">4.5 Storage Services</h3>
+<p><strong>Detected:</strong> Active Storage, ActiveStorage, aws-sdk-s3</p>
+<ul>
+<li>Enable server-side encryption (SSE) on all storage buckets</li>
+<li>Block public access by default; use pre-signed URLs for temporary access</li>
+<li>Implement lifecycle policies to auto-delete data after retention period</li>
+<li>Enable access logging on all storage buckets containing user data</li>
+</ul>
+<hr>
+<h2 id="5-data-deletion-engineering">5. Data Deletion Engineering</h2>
+<p>GDPR Article 17 (Right to Erasure) requires reliable, verifiable data deletion.</p>
+<pre><code>/**
+ * Cascade deletion across all services for a given user.
+ * Call this when processing a DSAR deletion request.
+ */
+async function deleteUserData(userId: string): Promise&lt;DeletionReport&gt; {
+  const report: DeletionReport = { userId, deletedFrom: [], errors: [] };
+
+  const deletionTasks = [
+    { service: &quot;ActionCable&quot;, fn: () =&gt; deleteActionCableData(userId) },
+    { service: &quot;ActionController::Cookies&quot;, fn: () =&gt; deleteActionControllerCookiesData(userId) },
+    { service: &quot;ActionMailer&quot;, fn: () =&gt; deleteActionMailerData(userId) },
+    { service: &quot;Active Storage&quot;, fn: () =&gt; deleteActiveStorageData(userId) },
+    { service: &quot;ActiveRecord&quot;, fn: () =&gt; deleteActiveRecordData(userId) },
+    { service: &quot;ActiveStorage&quot;, fn: () =&gt; deleteActiveStorageData(userId) },
+    { service: &quot;aws-sdk-s3&quot;, fn: () =&gt; deleteawssdks3Data(userId) },
+    { service: &quot;devise&quot;, fn: () =&gt; deletedeviseData(userId) },
+    { service: &quot;ioredis&quot;, fn: () =&gt; deleteioredisData(userId) },
+    { service: &quot;omniauth&quot;, fn: () =&gt; deleteomniauthData(userId) },
+    { service: &quot;pg&quot;, fn: () =&gt; deletepgData(userId) },
+    { service: &quot;PostgreSQL&quot;, fn: () =&gt; deletePostgreSQLData(userId) },
+    { service: &quot;PostgreSQL (env)&quot;, fn: () =&gt; deletePostgreSQLenvData(userId) },
+    { service: &quot;pundit&quot;, fn: () =&gt; deletepunditData(userId) },
+    { service: &quot;rack-attack&quot;, fn: () =&gt; deleterackattackData(userId) },
+    { service: &quot;rails-actionmailer&quot;, fn: () =&gt; deleterailsactionmailerData(userId) },
+    { service: &quot;rails-activerecord&quot;, fn: () =&gt; deleterailsactiverecordData(userId) },
+    { service: &quot;rails-sessions&quot;, fn: () =&gt; deleterailssessionsData(userId) },
+    { service: &quot;redis&quot;, fn: () =&gt; deleteredisData(userId) },
+    { service: &quot;Redis&quot;, fn: () =&gt; deleteRedisData(userId) },
+    { service: &quot;sidekiq&quot;, fn: () =&gt; deletesidekiqData(userId) },
+    { service: &quot;ws (WebSocket)&quot;, fn: () =&gt; deletewsWebSocketData(userId) },
+  ];
+
+  for (const task of deletionTasks) {
+    try {
+      await task.fn();
+      report.deletedFrom.push(task.service);
+    } catch (err) {
+      report.errors.push({ service: task.service, error: String(err) });
+    }
+  }
+
+  return report;
+}</code></pre>
+<hr>
+<h2 id="6-testing-privacy-controls">6. Testing Privacy Controls</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Test</th><th style="text-align:left">What to Verify</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">PII masking</td><td style="text-align:left">No raw PII in logs after processing 1000 test records</td><td style="text-align:left">Every release</td></tr>
+<tr><td style="text-align:left">Encryption at rest</td><td style="text-align:left">All PII fields return encrypted values from DB queries</td><td style="text-align:left">Weekly</td></tr>
+<tr><td style="text-align:left">Access control</td><td style="text-align:left">Unprivileged roles cannot access PII endpoints</td><td style="text-align:left">Every release</td></tr>
+<tr><td style="text-align:left">Data deletion</td><td style="text-align:left">User data fully removed from all services within SLA</td><td style="text-align:left">Monthly</td></tr>
+<tr><td style="text-align:left">Consent enforcement</td><td style="text-align:left">Analytics blocked when consent not given</td><td style="text-align:left">Every release</td></tr>
+<tr><td style="text-align:left">Retention enforcement</td><td style="text-align:left">Records older than retention period are purged</td><td style="text-align:left">Weekly</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-environment-variable-secrets-hygiene">7. Environment Variable & Secrets Hygiene</h2>
+<ul>
+<li>Never commit secrets to version control (use <code>.env.example</code> with placeholder values)</li>
+<li>Use a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler) in production</li>
+<li>Rotate API keys on a 90-day cycle; automate rotation where possible</li>
+<li>Scope service credentials to minimum required permissions</li>
+<li>Audit <code>.env</code> files for stale or unused credentials quarterly</li>
+</ul>
+<hr>
+<p><em>This Privacy Engineering Guide was auto-generated by Codepliant based on detected services. It provides implementation patterns — engineering teams should adapt these to their specific architecture. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

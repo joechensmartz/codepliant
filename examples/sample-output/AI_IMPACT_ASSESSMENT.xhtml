@@ -1,0 +1,153 @@
+<h1>AI Impact Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>AI Impact Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organisation:</strong> Acme Inc</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Overall AI Risk Classification:</strong> Limited</p>
+<p><strong>Assessment Date:</strong> 2026-03-18</p>
+<p><strong>Next Review:</strong> 2027-03-18</p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>This document provides a combined impact assessment under the <strong>EU AI Act</strong> (Regulation (EU) 2024/1689) and the <strong>Colorado AI Act</strong> (SB 24-205). It evaluates each AI service integrated into this application, classifies risk levels, identifies required mitigation measures, and establishes a monitoring plan.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Regulatory Overview</h2>
+<h3>1.1 EU AI Act (Regulation (EU) 2024/1689)</h3>
+<p>The EU AI Act establishes a risk-based regulatory framework for AI systems:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Risk Level</p></th><th><p>Requirements</p></th><th><p>Timeline</p></th></tr>
+<tr><td><p><strong>Unacceptable</strong></p></td><td><p>Prohibited — must not be deployed in the EU</p></td><td><p>2 February 2025</p></td></tr>
+<tr><td><p><strong>High</strong></p></td><td><p>Conformity assessment, registration, continuous monitoring</p></td><td><p>2 August 2026</p></td></tr>
+<tr><td><p><strong>Limited</strong></p></td><td><p>Transparency obligations (disclosure to users)</p></td><td><p>2 August 2026</p></td></tr>
+<tr><td><p><strong>Minimal</strong></p></td><td><p>No mandatory requirements; voluntary codes of conduct</p></td><td><p>Effective now</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>1.2 Colorado AI Act (SB 24-205)</h3>
+<p>The Colorado AI Act, effective <strong>1 February 2026</strong>, requires developers and deployers of "high-risk AI systems" that make or substantially support <strong>consequential decisions</strong> to:</p>
+<ul>
+<li><p>Perform impact assessments before deployment</p></li>
+<li><p>Provide transparency notices to consumers</p></li>
+<li><p>Implement risk management programmes</p></li>
+<li><p>Enable human appeal mechanisms for adverse decisions</p></li>
+<li><p>Report discovered algorithmic discrimination to the AG within 90 days</p></li>
+</ul>
+<p>Consequential decisions include those affecting education, employment, financial services, healthcare, housing, insurance, and legal services.</p>
+<h2>2. AI Services Inventory</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Data Processed</p></th><th><p>EU AI Act Risk</p></th><th><p>Colorado AI Act</p></th><th><p>Monitoring</p></th></tr>
+<tr><td><p>openai</p></td><td><p>user prompts, conversation history, generated content</p></td><td><p><strong>Limited</strong></p></td><td><p>N/A</p></td><td><p>Semi-annual review</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Per-Service Risk Evaluation</h2>
+<h3>3.1 openai</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Service</strong></p></td><td><p><code>openai</code></p></td></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>ai</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p><strong>EU AI Act Classification</strong></p></td><td><p>Limited</p></td></tr>
+<tr><td><p><strong>Colorado AI Act</strong></p></td><td><p>Not in scope</p></td></tr>
+<tr><td><p><strong>Monitoring Frequency</strong></p></td><td><p>Semi-annual review</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Rationale:</strong> This AI service interacts with end users or generates content, triggering transparency obligations under EU AI Act Article 50.</p>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Disclose AI interaction to users before or during use</p></li>
+<li><p>[ ] Label AI-generated content where required (deepfakes, synthetic text)</p></li>
+<li><p>[ ] Maintain AI disclosure documentation</p></li>
+<li><p>[ ] Provide opt-out mechanism where feasible</p></li>
+<li><p>[ ] Log user interactions for audit purposes</p></li>
+</ul>
+<h2>4. Algorithmic Discrimination Assessment</h2>
+<p>Under the Colorado AI Act, deployers must evaluate AI systems for algorithmic discrimination — differential treatment that disfavours individuals based on protected characteristics.</p>
+<h3>4.1 Protected Characteristics (Colorado)</h3>
+<ul>
+<li><p>Age</p></li>
+<li><p>Colour</p></li>
+<li><p>Disability</p></li>
+<li><p>Ethnicity</p></li>
+<li><p>Genetic information</p></li>
+<li><p>Gender identity / expression</p></li>
+<li><p>National origin</p></li>
+<li><p>Race</p></li>
+<li><p>Religion</p></li>
+<li><p>Sex</p></li>
+<li><p>Veteran status</p></li>
+</ul>
+<h3>4.2 Assessment Checklist</h3>
+<ul>
+<li><p>[ ] Identify which AI services make or support consequential decisions</p></li>
+<li><p>[ ] Test each service for disparate impact across protected characteristics</p></li>
+<li><p>[ ] Document testing methodology, datasets, and results</p></li>
+<li><p>[ ] Establish ongoing bias monitoring with alerting thresholds</p></li>
+<li><p>[ ] Define remediation procedures for discovered discrimination</p></li>
+<li><p>[ ] Set up 90-day reporting process to Colorado AG for discovered discrimination</p></li>
+</ul>
+<h2>5. Monitoring Plan</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Activity</p></th><th><p>Frequency</p></th><th><p>Owner</p></th><th><p>Next Due</p></th></tr>
+<tr><td><p>Full impact assessment review</p></td><td><p>Annual</p></td><td><p>DPO / AI Governance</p></td><td><p>2027-03-18</p></td></tr>
+<tr><td><p>Bias and fairness testing</p></td><td><p>Quarterly</p></td><td><p>Engineering</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Performance metrics review</p></td><td><p>Monthly</p></td><td><p>Engineering</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Incident log review</p></td><td><p>Monthly</p></td><td><p>DPO</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Regulatory change review</p></td><td><p>Quarterly</p></td><td><p>Legal</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Consumer complaint analysis</p></td><td><p>Monthly</p></td><td><p>Support / Legal</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Model drift detection</p></td><td><p>Continuous</p></td><td><p>Engineering</p></td><td><p>Automated</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>6. Transparency Obligations</h2>
+<h3>EU AI Act (Article 50)</h3>
+<ul>
+<li><p>[ ] Users are informed they are interacting with an AI system</p></li>
+<li><p>[ ] AI-generated content is labelled (deepfakes, synthetic text/audio/video)</p></li>
+<li><p>[ ] Emotion recognition / biometric categorisation use is disclosed</p></li>
+</ul>
+<h3>Colorado AI Act</h3>
+<ul>
+<li><p>[ ] Consumers notified that AI is being used to make or support consequential decisions</p></li>
+<li><p>[ ] Description of the AI system provided to affected consumers</p></li>
+<li><p>[ ] Consumer has access to appeal process with human reviewer</p></li>
+<li><p>[ ] Contact information for questions about AI use is published</p></li>
+</ul>
+<h2>7. AI Incident Response</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Action</p></th><th><p>Timeline</p></th><th><p>Owner</p></th></tr>
+<tr><td><p>Discovered algorithmic discrimination</p></td><td><p>Report to Colorado AG</p></td><td><p>90 days</p></td><td><p>Legal</p></td></tr>
+<tr><td><p>Serious AI incident (EU)</p></td><td><p>Report to national authority</p></td><td><p>Without undue delay</p></td><td><p>DPO</p></td></tr>
+<tr><td><p>Model producing harmful outputs</p></td><td><p>Suspend AI feature, investigate</p></td><td><p>Immediately</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Consumer complaint about AI decision</p></td><td><p>Initiate human review</p></td><td><p>30 days</p></td><td><p>Support</p></td></tr>
+<tr><td><p>Regulatory inquiry</p></td><td><p>Engage legal counsel, compile documentation</p></td><td><p>Within requested timeframe</p></td><td><p>Legal</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Contact</h2>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+<li><p><strong>Data Protection Officer:</strong> dpo@acme-saas.com</p></li>
+</ul>
+<hr />
+<p><em>This AI Impact Assessment was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It covers obligations under the EU AI Act (Regulation (EU) 2024/1689) and the Colorado AI Act (SB 24-205). This document must be reviewed by qualified legal counsel and your AI governance team. It does not constitute legal advice.</em></p>

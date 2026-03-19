@@ -1,0 +1,272 @@
+<h1>Incident Response Plan</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Incident Response Plan</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p>This document outlines the incident response procedures for <strong>Acme Inc</strong>. It covers detection, classification, notification, investigation, remediation, and post-incident review.</p>
+<h2>1. Incident Classification</h2>
+<p>All security incidents and data breaches are classified by severity to determine the appropriate response timeline and escalation path.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Severity</p></th><th><p>Description</p></th><th><p>Response Time</p></th><th><p>Examples</p></th></tr>
+<tr><td><p><strong>Critical (P1)</strong></p></td><td><p>Active data breach with confirmed data exfiltration or system compromise</p></td><td><p>Immediate (within 1 hour)</p></td><td><p>Unauthorized access to production database, ransomware, leaked credentials actively exploited</p></td></tr>
+<tr><td><p><strong>High (P2)</strong></p></td><td><p>Confirmed security incident with potential data exposure</p></td><td><p>Within 4 hours</p></td><td><p>Vulnerability actively being exploited, unauthorized access detected, suspected data leak</p></td></tr>
+<tr><td><p><strong>Medium (P3)</strong></p></td><td><p>Security event requiring investigation</p></td><td><p>Within 24 hours</p></td><td><p>Unusual access patterns, failed intrusion attempts, misconfiguration discovered</p></td></tr>
+<tr><td><p><strong>Low (P4)</strong></p></td><td><p>Minor security event or policy violation</p></td><td><p>Within 72 hours</p></td><td><p>Phishing attempt blocked, minor policy violation, non-sensitive data exposure</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Detection and Reporting Procedures</h2>
+<h3>How to Report an Incident</h3>
+<p>Any employee, contractor, or third party who discovers or suspects a security incident must report it immediately:</p>
+<ol>
+<li><p><strong>Email:</strong> <a href="mailto:legal@acme.com">legal@acme.com</a></p></li>
+<li><p><strong>Escalation:</strong> Contact the DPO at <a href="mailto:dpo@acme-saas.com">dpo@acme-saas.com</a></p></li>
+<li><p><strong>Do NOT</strong> attempt to investigate or remediate the issue independently</p></li>
+<li><p><strong>Do NOT</strong> communicate about the incident on public channels</p></li>
+</ol>
+<h3>Information to Include</h3>
+<ul>
+<li><p>Date and time the incident was discovered</p></li>
+<li><p>Description of what occurred</p></li>
+<li><p>Systems, services, or data affected</p></li>
+<li><p>How the incident was detected</p></li>
+<li><p>Any actions already taken</p></li>
+<li><p>Contact information of the reporter</p></li>
+</ul>
+<h2>3. GDPR 72-Hour Notification Requirement</h2>
+<p>Under Article 33 of the GDPR, personal data breaches must be reported to the relevant supervisory authority <strong>within 72 hours</strong> of becoming aware of the breach, unless the breach is unlikely to result in a risk to the rights and freedoms of individuals.</p>
+<h3>Timeline</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Milestone</p></th><th><p>Deadline</p></th></tr>
+<tr><td><p>Breach discovered</p></td><td><p>T = 0</p></td></tr>
+<tr><td><p>Internal assessment complete</p></td><td><p>T + 24 hours</p></td></tr>
+<tr><td><p>Decision on notification obligation</p></td><td><p>T + 36 hours</p></td></tr>
+<tr><td><p>Supervisory authority notified</p></td><td><p>T + 72 hours (maximum)</p></td></tr>
+<tr><td><p>Affected individuals notified (if high risk)</p></td><td><p>Without undue delay</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>If notification cannot be made within 72 hours, the reasons for the delay must be documented and communicated to the authority.</p>
+<h2>4. Authority Notification Template</h2>
+<p>Use the following template when notifying the supervisory authority of a personal data breach:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[PERSONAL DATA BREACH NOTIFICATION
+=================================
+
+Organization: Acme Inc
+DPO / Contact: Jane Mueller (dpo@acme-saas.com)
+Website: https://acme-saas.com
+
+Date and time breach was discovered: [DATE/TIME]
+Date and time breach occurred (if known): [DATE/TIME]
+
+Nature of the breach:
+  [ ] Confidentiality breach (unauthorized disclosure)
+  [ ] Integrity breach (unauthorized alteration)
+  [ ] Availability breach (unauthorized loss of access)
+
+Categories of personal data affected:
+  [ ] Names               [ ] Email addresses
+  [ ] Phone numbers       [ ] Physical addresses
+  [ ] Financial data      [ ] Health data
+  [ ] Authentication data [ ] Other: ___________
+
+Approximate number of data subjects affected: [NUMBER]
+Approximate number of records affected: [NUMBER]
+
+Description of likely consequences:
+[DESCRIBE POTENTIAL IMPACT ON DATA SUBJECTS]
+
+Measures taken or proposed to address the breach:
+[DESCRIBE CONTAINMENT AND REMEDIATION STEPS]
+
+Measures taken to mitigate adverse effects:
+[DESCRIBE MITIGATION ACTIONS]]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>5. User Notification Template</h2>
+<p>When a breach is likely to result in a high risk to the rights and freedoms of individuals (GDPR Article 34), affected users must be notified directly. Use the following template:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Subject: Important Security Notice from Acme Inc
+
+Dear [User Name],
+
+We are writing to inform you of a security incident at Acme Inc that may have affected your personal data.
+
+WHAT HAPPENED:
+[Brief, clear description of the incident]
+
+WHAT DATA WAS AFFECTED:
+[List the specific types of personal data involved]
+
+WHAT WE ARE DOING:
+[Describe the steps taken to contain and remediate the breach]
+
+WHAT YOU CAN DO:
+- Change your password immediately
+- Enable two-factor authentication if not already active
+- Monitor your accounts for suspicious activity
+- [Additional specific recommendations]
+
+CONTACT US:
+If you have questions, please contact us at legal@acme.com.
+
+We sincerely apologize for this incident and are taking all necessary
+steps to prevent a recurrence.
+
+Sincerely,
+Acme Inc]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>6. Investigation Procedures</h2>
+<p>Upon confirmation of a security incident, the incident response team must:</p>
+<h3>6.1 Containment</h3>
+<ul>
+<li><p>[ ] Isolate affected systems from the network</p></li>
+<li><p>[ ] Revoke compromised credentials and API keys</p></li>
+<li><p>[ ] Block malicious IP addresses or accounts</p></li>
+<li><p>[ ] Preserve forensic evidence (logs, snapshots, memory dumps)</p></li>
+<li><p>[ ] Activate backup communication channels if primary channels are compromised</p></li>
+</ul>
+<h3>6.2 Investigation</h3>
+<ul>
+<li><p>[ ] Determine the root cause of the incident</p></li>
+<li><p>[ ] Identify all affected systems, services, and data</p></li>
+<li><p>[ ] Determine the scope of data exposure</p></li>
+<li><p>[ ] Review access logs and audit trails</p></li>
+<li><p>[ ] Interview relevant personnel</p></li>
+<li><p>[ ] Document timeline of events</p></li>
+<li><p>[ ] Engage external forensic specialists if needed</p></li>
+</ul>
+<h2>7. Remediation Steps</h2>
+<ul>
+<li><p>[ ] Patch or fix the vulnerability that led to the incident</p></li>
+<li><p>[ ] Rotate all potentially compromised secrets, keys, and tokens</p></li>
+<li><p>[ ] Force password resets for affected user accounts</p></li>
+<li><p>[ ] Update firewall rules and access controls</p></li>
+<li><p>[ ] Deploy additional monitoring on affected systems</p></li>
+<li><p>[ ] Verify that the attack vector is fully closed</p></li>
+<li><p>[ ] Conduct a follow-up scan to confirm no persistence mechanisms remain</p></li>
+<li><p>[ ] Update security documentation and runbooks</p></li>
+</ul>
+<h2>8. Post-Incident Review</h2>
+<p>A post-incident review (blameless post-mortem) must be conducted within <strong>5 business days</strong> of incident resolution.</p>
+<h3>Review Agenda</h3>
+<ol>
+<li><p><strong>Timeline reconstruction</strong> — What happened, and when?</p></li>
+<li><p><strong>Root cause analysis</strong> — Why did it happen?</p></li>
+<li><p><strong>Detection assessment</strong> — How was the incident detected? Could it have been detected sooner?</p></li>
+<li><p><strong>Response evaluation</strong> — Was the response effective? What worked well?</p></li>
+<li><p><strong>Gap identification</strong> — What controls, processes, or tools were missing?</p></li>
+<li><p><strong>Action items</strong> — Concrete tasks with owners and deadlines to prevent recurrence</p></li>
+</ol>
+<h3>Documentation</h3>
+<p>The post-incident report must include:</p>
+<ul>
+<li><p>Incident summary and severity classification</p></li>
+<li><p>Complete timeline of events</p></li>
+<li><p>Root cause and contributing factors</p></li>
+<li><p>Data impact assessment</p></li>
+<li><p>Remediation actions taken</p></li>
+<li><p>Lessons learned</p></li>
+<li><p>Preventive action items with owners and due dates</p></li>
+</ul>
+<h2>9. Contact List</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Name</p></th><th><p>Email</p></th><th><p>Responsibility</p></th></tr>
+<tr><td><p>Incident Response Lead</p></td><td><p>[Name]</p></td><td><p><a href="mailto:legal@acme.com">legal@acme.com</a></p></td><td><p>Overall incident coordination</p></td></tr>
+<tr><td><p>Data Protection Officer</p></td><td><p>Jane Mueller</p></td><td><p><a href="mailto:dpo@acme-saas.com">dpo@acme-saas.com</a></p></td><td><p>GDPR compliance, authority notification</p></td></tr>
+<tr><td><p>Engineering Lead</p></td><td><p>[Name]</p></td><td><p>[email]</p></td><td><p>Technical investigation and remediation</p></td></tr>
+<tr><td><p>Legal Counsel</p></td><td><p>[Name]</p></td><td><p>[email]</p></td><td><p>Legal obligations, regulatory response</p></td></tr>
+<tr><td><p>Communications Lead</p></td><td><p>[Name]</p></td><td><p>[email]</p></td><td><p>User notification, public communications</p></td></tr>
+<tr><td><p>Executive Sponsor</p></td><td><p>[Name]</p></td><td><p>[email]</p></td><td><p>Final decision authority</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>10. AI Incident Handling</h2>
+<p>This project integrates with AI services. The following additional procedures apply to AI-related incidents.</p>
+<h3>AI-Specific Incident Types</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Incident Type</p></th><th><p>Description</p></th><th><p>Severity</p></th></tr>
+<tr><td><p><strong>Data leak via AI</strong></p></td><td><p>User data or sensitive information exposed through AI model inputs/outputs</p></td><td><p>Critical (P1)</p></td></tr>
+<tr><td><p><strong>Prompt injection</strong></p></td><td><p>Malicious prompts bypass safety controls to extract data or alter behavior</p></td><td><p>High (P2)</p></td></tr>
+<tr><td><p><strong>Bias incident</strong></p></td><td><p>AI produces discriminatory, harmful, or biased outputs at scale</p></td><td><p>High (P2)</p></td></tr>
+<tr><td><p><strong>Hallucination impact</strong></p></td><td><p>AI generates false information that causes user harm or legal liability</p></td><td><p>Medium–High</p></td></tr>
+<tr><td><p><strong>Model manipulation</strong></p></td><td><p>Adversarial inputs cause the AI to produce unauthorized outputs</p></td><td><p>High (P2)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>AI Incident Response Steps</h3>
+<ol>
+<li><p><strong>Contain</strong> — Disable or throttle the affected AI feature immediately</p></li>
+<li><p><strong>Assess data exposure</strong> — Determine if user data was leaked to or through the AI service</p></li>
+<li><p><strong>Review AI provider logs</strong> — Request audit logs from the AI service provider</p></li>
+<li><p><strong>Evaluate downstream impact</strong> — Assess whether AI outputs were stored, shared, or acted upon</p></li>
+<li><p><strong>Notify AI provider</strong> — Report the incident to the AI service provider per your agreement</p></li>
+<li><p><strong>Update safeguards</strong> — Strengthen input validation, output filtering, and prompt guardrails</p></li>
+<li><p><strong>Document</strong> — Record the incident with specific attention to data flow through AI services</p></li>
+</ol>
+<h2>11. PCI DSS Incident Procedures</h2>
+<p>This project processes payment data. The following PCI DSS-specific procedures apply to incidents involving cardholder data.</p>
+<h3>PCI Incident Requirements</h3>
+<ul>
+<li><p>[ ] Immediately contain and limit the exposure of cardholder data</p></li>
+<li><p>[ ] Notify your payment processor (e.g., Stripe, PayPal) within <strong>24 hours</strong> of discovering a breach</p></li>
+<li><p>[ ] Notify the relevant card brands (Visa, Mastercard, etc.) per their specific timelines</p></li>
+<li><p>[ ] Engage a PCI Forensic Investigator (PFI) if required by the card brands</p></li>
+<li><p>[ ] Preserve all evidence for forensic investigation</p></li>
+<li><p>[ ] Do NOT restart or alter compromised systems until forensic evidence is collected</p></li>
+</ul>
+<h3>Payment Data Breach Checklist</h3>
+<ul>
+<li><p>[ ] Confirm whether primary account numbers (PANs) were exposed</p></li>
+<li><p>[ ] Determine if CVV/CVC or PIN data was compromised</p></li>
+<li><p>[ ] Verify that cardholder data was being handled per PCI DSS requirements</p></li>
+<li><p>[ ] Document all compromised merchant IDs and terminal IDs</p></li>
+<li><p>[ ] Prepare for potential PCI DSS re-certification</p></li>
+</ul>
+<h2>Review Notes</h2>
+<h3>What a lawyer should check</h3>
+<ul>
+<li><p>Verify notification timelines meet GDPR 72-hour requirement</p></li>
+<li><p>Confirm escalation procedures are realistic</p></li>
+<li><p>Check that all required roles are assigned</p></li>
+<li><p>Ensure breach notification templates are jurisdiction-appropriate</p></li>
+</ul>
+<h3>Auto-generated vs. needs human input</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Section</p></th><th><p>Status</p></th><th><p>Confidence</p></th></tr>
+<tr><td><p>Response procedures</p></td><td><p>Standard template</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Notification timelines</p></td><td><p>Based on GDPR requirements</p></td><td><p>High</p></td></tr>
+<tr><td><p>Team assignments</p></td><td><p>Placeholder — needs completion</p></td><td><p>N/A</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Security Policy (<code>SECURITY.md</code>)</p></li>
+<li><p>Data Breach Notification Templates (<code>DATA<em>BREACH</em>NOTIFICATION_TEMPLATE.md</code>)</p></li>
+<li><p>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</p></li>
+<li><p>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This incident response plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. It should be reviewed and customized by your legal and security teams before adoption.</em></p>

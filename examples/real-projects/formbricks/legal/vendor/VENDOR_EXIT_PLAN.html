@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VENDOR EXIT PLAN — formbricks</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>VENDOR EXIT PLAN</h1>
+      <p class="meta">formbricks &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="vendor-exit-plan">Vendor Exit Plan</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> formbricks</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<hr>
+<h2 id="purpose">Purpose</h2>
+<p>This document outlines the migration strategy for each third-party service provider integrated into <strong>formbricks</strong>. It ensures the organization can transition away from any vendor without unacceptable disruption to service delivery or data loss.</p>
+<p>This plan is required by enterprise Data Processing Agreements (DPAs) and demonstrates vendor independence in accordance with business continuity best practices.</p>
+<p>For questions about vendor exit strategies, contact [your-email@example.com].</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Vendor</th><th style="text-align:left">Category</th><th style="text-align:left">Migration Complexity</th><th style="text-align:left">Estimated Timeline</th><th style="text-align:left">Alternatives</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Amazon S3 (AWS)</td><td style="text-align:left">storage</td><td style="text-align:left">Medium</td><td style="text-align:left">2-4 weeks (depends on data volume)</td><td style="text-align:left">Google Cloud Storage, Azure Blob Storage, Backblaze B2</td></tr>
+<tr><td style="text-align:left">Sentry</td><td style="text-align:left">monitoring</td><td style="text-align:left">Low</td><td style="text-align:left">1-2 weeks</td><td style="text-align:left">Datadog, Bugsnag, Rollbar</td></tr>
+<tr><td style="text-align:left">Google APIs</td><td style="text-align:left">other</td><td style="text-align:left">Medium</td><td style="text-align:left">[Estimate based on integration depth and data volume]</td><td style="text-align:left">[Research alternatives based on your requirements]</td></tr>
+<tr><td style="text-align:left">PostHog</td><td style="text-align:left">analytics</td><td style="text-align:left">Medium</td><td style="text-align:left">2-3 weeks</td><td style="text-align:left">Mixpanel, Amplitude, Google Analytics</td></tr>
+<tr><td style="text-align:left">Stripe</td><td style="text-align:left">payment</td><td style="text-align:left">High</td><td style="text-align:left">4-8 weeks</td><td style="text-align:left">PayPal/Braintree, Adyen, Square</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="detailed-exit-plans">Detailed Exit Plans</h2>
+<h3 id="amazon-s3-aws">Amazon S3 (AWS)</h3>
+<p><strong>Category:</strong> storage</p>
+<p><strong>Migration Complexity:</strong> Medium</p>
+<p><strong>Estimated Timeline:</strong> 2-4 weeks (depends on data volume)</p>
+<h4 id="data-export-procedures">Data Export Procedures</h4>
+<p>AWS CLI: aws s3 sync; SDK: programmatic download; S3 Batch Operations for large-scale</p>
+<h4 id="data-portability">Data Portability</h4>
+<p>All objects downloadable; metadata preserved; no proprietary format lock-in</p>
+<h4 id="alternative-services">Alternative Services</h4>
+<ul>
+<li>Google Cloud Storage</li>
+<li>Azure Blob Storage</li>
+<li>Backblaze B2</li>
+<li>Cloudflare R2</li>
+<li>MinIO (self-hosted)</li>
+</ul>
+<h4 id="contract-termination">Contract Termination</h4>
+<p>Delete S3 buckets; close AWS account; data transfer charges apply</p>
+<h4 id="key-migration-risks">Key Migration Risks</h4>
+<ul>
+<li>Data transfer costs (egress fees)</li>
+<li>IAM policy migration</li>
+<li>Presigned URL expiration</li>
+<li>Cross-region latency changes</li>
+</ul>
+<h4 id="migration-checklist">Migration Checklist</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all integration points in codebase</li>
+<li><input type="checkbox" disabled> Export all data from Amazon S3 (AWS)</li>
+<li><input type="checkbox" disabled> Select and evaluate replacement service</li>
+<li><input type="checkbox" disabled> Implement replacement integration in staging</li>
+<li><input type="checkbox" disabled> Verify data migration completeness</li>
+<li><input type="checkbox" disabled> Update environment variables and configuration</li>
+<li><input type="checkbox" disabled> Test all affected functionality</li>
+<li><input type="checkbox" disabled> Deploy to production with rollback plan</li>
+<li><input type="checkbox" disabled> Confirm contract termination with Amazon S3 (AWS)</li>
+<li><input type="checkbox" disabled> Verify data deletion from Amazon S3 (AWS) per DPA requirements</li>
+<li><input type="checkbox" disabled> Update compliance documentation (privacy policy, sub-processor list)</li>
+</ul>
+<h3 id="sentry">Sentry</h3>
+<p><strong>Category:</strong> monitoring</p>
+<p><strong>Migration Complexity:</strong> Low</p>
+<p><strong>Estimated Timeline:</strong> 1-2 weeks</p>
+<h4 id="data-export-procedures">Data Export Procedures</h4>
+<p>API: export issues, events, and project data; Discover: CSV export</p>
+<h4 id="data-portability">Data Portability</h4>
+<p>Issue and event data exportable via API; source maps stored locally</p>
+<h4 id="alternative-services">Alternative Services</h4>
+<ul>
+<li>Datadog</li>
+<li>Bugsnag</li>
+<li>Rollbar</li>
+<li>LogRocket</li>
+<li>GlitchTip (self-hosted)</li>
+</ul>
+<h4 id="contract-termination">Contract Termination</h4>
+<p>Cancel via organization settings; data deleted after retention period</p>
+<h4 id="key-migration-risks">Key Migration Risks</h4>
+<ul>
+<li>Alert rule migration</li>
+<li>Release tracking reconfiguration</li>
+<li>Source map upload pipeline changes</li>
+</ul>
+<h4 id="migration-checklist">Migration Checklist</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all integration points in codebase</li>
+<li><input type="checkbox" disabled> Export all data from Sentry</li>
+<li><input type="checkbox" disabled> Select and evaluate replacement service</li>
+<li><input type="checkbox" disabled> Implement replacement integration in staging</li>
+<li><input type="checkbox" disabled> Verify data migration completeness</li>
+<li><input type="checkbox" disabled> Update environment variables and configuration</li>
+<li><input type="checkbox" disabled> Test all affected functionality</li>
+<li><input type="checkbox" disabled> Deploy to production with rollback plan</li>
+<li><input type="checkbox" disabled> Confirm contract termination with Sentry</li>
+<li><input type="checkbox" disabled> Verify data deletion from Sentry per DPA requirements</li>
+<li><input type="checkbox" disabled> Update compliance documentation (privacy policy, sub-processor list)</li>
+</ul>
+<h3 id="google-apis">Google APIs</h3>
+<p><strong>Category:</strong> other</p>
+<p><strong>Migration Complexity:</strong> Medium</p>
+<p><strong>Estimated Timeline:</strong> [Estimate based on integration depth and data volume]</p>
+<h4 id="data-export-procedures">Data Export Procedures</h4>
+<p>[Contact vendor for data export procedures]</p>
+<h4 id="data-portability">Data Portability</h4>
+<p>[Review vendor documentation for data portability options]</p>
+<h4 id="alternative-services">Alternative Services</h4>
+<ul>
+<li>[Research alternatives based on your requirements]</li>
+</ul>
+<h4 id="contract-termination">Contract Termination</h4>
+<p>[Review contract terms for termination procedures and notice periods]</p>
+<h4 id="key-migration-risks">Key Migration Risks</h4>
+<ul>
+<li>Data migration complexity</li>
+<li>Service continuity during transition</li>
+<li>Contract termination fees</li>
+</ul>
+<h4 id="migration-checklist">Migration Checklist</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all integration points in codebase</li>
+<li><input type="checkbox" disabled> Export all data from Google APIs</li>
+<li><input type="checkbox" disabled> Select and evaluate replacement service</li>
+<li><input type="checkbox" disabled> Implement replacement integration in staging</li>
+<li><input type="checkbox" disabled> Verify data migration completeness</li>
+<li><input type="checkbox" disabled> Update environment variables and configuration</li>
+<li><input type="checkbox" disabled> Test all affected functionality</li>
+<li><input type="checkbox" disabled> Deploy to production with rollback plan</li>
+<li><input type="checkbox" disabled> Confirm contract termination with Google APIs</li>
+<li><input type="checkbox" disabled> Verify data deletion from Google APIs per DPA requirements</li>
+<li><input type="checkbox" disabled> Update compliance documentation (privacy policy, sub-processor list)</li>
+</ul>
+<h3 id="posthog">PostHog</h3>
+<p><strong>Category:</strong> analytics</p>
+<p><strong>Migration Complexity:</strong> Medium</p>
+<p><strong>Estimated Timeline:</strong> 2-3 weeks</p>
+<h4 id="data-export-procedures">Data Export Procedures</h4>
+<p>Dashboard: export events; API: bulk event retrieval; self-hosted: direct database access</p>
+<h4 id="data-portability">Data Portability</h4>
+<p>Full event data exportable; open-source version allows direct database access</p>
+<h4 id="alternative-services">Alternative Services</h4>
+<ul>
+<li>Mixpanel</li>
+<li>Amplitude</li>
+<li>Google Analytics</li>
+<li>Plausible</li>
+<li>Matomo (self-hosted)</li>
+</ul>
+<h4 id="contract-termination">Contract Termination</h4>
+<p>Cancel subscription via dashboard; self-hosted instances can continue indefinitely</p>
+<h4 id="key-migration-risks">Key Migration Risks</h4>
+<ul>
+<li>Feature flag migration if using PostHog flags</li>
+<li>Session recording data non-transferable</li>
+</ul>
+<h4 id="migration-checklist">Migration Checklist</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all integration points in codebase</li>
+<li><input type="checkbox" disabled> Export all data from PostHog</li>
+<li><input type="checkbox" disabled> Select and evaluate replacement service</li>
+<li><input type="checkbox" disabled> Implement replacement integration in staging</li>
+<li><input type="checkbox" disabled> Verify data migration completeness</li>
+<li><input type="checkbox" disabled> Update environment variables and configuration</li>
+<li><input type="checkbox" disabled> Test all affected functionality</li>
+<li><input type="checkbox" disabled> Deploy to production with rollback plan</li>
+<li><input type="checkbox" disabled> Confirm contract termination with PostHog</li>
+<li><input type="checkbox" disabled> Verify data deletion from PostHog per DPA requirements</li>
+<li><input type="checkbox" disabled> Update compliance documentation (privacy policy, sub-processor list)</li>
+</ul>
+<h3 id="stripe">Stripe</h3>
+<p><strong>Category:</strong> payment</p>
+<p><strong>Migration Complexity:</strong> High</p>
+<p><strong>Estimated Timeline:</strong> 4-8 weeks</p>
+<h4 id="data-export-procedures">Data Export Procedures</h4>
+<p>Dashboard: export transactions, customers, invoices as CSV; API: bulk data retrieval</p>
+<h4 id="data-portability">Data Portability</h4>
+<p>Full transaction history, customer data, and subscription data exportable via API and dashboard</p>
+<h4 id="alternative-services">Alternative Services</h4>
+<ul>
+<li>PayPal/Braintree</li>
+<li>Adyen</li>
+<li>Square</li>
+<li>Paddle</li>
+<li>Lemon Squeezy</li>
+</ul>
+<h4 id="contract-termination">Contract Termination</h4>
+<p>Cancel via dashboard; must migrate active subscriptions before closure; 90-day data access post-closure</p>
+<h4 id="key-migration-risks">Key Migration Risks</h4>
+<ul>
+<li>Active subscription migration complexity</li>
+<li>PCI compliance re-certification with new provider</li>
+<li>Webhook endpoint reconfiguration</li>
+<li>Payment method re-collection from customers</li>
+</ul>
+<h4 id="migration-checklist">Migration Checklist</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all integration points in codebase</li>
+<li><input type="checkbox" disabled> Export all data from Stripe</li>
+<li><input type="checkbox" disabled> Select and evaluate replacement service</li>
+<li><input type="checkbox" disabled> Implement replacement integration in staging</li>
+<li><input type="checkbox" disabled> Verify data migration completeness</li>
+<li><input type="checkbox" disabled> Update environment variables and configuration</li>
+<li><input type="checkbox" disabled> Test all affected functionality</li>
+<li><input type="checkbox" disabled> Deploy to production with rollback plan</li>
+<li><input type="checkbox" disabled> Confirm contract termination with Stripe</li>
+<li><input type="checkbox" disabled> Verify data deletion from Stripe per DPA requirements</li>
+<li><input type="checkbox" disabled> Update compliance documentation (privacy policy, sub-processor list)</li>
+</ul>
+<hr>
+<h2 id="general-migration-framework">General Migration Framework</h2>
+<h3 id="phase-1-planning-week-1">Phase 1: Planning (Week 1)</h3>
+<ol>
+<li><strong>Impact Assessment</strong> — Identify all systems, features, and data flows dependent on the vendor</li>
+<li><strong>Alternative Evaluation</strong> — Score alternatives on feature parity, pricing, compliance, and data residency</li>
+<li><strong>Stakeholder Communication</strong> — Notify affected teams and set expectations for timeline</li>
+<li><strong>Budget Approval</strong> — Secure budget for migration effort and potential parallel running costs</li>
+</ol>
+<h3 id="phase-2-preparation-week-2-3">Phase 2: Preparation (Week 2-3)</h3>
+<ol>
+<li><strong>Data Export</strong> — Execute full data export from current vendor</li>
+<li><strong>Data Validation</strong> — Verify export completeness and integrity</li>
+<li><strong>Environment Setup</strong> — Provision accounts and configure new vendor</li>
+<li><strong>Code Changes</strong> — Implement abstraction layer or direct replacement in codebase</li>
+</ol>
+<h3 id="phase-3-migration-week-3-4">Phase 3: Migration (Week 3-4)</h3>
+<ol>
+<li><strong>Staging Deployment</strong> — Deploy to staging with new vendor integration</li>
+<li><strong>Regression Testing</strong> — Run full test suite against new integration</li>
+<li><strong>Performance Testing</strong> — Verify latency, throughput, and reliability meet requirements</li>
+<li><strong>Data Migration</strong> — Import historical data into new vendor (if applicable)</li>
+</ol>
+<h3 id="phase-4-cutover-week-4">Phase 4: Cutover (Week 4+)</h3>
+<ol>
+<li><strong>Blue-Green Deployment</strong> — Run both vendors in parallel during cutover window</li>
+<li><strong>Production Switch</strong> — Point production traffic to new vendor</li>
+<li><strong>Monitoring</strong> — Watch for errors, performance degradation, and data inconsistencies</li>
+<li><strong>Old Vendor Cleanup</strong> — Terminate contract, request data deletion, revoke API keys</li>
+</ol>
+<h3 id="phase-5-post-migration-week-5">Phase 5: Post-Migration (Week 5+)</h3>
+<ol>
+<li><strong>Documentation Update</strong> — Update privacy policy, sub-processor list, vendor contacts</li>
+<li><strong>Compliance Review</strong> — Verify new vendor meets all DPA and regulatory requirements</li>
+<li><strong>Lessons Learned</strong> — Document migration experience for future reference</li>
+<li><strong>Audit Trail</strong> — File migration records for compliance auditing</li>
+</ol>
+<hr>
+<h2 id="data-deletion-verification">Data Deletion Verification</h2>
+<p>After completing any vendor migration, verify the following:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> All personal data has been deleted from the old vendor per GDPR Art. 17</li>
+<li><input type="checkbox" disabled> Vendor has provided written confirmation of data deletion</li>
+<li><input type="checkbox" disabled> Backup copies at the vendor have been destroyed (confirm retention schedules)</li>
+<li><input type="checkbox" disabled> API keys and access tokens for the old vendor have been revoked</li>
+<li><input type="checkbox" disabled> DNS records, webhooks, and integrations pointing to old vendor have been removed</li>
+</ul>
+<hr>
+<h2 id="review-schedule">Review Schedule</h2>
+<p>This vendor exit plan should be reviewed:</p>
+<ul>
+<li><strong>Annually</strong> as part of the regular vendor management review</li>
+<li><strong>When adding</strong> a new third-party vendor</li>
+<li><strong>When a vendor</strong> changes pricing, terms, or has a significant incident</li>
+<li><strong>Before contract renewal</strong> to evaluate whether migration is advantageous</li>
+</ul>
+<hr>
+<p><em>This vendor exit plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and customize for your specific requirements. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

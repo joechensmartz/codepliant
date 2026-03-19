@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA DICTIONARY — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA DICTIONARY</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="data-dictionary">Data Dictionary</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> root</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</li>
+<li>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</li>
+<li>Data Classification Report (<code>DATA_CLASSIFICATION.md</code>)</li>
+</ul>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This document catalogs every data field detected across the <strong>root</strong> application. It serves as the authoritative reference for data mapping required by GDPR Article 30 (Records of Processing Activities), SOC 2 (CC6.1), and internal data governance policies.</p>
+<h2 id="2-scope">2. Scope</h2>
+<p>This dictionary covers data fields from:</p>
+<ul>
+<li>Database schemas (Prisma, Drizzle, Mongoose, TypeORM, SQLAlchemy, Django)</li>
+<li>API routes and request handlers</li>
+<li>Third-party service integrations</li>
+<li>Environment variable configurations</li>
+</ul>
+<hr>
+<h2 id="3-data-field-catalog">3. Data Field Catalog</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Source</th><th style="text-align:left">Type</th><th style="text-align:left">Sensitivity</th><th style="text-align:left">Retention</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">payment_info</td><td style="text-align:left">stripe</td><td style="text-align:left">Financial — PCI</td><td style="text-align:left">Critical</td><td style="text-align:left">Do not store post-authorization; tokenize</td><td style="text-align:left">Payment processing</td></tr>
+<tr><td style="text-align:left">billing address</td><td style="text-align:left">stripe</td><td style="text-align:left">Location</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion</td><td style="text-align:left">Billing, shipping, localization</td></tr>
+<tr><td style="text-align:left">billing_address</td><td style="text-align:left">stripe</td><td style="text-align:left">Location</td><td style="text-align:left">High</td><td style="text-align:left">7 years (tax/legal)</td><td style="text-align:left">Billing</td></tr>
+<tr><td style="text-align:left">customer_email</td><td style="text-align:left">stripe</td><td style="text-align:left">Contact</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion + 30 days</td><td style="text-align:left">Transaction receipts</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">stripe</td><td style="text-align:left">Contact</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion + 30 days</td><td style="text-align:left">Account identification, communication</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Contact</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion + 30 days</td><td style="text-align:left">Account identification, communication</td></tr>
+<tr><td style="text-align:left">email content</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Contact</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion + 30 days</td><td style="text-align:left">Account identification, communication</td></tr>
+<tr><td style="text-align:left">email_address</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Contact</td><td style="text-align:left">High</td><td style="text-align:left">Until unsubscribe or account deletion</td><td style="text-align:left">Email delivery</td></tr>
+<tr><td style="text-align:left">IP address</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Location</td><td style="text-align:left">High</td><td style="text-align:left">Until account deletion</td><td style="text-align:left">Billing, shipping, localization</td></tr>
+<tr><td style="text-align:left">transaction_history</td><td style="text-align:left">stripe</td><td style="text-align:left">Financial</td><td style="text-align:left">High</td><td style="text-align:left">7 years (tax/legal)</td><td style="text-align:left">Order records, refunds</td></tr>
+<tr><td style="text-align:left">conversation history</td><td style="text-align:left">openai</td><td style="text-align:left">AI Interaction</td><td style="text-align:left">Medium</td><td style="text-align:left">30 days (logs); per vendor policy</td><td style="text-align:left">AI feature delivery</td></tr>
+<tr><td style="text-align:left">conversation_history</td><td style="text-align:left">openai</td><td style="text-align:left">AI Interaction</td><td style="text-align:left">Medium</td><td style="text-align:left">30 days (logs); per vendor policy</td><td style="text-align:left">Context continuity</td></tr>
+<tr><td style="text-align:left">email_content</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Communication</td><td style="text-align:left">Medium</td><td style="text-align:left">90 days (delivery logs)</td><td style="text-align:left">Email delivery</td></tr>
+<tr><td style="text-align:left">ip_address</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Technical</td><td style="text-align:left">Medium</td><td style="text-align:left">90 days</td><td style="text-align:left">Geolocation, fraud prevention</td></tr>
+<tr><td style="text-align:left">ip_address</td><td style="text-align:left">posthog</td><td style="text-align:left">Technical</td><td style="text-align:left">Medium</td><td style="text-align:left">90 days</td><td style="text-align:left">Geolocation, fraud prevention</td></tr>
+<tr><td style="text-align:left">page_views</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Behavioral</td><td style="text-align:left">Medium</td><td style="text-align:left">26 months</td><td style="text-align:left">Product analytics</td></tr>
+<tr><td style="text-align:left">page_views</td><td style="text-align:left">posthog</td><td style="text-align:left">Behavioral</td><td style="text-align:left">Medium</td><td style="text-align:left">26 months</td><td style="text-align:left">Product analytics</td></tr>
+<tr><td style="text-align:left">session cookies</td><td style="text-align:left">express-session</td><td style="text-align:left">Session</td><td style="text-align:left">Medium</td><td style="text-align:left">Until session expiry</td><td style="text-align:left">Session management</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">express-session</td><td style="text-align:left">Session</td><td style="text-align:left">Medium</td><td style="text-align:left">Until session expiry</td><td style="text-align:left">Session management</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Session</td><td style="text-align:left">Medium</td><td style="text-align:left">Until session expiry</td><td style="text-align:left">Session management</td></tr>
+<tr><td style="text-align:left">session recordings</td><td style="text-align:left">posthog</td><td style="text-align:left">Session</td><td style="text-align:left">Medium</td><td style="text-align:left">Until session expiry</td><td style="text-align:left">Session management</td></tr>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">User Content</td><td style="text-align:left">Medium</td><td style="text-align:left">Until user-initiated deletion</td><td style="text-align:left">File storage</td></tr>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">Multer</td><td style="text-align:left">User Content</td><td style="text-align:left">Medium</td><td style="text-align:left">Until user-initiated deletion</td><td style="text-align:left">File storage</td></tr>
+<tr><td style="text-align:left">user prompts</td><td style="text-align:left">openai</td><td style="text-align:left">AI Interaction</td><td style="text-align:left">Medium</td><td style="text-align:left">30 days (logs); per vendor policy</td><td style="text-align:left">AI feature delivery</td></tr>
+<tr><td style="text-align:left">user_behavior</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Behavioral</td><td style="text-align:left">Medium</td><td style="text-align:left">26 months</td><td style="text-align:left">UX optimization</td></tr>
+<tr><td style="text-align:left">user_behavior</td><td style="text-align:left">posthog</td><td style="text-align:left">Behavioral</td><td style="text-align:left">Medium</td><td style="text-align:left">26 months</td><td style="text-align:left">UX optimization</td></tr>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Application Data</td><td style="text-align:left">Medium</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">user_prompts</td><td style="text-align:left">openai</td><td style="text-align:left">AI Interaction</td><td style="text-align:left">Medium</td><td style="text-align:left">30 days (logs); per vendor policy</td><td style="text-align:left">AI feature delivery</td></tr>
+<tr><td style="text-align:left">AI Interaction Data</td><td style="text-align:left">openai</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Communication Data</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">cookie data</td><td style="text-align:left">cookie-parser</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">cookies</td><td style="text-align:left">cookie-parser</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">custom events</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">posthog</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">device_info</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Technical</td><td style="text-align:left">Low</td><td style="text-align:left">26 months</td><td style="text-align:left">Compatibility analytics</td></tr>
+<tr><td style="text-align:left">device_info</td><td style="text-align:left">posthog</td><td style="text-align:left">Technical</td><td style="text-align:left">Low</td><td style="text-align:left">26 months</td><td style="text-align:left">Compatibility analytics</td></tr>
+<tr><td style="text-align:left">feature flag usage</td><td style="text-align:left">posthog</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">Multer</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">Metadata</td><td style="text-align:left">Low</td><td style="text-align:left">Until file deletion</td><td style="text-align:left">File management</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">Multer</td><td style="text-align:left">Metadata</td><td style="text-align:left">Low</td><td style="text-align:left">Until file deletion</td><td style="text-align:left">File management</td></tr>
+<tr><td style="text-align:left">Financial Data</td><td style="text-align:left">stripe</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">generated content</td><td style="text-align:left">openai</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">generated_content</td><td style="text-align:left">openai</td><td style="text-align:left">AI Output</td><td style="text-align:left">Low</td><td style="text-align:left">Per user deletion request</td><td style="text-align:left">AI feature delivery</td></tr>
+<tr><td style="text-align:left">page views</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">payment information</td><td style="text-align:left">stripe</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">Product.name</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">ProductOption.name</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">ProductOptionValue.name</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">ProductVariant.name</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">potential PII in uploaded content</td><td style="text-align:left">Multer</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">search queries</td><td style="text-align:left">algoliasearch</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">search result clicks</td><td style="text-align:left">algoliasearch</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">Redis (Cache)</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">node-cache</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">transaction history</td><td style="text-align:left">stripe</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">Multer</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">posthog</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">posthog</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">user identity</td><td style="text-align:left">@segment/analytics-next</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">user search behavior</td><td style="text-align:left">algoliasearch</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">User-Uploaded Content</td><td style="text-align:left">Multer</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+<tr><td style="text-align:left">User-Uploaded Content</td><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">Application Data</td><td style="text-align:left">Low</td><td style="text-align:left">Per data retention policy</td><td style="text-align:left">Application functionality</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-sensitivity-summary">4. Sensitivity Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Count</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Critical</td><td style="text-align:left">1</td><td style="text-align:left">Credentials, government IDs, raw payment data — requires encryption at rest and strict access control</td></tr>
+<tr><td style="text-align:left">High</td><td style="text-align:left">9</td><td style="text-align:left">PII (names, emails, addresses) — requires encryption and consent</td></tr>
+<tr><td style="text-align:left">Medium</td><td style="text-align:left">18</td><td style="text-align:left">Behavioral data, session data, IP addresses — requires privacy notice</td></tr>
+<tr><td style="text-align:left">Low</td><td style="text-align:left">41</td><td style="text-align:left">Preferences, metadata, operational data — standard handling</td></tr>
+</tbody>
+</table>
+<p><strong>Total fields cataloged:</strong> 69</p>
+<hr>
+<h2 id="5-cross-references">5. Cross-References</h2>
+<ul>
+<li><strong>Database schema</strong> — Fields detected from Prisma/ORM model definitions</li>
+<li><strong>Storage services</strong> — @aws-sdk/client-s3, Multer</li>
+<li><strong>Analytics services</strong> — @segment/analytics-next, posthog</li>
+<li><strong>Email services</strong> — @sendgrid/mail</li>
+<li><strong>Other services</strong> — algoliasearch, cookie-parser, express-session</li>
+<li><strong>Database services</strong> — ioredis</li>
+<li><strong>Ai services</strong> — openai</li>
+<li><strong>Payment services</strong> — stripe</li>
+</ul>
+<hr>
+<h2 id="6-related-documents">6. Related Documents</h2>
+<ul>
+<li><strong>PRIVACY_POLICY.md</strong> — Public disclosure of data collection practices</li>
+<li><strong>DATA<em>RETENTION</em>POLICY.md</strong> — Detailed retention schedules and deletion procedures</li>
+<li><strong>DATA_CLASSIFICATION.md</strong> — GDPR sensitivity classification details</li>
+<li><strong>DATA<em>FLOW</em>MAP.md</strong> — Visual representation of data flows between services</li>
+<li><strong>DSAR<em>HANDLING</em>GUIDE.md</strong> — Data subject access request procedures</li>
+</ul>
+<hr>
+<h2 id="7-maintenance">7. Maintenance</h2>
+<p>This data dictionary should be updated:</p>
+<ul>
+<li>When new database models or fields are added</li>
+<li>When new third-party services are integrated</li>
+<li>When data retention policies change</li>
+<li>At minimum <strong>quarterly</strong> as part of compliance review</li>
+</ul>
+<p>For questions about this data dictionary, contact [your-email@example.com].</p>
+<hr>
+<p><em>This Data Dictionary was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

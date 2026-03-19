@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI MODEL CARD — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AI MODEL CARD</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="ai-model-card">AI Model Card</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> maybe</p>
+<p><strong>Risk Classification:</strong> Limited</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>AI Disclosure (<code>AI_DISCLOSURE.md</code>)</li>
+<li>AI Act Compliance Checklist (<code>AI<em>ACT</em>CHECKLIST.md</code>)</li>
+<li>AI Governance Framework (<code>AI<em>GOVERNANCE</em>FRAMEWORK.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This document provides model-level transparency information for each AI service integrated into this application, in accordance with Article 53 of the EU AI Act (Regulation (EU) 2024/1689) regarding transparency obligations for providers of general-purpose AI (GPAI) models. Full obligations take effect on <strong>2 August 2026</strong>.</blockquote>
+<hr>
+<h2 id="ruby-openai">ruby-openai</h2>
+<h3 id="overview">Overview</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Detail</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Model / Service</strong></td><td style="text-align:left">ruby-openai</td></tr>
+<tr><td style="text-align:left"><strong>Provider</strong></td><td style="text-align:left">ruby-openai</td></tr>
+<tr><td style="text-align:left"><strong>Service Identifier</strong></td><td style="text-align:left"><code>ruby-openai</code></td></tr>
+<tr><td style="text-align:left"><strong>Use Case in This Application</strong></td><td style="text-align:left">AI processing</td></tr>
+<tr><td style="text-align:left"><strong>Risk Classification</strong></td><td style="text-align:left">Limited</td></tr>
+</tbody>
+</table>
+<h3 id="data-inputs">Data Inputs</h3>
+<p>The following data types are sent to this AI service based on code analysis:</p>
+<ul>
+<li>user prompts</li>
+<li>conversation history</li>
+<li>generated content</li>
+</ul>
+<h3 id="known-limitations">Known Limitations</h3>
+<ul>
+<li>Specific limitations not available — consult provider documentation</li>
+<li>May generate inaccurate or misleading outputs</li>
+<li>Performance characteristics should be evaluated for the specific use case</li>
+</ul>
+<h3 id="bias-considerations">Bias Considerations</h3>
+<ul>
+<li>Bias profile not available — consult provider documentation</li>
+<li>Applications should conduct bias evaluation for the specific use case</li>
+<li>Monitor outputs for demographic or topical bias</li>
+</ul>
+<h3 id="performance-metrics">Performance Metrics</h3>
+<blockquote><strong>Placeholder:</strong> Consult provider documentation for performance information</blockquote>
+<p>></p>
+<blockquote>Operators deploying this AI system should document application-specific performance metrics including accuracy, false positive/negative rates, and fairness metrics relevant to their use case.</blockquote>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Value</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Accuracy</td><td style="text-align:left"><em>To be measured</em></td><td style="text-align:left">Measure against application-specific test set</td></tr>
+<tr><td style="text-align:left">Latency (p50)</td><td style="text-align:left"><em>To be measured</em></td><td style="text-align:left">Median response time in production</td></tr>
+<tr><td style="text-align:left">Latency (p99)</td><td style="text-align:left"><em>To be measured</em></td><td style="text-align:left">99th percentile response time</td></tr>
+<tr><td style="text-align:left">Error rate</td><td style="text-align:left"><em>To be measured</em></td><td style="text-align:left">Rate of failed or invalid responses</td></tr>
+<tr><td style="text-align:left">Fairness</td><td style="text-align:left"><em>To be measured</em></td><td style="text-align:left">Evaluate across demographic groups relevant to use case</td></tr>
+</tbody>
+</table>
+<h3 id="training-data-transparency">Training Data Transparency</h3>
+<ul>
+<li><strong>Provider documentation:</strong> <a href="#">ruby-openai Research & Documentation</a></li>
+<li><strong>Training data disclosure:</strong> Refer to the provider's published model card and technical reports for details on training data composition, filtering, and governance</li>
+<li><strong>Data governance:</strong> Review the provider's data processing agreement for information on how training data is sourced, curated, and maintained</li>
+</ul>
+<hr>
+<h2 id="article-53-compliance-summary">Article 53 Compliance Summary</h2>
+<p>The EU AI Act Article 53 requires providers of general-purpose AI models to:</p>
+<h3 id="531-technical-documentation">53(1) — Technical Documentation</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Maintain up-to-date technical documentation for each GPAI model used</li>
+<li><input type="checkbox" disabled> Documentation covers model training, testing, and evaluation results</li>
+<li><input type="checkbox" disabled> Information is sufficient for downstream providers to comply with their obligations</li>
+</ul>
+<h3 id="531a-model-identification">53(1)(a) — Model Identification</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Each AI model is clearly identified with name, version, and provider</li>
+<li><input type="checkbox" disabled> Model capabilities and limitations are documented</li>
+<li><input type="checkbox" disabled> Intended and foreseeable use cases are described</li>
+</ul>
+<h3 id="531b-training-testing">53(1)(b) — Training & Testing</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Training data sources and governance are documented (or referenced from provider)</li>
+<li><input type="checkbox" disabled> Evaluation results and benchmark performance are recorded</li>
+<li><input type="checkbox" disabled> Testing methodology is described or referenced</li>
+</ul>
+<h3 id="531c-integration-information">53(1)(c) — Integration Information</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Information for downstream integrators is provided</li>
+<li><input type="checkbox" disabled> API usage, data flow, and processing scope are documented</li>
+<li><input type="checkbox" disabled> Known risks and mitigation measures are communicated</li>
+</ul>
+<h3 id="531d-copyright-compliance">53(1)(d) — Copyright Compliance</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Provider's copyright policy for training data is reviewed</li>
+<li><input type="checkbox" disabled> EU Copyright Directive (Directive (EU) 2019/790) compliance is verified with provider</li>
+<li><input type="checkbox" disabled> Text and data mining opt-out mechanisms are documented where applicable</li>
+</ul>
+<h3 id="532-systemic-risk-if-applicable">53(2) — Systemic Risk (if applicable)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Assess whether any GPAI model used has systemic risk (>10^25 FLOPs or EC designation)</li>
+<li><input type="checkbox" disabled> If systemic risk applies, additional obligations under Article 55 must be met</li>
+<li><input type="checkbox" disabled> Model evaluation and adversarial testing documentation is maintained</li>
+</ul>
+<blockquote><strong>Note:</strong> As a deployer (not provider) of GPAI models, your primary obligation is to ensure that the AI providers you use comply with Article 53. This checklist helps you verify and document that compliance.</blockquote>
+<h2 id="data-flow-summary">Data Flow Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Type</th><th style="text-align:left">AI Providers Receiving Data</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user prompts</td><td style="text-align:left">ruby-openai</td></tr>
+<tr><td style="text-align:left">conversation history</td><td style="text-align:left">ruby-openai</td></tr>
+<tr><td style="text-align:left">generated content</td><td style="text-align:left">ruby-openai</td></tr>
+</tbody>
+</table>
+<h2 id="contact">Contact</h2>
+<p>For questions about the AI models used in this application:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This AI Model Card was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Model information is derived from publicly available provider documentation as of the generation date. This document should be reviewed by a qualified professional to ensure compliance with the EU AI Act (Regulation (EU) 2024/1689) Article 53 and other applicable regulations. Performance metrics marked as placeholders must be completed based on application-specific evaluation.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

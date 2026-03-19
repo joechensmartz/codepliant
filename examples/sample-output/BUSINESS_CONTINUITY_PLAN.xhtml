@@ -1,0 +1,267 @@
+<h1>Business Continuity Plan</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Business Continuity Plan</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</p></li>
+<li><p>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</p></li>
+<li><p>Backup Policy (<code>BACKUP_POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<p>This Business Continuity Plan (BCP) defines recovery objectives, failover procedures, and communication protocols for <strong>Acme Inc</strong>'s <strong>nextjs-saas-example</strong> application. It ensures that critical services can be restored within acceptable timeframes following an outage, disaster, or other disruptive event.</p>
+<h2>1. Recovery Objectives by Service</h2>
+<p>Recovery Time Objective (RTO) defines the maximum acceptable downtime. Recovery Point Objective (RPO) defines the maximum acceptable data loss window.</p>
+<h3>1.1 Critical Services (RTO: 1 hour, RPO: 0–5 minutes)</h3>
+<p>Services whose outage immediately prevents users from accessing core functionality.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>RTO</p></th><th><p>RPO</p></th><th><p>Recovery Strategy</p></th></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>1 hour</p></td><td><p>0 minutes</p></td><td><p>Session cache failover; extend existing tokens</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Payment Processing</p></td><td><p>1 hour</p></td><td><p>0 minutes</p></td><td><p>Transaction queue with retry; idempotency keys</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>1 hour</p></td><td><p>0 minutes</p></td><td><p>Transaction queue with retry; idempotency keys</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>Database</p></td><td><p>1 hour</p></td><td><p>5 minutes</p></td><td><p>Automated replica promotion; point-in-time recovery</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>1.2 High Priority Services (RTO: 4 hours, RPO: 1 hour)</h3>
+<p>Services that support core functionality but have workarounds available.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>RTO</p></th><th><p>RPO</p></th><th><p>Recovery Strategy</p></th></tr>
+<tr><td><p>resend</p></td><td><p>Email</p></td><td><p>4 hours</p></td><td><p>1 hour</p></td><td><p>Queue with retry; alternative SMTP provider</p></td></tr>
+<tr><td><p>openai</p></td><td><p>AI Service</p></td><td><p>4 hours</p></td><td><p>1 hour</p></td><td><p>Graceful degradation; disable AI features</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>1.3 Standard Services (RTO: 24 hours, RPO: 24 hours)</h3>
+<p>Services whose outage is noticeable but does not prevent core operations.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>RTO</p></th><th><p>RPO</p></th><th><p>Recovery Strategy</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Monitoring</p></td><td><p>24 hours</p></td><td><p>24 hours</p></td><td><p>Secondary monitoring; manual checks</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Analytics</p></td><td><p>24 hours</p></td><td><p>24 hours</p></td><td><p>Data buffering; delayed processing</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Infrastructure Overview</h2>
+<p>Cloud provider details should be documented here. Run a cloud scan to auto-populate.</p>
+<h3>2.2 Architecture Diagram</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[[TODO: Insert or link to architecture diagram showing:]
+- Application servers and their locations
+- Database servers and replication topology
+- CDN and edge locations
+- Third-party service dependencies
+- Network connectivity and failover paths]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>3. Failover Procedures</h2>
+<h3>3.1 Database Failover</h3>
+<p>Detected database service(s): prisma</p>
+<ol>
+<li><p><strong>Detection</strong> — Automated monitoring detects database unavailability</p></li>
+<li><p><strong>Assessment</strong> — Determine if the outage is transient (retry) or persistent (failover)</p></li>
+<li><p><strong>Failover Execution</strong></p></li>
+</ol>
+<ul>
+<li><p>[ ] Promote read replica to primary (if using replication)</p></li>
+<li><p>[ ] Update connection strings / DNS records</p></li>
+<li><p>[ ] Verify application connectivity to new primary</p></li>
+<li><p>[ ] Validate data integrity after failover</p></li>
+</ul>
+<ol>
+<li><p><strong>Communication</strong> — Notify engineering team and update status page</p></li>
+<li><p><strong>Recovery</strong> — Rebuild failed node and re-establish replication</p></li>
+</ol>
+<h3>3.2 Application Failover</h3>
+<ol>
+<li><p><strong>Detection</strong> — Health check failures trigger failover</p></li>
+<li><p><strong>Traffic Routing</strong> — Load balancer / DNS routes traffic to healthy instances</p></li>
+<li><p><strong>Scaling</strong> — Auto-scale additional instances if capacity is reduced</p></li>
+<li><p><strong>Verification</strong> — Confirm application functionality in failover state</p></li>
+</ol>
+<h3>3.3 Authentication Service Failover</h3>
+<p>Detected auth service(s): @supabase/supabase-js</p>
+<ul>
+<li><p>[ ] If third-party auth is unavailable, evaluate enabling cached session validation</p></li>
+<li><p>[ ] Extend existing session tokens to prevent mass logouts</p></li>
+<li><p>[ ] Display maintenance notice on login page</p></li>
+<li><p>[ ] Monitor auth provider status page for restoration timeline</p></li>
+<li><p>[ ] Once restored, force session refresh for security</p></li>
+</ul>
+<h3>3.4 Payment Service Failover</h3>
+<p>Detected payment service(s): stripe, stripe-ios</p>
+<ul>
+<li><p>[ ] Queue pending transactions for retry when service is restored</p></li>
+<li><p>[ ] Display user-facing message about temporary payment unavailability</p></li>
+<li><p>[ ] Do NOT attempt to reprocess payments without idempotency keys</p></li>
+<li><p>[ ] Notify finance team of any transactions in uncertain state</p></li>
+<li><p>[ ] After restoration, reconcile all queued transactions</p></li>
+</ul>
+<h3>3.5 AI Service Failover</h3>
+<p>Detected AI service(s): openai</p>
+<ul>
+<li><p>[ ] Activate graceful degradation (disable AI features, show fallback content)</p></li>
+<li><p>[ ] Queue AI requests for processing when service is restored (if applicable)</p></li>
+<li><p>[ ] Display user-facing notice that AI features are temporarily unavailable</p></li>
+<li><p>[ ] Monitor AI provider status page for restoration timeline</p></li>
+</ul>
+<h2>4. Backup Strategy</h2>
+<h3>4.1 Backup Schedule</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Type</p></th><th><p>Frequency</p></th><th><p>Retention</p></th><th><p>Storage Location</p></th><th><p>Encryption</p></th></tr>
+<tr><td><p>Production database</p></td><td><p>Continuous (streaming) + daily snapshot</p></td><td><p>30 days</p></td><td><p>[Backup region]</p></td><td><p>AES-256 at rest</p></td></tr>
+<tr><td><p>User-uploaded files</p></td><td><p>Daily incremental, weekly full</p></td><td><p>90 days</p></td><td><p>[Backup region]</p></td><td><p>AES-256 at rest</p></td></tr>
+<tr><td><p>Application configuration</p></td><td><p>On every change (version control)</p></td><td><p>Indefinite</p></td><td><p>Git repository</p></td><td><p>In transit (TLS)</p></td></tr>
+<tr><td><p>Secrets and credentials</p></td><td><p>On rotation</p></td><td><p>Current + 1 previous</p></td><td><p>Secret manager</p></td><td><p>Envelope encryption</p></td></tr>
+<tr><td><p>Audit logs</p></td><td><p>Daily export</p></td><td><p>1 year minimum</p></td><td><p>[Compliance storage]</p></td><td><p>AES-256 at rest</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>4.2 Backup Verification</h3>
+<ul>
+<li><p>[ ] Automated backup verification runs daily (check backup completeness and integrity)</p></li>
+<li><p>[ ] Monthly restore drill — restore from backup to a staging environment</p></li>
+<li><p>[ ] Quarterly full disaster recovery test (see Section 8)</p></li>
+<li><p>[ ] Document all backup test results and any issues found</p></li>
+</ul>
+<h2>5. Communication Plan</h2>
+<h3>5.1 Internal Communication</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Severity</p></th><th><p>Notify</p></th><th><p>Channel</p></th><th><p>Timeline</p></th></tr>
+<tr><td><p>Critical (P1)</p></td><td><p>All engineering + leadership</p></td><td><p>Slack/Teams war room + phone</p></td><td><p>Immediately</p></td></tr>
+<tr><td><p>High (P2)</p></td><td><p>Engineering lead + on-call</p></td><td><p>Slack/Teams channel</p></td><td><p>Within 30 minutes</p></td></tr>
+<tr><td><p>Medium (P3)</p></td><td><p>Engineering team</p></td><td><p>Slack/Teams channel</p></td><td><p>Within 2 hours</p></td></tr>
+<tr><td><p>Low (P4)</p></td><td><p>Relevant team</p></td><td><p>Ticket / async update</p></td><td><p>Within 24 hours</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.2 External Communication</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Audience</p></th><th><p>Channel</p></th><th><p>Responsibility</p></th><th><p>Template</p></th></tr>
+<tr><td><p>Users / Customers</p></td><td><p>Status page + in-app banner</p></td><td><p>Communications Lead</p></td><td><p>See 5.4</p></td></tr>
+<tr><td><p>Enterprise clients</p></td><td><p>Direct email / Slack</p></td><td><p>Account Management</p></td><td><p>See 5.4</p></td></tr>
+<tr><td><p>Regulators (if data breach)</p></td><td><p>Formal notification</p></td><td><p>DPO / Legal</p></td><td><p>See Incident Response Plan</p></td></tr>
+<tr><td><p>Partners / Vendors</p></td><td><p>Email</p></td><td><p>Business Operations</p></td><td><p>As needed</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.3 Escalation Path</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[On-call Engineer
+    └─&gt; Engineering Lead
+          └─&gt; VP of Engineering
+                └─&gt; CTO / CEO
+                      └─&gt; Board (if material impact)]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>5.4 Status Update Templates</h3>
+<p><strong>Initial notification:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[[Acme Inc] Service Disruption — [Service Name]
+
+We are currently experiencing issues with [affected service/feature].
+Our engineering team is investigating and working to restore service.
+
+Impact: [Description of user impact]
+Started: [Time in UTC]
+Next update: [Time — within 1 hour for P1/P2]]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Resolution notification:</strong></p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[[Acme Inc] Resolved — [Service Name]
+
+The issue affecting [service/feature] has been resolved.
+
+Duration: [Total downtime]
+Root cause: [Brief description]
+Next steps: [Any follow-up actions users need to take]]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>6. Roles and Responsibilities</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Primary Responsibility</p></th><th><p>Backup</p></th></tr>
+<tr><td><p>Incident Commander</p></td><td><p>Overall coordination of BCP activation</p></td><td><p>[Backup name]</p></td></tr>
+<tr><td><p>Technical Lead</p></td><td><p>Directs technical recovery efforts</p></td><td><p>[Backup name]</p></td></tr>
+<tr><td><p>Communications Lead</p></td><td><p>Manages internal and external communications</p></td><td><p>[Backup name]</p></td></tr>
+<tr><td><p>Operations Lead</p></td><td><p>Infrastructure and deployment management</p></td><td><p>[Backup name]</p></td></tr>
+<tr><td><p>Data Protection Officer</p></td><td><p>Assesses data impact and regulatory obligations</p></td><td><p>[Backup name]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>7. Third-Party Dependency Map</h2>
+<p>The following third-party services are critical to application operation:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Impact if Unavailable</p></th><th><p>Alternative / Workaround</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>Blind to errors and performance issues</p></td><td><p>Manual log review; secondary tools</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>Users cannot sign in or register</p></td><td><p>Cached sessions; manual verification</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>AI-powered features unavailable</p></td><td><p>Disable AI features; show static content</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>Usage data not collected (no user impact)</p></td><td><p>Buffer events client-side</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p>Data reads/writes unavailable</p></td><td><p>Read replica; cached responses</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>Transactional emails delayed or undelivered</p></td><td><p>Alternative email provider; manual send</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>Payment processing halted</p></td><td><p>Queue transactions for later processing</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>Payment processing halted</p></td><td><p>Queue transactions for later processing</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>8. Testing and Drills</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Exercise</p></th><th><p>Frequency</p></th><th><p>Scope</p></th><th><p>Participants</p></th></tr>
+<tr><td><p>Tabletop exercise</p></td><td><p>Quarterly</p></td><td><p>Walk through BCP scenarios verbally</p></td><td><p>All BCP role holders</p></td></tr>
+<tr><td><p>Backup restore drill</p></td><td><p>Monthly</p></td><td><p>Restore from backup to staging</p></td><td><p>Engineering team</p></td></tr>
+<tr><td><p>Failover test</p></td><td><p>Quarterly</p></td><td><p>Trigger controlled failover</p></td><td><p>Engineering + Operations</p></td></tr>
+<tr><td><p>Full DR simulation</p></td><td><p>Annually</p></td><td><p>Simulate complete outage, activate BCP</p></td><td><p>All teams</p></td></tr>
+<tr><td><p>Communication drill</p></td><td><p>Semi-annually</p></td><td><p>Test notification chains and templates</p></td><td><p>All BCP role holders</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>After each drill, document:</p>
+<ul>
+<li><p>[ ] What worked well</p></li>
+<li><p>[ ] What needs improvement</p></li>
+<li><p>[ ] Action items with owners and deadlines</p></li>
+<li><p>[ ] Updates to this BCP based on lessons learned</p></li>
+</ul>
+<h2>9. Plan Maintenance</h2>
+<p>This Business Continuity Plan must be reviewed and updated:</p>
+<ul>
+<li><p>After any significant infrastructure change</p></li>
+<li><p>After any actual incident or outage</p></li>
+<li><p>After each DR drill or tabletop exercise</p></li>
+<li><p>At minimum quarterly</p></li>
+<li><p>When adding or removing critical third-party services</p></li>
+</ul>
+<p>For questions about this plan, contact <strong>legal@acme.com</strong>.</p>
+<hr />
+<p><em>This Business Continuity Plan was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Recovery objectives and procedures should be reviewed and customized by your engineering and operations teams based on actual infrastructure and business requirements.</em></p>

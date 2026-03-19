@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUDIT LOG POLICY — formbricks</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AUDIT LOG POLICY</h1>
+      <p class="meta">formbricks &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="audit-log-policy">Audit Log Policy</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> formbricks</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</li>
+<li>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</li>
+<li>Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</li>
+</ul>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This policy defines what events are logged across the <strong>formbricks</strong> application, how long logs are retained, and who has access to audit data. It supports compliance with GDPR Article 30 (records of processing activities), SOC 2 Trust Service Criteria (CC7.2 — monitoring), and internal security requirements.</p>
+<h2 id="2-scope">2. Scope</h2>
+<p>This policy applies to all logging and monitoring systems integrated into the application, including error tracking, analytics, authentication logs, and transaction records.</p>
+<hr>
+<h2 id="3-events-logged">3. Events Logged</h2>
+<p>The following table describes the categories of events logged by each detected service:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Events Logged</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">monitoring</td><td style="text-align:left">Application errors; Unhandled exceptions; Performance transactions; User context (IP, browser)</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">analytics</td><td style="text-align:left">Page views; Feature flag evaluations; User actions; Session recordings</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">auth</td><td style="text-align:left">Application events, user interactions, system metrics</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">Application events, user interactions, system metrics</td></tr>
+</tbody>
+</table>
+<h3 id="31-standard-application-events">3.1 Standard Application Events</h3>
+<p>In addition to service-specific events, the following application events should be logged:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Event Category</th><th style="text-align:left">Examples</th><th style="text-align:left">Severity</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Authentication</td><td style="text-align:left">Login, logout, password reset, MFA enrollment</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Authorization</td><td style="text-align:left">Permission changes, role assignments, access denials</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Data Access</td><td style="text-align:left">Record views, exports, bulk downloads</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Data Modification</td><td style="text-align:left">Create, update, delete operations on personal data</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">System Administration</td><td style="text-align:left">Config changes, deployment events, service restarts</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Security Events</td><td style="text-align:left">Failed login attempts, IP blocks, rate limit triggers</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">User Account</td><td style="text-align:left">Registration, profile updates, account deletion</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">API Access</td><td style="text-align:left">API key creation, OAuth token grants, webhook events</td><td style="text-align:left">Medium</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-retention-periods">4. Retention Periods</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Log Category</th><th style="text-align:left">Retention Period</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Monitoring logs</td><td style="text-align:left">30 days (error logs), 90 days (performance data)</td><td style="text-align:left">Operational debugging and performance optimization</td></tr>
+<tr><td style="text-align:left">Analytics logs</td><td style="text-align:left">26 months (industry default, configurable)</td><td style="text-align:left">Product insights and trend analysis</td></tr>
+<tr><td style="text-align:left">Auth logs</td><td style="text-align:left">Duration of account + 30 days after deletion</td><td style="text-align:left">Security compliance and access auditing</td></tr>
+<tr><td style="text-align:left">Payment logs</td><td style="text-align:left">7 years (financial regulation requirement)</td><td style="text-align:left">Financial regulation (tax, accounting, anti-fraud)</td></tr>
+<tr><td style="text-align:left">Security/audit logs</td><td style="text-align:left">1 year minimum</td><td style="text-align:left">Regulatory compliance and incident investigation</td></tr>
+<tr><td style="text-align:left">Access logs</td><td style="text-align:left">90 days</td><td style="text-align:left">Operational debugging and security review</td></tr>
+</tbody>
+</table>
+<h3 id="41-retention-rules">4.1 Retention Rules</h3>
+<ol>
+<li><strong>Minimum retention:</strong> Security-critical logs must be retained for at least 1 year</li>
+<li><strong>Maximum retention:</strong> Personal data in logs must not be retained beyond the stated period without legal basis</li>
+<li><strong>Automated deletion:</strong> Log rotation and TTL policies must be configured to enforce retention limits</li>
+<li><strong>Legal holds:</strong> Retention periods may be extended when required for legal proceedings or regulatory investigations</li>
+<li><strong>Anonymization:</strong> Where possible, logs should be anonymized after the active retention period</li>
+</ol>
+<hr>
+<h2 id="5-access-controls">5. Access Controls</h2>
+<h3 id="51-role-based-access">5.1 Role-Based Access</h3>
+<p><strong>Monitoring Logs:</strong></p>
+<ul>
+<li>Engineering team: Full read access to error and performance logs</li>
+<li>On-call engineers: Real-time alert access</li>
+<li>Security team: Audit log access for incident investigation</li>
+<li>Management: Aggregated dashboard access only</li>
+</ul>
+<p><strong>Analytics Logs:</strong></p>
+<ul>
+<li>Product team: Full analytics dashboard access</li>
+<li>Marketing team: Campaign and conversion metrics</li>
+<li>Engineering team: Technical metrics and debugging data</li>
+<li>Executives: High-level KPI dashboards only</li>
+</ul>
+<p><strong>Auth Logs:</strong></p>
+<ul>
+<li>Security team: Authentication event audit logs</li>
+<li>Engineering team: Debugging access (time-limited)</li>
+<li>Compliance team: Access review audit trail</li>
+<li>No individual user credentials accessible to any team</li>
+</ul>
+<p><strong>Payment Logs:</strong></p>
+<ul>
+<li>Finance team: Transaction records and billing data</li>
+<li>Support team: Order lookup (masked payment details)</li>
+<li>Security team: Fraud detection logs</li>
+<li>PCI DSS scope: Only authorized personnel with need-to-know</li>
+</ul>
+<h3 id="52-access-principles">5.2 Access Principles</h3>
+<ol>
+<li><strong>Least privilege:</strong> Team members only access logs necessary for their role</li>
+<li><strong>Need-to-know:</strong> Access to sensitive logs (auth, payment) requires explicit approval</li>
+<li><strong>Time-limited:</strong> Debug access grants expire automatically after 24 hours</li>
+<li><strong>Audited:</strong> All access to audit logs is itself logged (meta-audit)</li>
+<li><strong>No PII in dashboards:</strong> Shared dashboards must not display personally identifiable information</li>
+</ol>
+<h3 id="53-access-review-schedule">5.3 Access Review Schedule</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Review Type</th><th style="text-align:left">Frequency</th><th style="text-align:left">Responsible Party</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Access permissions audit</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Security team</td></tr>
+<tr><td style="text-align:left">Log access review</td><td style="text-align:left">Monthly</td><td style="text-align:left">Engineering lead</td></tr>
+<tr><td style="text-align:left">Service account audit</td><td style="text-align:left">Quarterly</td><td style="text-align:left">DevOps team</td></tr>
+<tr><td style="text-align:left">Compliance review</td><td style="text-align:left">Annually</td><td style="text-align:left">Compliance officer</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-log-integrity-security">6. Log Integrity & Security</h2>
+<h3 id="61-protection-measures">6.1 Protection Measures</h3>
+<ul>
+<li><strong>Encryption in transit:</strong> All log data transmitted over TLS 1.2+</li>
+<li><strong>Encryption at rest:</strong> Log storage encrypted using AES-256 or equivalent</li>
+<li><strong>Immutability:</strong> Audit logs must be append-only; modification or deletion requires elevated privileges and is itself logged</li>
+<li><strong>Centralization:</strong> Logs should be forwarded to a centralized logging system separate from application servers</li>
+<li><strong>Backup:</strong> Critical audit logs backed up to a separate storage system</li>
+</ul>
+<h3 id="62-tampering-detection">6.2 Tampering Detection</h3>
+<ul>
+<li>Log entries must include timestamps from a trusted time source</li>
+<li>Integrity checksums should be computed for log batches</li>
+<li>Anomalous gaps in log sequences must trigger alerts</li>
+</ul>
+<hr>
+<h2 id="7-incident-response-integration">7. Incident Response Integration</h2>
+<p>Audit logs are a critical input to the incident response process:</p>
+<ol>
+<li><strong>Detection:</strong> Monitoring alerts trigger based on log patterns (error spikes, auth failures)</li>
+<li><strong>Investigation:</strong> Security team uses audit logs to reconstruct event timelines</li>
+<li><strong>Containment:</strong> Access logs help identify affected systems and users</li>
+<li><strong>Notification:</strong> Log data informs breach notification requirements (GDPR 72-hour window)</li>
+<li><strong>Post-mortem:</strong> Audit trail supports root cause analysis</li>
+</ol>
+<p>For the full incident response plan, see <strong>INCIDENT<em>RESPONSE</em>PLAN.md</strong>.</p>
+<hr>
+<h2 id="8-policy-review">8. Policy Review</h2>
+<p>This audit log policy should be reviewed:</p>
+<ul>
+<li><strong>Quarterly</strong> as part of the security review cycle</li>
+<li><strong>When adding</strong> new monitoring or analytics services</li>
+<li><strong>After a security incident</strong> to identify logging gaps</li>
+<li><strong>When regulatory requirements</strong> change</li>
+</ul>
+<p>For questions about this policy, contact [your-email@example.com].</p>
+<hr>
+<p><em>This Audit Log Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

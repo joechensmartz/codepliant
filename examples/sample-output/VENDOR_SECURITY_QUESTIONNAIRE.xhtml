@@ -1,0 +1,188 @@
+<h1>Vendor Security Questionnaire</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Vendor Security Questionnaire</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Vendor:</strong> Acme Inc</p>
+<p><strong>Completed by:</strong> [NAME / TITLE]</p>
+<p><strong>Date:</strong> 2026-03-18</p>
+<p><strong>Contact:</strong> legal@acme.com</p>
+<p>This questionnaire follows the SIG Lite (Standardized Information Gathering) format and has been pre-populated based on automated analysis of the codebase. Review and update all answers before submitting to customers.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Legend:</strong> Answers prefixed with <code>[AUTO]</code> were derived from code analysis. Answers prefixed with <code>[MANUAL]</code> require human input.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Company Information</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Company legal name</p></td><td><p>Acme Inc</p></td></tr>
+<tr><td><p>Company website</p></td><td><p>https://acme-saas.com</p></td></tr>
+<tr><td><p>Primary security contact</p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p>Data Protection Officer</p></td><td><p>Jane Mueller (dpo@acme-saas.com)</p></td></tr>
+<tr><td><p>Company headquarters location</p></td><td><p>[MANUAL] [LOCATION]</p></td></tr>
+<tr><td><p>Number of employees</p></td><td><p>[MANUAL]</p></td></tr>
+<tr><td><p>Year founded</p></td><td><p>[MANUAL]</p></td></tr>
+<tr><td><p>Do you carry cyber liability insurance?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Security Governance</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Do you have a dedicated security team?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have a written information security policy?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you conduct regular security awareness training?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have an incident response plan?</p></td><td><p>[AUTO] Yes — generated as part of compliance documentation</p></td></tr>
+<tr><td><p>Do you conduct regular risk assessments?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have a business continuity / disaster recovery plan?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Certifications & Compliance</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>SOC 2 Type I or II certification?</p></td><td><p>[MANUAL] Yes / No — Type: __</p></td></tr>
+<tr><td><p>ISO 27001 certified?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>GDPR compliant?</p></td><td><p>[AUTO] Compliance documentation generated — [MANUAL] confirm operational compliance</p></td></tr>
+<tr><td><p>PCI DSS compliant?</p></td><td><p>[AUTO] Payment processing detected (via Stripe/PayPal) — payments are handled by PCI-compliant third party</p></td></tr>
+<tr><td><p>HIPAA compliant?</p></td><td><p>[MANUAL] Yes / No / N/A</p></td></tr>
+<tr><td><p>Do you undergo regular third-party penetration testing?</p></td><td><p>[MANUAL] Yes / No — Frequency: __</p></td></tr>
+<tr><td><p>Do you have a bug bounty or vulnerability disclosure program?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Access Control</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Do you require authentication for access?</p></td><td><p>[AUTO] Yes — authentication implemented via @supabase/supabase-js</p></td></tr>
+<tr><td><p>Do you support multi-factor authentication (MFA)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you enforce role-based access control (RBAC)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you enforce least-privilege access?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>How are user sessions managed?</p></td><td><p>[MANUAL] [DESCRIBE SESSION MANAGEMENT]</p></td></tr>
+<tr><td><p>Do you support Single Sign-On (SSO)?</p></td><td><p>[MANUAL] Yes / No — Protocol: SAML / OIDC</p></td></tr>
+<tr><td><p>Do you log all access events?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. Data Protection</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Is data encrypted at rest?</p></td><td><p>[MANUAL] Yes / No — Algorithm: __</p></td></tr>
+<tr><td><p>Is data encrypted in transit?</p></td><td><p>[AUTO] Yes — HTTPS/TLS required for all communications</p></td></tr>
+<tr><td><p>Where is data stored?</p></td><td><p>[AUTO] Database services detected: prisma — [MANUAL] specify hosting region</p></td></tr>
+<tr><td><p>Do you use a key management service?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have a data retention policy?</p></td><td><p>[AUTO] Yes — generated as part of compliance documentation</p></td></tr>
+<tr><td><p>Do you have a data classification scheme?</p></td><td><p>[AUTO] Yes — data classification report generated</p></td></tr>
+<tr><td><p>Can you delete customer data on request?</p></td><td><p>[MANUAL] Yes / No — Process: __</p></td></tr>
+<tr><td><p>Do you have a data backup strategy?</p></td><td><p>[MANUAL] Yes / No — Frequency: __</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>6. Application Security</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Do you follow a secure software development lifecycle (SDLC)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you conduct code reviews?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you perform static application security testing (SAST)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you perform dynamic application security testing (DAST)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you scan dependencies for known vulnerabilities?</p></td><td><p>[AUTO] Yes — dependency vulnerability scanning is part of the compliance process</p></td></tr>
+<tr><td><p>Do you use error monitoring / observability?</p></td><td><p>[AUTO] Yes — @sentry/node</p></td></tr>
+<tr><td><p>Do you have a WAF (Web Application Firewall)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you protect against OWASP Top 10 vulnerabilities?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>7. Infrastructure Security</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Where is your application hosted?</p></td><td><p>[MANUAL] [CLOUD PROVIDER / REGION]</p></td></tr>
+<tr><td><p>Do you use a CDN?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you use container orchestration?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have network segmentation?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you use intrusion detection / prevention systems?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you perform regular vulnerability scanning of infrastructure?</p></td><td><p>[MANUAL] Yes / No — Frequency: __</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>8. Third-Party Risk Management</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>How many third-party sub-processors do you use?</p></td><td><p>[AUTO] 8 sub-processor(s) detected</p></td></tr>
+<tr><td><p>Do you maintain a sub-processor list?</p></td><td><p>[AUTO] Yes — generated as part of compliance documentation</p></td></tr>
+<tr><td><p>Do you have DPAs with all sub-processors?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you assess the security posture of sub-processors?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you notify customers of sub-processor changes?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>9. Incident Response</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Do you have a documented incident response plan?</p></td><td><p>[AUTO] Yes — incident response plan generated</p></td></tr>
+<tr><td><p>What is your breach notification timeline?</p></td><td><p>[AUTO] Within 72 hours (GDPR), within 30-60 days (US state laws)</p></td></tr>
+<tr><td><p>Do you conduct post-incident reviews?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have a dedicated incident response team?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Security incident reporting email</p></td><td><p>legal@acme.com</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>10. AI & Machine Learning</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Does the application use AI/ML services?</p></td><td><p>[AUTO] Yes — openai</p></td></tr>
+<tr><td><p>What data is sent to AI services?</p></td><td><p>[AUTO] user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p>Is AI-generated content identified to users?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do you have safeguards against AI bias?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Can customers opt out of AI processing?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+<tr><td><p>Do AI providers use customer data for training?</p></td><td><p>[MANUAL] Yes / No — [VERIFY WITH EACH PROVIDER]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>11. Privacy & Data Subject Rights</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Do you have a published privacy policy?</p></td><td><p>[AUTO] Yes — generated as part of compliance documentation</p></td></tr>
+<tr><td><p>Do you support data subject access requests (DSAR)?</p></td><td><p>[AUTO] DSAR handling guide generated</p></td></tr>
+<tr><td><p>Do you support the right to erasure?</p></td><td><p>[MANUAL] Yes / No — Process: __</p></td></tr>
+<tr><td><p>Do you support data portability?</p></td><td><p>[MANUAL] Yes / No — Format: __</p></td></tr>
+<tr><td><p>Do you obtain consent for analytics/tracking?</p></td><td><p>[MANUAL] Yes / No — [AUTO] consent management guide generated</p></td></tr>
+<tr><td><p>Do you process data of minors (under 16)?</p></td><td><p>[MANUAL] Yes / No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Third-Party Risk Assessment (<code>THIRD<em>PARTY</em>RISK_ASSESSMENT.md</code>)</p></li>
+<li><p>Supplier Code of Conduct (<code>SUPPLIER<em>CODE</em>OF_CONDUCT.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This vendor security questionnaire was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Answers marked [AUTO] are derived from code analysis and should be verified. Answers marked [MANUAL] require input from your security and compliance teams. This document is not a substitute for a formal security assessment.</em></p>

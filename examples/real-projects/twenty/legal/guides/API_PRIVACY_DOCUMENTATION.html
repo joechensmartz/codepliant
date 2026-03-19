@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API PRIVACY DOCUMENTATION — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>API PRIVACY DOCUMENTATION</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="api-privacy-documentation">API Privacy Documentation</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> twenty</p>
+<p>This document maps API endpoints to the types of personal data they process, providing transparency for privacy compliance. Each endpoint is linked to the relevant section of the Privacy Policy.</p>
+<p>For questions about API data handling, contact [your-email@example.com].</p>
+<h2 id="overview">Overview</h2>
+<p>Total API endpoints detected: <strong>15</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Endpoints accepting user data</td><td style="text-align:left">5</td></tr>
+<tr><td style="text-align:left">Write endpoints (POST/PUT/PATCH/DELETE)</td><td style="text-align:left">6</td></tr>
+<tr><td style="text-align:left">Read-only endpoints (GET/QUERY)</td><td style="text-align:left">9</td></tr>
+</tbody>
+</table>
+<h2 id="endpoint-summary">Endpoint Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Endpoint</th><th style="text-align:left">Method</th><th style="text-align:left">Data Fields</th><th style="text-align:left">Privacy Category</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>/start-recording</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/recording/:recordingId</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/(public)/releases/api</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/contributors/[slug]/og.png</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/contributors/contributorStats/[slug]</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/activate</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/checkout</code></td><td style="text-align:left">POST</td><td style="text-align:left">billingInterval, successUrl, seatCount</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/portal</code></td><td style="text-align:left">POST</td><td style="text-align:left">enterpriseKey, returnUrl</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/seats</code></td><td style="text-align:left">POST</td><td style="text-align:left">enterpriseKey, seatCount</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/status</code></td><td style="text-align:left">POST</td><td style="text-align:left">enterpriseKey</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/enterprise/validate</code></td><td style="text-align:left">POST</td><td style="text-align:left">enterpriseKey</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/github-stars</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/keystatic/[...params]</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/keystatic/[...params]</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/releases</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+</tbody>
+</table>
+<h2 id="privacy-policy-mapping">Privacy Policy Mapping</h2>
+<p>The following table maps data categories collected through the API to the corresponding sections in your Privacy Policy.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Category</th><th style="text-align:left">Privacy Policy Section</th><th style="text-align:left">Legal Basis (GDPR)</th><th style="text-align:left">Retention</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Other</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">Personal Information We Collect</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account + [X] days</td></tr>
+<tr><td style="text-align:left">Financial Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">AI Interaction Data</td><td style="text-align:left">AI and Automated Processing</td><td style="text-align:left">Contractual necessity / Consent</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Communication Data</td><td style="text-align:left">Communications</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Technical & Diagnostic Data</td><td style="text-align:left">Automatically Collected Information</td><td style="text-align:left">Legitimate interest (Art. 6(1)(f))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">User-Uploaded Content</td><td style="text-align:left">User Content</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Until deletion requested</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Contact Information</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Authentication Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Location Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+</tbody>
+</table>
+<h2 id="detailed-endpoint-documentation">Detailed Endpoint Documentation</h2>
+<h3 id="get-start-recording"><code>GET /start-recording</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-companion/src/server.js</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/start-recording</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-recordingrecordingid"><code>GET /recording/:recordingId</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-companion/src/server.js</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/recording/:recordingId</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-publicreleasesapi"><code>GET /(public)/releases/api</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/(public)/releases/api/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/(public)/releases/api</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apicontributorsslugogpng"><code>GET /api/contributors/[slug]/og.png</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/contributors/[slug]/og.png/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/contributors/[slug]/og.png</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apicontributorscontributorstatsslug"><code>GET /api/contributors/contributorStats/[slug]</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/contributors/contributorStats/[slug]/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/contributors/contributorStats/[slug]</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apienterpriseactivate"><code>GET /api/enterprise/activate</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/activate/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/activate</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apienterprisecheckout"><code>POST /api/enterprise/checkout</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/checkout/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/checkout</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">billingInterval, successUrl, seatCount</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>billingInterval</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>successUrl</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>seatCount</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apienterpriseportal"><code>POST /api/enterprise/portal</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/portal/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/portal</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">enterpriseKey, returnUrl</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>enterpriseKey</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>returnUrl</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apienterpriseseats"><code>POST /api/enterprise/seats</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/seats/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/seats</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">enterpriseKey, seatCount</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>enterpriseKey</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>seatCount</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apienterprisestatus"><code>POST /api/enterprise/status</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/status/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/status</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">enterpriseKey</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>enterpriseKey</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apienterprisevalidate"><code>POST /api/enterprise/validate</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/enterprise/validate/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/enterprise/validate</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">enterpriseKey</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>enterpriseKey</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="get-apigithub-stars"><code>GET /api/github-stars</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/github-stars/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/github-stars</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apikeystaticparams"><code>GET /api/keystatic/[...params]</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/keystatic/[...params]/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/keystatic/[...params]</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apikeystaticparams"><code>POST /api/keystatic/[...params]</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/keystatic/[...params]/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/keystatic/[...params]</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apireleases"><code>GET /api/releases</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/twenty-website/src/app/api/releases/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/releases</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h2 id="api-data-flow-to-third-party-services">API Data Flow to Third-Party Services</h2>
+<p>The following third-party services may receive data submitted through the API.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Shared</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@sentry/node</td><td style="text-align:left">monitoring</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">drizzle</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">passport-google-oauth20</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Google profile data, OAuth tokens</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h2 id="recommendations">Recommendations</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document the purpose and legal basis for each data field collected</li>
+<li><input type="checkbox" disabled> Implement input validation on all endpoints accepting user data</li>
+<li><input type="checkbox" disabled> Add rate limiting to prevent abuse of data-accepting endpoints</li>
+<li><input type="checkbox" disabled> Ensure authentication is required for all endpoints accessing personal data</li>
+<li><input type="checkbox" disabled> Implement field-level encryption for sensitive data (SSN, financial data)</li>
+<li><input type="checkbox" disabled> Add API versioning to manage privacy-impacting changes</li>
+<li><input type="checkbox" disabled> Log all data access for audit trail purposes</li>
+<li><input type="checkbox" disabled> Document data retention periods for each endpoint's data</li>
+</ul>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</li>
+</ul>
+<hr>
+<p><em>This API privacy documentation was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>twenty</strong> codebase. It should be reviewed by your engineering and legal teams to ensure accuracy and completeness. Fields marked with brackets require manual input.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

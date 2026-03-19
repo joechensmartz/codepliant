@@ -1,0 +1,304 @@
+<h1>Third-Party Risk Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Third-Party Risk Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Assessor:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Sub-Processor List (<code>SUBPROCESSOR_LIST.md</code>)</p></li>
+<li><p>Vendor Contacts Directory (<code>VENDOR_CONTACTS.md</code>)</p></li>
+<li><p>Vendor Security Questionnaire (<code>VENDOR<em>SECURITY</em>QUESTIONNAIRE.md</code>)</p></li>
+<li><p>Risk Register (<code>RISK_REGISTER.md</code>)</p></li>
+</ul>
+<hr />
+<h2>Overview</h2>
+<p>This document provides a risk assessment of all third-party services integrated into the <strong>nextjs-saas-example</strong> application. Each vendor has been evaluated for data sensitivity, geographic risk, compliance certifications, data processing scope, and risk mitigation measures.</p>
+<p>Total third-party vendors assessed: <strong>7</strong></p>
+<p>For questions about this assessment, contact legal@acme.com.</p>
+<hr />
+<h2>Risk Matrix</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Vendor</p></th><th><p>Category</p></th><th><p>Data Sensitivity</p></th><th><p>Geographic Risk</p></th><th><p>Certifications</p></th><th><p>Overall Risk</p></th></tr>
+<tr><td><p>Sentry</p></td><td><p>monitoring</p></td><td><p>low</p></td><td><p>US</p></td><td><p>SOC 2 Type II, ISO 27001, GDPR</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Supabase</p></td><td><p>auth</p></td><td><p>high</p></td><td><p>Other</p></td><td><p>SOC 2 Type II, ISO 27001, GDPR</p></td><td><p>Critical</p></td></tr>
+<tr><td><p>OpenAI</p></td><td><p>ai</p></td><td><p>high</p></td><td><p>US</p></td><td><p>SOC 2 Type II, GDPR</p></td><td><p>Critical</p></td></tr>
+<tr><td><p>PostHog</p></td><td><p>analytics</p></td><td><p>medium</p></td><td><p>US</p></td><td><p>SOC 2 Type II, GDPR</p></td><td><p>High</p></td></tr>
+<tr><td><p>Resend</p></td><td><p>email</p></td><td><p>medium</p></td><td><p>US</p></td><td><p>SOC 2 Type II, GDPR</p></td><td><p>High</p></td></tr>
+<tr><td><p>Stripe</p></td><td><p>payment</p></td><td><p>high</p></td><td><p>US</p></td><td><p>PCI DSS Level 1, SOC 2 Type II, ISO 27001, GDPR</p></td><td><p>High</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>high</p></td><td><p>Other</p></td><td><p>None verified</p></td><td><p>Critical</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Detailed Vendor Assessments</h2>
+<h3>Sentry</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>monitoring</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>error data, stack traces, user context, device information, IP address</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>low</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>US</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>Medium — EU-US Data Privacy Framework applicable</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>SOC 2 Type II, ISO 27001, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>Error logs, stack traces, performance metrics</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>Low</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>PII scrubbing in error reports</p></li>
+<li><p>Short retention periods for logs</p></li>
+<li><p>Access restricted to engineering team</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+</ul>
+<h3>Supabase</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>auth</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>email, password hash, session data, user metadata</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>high</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>Other</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>High — verify adequacy decision or implement SCCs</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>SOC 2 Type II, ISO 27001, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>Identity verification, session management, credential storage</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>Critical</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>Industry-standard authentication protocols (OAuth 2.0, OIDC)</p></li>
+<li><p>Passwords never stored in plaintext</p></li>
+<li><p>Session tokens rotated regularly</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+</ul>
+<h3>OpenAI</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>ai</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>high</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>US</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>Medium — EU-US Data Privacy Framework applicable</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>SOC 2 Type II, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>User input processing, content generation, model training (per vendor policy)</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>Critical</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>Data minimization — only necessary context sent to AI provider</p></li>
+<li><p>Opt-out mechanism for AI processing where applicable</p></li>
+<li><p>Review vendor data retention and training policies</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] AI-specific data usage addendum</p></li>
+<li><p>[ ] BAA (Business Associate Agreement) — if handling PHI</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+</ul>
+<h3>PostHog</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>analytics</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>user behavior, session recordings, feature flag usage, device information</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>medium</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>US</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>Medium — EU-US Data Privacy Framework applicable</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>SOC 2 Type II, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>User behavior tracking, session data, event logging</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>IP anonymization enabled where supported</p></li>
+<li><p>Cookie consent required before tracking</p></li>
+<li><p>Data retention limits configured</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+</ul>
+<h3>Resend</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>email</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>email addresses, email content</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>medium</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>US</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>Medium — EU-US Data Privacy Framework applicable</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>SOC 2 Type II, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>Email addresses, message content, delivery metadata</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>TLS encryption for email transmission</p></li>
+<li><p>Unsubscribe mechanism in all marketing emails</p></li>
+<li><p>Email content not stored beyond delivery</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+</ul>
+<h3>Stripe</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>payment</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>payment information, billing address, email, transaction history</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>high</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>US</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>Medium — EU-US Data Privacy Framework applicable</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>PCI DSS Level 1, SOC 2 Type II, ISO 27001, GDPR</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>Payment card processing, billing records, transaction history</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>PCI DSS compliant processor handles all card data</p></li>
+<li><p>No raw payment data stored in application</p></li>
+<li><p>Tokenization used for recurring payments</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] PCI DSS Attestation of Compliance</p></li>
+<li><p>[ ] BAA (Business Associate Agreement) — if handling PHI</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+</ul>
+<h3>stripe-ios</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Attribute</p></th><th><p>Detail</p></th></tr>
+<tr><td><p><strong>Category</strong></p></td><td><p>payment</p></td></tr>
+<tr><td><p><strong>Data Processed</strong></p></td><td><p>payment information, billing address, email, transaction history</p></td></tr>
+<tr><td><p><strong>Data Sensitivity</strong></p></td><td><p>high</p></td></tr>
+<tr><td><p><strong>Geographic Location</strong></p></td><td><p>Other</p></td></tr>
+<tr><td><p><strong>Geographic Risk</strong></p></td><td><p>High — verify adequacy decision or implement SCCs</p></td></tr>
+<tr><td><p><strong>Certifications</strong></p></td><td><p>None verified</p></td></tr>
+<tr><td><p><strong>Processing Scope</strong></p></td><td><p>Payment card processing, billing records, transaction history</p></td></tr>
+<tr><td><p><strong>Overall Risk Level</strong></p></td><td><p>Critical</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Risk Mitigation Measures:</strong></p>
+<ul>
+<li><p>PCI DSS compliant processor handles all card data</p></li>
+<li><p>No raw payment data stored in application</p></li>
+<li><p>Tokenization used for recurring payments</p></li>
+</ul>
+<p><strong>Required Contracts:</strong></p>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] PCI DSS Attestation of Compliance</p></li>
+</ul>
+<hr />
+<h2>Vendor Due Diligence Checklist</h2>
+<p>Before onboarding any new third-party vendor, complete the following checklist:</p>
+<ul>
+<li><p>[ ] <strong>Security Assessment:</strong> Review vendor's SOC 2 report or equivalent security certification</p></li>
+<li><p>[ ] <strong>Privacy Policy Review:</strong> Verify vendor's privacy policy aligns with your data protection requirements</p></li>
+<li><p>[ ] <strong>Data Processing Agreement:</strong> Execute a DPA that meets GDPR Article 28 requirements</p></li>
+<li><p>[ ] <strong>Sub-processor Disclosure:</strong> Obtain list of vendor's sub-processors and their locations</p></li>
+<li><p>[ ] <strong>Data Residency:</strong> Confirm where data will be stored and processed</p></li>
+<li><p>[ ] <strong>Breach Notification:</strong> Verify vendor commits to timely breach notification (72 hours or less)</p></li>
+<li><p>[ ] <strong>Data Deletion:</strong> Confirm vendor can delete data upon request and at contract termination</p></li>
+<li><p>[ ] <strong>Access Controls:</strong> Review vendor's access control and authentication mechanisms</p></li>
+<li><p>[ ] <strong>Encryption:</strong> Verify encryption in transit (TLS 1.2+) and at rest</p></li>
+<li><p>[ ] <strong>Audit Rights:</strong> Ensure contract includes right to audit or request audit reports</p></li>
+<li><p>[ ] <strong>Insurance:</strong> Verify vendor carries adequate cyber liability insurance</p></li>
+<li><p>[ ] <strong>Incident History:</strong> Research vendor's history of security incidents or data breaches</p></li>
+<li><p>[ ] <strong>Business Continuity:</strong> Review vendor's disaster recovery and business continuity plans</p></li>
+<li><p>[ ] <strong>Regulatory Compliance:</strong> Verify compliance with applicable regulations (GDPR, CCPA, HIPAA, etc.)</p></li>
+</ul>
+<hr />
+<h2>Contract Review Requirements</h2>
+<p>The following contractual documents should be in place for the third-party vendors used in this project:</p>
+<h3>Required Agreements</h3>
+<ul>
+<li><p>[ ] DPA (Data Processing Agreement)</p></li>
+<li><p>[ ] Standard Contractual Clauses (SCCs) — for cross-border transfers</p></li>
+<li><p>[ ] AI-specific data usage addendum</p></li>
+<li><p>[ ] BAA (Business Associate Agreement) — if handling PHI</p></li>
+<li><p>[ ] PCI DSS Attestation of Compliance</p></li>
+</ul>
+<h3>DPA Minimum Requirements</h3>
+<p>Every Data Processing Agreement must include:</p>
+<ol>
+<li><p><strong>Subject matter and duration</strong> of data processing</p></li>
+<li><p><strong>Nature and purpose</strong> of the processing</p></li>
+<li><p><strong>Types of personal data</strong> processed</p></li>
+<li><p><strong>Categories of data subjects</strong> affected</p></li>
+<li><p><strong>Obligations and rights</strong> of the data controller</p></li>
+<li><p><strong>Technical and organizational security measures</strong></p></li>
+<li><p><strong>Sub-processor engagement</strong> conditions and notification obligations</p></li>
+<li><p><strong>Data breach notification</strong> procedures and timelines</p></li>
+<li><p><strong>Data return and deletion</strong> upon contract termination</p></li>
+<li><p><strong>Audit rights</strong> for the data controller</p></li>
+</ol>
+<h3>Additional Agreements by Scenario</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Required Agreement</p></th></tr>
+<tr><td><p>Processing health data (PHI)</p></td><td><p>BAA (Business Associate Agreement)</p></td></tr>
+<tr><td><p>Cross-border data transfers (EU to non-EU)</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td></tr>
+<tr><td><p>Payment card processing</p></td><td><p>PCI DSS Attestation of Compliance</p></td></tr>
+<tr><td><p>Processing children's data</p></td><td><p>COPPA-compliant agreement</p></td></tr>
+<tr><td><p>AI/ML data processing</p></td><td><p>AI data usage and training opt-out addendum</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Review Schedule</h2>
+<p>This risk assessment should be reviewed:</p>
+<ul>
+<li><p><strong>Annually</strong> as part of the regular compliance review cycle</p></li>
+<li><p><strong>When adding</strong> a new third-party vendor</p></li>
+<li><p><strong>When a vendor</strong> changes its data processing practices or certifications</p></li>
+<li><p><strong>After a security incident</strong> involving any listed vendor</p></li>
+</ul>
+<hr />
+<p><em>This Third-Party Risk Assessment was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>

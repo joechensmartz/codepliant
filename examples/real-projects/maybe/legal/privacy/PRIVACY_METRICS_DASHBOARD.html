@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIVACY METRICS DASHBOARD — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>PRIVACY METRICS DASHBOARD</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="privacy-metrics-dashboard">Privacy Metrics Dashboard</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> maybe</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Privacy contact:</strong> [your-email@example.com]</p>
+<p><strong>DPO:</strong> [DPO Name] ([dpo@example.com])</p>
+<p><strong>Reporting period:</strong> 2026</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This dashboard tracks key performance indicators (KPIs) for the <strong>[Your Company Name]</strong> privacy program. It provides monthly metrics for DSAR handling, consent management, data subject complaints, breach incidents, and vendor compliance. Use this dashboard for board reporting, regulatory evidence, and continuous improvement of the privacy program.</p>
+<p><strong>Detected stack:</strong> 20 third-party services across 8 categories.</p>
+<hr>
+<h2 id="kpi-targets">KPI Targets</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Target</th><th style="text-align:left">Regulatory Basis</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR Response Time (avg)</td><td style="text-align:left">< 15 business days</td><td style="text-align:left">Best practice: 30 days</td></tr>
+<tr><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left">100%</td><td style="text-align:left">Regulatory requirement</td></tr>
+<tr><td style="text-align:left">Consent Opt-in Rate</td><td style="text-align:left">> 70%</td><td style="text-align:left">Industry benchmark</td></tr>
+<tr><td style="text-align:left">Consent Withdrawal Processing</td><td style="text-align:left">< 48 hours</td><td style="text-align:left">Best practice</td></tr>
+<tr><td style="text-align:left">Data Subject Complaints</td><td style="text-align:left">< 5/month</td><td style="text-align:left">Internal target</td></tr>
+<tr><td style="text-align:left">Breach Notification Time</td><td style="text-align:left">< 72 hours</td><td style="text-align:left">Best practice</td></tr>
+<tr><td style="text-align:left">Vendor DPA Coverage</td><td style="text-align:left">100%</td><td style="text-align:left">Best practice</td></tr>
+<tr><td style="text-align:left">Privacy Training Completion</td><td style="text-align:left">100%</td><td style="text-align:left">Best practice</td></tr>
+<tr><td style="text-align:left">Data Deletion Backlog</td><td style="text-align:left">0</td><td style="text-align:left">Regulatory requirement</td></tr>
+<tr><td style="text-align:left">AI Processing Opt-out Rate</td><td style="text-align:left">< 10%</td><td style="text-align:left">EU AI Act / Best practice</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="1-dsar-data-subject-access-request-metrics">1. DSAR (Data Subject Access Request) Metrics</h2>
+<h3 id="monthly-dsar-tracking-2026">Monthly DSAR Tracking — 2026</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Month</th><th style="text-align:left">Received</th><th style="text-align:left">Completed</th><th style="text-align:left">Pending</th><th style="text-align:left">Avg Response (days)</th><th style="text-align:left">Within SLA</th><th style="text-align:left">Overdue</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Jan</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Feb</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Mar</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Apr</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">May</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Jun</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Jul</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Aug</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Sep</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Oct</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Nov</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Dec</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left"><strong>YTD Total</strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<h3 id="dsar-by-request-type">DSAR by Request Type</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Request Type</th><th style="text-align:left">Count</th><th style="text-align:left">Avg Processing Time</th><th style="text-align:left">Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Access Request</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">15 days</td></tr>
+<tr><td style="text-align:left">Deletion Request</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">15 days</td></tr>
+<tr><td style="text-align:left">Portability Request</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">15 days</td></tr>
+<tr><td style="text-align:left">Rectification Request</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">10 days</td></tr>
+<tr><td style="text-align:left">Objection to Processing</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">10 days</td></tr>
+<tr><td style="text-align:left">Restrict Processing</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left">10 days</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-data-subject-complaints">2. Data Subject Complaints</h2>
+<h3 id="monthly-complaint-tracking-2026">Monthly Complaint Tracking — 2026</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Month</th><th style="text-align:left">Received</th><th style="text-align:left">Resolved</th><th style="text-align:left">Escalated</th><th style="text-align:left">Avg Resolution (days)</th><th style="text-align:left">Satisfaction</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Jan</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Feb</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Mar</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Apr</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">May</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Jun</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Jul</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Aug</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Sep</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Oct</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Nov</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Dec</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left"><strong>YTD Total</strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+</tbody>
+</table>
+<h3 id="complaints-by-category">Complaints by Category</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Count</th><th style="text-align:left">Resolution Rate</th><th style="text-align:left">Avg Time</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Unwanted communications</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Data accuracy</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Delayed DSAR response</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Unauthorized data sharing</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Consent not respected</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Other</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> days</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-breach-incident-metrics">3. Breach & Incident Metrics</h2>
+<h3 id="monthly-incident-tracking-2026">Monthly Incident Tracking — 2026</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Month</th><th style="text-align:left">Incidents</th><th style="text-align:left">Breaches (notifiable)</th><th style="text-align:left">Avg Detection (hrs)</th><th style="text-align:left">Avg Notification (hrs)</th><th style="text-align:left">Records Affected</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Jan</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Feb</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Mar</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Apr</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">May</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Jun</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Jul</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Aug</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Sep</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Oct</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Nov</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Dec</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left"><strong>YTD Total</strong></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<h3 id="incident-response-sla-performance">Incident Response SLA Performance</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Target</th><th style="text-align:left">Actual</th><th style="text-align:left">Status</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Time to detect</td><td style="text-align:left">< 24 hours</td><td style="text-align:left"><em>_</em> hrs</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Time to contain</td><td style="text-align:left">< 48 hours</td><td style="text-align:left"><em>_</em> hrs</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Time to notify regulator</td><td style="text-align:left">< 72 hours</td><td style="text-align:left"><em>_</em> hrs</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Time to notify data subjects</td><td style="text-align:left">< 7 days</td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Post-incident review completed</td><td style="text-align:left">< 14 days</td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-vendor-compliance-metrics">4. Vendor Compliance Metrics</h2>
+<h3 id="vendor-dpa-status">Vendor DPA Status</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th><th style="text-align:left">Percentage</th><th style="text-align:left">Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Total vendors detected</td><td style="text-align:left">20</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">DPA signed and current</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">100%</td></tr>
+<tr><td style="text-align:left">DPA pending signature</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">0%</td></tr>
+<tr><td style="text-align:left">DPA expired / due for renewal</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">0%</td></tr>
+<tr><td style="text-align:left">No DPA in place</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">0%</td></tr>
+</tbody>
+</table>
+<h3 id="vendor-review-status">Vendor Review Status</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th><th style="text-align:left">Status</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Reviews completed (YTD)</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Reviews overdue</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">New vendors onboarded (YTD)</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Vendors offboarded (YTD)</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-privacy-training-metrics">5. Privacy Training Metrics</h2>
+<h3 id="training-completion-2026">Training Completion — 2026</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Quarter</th><th style="text-align:left">Eligible Staff</th><th style="text-align:left">Completed</th><th style="text-align:left">Completion Rate</th><th style="text-align:left">Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Q1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">100%</td></tr>
+<tr><td style="text-align:left">Q2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">100%</td></tr>
+<tr><td style="text-align:left">Q3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">100%</td></tr>
+<tr><td style="text-align:left">Q4</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left">100%</td></tr>
+</tbody>
+</table>
+<h3 id="training-by-topic">Training by Topic</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Topic</th><th style="text-align:left">Completions</th><th style="text-align:left">Pass Rate</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">GDPR Fundamentals</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Data Handling Procedures</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Breach Response</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Vendor Management</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Responsible AI Use</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">DSAR Processing</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="monthly-privacy-scorecard-template">Monthly Privacy Scorecard Template</h2>
+<p>Use this template for monthly board/stakeholder reporting:</p>
+<h3 id="privacy-program-scorecard-month-2026">Privacy Program Scorecard — [Month 2026]</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Target</th><th style="text-align:left">Actual</th><th style="text-align:left">Trend</th><th style="text-align:left">RAG Status</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR Response Time</td><td style="text-align:left">< 15 days</td><td style="text-align:left"><em>_</em> days</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left">100%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Consent Opt-in Rate</td><td style="text-align:left">> 70%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Complaints Received</td><td style="text-align:left">< 5</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Breach Incidents</td><td style="text-align:left">0</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Vendor DPA Coverage</td><td style="text-align:left">100%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Training Completion</td><td style="text-align:left">100%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Data Deletion Backlog</td><td style="text-align:left">0</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<p><strong>RAG Key:</strong> GREEN = On target | AMBER = Within 10% of target | RED = Exceeds target threshold</p>
+<h3 id="monthly-narrative">Monthly Narrative</h3>
+<p><strong>Highlights:</strong></p>
+<ul>
+<li><em>_</em></li>
+</ul>
+<p><strong>Concerns:</strong></p>
+<ul>
+<li><em>_</em></li>
+</ul>
+<p><strong>Actions for next month:</strong></p>
+<ul>
+<li><em>_</em></li>
+</ul>
+<hr>
+<h2 id="trend-analysis">Trend Analysis</h2>
+<h3 id="quarterly-comparison">Quarterly Comparison</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Q1</th><th style="text-align:left">Q2</th><th style="text-align:left">Q3</th><th style="text-align:left">Q4</th><th style="text-align:left">YoY Change</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSARs Received</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Avg DSAR Response Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em> days</td></tr>
+<tr><td style="text-align:left">Complaints</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em>%</td></tr>
+<tr><td style="text-align:left">Consent Rate</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em>%</td><td style="text-align:left"><em>_</em> pts</td></tr>
+<tr><td style="text-align:left">Breaches</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Vendor Reviews Completed</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="maintaining-this-dashboard">Maintaining This Dashboard</h2>
+<ul>
+<li><strong>Update frequency:</strong> Monthly (first business day of each month)</li>
+<li><strong>Ownership:</strong> Data Protection Officer / Privacy Team</li>
+<li><strong>Data sources:</strong> DSAR log, consent management platform, incident log, vendor tracker, LMS</li>
+<li><strong>Distribution:</strong> Privacy team, C-suite, board (quarterly summary)</li>
+<li><strong>Automation:</strong> Re-run Codepliant to update vendor counts; manually update operational metrics</li>
+</ul>
+<hr>
+<p><em>This privacy metrics dashboard was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Vendor counts and categories are auto-populated from the codebase. Operational metrics (DSAR counts, consent rates, etc.) must be manually tracked. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

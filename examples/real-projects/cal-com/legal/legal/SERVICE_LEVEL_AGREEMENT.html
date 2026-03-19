@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERVICE LEVEL AGREEMENT — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>SERVICE LEVEL AGREEMENT</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="service-level-agreement-sla">Service Level Agreement (SLA)</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Effective Date:</strong> 2026-03-16</p>
+<p><strong>Last Updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> calcom-monorepo</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Terms of Service (<code>TERMS<em>OF</em>SERVICE.md</code>)</li>
+<li>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</li>
+</ul>
+<hr>
+<h2 id="1-overview">1. Overview</h2>
+<p>This Service Level Agreement ("SLA") describes the service level commitments that [Your Company Name] makes to customers for the Services described herein. This SLA is incorporated into and forms part of the agreement between [Your Company Name] and the customer ("Customer").</p>
+<p>Monitoring and observability is provided through: @sentry/nextjs.</p>
+<h2 id="2-definitions">2. Definitions</h2>
+<ul>
+<li><strong>"Downtime"</strong> means any period during which the Services are unavailable to the Customer, as measured by our monitoring systems.</li>
+<li><strong>"Scheduled Maintenance"</strong> means planned maintenance windows that are communicated to customers at least 48 hours in advance.</li>
+<li><strong>"Monthly Uptime Percentage"</strong> means the total minutes in a calendar month minus the minutes of Downtime, divided by the total minutes in the month, expressed as a percentage.</li>
+<li><strong>"Service Credit"</strong> means a credit issued to the Customer's account as a remedy for failure to meet SLA commitments.</li>
+<li><strong>"Incident"</strong> means any unplanned interruption or degradation of the Services.</li>
+</ul>
+<h2 id="3-service-level-objectives">3. Service Level Objectives</h2>
+<h3 id="31-availability">3.1 Availability</h3>
+<p>[Your Company Name] commits to the following uptime targets:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service Tier</th><th style="text-align:left">Monthly Uptime Target</th><th style="text-align:left">Maximum Monthly Downtime</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Standard</td><td style="text-align:left">99.5%</td><td style="text-align:left">~3 hours 39 minutes</td></tr>
+<tr><td style="text-align:left">Professional</td><td style="text-align:left">99.9%</td><td style="text-align:left">~43 minutes</td></tr>
+<tr><td style="text-align:left">Enterprise</td><td style="text-align:left">99.95%</td><td style="text-align:left">~22 minutes</td></tr>
+</tbody>
+</table>
+<p>Scheduled Maintenance windows are excluded from uptime calculations. Maintenance windows are typically scheduled during low-traffic periods (weekends, 02:00-06:00 UTC).</p>
+<h3 id="32-performance">3.2 Performance</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Target</th><th style="text-align:left">Measurement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">API Response Time (p50)</td><td style="text-align:left">< 200ms</td><td style="text-align:left">Measured at edge</td></tr>
+<tr><td style="text-align:left">API Response Time (p95)</td><td style="text-align:left">< 500ms</td><td style="text-align:left">Measured at edge</td></tr>
+<tr><td style="text-align:left">API Response Time (p99)</td><td style="text-align:left">< 1000ms</td><td style="text-align:left">Measured at edge</td></tr>
+<tr><td style="text-align:left">Page Load Time</td><td style="text-align:left">< 3 seconds</td><td style="text-align:left">Measured from client</td></tr>
+<tr><td style="text-align:left">Error Rate</td><td style="text-align:left">< 0.1%</td><td style="text-align:left">5xx responses / total requests</td></tr>
+<tr><td style="text-align:left">Database Query Time (p95)</td><td style="text-align:left">< 100ms</td><td style="text-align:left">Measured at application layer</td></tr>
+<tr><td style="text-align:left">Data Durability</td><td style="text-align:left">99.999999999%</td><td style="text-align:left">Eleven nines</td></tr>
+</tbody>
+</table>
+<h2 id="4-incident-classification-and-response-times">4. Incident Classification and Response Times</h2>
+<h3 id="41-severity-levels">4.1 Severity Levels</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Definition</th><th style="text-align:left">Examples</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>P1 — Critical</strong></td><td style="text-align:left">Complete service outage affecting all users</td><td style="text-align:left">Service is down, data loss</td></tr>
+<tr><td style="text-align:left"><strong>P2 — High</strong></td><td style="text-align:left">Major feature unavailable or severe degradation</td><td style="text-align:left">Authentication failing, Payment processing errors, Core functionality broken</td></tr>
+<tr><td style="text-align:left"><strong>P3 — Medium</strong></td><td style="text-align:left">Minor feature unavailable or moderate degradation</td><td style="text-align:left">Non-critical feature broken, slow performance</td></tr>
+<tr><td style="text-align:left"><strong>P4 — Low</strong></td><td style="text-align:left">Cosmetic issues or minor inconveniences</td><td style="text-align:left">UI glitches, documentation errors</td></tr>
+</tbody>
+</table>
+<h3 id="42-response-times">4.2 Response Times</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Initial Response</th><th style="text-align:left">Status Updates</th><th style="text-align:left">Resolution Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">P1 — Critical</td><td style="text-align:left">15 minutes</td><td style="text-align:left">Every 30 minutes</td><td style="text-align:left">4 hours</td></tr>
+<tr><td style="text-align:left">P2 — High</td><td style="text-align:left">1 hour</td><td style="text-align:left">Every 2 hours</td><td style="text-align:left">8 hours</td></tr>
+<tr><td style="text-align:left">P3 — Medium</td><td style="text-align:left">4 hours</td><td style="text-align:left">Every 8 hours</td><td style="text-align:left">3 business days</td></tr>
+<tr><td style="text-align:left">P4 — Low</td><td style="text-align:left">1 business day</td><td style="text-align:left">As needed</td><td style="text-align:left">10 business days</td></tr>
+</tbody>
+</table>
+<p>Response times are measured from the time the incident is reported to our support team or detected by our monitoring systems, whichever is earlier.</p>
+<h2 id="5-communication">5. Communication</h2>
+<h3 id="51-status-page">5.1 Status Page</h3>
+<p>[Your Company Name] maintains a public status page that provides real-time and historical information about service availability. Customers will be notified of incidents through:</p>
+<ul>
+<li>Status page updates</li>
+<li>Email notifications (for subscribed users)</li>
+<li>In-app notifications (when available)</li>
+</ul>
+<h3 id="52-incident-communication">5.2 Incident Communication</h3>
+<p>During an active incident, we will provide:</p>
+<ol>
+<li><strong>Initial notification</strong> acknowledging the issue and its severity</li>
+<li><strong>Regular updates</strong> at the frequency specified by the severity level</li>
+<li><strong>Resolution notification</strong> confirming the issue is resolved</li>
+<li><strong>Post-incident report</strong> (for P1 and P2 incidents) within 5 business days</li>
+</ol>
+<h3 id="53-scheduled-maintenance">5.3 Scheduled Maintenance</h3>
+<ul>
+<li>Maintenance windows are announced at least 48 hours in advance</li>
+<li>Emergency maintenance may be performed with shorter notice when necessary for security or data integrity</li>
+<li>Maintenance notifications are sent via email and posted on the status page</li>
+</ul>
+<h2 id="6-service-credits">6. Service Credits</h2>
+<h3 id="61-credit-schedule">6.1 Credit Schedule</h3>
+<p>If we fail to meet the Monthly Uptime Percentage, Customers are eligible for the following Service Credits:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Monthly Uptime Percentage</th><th style="text-align:left">Service Credit (% of monthly fee)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">99.0% - 99.49%</td><td style="text-align:left">10%</td></tr>
+<tr><td style="text-align:left">95.0% - 98.99%</td><td style="text-align:left">25%</td></tr>
+<tr><td style="text-align:left">90.0% - 94.99%</td><td style="text-align:left">50%</td></tr>
+<tr><td style="text-align:left">Below 90.0%</td><td style="text-align:left">100%</td></tr>
+</tbody>
+</table>
+<h3 id="62-credit-request-process">6.2 Credit Request Process</h3>
+<p>To receive a Service Credit:</p>
+<ol>
+<li>Submit a request to [your-email@example.com] within 30 days of the incident</li>
+<li>Include the dates and times of the Downtime</li>
+<li>Provide any relevant evidence (screenshots, error logs, etc.)</li>
+</ol>
+<h3 id="63-credit-limitations">6.3 Credit Limitations</h3>
+<ul>
+<li>Service Credits are the sole and exclusive remedy for failure to meet SLA commitments</li>
+<li>Credits are applied to future invoices and are not redeemable for cash</li>
+<li>Maximum credit in any billing period shall not exceed 100% of the fees for that period</li>
+<li>Credits do not carry over between billing periods</li>
+</ul>
+<h2 id="7-exclusions">7. Exclusions</h2>
+<p>This SLA does not apply to:</p>
+<ul>
+<li><strong>Scheduled Maintenance</strong> performed during announced maintenance windows</li>
+<li><strong>Force Majeure</strong> events including natural disasters, war, government actions, or widespread internet failures</li>
+<li><strong>Customer-caused issues</strong> including misconfiguration, unauthorized modifications, or exceeding usage limits</li>
+<li><strong>Third-party failures</strong> beyond [Your Company Name]'s reasonable control, including upstream provider outages</li>
+<li><strong>Beta or preview features</strong> that are explicitly marked as not covered by this SLA</li>
+<li><strong>Free tier</strong> accounts (SLA applies to paid plans only)</li>
+<li><strong>Abuse or violations</strong> of the Terms of Service or Acceptable Use Policy</li>
+</ul>
+<h2 id="8-support">8. Support</h2>
+<h3 id="81-support-channels">8.1 Support Channels</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Channel</th><th style="text-align:left">Availability</th><th style="text-align:left">Response Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Email ([your-email@example.com])</td><td style="text-align:left">24/7</td><td style="text-align:left">Per severity level</td></tr>
+<tr><td style="text-align:left">In-app Chat</td><td style="text-align:left">Business hours</td><td style="text-align:left">2 hours</td></tr>
+<tr><td style="text-align:left">Phone (Enterprise)</td><td style="text-align:left">24/7</td><td style="text-align:left">15 minutes (P1 only)</td></tr>
+<tr><td style="text-align:left">Community Forum</td><td style="text-align:left">Best effort</td><td style="text-align:left">Not guaranteed</td></tr>
+</tbody>
+</table>
+<h3 id="82-support-hours">8.2 Support Hours</h3>
+<ul>
+<li><strong>Business hours:</strong> Monday through Friday, 09:00 - 18:00 UTC (excluding public holidays)</li>
+<li><strong>24/7 support:</strong> Available for P1 incidents on Professional and Enterprise plans</li>
+</ul>
+<h2 id="9-reporting-and-transparency">9. Reporting and Transparency</h2>
+<p>[Your Company Name] provides:</p>
+<ul>
+<li><strong>Monthly uptime reports</strong> available on the status page</li>
+<li><strong>Quarterly SLA review</strong> summarizing performance against commitments</li>
+<li><strong>Annual reliability report</strong> detailing major incidents, root causes, and improvements</li>
+</ul>
+<h2 id="10-sla-modifications">10. SLA Modifications</h2>
+<p>[Your Company Name] may modify this SLA with at least 30 days' advance notice. Changes will not reduce service level commitments for the duration of an active contract period. Material changes will be communicated via email.</p>
+<h2 id="11-contact">11. Contact</h2>
+<p>For SLA-related questions or to report a service issue:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This Service Level Agreement was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis of calcom-monorepo. It should be reviewed by legal counsel before use.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

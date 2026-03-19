@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 48 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></td><td style="text-align:left">config/initializers/active<em>record</em>encryption.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></td><td style="text-align:left">config/initializers/active<em>record</em>encryption.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></td><td style="text-align:left">config/initializers/active<em>record</em>encryption.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTERCOM<em>IDENTITY</em>VERIFICATION_KEY</code></td><td style="text-align:left">config/initializers/intercom.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOGTAIL<em>API</em>KEY</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OPENAI<em>ACCESS</em>TOKEN</code></td><td style="text-align:left">app/models/setting.rb, app/models/user.rb, test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAID<em>EU</em>SECRET</code></td><td style="text-align:left">config/initializers/plaid.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAID_SECRET</code></td><td style="text-align:left">config/initializers/plaid.rb, test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>MASTER</em>KEY</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SECRET<em>KEY</em>BASE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PASSWORD</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>SECRET</em>KEY</code></td><td style="text-align:left">app/models/provider/registry.rb, test/test<em>helper.rb, test/models/provider/stripe</em>test.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">app/models/provider/registry.rb, test/test<em>helper.rb, test/models/provider/stripe</em>test.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SYNTH<em>API</em>KEY</code></td><td style="text-align:left">.env.example, app/models/setting.rb, test/test<em>helper.rb, test/models/provider/synth</em>test.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>CACHE<em>REDIS</em>URL</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_USER</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>APP_DOMAIN</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DB_HOST</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>DB_PORT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>LOGTAIL<em>INGESTING</em>HOST</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PORT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SELF_HOSTED</code></td><td style="text-align:left">.env.example, config/application.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SELF<em>HOSTING</em>ENABLED</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PORT</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SYNTH_URL</code></td><td style="text-align:left">app/models/provider/synth.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>AI<em>DEBUG</em>MODE</code></td><td style="text-align:left">app/models/chat/debuggable.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUILD<em>COMMIT</em>SHA</code></td><td style="text-align:left">config/initializers/version.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUNDLE_GEMFILE</code></td><td style="text-align:left">config/boot.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CI</code></td><td style="text-align:left">config/environments/test.rb, test/application<em>system</em>test_case.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>COVERAGE</code></td><td style="text-align:left">test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE_PARALLELIZATION</code></td><td style="text-align:left">test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL_SENDER</code></td><td style="text-align:left">.env.example, config/environments/test.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INTERCOM<em>APP</em>ID</code></td><td style="text-align:left">config/initializers/intercom.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OPENAI<em>ORGANIZATION</em>ID</code></td><td style="text-align:left">test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PGGSSENCMODE</code></td><td style="text-align:left">test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PIDFILE</code></td><td style="text-align:left">config/puma.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAID<em>CLIENT</em>ID</code></td><td style="text-align:left">config/initializers/plaid.rb, test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAID_ENV</code></td><td style="text-align:left">config/initializers/plaid.rb, test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PLAID<em>EU</em>CLIENT_ID</code></td><td style="text-align:left">config/initializers/plaid.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS_ENV</code></td><td style="text-align:left">config/initializers/sentry.rb, test/test_helper.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REQUIRE<em>INVITE</em>CODE</code></td><td style="text-align:left">app/controllers/concerns/invitable.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">app/controllers/concerns/authentication.rb, config/initializers/sentry.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_ADDRESS</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>TLS</em>ENABLED</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP_USERNAME</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>ANNUAL</em>PRICE_ID</code></td><td style="text-align:left">app/models/provider/stripe.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>MONTHLY</em>PRICE_ID</code></td><td style="text-align:left">app/models/provider/stripe.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></li>
+<li><code>AI<em>DEBUG</em>MODE</code></li>
+<li><code>BUILD<em>COMMIT</em>SHA</code></li>
+<li><code>BUNDLE_GEMFILE</code></li>
+<li><code>CACHE<em>REDIS</em>URL</code></li>
+<li><code>CI</code></li>
+<li><code>COVERAGE</code></li>
+<li><code>DISABLE_PARALLELIZATION</code></li>
+<li><code>INTERCOM<em>APP</em>ID</code></li>
+<li><code>INTERCOM<em>IDENTITY</em>VERIFICATION_KEY</code></li>
+<li><code>LOGTAIL<em>API</em>KEY</code></li>
+<li><code>LOGTAIL<em>INGESTING</em>HOST</code></li>
+<li><code>OPENAI<em>ACCESS</em>TOKEN</code></li>
+<li><code>OPENAI<em>ORGANIZATION</em>ID</code></li>
+<li><code>PGGSSENCMODE</code></li>
+<li><code>PIDFILE</code></li>
+<li><code>PLAID<em>CLIENT</em>ID</code></li>
+<li><code>PLAID_ENV</code></li>
+<li><code>PLAID<em>EU</em>CLIENT_ID</code></li>
+<li><code>PLAID<em>EU</em>SECRET</code></li>
+<li><code>PLAID_SECRET</code></li>
+<li><code>RAILS_ENV</code></li>
+<li><code>RAILS<em>MASTER</em>KEY</code></li>
+<li><code>REQUIRE<em>INVITE</em>CODE</code></li>
+<li><code>SELF<em>HOSTING</em>ENABLED</code></li>
+<li><code>SENTRY_DSN</code></li>
+<li><code>STRIPE<em>ANNUAL</em>PRICE_ID</code></li>
+<li><code>STRIPE<em>MONTHLY</em>PRICE_ID</code></li>
+<li><code>STRIPE<em>SECRET</em>KEY</code></li>
+<li><code>STRIPE<em>WEBHOOK</em>SECRET</code></li>
+<li><code>SYNTH_URL</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>18 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 18 hardcoded secret(s) detected in source code: Hardcoded Password, Hardcoded Secret. Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>app/models/demo/generator.rb</code></td><td style="text-align:left">139</td><td style="text-align:left"><code>password: "password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>app/models/demo/generator.rb</code></td><td style="text-align:left">149</td><td style="text-align:left"><code>password: "password",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/password<em>resets</em>controller_test.rb</code></td><td style="text-align:left">27</td><td style="text-align:left"><code>params: { user: { password: "password", password_confirmation: "password" } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>test/controllers/plaid<em>items</em>controller_test.rb</code></td><td style="text-align:left">16</td><td style="text-align:left"><code>OpenStruct.new(access<em>token: "[REDACTED]", item</em>id: "[REDACTED]")</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/registrations<em>controller</em>test.rb</code></td><td style="text-align:left">12</td><td style="text-align:left"><code>password: "Password1!" } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/registrations<em>controller</em>test.rb</code></td><td style="text-align:left">22</td><td style="text-align:left"><code>password: "Password1!" } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/registrations<em>controller</em>test.rb</code></td><td style="text-align:left">27</td><td style="text-align:left"><code>password: "Password1!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/registrations<em>controller</em>test.rb</code></td><td style="text-align:left">35</td><td style="text-align:left"><code>password: "Password1!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">24</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">63</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">100</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">115</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">138</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">163</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">184</td><td style="text-align:left"><code>password: "SecurePass123!",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>test/controllers/api/v1/auth<em>controller</em>test.rb</code></td><td style="text-align:left">311</td><td style="text-align:left"><code>password: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>test/controllers/api/v1/base<em>controller</em>test.rb</code></td><td style="text-align:left">18</td><td style="text-align:left"><code>@plain<em>api</em>key = "base<em>test</em>#{SecureRandom.hex(8)}"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>test/controllers/settings/hostings<em>controller</em>test.rb</code></td><td style="text-align:left">43</td><td style="text-align:left"><code>patch settings<em>hosting</em>url, params: { setting: { synth<em>api</em>key: "1234567890" } }</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

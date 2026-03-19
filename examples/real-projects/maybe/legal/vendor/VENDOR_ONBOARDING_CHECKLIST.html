@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VENDOR ONBOARDING CHECKLIST — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>VENDOR ONBOARDING CHECKLIST</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="vendor-onboarding-checklist">Vendor Onboarding Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Effective Date:</strong> 2026-03-16</p>
+<p><strong>Last Updated:</strong> 2026-03-16</p>
+<p><strong>Document Owner:</strong> [DPO Name] ([dpo@example.com])</p>
+<blockquote>This checklist must be completed before onboarding any new third-party vendor that will process, store, or have access to [Your Company Name] data. The checklist covers legal, security, privacy, and operational requirements. Each item must be marked complete and signed off before vendor access is provisioned.</blockquote>
+<hr>
+<h2 id="current-vendor-inventory">Current Vendor Inventory</h2>
+<p>The following third-party vendors were detected in the codebase and are subject to ongoing vendor management:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Vendor</th><th style="text-align:left">Category</th><th style="text-align:left">Risk Tier</th><th style="text-align:left">Data Classification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">ActionCable</td><td style="text-align:left">Other</td><td style="text-align:left">Low</td><td style="text-align:left">Internal — classification depends on specific use case</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">Other</td><td style="text-align:left">Low</td><td style="text-align:left">Internal — classification depends on specific use case</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">ActionMailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">Medium</td><td style="text-align:left">Confidential — processes email addresses, message content</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Active Storage</td><td style="text-align:left">File Storage</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores files that may contain any data category</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">ActiveRecord</td><td style="text-align:left">Database</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores application data, potentially all data categories</td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">ActiveStorage</td><td style="text-align:left">File Storage</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores files that may contain any data category</td></tr>
+<tr><td style="text-align:left">7</td><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">File Storage</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores files that may contain any data category</td></tr>
+<tr><td style="text-align:left">8</td><td style="text-align:left">intercom-ruby</td><td style="text-align:left">Other</td><td style="text-align:left">Low</td><td style="text-align:left">Internal — classification depends on specific use case</td></tr>
+<tr><td style="text-align:left">9</td><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">Medium</td><td style="text-align:left">Confidential — processes email addresses, message content</td></tr>
+<tr><td style="text-align:left">10</td><td style="text-align:left">pg</td><td style="text-align:left">Database</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores application data, potentially all data categories</td></tr>
+<tr><td style="text-align:left">11</td><td style="text-align:left">plaid</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">Critical</td><td style="text-align:left">Restricted — processes payment card data, financial PII</td></tr>
+<tr><td style="text-align:left">12</td><td style="text-align:left">rack-attack</td><td style="text-align:left">Other</td><td style="text-align:left">Low</td><td style="text-align:left">Internal — classification depends on specific use case</td></tr>
+<tr><td style="text-align:left">13</td><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">Medium</td><td style="text-align:left">Confidential — processes email addresses, message content</td></tr>
+<tr><td style="text-align:left">14</td><td style="text-align:left">rails-activerecord</td><td style="text-align:left">Database</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores application data, potentially all data categories</td></tr>
+<tr><td style="text-align:left">15</td><td style="text-align:left">rails-sessions</td><td style="text-align:left">Authentication</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — processes authentication credentials, identity data</td></tr>
+<tr><td style="text-align:left">16</td><td style="text-align:left">redis</td><td style="text-align:left">Database</td><td style="text-align:left">High</td><td style="text-align:left">Confidential — stores application data, potentially all data categories</td></tr>
+<tr><td style="text-align:left">17</td><td style="text-align:left">ruby-openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">Critical</td><td style="text-align:left">Confidential — may process user content, prompts, PII</td></tr>
+<tr><td style="text-align:left">18</td><td style="text-align:left">sentry-ruby</td><td style="text-align:left">Error Monitoring</td><td style="text-align:left">Medium</td><td style="text-align:left">Internal — collects error logs, stack traces, device metadata</td></tr>
+<tr><td style="text-align:left">19</td><td style="text-align:left">sidekiq</td><td style="text-align:left">Other</td><td style="text-align:left">Low</td><td style="text-align:left">Internal — classification depends on specific use case</td></tr>
+<tr><td style="text-align:left">20</td><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">Critical</td><td style="text-align:left">Restricted — processes payment card data, financial PII</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Total vendors:</strong> 20 | <strong>Critical/High risk:</strong> 11</blockquote>
+<hr>
+<h2 id="1-pre-engagement-assessment">1. Pre-Engagement Assessment</h2>
+<p>Complete before initiating any vendor relationship.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Business justification</strong> — Document why this vendor is needed and what alternatives were evaluated</li>
+<li><input type="checkbox" disabled> <strong>Data inventory</strong> — Identify exactly what data the vendor will access, process, or store</li>
+<li><input type="checkbox" disabled> <strong>Data classification</strong> — Classify all data the vendor will handle (Public / Internal / Confidential / Restricted)</li>
+<li><input type="checkbox" disabled> <strong>Risk tier assignment</strong> — Assign vendor risk tier based on data sensitivity:</li>
+<li><strong>Critical</strong> — Processes restricted data (payment, health, credentials)</li>
+<li><strong>High</strong> — Processes confidential data (PII, authentication, stored files)</li>
+<li><strong>Medium</strong> — Processes internal data (analytics, logs, behavioral data)</li>
+<li><strong>Low</strong> — Processes only public data</li>
+<li><input type="checkbox" disabled> <strong>Regulatory check</strong> — Identify applicable regulations (GDPR, CCPA, PCI DSS, HIPAA, SOC 2)</li>
+<li><input type="checkbox" disabled> <strong>Budget approval</strong> — Obtain financial approval for the vendor engagement</li>
+</ul>
+<h2 id="2-security-assessment">2. Security Assessment</h2>
+<p>Complete for all Medium, High, and Critical risk vendors.</p>
+<h3 id="21-vendor-security-posture">2.1 Vendor Security Posture</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Security certifications</strong> — Request and verify (check all that apply):</li>
+<li><input type="checkbox" disabled> SOC 2 Type II report (current year)</li>
+<li><input type="checkbox" disabled> ISO 27001 certification</li>
+<li><input type="checkbox" disabled> PCI DSS compliance (if processing payment data)</li>
+<li><input type="checkbox" disabled> HIPAA BAA (if processing health data)</li>
+<li><input type="checkbox" disabled> CSA STAR certification (if cloud service)</li>
+<li><input type="checkbox" disabled> <strong>Penetration test report</strong> — Request most recent pentest results (must be within 12 months)</li>
+<li><input type="checkbox" disabled> <strong>Vulnerability management</strong> — Confirm vendor has a documented vulnerability management program</li>
+<li><input type="checkbox" disabled> <strong>Incident response plan</strong> — Confirm vendor has a documented incident response plan</li>
+<li><input type="checkbox" disabled> <strong>Insurance</strong> — Verify vendor carries cyber liability insurance (minimum coverage: $[AMOUNT])</li>
+</ul>
+<h3 id="22-technical-security-controls">2.2 Technical Security Controls</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Encryption at rest</strong> — Confirm data is encrypted at rest (AES-256 or equivalent)</li>
+<li><input type="checkbox" disabled> <strong>Encryption in transit</strong> — Confirm TLS 1.2+ for all data transmission</li>
+<li><input type="checkbox" disabled> <strong>Access controls</strong> — Confirm role-based access control (RBAC) and principle of least privilege</li>
+<li><input type="checkbox" disabled> <strong>MFA</strong> — Confirm multi-factor authentication is available and enforced for admin access</li>
+<li><input type="checkbox" disabled> <strong>Audit logging</strong> — Confirm vendor logs access to [Your Company Name] data and provides audit logs on request</li>
+<li><input type="checkbox" disabled> <strong>Data isolation</strong> — Confirm [Your Company Name] data is logically or physically isolated from other customers</li>
+<li><input type="checkbox" disabled> <strong>Backup & recovery</strong> — Confirm vendor backup procedures and recovery time objectives (RTO/RPO)</li>
+</ul>
+<h2 id="3-data-processing-agreement-dpa">3. Data Processing Agreement (DPA)</h2>
+<p>Required for all vendors that process personal data on behalf of [Your Company Name].</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>DPA executed</strong> — Signed Data Processing Agreement covering:</li>
+<li><input type="checkbox" disabled> Subject matter and duration of processing</li>
+<li><input type="checkbox" disabled> Nature and purpose of processing</li>
+<li><input type="checkbox" disabled> Types of personal data processed</li>
+<li><input type="checkbox" disabled> Categories of data subjects</li>
+<li><input type="checkbox" disabled> Obligations and rights of the controller</li>
+<li><input type="checkbox" disabled> Sub-processor notification requirements</li>
+<li><input type="checkbox" disabled> Data deletion/return upon termination</li>
+<li><input type="checkbox" disabled> <strong>Standard Contractual Clauses (SCCs)</strong> — If vendor processes data outside the EEA, SCCs or equivalent transfer mechanism must be in place</li>
+<li><input type="checkbox" disabled> <strong>Transfer Impact Assessment</strong> — Completed for any EU-to-non-EU data transfers</li>
+<li><input type="checkbox" disabled> <strong>Sub-processor list</strong> — Obtained and reviewed the vendor's current sub-processor list</li>
+<li><input type="checkbox" disabled> <strong>Sub-processor change notification</strong> — Vendor agrees to notify [Your Company Name] of sub-processor changes with [30] days' advance notice</li>
+</ul>
+<h3 id="31-dpa-contact-information">3.1 DPA Contact Information</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">[Your Company Name] DPO</td><td style="text-align:left">[DPO Name] ([dpo@example.com])</td></tr>
+<tr><td style="text-align:left">[Your Company Name] legal contact</td><td style="text-align:left">[your-email@example.com]</td></tr>
+<tr><td style="text-align:left">Vendor DPA contact</td><td style="text-align:left">[VENDOR DPA CONTACT]</td></tr>
+<tr><td style="text-align:left">DPA execution date</td><td style="text-align:left">[DATE]</td></tr>
+<tr><td style="text-align:left">DPA renewal date</td><td style="text-align:left">[DATE]</td></tr>
+</tbody>
+</table>
+<h2 id="4-privacy-compliance-review">4. Privacy & Compliance Review</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Privacy policy review</strong> — Reviewed vendor's public privacy policy for compatibility with [Your Company Name]'s commitments</li>
+<li><input type="checkbox" disabled> <strong>Data retention</strong> — Confirmed vendor's data retention periods align with [Your Company Name]'s Data Retention Policy</li>
+<li><input type="checkbox" disabled> <strong>Data subject rights</strong> — Confirmed vendor can support DSAR fulfillment (access, deletion, portability) within required timelines</li>
+<li><input type="checkbox" disabled> <strong>Cookie/tracking compliance</strong> — If vendor sets cookies or tracking pixels, confirmed compliance with ePrivacy Directive</li>
+<li><input type="checkbox" disabled> <strong>Children's data</strong> — If applicable, confirmed vendor is COPPA/Age Verification compliant</li>
+<li><input type="checkbox" disabled> <strong>Consent management</strong> — Confirmed vendor respects user consent preferences (opt-in/opt-out)</li>
+<li><input type="checkbox" disabled> <strong>AI/ML transparency</strong> — If vendor uses AI/ML, confirmed:</li>
+<li><input type="checkbox" disabled> No training on [Your Company Name] customer data without explicit consent</li>
+<li><input type="checkbox" disabled> Transparent about AI decision-making processes</li>
+<li><input type="checkbox" disabled> Compliant with EU AI Act requirements (if applicable)</li>
+</ul>
+<h2 id="5-operational-requirements">5. Operational Requirements</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>SLA agreement</strong> — Service Level Agreement executed covering:</li>
+<li><input type="checkbox" disabled> Uptime commitment (e.g., 99.9%)</li>
+<li><input type="checkbox" disabled> Response time for support tickets</li>
+<li><input type="checkbox" disabled> Planned maintenance notification windows</li>
+<li><input type="checkbox" disabled> Incident notification timeline (must be ≤ 72 hours for data breaches)</li>
+<li><input type="checkbox" disabled> <strong>Integration documentation</strong> — Technical integration guide reviewed by engineering team</li>
+<li><input type="checkbox" disabled> <strong>API security</strong> — API keys, OAuth tokens, or other credentials are:</li>
+<li><input type="checkbox" disabled> Stored in environment variables (never hardcoded)</li>
+<li><input type="checkbox" disabled> Rotated on a defined schedule</li>
+<li><input type="checkbox" disabled> Scoped to minimum required permissions</li>
+<li><input type="checkbox" disabled> <strong>Exit strategy</strong> — Documented plan for vendor termination including:</li>
+<li><input type="checkbox" disabled> Data export process and format</li>
+<li><input type="checkbox" disabled> Data deletion confirmation procedure</li>
+<li><input type="checkbox" disabled> Timeline for complete data removal</li>
+<li><input type="checkbox" disabled> Alternative vendor identified</li>
+</ul>
+<h2 id="6-approval-sign-off">6. Approval & Sign-off</h2>
+<p>All approvals must be obtained before vendor access is provisioned.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Name</th><th style="text-align:left">Approved</th><th style="text-align:left">Date</th><th style="text-align:left">Signature</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Engineering Lead</strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">[ ] Yes / [ ] No</td><td style="text-align:left"><strong><em></strong></em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td></tr>
+<tr><td style="text-align:left"><strong>Security/IT</strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">[ ] Yes / [ ] No</td><td style="text-align:left"><strong><em></strong></em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td></tr>
+<tr><td style="text-align:left"><strong>Legal/Privacy</strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">[ ] Yes / [ ] No</td><td style="text-align:left"><strong><em></strong></em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td></tr>
+<tr><td style="text-align:left"><strong>Data Protection Officer</strong></td><td style="text-align:left">[DPO Name]</td><td style="text-align:left">[ ] Yes / [ ] No</td><td style="text-align:left"><strong><em></strong></em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td></tr>
+<tr><td style="text-align:left"><strong>Budget Owner</strong></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td><td style="text-align:left">[ ] Yes / [ ] No</td><td style="text-align:left"><strong><em></strong></em></td><td style="text-align:left"><strong><em></strong><strong></em></strong>__</td></tr>
+</tbody>
+</table>
+<h3 id="conditions-notes">Conditions / Notes</h3>
+<p><em>[Document any conditions, exceptions, or notes from the approval process]</em></p>
+<h2 id="7-ongoing-vendor-monitoring">7. Ongoing Vendor Monitoring</h2>
+<p>After onboarding, vendors are subject to periodic review:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Review Activity</th><th style="text-align:left">Frequency</th><th style="text-align:left">Responsible</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Security certification renewal check</td><td style="text-align:left">Annual</td><td style="text-align:left">Security/IT</td></tr>
+<tr><td style="text-align:left">DPA review and update</td><td style="text-align:left">Annual</td><td style="text-align:left">Legal/Privacy</td></tr>
+<tr><td style="text-align:left">Sub-processor list review</td><td style="text-align:left">Quarterly</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Access audit (who has access to what)</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">SLA performance review</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Penetration test report review</td><td style="text-align:left">Annual</td><td style="text-align:left">Security/IT</td></tr>
+<tr><td style="text-align:left">Data classification review</td><td style="text-align:left">Annual</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Full vendor risk reassessment</td><td style="text-align:left">Annual</td><td style="text-align:left">DPO + Security</td></tr>
+</tbody>
+</table>
+<h3 id="vendor-removal-triggers">Vendor Removal Triggers</h3>
+<p>A vendor should be flagged for removal or replacement if:</p>
+<ul>
+<li>Security certification lapses or is revoked</li>
+<li>Data breach occurs with inadequate response</li>
+<li>SLA commitments are repeatedly missed</li>
+<li>Vendor fails to support DSAR fulfillment</li>
+<li>Sub-processor changes introduce unacceptable risk</li>
+<li>Vendor is acquired by an entity in a jurisdiction with inadequate data protection</li>
+</ul>
+<hr>
+<p><em>This Vendor Onboarding Checklist was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on a scan of the project's codebase. It should be reviewed by your legal and procurement teams before use.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CROSS BORDER TRANSFER MAP — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>CROSS BORDER TRANSFER MAP</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="cross-border-data-transfer-map">Cross-Border Data Transfer Map</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Data Exporter Location:</strong> [Your Location]</p>
+<p><strong>Project:</strong> saleor</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<hr>
+<blockquote>This document maps all international data transfers identified through code analysis. It identifies the destination country, service provider, data types transferred, and applicable legal safeguards for each transfer. Required under GDPR Chapter V (Articles 44-49) for EU data exporters.</blockquote>
+<h2 id="transfer-flow-diagram">Transfer Flow Diagram</h2>
+<pre><code>graph LR
+  A[&quot;[Your Company Name]&lt;br/&gt;[Your Location]&quot;]
+  C0[&quot;Unknown&lt;br/&gt;boto3&lt;br/&gt;Django Channels&lt;br/&gt;django-admin&lt;br/&gt;django-sessions&lt;br/&gt;redis&quot;]
+  A --&gt;|&quot;SCCs&quot;| C0
+  C1[&quot;United States&lt;br/&gt;stripe&quot;]
+  A --&gt;|&quot;DPF/Adequacy&quot;| C1</code></pre>
+<h2 id="transfer-summary-by-country">Transfer Summary by Country</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Country</th><th style="text-align:left">Services</th><th style="text-align:left">Data Types</th><th style="text-align:left">Safeguard</th><th style="text-align:left">Adequacy Decision</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Unknown (??)</td><td style="text-align:left">boto3, Django Channels, django-admin, django-sessions, redis</td><td style="text-align:left">uploaded files, file metadata, real-time user data, connection metadata</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left">United States (US)</td><td style="text-align:left">stripe</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">EU-US DPF / SCCs</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h2 id="detailed-transfer-register">Detailed Transfer Register</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Country</th><th style="text-align:left">Data Types</th><th style="text-align:left">Safeguard</th><th style="text-align:left">DPF Certified</th><th style="text-align:left">DPA in Place</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">boto3</td><td style="text-align:left">storage</td><td style="text-align:left">Unknown</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">N/A</td><td style="text-align:left">[ ]</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Django Channels</td><td style="text-align:left">other</td><td style="text-align:left">Unknown</td><td style="text-align:left">real-time user data, connection metadata, channel group data</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">N/A</td><td style="text-align:left">[ ]</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">django-admin</td><td style="text-align:left">auth</td><td style="text-align:left">Unknown</td><td style="text-align:left">admin panel access, staff user accounts</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">N/A</td><td style="text-align:left">[ ]</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">django-sessions</td><td style="text-align:left">auth</td><td style="text-align:left">Unknown</td><td style="text-align:left">session cookies, CSRF tokens</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">N/A</td><td style="text-align:left">[ ]</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">Unknown</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">[Verify with provider]</td><td style="text-align:left">N/A</td><td style="text-align:left">[ ]</td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">United States</td><td style="text-align:left">payment information, billing address, email</td><td style="text-align:left">EU-US DPF / SCCs</td><td style="text-align:left"><a href="https://www.dataprivacyframework.gov/list">Verify</a></td><td style="text-align:left">[ ]</td></tr>
+</tbody>
+</table>
+<h2 id="services-requiring-additional-safeguards">Services Requiring Additional Safeguards</h2>
+<p>The following services transfer data to countries without an EU adequacy decision. Additional safeguards (SCCs + supplementary measures) are required per the Schrems II ruling.</p>
+<h3 id="boto3">boto3</h3>
+<ul>
+<li><strong>Destination:</strong> Unknown</li>
+<li><strong>Safeguard:</strong> [Verify with provider]</li>
+<li><strong>Data:</strong> uploaded files, file metadata</li>
+<li><strong>Required actions:</strong></li>
+<li><input type="checkbox" disabled> Execute Standard Contractual Clauses (Module 2: Controller to Processor)</li>
+<li><input type="checkbox" disabled> Complete Annex I (List of parties)</li>
+<li><input type="checkbox" disabled> Complete Annex II (Technical and organisational measures)</li>
+<li><input type="checkbox" disabled> Verify provider's DPF certification status</li>
+<li><input type="checkbox" disabled> Implement supplementary encryption measures if needed</li>
+</ul>
+<h3 id="django-channels">Django Channels</h3>
+<ul>
+<li><strong>Destination:</strong> Unknown</li>
+<li><strong>Safeguard:</strong> [Verify with provider]</li>
+<li><strong>Data:</strong> real-time user data, connection metadata, channel group data, WebSocket messages</li>
+<li><strong>Required actions:</strong></li>
+<li><input type="checkbox" disabled> Execute Standard Contractual Clauses (Module 2: Controller to Processor)</li>
+<li><input type="checkbox" disabled> Complete Annex I (List of parties)</li>
+<li><input type="checkbox" disabled> Complete Annex II (Technical and organisational measures)</li>
+<li><input type="checkbox" disabled> Verify provider's DPF certification status</li>
+<li><input type="checkbox" disabled> Implement supplementary encryption measures if needed</li>
+</ul>
+<h3 id="django-admin">django-admin</h3>
+<ul>
+<li><strong>Destination:</strong> Unknown</li>
+<li><strong>Safeguard:</strong> [Verify with provider]</li>
+<li><strong>Data:</strong> admin panel access, staff user accounts</li>
+<li><strong>Required actions:</strong></li>
+<li><input type="checkbox" disabled> Execute Standard Contractual Clauses (Module 2: Controller to Processor)</li>
+<li><input type="checkbox" disabled> Complete Annex I (List of parties)</li>
+<li><input type="checkbox" disabled> Complete Annex II (Technical and organisational measures)</li>
+<li><input type="checkbox" disabled> Verify provider's DPF certification status</li>
+<li><input type="checkbox" disabled> Implement supplementary encryption measures if needed</li>
+</ul>
+<h3 id="django-sessions">django-sessions</h3>
+<ul>
+<li><strong>Destination:</strong> Unknown</li>
+<li><strong>Safeguard:</strong> [Verify with provider]</li>
+<li><strong>Data:</strong> session cookies, CSRF tokens</li>
+<li><strong>Required actions:</strong></li>
+<li><input type="checkbox" disabled> Execute Standard Contractual Clauses (Module 2: Controller to Processor)</li>
+<li><input type="checkbox" disabled> Complete Annex I (List of parties)</li>
+<li><input type="checkbox" disabled> Complete Annex II (Technical and organisational measures)</li>
+<li><input type="checkbox" disabled> Verify provider's DPF certification status</li>
+<li><input type="checkbox" disabled> Implement supplementary encryption measures if needed</li>
+</ul>
+<h3 id="redis">redis</h3>
+<ul>
+<li><strong>Destination:</strong> Unknown</li>
+<li><strong>Safeguard:</strong> [Verify with provider]</li>
+<li><strong>Data:</strong> cached data, session data</li>
+<li><strong>Required actions:</strong></li>
+<li><input type="checkbox" disabled> Execute Standard Contractual Clauses (Module 2: Controller to Processor)</li>
+<li><input type="checkbox" disabled> Complete Annex I (List of parties)</li>
+<li><input type="checkbox" disabled> Complete Annex II (Technical and organisational measures)</li>
+<li><input type="checkbox" disabled> Verify provider's DPF certification status</li>
+<li><input type="checkbox" disabled> Implement supplementary encryption measures if needed</li>
+</ul>
+<h2 id="data-type-service-matrix">Data Type × Service Matrix</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Type</th><th style="text-align:left">boto3</th><th style="text-align:left">Django Channels</th><th style="text-align:left">django-admin</th><th style="text-align:left">django-sessions</th><th style="text-align:left">redis</th><th style="text-align:left">stripe</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">real-time user data</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">connection metadata</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">channel group data</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">WebSocket messages</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">admin panel access</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">staff user accounts</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">session cookies</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">CSRF tokens</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">payment information</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td></tr>
+<tr><td style="text-align:left">billing address</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td></tr>
+<tr><td style="text-align:left">transaction history</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">●</td></tr>
+</tbody>
+</table>
+<h2 id="transfer-compliance-checklist">Transfer Compliance Checklist</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> All transfers have a valid legal basis under GDPR Chapter V</li>
+<li><input type="checkbox" disabled> SCCs (2021 version) executed with all non-DPF-certified providers</li>
+<li><input type="checkbox" disabled> DPF certification verified for applicable US providers</li>
+<li><input type="checkbox" disabled> Transfer Impact Assessment completed for each non-adequate country</li>
+<li><input type="checkbox" disabled> Supplementary measures implemented where SCCs are relied upon</li>
+<li><input type="checkbox" disabled> Data Processing Agreements in place with all processors</li>
+<li><input type="checkbox" disabled> Record of Processing Activities updated with transfer details</li>
+<li><input type="checkbox" disabled> Privacy Policy discloses international transfers and safeguards</li>
+<li><input type="checkbox" disabled> DPO informed of all cross-border transfers</li>
+</ul>
+<h2 id="review-schedule">Review Schedule</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Review</th><th style="text-align:left">Frequency</th><th style="text-align:left">Next Due</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Full transfer map review</td><td style="text-align:left">Annual</td><td style="text-align:left">2027-03-16</td></tr>
+<tr><td style="text-align:left">DPF certification verification</td><td style="text-align:left">Semi-annual</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">New service onboarding review</td><td style="text-align:left">Per event</td><td style="text-align:left">Ongoing</td></tr>
+<tr><td style="text-align:left">Regulatory change assessment</td><td style="text-align:left">Quarterly</td><td style="text-align:left">[Set date]</td></tr>
+</tbody>
+</table>
+<p><strong>Contact:</strong> [your-email@example.com]</p>
+<hr>
+<p><em>This Cross-Border Transfer Map was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. Service location and DPF certification status should be verified with each provider's current documentation. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

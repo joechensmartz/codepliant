@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE FAQ — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE FAQ</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~12 min read</p>
+    </header>
+    <h1 id="compliance-faq">Compliance FAQ</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>[Your Company Name]</strong> — Frequently Asked Questions about Data Privacy & Compliance</p>
+<blockquote>This FAQ is auto-generated from our actual codebase analysis. Every answer below is based on the services and data flows detected in our application.</blockquote>
+<p><em>11 services detected across 7 categories.</em></p>
+<hr>
+<h2 id="data-collection">Data Collection</h2>
+<h3 id="q1-what-personal-data-do-you-collect">Q1: What personal data do you collect?</h3>
+<p>Based on our code analysis, we collect the following types of data:</p>
+<ul>
+<li>uploaded files</li>
+<li>file metadata</li>
+<li>user identity</li>
+<li>user behavior</li>
+<li>page views</li>
+<li>custom events</li>
+<li>device information</li>
+<li>IP address</li>
+<li>email addresses</li>
+<li>email content</li>
+<li>search queries</li>
+<li>search result clicks</li>
+<li>user search behavior</li>
+<li>cookies</li>
+<li>cookie data</li>
+<li>session cookies</li>
+<li>session data</li>
+<li>cached data</li>
+<li>potential PII in uploaded content</li>
+<li>user prompts</li>
+<li>conversation history</li>
+<li>generated content</li>
+<li>session recordings</li>
+<li>feature flag usage</li>
+<li>payment information</li>
+<li>billing address</li>
+<li>email</li>
+<li>transaction history</li>
+</ul>
+<p>This data is collected through 11 integrated service(s): @aws-sdk/client-s3, @segment/analytics-next, @sendgrid/mail, algoliasearch, cookie-parser, express-session, ioredis, Multer, openai, posthog, stripe.</p>
+<h3 id="q2-why-do-you-collect-this-data">Q2: Why do you collect this data?</h3>
+<p>We collect data only when necessary to:</p>
+<ul>
+<li><strong>Provide our service</strong> — core functionality requires certain data to operate</li>
+<li><strong>Ensure security</strong> — protecting your account and our infrastructure</li>
+<li><strong>Improve our product</strong> — understanding usage patterns helps us build better features</li>
+<li><strong>Process payments</strong> — completing transactions you initiate</li>
+<li><strong>Power AI features</strong> — delivering AI-assisted functionality you request</li>
+<li><strong>Comply with law</strong> — meeting legal obligations (tax records, fraud prevention)</li>
+</ul>
+<h3 id="q3-do-you-collect-data-from-children">Q3: Do you collect data from children?</h3>
+<p>No. Our service is not directed at children under 16 (or 13 in the US). We do not knowingly collect personal data from children. If we learn that we have collected data from a child, we will delete it promptly. Contact [your-email@example.com] if you believe a child has provided us data.</p>
+<h2 id="service-specific-questions">Service-Specific Questions</h2>
+<h3 id="q4-what-data-does-openai-receive">Q4: What data does openai receive?</h3>
+<p><strong>What openai receives:</strong> Text prompts, conversation context, and any content you submit for AI processing. OpenAI may also receive metadata such as request timestamps and API version.</p>
+<p><strong>What openai does NOT receive:</strong> OpenAI does not receive your account password, payment details, or data from other parts of the application unrelated to AI features.</p>
+<p><strong>Data collected via openai:</strong> user prompts, conversation history, generated content</p>
+<h3 id="q5-what-data-does-stripe-receive">Q5: What data does stripe receive?</h3>
+<p><strong>What stripe receives:</strong> Payment card details (via their SDK), billing address, email, transaction amounts, and currency. Stripe also receives device fingerprint data for fraud prevention.</p>
+<p><strong>What stripe does NOT receive:</strong> Stripe does not receive your password, usage analytics, or content you create in the application.</p>
+<p><strong>Data collected via stripe:</strong> payment information, billing address, email, transaction history</p>
+<h2 id="data-sharing-third-parties">Data Sharing & Third Parties</h2>
+<h3 id="q6-do-you-sell-my-data">Q6: Do you sell my data?</h3>
+<p><strong>No. We do not sell your personal data.</strong> We do not share your data with third parties for their own marketing purposes. Data is only shared with our service providers (sub-processors) who process data on our behalf under strict contractual obligations.</p>
+<h3 id="q7-who-do-you-share-my-data-with">Q7: Who do you share my data with?</h3>
+<p>We share data only with the service providers necessary to operate our product:</p>
+<p>| @aws-sdk/client-s3 | File Storage | uploaded files, file metadata |</p>
+<p>| @segment/analytics-next | Analytics | user identity, user behavior, page views |</p>
+<p>| @sendgrid/mail | Email Services | email addresses, email content |</p>
+<p>| algoliasearch | Other Services | search queries, search result clicks, user search behavior |</p>
+<p>| cookie-parser | Other Services | cookies, cookie data |</p>
+<p>| express-session | Other Services | session cookies, session data |</p>
+<p>| ioredis | Database | cached data, session data |</p>
+<p>| Multer | File Storage | uploaded files, file metadata, potential PII in uploaded content |</p>
+<p>| openai | AI Services | user prompts, conversation history, generated content |</p>
+<p>| posthog | Analytics | user behavior, session recordings, feature flag usage |</p>
+<p>| stripe | Payment Processing | payment information, billing address, email |</p>
+<p>Each provider operates under a Data Processing Agreement (DPA) that limits how they can use your data. See our full Sub-Processor List for details.</p>
+<h3 id="q8-do-third-parties-have-access-to-my-raw-data">Q8: Do third parties have access to my raw data?</h3>
+<p>Third-party services receive only the minimum data necessary for their function. They are contractually prohibited from using your data for purposes other than providing their service to us.</p>
+<h2 id="data-retention">Data Retention</h2>
+<h3 id="q9-how-long-do-you-keep-my-data">Q9: How long do you keep my data?</h3>
+<p>Retention periods vary by data category:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Retention Period</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">File Storage</td><td style="text-align:left">Uploaded files are retained until you delete them or close your account.</td></tr>
+<tr><td style="text-align:left">Analytics</td><td style="text-align:left">Analytics data is retained for up to 26 months, then automatically deleted or anonymized.</td></tr>
+<tr><td style="text-align:left">Email Services</td><td style="text-align:left">Email communication records are retained for up to 3 years.</td></tr>
+<tr><td style="text-align:left">Other Services</td><td style="text-align:left">Data is retained as long as necessary for the service, typically no more than 1 year.</td></tr>
+<tr><td style="text-align:left">Database</td><td style="text-align:left">User data is retained until you delete your account or request erasure.</td></tr>
+<tr><td style="text-align:left">AI Services</td><td style="text-align:left">AI interaction data (prompts and responses) is retained for up to 90 days, then automatically purged.</td></tr>
+<tr><td style="text-align:left">Payment Processing</td><td style="text-align:left">Transaction records are retained for 7 years as required by tax and financial regulations.</td></tr>
+</tbody>
+</table>
+<h3 id="q10-can-i-request-my-data-be-deleted-sooner">Q10: Can I request my data be deleted sooner?</h3>
+<p>Yes. You can request deletion of your personal data at any time by emailing [your-email@example.com] with the subject "Data Deletion Request." We will process your request within 30 days. Note: transaction records required by tax law (typically 7 years) cannot be deleted early.</p>
+<h2 id="data-security">Data Security</h2>
+<h3 id="q11-how-do-you-protect-my-data">Q11: How do you protect my data?</h3>
+<p>We implement industry-standard security measures including:</p>
+<ul>
+<li><strong>Encryption in transit:</strong> All data is transmitted over HTTPS/TLS 1.2+</li>
+<li><strong>Encryption at rest:</strong> Stored data is encrypted using AES-256 or equivalent</li>
+<li><strong>Access control:</strong> Role-based access with principle of least privilege</li>
+<li><strong>Regular audits:</strong> Periodic security reviews and vulnerability assessments</li>
+</ul>
+<h3 id="q12-what-happens-if-there-is-a-data-breach">Q12: What happens if there is a data breach?</h3>
+<p>We maintain a documented Incident Response Plan. In the event of a data breach:</p>
+<ol>
+<li>We will investigate and contain the breach within 24 hours</li>
+<li>We will notify affected users without undue delay (within 72 hours as required by GDPR)</li>
+<li>We will notify the relevant supervisory authority where required</li>
+<li>We will provide details on what data was affected and remediation steps</li>
+</ol>
+<h3 id="q13-do-you-use-encryption">Q13: Do you use encryption?</h3>
+<p>Yes. All data is encrypted both in transit (TLS 1.2+) and at rest (AES-256). API keys and credentials are stored in environment variables, never in source code.</p>
+<h2 id="your-rights">Your Rights</h2>
+<h3 id="q14-what-rights-do-i-have-over-my-data">Q14: What rights do I have over my data?</h3>
+<p>You have the following rights:</p>
+<p><strong>Under GDPR (EU/EEA/UK):</strong></p>
+<ul>
+<li><strong>Access</strong> — Request a copy of all data we hold about you</li>
+<li><strong>Rectification</strong> — Request correction of inaccurate data</li>
+<li><strong>Erasure</strong> — Request deletion of your data ("right to be forgotten")</li>
+<li><strong>Portability</strong> — Receive your data in a machine-readable format</li>
+<li><strong>Restriction</strong> — Request we limit processing of your data</li>
+<li><strong>Object</strong> — Object to processing based on legitimate interest</li>
+<li><strong>Withdraw consent</strong> — Withdraw consent at any time where processing is consent-based</li>
+</ul>
+<h3 id="q15-how-do-i-exercise-my-data-rights">Q15: How do I exercise my data rights?</h3>
+<p>Contact us at [your-email@example.com] with your request. Please include:</p>
+<ol>
+<li>Your name and email associated with your account</li>
+<li>The specific right you wish to exercise</li>
+<li>Any details to help us locate your data</li>
+</ol>
+<p>We will respond within 30 days.</p>
+<h2 id="ai-automated-processing">AI & Automated Processing</h2>
+<h3 id="q16-do-you-use-aimachine-learning">Q16: Do you use AI/machine learning?</h3>
+<p>Yes. We use the following AI services: <strong>openai</strong>.</p>
+<p>AI features are used to enhance the product experience, provide intelligent suggestions, and automate tasks.</p>
+<h3 id="q17-is-my-data-used-to-train-ai-models">Q17: Is my data used to train AI models?</h3>
+<p>By default, <strong>no</strong>. We configure our AI providers to not use your data for model training. Your prompts and interactions are processed to deliver the AI feature you requested, then retained according to our data retention schedule (typically 90 days).</p>
+<h3 id="q18-can-i-opt-out-of-ai-features">Q18: Can I opt out of AI features?</h3>
+<p>Where AI features are optional, you can choose not to use them. For AI features that are core to the service, you can contact [your-email@example.com] to discuss alternatives. We are transparent about which features use AI — see our AI Disclosure document for full details.</p>
+<h3 id="q19-what-decisions-are-made-by-ai">Q19: What decisions are made by AI?</h3>
+<p>AI features are used to assist and augment your experience, not to make autonomous decisions that significantly affect you. A human is always in the loop for consequential decisions.</p>
+<h2 id="cookies-tracking">Cookies & Tracking</h2>
+<h3 id="q20-do-you-use-cookies">Q20: Do you use cookies?</h3>
+<p>Yes. We use cookies for:</p>
+<ul>
+<li><strong>Functional cookies</strong> — Remembering your preferences</li>
+<li><strong>Analytics cookies</strong> — Understanding how our product is used (aggregated, anonymized)</li>
+</ul>
+<p>See our Cookie Policy for the complete cookie inventory.</p>
+<h3 id="q21-how-do-i-control-cookies">Q21: How do I control cookies?</h3>
+<ul>
+<li><strong>Cookie banner:</strong> Accept or reject non-essential cookies when you first visit</li>
+<li><strong>Browser settings:</strong> Block or delete cookies through your browser preferences</li>
+<li><strong>Account settings:</strong> Manage tracking preferences in your account (where available)</li>
+</ul>
+<h3 id="q22-do-you-use-fingerprinting-or-tracking-pixels">Q22: Do you use fingerprinting or tracking pixels?</h3>
+<p>We do not use browser fingerprinting. We may use standard analytics tools that set cookies with your consent.</p>
+<h2 id="international-data-transfers">International Data Transfers</h2>
+<h3 id="q23-where-is-my-data-stored">Q23: Where is my data stored?</h3>
+<p>Data may be processed in the following regions based on our service providers:</p>
+<ul>
+<li><strong>@aws-sdk/client-s3</strong> — Processes data as described in their privacy policy</li>
+<li><strong>@segment/analytics-next</strong> — Processes data as described in their privacy policy</li>
+<li><strong>@sendgrid/mail</strong> — Processes data as described in their privacy policy</li>
+<li><strong>algoliasearch</strong> — Processes data as described in their privacy policy</li>
+<li><strong>cookie-parser</strong> — Processes data as described in their privacy policy</li>
+<li><strong>express-session</strong> — Processes data as described in their privacy policy</li>
+<li><strong>ioredis</strong> — Processes data as described in their privacy policy</li>
+<li><strong>Multer</strong> — Processes data as described in their privacy policy</li>
+<li><strong>openai</strong> — Processes data as described in their privacy policy</li>
+<li><strong>posthog</strong> — Processes data as described in their privacy policy</li>
+<li><strong>stripe</strong> — Processes data as described in their privacy policy</li>
+</ul>
+<p>Many of our providers operate infrastructure in the US and EU. We ensure appropriate safeguards are in place for any international transfers.</p>
+<h3 id="q24-how-do-you-protect-international-data-transfers">Q24: How do you protect international data transfers?</h3>
+<p>We rely on the following mechanisms to protect data transferred outside the EU/EEA:</p>
+<ul>
+<li><strong>Standard Contractual Clauses (SCCs)</strong> — Approved by the European Commission</li>
+<li><strong>Data Processing Agreements</strong> — Binding contractual obligations on each provider</li>
+<li><strong>Adequacy decisions</strong> — Where available (e.g., EU-US Data Privacy Framework)</li>
+<li><strong>Supplementary measures</strong> — Additional technical and organizational safeguards where needed</li>
+</ul>
+<h2 id="payments-billing">Payments & Billing</h2>
+<h3 id="q25-do-you-store-my-credit-card-number">Q25: Do you store my credit card number?</h3>
+<p><strong>No.</strong> Payment processing is handled entirely by our payment processor. We never see, transmit, or store your full credit card number. We only retain a tokenized reference and basic transaction metadata (amount, date, status).</p>
+<h3 id="q26-is-my-payment-information-secure">Q26: Is my payment information secure?</h3>
+<p>Yes. Our payment processor is PCI DSS Level 1 certified — the highest level of payment security certification. All payment data is encrypted end-to-end.</p>
+<h3 id="q27-what-happens-to-my-payment-data-if-i-cancel">Q27: What happens to my payment data if I cancel?</h3>
+<p>Transaction records are retained for 7 years as required by tax and financial regulations. Your payment method details are removed from our systems when you cancel or request deletion.</p>
+<h2 id="general">General</h2>
+<h3 id="q28-how-will-i-know-if-this-policy-changes">Q28: How will I know if this policy changes?</h3>
+<p>We will notify you of material changes through:</p>
+<ul>
+<li>Email notification to the address associated with your account</li>
+<li>A prominent notice on our website at [your-website.com]</li>
+<li>Updated "Last updated" date on our Privacy Policy</li>
+</ul>
+<h3 id="q29-who-is-responsible-for-data-protection">Q29: Who is responsible for data protection?</h3>
+<p>[Your Company Name] is the data controller. For data protection inquiries, contact [your-email@example.com].</p>
+<h3 id="q30-how-can-i-file-a-complaint">Q30: How can I file a complaint?</h3>
+<p>If you believe your data protection rights have been violated:</p>
+<ol>
+<li><strong>Contact us first</strong> at [your-email@example.com] — we take every complaint seriously</li>
+<li><strong>Supervisory authority</strong> — You have the right to lodge a complaint with your local data protection authority (e.g., your national DPA in the EU/EEA)</li>
+</ol>
+<h3 id="q31-do-you-comply-with-gdprccpa">Q31: Do you comply with GDPR/CCPA?</h3>
+<p>Yes. We comply with the GDPR (EU General Data Protection Regulation) and apply its standards to all users regardless of location.</p>
+<h3 id="q32-where-can-i-find-your-full-privacy-policy">Q32: Where can I find your full Privacy Policy?</h3>
+<p>Our complete Privacy Policy is available at [your-website.com]/privacy. It provides detailed information about all data processing activities, legal bases, and your rights.</p>
+<h2 id="technical-questions">Technical Questions</h2>
+<h3 id="q33-can-i-export-all-my-data">Q33: Can I export all my data?</h3>
+<p>Yes. You can request a full export of your personal data in a machine-readable format (JSON/CSV) by contacting [your-email@example.com]. This is your right to data portability under GDPR Article 20.</p>
+<h3 id="q34-what-happens-to-my-data-when-i-delete-my-account">Q34: What happens to my data when I delete my account?</h3>
+<p>When you delete your account:</p>
+<ol>
+<li>Your profile and account data is permanently deleted within 30 days</li>
+<li>Content you created is removed from primary systems within 30 days</li>
+<li>Backup copies are purged within 90 days</li>
+<li>Anonymized/aggregated data that cannot identify you may be retained</li>
+<li>Transaction records required by law are retained for the mandated period</li>
+</ol>
+<hr>
+<h2 id="contact">Contact</h2>
+<p>For any privacy-related questions not covered in this FAQ, contact us at:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+<li><strong>Website:</strong> [your-website.com]</li>
+</ul>
+<hr>
+<p><em>This FAQ was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis of 11 detected services. It should be reviewed by a qualified legal professional before publication.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

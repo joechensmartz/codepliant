@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIVACY ROADMAP — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>PRIVACY ROADMAP</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~11 min read</p>
+    </header>
+    <h1 id="privacy-program-roadmap">Privacy Program Roadmap</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<p><strong>Detected Services:</strong> 6 across 5 categories</p>
+<p><strong>Current Maturity Level:</strong> Defined (Level 3/5)</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This 12-month roadmap provides a structured plan to build and mature [Your Company Name]'s privacy program from its current state (<strong>Level 3: Defined</strong>) toward full compliance maturity.</p>
+<h3 id="current-maturity-assessment">Current Maturity Assessment</h3>
+<pre><code>Current Level: ███░░ 3/5
+Target (6mo):  ████░ 4/5
+Target (12mo): █████ 5/5</code></pre>
+<p><strong>Current state:</strong> Documented processes. Systematic but not yet measured.</p>
+<h3 id="roadmap-at-a-glance">Roadmap at a Glance</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Quarter</th><th style="text-align:left">Focus</th><th style="text-align:left">Key Milestones</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Q1 (Months 1-3)</td><td style="text-align:left">Foundation</td><td style="text-align:left">Privacy policy, consent, breach procedures</td></tr>
+<tr><td style="text-align:left">Q2 (Months 4-6)</td><td style="text-align:left">Operationalize</td><td style="text-align:left">Vendor management, training, DSAR process</td></tr>
+<tr><td style="text-align:left">Q3 (Months 7-9)</td><td style="text-align:left">Mature</td><td style="text-align:left">Automation, metrics, audit readiness</td></tr>
+<tr><td style="text-align:left">Q4 (Months 10-12)</td><td style="text-align:left">Optimize</td><td style="text-align:left">Continuous improvement, certification prep</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="q1-build-the-foundation">Q1: Build the Foundation</h2>
+<h3 id="month-1-privacy-governance-core-documents">Month 1: Privacy Governance & Core Documents</h3>
+<p><strong>Theme:</strong> Establish governance and publish essential documents.</p>
+<h4 id="week-1-2-governance-setup">Week 1-2: Governance Setup</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Appoint a privacy lead</strong> — Designate a Data Protection Officer or privacy lead</li>
+<li><input type="checkbox" disabled> <strong>Define privacy program scope</strong> — Document which systems, data, and teams are in scope</li>
+<li><input type="checkbox" disabled> <strong>Conduct initial data inventory</strong> — Map all 6 detected services and their data flows</li>
+<li><input type="checkbox" disabled> <strong>Establish privacy team</strong> — Identify stakeholders from Legal, Engineering, Product, and Security</li>
+</ul>
+<h4 id="week-3-4-core-document-review-publication">Week 3-4: Core Document Review & Publication</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Review and publish Privacy Policy</strong> — Verify all 6 services are listed</li>
+<li><input type="checkbox" disabled> <strong>Review and publish Terms of Service</strong> — Customize for your business model</li>
+<li><input type="checkbox" disabled> <strong>Publish Security Policy</strong> — Include responsible disclosure contact</li>
+<li><input type="checkbox" disabled> <strong>Publish Refund Policy</strong> — EU consumer rights compliance</li>
+</ul>
+<h4 id="month-1-deliverables">Month 1 Deliverables</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Deliverable</th><th style="text-align:left">Status</th><th style="text-align:left">Owner</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Privacy lead appointed</td><td style="text-align:left">☐</td><td style="text-align:left">Executive team</td><td style="text-align:left">Week 1</td></tr>
+<tr><td style="text-align:left">Data inventory complete</td><td style="text-align:left">☐</td><td style="text-align:left">Privacy lead</td><td style="text-align:left">Week 2</td></tr>
+<tr><td style="text-align:left">Privacy Policy published</td><td style="text-align:left">☐</td><td style="text-align:left">Legal/Privacy</td><td style="text-align:left">Week 3</td></tr>
+<tr><td style="text-align:left">Terms of Service published</td><td style="text-align:left">☐</td><td style="text-align:left">Legal</td><td style="text-align:left">Week 3</td></tr>
+<tr><td style="text-align:left">Security Policy published</td><td style="text-align:left">☐</td><td style="text-align:left">Engineering</td><td style="text-align:left">Week 4</td></tr>
+</tbody>
+</table>
+<h3 id="month-2-data-protection-incident-readiness">Month 2: Data Protection & Incident Readiness</h3>
+<p><strong>Theme:</strong> Establish breach response and data protection procedures.</p>
+<h4 id="week-5-6-incident-response">Week 5-6: Incident Response</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Finalize Incident Response Plan</strong> — Define roles, escalation paths, and timelines</li>
+<li><input type="checkbox" disabled> <strong>Set up breach notification templates</strong> — Pre-draft notifications for regulators and users</li>
+<li><input type="checkbox" disabled> <strong>Establish incident communication channels</strong> — On-call rotation, dedicated Slack/Teams channel</li>
+<li><input type="checkbox" disabled> <strong>Conduct first tabletop exercise</strong> — Simulate a breach scenario with the response team</li>
+<li><input type="checkbox" disabled> <strong>GDPR 72-hour notification procedure</strong> — Document the process to notify supervisory authority</li>
+</ul>
+<h4 id="week-7-8-data-protection">Week 7-8: Data Protection</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Document data retention periods</strong> — Define retention for each of the 5 data categories</li>
+<li><input type="checkbox" disabled> <strong>Implement automated deletion</strong> — Set up cron jobs or TTLs for data that exceeds retention periods</li>
+<li><input type="checkbox" disabled> <strong>Review Data Processing Agreements</strong> — Ensure DPAs are in place with all 6 sub-processors</li>
+<li><input type="checkbox" disabled> <strong>Database encryption audit</strong> — Verify encryption at rest for all database services</li>
+<li><input type="checkbox" disabled> <strong>File storage access review</strong> — Audit permissions on cloud storage buckets</li>
+</ul>
+<h4 id="month-2-deliverables">Month 2 Deliverables</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Deliverable</th><th style="text-align:left">Status</th><th style="text-align:left">Owner</th><th style="text-align:left">Deadline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Incident Response Plan</td><td style="text-align:left">☐</td><td style="text-align:left">Security</td><td style="text-align:left">Week 5</td></tr>
+<tr><td style="text-align:left">Tabletop exercise complete</td><td style="text-align:left">☐</td><td style="text-align:left">Security</td><td style="text-align:left">Week 6</td></tr>
+<tr><td style="text-align:left">Data retention schedule</td><td style="text-align:left">☐</td><td style="text-align:left">Privacy lead</td><td style="text-align:left">Week 7</td></tr>
+<tr><td style="text-align:left">DPAs collected</td><td style="text-align:left">☐</td><td style="text-align:left">Legal</td><td style="text-align:left">Week 8</td></tr>
+</tbody>
+</table>
+<h3 id="month-3-consent-rights-management">Month 3: Consent & Rights Management</h3>
+<p><strong>Theme:</strong> Implement data subject rights and consent management.</p>
+<h4 id="week-9-10-consent-architecture">Week 9-10: Consent Architecture</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Consent record keeping</strong> — Implement logging for all consent events (who, when, what, how)</li>
+<li><input type="checkbox" disabled> <strong>Privacy preference center</strong> — Build or configure a page where users can manage their preferences</li>
+<li><input type="checkbox" disabled> <strong>Consent withdrawal mechanism</strong> — Ensure users can easily withdraw consent</li>
+</ul>
+<h4 id="week-11-12-data-subject-rights">Week 11-12: Data Subject Rights</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>DSAR handling process</strong> — Document the end-to-end process for data subject access requests</li>
+<li><input type="checkbox" disabled> <strong>Data export capability</strong> — Build or verify the ability to export user data in a portable format</li>
+<li><input type="checkbox" disabled> <strong>Account deletion flow</strong> — Implement self-service account deletion (GDPR Art. 17)</li>
+<li><input type="checkbox" disabled> <strong>Right to rectification</strong> — Enable users to correct their personal data</li>
+<li><input type="checkbox" disabled> <strong>Response time SLA</strong> — Commit to responding to DSARs within 30 days</li>
+</ul>
+<h4 id="q1-checkpoint">Q1 Checkpoint</h4>
+<p>At the end of Q1, you should have:</p>
+<ul>
+<li>✅ Published core legal documents</li>
+<li>✅ Incident response plan tested</li>
+<li>✅ DPAs with all sub-processors</li>
+<li>✅ Consent management operational</li>
+<li>✅ DSAR handling process live</li>
+</ul>
+<p><strong>Expected maturity:</strong> Level 4 (Managed)</p>
+<hr>
+<h2 id="q2-operationalize-privacy">Q2: Operationalize Privacy</h2>
+<h3 id="month-4-vendor-third-party-management">Month 4: Vendor & Third-Party Management</h3>
+<p><strong>Theme:</strong> Systematic vendor risk management.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Complete vendor risk assessment</strong> — Evaluate each of the 6 detected services</li>
+<li><input type="checkbox" disabled> <strong>Vendor security questionnaire</strong> — Send SIG Lite questionnaire to all sub-processors</li>
+<li><input type="checkbox" disabled> <strong>Vendor onboarding process</strong> — Define approval workflow for new third-party services</li>
+<li><input type="checkbox" disabled> <strong>Sub-processor list publication</strong> — Publish and maintain a public list of sub-processors</li>
+<li><input type="checkbox" disabled> <strong>Vendor exit planning</strong> — Document migration strategies for critical services</li>
+<li><input type="checkbox" disabled> <strong>Sub-processor change notification</strong> — Set up process to notify users of sub-processor changes</li>
+</ul>
+<h3 id="month-5-privacy-training-awareness">Month 5: Privacy Training & Awareness</h3>
+<p><strong>Theme:</strong> Build a privacy-aware culture.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Privacy training program</strong> — Develop role-specific training materials</li>
+<li>Engineering: secure coding, data minimization, privacy by design</li>
+<li>Product: privacy impact assessment, consent UX patterns</li>
+<li>Support: DSAR handling, data breach identification</li>
+<li>Management: regulatory landscape, liability, compliance budgeting</li>
+<li><input type="checkbox" disabled> <strong>Training records</strong> — Implement a system to track training completion</li>
+<li><input type="checkbox" disabled> <strong>Privacy champions network</strong> — Appoint privacy champions in each team</li>
+<li><input type="checkbox" disabled> <strong>Privacy newsletter</strong> — Launch an internal monthly privacy update</li>
+<li><input type="checkbox" disabled> <strong>Phishing simulation</strong> — Run a baseline phishing awareness test</li>
+</ul>
+<h3 id="month-6-privacy-impact-assessments">Month 6: Privacy Impact Assessments</h3>
+<p><strong>Theme:</strong> Systematic risk identification.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>PIA/DPIA process</strong> — Document when and how privacy impact assessments are conducted</li>
+<li><input type="checkbox" disabled> <strong>Privacy by design checklist</strong> — Integrate privacy checks into the product development lifecycle</li>
+<li><input type="checkbox" disabled> <strong>Risk register update</strong> — Update the risk register with findings from all assessments</li>
+<li><input type="checkbox" disabled> <strong>Transfer impact assessment</strong> — Evaluate all international data transfers (Schrems II)</li>
+<li><input type="checkbox" disabled> <strong>Lawful basis review</strong> — Confirm the lawful basis for each processing activity</li>
+</ul>
+<h4 id="q2-checkpoint">Q2 Checkpoint</h4>
+<p>At the end of Q2, you should have:</p>
+<ul>
+<li>✅ Vendor management program operational</li>
+<li>✅ Privacy training delivered to all staff</li>
+<li>✅ PIAs completed for high-risk processing</li>
+<li>✅ International transfer safeguards in place</li>
+</ul>
+<p><strong>Expected maturity:</strong> Level 4 (Managed)</p>
+<hr>
+<h2 id="q3-mature-the-program">Q3: Mature the Program</h2>
+<h3 id="month-7-automation-monitoring">Month 7: Automation & Monitoring</h3>
+<p><strong>Theme:</strong> Reduce manual effort, increase consistency.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>CI/CD compliance checks</strong> — Integrate Codepliant into your CI/CD pipeline</li>
+</ul>
+<pre><code>  # .github/workflows/compliance.yml
+  - uses: joechensmartz/codepliant@v410
+    with:
+      fail-on-missing: true</code></pre>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Pre-commit hook</strong> — Install compliance pre-commit hook</li>
+</ul>
+<pre><code>  npx codepliant hook install</code></pre>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Automated dependency scanning</strong> — Weekly vulnerability scans</li>
+<li><input type="checkbox" disabled> <strong>Consent analytics dashboard</strong> — Track consent rates, opt-out rates, DSAR volumes</li>
+<li><input type="checkbox" disabled> <strong>Scheduled re-scans</strong> — Weekly automated compliance scans</li>
+</ul>
+<pre><code>  npx codepliant schedule install --frequency weekly</code></pre>
+<h3 id="month-8-metrics-reporting">Month 8: Metrics & Reporting</h3>
+<p><strong>Theme:</strong> Measure what matters.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Define compliance KPIs</strong> — Establish key performance indicators:</li>
+<li>DSAR response time (target: <30 days)</li>
+<li>Consent rate (target: >80%)</li>
+<li>Training completion rate (target: 100%)</li>
+<li>Vendor DPA coverage (target: 100%)</li>
+<li>Incident response time (target: <24 hours)</li>
+<li>Document freshness (target: updated within 90 days)</li>
+<li><input type="checkbox" disabled> <strong>Executive dashboard</strong> — Monthly compliance report for leadership</li>
+<li><input type="checkbox" disabled> <strong>Compliance maturity score</strong> — Track progress toward target maturity level</li>
+<li><input type="checkbox" disabled> <strong>Regulatory readiness scorecard</strong> — Per-regulation compliance status</li>
+<li><input type="checkbox" disabled> <strong>Budget tracking</strong> — Monitor compliance program spend vs. budget</li>
+</ul>
+<h3 id="month-9-audit-readiness">Month 9: Audit Readiness</h3>
+<p><strong>Theme:</strong> Prepare for external audit or certification.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>SOC 2 gap analysis</strong> — Identify gaps against Trust Service Criteria</li>
+<li><input type="checkbox" disabled> <strong>ISO 27001 readiness</strong> — Map controls to Annex A requirements</li>
+<li><input type="checkbox" disabled> <strong>Evidence collection</strong> — Gather evidence for all implemented controls</li>
+<li><input type="checkbox" disabled> <strong>Internal audit</strong> — Conduct a pre-audit internal review</li>
+<li><input type="checkbox" disabled> <strong>Record of processing activities</strong> — Verify GDPR Art. 30 documentation is complete</li>
+<li><input type="checkbox" disabled> <strong>Policy review cycle</strong> — Review and update all policies published in Q1</li>
+</ul>
+<h4 id="q3-checkpoint">Q3 Checkpoint</h4>
+<p>At the end of Q3, you should have:</p>
+<ul>
+<li>✅ Automated compliance checks in CI/CD</li>
+<li>✅ KPI dashboard operational</li>
+<li>✅ Internal audit completed</li>
+<li>✅ All policies reviewed and updated</li>
+</ul>
+<p><strong>Expected maturity:</strong> Level 5</p>
+<hr>
+<h2 id="q4-optimize-sustain">Q4: Optimize & Sustain</h2>
+<h3 id="month-10-continuous-improvement">Month 10: Continuous Improvement</h3>
+<p><strong>Theme:</strong> Embed privacy into daily operations.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Privacy by design in SDLC</strong> — Mandatory privacy review for all new features</li>
+<li><input type="checkbox" disabled> <strong>Automated PIA triggers</strong> — Auto-trigger PIA when new services are added to codebase</li>
+<li><input type="checkbox" disabled> <strong>Privacy debt tracking</strong> — Track and prioritize privacy improvements alongside tech debt</li>
+<li><input type="checkbox" disabled> <strong>Cross-functional privacy reviews</strong> — Monthly meetings with Engineering, Product, Legal</li>
+<li><input type="checkbox" disabled> <strong>Industry benchmarking</strong> — Compare your program against industry peers</li>
+</ul>
+<h3 id="month-11-advanced-compliance">Month 11: Advanced Compliance</h3>
+<p><strong>Theme:</strong> Address specialized requirements.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>International compliance</strong> — Expand coverage to additional jurisdictions</li>
+<li><input type="checkbox" disabled> <strong>Data breach drill</strong> — Conduct annual breach response exercise</li>
+<li><input type="checkbox" disabled> <strong>Vendor re-assessment</strong> — Annual review of all sub-processor security</li>
+<li><input type="checkbox" disabled> <strong>Privacy program charter review</strong> — Annual review and update of program charter</li>
+</ul>
+<h3 id="month-12-annual-review-year-2-planning">Month 12: Annual Review & Year 2 Planning</h3>
+<p><strong>Theme:</strong> Reflect, report, and plan ahead.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Annual compliance review</strong> — Complete the Annual Review Checklist</li>
+<li><input type="checkbox" disabled> <strong>Compliance certificate</strong> — Generate updated compliance attestation</li>
+<li><input type="checkbox" disabled> <strong>Annual report</strong> — Publish transparency report with DSAR/breach statistics</li>
+<li><input type="checkbox" disabled> <strong>Maturity re-assessment</strong> — Re-assess maturity level and document progress</li>
+<li><input type="checkbox" disabled> <strong>Year 2 roadmap</strong> — Plan next year's privacy program priorities based on:</li>
+<li>Regulatory changes (new laws, enforcement trends)</li>
+<li>Business changes (new products, markets, acquisitions)</li>
+<li>Technology changes (new services, AI capabilities)</li>
+<li>Audit findings and improvement opportunities</li>
+<li><input type="checkbox" disabled> <strong>Budget proposal</strong> — Submit compliance budget for next fiscal year</li>
+</ul>
+<h4 id="q4-checkpoint">Q4 Checkpoint</h4>
+<p>At the end of Q4, you should have:</p>
+<ul>
+<li>✅ Privacy embedded in development lifecycle</li>
+<li>✅ Certification-ready documentation</li>
+<li>✅ Annual review completed</li>
+<li>✅ Year 2 roadmap approved</li>
+</ul>
+<p><strong>Target maturity:</strong> Level 5 (Managed/Optimizing)</p>
+<hr>
+<h2 id="resource-planning">Resource Planning</h2>
+<h3 id="estimated-effort-by-quarter">Estimated Effort by Quarter</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Quarter</th><th style="text-align:left">Engineering</th><th style="text-align:left">Legal</th><th style="text-align:left">Management</th><th style="text-align:left">Total Hours/Week</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Q1</td><td style="text-align:left">8-12 hrs/wk</td><td style="text-align:left">6-10 hrs/wk</td><td style="text-align:left">2-4 hrs/wk</td><td style="text-align:left">16-26</td></tr>
+<tr><td style="text-align:left">Q2</td><td style="text-align:left">4-8 hrs/wk</td><td style="text-align:left">4-8 hrs/wk</td><td style="text-align:left">2-4 hrs/wk</td><td style="text-align:left">10-20</td></tr>
+<tr><td style="text-align:left">Q3</td><td style="text-align:left">6-10 hrs/wk</td><td style="text-align:left">2-4 hrs/wk</td><td style="text-align:left">2-4 hrs/wk</td><td style="text-align:left">10-18</td></tr>
+<tr><td style="text-align:left">Q4</td><td style="text-align:left">4-6 hrs/wk</td><td style="text-align:left">4-6 hrs/wk</td><td style="text-align:left">4-6 hrs/wk</td><td style="text-align:left">12-18</td></tr>
+</tbody>
+</table>
+<h3 id="recommended-tools">Recommended Tools</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Tool</th><th style="text-align:left">Purpose</th><th style="text-align:left">Priority</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Codepliant</td><td style="text-align:left">Automated compliance doc generation</td><td style="text-align:left"><strong>Essential</strong></td></tr>
+<tr><td style="text-align:left">Cookie consent platform</td><td style="text-align:left">Cookie consent management</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">DSAR management tool</td><td style="text-align:left">Data subject request tracking</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Vendor management platform</td><td style="text-align:left">Third-party risk management</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Training platform</td><td style="text-align:left">Privacy training delivery</td><td style="text-align:left">Medium</td></tr>
+</tbody>
+</table>
+<h3 id="budget-estimate-annual">Budget Estimate (Annual)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Estimated Cost</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Tools & Software</td><td style="text-align:left">$5,000-$20,000</td><td style="text-align:left">Compliance automation, consent management</td></tr>
+<tr><td style="text-align:left">Legal Review</td><td style="text-align:left">$10,000-$30,000</td><td style="text-align:left">External counsel for policy review</td></tr>
+<tr><td style="text-align:left">Training</td><td style="text-align:left">$2,000-$8,000</td><td style="text-align:left">Training platform and materials</td></tr>
+<tr><td style="text-align:left">Audit & Certification</td><td style="text-align:left">$15,000-$50,000</td><td style="text-align:left">SOC 2 or ISO 27001 (if pursuing)</td></tr>
+<tr><td style="text-align:left">Personnel</td><td style="text-align:left">Varies</td><td style="text-align:left">Fractional DPO or dedicated privacy hire</td></tr>
+<tr><td style="text-align:left"><strong>Total</strong></td><td style="text-align:left"><strong>$32,000-$108,000</strong></td><td style="text-align:left">Varies significantly by company size</td></tr>
+</tbody>
+</table>
+<h2 id="success-criteria">Success Criteria</h2>
+<h3 id="12-month-targets">12-Month Targets</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Target</th><th style="text-align:left">Measurement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Privacy maturity level</td><td style="text-align:left">Level 5</td><td style="text-align:left">Codepliant maturity assessment</td></tr>
+<tr><td style="text-align:left">Document coverage</td><td style="text-align:left">100% recommended docs</td><td style="text-align:left"><code>codepliant completeness</code></td></tr>
+<tr><td style="text-align:left">DSAR response time</td><td style="text-align:left">< 30 days</td><td style="text-align:left">DSAR tracking system</td></tr>
+<tr><td style="text-align:left">Consent rate</td><td style="text-align:left">> 80%</td><td style="text-align:left">Cookie consent analytics</td></tr>
+<tr><td style="text-align:left">Training completion</td><td style="text-align:left">100% of staff</td><td style="text-align:left">Training record system</td></tr>
+<tr><td style="text-align:left">Vendor DPA coverage</td><td style="text-align:left">100%</td><td style="text-align:left">Vendor management tracker</td></tr>
+<tr><td style="text-align:left">Incident response time</td><td style="text-align:left">< 4 hours to triage</td><td style="text-align:left">Incident response logs</td></tr>
+<tr><td style="text-align:left">Policy freshness</td><td style="text-align:left">All updated within 90 days</td><td style="text-align:left"><code>codepliant lint</code></td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="contact">Contact</h2>
+<p><strong>Privacy Program Lead:</strong> [To be appointed]</p>
+<p><strong>Email:</strong> [your-email@example.com]</p>
+<hr>
+<p><em>This Privacy Program Roadmap was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated analysis of 6 detected services at maturity level 3 (Defined). It should be reviewed and customized by a qualified compliance professional.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

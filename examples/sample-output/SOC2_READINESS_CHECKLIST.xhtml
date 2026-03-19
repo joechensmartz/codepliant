@@ -1,0 +1,321 @@
+<h1>SOC 2 Readiness Checklist</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>SOC 2 Type II Readiness Checklist</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Contact:</strong> legal@acme.com</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Security Policy (<code>SECURITY.md</code>)</p></li>
+<li><p>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</p></li>
+<li><p>Change Management Policy (<code>CHANGE<em>MANAGEMENT</em>POLICY.md</code>)</p></li>
+<li><p>Audit Log Policy (<code>AUDIT<em>LOG</em>POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Disclaimer:</strong> This checklist is generated based on automated code analysis and is intended as a starting point for SOC 2 Type II readiness. It is not a substitute for a formal SOC 2 audit or professional guidance. Engage a qualified CPA firm for your official SOC 2 examination.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Overview</h2>
+<p>This checklist helps Acme Inc prepare for a SOC 2 Type II audit by mapping detected services and infrastructure to the five Trust Services Criteria (TSC). Each section contains actionable items tailored to your project's technology stack.</p>
+<p><strong>Detected services:</strong> 8</p>
+<p><strong>Relevant SOC 2 sections:</strong> Availability (A1), Security (CC6), Processing Integrity (PI1), Confidentiality (C1), Privacy (P1-P8)</p>
+<hr />
+<h2>2. Service-to-Control Mapping</h2>
+<p>The following table maps each detected service to the applicable SOC 2 Trust Services Criteria:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Detected Service</p></th><th><p>Category</p></th><th><p>Mapped SOC 2 Controls</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Error Monitoring</p></td><td><p>Availability (A1), Security (CC6)</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>Security (CC6)</p></td></tr>
+<tr><td><p>openai</p></td><td><p>AI Service</p></td><td><p>Processing Integrity (PI1), Confidentiality (C1), Privacy (P1-P8)</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Analytics</p></td><td><p>Processing Integrity (PI1), Privacy (P1-P8)</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>Database</p></td><td><p>Confidentiality (C1), Security (CC6)</p></td></tr>
+<tr><td><p>resend</p></td><td><p>Email Service</p></td><td><p>Confidentiality (C1), Privacy (P1-P8)</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Payment Processing</p></td><td><p>Confidentiality (C1), Security (CC6), Processing Integrity (PI1)</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>Confidentiality (C1), Security (CC6), Processing Integrity (PI1)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>3. Readiness Checklist</h2>
+<h3>Security (CC6) — Common Criteria for Security</h3>
+<p><strong>Objective:</strong> Information and systems are protected against unauthorized access, unauthorized disclosure of information, and damage to systems.</p>
+<h4>CC6.1 — Logical and Physical Access Controls</h4>
+<ul>
+<li><p>[ ] Implement role-based access control (RBAC) for all systems</p></li>
+<li><p>[ ] Review access control configuration for: @supabase/supabase-js</p></li>
+<li><p>[ ] Enforce multi-factor authentication (MFA) for all user accounts</p></li>
+<li><p>[ ] Implement session timeout and automatic logout policies</p></li>
+<li><p>[ ] Document authentication flows and access provisioning/deprovisioning procedures</p></li>
+<li><p>[ ] Maintain an access control matrix documenting who has access to what</p></li>
+<li><p>[ ] Review and recertify user access quarterly</p></li>
+<li><p>[ ] Log all access events and authentication attempts</p></li>
+</ul>
+<h4>CC6.6 — Encryption</h4>
+<ul>
+<li><p>[ ] Enforce TLS 1.2+ for all data in transit</p></li>
+<li><p>[ ] Enable encryption at rest for: prisma</p></li>
+<li><p>[ ] Document encryption standards and key management procedures</p></li>
+<li><p>[ ] Rotate encryption keys on a defined schedule</p></li>
+</ul>
+<h4>CC6.8 — Vulnerability Management</h4>
+<ul>
+<li><p>[ ] Run automated dependency vulnerability scanning (e.g., npm audit, Snyk, Dependabot)</p></li>
+<li><p>[ ] Conduct periodic penetration testing (at least annually)</p></li>
+<li><p>[ ] Maintain a vulnerability remediation SLA (critical: 24h, high: 7d, medium: 30d, low: 90d)</p></li>
+<li><p>[ ] Document and track all identified vulnerabilities to resolution</p></li>
+</ul>
+<hr />
+<h3>Availability (A1) — Availability for Operations</h3>
+<p><strong>Objective:</strong> The system is available for operation and use as committed or agreed.</p>
+<h4>A1.1 — Uptime Monitoring and SLA</h4>
+<ul>
+<li><p>[ ] Configure alerting in: @sentry/node</p></li>
+<li><p>[ ] Define uptime SLA targets (e.g., 99.9% availability)</p></li>
+<li><p>[ ] Set up real-time health check endpoints</p></li>
+<li><p>[ ] Implement automated incident alerting with escalation procedures</p></li>
+</ul>
+<h4>A1.2 — Disaster Recovery and Business Continuity</h4>
+<ul>
+<li><p>[ ] Document a Disaster Recovery Plan (DRP) with defined RTO and RPO</p></li>
+<li><p>[ ] Test disaster recovery procedures at least annually</p></li>
+<li><p>[ ] Maintain automated backups with documented retention schedule</p></li>
+<li><p>[ ] Define and test failover procedures for critical systems</p></li>
+<li><p>[ ] Document business continuity procedures for extended outages</p></li>
+<li><p>[ ] Maintain an up-to-date system architecture diagram</p></li>
+</ul>
+<h4>A1.3 — Capacity Planning</h4>
+<ul>
+<li><p>[ ] Monitor resource utilization (CPU, memory, storage, network)</p></li>
+<li><p>[ ] Set capacity threshold alerts (e.g., 80% utilization triggers review)</p></li>
+<li><p>[ ] Document scaling procedures (horizontal and vertical)</p></li>
+<li><p>[ ] Review capacity plans quarterly</p></li>
+</ul>
+<hr />
+<h3>Processing Integrity (PI1) — System Processing is Complete, Valid, Accurate, and Timely</h3>
+<p><strong>Objective:</strong> System processing is complete, valid, accurate, timely, and authorized.</p>
+<h4>PI1.1 — Data Validation and Error Handling</h4>
+<ul>
+<li><p>[ ] Implement input validation on all user-facing endpoints</p></li>
+<li><p>[ ] Use schema validation for API request and response payloads</p></li>
+<li><p>[ ] Log and alert on data validation failures</p></li>
+<li><p>[ ] Implement idempotency controls for payment transactions via: stripe, stripe-ios</p></li>
+<li><p>[ ] Validate transaction amounts and currency codes before processing</p></li>
+<li><p>[ ] Reconcile payment records daily</p></li>
+<li><p>[ ] Validate AI model inputs and outputs for: openai</p></li>
+<li><p>[ ] Implement guardrails for AI-generated content (safety filters, output validation)</p></li>
+<li><p>[ ] Log AI processing decisions for auditability</p></li>
+</ul>
+<h4>PI1.2 — Error Handling and Exception Management</h4>
+<ul>
+<li><p>[ ] Implement structured error handling across all application layers</p></li>
+<li><p>[ ] Log all unhandled exceptions with sufficient context for investigation</p></li>
+<li><p>[ ] Define error severity levels and corresponding response procedures</p></li>
+<li><p>[ ] Monitor error rates and set alerting thresholds</p></li>
+<li><p>[ ] Implement graceful degradation for non-critical service failures</p></li>
+</ul>
+<h4>PI1.3 — Change Management</h4>
+<ul>
+<li><p>[ ] Require code review for all production changes</p></li>
+<li><p>[ ] Maintain a change log or release notes</p></li>
+<li><p>[ ] Implement automated testing in CI/CD pipelines</p></li>
+<li><p>[ ] Document rollback procedures for production deployments</p></li>
+<li><p>[ ] Separate development, staging, and production environments</p></li>
+</ul>
+<hr />
+<h3>Confidentiality (C1) — Protection of Confidential Information</h3>
+<p><strong>Objective:</strong> Information designated as confidential is protected as committed or agreed.</p>
+<h4>C1.1 — Data Classification</h4>
+<ul>
+<li><p>[ ] Define a data classification policy (Public, Internal, Confidential, Restricted)</p></li>
+<li><p>[ ] Classify all data stores and label them according to policy</p></li>
+<li><p>[ ] Train employees on data handling procedures for each classification level</p></li>
+<li><p>[ ] Review data classifications annually or when new data types are introduced</p></li>
+</ul>
+<h4>C1.2 — Encryption at Rest</h4>
+<ul>
+<li><p>[ ] Enable transparent data encryption (TDE) or equivalent for: prisma</p></li>
+<li><p>[ ] Encrypt all backups at rest</p></li>
+<li><p>[ ] Document which encryption algorithms and key lengths are in use</p></li>
+<li><p>[ ] Store encryption keys in a dedicated key management service (KMS)</p></li>
+</ul>
+<h4>C1.3 — Encryption in Transit</h4>
+<ul>
+<li><p>[ ] Enforce HTTPS/TLS for all external communications</p></li>
+<li><p>[ ] Use TLS for internal service-to-service communication where feasible</p></li>
+<li><p>[ ] Disable deprecated TLS versions (TLS 1.0, 1.1)</p></li>
+<li><p>[ ] Monitor certificate expiration and automate renewal</p></li>
+</ul>
+<h4>C1.4 — PCI DSS Alignment</h4>
+<p><em>Payment services detected: stripe, stripe-ios</em></p>
+<ul>
+<li><p>[ ] Confirm PCI DSS compliance scope and complete SAQ (Self-Assessment Questionnaire)</p></li>
+<li><p>[ ] Never store raw credit card numbers — use tokenization via payment processor</p></li>
+<li><p>[ ] Restrict access to cardholder data to authorized personnel only</p></li>
+<li><p>[ ] Maintain PCI DSS compliance documentation and evidence</p></li>
+<li><p>[ ] Conduct quarterly ASV (Approved Scanning Vendor) scans</p></li>
+</ul>
+<hr />
+<h3>Privacy (P1-P8) — Personal Information Protection</h3>
+<p><strong>Objective:</strong> Personal information is collected, used, retained, disclosed, and disposed of in conformity with commitments and criteria.</p>
+<h4>P1 — Notice</h4>
+<ul>
+<li><p>[ ] Publish a clear and accessible Privacy Policy</p></li>
+<li><p>[ ] Notify users of data collection purposes before or at the time of collection</p></li>
+<li><p>[ ] Describe the types of personal information collected and reasons for collection</p></li>
+<li><p>[ ] Disclose third-party data sharing for: posthog, openai</p></li>
+</ul>
+<h4>P2 — Choice and Consent</h4>
+<ul>
+<li><p>[ ] Obtain explicit consent before collecting personal information</p></li>
+<li><p>[ ] Provide opt-out mechanisms for non-essential data processing</p></li>
+<li><p>[ ] Maintain consent records with timestamps</p></li>
+<li><p>[ ] Implement cookie consent banner with granular opt-in/opt-out controls</p></li>
+</ul>
+<h4>P3 — Collection</h4>
+<ul>
+<li><p>[ ] Collect only the minimum personal information necessary (data minimization)</p></li>
+<li><p>[ ] Document the legal basis for each category of personal data collected</p></li>
+<li><p>[ ] Maintain a Record of Processing Activities (ROPA)</p></li>
+</ul>
+<h4>P4 — Use, Retention, and Disposal</h4>
+<ul>
+<li><p>[ ] Use personal information only for the purposes disclosed in the privacy notice</p></li>
+<li><p>[ ] Define and enforce data retention periods per data category</p></li>
+<li><p>[ ] Implement automated data purge processes for expired retention periods</p></li>
+<li><p>[ ] Document data disposal procedures (secure deletion, anonymization)</p></li>
+</ul>
+<h4>P5 — Access</h4>
+<ul>
+<li><p>[ ] Provide individuals with the ability to access their personal information</p></li>
+<li><p>[ ] Implement a self-service data export feature (e.g., account data download)</p></li>
+<li><p>[ ] Respond to data subject access requests (DSARs) within regulatory timeframes</p></li>
+</ul>
+<h4>P6 — Disclosure and Sharing</h4>
+<ul>
+<li><p>[ ] Document all third-party sub-processors and data sharing arrangements</p></li>
+<li><p>[ ] Execute Data Processing Agreements (DPAs) with all sub-processors</p></li>
+<li><p>[ ] Notify individuals of material changes to data sharing practices</p></li>
+</ul>
+<h4>P7 — Data Quality</h4>
+<ul>
+<li><p>[ ] Provide mechanisms for individuals to update or correct their personal information</p></li>
+<li><p>[ ] Validate personal data accuracy at the point of collection</p></li>
+<li><p>[ ] Periodically review stored personal data for accuracy</p></li>
+</ul>
+<h4>P8 — Monitoring and Enforcement</h4>
+<ul>
+<li><p>[ ] Conduct periodic privacy impact assessments (PIAs)</p></li>
+<li><p>[ ] Monitor for unauthorized access to personal information</p></li>
+<li><p>[ ] Maintain a privacy incident response procedure</p></li>
+<li><p>[ ] Train employees on privacy obligations and data handling procedures</p></li>
+<li><p>[ ] Appoint a privacy owner or Data Protection Officer (DPO)</p></li>
+</ul>
+<hr />
+<h2>4. Recommended Audit Timeline</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Phase</p></th><th><p>Duration</p></th><th><p>Activities</p></th></tr>
+<tr><td><p><strong>Gap Assessment</strong></p></td><td><p>2-4 weeks</p></td><td><p>Identify gaps between current state and SOC 2 requirements</p></td></tr>
+<tr><td><p><strong>Remediation</strong></p></td><td><p>4-12 weeks</p></td><td><p>Implement missing controls and document procedures</p></td></tr>
+<tr><td><p><strong>Evidence Collection</strong></p></td><td><p>Ongoing (6-12 months)</p></td><td><p>Collect evidence of controls operating effectively over the audit period</p></td></tr>
+<tr><td><p><strong>Readiness Assessment</strong></p></td><td><p>2-4 weeks</p></td><td><p>Internal review to verify all controls are in place and operating</p></td></tr>
+<tr><td><p><strong>Type II Audit</strong></p></td><td><p>4-8 weeks</p></td><td><p>External auditor examines controls over a minimum 6-month observation period</p></td></tr>
+<tr><td><p><strong>Report Issuance</strong></p></td><td><p>2-4 weeks</p></td><td><p>CPA firm issues the SOC 2 Type II report</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>5. Evidence Collection Guide</h2>
+<p>For each control area, collect and maintain the following evidence artifacts for your SOC 2 Type II audit:</p>
+<h3>Security (CC6)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Evidence Artifact</p></th><th><p>Description</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>Access control matrix</p></td><td><p>Document of who has access to each system</p></td><td><p>Quarterly review</p></td></tr>
+<tr><td><p>MFA enrollment report</p></td><td><p>Proof that MFA is enabled for all users</p></td><td><p>Monthly snapshot</p></td></tr>
+<tr><td><p>Penetration test report</p></td><td><p>Results from external penetration testing</p></td><td><p>Annually</p></td></tr>
+<tr><td><p>Vulnerability scan results</p></td><td><p>Automated scan output showing remediation</p></td><td><p>Monthly</p></td></tr>
+<tr><td><p>Encryption configuration</p></td><td><p>Screenshots/configs showing encryption settings</p></td><td><p>On change</p></td></tr>
+<tr><td><p>Access review records</p></td><td><p>Logs of quarterly access recertification</p></td><td><p>Quarterly</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Availability (A1)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Evidence Artifact</p></th><th><p>Description</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>Uptime reports</p></td><td><p>SLA monitoring dashboard exports</p></td><td><p>Monthly</p></td></tr>
+<tr><td><p>Incident post-mortems</p></td><td><p>Root cause analysis for each outage</p></td><td><p>Per incident</p></td></tr>
+<tr><td><p>DR test results</p></td><td><p>Documentation of disaster recovery tests</p></td><td><p>Annually</p></td></tr>
+<tr><td><p>Backup verification logs</p></td><td><p>Proof that backups complete and are restorable</p></td><td><p>Monthly</p></td></tr>
+<tr><td><p>Capacity planning reviews</p></td><td><p>Resource utilization reports and forecasts</p></td><td><p>Quarterly</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Processing Integrity (PI1)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Evidence Artifact</p></th><th><p>Description</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>CI/CD pipeline configs</p></td><td><p>Build and deployment pipeline definitions</p></td><td><p>On change</p></td></tr>
+<tr><td><p>Code review records</p></td><td><p>Pull request approvals and review comments</p></td><td><p>Per change</p></td></tr>
+<tr><td><p>Test coverage reports</p></td><td><p>Automated test results and coverage metrics</p></td><td><p>Per build</p></td></tr>
+<tr><td><p>Change management log</p></td><td><p>Record of all production changes</p></td><td><p>Continuous</p></td></tr>
+<tr><td><p>Error rate dashboards</p></td><td><p>Application error monitoring summaries</p></td><td><p>Monthly</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Confidentiality (C1)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Evidence Artifact</p></th><th><p>Description</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>Data classification inventory</p></td><td><p>Catalog of data stores with classifications</p></td><td><p>Annually</p></td></tr>
+<tr><td><p>Encryption audit</p></td><td><p>Verification of encryption at rest and in transit</p></td><td><p>Quarterly</p></td></tr>
+<tr><td><p>Key management procedures</p></td><td><p>Documentation of key rotation and storage</p></td><td><p>On change</p></td></tr>
+<tr><td><p>DPA agreements</p></td><td><p>Signed Data Processing Agreements with vendors</p></td><td><p>On onboarding</p></td></tr>
+<tr><td><p>PCI SAQ (if applicable)</p></td><td><p>Completed PCI Self-Assessment Questionnaire</p></td><td><p>Annually</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Privacy (P1-P8)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Evidence Artifact</p></th><th><p>Description</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>Privacy Policy</p></td><td><p>Published privacy notice</p></td><td><p>On change</p></td></tr>
+<tr><td><p>Consent records</p></td><td><p>Logs of user consent with timestamps</p></td><td><p>Continuous</p></td></tr>
+<tr><td><p>ROPA</p></td><td><p>Record of Processing Activities</p></td><td><p>Annually</p></td></tr>
+<tr><td><p>DSAR response logs</p></td><td><p>Records of data subject access requests handled</p></td><td><p>Per request</p></td></tr>
+<tr><td><p>Privacy impact assessments</p></td><td><p>PIA reports for new features or changes</p></td><td><p>Per project</p></td></tr>
+<tr><td><p>Employee training records</p></td><td><p>Proof of privacy training completion</p></td><td><p>Annually</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>6. Next Steps</h2>
+<ol>
+<li><p><strong>Assign an owner</strong> for each control area listed above.</p></li>
+<li><p><strong>Conduct a gap assessment</strong> comparing your current controls to this checklist.</p></li>
+<li><p><strong>Prioritize remediation</strong> starting with Security (CC6) and Availability (A1).</p></li>
+<li><p><strong>Begin evidence collection</strong> immediately — SOC 2 Type II requires evidence over a 6-12 month observation period.</p></li>
+<li><p><strong>Engage an auditor</strong> early to align on scope and expectations.</p></li>
+</ol>
+<hr />
+<p><em>This SOC 2 Readiness Checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It should be reviewed by a qualified professional before use in audit preparation.</em></p>

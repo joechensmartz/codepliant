@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VENDOR SECURITY QUESTIONNAIRE — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>VENDOR SECURITY QUESTIONNAIRE</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~7 min read</p>
+    </header>
+    <h1 id="vendor-security-questionnaire">Vendor Security Questionnaire</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Vendor:</strong> [Your Company Name]</p>
+<p><strong>Completed by:</strong> [NAME / TITLE]</p>
+<p><strong>Date:</strong> 2026-03-16</p>
+<p><strong>Contact:</strong> [your-email@example.com]</p>
+<p>This questionnaire follows the SIG Lite (Standardized Information Gathering) format and has been pre-populated based on automated analysis of the codebase. Review and update all answers before submitting to customers.</p>
+<blockquote><strong>Legend:</strong> Answers prefixed with <code>[AUTO]</code> were derived from code analysis. Answers prefixed with <code>[MANUAL]</code> require human input.</blockquote>
+<h2 id="1-company-information">1. Company Information</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Company legal name</td><td style="text-align:left">[Your Company Name]</td></tr>
+<tr><td style="text-align:left">Company website</td><td style="text-align:left">[https://yoursite.com]</td></tr>
+<tr><td style="text-align:left">Primary security contact</td><td style="text-align:left">[your-email@example.com]</td></tr>
+<tr><td style="text-align:left">Data Protection Officer</td><td style="text-align:left">[Data Protection Officer Name] ([dpo@example.com])</td></tr>
+<tr><td style="text-align:left">Company headquarters location</td><td style="text-align:left">[MANUAL] [LOCATION]</td></tr>
+<tr><td style="text-align:left">Number of employees</td><td style="text-align:left">[MANUAL]</td></tr>
+<tr><td style="text-align:left">Year founded</td><td style="text-align:left">[MANUAL]</td></tr>
+<tr><td style="text-align:left">Do you carry cyber liability insurance?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="2-security-governance">2. Security Governance</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Do you have a dedicated security team?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have a written information security policy?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you conduct regular security awareness training?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have an incident response plan?</td><td style="text-align:left">[AUTO] Yes — generated as part of compliance documentation</td></tr>
+<tr><td style="text-align:left">Do you conduct regular risk assessments?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have a business continuity / disaster recovery plan?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="3-certifications-compliance">3. Certifications & Compliance</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">SOC 2 Type I or II certification?</td><td style="text-align:left">[MANUAL] Yes / No — Type: __</td></tr>
+<tr><td style="text-align:left">ISO 27001 certified?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">GDPR compliant?</td><td style="text-align:left">[AUTO] Compliance documentation generated — [MANUAL] confirm operational compliance</td></tr>
+<tr><td style="text-align:left">PCI DSS compliant?</td><td style="text-align:left">[AUTO] Payment processing detected (via Stripe/PayPal) — payments are handled by PCI-compliant third party</td></tr>
+<tr><td style="text-align:left">HIPAA compliant?</td><td style="text-align:left">[MANUAL] Yes / No / N/A</td></tr>
+<tr><td style="text-align:left">Do you undergo regular third-party penetration testing?</td><td style="text-align:left">[MANUAL] Yes / No — Frequency: __</td></tr>
+<tr><td style="text-align:left">Do you have a bug bounty or vulnerability disclosure program?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="4-access-control">4. Access Control</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Do you require authentication for access?</td><td style="text-align:left">[AUTO] Yes — authentication implemented via passport, passport-google-oauth20, passport-microsoft</td></tr>
+<tr><td style="text-align:left">Do you support multi-factor authentication (MFA)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you enforce role-based access control (RBAC)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you enforce least-privilege access?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">How are user sessions managed?</td><td style="text-align:left">[MANUAL] [DESCRIBE SESSION MANAGEMENT]</td></tr>
+<tr><td style="text-align:left">Do you support Single Sign-On (SSO)?</td><td style="text-align:left">[MANUAL] Yes / No — Protocol: SAML / OIDC</td></tr>
+<tr><td style="text-align:left">Do you log all access events?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="5-data-protection">5. Data Protection</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Is data encrypted at rest?</td><td style="text-align:left">[MANUAL] Yes / No — Algorithm: __</td></tr>
+<tr><td style="text-align:left">Is data encrypted in transit?</td><td style="text-align:left">[AUTO] Yes — HTTPS/TLS required for all communications</td></tr>
+<tr><td style="text-align:left">Where is data stored?</td><td style="text-align:left">[AUTO] Database services detected: drizzle, ioredis, redis — [MANUAL] specify hosting region</td></tr>
+<tr><td style="text-align:left">Do you use cloud storage?</td><td style="text-align:left">[AUTO] Yes — @aws-sdk/client-s3 detected</td></tr>
+<tr><td style="text-align:left">Do you use a key management service?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have a data retention policy?</td><td style="text-align:left">[AUTO] Yes — generated as part of compliance documentation</td></tr>
+<tr><td style="text-align:left">Do you have a data classification scheme?</td><td style="text-align:left">[AUTO] Yes — data classification report generated</td></tr>
+<tr><td style="text-align:left">Can you delete customer data on request?</td><td style="text-align:left">[MANUAL] Yes / No — Process: __</td></tr>
+<tr><td style="text-align:left">Do you have a data backup strategy?</td><td style="text-align:left">[MANUAL] Yes / No — Frequency: __</td></tr>
+</tbody>
+</table>
+<h2 id="6-application-security">6. Application Security</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Do you follow a secure software development lifecycle (SDLC)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you conduct code reviews?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you perform static application security testing (SAST)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you perform dynamic application security testing (DAST)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you scan dependencies for known vulnerabilities?</td><td style="text-align:left">[AUTO] Yes — dependency vulnerability scanning is part of the compliance process</td></tr>
+<tr><td style="text-align:left">Do you use error monitoring / observability?</td><td style="text-align:left">[AUTO] Yes — @sentry/node</td></tr>
+<tr><td style="text-align:left">Do you have a WAF (Web Application Firewall)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you protect against OWASP Top 10 vulnerabilities?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="7-infrastructure-security">7. Infrastructure Security</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Where is your application hosted?</td><td style="text-align:left">[MANUAL] [CLOUD PROVIDER / REGION]</td></tr>
+<tr><td style="text-align:left">Do you use a CDN?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you use container orchestration?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have network segmentation?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you use intrusion detection / prevention systems?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you perform regular vulnerability scanning of infrastructure?</td><td style="text-align:left">[MANUAL] Yes / No — Frequency: __</td></tr>
+</tbody>
+</table>
+<h2 id="8-third-party-risk-management">8. Third-Party Risk Management</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">How many third-party sub-processors do you use?</td><td style="text-align:left">[AUTO] 16 sub-processor(s) detected</td></tr>
+<tr><td style="text-align:left">Do you maintain a sub-processor list?</td><td style="text-align:left">[AUTO] Yes — generated as part of compliance documentation</td></tr>
+<tr><td style="text-align:left">Do you have DPAs with all sub-processors?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you assess the security posture of sub-processors?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you notify customers of sub-processor changes?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="9-incident-response">9. Incident Response</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Do you have a documented incident response plan?</td><td style="text-align:left">[AUTO] Yes — incident response plan generated</td></tr>
+<tr><td style="text-align:left">What is your breach notification timeline?</td><td style="text-align:left">[AUTO] Within 72 hours (GDPR), within 30-60 days (US state laws)</td></tr>
+<tr><td style="text-align:left">Do you conduct post-incident reviews?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have a dedicated incident response team?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Security incident reporting email</td><td style="text-align:left">[your-email@example.com]</td></tr>
+</tbody>
+</table>
+<h2 id="10-ai-machine-learning">10. AI & Machine Learning</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Does the application use AI/ML services?</td><td style="text-align:left">[AUTO] Yes — @ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, openai</td></tr>
+<tr><td style="text-align:left">What data is sent to AI services?</td><td style="text-align:left">[AUTO] user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">Is AI-generated content identified to users?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do you have safeguards against AI bias?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Can customers opt out of AI processing?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+<tr><td style="text-align:left">Do AI providers use customer data for training?</td><td style="text-align:left">[MANUAL] Yes / No — [VERIFY WITH EACH PROVIDER]</td></tr>
+</tbody>
+</table>
+<h2 id="11-privacy-data-subject-rights">11. Privacy & Data Subject Rights</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Question</th><th style="text-align:left">Answer</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Do you have a published privacy policy?</td><td style="text-align:left">[AUTO] Yes — generated as part of compliance documentation</td></tr>
+<tr><td style="text-align:left">Do you support data subject access requests (DSAR)?</td><td style="text-align:left">[AUTO] DSAR handling guide generated</td></tr>
+<tr><td style="text-align:left">Do you support the right to erasure?</td><td style="text-align:left">[MANUAL] Yes / No — Process: __</td></tr>
+<tr><td style="text-align:left">Do you support data portability?</td><td style="text-align:left">[MANUAL] Yes / No — Format: __</td></tr>
+<tr><td style="text-align:left">Do you process data of minors (under 16)?</td><td style="text-align:left">[MANUAL] Yes / No</td></tr>
+</tbody>
+</table>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Third-Party Risk Assessment (<code>THIRD<em>PARTY</em>RISK_ASSESSMENT.md</code>)</li>
+<li>Supplier Code of Conduct (<code>SUPPLIER<em>CODE</em>OF_CONDUCT.md</code>)</li>
+</ul>
+<hr>
+<p><em>This vendor security questionnaire was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>twenty</strong> codebase. Answers marked [AUTO] are derived from code analysis and should be verified. Answers marked [MANUAL] require input from your security and compliance teams. This document is not a substitute for a formal security assessment.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<h1>Lawful Basis Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Lawful Basis Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Acme Inc</strong> — GDPR Article 6 Lawful Basis Assessment</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Generated on 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a></p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Controller Information</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Data Controller</strong></p></td><td><p>Acme Inc</p></td></tr>
+<tr><td><p><strong>Contact Email</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>Data Protection Officer</strong></p></td><td><p>Jane Mueller</p></td></tr>
+<tr><td><p><strong>DPO Email</strong></p></td><td><p>dpo@acme-saas.com</p></td></tr>
+<tr><td><p><strong>Assessment Date</strong></p></td><td><p>2026-03-18</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Lawful Basis Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Processing Activity</p></th><th><p>Lawful Basis</p></th><th><p>GDPR Article</p></th><th><p>Requires LIA</p></th></tr>
+<tr><td><p>Error Monitoring</p></td><td><p>Legitimate interest</p></td><td><p>Art. 6(1)(f)</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>User Authentication</p></td><td><p>Contract performance</p></td><td><p>Art. 6(1)(b)</p></td><td><p>No</p></td></tr>
+<tr><td><p>AI Processing</p></td><td><p>Consent / Contract performance</p></td><td><p>Art. 6(1)(a) / Art. 6(1)(b)</p></td><td><p>No</p></td></tr>
+<tr><td><p>Usage Analytics</p></td><td><p>Consent / Legitimate interest</p></td><td><p>Art. 6(1)(a) / Art. 6(1)(f)</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Data Storage</p></td><td><p>Contract performance</p></td><td><p>Art. 6(1)(b)</p></td><td><p>No</p></td></tr>
+<tr><td><p>Email Communications</p></td><td><p>Legitimate interest / Consent</p></td><td><p>Art. 6(1)(f) / Art. 6(1)(a)</p></td><td><p>Yes</p></td></tr>
+<tr><td><p>Payment Processing</p></td><td><p>Contract performance / Legal obligation</p></td><td><p>Art. 6(1)(b) / Art. 6(1)(c)</p></td><td><p>No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Detailed Assessments</h2>
+<h3>3.1. Error Monitoring</h3>
+<p><strong>Services:</strong> @sentry/node</p>
+<p><strong>Data processed:</strong> error data, stack traces, user context, device information, IP address</p>
+<p><strong>Lawful basis:</strong> Legitimate interest (Art. 6(1)(f))</p>
+<p><strong>Reasoning:</strong></p>
+<p>Error monitoring and performance tracking serve the legitimate interest of maintaining service reliability, detecting and resolving technical issues, and ensuring security. Data subjects reasonably expect that a software service will monitor for errors. Data collected is primarily technical (stack traces, device info) with minimal personal data impact.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>A Legitimate Interest Assessment (LIA) is recommended for this processing activity. See Section 4 below.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.2. User Authentication</h3>
+<p><strong>Services:</strong> @supabase/supabase-js</p>
+<p><strong>Data processed:</strong> email, password hash, session data, user metadata</p>
+<p><strong>Lawful basis:</strong> Contract performance (Art. 6(1)(b))</p>
+<p><strong>Reasoning:</strong></p>
+<p>User authentication is necessary for the performance of the contract between the data controller and the data subject. Without processing login credentials and session data, the service cannot identify the user or provide access to their account. This processing is directly linked to the service the user has agreed to use.</p>
+<h3>3.3. AI Processing</h3>
+<p><strong>Services:</strong> openai</p>
+<p><strong>Data processed:</strong> user prompts, conversation history, generated content</p>
+<p><strong>Lawful basis:</strong> Consent / Contract performance (Art. 6(1)(a) / Art. 6(1)(b))</p>
+<p><strong>Reasoning:</strong></p>
+<p>AI processing depends on whether it is integral to the service. If AI features are core to the product the user signed up for, contract performance applies. If AI features are optional or supplementary, consent should be obtained. Special attention is required under GDPR Art. 22 regarding automated decision-making with legal or similarly significant effects.</p>
+<h3>3.4. Usage Analytics</h3>
+<p><strong>Services:</strong> posthog</p>
+<p><strong>Data processed:</strong> user behavior, session recordings, feature flag usage, device information</p>
+<p><strong>Lawful basis:</strong> Consent / Legitimate interest (Art. 6(1)(a) / Art. 6(1)(f))</p>
+<p><strong>Reasoning:</strong></p>
+<p>Analytics processing may rely on consent (obtained via cookie banner) for tracking technologies that are not strictly necessary. Alternatively, aggregated and anonymized analytics may be processed under legitimate interest for product improvement. A Legitimate Interest Assessment should be conducted to document the balancing test if Art. 6(1)(f) is used.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>A Legitimate Interest Assessment (LIA) is recommended for this processing activity. See Section 4 below.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.5. Data Storage</h3>
+<p><strong>Services:</strong> prisma</p>
+<p><strong>Data processed:</strong> user data as defined in schema</p>
+<p><strong>Lawful basis:</strong> Contract performance (Art. 6(1)(b))</p>
+<p><strong>Reasoning:</strong></p>
+<p>Database storage of user data is necessary to operate the service the user has agreed to use. Without persistent data storage, the service cannot function. Data stored is directly provided by or generated for the user as part of normal service operation.</p>
+<h3>3.6. Email Communications</h3>
+<p><strong>Services:</strong> resend</p>
+<p><strong>Data processed:</strong> email addresses, email content</p>
+<p><strong>Lawful basis:</strong> Legitimate interest / Consent (Art. 6(1)(f) / Art. 6(1)(a))</p>
+<p><strong>Reasoning:</strong></p>
+<p>Transactional emails (order confirmations, password resets, security alerts) are processed under legitimate interest — the data subject reasonably expects these communications as part of the service. Marketing emails require explicit consent under both GDPR and the ePrivacy Directive.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>A Legitimate Interest Assessment (LIA) is recommended for this processing activity. See Section 4 below.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>3.7. Payment Processing</h3>
+<p><strong>Services:</strong> stripe, stripe-ios</p>
+<p><strong>Data processed:</strong> payment information, billing address, email, transaction history</p>
+<p><strong>Lawful basis:</strong> Contract performance / Legal obligation (Art. 6(1)(b) / Art. 6(1)(c))</p>
+<p><strong>Reasoning:</strong></p>
+<p>Payment processing is necessary to fulfill the contractual obligation of delivering paid services or goods. Additionally, retention of transaction records is required under tax and accounting regulations (legal obligation). Payment card data is tokenized and processed by PCI DSS-compliant processors, minimizing the controller's exposure.</p>
+<h2>4. Legitimate Interest Assessments (LIA)</h2>
+<p>Under GDPR Art. 6(1)(f), processing based on legitimate interest requires a three-part test. The following assessments should be completed for each processing activity relying on this basis.</p>
+<h3>4.1. LIA: Error Monitoring</h3>
+<h4>Part 1: Purpose Test — Identify the legitimate interest</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>What is the purpose of the processing?</p></td><td><p>Detecting and resolving application errors, maintaining service reliability, and ensuring security</p></td></tr>
+<tr><td><p>Is there a genuine need for this processing?</p></td><td><p>[Yes/No — provide justification]</p></td></tr>
+<tr><td><p>Who benefits from the processing?</p></td><td><p>Both the controller (service reliability) and data subjects (stable, secure service)</p></td></tr>
+<tr><td><p>Would the processing be considered unethical or unlawful in any way?</p></td><td><p>No — the processing is standard industry practice</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 2: Necessity Test — Is the processing necessary?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Is this the least intrusive way to achieve the purpose?</p></td><td><p>Error monitoring is essential for service reliability. Consider minimizing personal data in error reports (e.g., redacting email addresses from stack traces).</p></td></tr>
+<tr><td><p>Could the same result be achieved without processing personal data?</p></td><td><p>[Assess whether anonymization is feasible]</p></td></tr>
+<tr><td><p>Is the data collected proportionate to the purpose?</p></td><td><p>[Confirm data minimization]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 3: Balancing Test — Do data subject rights override?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p>Nature of the data</p></td><td><p>Technical data (stack traces, device info) with incidental personal data (IP addresses)</p></td></tr>
+<tr><td><p>Reasonable expectations of the data subject</p></td><td><p>Users reasonably expect that a software service monitors for errors and maintains security</p></td></tr>
+<tr><td><p>Likely impact on the data subject</p></td><td><p>[Assess — low/medium/high]</p></td></tr>
+<tr><td><p>Status of the data subject (e.g., children, vulnerable)</p></td><td><p>Not specifically targeting vulnerable individuals</p></td></tr>
+<tr><td><p>Safeguards in place</p></td><td><p>[List safeguards — encryption, access controls, retention limits]</p></td></tr>
+<tr><td><p>Opt-out mechanism available</p></td><td><p>Limited — error monitoring is essential for service operation; users can request data deletion</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>LIA Conclusion</h4>
+<ul>
+<li><p>[ ] The legitimate interest is valid and clearly identified</p></li>
+<li><p>[ ] The processing is necessary and proportionate</p></li>
+<li><p>[ ] The data subject's rights do not override the legitimate interest</p></li>
+<li><p>[ ] Adequate safeguards are in place</p></li>
+<li><p>[ ] An opt-out mechanism is available</p></li>
+</ul>
+<p><strong>Decision:</strong> [Approved / Rejected / Needs further review]</p>
+<p><strong>Reviewed by:</strong> [Name and role]</p>
+<p><strong>Review date:</strong> [Date]</p>
+<h3>4.2. LIA: Usage Analytics</h3>
+<h4>Part 1: Purpose Test — Identify the legitimate interest</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>What is the purpose of the processing?</p></td><td><p>Product improvement, understanding user behavior, optimizing user experience, and measuring feature adoption</p></td></tr>
+<tr><td><p>Is there a genuine need for this processing?</p></td><td><p>[Yes/No — provide justification]</p></td></tr>
+<tr><td><p>Who benefits from the processing?</p></td><td><p>Both the controller (product insights) and data subjects (improved user experience)</p></td></tr>
+<tr><td><p>Would the processing be considered unethical or unlawful in any way?</p></td><td><p>No — the processing is standard industry practice</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 2: Necessity Test — Is the processing necessary?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Is this the least intrusive way to achieve the purpose?</p></td><td><p>Consider whether fully anonymized analytics could serve the same purpose. If not, ensure data minimization and pseudonymization are applied.</p></td></tr>
+<tr><td><p>Could the same result be achieved without processing personal data?</p></td><td><p>[Assess whether anonymization is feasible]</p></td></tr>
+<tr><td><p>Is the data collected proportionate to the purpose?</p></td><td><p>[Confirm data minimization]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 3: Balancing Test — Do data subject rights override?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p>Nature of the data</p></td><td><p>Pseudonymized behavioral data — not special category data</p></td></tr>
+<tr><td><p>Reasonable expectations of the data subject</p></td><td><p>Users generally expect websites to track usage for improvement, though expectations vary by audience. Transparency is key.</p></td></tr>
+<tr><td><p>Likely impact on the data subject</p></td><td><p>[Assess — low/medium/high]</p></td></tr>
+<tr><td><p>Status of the data subject (e.g., children, vulnerable)</p></td><td><p>Not specifically targeting vulnerable individuals</p></td></tr>
+<tr><td><p>Safeguards in place</p></td><td><p>[List safeguards — encryption, access controls, retention limits]</p></td></tr>
+<tr><td><p>Opt-out mechanism available</p></td><td><p>Yes — via cookie preferences and account settings</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>LIA Conclusion</h4>
+<ul>
+<li><p>[ ] The legitimate interest is valid and clearly identified</p></li>
+<li><p>[ ] The processing is necessary and proportionate</p></li>
+<li><p>[ ] The data subject's rights do not override the legitimate interest</p></li>
+<li><p>[ ] Adequate safeguards are in place</p></li>
+<li><p>[ ] An opt-out mechanism is available</p></li>
+</ul>
+<p><strong>Decision:</strong> [Approved / Rejected / Needs further review]</p>
+<p><strong>Reviewed by:</strong> [Name and role]</p>
+<p><strong>Review date:</strong> [Date]</p>
+<h3>4.3. LIA: Email Communications</h3>
+<h4>Part 1: Purpose Test — Identify the legitimate interest</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>What is the purpose of the processing?</p></td><td><p>Sending transactional communications (order confirmations, security alerts, password resets) that users expect as part of the service</p></td></tr>
+<tr><td><p>Is there a genuine need for this processing?</p></td><td><p>[Yes/No — provide justification]</p></td></tr>
+<tr><td><p>Who benefits from the processing?</p></td><td><p>Both the controller (operational communication) and data subjects (receiving expected notifications)</p></td></tr>
+<tr><td><p>Would the processing be considered unethical or unlawful in any way?</p></td><td><p>No — the processing is standard industry practice</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 2: Necessity Test — Is the processing necessary?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Question</p></th><th><p>Answer</p></th></tr>
+<tr><td><p>Is this the least intrusive way to achieve the purpose?</p></td><td><p>Transactional emails are the least intrusive way to deliver service-critical information. Alternative channels (SMS, push) may be more intrusive.</p></td></tr>
+<tr><td><p>Could the same result be achieved without processing personal data?</p></td><td><p>[Assess whether anonymization is feasible]</p></td></tr>
+<tr><td><p>Is the data collected proportionate to the purpose?</p></td><td><p>[Confirm data minimization]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Part 3: Balancing Test — Do data subject rights override?</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p>Nature of the data</p></td><td><p>Email addresses and communication records — standard personal data</p></td></tr>
+<tr><td><p>Reasonable expectations of the data subject</p></td><td><p>Users reasonably expect to receive transactional emails related to their use of the service</p></td></tr>
+<tr><td><p>Likely impact on the data subject</p></td><td><p>[Assess — low/medium/high]</p></td></tr>
+<tr><td><p>Status of the data subject (e.g., children, vulnerable)</p></td><td><p>Not specifically targeting vulnerable individuals</p></td></tr>
+<tr><td><p>Safeguards in place</p></td><td><p>[List safeguards — encryption, access controls, retention limits]</p></td></tr>
+<tr><td><p>Opt-out mechanism available</p></td><td><p>Yes — unsubscribe link in every email (marketing); transactional emails cannot be opted out of while using the service</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>LIA Conclusion</h4>
+<ul>
+<li><p>[ ] The legitimate interest is valid and clearly identified</p></li>
+<li><p>[ ] The processing is necessary and proportionate</p></li>
+<li><p>[ ] The data subject's rights do not override the legitimate interest</p></li>
+<li><p>[ ] Adequate safeguards are in place</p></li>
+<li><p>[ ] An opt-out mechanism is available</p></li>
+</ul>
+<p><strong>Decision:</strong> [Approved / Rejected / Needs further review]</p>
+<p><strong>Reviewed by:</strong> [Name and role]</p>
+<p><strong>Review date:</strong> [Date]</p>
+<h2>5. Consent Management Requirements</h2>
+<p>The following processing activities rely (fully or partially) on consent:</p>
+<h3>AI Processing</h3>
+<ul>
+<li><p>[ ] Consent is freely given (not bundled with other terms)</p></li>
+<li><p>[ ] Consent is specific to this processing purpose</p></li>
+<li><p>[ ] Consent request is clear and in plain language</p></li>
+<li><p>[ ] Consent is obtained via affirmative action (no pre-ticked boxes)</p></li>
+<li><p>[ ] Withdrawal mechanism is as easy as giving consent</p></li>
+<li><p>[ ] Consent records are maintained with timestamps</p></li>
+<li><p>[ ] Consent is refreshed periodically</p></li>
+</ul>
+<h3>Usage Analytics</h3>
+<ul>
+<li><p>[ ] Consent is freely given (not bundled with other terms)</p></li>
+<li><p>[ ] Consent is specific to this processing purpose</p></li>
+<li><p>[ ] Consent request is clear and in plain language</p></li>
+<li><p>[ ] Consent is obtained via affirmative action (no pre-ticked boxes)</p></li>
+<li><p>[ ] Withdrawal mechanism is as easy as giving consent</p></li>
+<li><p>[ ] Consent records are maintained with timestamps</p></li>
+<li><p>[ ] Consent is refreshed periodically</p></li>
+</ul>
+<h3>Email Communications</h3>
+<ul>
+<li><p>[ ] Consent is freely given (not bundled with other terms)</p></li>
+<li><p>[ ] Consent is specific to this processing purpose</p></li>
+<li><p>[ ] Consent request is clear and in plain language</p></li>
+<li><p>[ ] Consent is obtained via affirmative action (no pre-ticked boxes)</p></li>
+<li><p>[ ] Withdrawal mechanism is as easy as giving consent</p></li>
+<li><p>[ ] Consent records are maintained with timestamps</p></li>
+<li><p>[ ] Consent is refreshed periodically</p></li>
+</ul>
+<h2>6. Review Schedule</h2>
+<p>This assessment must be reviewed:</p>
+<ul>
+<li><p><strong>Annually</strong> — Full review of all lawful basis determinations</p></li>
+<li><p><strong>On change</strong> — When new processing activities are introduced</p></li>
+<li><p><strong>On regulatory update</strong> — When relevant guidance changes</p></li>
+<li><p><strong>On complaint</strong> — Following any data subject complaint about processing</p></li>
+</ul>
+<h2>Review Notes</h2>
+<h3>What a lawyer should check</h3>
+<ul>
+<li><p>Validate each lawful basis selection against the specific processing context</p></li>
+<li><p>Complete all LIA templates with specific factual assessments</p></li>
+<li><p>Verify consent mechanisms meet GDPR requirements</p></li>
+<li><p>Confirm Art. 6(1)(b) claims are truly necessary for contract performance</p></li>
+<li><p>Review whether any processing requires a DPIA under Art. 35</p></li>
+</ul>
+<h3>Auto-generated vs. needs human input</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Section</p></th><th><p>Status</p></th><th><p>Confidence</p></th></tr>
+<tr><td><p>Processing activities list</p></td><td><p>Auto-detected from code</p></td><td><p>High</p></td></tr>
+<tr><td><p>Lawful basis selection</p></td><td><p>Auto-assigned defaults</p></td><td><p>Low — requires legal validation</p></td></tr>
+<tr><td><p>Detailed reasoning</p></td><td><p>Template reasoning</p></td><td><p>Medium — needs context-specific review</p></td></tr>
+<tr><td><p>LIA templates</p></td><td><p>Structure only — needs completion</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Consent requirements</p></td><td><p>Checklist only</p></td><td><p>Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</p></li>
+<li><p>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</p></li>
+<li><p>Privacy Impact Assessment (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Consent Management Guide (<code>CONSENT<em>MANAGEMENT</em>GUIDE.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This Lawful Basis Assessment was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. Lawful basis determinations are preliminary and must be reviewed by qualified legal counsel. All LIA templates must be completed with specific factual assessments before relying on legitimate interest.</em></p>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — chatwoot</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">chatwoot &middot; Last updated 2026-03-18 &middot; ~13 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 90 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>ACCESS</em>KEY_ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AWS<em>SECRET</em>ACCESS_KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>APP</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FB<em>APP</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FB<em>VERIFY</em>TOKEN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>OAUTH</em>CLIENT_SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IG<em>VERIFY</em>TOKEN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IP<em>LOOKUP</em>API_KEY</code></td><td style="text-align:left">config/initializers/geocoder.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MAILGUN<em>INGRESS</em>SIGNING_KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MANDRILL<em>INGRESS</em>API_KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>INBOUND</em>EMAIL_PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>MASTER</em>KEY</code></td><td style="text-align:left">config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS_PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SECRET<em>KEY</em>BASE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SLACK<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PASSWORD</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWITTER<em>CONSUMER</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWITTER<em>CONSUMER</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VAPID<em>PRIVATE</em>KEY</code></td><td style="text-align:left">spec/lib/vapid<em>service</em>spec.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VAPID<em>PUBLIC</em>KEY</code></td><td style="text-align:left">spec/lib/vapid<em>service</em>spec.rb</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>DATABASE_URL</code></td><td style="text-align:left">docker/entrypoints/helpers/pg<em>database</em>url.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_HOST</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_PORT</code></td><td style="text-align:left">docker/entrypoints/helpers/pg<em>database</em>url.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>POSTGRES_USERNAME</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>REDIS<em>DISABLE</em>CLIENT_COMMAND</code></td><td style="text-align:left">config/initializers/actioncable.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS<em>OPENSSL</em>VERIFY_MODE</code></td><td style="text-align:left">config/application.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS<em>SENTINEL</em>MASTER_NAME</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS_SENTINELS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>REDIS_URL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ASSET<em>CDN</em>HOST</code></td><td style="text-align:left">.env.example, config/environments/production.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DD<em>TRACE</em>AGENT_URL</code></td><td style="text-align:left">config/initializers/datadog.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FRONTEND_URL</code></td><td style="text-align:left">.env.example, config/environments/development.rb, config/environments/production.rb, config/environments/staging.rb, config/initializers/mailer.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>OAUTH</em>CALLBACK_URL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HELPCENTER_URL</code></td><td style="text-align:left">spec/controllers/public/api/v1/portals/articles<em>controller</em>spec.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>MAILER<em>INBOUND</em>EMAIL_DOMAIN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_DOMAIN</code></td><td style="text-align:left">.env.example, config/initializers/mailer.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PORT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ACTION<em>MAILBOX</em>SES<em>SNS</em>TOPIC</code></td><td style="text-align:left">.env.example, config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ACTIVE<em>STORAGE</em>SERVICE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ANDROID<em>BUNDLE</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ANDROID<em>SHA256</em>CERT_FINGERPRINT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>AWS_REGION</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZURE<em>APP</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUILD_MODE</code></td><td style="text-align:left">vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUNDLE_GEMFILE</code></td><td style="text-align:left">config/boot.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CODESPACES</code></td><td style="text-align:left">config/environments/development.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEV</code></td><td style="text-align:left">app/javascript/dashboard/components/Modal.vue, app/javascript/dashboard/components/widgets/forms/Input.vue</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DIRECT<em>UPLOADS</em>ENABLED</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE<em>MINI</em>PROFILER</code></td><td style="text-align:left">config/initializers/rack_profiler.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE<em>SENTRY</em>PII</code></td><td style="text-align:left">config/initializers/sentry.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DISABLE_TELEMETRY</code></td><td style="text-align:left">lib/chatwoot_hub.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>ACCOUNT</em>SIGNUP</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>INBOX</em>EVENTS</code></td><td style="text-align:left">app/models/inbox.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>PUSH</em>RELAY_SERVER</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ENABLE<em>SENTRY</em>TRANSACTIONS</code></td><td style="text-align:left">config/initializers/sentry.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FB<em>APP</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>FORCE_SSL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>OAUTH</em>CLIENT_ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IOS<em>APP</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>LETTER_OPENER</code></td><td style="text-align:left">config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOG_LEVEL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>LOG_SIZE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>MAILER<em>SENDER</em>EMAIL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RAILS_ENV</code></td><td style="text-align:left">.env.example, spec/rails<em>helper.rb, spec/test</em>helper.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>INBOUND</em>EMAIL_SERVICE</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>LOG</em>TO_STDOUT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>MAX</em>THREADS</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RAILS<em>SERVE</em>STATIC_FILES</code></td><td style="text-align:left">config/environments/staging.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>BUCKET</em>NAME</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">config/initializers/sentry.rb, lib/chatwoot<em>exception</em>tracker.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SLACK<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_ADDRESS</code></td><td style="text-align:left">.env.example, config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_AUTHENTICATION</code></td><td style="text-align:left">.env.example, config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>ENABLE</em>STARTTLS_AUTO</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>OPEN</em>TIMEOUT</code></td><td style="text-align:left">config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>OPENSSL</em>VERIFY_MODE</code></td><td style="text-align:left">.env.example, config/initializers/mailer.rb</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>READ</em>TIMEOUT</code></td><td style="text-align:left">config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_SSL</code></td><td style="text-align:left">config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_TLS</code></td><td style="text-align:left">config/initializers/mailer.rb</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_USERNAME</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TEST</code></td><td style="text-align:left">vite.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWITTER<em>APP</em>ID</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TWITTER_ENVIRONMENT</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TZ</code></td><td style="text-align:left">app/javascript/shared/helpers/specs/timeHelper.spec.js</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>DETERMINISTIC</em>KEY</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>KEY</em>DERIVATION_SALT</code></li>
+<li><code>ACTIVE<em>RECORD</em>ENCRYPTION<em>PRIMARY</em>KEY</code></li>
+<li><code>BUILD_MODE</code></li>
+<li><code>BUNDLE_GEMFILE</code></li>
+<li><code>CODESPACES</code></li>
+<li><code>DATABASE_URL</code></li>
+<li><code>DD<em>TRACE</em>AGENT_URL</code></li>
+<li><code>DEV</code></li>
+<li><code>DISABLE<em>MINI</em>PROFILER</code></li>
+<li><code>DISABLE<em>SENTRY</em>PII</code></li>
+<li><code>DISABLE_TELEMETRY</code></li>
+<li><code>ENABLE<em>INBOX</em>EVENTS</code></li>
+<li><code>ENABLE<em>SENTRY</em>TRANSACTIONS</code></li>
+<li><code>HELPCENTER_URL</code></li>
+<li><code>IP<em>LOOKUP</em>API_KEY</code></li>
+<li><code>LETTER_OPENER</code></li>
+<li><code>POSTGRES_PORT</code></li>
+<li><code>RAILS<em>MASTER</em>KEY</code></li>
+<li><code>RAILS<em>SERVE</em>STATIC_FILES</code></li>
+<li><code>REDIS<em>DISABLE</em>CLIENT_COMMAND</code></li>
+<li><code>REDIS<em>OPENSSL</em>VERIFY_MODE</code></li>
+<li><code>SENTRY_DSN</code></li>
+<li><code>SMTP<em>OPEN</em>TIMEOUT</code></li>
+<li><code>SMTP<em>READ</em>TIMEOUT</code></li>
+<li><code>SMTP_SSL</code></li>
+<li><code>SMTP_TLS</code></li>
+<li><code>TEST</code></li>
+<li><code>TZ</code></li>
+<li><code>VAPID<em>PRIVATE</em>KEY</code></li>
+<li><code>VAPID<em>PUBLIC</em>KEY</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>79 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 78 hardcoded secret(s) detected in source code: Hardcoded Password, Hardcoded Secret, Hardcoded Bearer Token. Move these to environment variables immediately.</li>
+<li><strong>[WARNING]</strong> 1 potentially sensitive value(s) found in source code. Review and consider moving to environment variables.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>app/builders/agent_builder.rb</code></td><td style="text-align:left">32</td><td style="text-align:left"><code>temp_password = "1!aA#{SecureRandom.alphanumeric(12)}"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>app/javascript/dashboard/store/modules/specs/agentBots/fixtures.js</code></td><td style="text-align:left">11</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>app/javascript/dashboard/store/modules/specs/agentBots/fixtures.js</code></td><td style="text-align:left">24</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>db/seeds.rb</code></td><td style="text-align:left">28</td><td style="text-align:left"><code>user = User.new(name: 'John', email: 'john@acme.inc', password: 'Password1!', type: 'SuperAdmin')</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>lib/seeders/account_seeder.rb</code></td><td style="text-align:left">74</td><td style="text-align:left"><code>user<em>record = User.create</em>with(name: user['name'], password: 'Password1!.').find<em>or</em>create<em>by!(email: user['email'].to</em>s...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>lib/seeders/reports/report<em>data</em>seeder.rb</code></td><td style="text-align:left">111</td><td style="text-align:left"><code>password: 'Password1!.',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/builders/messages/instagram/message<em>builder</em>spec.rb</code></td><td style="text-align:left">23</td><td style="text-align:left"><code>instagram<em>channel.update(access</em>token: "[REDACTED]")</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/builders/messages/instagram/message<em>builder</em>spec.rb</code></td><td style="text-align:left">192</td><td style="text-align:left"><code>instagram<em>channel.update(access</em>token: "[REDACTED]")</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">21</td><td style="text-align:left"><code>params = { account<em>name: 'test', email: email, user: nil, locale: nil, user</em>full<em>name: user</em>full_name, password: 'Passwo...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">41</td><td style="text-align:left"><code>params = { account<em>name: 'test', email: email, user: nil, locale: nil, user</em>full<em>name: user</em>full_name, password: 'Passwo...</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">97</td><td style="text-align:left"><code>params = { account<em>name: 'test', email: email, user</em>full<em>name: user</em>full_name, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">109</td><td style="text-align:left"><code>params = { account<em>name: 'test', email: email, user</em>full<em>name: user</em>full_name, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">45</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">92</td><td style="text-align:left"><code>params: { profile: { current<em>password: 'Test123!', password: 'Test1234!', password</em>confirmation: 'Test1234!' } },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">105</td><td style="text-align:left"><code>params: { profile: { current<em>password: 'Test123!', password: 'Test1234!', password</em>confirmation: 'Test1234!' } },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">160</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">178</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">215</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">238</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">263</td><td style="text-align:left"><code>let(:agent) { create(:user, password: 'Test123!', account: account, role: :agent) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v1/profiles<em>controller</em>spec.rb</code></td><td style="text-align:left">287</td><td style="text-align:left"><code>create(:user, password: 'Test123!', email: 'test-unconfirmed@email.com', account: account, role: :agent,</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts/integrations/apps<em>controller</em>spec.rb</code></td><td style="text-align:left">57</td><td style="text-align:left"><code>with<em>modified</em>env SLACK<em>CLIENT</em>ID: 'client<em>id', SLACK</em>CLIENT_SECRET: "[REDACTED]" do</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts/tiktok/authorizations<em>controller</em>spec.rb</code></td><td style="text-align:left">25</td><td style="text-align:left"><code>with<em>modified</em>env TIKTOK<em>APP</em>ID: "[REDACTED]", TIKTOK<em>APP</em>SECRET: "[REDACTED]" do</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/controllers/api/v1/accounts/tiktok/authorizations<em>controller</em>spec.rb</code></td><td style="text-align:left">36</td><td style="text-align:left"><code>with<em>modified</em>env TIKTOK<em>APP</em>ID: "[REDACTED]", TIKTOK<em>APP</em>SECRET: "[REDACTED]" do</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">20</td><td style="text-align:left"><code>params = { email: email, user: nil, locale: nil, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">37</td><td style="text-align:left"><code>params = { email: email, user: nil, locale: nil, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">54</td><td style="text-align:left"><code>params = { email: email, user: nil, password: 'Password1!', locale: nil, h<em>captcha</em>client_response: '123' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">110</td><td style="text-align:left"><code>params = { email: email, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">129</td><td style="text-align:left"><code>params = { email: email, user: nil, password: 'Password1!', locale: nil }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">20</td><td style="text-align:left"><code>let!(:user) { create(:user, password: 'Password1!', account: account) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">21</td><td style="text-align:left"><code>let!(:user<em>with</em>new_pwd) { create(:user, password: 'Password1!.><?', account: account) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">24</td><td style="text-align:left"><code>params = { email: user.email, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">35</td><td style="text-align:left"><code>params = { email: user<em>with</em>new_pwd.email, password: 'Password1!.><?' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">46</td><td style="text-align:left"><code>params = { email: user.email, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">58</td><td style="text-align:left"><code>let!(:user) { create(:user, password: 'Password1!', account: account) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise/session<em>controller</em>spec.rb</code></td><td style="text-align:left">72</td><td style="text-align:left"><code>let!(:user) { create(:user, password: 'Password1!', account: account) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise<em>overrides/sessions</em>controller_spec.rb</code></td><td style="text-align:left">11</td><td style="text-align:left"><code>let(:user) { create(:user, password: 'Test@123456') }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise<em>overrides/sessions</em>controller_spec.rb</code></td><td style="text-align:left">15</td><td style="text-align:left"><code>post :create, params: { email: user.email, password: 'Test@123456' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise<em>overrides/sessions</em>controller_spec.rb</code></td><td style="text-align:left">35</td><td style="text-align:left"><code>post :create, params: { email: user.email, password: 'Test@123456' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/devise<em>overrides/sessions</em>controller_spec.rb</code></td><td style="text-align:left">44</td><td style="text-align:left"><code>post :create, params: { email: user.email, password: 'Test@123456' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/controllers/instagram/callbacks<em>controller</em>spec.rb</code></td><td style="text-align:left">58</td><td style="text-align:left"><code>existing<em>channel = create(:channel</em>instagram, account: account, instagram<em>id: '12345', access</em>token: 'old_token')</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/platform/api/v1/users<em>controller</em>spec.rb</code></td><td style="text-align:left">159</td><td style="text-align:left"><code>email: 'test@test.com', password: 'Password1!',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/platform/api/v1/users<em>controller</em>spec.rb</code></td><td style="text-align:left">185</td><td style="text-align:left"><code>post "[REDACTED]", params: { name: 'test', email: 'test@test.com', password: 'Password1!' },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/super<em>admin/users</em>controller_spec.rb</code></td><td style="text-align:left">21</td><td style="text-align:left"><code>password: 'Password1!',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/super<em>admin/users</em>controller_spec.rb</code></td><td style="text-align:left">31</td><td style="text-align:left"><code>password: 'Password1!',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/controllers/super<em>admin/users</em>controller_spec.rb</code></td><td style="text-align:left">40</td><td style="text-align:left"><code>password: 'Password1!',</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/controllers/tiktok/callbacks<em>controller</em>spec.rb</code></td><td style="text-align:left">81</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">35</td><td style="text-align:left"><code>params = { email: email, user: nil, locale: nil, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">58</td><td style="text-align:left"><code>params = { email: email, user: nil, locale: nil, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/api/v2/accounts<em>controller</em>spec.rb</code></td><td style="text-align:left">74</td><td style="text-align:left"><code>params = { email: email, user: nil, locale: nil, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/devise<em>overrides/session</em>controller_spec.rb</code></td><td style="text-align:left">5</td><td style="text-align:left"><code>let!(:user) { create(:user, password: 'Password1!', account: account) }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/devise<em>overrides/session</em>controller_spec.rb</code></td><td style="text-align:left">18</td><td style="text-align:left"><code>params = { email: saml_user.email, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/devise<em>overrides/session</em>controller_spec.rb</code></td><td style="text-align:left">30</td><td style="text-align:left"><code>params = { email: saml<em>user.email, sso</em>auth<em>token: valid</em>token, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/devise<em>overrides/session</em>controller_spec.rb</code></td><td style="text-align:left">43</td><td style="text-align:left"><code>params = { email: user.email, password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/enterprise/controllers/enterprise/devise<em>overrides/session</em>controller_spec.rb</code></td><td style="text-align:left">73</td><td style="text-align:left"><code>params = { email: '', password: 'Password1!' }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Bearer Token</td><td style="text-align:left"><code>spec/enterprise/models/captain/custom<em>tool</em>spec.rb</code></td><td style="text-align:left">259</td><td style="text-align:left"><code>expect(tool.build<em>auth</em>headers).to eq({ "[REDACTED]" => 'Bearer test<em>bearer</em>token_123' })</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/enterprise/models/channel/voice_spec.rb</code></td><td style="text-align:left">59</td><td style="text-align:left"><code>api<em>key</em>secret: 'test_secret',</code></td></tr>
+<tr><td style="text-align:left">MEDIUM</td><td style="text-align:left">Twilio Account SID</td><td style="text-align:left"><code>spec/enterprise/services/twilio/voice<em>webhook</em>setup<em>service</em>spec.rb</code></td><td style="text-align:left">6</td><td style="text-align:left"><code>let(:account_sid) { "[REDACTED]" }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/factories/captain/custom_tool.rb</code></td><td style="text-align:left">25</td><td style="text-align:left"><code>auth<em>config { { username: 'test</em>user', password: 'test_pass' } }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/jobs/webhooks/instagram<em>events</em>job_spec.rb</code></td><td style="text-align:left">228</td><td style="text-align:left"><code>instagram<em>channel.update(access</em>token: "[REDACTED]")</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/lib/redis/config_spec.rb</code></td><td style="text-align:left">31</td><td style="text-align:left"><code>{ host: 'sentinel_1', port: '1234', password: "[REDACTED]" },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/lib/redis/config_spec.rb</code></td><td style="text-align:left">32</td><td style="text-align:left"><code>{ host: 'sentinel_2', port: '4321', password: "[REDACTED]" },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/lib/redis/config_spec.rb</code></td><td style="text-align:left">33</td><td style="text-align:left"><code>{ host: 'sentinel_3', port: '26379', password: "[REDACTED]" }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/lib/webhooks/trigger_spec.rb</code></td><td style="text-align:left">281</td><td style="text-align:left"><code>trigger.execute(url, payload, webhook<em>type, secret: 'mysecret', delivery</em>id: 'abc-123')</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/listeners/automation<em>rule</em>listener<em>old</em>spec.rb</code></td><td style="text-align:left">741</td><td style="text-align:left"><code>smtp<em>password: 'password', smtp</em>domain: "[REDACTED]", account: new_account)</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/mailers/conversation<em>reply</em>mailer_spec.rb</code></td><td style="text-align:left">455</td><td style="text-align:left"><code>smtp<em>password: 'password', smtp</em>domain: "[REDACTED]", account: account)</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/mailers/conversation<em>reply</em>mailer_spec.rb</code></td><td style="text-align:left">567</td><td style="text-align:left"><code>imap<em>enabled: true, account: account, provider: 'microsoft', provider</em>config: { access_token: "[REDACTED]" })</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/mailers/conversation<em>reply</em>mailer_spec.rb</code></td><td style="text-align:left">583</td><td style="text-align:left"><code>imap<em>enabled: true, account: account, provider: 'google', provider</em>config: { access_token: "[REDACTED]" })</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/models/application<em>record</em>external<em>credentials</em>encryption_spec.rb</code></td><td style="text-align:left">85</td><td style="text-align:left"><code>legacy<em>record.update!(smtp</em>password: "[REDACTED]")</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/models/user_spec.rb</code></td><td style="text-align:left">119</td><td style="text-align:left"><code>let(:user) { create(:user, password: 'Test@123456') }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/models/integrations/app_spec.rb</code></td><td style="text-align:left">48</td><td style="text-align:left"><code>with<em>modified</em>env SLACK<em>CLIENT</em>SECRET: "[REDACTED]" do</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/profile/mfa<em>controller</em>spec.rb</code></td><td style="text-align:left">10</td><td style="text-align:left"><code>let(:user) { create(:user, account: account, password: 'Test@123456') }</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/profile/mfa<em>controller</em>spec.rb</code></td><td style="text-align:left">166</td><td style="text-align:left"><code>params: { password: 'Test@123456', otp<em>code: otp</em>code },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/profile/mfa<em>controller</em>spec.rb</code></td><td style="text-align:left">186</td><td style="text-align:left"><code>params: { password: "[REDACTED]", otp<em>code: otp</em>code },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/profile/mfa<em>controller</em>spec.rb</code></td><td style="text-align:left">199</td><td style="text-align:left"><code>params: { password: 'Test@123456', otp_code: '000000' },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>spec/requests/api/v1/profile/mfa<em>controller</em>spec.rb</code></td><td style="text-align:left">213</td><td style="text-align:left"><code>params: { password: 'Test@123456', otp_code: '123456' },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/services/tiktok/token<em>service</em>spec.rb</code></td><td style="text-align:left">7</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/services/tiktok/token<em>service</em>spec.rb</code></td><td style="text-align:left">31</td><td style="text-align:left"><code>access_token: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>spec/services/whatsapp/facebook<em>api</em>client_spec.rb</code></td><td style="text-align:left">25</td><td style="text-align:left"><code>body: { access<em>token: 'new</em>token' }.to_json,</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

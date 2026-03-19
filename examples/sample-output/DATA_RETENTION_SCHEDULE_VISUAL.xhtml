@@ -1,0 +1,109 @@
+<h1>Data Retention Schedule Visual</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Retention Schedule — Visual</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organisation:</strong> Acme Inc</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Generated:</strong> 2026-03-18</p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>This document provides a visual Gantt-chart representation of data retention timelines for every service category detected in your project. Use it alongside the <a href="DATA<em>RETENTION</em>POLICY.md">Data Retention Policy</a> for a complete picture.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Retention Timeline</h2>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">mermaid</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[gantt
+    title Data Retention Timelines
+    dateFormat YYYY-MM-DD
+    axisFormat %Y
+    todayMarker off
+    section Legend
+    Collection date             :milestone, m1, 2026-03-18, 0d
+    section Authentication
+    Until deletion (~10y cap)    :crit, auth, 2026-03-18, 3650d
+    section Database
+    Until deletion (~10y cap)    :crit, database, 2026-03-18, 3650d
+    section Payment Processing
+    7 years    :crit, payment, 2026-03-18, 2555d
+    section Email Service
+    3 years    :active, email, 2026-03-18, 1095d
+    section Analytics
+    2 years    :active, analytics, 2026-03-18, 790d
+    section Error Monitoring
+    90 days    :done, monitoring, 2026-03-18, 90d
+    section AI Service
+    90 days    :done, ai, 2026-03-18, 90d]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>Retention Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Retention Period</p></th><th><p>Days</p></th><th><p>Risk Level</p></th></tr>
+<tr><td><p>Authentication</p></td><td><p>Until deletion (~10y cap)</p></td><td><p>3650</p></td><td><p>High</p></td></tr>
+<tr><td><p>Database</p></td><td><p>Until deletion (~10y cap)</p></td><td><p>3650</p></td><td><p>High</p></td></tr>
+<tr><td><p>Payment Processing</p></td><td><p>7 years</p></td><td><p>2555</p></td><td><p>High</p></td></tr>
+<tr><td><p>Email Service</p></td><td><p>3 years</p></td><td><p>1095</p></td><td><p>Moderate</p></td></tr>
+<tr><td><p>Analytics</p></td><td><p>2 years</p></td><td><p>790</p></td><td><p>Moderate</p></td></tr>
+<tr><td><p>Error Monitoring</p></td><td><p>90 days</p></td><td><p>90</p></td><td><p>Low</p></td></tr>
+<tr><td><p>AI Service</p></td><td><p>90 days</p></td><td><p>90</p></td><td><p>Low</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Default retention override:</strong> 365 days (from configuration).</p>
+<h2>Expiry Timeline</h2>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">mermaid</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[timeline
+    title When does data expire?
+    2036-03-15 : Authentication — Until deletion (~10y cap)
+    2036-03-15 : Database — Until deletion (~10y cap)
+    2033-03-16 : Payment Processing — 7 years
+    2029-03-17 : Email Service — 3 years
+    2028-05-16 : Analytics — 2 years
+    2026-06-16 : Error Monitoring — 90 days
+    2026-06-16 : AI Service — 90 days]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>Data Lifecycle Phases</h2>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">mermaid</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[flowchart LR
+    A[Collection] --&gt; B[Processing]
+    B --&gt; C[Storage]
+    C --&gt; D{Retention\nPeriod\nExpired?}
+    D --&gt;|No| C
+    D --&gt;|Yes| E[Anonymise\nor Delete]
+    E --&gt; F[Purge\nfrom Backups]
+    F --&gt; G[Confirm\nDeletion]]]></ac:plain-text-body>
+</ac:structured-macro>
+<p>Each data category follows this lifecycle. The retention period (shown in the Gantt chart above) governs how long data remains in the <strong>Storage</strong> phase before progressing to deletion.</p>
+<h2>Retention Risk Heat Map</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Risk Level</p></th><th><p>Categories</p></th><th><p>Recommended Action</p></th></tr>
+<tr><td><p><strong>High</strong> (7+ years)</p></td><td><p>Authentication, Database, Payment Processing</p></td><td><p>Verify legal obligation; minimise where possible</p></td></tr>
+<tr><td><p><strong>Moderate</strong> (1–7 years)</p></td><td><p>Email Service, Analytics</p></td><td><p>Review annually; ensure consent is current</p></td></tr>
+<tr><td><p><strong>Low</strong> (< 1 year)</p></td><td><p>Error Monitoring, AI Service</p></td><td><p>Automated purge in place</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Contact</h2>
+<p>For questions about data retention schedules:</p>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+<li><p><strong>Data Protection Officer:</strong> dpo@acme-saas.com</p></li>
+</ul>
+<hr />
+<p><em>This Data Retention Schedule Visual was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Retention periods are based on regulatory best practices and should be reviewed by your legal and compliance teams.</em></p>

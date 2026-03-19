@@ -1,0 +1,245 @@
+<h1>Incident Severity Matrix</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Incident Severity Matrix</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Severity classification and response framework for Acme Inc.</strong></p>
+<p>8 services | Generated on 2026-03-18</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Purpose</h2>
+<p>This matrix defines severity levels for security incidents and service disruptions. It establishes response times, escalation paths, and communication requirements to ensure consistent and rapid incident handling.</p>
+<hr />
+<h2>1. Severity Level Definitions</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Name</p></th><th><p>Definition</p></th><th><p>Examples</p></th></tr>
+<tr><td><p><strong>P0</strong></p></td><td><p><strong>Catastrophic</strong></p></td><td><p>Complete system compromise, active data exfiltration, or regulatory breach affecting all users</p></td><td><p>Production database breach, ransomware encrypting all systems, leaked master encryption keys, complete auth bypass</p></td></tr>
+<tr><td><p><strong>P1</strong></p></td><td><p><strong>Critical</strong></p></td><td><p>Major security incident with confirmed data exposure or significant service degradation</p></td><td><p>Unauthorized access to PII, API key compromise with data access, partial service outage affecting >50% users</p></td></tr>
+<tr><td><p><strong>P2</strong></p></td><td><p><strong>High</strong></p></td><td><p>Security incident with potential data exposure or moderate service impact</p></td><td><p>Vulnerability actively exploited, unauthorized access detected but contained, service degradation affecting <50% users</p></td></tr>
+<tr><td><p><strong>P3</strong></p></td><td><p><strong>Medium</strong></p></td><td><p>Security event requiring investigation with limited immediate impact</p></td><td><p>Suspicious access patterns, failed intrusion attempts, configuration drift detected, minor data quality issues</p></td></tr>
+<tr><td><p><strong>P4</strong></p></td><td><p><strong>Low</strong></p></td><td><p>Minor security event or policy violation with no data impact</p></td><td><p>Phishing attempt blocked, minor policy violation, non-sensitive log exposure, informational security alert</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>2. Response Time Requirements</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Acknowledge</p></th><th><p>Triage</p></th><th><p>Initial Response</p></th><th><p>Resolution Target</p></th><th><p>Post-Mortem</p></th></tr>
+<tr><td><p><strong>P0</strong></p></td><td><p>5 minutes</p></td><td><p>15 minutes</p></td><td><p>30 minutes</p></td><td><p>4 hours</p></td><td><p>Within 24 hours</p></td></tr>
+<tr><td><p><strong>P1</strong></p></td><td><p>15 minutes</p></td><td><p>30 minutes</p></td><td><p>1 hour</p></td><td><p>8 hours</p></td><td><p>Within 48 hours</p></td></tr>
+<tr><td><p><strong>P2</strong></p></td><td><p>30 minutes</p></td><td><p>1 hour</p></td><td><p>4 hours</p></td><td><p>24 hours</p></td><td><p>Within 5 business days</p></td></tr>
+<tr><td><p><strong>P3</strong></p></td><td><p>2 hours</p></td><td><p>4 hours</p></td><td><p>24 hours</p></td><td><p>72 hours</p></td><td><p>Within 10 business days</p></td></tr>
+<tr><td><p><strong>P4</strong></p></td><td><p>24 hours</p></td><td><p>48 hours</p></td><td><p>72 hours</p></td><td><p>1 week</p></td><td><p>Monthly review</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>3. Escalation Paths</h2>
+<h3>P0 — Catastrophic</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Discoverer
+  └─&gt; Security On-Call (immediate)
+       └─&gt; CTO / CISO (within 5 min)
+            └─&gt; CEO + Legal Counsel (within 15 min)
+                 └─&gt; Board notification (within 1 hour)
+                      └─&gt; Regulatory authority (within 72 hours per GDPR)]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>P1 — Critical</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Discoverer
+  └─&gt; Security On-Call (within 15 min)
+       └─&gt; Engineering Lead + Security Lead (within 30 min)
+            └─&gt; CTO / CISO (within 1 hour)
+                 └─&gt; DPO for data breach assessment]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>P2 — High</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Discoverer
+  └─&gt; Security On-Call (within 30 min)
+       └─&gt; Engineering Lead (within 1 hour)
+            └─&gt; CTO (if escalation needed)]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>P3/P4 — Medium/Low</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Discoverer
+  └─&gt; Security channel / ticket
+       └─&gt; Security team triage (next business day for P4)]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>4. Communication Requirements</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Internal Comms</p></th><th><p>Customer Comms</p></th><th><p>Regulatory Notification</p></th><th><p>Public Disclosure</p></th></tr>
+<tr><td><p><strong>P0</strong></p></td><td><p>All-hands war room, executive updates every 30 min</p></td><td><p>Status page + direct email within 1 hour</p></td><td><p>Within 72 hours (GDPR Art. 33) to <a href="mailto:dpo@acme-saas.com">dpo@acme-saas.com</a></p></td><td><p>If data breach confirmed, within 72 hours</p></td></tr>
+<tr><td><p><strong>P1</strong></p></td><td><p>Security + engineering channel, executive update hourly</p></td><td><p>Status page update, affected users notified within 24 hours</p></td><td><p>Assess within 36 hours, notify if required</p></td><td><p>Only if legally required</p></td></tr>
+<tr><td><p><strong>P2</strong></p></td><td><p>Security channel, engineering lead notified</p></td><td><p>Status page if user-facing impact</p></td><td><p>Assess within 72 hours</p></td><td><p>No</p></td></tr>
+<tr><td><p><strong>P3</strong></p></td><td><p>Security ticket, weekly summary</p></td><td><p>No</p></td><td><p>No (unless investigation escalates)</p></td><td><p>No</p></td></tr>
+<tr><td><p><strong>P4</strong></p></td><td><p>Security ticket</p></td><td><p>No</p></td><td><p>No</p></td><td><p>No</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>5. Communication Channels</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Channel</p></th><th><p>Used For</p></th><th><p>Access</p></th></tr>
+<tr><td><p>Security email (<a href="mailto:legal@acme.com">legal@acme.com</a>)</p></td><td><p>External reports, regulatory correspondence</p></td><td><p>Security team</p></td></tr>
+<tr><td><p>#security-incidents (Slack/Teams)</p></td><td><p>Real-time incident coordination</p></td><td><p>Security + engineering</p></td></tr>
+<tr><td><p>War room (video call)</p></td><td><p>P0/P1 live coordination</p></td><td><p>All responders</p></td></tr>
+<tr><td><p>Incident management tool</p></td><td><p>Ticket tracking, timeline documentation</p></td><td><p>All staff</p></td></tr>
+<tr><td><p>Status page</p></td><td><p>Customer-facing incident updates</p></td><td><p>Public</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>6. Per-Service Impact Assessment</h2>
+<p>Severity classification when each detected service is compromised or experiences an outage.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>If Compromised</p></th><th><p>If Outage</p></th><th><p>Data at Risk</p></th><th><p>Regulatory Impact</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p><strong>P2</strong></p></td><td><p><strong>P2</strong></p></td><td><p>error data, stack traces, user context</p></td><td><p>Minimal direct regulatory impact</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p><strong>P0</strong></p></td><td><p><strong>P1</strong></p></td><td><p>email, password hash, session data</p></td><td><p>GDPR Art. 33/34, credential breach notification</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p><strong>P0</strong></p></td><td><p><strong>P2</strong></p></td><td><p>user prompts, conversation history, generated content</p></td><td><p>EU AI Act, GDPR Art. 22 (automated decisions)</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p><strong>P1</strong></p></td><td><p><strong>P3</strong></p></td><td><p>user behavior, session recordings, feature flag usage</p></td><td><p>ePrivacy, GDPR Art. 6/7 (consent)</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p><strong>P0</strong></p></td><td><p><strong>P1</strong></p></td><td><p>user data as defined in schema</p></td><td><p>GDPR Art. 33/34, data breach notification</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p><strong>P1</strong></p></td><td><p><strong>P2</strong></p></td><td><p>email addresses, email content</p></td><td><p>CAN-SPAM, GDPR Art. 33/34</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p><strong>P0</strong></p></td><td><p><strong>P1</strong></p></td><td><p>payment information, billing address, email</p></td><td><p>PCI DSS, GDPR Art. 33/34</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p><strong>P0</strong></p></td><td><p><strong>P1</strong></p></td><td><p>payment information, billing address, email</p></td><td><p>PCI DSS, GDPR Art. 33/34</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>7. Category-Specific Incident Scenarios</h2>
+<h3>AI Services</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Severity</p></th><th><p>Response Action</p></th></tr>
+<tr><td><p>User PII leaked through AI prompts</p></td><td><p><strong>P0</strong></p></td><td><p>Disable AI feature, assess data exposure, notify affected users</p></td></tr>
+<tr><td><p>Prompt injection bypasses safety controls</p></td><td><p><strong>P1</strong></p></td><td><p>Throttle AI endpoint, deploy input validation fix, audit recent outputs</p></td></tr>
+<tr><td><p>AI model produces biased/discriminatory output</p></td><td><p><strong>P2</strong></p></td><td><p>Document instances, add guardrails, notify AI ethics team</p></td></tr>
+<tr><td><p>AI service provider data breach</p></td><td><p><strong>P1</strong></p></td><td><p>Assess data shared with provider, rotate API keys, review DPA obligations</p></td></tr>
+<tr><td><p>AI hallucination causes user harm</p></td><td><p><strong>P2</strong></p></td><td><p>Add output disclaimers, review and strengthen validation layer</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Payment Services</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Severity</p></th><th><p>Response Action</p></th></tr>
+<tr><td><p>Cardholder data exposed</p></td><td><p><strong>P0</strong></p></td><td><p>Isolate systems, notify payment processor within 24h, engage PCI forensic investigator</p></td></tr>
+<tr><td><p>Payment processing outage</p></td><td><p><strong>P1</strong></p></td><td><p>Activate backup processor, communicate to affected customers</p></td></tr>
+<tr><td><p>Fraudulent transactions detected</p></td><td><p><strong>P2</strong></p></td><td><p>Flag accounts, review transaction logs, strengthen fraud detection</p></td></tr>
+<tr><td><p>PCI DSS compliance gap discovered</p></td><td><p><strong>P3</strong></p></td><td><p>Document gap, create remediation plan, assess risk</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Authentication Services</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Severity</p></th><th><p>Response Action</p></th></tr>
+<tr><td><p>Complete auth bypass discovered</p></td><td><p><strong>P0</strong></p></td><td><p>Disable affected auth flow, force re-authentication, rotate all sessions</p></td></tr>
+<tr><td><p>Credential stuffing attack in progress</p></td><td><p><strong>P1</strong></p></td><td><p>Enable rate limiting, lock affected accounts, force password resets</p></td></tr>
+<tr><td><p>OAuth token leak</p></td><td><p><strong>P1</strong></p></td><td><p>Revoke leaked tokens, rotate secrets, audit access logs</p></td></tr>
+<tr><td><p>Auth provider outage</p></td><td><p><strong>P2</strong></p></td><td><p>Activate fallback auth, communicate login issues to users</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Database & Storage Services</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Severity</p></th><th><p>Response Action</p></th></tr>
+<tr><td><p>Database exposed to internet</p></td><td><p><strong>P0</strong></p></td><td><p>Restrict network access immediately, audit data access logs, rotate credentials</p></td></tr>
+<tr><td><p>Unauthorized database query detected</p></td><td><p><strong>P1</strong></p></td><td><p>Revoke access, investigate query scope, assess data exposure</p></td></tr>
+<tr><td><p>Storage bucket misconfiguration</p></td><td><p><strong>P1</strong></p></td><td><p>Lock down permissions, audit exposed files, notify if PII exposed</p></td></tr>
+<tr><td><p>Database corruption / data loss</p></td><td><p><strong>P2</strong></p></td><td><p>Activate backup restoration, assess data integrity</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Analytics Services</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Scenario</p></th><th><p>Severity</p></th><th><p>Response Action</p></th></tr>
+<tr><td><p>Analytics collecting PII without consent</p></td><td><p><strong>P2</strong></p></td><td><p>Disable data collection, audit consent records, update cookie consent config</p></td></tr>
+<tr><td><p>Analytics data shared with unauthorized third party</p></td><td><p><strong>P1</strong></p></td><td><p>Revoke access, assess GDPR Art. 33 notification requirement</p></td></tr>
+<tr><td><p>Analytics tracking across domains without disclosure</p></td><td><p><strong>P3</strong></p></td><td><p>Update privacy policy, reconfigure tracking parameters</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>8. Severity Decision Tree</h2>
+<p>Use this decision tree to classify incidents when severity is unclear:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Is there confirmed data exfiltration or complete system compromise?
+  ├─ YES → P0 (Catastrophic)
+  └─ NO
+       Is there confirmed unauthorized access to PII or critical systems?
+       ├─ YES → P1 (Critical)
+       └─ NO
+            Is there an active exploit or significant service degradation?
+            ├─ YES → P2 (High)
+            └─ NO
+                 Is investigation required to determine impact?
+                 ├─ YES → P3 (Medium)
+                 └─ NO → P4 (Low)]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>9. Regulatory Response Timelines</h2>
+<p>Mandatory notification deadlines by regulation for data breach incidents (P0/P1).</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Regulation</p></th><th><p>Authority Notification</p></th><th><p>Individual Notification</p></th><th><p>Key Requirement</p></th></tr>
+<tr><td><p>GDPR (Art. 33/34)</p></td><td><p><strong>72 hours</strong></p></td><td><p>Without undue delay (high risk)</p></td><td><p>Must document all breaches regardless of notification</p></td></tr>
+<tr><td><p>UK GDPR</p></td><td><p><strong>72 hours</strong></p></td><td><p>Without undue delay (high risk)</p></td><td><p>Notify ICO via online portal</p></td></tr>
+<tr><td><p>CCPA/CPRA</p></td><td><p>Varies by state</p></td><td><p>Without unreasonable delay</p></td><td><p>AG notification for 500+ CA residents</p></td></tr>
+<tr><td><p>PCI DSS</p></td><td><p><strong>24 hours</strong> (to processor)</p></td><td><p>As required</p></td><td><p>Engage PCI Forensic Investigator (PFI)</p></td></tr>
+<tr><td><p>EU AI Act</p></td><td><p>As required by severity</p></td><td><p>Depends on risk level</p></td><td><p>Additional obligations for high-risk AI systems</p></td></tr>
+<tr><td><p>ePrivacy</p></td><td><p>Per member state law</p></td><td><p>Per member state law</p></td><td><p>Cookie/tracking specific requirements</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>10. Incident Response Roles</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>P0 Responsibility</p></th><th><p>P1-P2 Responsibility</p></th><th><p>P3-P4 Responsibility</p></th></tr>
+<tr><td><p><strong>Incident Commander</strong></p></td><td><p>Leads war room, all decisions</p></td><td><p>Coordinates response</p></td><td><p>Reviews report</p></td></tr>
+<tr><td><p><strong>Security Lead</strong></p></td><td><p>Active investigation, containment</p></td><td><p>Investigation lead</p></td><td><p>Triages tickets</p></td></tr>
+<tr><td><p><strong>Engineering Lead</strong></p></td><td><p>Emergency fixes, system isolation</p></td><td><p>Deploys fixes</p></td><td><p>Assigns fixes</p></td></tr>
+<tr><td><p><strong>DPO</strong> (<a href="mailto:dpo@acme-saas.com">dpo@acme-saas.com</a>)</p></td><td><p>Regulatory notification decision</p></td><td><p>Breach assessment</p></td><td><p>Monthly review</p></td></tr>
+<tr><td><p><strong>Communications Lead</strong></p></td><td><p>Customer + public messaging</p></td><td><p>Status page updates</p></td><td><p>No action</p></td></tr>
+<tr><td><p><strong>Legal Counsel</strong></p></td><td><p>Regulatory response, evidence preservation</p></td><td><p>Legal assessment</p></td><td><p>No action</p></td></tr>
+<tr><td><p><strong>Executive Sponsor</strong></p></td><td><p>Final authority, board comms</p></td><td><p>Informed, escalation</p></td><td><p>Informed via report</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>This incident severity matrix was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase (8 services detected). Customize response times, escalation paths, and roles to match your organization's structure. This document should be reviewed by your security team and legal counsel before adoption.</em></p>

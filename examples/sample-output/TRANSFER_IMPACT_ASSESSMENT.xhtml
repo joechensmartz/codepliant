@@ -1,0 +1,256 @@
+<h1>Transfer Impact Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Transfer Impact Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Acme Inc</strong> — International Data Transfer Impact Assessment</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Prepared in accordance with GDPR Chapter V and the <em>Schrems II</em> ruling (CJEU C-311/18)</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Assessment date: 2026-03-18</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Assessment Overview</h2>
+<p>This Transfer Impact Assessment (TIA) evaluates the risks associated with transferring personal data from the European Economic Area (EEA) to the United States through third-party services used by <strong>Acme Inc</strong>. This assessment is required following the Court of Justice of the European Union (CJEU) ruling in <em>Data Protection Commissioner v. Facebook Ireland Ltd and Maximillian Schrems</em> (Case C-311/18, "Schrems II").</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Data Exporter</strong></p></td><td><p>Acme Inc</p></td></tr>
+<tr><td><p><strong>Exporter Contact</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>DPO</strong></p></td><td><p>Jane Mueller</p></td></tr>
+<tr><td><p><strong>Importing Country</strong></p></td><td><p>United States</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>Standard Contractual Clauses (SCCs) / EU-US Data Privacy Framework</p></td></tr>
+<tr><td><p><strong>Number of US-based Services</strong></p></td><td><p>6</p></td></tr>
+<tr><td><p><strong>Assessment Date</strong></p></td><td><p>2026-03-18</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. US-Based Services Identified</h2>
+<p>The following US-based third-party services have been detected in the codebase:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Transferred</p></th><th><p>Transfer Mechanism</p></th><th><p>DPF Certified</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>error data, stack traces, user context</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>email, password hash, session data</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>user prompts, conversation history, generated content</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>user behavior, session recordings, feature flag usage</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>email addresses, email content</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>payment information, billing address, email</p></td><td><p>SCCs / DPF</p></td><td><p>[Verify]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Legal Framework Assessment</h2>
+<h3>3.1 EU-US Data Privacy Framework (DPF)</h3>
+<p>The EU-US Data Privacy Framework was adopted by the European Commission on July 10, 2023 (Adequacy Decision C(2023) 4745). US companies certified under the DPF provide an adequate level of data protection for transfers from the EEA.</p>
+<p><strong>Action Required:</strong> Verify each service provider's DPF certification status at <a href="https://www.dataprivacyframework.gov/list">dataprivacyframework.gov</a>.</p>
+<h3>3.2 Standard Contractual Clauses (SCCs)</h3>
+<p>Where a service provider is not DPF-certified, Standard Contractual Clauses (Commission Implementing Decision (EU) 2021/914) must be in place. SCCs alone may not be sufficient without supplementary measures, per the Schrems II ruling.</p>
+<h3>3.3 Supplementary Measures</h3>
+<p>The following supplementary measures should be implemented where SCCs are relied upon:</p>
+<ul>
+<li><p>[ ] <strong>Encryption in transit</strong> — TLS 1.2+ for all data transfers</p></li>
+<li><p>[ ] <strong>Encryption at rest</strong> — Data encrypted at rest with keys controlled by the data exporter where possible</p></li>
+<li><p>[ ] <strong>Pseudonymization</strong> — Personal identifiers replaced with pseudonyms before transfer where feasible</p></li>
+<li><p>[ ] <strong>Data minimization</strong> — Only necessary data transferred to each service</p></li>
+<li><p>[ ] <strong>Access controls</strong> — Strict access controls limiting who can access transferred data</p></li>
+<li><p>[ ] <strong>Audit rights</strong> — Contractual right to audit the data importer's compliance</p></li>
+<li><p>[ ] <strong>Breach notification</strong> — Contractual obligation for prompt breach notification</p></li>
+</ul>
+<h2>4. US Surveillance Law Assessment</h2>
+<h3>4.1 FISA Section 702</h3>
+<p>Section 702 of the Foreign Intelligence Surveillance Act allows US intelligence agencies to collect communications of non-US persons located outside the US. The DPF includes safeguards through Executive Order 14086 (October 7, 2022), which establishes:</p>
+<ul>
+<li><p>Necessity and proportionality requirements for US signals intelligence</p></li>
+<li><p>A redress mechanism through the Data Protection Review Court (DPRC)</p></li>
+<li><p>Limitations on bulk collection of personal data</p></li>
+</ul>
+<h3>4.2 Risk Assessment by Service Category</h3>
+<p><strong>Monitoring Services</strong> (@sentry/node)</p>
+<ul>
+<li><p>Risk Level: <strong>Low</strong></p></li>
+<li><p>Rationale: Monitoring services primarily collect technical data (error reports, stack traces). Some user context data may be included incidentally.</p></li>
+</ul>
+<p><strong>Auth Services</strong> (@supabase/supabase-js)</p>
+<ul>
+<li><p>Risk Level: <strong>Medium</strong></p></li>
+<li><p>Rationale: Authentication services process identity data (email, name, profile). These services typically have strong security controls.</p></li>
+</ul>
+<p><strong>Ai Services</strong> (openai)</p>
+<ul>
+<li><p>Risk Level: <strong>High</strong></p></li>
+<li><p>Rationale: AI services process user-generated content which may contain sensitive personal data. Data may be used for model training unless explicitly opted out.</p></li>
+</ul>
+<p><strong>Analytics Services</strong> (posthog)</p>
+<ul>
+<li><p>Risk Level: <strong>Medium</strong></p></li>
+<li><p>Rationale: Analytics services collect behavioral data, IP addresses, and device information. Consent is typically required under GDPR/ePrivacy Directive.</p></li>
+</ul>
+<p><strong>Email Services</strong> (resend)</p>
+<ul>
+<li><p>Risk Level: <strong>Medium</strong></p></li>
+<li><p>Rationale: Email services process contact information and communication content. Transactional emails are generally lower risk than marketing communications.</p></li>
+</ul>
+<p><strong>Payment Services</strong> (stripe)</p>
+<ul>
+<li><p>Risk Level: <strong>High</strong></p></li>
+<li><p>Rationale: Financial data is sensitive and subject to both GDPR and PCI DSS requirements. Payment processors typically have robust security measures and DPF certification.</p></li>
+</ul>
+<h2>5. Per-Service Transfer Assessment</h2>
+<h3>@sentry/node</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>error data, stack traces, user context, device information, IP address</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>Low-Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>@supabase/supabase-js</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>email, password hash, session data, user metadata</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>openai</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>posthog</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>user behavior, session recordings, feature flag usage, device information</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>resend</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>email addresses, email content</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>Low-Medium</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>stripe</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p><strong>Data Categories</strong></p></td><td><p>payment information, billing address, email, transaction history</p></td></tr>
+<tr><td><p><strong>Transfer Mechanism</strong></p></td><td><p>SCCs / DPF — [Verify with provider]</p></td></tr>
+<tr><td><p><strong>DPF Certification</strong></p></td><td><p>[Check dataprivacyframework.gov]</p></td></tr>
+<tr><td><p><strong>Encryption in Transit</strong></p></td><td><p>[Verify — typically yes]</p></td></tr>
+<tr><td><p><strong>Encryption at Rest</strong></p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p><strong>Sub-processors</strong></p></td><td><p>[Review provider's sub-processor list]</p></td></tr>
+<tr><td><p><strong>Data Minimization</strong></p></td><td><p>[Assess what data is strictly necessary]</p></td></tr>
+<tr><td><p><strong>Risk Level</strong></p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>6. Standard Contractual Clauses Checklist</h2>
+<p>For each US-based service provider, ensure the following:</p>
+<ul>
+<li><p>[ ] SCCs (Module 2: Controller to Processor) executed with provider</p></li>
+<li><p>[ ] Annex I (List of parties) completed</p></li>
+<li><p>[ ] Annex II (Technical and organizational measures) documented</p></li>
+<li><p>[ ] Annex III (Sub-processors) provided by data importer</p></li>
+<li><p>[ ] Provider's DPF certification status verified</p></li>
+<li><p>[ ] Data Processing Agreement (DPA) in place with provider</p></li>
+<li><p>[ ] Supplementary measures implemented where necessary</p></li>
+<li><p>[ ] Provider's security certifications reviewed (SOC 2, ISO 27001)</p></li>
+</ul>
+<h2>7. Recommendations</h2>
+<ol>
+<li><p><strong>Verify DPF certification</strong> for all US-based service providers listed above</p></li>
+<li><p><strong>Execute SCCs</strong> with any provider not certified under the DPF</p></li>
+<li><p><strong>Implement supplementary measures</strong> as identified in Section 3.3</p></li>
+<li><p><strong>Conduct regular reviews</strong> — reassess this TIA at least annually or when:</p></li>
+</ol>
+<ul>
+<li><p>New US-based services are added</p></li>
+<li><p>EU or US data protection laws change</p></li>
+<li><p>A relevant CJEU or supervisory authority decision is issued</p></li>
+</ul>
+<ol>
+<li><p><strong>Document all DPAs</strong> — maintain copies of signed Data Processing Agreements</p></li>
+<li><p><strong>Monitor the DPF</strong> — track any legal challenges to the EU-US Data Privacy Framework</p></li>
+</ol>
+<h2>8. Review Schedule</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Review Type</p></th><th><p>Frequency</p></th><th><p>Next Due</p></th></tr>
+<tr><td><p>Full TIA Review</p></td><td><p>Annual</p></td><td><p>2027-03-18</p></td></tr>
+<tr><td><p>DPF Certification Check</p></td><td><p>Semi-annual</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>SCC Compliance Audit</p></td><td><p>Annual</p></td><td><p>[Set date]</p></td></tr>
+<tr><td><p>Supplementary Measures Review</p></td><td><p>Annual</p></td><td><p>[Set date]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Sub-Processor List (<code>SUBPROCESSOR_LIST.md</code>)</p></li>
+<li><p>Data Processing Agreement (<code>DATA<em>PROCESSING</em>AGREEMENT.md</code>)</p></li>
+<li><p>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This Transfer Impact Assessment was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It must be reviewed by your Data Protection Officer and legal counsel. The assessment of each service provider should be verified with their current documentation. This document does not constitute legal advice.</em></p>

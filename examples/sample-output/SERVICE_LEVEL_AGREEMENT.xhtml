@@ -1,0 +1,181 @@
+<h1>Service Level Agreement</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Service Level Agreement (SLA)</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Effective Date:</strong> 2026-03-18</p>
+<p><strong>Last Updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Terms of Service (<code>TERMS<em>OF</em>SERVICE.md</code>)</p></li>
+<li><p>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</p></li>
+</ul>
+<hr />
+<h2>1. Overview</h2>
+<p>This Service Level Agreement ("SLA") describes the service level commitments that Acme Inc makes to customers for the Services described herein. This SLA is incorporated into and forms part of the agreement between Acme Inc and the customer ("Customer").</p>
+<p>Monitoring and observability is provided through: @sentry/node.</p>
+<h2>2. Definitions</h2>
+<ul>
+<li><p><strong>"Downtime"</strong> means any period during which the Services are unavailable to the Customer, as measured by our monitoring systems.</p></li>
+<li><p><strong>"Scheduled Maintenance"</strong> means planned maintenance windows that are communicated to customers at least 48 hours in advance.</p></li>
+<li><p><strong>"Monthly Uptime Percentage"</strong> means the total minutes in a calendar month minus the minutes of Downtime, divided by the total minutes in the month, expressed as a percentage.</p></li>
+<li><p><strong>"Service Credit"</strong> means a credit issued to the Customer's account as a remedy for failure to meet SLA commitments.</p></li>
+<li><p><strong>"Incident"</strong> means any unplanned interruption or degradation of the Services.</p></li>
+</ul>
+<h2>3. Service Level Objectives</h2>
+<h3>3.1 Availability</h3>
+<p>Acme Inc commits to the following uptime targets:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service Tier</p></th><th><p>Monthly Uptime Target</p></th><th><p>Maximum Monthly Downtime</p></th></tr>
+<tr><td><p>Standard</p></td><td><p>99.5%</p></td><td><p>~3 hours 39 minutes</p></td></tr>
+<tr><td><p>Professional</p></td><td><p>99.9%</p></td><td><p>~43 minutes</p></td></tr>
+<tr><td><p>Enterprise</p></td><td><p>99.95%</p></td><td><p>~22 minutes</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>Scheduled Maintenance windows are excluded from uptime calculations. Maintenance windows are typically scheduled during low-traffic periods (weekends, 02:00-06:00 UTC).</p>
+<h3>3.2 Performance</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Metric</p></th><th><p>Target</p></th><th><p>Measurement</p></th></tr>
+<tr><td><p>API Response Time (p50)</p></td><td><p>< 200ms</p></td><td><p>Measured at edge</p></td></tr>
+<tr><td><p>API Response Time (p95)</p></td><td><p>< 500ms</p></td><td><p>Measured at edge</p></td></tr>
+<tr><td><p>API Response Time (p99)</p></td><td><p>< 1000ms</p></td><td><p>Measured at edge</p></td></tr>
+<tr><td><p>Page Load Time</p></td><td><p>< 3 seconds</p></td><td><p>Measured from client</p></td></tr>
+<tr><td><p>Error Rate</p></td><td><p>< 0.1%</p></td><td><p>5xx responses / total requests</p></td></tr>
+<tr><td><p>Database Query Time (p95)</p></td><td><p>< 100ms</p></td><td><p>Measured at application layer</p></td></tr>
+<tr><td><p>Data Durability</p></td><td><p>99.999999999%</p></td><td><p>Eleven nines</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Incident Classification and Response Times</h2>
+<h3>4.1 Severity Levels</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Severity</p></th><th><p>Definition</p></th><th><p>Examples</p></th></tr>
+<tr><td><p><strong>P1 — Critical</strong></p></td><td><p>Complete service outage affecting all users</p></td><td><p>Service is down, data loss</p></td></tr>
+<tr><td><p><strong>P2 — High</strong></p></td><td><p>Major feature unavailable or severe degradation</p></td><td><p>Authentication failing, Payment processing errors, Core functionality broken</p></td></tr>
+<tr><td><p><strong>P3 — Medium</strong></p></td><td><p>Minor feature unavailable or moderate degradation</p></td><td><p>Non-critical feature broken, slow performance</p></td></tr>
+<tr><td><p><strong>P4 — Low</strong></p></td><td><p>Cosmetic issues or minor inconveniences</p></td><td><p>UI glitches, documentation errors</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>4.2 Response Times</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Severity</p></th><th><p>Initial Response</p></th><th><p>Status Updates</p></th><th><p>Resolution Target</p></th></tr>
+<tr><td><p>P1 — Critical</p></td><td><p>15 minutes</p></td><td><p>Every 30 minutes</p></td><td><p>4 hours</p></td></tr>
+<tr><td><p>P2 — High</p></td><td><p>1 hour</p></td><td><p>Every 2 hours</p></td><td><p>8 hours</p></td></tr>
+<tr><td><p>P3 — Medium</p></td><td><p>4 hours</p></td><td><p>Every 8 hours</p></td><td><p>3 business days</p></td></tr>
+<tr><td><p>P4 — Low</p></td><td><p>1 business day</p></td><td><p>As needed</p></td><td><p>10 business days</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>Response times are measured from the time the incident is reported to our support team or detected by our monitoring systems, whichever is earlier.</p>
+<h2>5. Communication</h2>
+<h3>5.1 Status Page</h3>
+<p>Acme Inc maintains a public status page that provides real-time and historical information about service availability. Customers will be notified of incidents through:</p>
+<ul>
+<li><p>Status page updates</p></li>
+<li><p>Email notifications (for subscribed users)</p></li>
+<li><p>In-app notifications (when available)</p></li>
+</ul>
+<h3>5.2 Incident Communication</h3>
+<p>During an active incident, we will provide:</p>
+<ol>
+<li><p><strong>Initial notification</strong> acknowledging the issue and its severity</p></li>
+<li><p><strong>Regular updates</strong> at the frequency specified by the severity level</p></li>
+<li><p><strong>Resolution notification</strong> confirming the issue is resolved</p></li>
+<li><p><strong>Post-incident report</strong> (for P1 and P2 incidents) within 5 business days</p></li>
+</ol>
+<h3>5.3 Scheduled Maintenance</h3>
+<ul>
+<li><p>Maintenance windows are announced at least 48 hours in advance</p></li>
+<li><p>Emergency maintenance may be performed with shorter notice when necessary for security or data integrity</p></li>
+<li><p>Maintenance notifications are sent via email and posted on the status page</p></li>
+</ul>
+<h2>6. Service Credits</h2>
+<h3>6.1 Credit Schedule</h3>
+<p>If we fail to meet the Monthly Uptime Percentage, Customers are eligible for the following Service Credits:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Monthly Uptime Percentage</p></th><th><p>Service Credit (% of monthly fee)</p></th></tr>
+<tr><td><p>99.0% - 99.49%</p></td><td><p>10%</p></td></tr>
+<tr><td><p>95.0% - 98.99%</p></td><td><p>25%</p></td></tr>
+<tr><td><p>90.0% - 94.99%</p></td><td><p>50%</p></td></tr>
+<tr><td><p>Below 90.0%</p></td><td><p>100%</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>6.2 Credit Request Process</h3>
+<p>To receive a Service Credit:</p>
+<ol>
+<li><p>Submit a request to legal@acme.com within 30 days of the incident</p></li>
+<li><p>Include the dates and times of the Downtime</p></li>
+<li><p>Provide any relevant evidence (screenshots, error logs, etc.)</p></li>
+</ol>
+<h3>6.3 Credit Limitations</h3>
+<ul>
+<li><p>Service Credits are the sole and exclusive remedy for failure to meet SLA commitments</p></li>
+<li><p>Credits are applied to future invoices and are not redeemable for cash</p></li>
+<li><p>Maximum credit in any billing period shall not exceed 100% of the fees for that period</p></li>
+<li><p>Credits do not carry over between billing periods</p></li>
+</ul>
+<h2>7. Exclusions</h2>
+<p>This SLA does not apply to:</p>
+<ul>
+<li><p><strong>Scheduled Maintenance</strong> performed during announced maintenance windows</p></li>
+<li><p><strong>Force Majeure</strong> events including natural disasters, war, government actions, or widespread internet failures</p></li>
+<li><p><strong>Customer-caused issues</strong> including misconfiguration, unauthorized modifications, or exceeding usage limits</p></li>
+<li><p><strong>Third-party failures</strong> beyond Acme Inc's reasonable control, including upstream provider outages</p></li>
+<li><p><strong>Beta or preview features</strong> that are explicitly marked as not covered by this SLA</p></li>
+<li><p><strong>Free tier</strong> accounts (SLA applies to paid plans only)</p></li>
+<li><p><strong>Abuse or violations</strong> of the Terms of Service or Acceptable Use Policy</p></li>
+</ul>
+<h2>8. Support</h2>
+<h3>8.1 Support Channels</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Channel</p></th><th><p>Availability</p></th><th><p>Response Target</p></th></tr>
+<tr><td><p>Email (legal@acme.com)</p></td><td><p>24/7</p></td><td><p>Per severity level</p></td></tr>
+<tr><td><p>In-app Chat</p></td><td><p>Business hours</p></td><td><p>2 hours</p></td></tr>
+<tr><td><p>Phone (Enterprise)</p></td><td><p>24/7</p></td><td><p>15 minutes (P1 only)</p></td></tr>
+<tr><td><p>Community Forum</p></td><td><p>Best effort</p></td><td><p>Not guaranteed</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>8.2 Support Hours</h3>
+<ul>
+<li><p><strong>Business hours:</strong> Monday through Friday, 09:00 - 18:00 UTC (excluding public holidays)</p></li>
+<li><p><strong>24/7 support:</strong> Available for P1 incidents on Professional and Enterprise plans</p></li>
+</ul>
+<h2>9. Reporting and Transparency</h2>
+<p>Acme Inc provides:</p>
+<ul>
+<li><p><strong>Monthly uptime reports</strong> available on the status page</p></li>
+<li><p><strong>Quarterly SLA review</strong> summarizing performance against commitments</p></li>
+<li><p><strong>Annual reliability report</strong> detailing major incidents, root causes, and improvements</p></li>
+</ul>
+<h2>10. SLA Modifications</h2>
+<p>Acme Inc may modify this SLA with at least 30 days' advance notice. Changes will not reduce service level commitments for the duration of an active contract period. Material changes will be communicated via email.</p>
+<h2>11. Contact</h2>
+<p>For SLA-related questions or to report a service issue:</p>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+</ul>
+<hr />
+<p><em>This Service Level Agreement was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis of nextjs-saas-example. It should be reviewed by legal counsel before use.</em></p>

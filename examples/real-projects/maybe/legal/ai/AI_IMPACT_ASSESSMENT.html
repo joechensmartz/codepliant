@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI IMPACT ASSESSMENT — maybe</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>AI IMPACT ASSESSMENT</h1>
+      <p class="meta">maybe &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="ai-impact-assessment">AI Impact Assessment</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> maybe</p>
+<p><strong>Overall AI Risk Classification:</strong> Limited</p>
+<p><strong>Assessment Date:</strong> 2026-03-16</p>
+<p><strong>Next Review:</strong> 2027-03-16</p>
+<hr>
+<blockquote>This document provides a combined impact assessment under the <strong>EU AI Act</strong> (Regulation (EU) 2024/1689) and the <strong>Colorado AI Act</strong> (SB 24-205). It evaluates each AI service integrated into this application, classifies risk levels, identifies required mitigation measures, and establishes a monitoring plan.</blockquote>
+<h2 id="1-regulatory-overview">1. Regulatory Overview</h2>
+<h3 id="11-eu-ai-act-regulation-eu-20241689">1.1 EU AI Act (Regulation (EU) 2024/1689)</h3>
+<p>The EU AI Act establishes a risk-based regulatory framework for AI systems:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Risk Level</th><th style="text-align:left">Requirements</th><th style="text-align:left">Timeline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Unacceptable</strong></td><td style="text-align:left">Prohibited — must not be deployed in the EU</td><td style="text-align:left">2 February 2025</td></tr>
+<tr><td style="text-align:left"><strong>High</strong></td><td style="text-align:left">Conformity assessment, registration, continuous monitoring</td><td style="text-align:left">2 August 2026</td></tr>
+<tr><td style="text-align:left"><strong>Limited</strong></td><td style="text-align:left">Transparency obligations (disclosure to users)</td><td style="text-align:left">2 August 2026</td></tr>
+<tr><td style="text-align:left"><strong>Minimal</strong></td><td style="text-align:left">No mandatory requirements; voluntary codes of conduct</td><td style="text-align:left">Effective now</td></tr>
+</tbody>
+</table>
+<h3 id="12-colorado-ai-act-sb-24-205">1.2 Colorado AI Act (SB 24-205)</h3>
+<p>The Colorado AI Act, effective <strong>1 February 2026</strong>, requires developers and deployers of "high-risk AI systems" that make or substantially support <strong>consequential decisions</strong> to:</p>
+<ul>
+<li>Perform impact assessments before deployment</li>
+<li>Provide transparency notices to consumers</li>
+<li>Implement risk management programmes</li>
+<li>Enable human appeal mechanisms for adverse decisions</li>
+<li>Report discovered algorithmic discrimination to the AG within 90 days</li>
+</ul>
+<p>Consequential decisions include those affecting education, employment, financial services, healthcare, housing, insurance, and legal services.</p>
+<h2 id="2-ai-services-inventory">2. AI Services Inventory</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Data Processed</th><th style="text-align:left">EU AI Act Risk</th><th style="text-align:left">Colorado AI Act</th><th style="text-align:left">Monitoring</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left"><strong>Limited</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Semi-annual review</td></tr>
+</tbody>
+</table>
+<h2 id="3-per-service-risk-evaluation">3. Per-Service Risk Evaluation</h2>
+<h3 id="31-ruby-openai">3.1 ruby-openai</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Detail</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Service</strong></td><td style="text-align:left"><code>ruby-openai</code></td></tr>
+<tr><td style="text-align:left"><strong>Category</strong></td><td style="text-align:left">ai</td></tr>
+<tr><td style="text-align:left"><strong>Data Processed</strong></td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left"><strong>EU AI Act Classification</strong></td><td style="text-align:left">Limited</td></tr>
+<tr><td style="text-align:left"><strong>Colorado AI Act</strong></td><td style="text-align:left">Not in scope</td></tr>
+<tr><td style="text-align:left"><strong>Monitoring Frequency</strong></td><td style="text-align:left">Semi-annual review</td></tr>
+</tbody>
+</table>
+<p><strong>Rationale:</strong> This AI service interacts with end users or generates content, triggering transparency obligations under EU AI Act Article 50.</p>
+<p><strong>Required Mitigations:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Disclose AI interaction to users before or during use</li>
+<li><input type="checkbox" disabled> Label AI-generated content where required (deepfakes, synthetic text)</li>
+<li><input type="checkbox" disabled> Maintain AI disclosure documentation</li>
+<li><input type="checkbox" disabled> Provide opt-out mechanism where feasible</li>
+<li><input type="checkbox" disabled> Log user interactions for audit purposes</li>
+</ul>
+<h2 id="4-algorithmic-discrimination-assessment">4. Algorithmic Discrimination Assessment</h2>
+<p>Under the Colorado AI Act, deployers must evaluate AI systems for algorithmic discrimination — differential treatment that disfavours individuals based on protected characteristics.</p>
+<h3 id="41-protected-characteristics-colorado">4.1 Protected Characteristics (Colorado)</h3>
+<ul>
+<li>Age</li>
+<li>Colour</li>
+<li>Disability</li>
+<li>Ethnicity</li>
+<li>Genetic information</li>
+<li>Gender identity / expression</li>
+<li>National origin</li>
+<li>Race</li>
+<li>Religion</li>
+<li>Sex</li>
+<li>Veteran status</li>
+</ul>
+<h3 id="42-assessment-checklist">4.2 Assessment Checklist</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify which AI services make or support consequential decisions</li>
+<li><input type="checkbox" disabled> Test each service for disparate impact across protected characteristics</li>
+<li><input type="checkbox" disabled> Document testing methodology, datasets, and results</li>
+<li><input type="checkbox" disabled> Establish ongoing bias monitoring with alerting thresholds</li>
+<li><input type="checkbox" disabled> Define remediation procedures for discovered discrimination</li>
+<li><input type="checkbox" disabled> Set up 90-day reporting process to Colorado AG for discovered discrimination</li>
+</ul>
+<h2 id="5-monitoring-plan">5. Monitoring Plan</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Activity</th><th style="text-align:left">Frequency</th><th style="text-align:left">Owner</th><th style="text-align:left">Next Due</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Full impact assessment review</td><td style="text-align:left">Annual</td><td style="text-align:left">DPO / AI Governance</td><td style="text-align:left">2027-03-16</td></tr>
+<tr><td style="text-align:left">Bias and fairness testing</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Engineering</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">Performance metrics review</td><td style="text-align:left">Monthly</td><td style="text-align:left">Engineering</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">Incident log review</td><td style="text-align:left">Monthly</td><td style="text-align:left">DPO</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">Regulatory change review</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Legal</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">Consumer complaint analysis</td><td style="text-align:left">Monthly</td><td style="text-align:left">Support / Legal</td><td style="text-align:left">[Set date]</td></tr>
+<tr><td style="text-align:left">Model drift detection</td><td style="text-align:left">Continuous</td><td style="text-align:left">Engineering</td><td style="text-align:left">Automated</td></tr>
+</tbody>
+</table>
+<h2 id="6-transparency-obligations">6. Transparency Obligations</h2>
+<h3 id="eu-ai-act-article-50">EU AI Act (Article 50)</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Users are informed they are interacting with an AI system</li>
+<li><input type="checkbox" disabled> AI-generated content is labelled (deepfakes, synthetic text/audio/video)</li>
+<li><input type="checkbox" disabled> Emotion recognition / biometric categorisation use is disclosed</li>
+</ul>
+<h3 id="colorado-ai-act">Colorado AI Act</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Consumers notified that AI is being used to make or support consequential decisions</li>
+<li><input type="checkbox" disabled> Description of the AI system provided to affected consumers</li>
+<li><input type="checkbox" disabled> Consumer has access to appeal process with human reviewer</li>
+<li><input type="checkbox" disabled> Contact information for questions about AI use is published</li>
+</ul>
+<h2 id="7-ai-incident-response">7. AI Incident Response</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Scenario</th><th style="text-align:left">Action</th><th style="text-align:left">Timeline</th><th style="text-align:left">Owner</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Discovered algorithmic discrimination</td><td style="text-align:left">Report to Colorado AG</td><td style="text-align:left">90 days</td><td style="text-align:left">Legal</td></tr>
+<tr><td style="text-align:left">Serious AI incident (EU)</td><td style="text-align:left">Report to national authority</td><td style="text-align:left">Without undue delay</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Model producing harmful outputs</td><td style="text-align:left">Suspend AI feature, investigate</td><td style="text-align:left">Immediately</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Consumer complaint about AI decision</td><td style="text-align:left">Initiate human review</td><td style="text-align:left">30 days</td><td style="text-align:left">Support</td></tr>
+<tr><td style="text-align:left">Regulatory inquiry</td><td style="text-align:left">Engage legal counsel, compile documentation</td><td style="text-align:left">Within requested timeframe</td><td style="text-align:left">Legal</td></tr>
+</tbody>
+</table>
+<h2 id="contact">Contact</h2>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This AI Impact Assessment was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It covers obligations under the EU AI Act (Regulation (EU) 2024/1689) and the Colorado AI Act (SB 24-205). This document must be reviewed by qualified legal counsel and your AI governance team. It does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

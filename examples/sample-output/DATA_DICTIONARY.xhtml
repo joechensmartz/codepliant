@@ -1,0 +1,156 @@
+<h1>Data Dictionary</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Dictionary</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Company:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</p></li>
+<li><p>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</p></li>
+<li><p>Data Classification Report (<code>DATA_CLASSIFICATION.md</code>)</p></li>
+</ul>
+<hr />
+<h2>1. Purpose</h2>
+<p>This document catalogs every data field detected across the <strong>nextjs-saas-example</strong> application. It serves as the authoritative reference for data mapping required by GDPR Article 30 (Records of Processing Activities), SOC 2 (CC6.1), and internal data governance policies.</p>
+<h2>2. Scope</h2>
+<p>This dictionary covers data fields from:</p>
+<ul>
+<li><p>Database schemas (Prisma, Drizzle, Mongoose, TypeORM, SQLAlchemy, Django)</p></li>
+<li><p>API routes and request handlers</p></li>
+<li><p>Third-party service integrations</p></li>
+<li><p>Environment variable configurations</p></li>
+</ul>
+<hr />
+<h2>3. Data Field Catalog</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Source</p></th><th><p>Type</p></th><th><p>Sensitivity</p></th><th><p>Retention</p></th><th><p>Purpose</p></th></tr>
+<tr><td><p>api_credential</p></td><td><p>env: OPENAI<em>API</em>KEY=<em>*</em></p></td><td><p>Infrastructure</p></td><td><p>Critical</p></td><td><p>Rotate regularly</p></td><td><p>Service authentication</p></td></tr>
+<tr><td><p>api_credential</p></td><td><p>env: RESEND<em>API</em>KEY=<em>*</em></p></td><td><p>Infrastructure</p></td><td><p>Critical</p></td><td><p>Rotate regularly</p></td><td><p>Service authentication</p></td></tr>
+<tr><td><p>api_credential</p></td><td><p>env: STRIPE<em>SECRET</em>KEY=<em>*</em></p></td><td><p>Infrastructure</p></td><td><p>Critical</p></td><td><p>Rotate regularly</p></td><td><p>Service authentication</p></td></tr>
+<tr><td><p>password hash</p></td><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>Critical</p></td><td><p>Until account deletion; hashed at rest</p></td><td><p>User authentication</p></td></tr>
+<tr><td><p>password_hash</p></td><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>Critical</p></td><td><p>Until account deletion; hashed at rest</p></td><td><p>User authentication</p></td></tr>
+<tr><td><p>payment_info</p></td><td><p>stripe</p></td><td><p>Financial — PCI</p></td><td><p>Critical</p></td><td><p>Do not store post-authorization; tokenize</p></td><td><p>Payment processing</p></td></tr>
+<tr><td><p>payment_info</p></td><td><p>stripe-ios</p></td><td><p>Financial — PCI</p></td><td><p>Critical</p></td><td><p>Do not store post-authorization; tokenize</p></td><td><p>Payment processing</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>stripe</p></td><td><p>Location</p></td><td><p>High</p></td><td><p>Until account deletion</p></td><td><p>Billing, shipping, localization</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>stripe-ios</p></td><td><p>Location</p></td><td><p>High</p></td><td><p>Until account deletion</p></td><td><p>Billing, shipping, localization</p></td></tr>
+<tr><td><p>billing_address</p></td><td><p>stripe</p></td><td><p>Location</p></td><td><p>High</p></td><td><p>7 years (tax/legal)</p></td><td><p>Billing</p></td></tr>
+<tr><td><p>billing_address</p></td><td><p>stripe-ios</p></td><td><p>Location</p></td><td><p>High</p></td><td><p>7 years (tax/legal)</p></td><td><p>Billing</p></td></tr>
+<tr><td><p>customer_email</p></td><td><p>stripe</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Transaction receipts</p></td></tr>
+<tr><td><p>customer_email</p></td><td><p>stripe-ios</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Transaction receipts</p></td></tr>
+<tr><td><p>email</p></td><td><p>@supabase/supabase-js</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Account identification</p></td></tr>
+<tr><td><p>email</p></td><td><p>stripe</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Account identification, communication</p></td></tr>
+<tr><td><p>email</p></td><td><p>stripe-ios</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Account identification, communication</p></td></tr>
+<tr><td><p>email addresses</p></td><td><p>resend</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Account identification, communication</p></td></tr>
+<tr><td><p>email content</p></td><td><p>resend</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until account deletion + 30 days</p></td><td><p>Account identification, communication</p></td></tr>
+<tr><td><p>email_address</p></td><td><p>resend</p></td><td><p>Contact</p></td><td><p>High</p></td><td><p>Until unsubscribe or account deletion</p></td><td><p>Email delivery</p></td></tr>
+<tr><td><p>IP address</p></td><td><p>@sentry/node</p></td><td><p>Location</p></td><td><p>High</p></td><td><p>Until account deletion</p></td><td><p>Billing, shipping, localization</p></td></tr>
+<tr><td><p>transaction_history</p></td><td><p>stripe</p></td><td><p>Financial</p></td><td><p>High</p></td><td><p>7 years (tax/legal)</p></td><td><p>Order records, refunds</p></td></tr>
+<tr><td><p>transaction_history</p></td><td><p>stripe-ios</p></td><td><p>Financial</p></td><td><p>High</p></td><td><p>7 years (tax/legal)</p></td><td><p>Order records, refunds</p></td></tr>
+<tr><td><p>conversation history</p></td><td><p>openai</p></td><td><p>AI Interaction</p></td><td><p>Medium</p></td><td><p>30 days (logs); per vendor policy</p></td><td><p>AI feature delivery</p></td></tr>
+<tr><td><p>conversation_history</p></td><td><p>openai</p></td><td><p>AI Interaction</p></td><td><p>Medium</p></td><td><p>30 days (logs); per vendor policy</p></td><td><p>Context continuity</p></td></tr>
+<tr><td><p>email_content</p></td><td><p>resend</p></td><td><p>Communication</p></td><td><p>Medium</p></td><td><p>90 days (delivery logs)</p></td><td><p>Email delivery</p></td></tr>
+<tr><td><p>error<em>tracking</em>config</p></td><td><p>env: SENTRY_DSN=<em>*</em></p></td><td><p>Infrastructure</p></td><td><p>Medium</p></td><td><p>Until service change</p></td><td><p>Error monitoring</p></td></tr>
+<tr><td><p>ip_address</p></td><td><p>@sentry/node</p></td><td><p>Technical</p></td><td><p>Medium</p></td><td><p>30 days</p></td><td><p>Error context</p></td></tr>
+<tr><td><p>ip_address</p></td><td><p>posthog</p></td><td><p>Technical</p></td><td><p>Medium</p></td><td><p>90 days</p></td><td><p>Geolocation, fraud prevention</p></td></tr>
+<tr><td><p>oauth_token</p></td><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>Medium</p></td><td><p>Until session expiry or revocation</p></td><td><p>Third-party authentication</p></td></tr>
+<tr><td><p>page_views</p></td><td><p>posthog</p></td><td><p>Behavioral</p></td><td><p>Medium</p></td><td><p>26 months</p></td><td><p>Product analytics</p></td></tr>
+<tr><td><p>session data</p></td><td><p>@supabase/supabase-js</p></td><td><p>Session</p></td><td><p>Medium</p></td><td><p>Until session expiry</p></td><td><p>Session management</p></td></tr>
+<tr><td><p>session recordings</p></td><td><p>posthog</p></td><td><p>Session</p></td><td><p>Medium</p></td><td><p>Until session expiry</p></td><td><p>Session management</p></td></tr>
+<tr><td><p>session_token</p></td><td><p>@supabase/supabase-js</p></td><td><p>Session</p></td><td><p>Medium</p></td><td><p>Until session expiry</p></td><td><p>Session management</p></td></tr>
+<tr><td><p>user prompts</p></td><td><p>openai</p></td><td><p>AI Interaction</p></td><td><p>Medium</p></td><td><p>30 days (logs); per vendor policy</p></td><td><p>AI feature delivery</p></td></tr>
+<tr><td><p>user_behavior</p></td><td><p>posthog</p></td><td><p>Behavioral</p></td><td><p>Medium</p></td><td><p>26 months</p></td><td><p>UX optimization</p></td></tr>
+<tr><td><p>user_context</p></td><td><p>@sentry/node</p></td><td><p>Technical</p></td><td><p>Medium</p></td><td><p>30 days</p></td><td><p>Error context</p></td></tr>
+<tr><td><p>user_data</p></td><td><p>prisma</p></td><td><p>Application Data</p></td><td><p>Medium</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>user_prompts</p></td><td><p>openai</p></td><td><p>AI Interaction</p></td><td><p>Medium</p></td><td><p>30 days (logs); per vendor policy</p></td><td><p>AI feature delivery</p></td></tr>
+<tr><td><p>AI Interaction Data</p></td><td><p>openai</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Authentication Data</p></td><td><p>User.passwordHash</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Communication Data</p></td><td><p>resend</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Contact Information</p></td><td><p>User.email</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Contact Information</p></td><td><p>User.phone</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>device information</p></td><td><p>@sentry/node</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>device information</p></td><td><p>posthog</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>device_info</p></td><td><p>posthog</p></td><td><p>Technical</p></td><td><p>Low</p></td><td><p>26 months</p></td><td><p>Compatibility analytics</p></td></tr>
+<tr><td><p>error data</p></td><td><p>@sentry/node</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>error_data</p></td><td><p>@sentry/node</p></td><td><p>Technical</p></td><td><p>Low</p></td><td><p>30 days</p></td><td><p>Error tracking</p></td></tr>
+<tr><td><p>feature flag usage</p></td><td><p>posthog</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Financial Data</p></td><td><p>stripe</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Financial Data</p></td><td><p>stripe-ios</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>generated content</p></td><td><p>openai</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>generated_content</p></td><td><p>openai</p></td><td><p>AI Output</p></td><td><p>Low</p></td><td><p>Per user deletion request</p></td><td><p>AI feature delivery</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>stripe</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>stripe-ios</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Personal Identity Data</p></td><td><p>@supabase/supabase-js</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Personal Identity Data</p></td><td><p>User.name</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>stack traces</p></td><td><p>@sentry/node</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>stack_traces</p></td><td><p>@sentry/node</p></td><td><p>Technical</p></td><td><p>Low</p></td><td><p>30 days</p></td><td><p>Debugging</p></td></tr>
+<tr><td><p>Stored User Data</p></td><td><p>prisma</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Technical & Diagnostic Data</p></td><td><p>@sentry/node</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>stripe</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>stripe-ios</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>Usage & Behavioral Data</p></td><td><p>posthog</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>user behavior</p></td><td><p>posthog</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>user context</p></td><td><p>@sentry/node</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>user data as defined in schema</p></td><td><p>prisma</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+<tr><td><p>user metadata</p></td><td><p>@supabase/supabase-js</p></td><td><p>Application Data</p></td><td><p>Low</p></td><td><p>Per data retention policy</p></td><td><p>Application functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>4. Sensitivity Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Count</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Critical</p></td><td><p>7</p></td><td><p>Credentials, government IDs, raw payment data — requires encryption at rest and strict access control</p></td></tr>
+<tr><td><p>High</p></td><td><p>15</p></td><td><p>PII (names, emails, addresses) — requires encryption and consent</p></td></tr>
+<tr><td><p>Medium</p></td><td><p>16</p></td><td><p>Behavioral data, session data, IP addresses — requires privacy notice</p></td></tr>
+<tr><td><p>Low</p></td><td><p>30</p></td><td><p>Preferences, metadata, operational data — standard handling</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Total fields cataloged:</strong> 68</p>
+<hr />
+<h2>5. Cross-References</h2>
+<ul>
+<li><p><strong>Database schema</strong> — Fields detected from Prisma/ORM model definitions</p></li>
+<li><p><strong>Environment variables</strong> — Service credentials and connection strings</p></li>
+<li><p><strong>Monitoring services</strong> — @sentry/node</p></li>
+<li><p><strong>Auth services</strong> — @supabase/supabase-js</p></li>
+<li><p><strong>Ai services</strong> — openai</p></li>
+<li><p><strong>Analytics services</strong> — posthog</p></li>
+<li><p><strong>Database services</strong> — prisma</p></li>
+<li><p><strong>Email services</strong> — resend</p></li>
+<li><p><strong>Payment services</strong> — stripe, stripe-ios</p></li>
+</ul>
+<hr />
+<h2>6. Related Documents</h2>
+<ul>
+<li><p><strong>PRIVACY_POLICY.md</strong> — Public disclosure of data collection practices</p></li>
+<li><p><strong>DATA<em>RETENTION</em>POLICY.md</strong> — Detailed retention schedules and deletion procedures</p></li>
+<li><p><strong>DATA_CLASSIFICATION.md</strong> — GDPR sensitivity classification details</p></li>
+<li><p><strong>DATA<em>FLOW</em>MAP.md</strong> — Visual representation of data flows between services</p></li>
+<li><p><strong>DSAR<em>HANDLING</em>GUIDE.md</strong> — Data subject access request procedures</p></li>
+</ul>
+<hr />
+<h2>7. Maintenance</h2>
+<p>This data dictionary should be updated:</p>
+<ul>
+<li><p>When new database models or fields are added</p></li>
+<li><p>When new third-party services are integrated</p></li>
+<li><p>When data retention policies change</p></li>
+<li><p>At minimum <strong>quarterly</strong> as part of compliance review</p></li>
+</ul>
+<p>For questions about this data dictionary, contact legal@acme.com.</p>
+<hr />
+<p><em>This Data Dictionary was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>

@@ -1,0 +1,162 @@
+<h1>Regulatory Mapping Matrix</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Regulatory Mapping Matrix</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Generated:</strong> 2026-03-18</p>
+<p>This matrix maps each detected third-party service to applicable regulations. Use this to understand the regulatory landscape for your technology stack and prioritize compliance efforts accordingly.</p>
+<h2>Legend</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Symbol</p></th><th><p>Meaning</p></th></tr>
+<tr><td><p><strong>YES</strong></p></td><td><p>Regulation applies to this service</p></td></tr>
+<tr><td><p><strong>?</strong></p></td><td><p>May apply — requires manual assessment</p></td></tr>
+<tr><td><p><strong>—</strong></p></td><td><p>Not applicable based on current analysis</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Service-to-Regulation Matrix</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>GDPR</p></th><th><p>CCPA</p></th><th><p>EU AI Act</p></th><th><p>PCI DSS</p></th><th><p>HIPAA</p></th><th><p>SOC 2</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>?</p></td><td><p>YES</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>YES</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>YES</p></td><td><p>—</p></td><td><p>YES</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Regulation Coverage Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Regulation</p></th><th><p>Services Affected</p></th><th><p>Coverage %</p></th><th><p>Priority</p></th></tr>
+<tr><td><p>GDPR</p></td><td><p>8/8</p></td><td><p>100%</p></td><td><p>High</p></td></tr>
+<tr><td><p>CCPA</p></td><td><p>6/8</p></td><td><p>75%</p></td><td><p>High</p></td></tr>
+<tr><td><p>EU AI Act</p></td><td><p>1/8</p></td><td><p>13%</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>PCI DSS</p></td><td><p>2/8</p></td><td><p>25%</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>HIPAA</p></td><td><p>0/8 (+1 pending)</p></td><td><p>0%</p></td><td><p>Low</p></td></tr>
+<tr><td><p>SOC 2</p></td><td><p>8/8</p></td><td><p>100%</p></td><td><p>High</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Detailed Assessment by Regulation</h2>
+<h3>GDPR</h3>
+<p><strong>Applicable services:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>openai</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>resend</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Processes personal data</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Processes personal data</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>CCPA</h3>
+<p><strong>Applicable services:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Processes California consumer personal information</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Collects consumer identity information</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Collects/shares consumer information for commercial purposes</p></td></tr>
+<tr><td><p>resend</p></td><td><p>Processes consumer contact information</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Processes California consumer personal information</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Processes California consumer personal information</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>EU AI Act</h3>
+<p><strong>Applicable services:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>openai</p></td><td><p>AI/ML service — subject to EU AI Act requirements</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>PCI DSS</h3>
+<p><strong>Applicable services:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>stripe</p></td><td><p>Payment processing — PCI DSS applies</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment processing — PCI DSS applies</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>HIPAA</h3>
+<p><strong>Requires manual assessment:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>prisma</p></td><td><p>May apply if storing PHI — requires manual assessment</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>SOC 2</h3>
+<p><strong>Applicable services:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Reason</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring service relevant to SOC 2 Trust Service Criteria</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth service relevant to SOC 2 Trust Service Criteria</p></td></tr>
+<tr><td><p>openai</p></td><td><p>AI service — relevant to SOC 2 processing integrity criteria</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Processes customer data — relevant to SOC 2 privacy criteria</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database service relevant to SOC 2 Trust Service Criteria</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email service relevant to SOC 2 Trust Service Criteria</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Payment service — relevant to SOC 2 confidentiality criteria</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment service — relevant to SOC 2 confidentiality criteria</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Category Heatmap</h2>
+<p>Regulatory exposure by service category:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p># Services</p></th><th><p>GDPR</p></th><th><p>CCPA</p></th><th><p>AI Act</p></th><th><p>PCI</p></th><th><p>HIPAA</p></th><th><p>SOC 2</p></th><th><p>Regulatory Exposure</p></th></tr>
+<tr><td><p>monitoring</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>50% (Medium)</p></td></tr>
+<tr><td><p>auth</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>50% (Medium)</p></td></tr>
+<tr><td><p>ai</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>50% (Medium)</p></td></tr>
+<tr><td><p>analytics</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>50% (Medium)</p></td></tr>
+<tr><td><p>database</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>33% (Low)</p></td></tr>
+<tr><td><p>email</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0</p></td><td><p>1</p></td><td><p>50% (Medium)</p></td></tr>
+<tr><td><p>payment</p></td><td><p>2</p></td><td><p>2</p></td><td><p>2</p></td><td><p>0</p></td><td><p>2</p></td><td><p>0</p></td><td><p>2</p></td><td><p>67% (Medium)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Recommendations</h2>
+<ol>
+<li><p><strong>GDPR:</strong> 8 service(s) process personal data. Ensure DPAs are in place, lawful basis is documented, and DSAR handling procedures are established.</p></li>
+<li><p><strong>CCPA:</strong> 6 service(s) process consumer information. Ensure "Do Not Sell" mechanisms are implemented and privacy notice is updated.</p></li>
+<li><p><strong>EU AI Act:</strong> 1 AI service(s) detected. Classify risk level, implement transparency requirements, and document human oversight measures.</p></li>
+<li><p><strong>PCI DSS:</strong> 2 payment service(s) detected. Verify PCI compliance of payment processors and minimize cardholder data exposure.</p></li>
+<li><p><strong>SOC 2:</strong> Review Trust Service Criteria (Security, Availability, Processing Integrity, Confidentiality, Privacy) against all applicable services.</p></li>
+</ol>
+<hr />
+<p><em>This regulatory mapping matrix was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Applicability assessments are based on service categories and detected data types. Consult legal counsel to confirm regulatory obligations for your specific jurisdiction and use case.</em></p>

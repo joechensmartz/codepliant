@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BACKUP POLICY — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>BACKUP POLICY</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="backup-policy">Backup Policy</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> saleor</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</li>
+<li>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</li>
+<li>Encryption Policy (<code>ENCRYPTION_POLICY.md</code>)</li>
+</ul>
+<hr>
+<p>This Backup Policy defines the backup schedules, retention periods, recovery procedures, and testing requirements for all data stores used by <strong>[Your Company Name]</strong>'s <strong>saleor</strong> application. It supports compliance with GDPR Article 32 (availability and resilience), SOC 2 A1.2 (backup and recovery), and ISO 27001 Annex A.12.3 (information backup).</p>
+<h2 id="1-backup-schedule-per-data-store">1. Backup Schedule per Data Store</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Store</th><th style="text-align:left">Backup Method</th><th style="text-align:left">Schedule</th><th style="text-align:left">Point-in-Time Recovery</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Postgresql</td><td style="text-align:left">pg_dump (logical)</td><td style="text-align:left">Continuous WAL archiving + daily full backup</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">RDB snapshots</td><td style="text-align:left">RDB snapshot every 1 hour; AOF fsync every second</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left">boto3 (File Storage)</td><td style="text-align:left">Cross-region replication + versioning</td><td style="text-align:left">Daily incremental, weekly full</td><td style="text-align:left">Via versioning</td></tr>
+<tr><td style="text-align:left">Application configuration</td><td style="text-align:left">Version control (Git)</td><td style="text-align:left">On every change</td><td style="text-align:left">Full history via Git</td></tr>
+<tr><td style="text-align:left">Secrets and credentials</td><td style="text-align:left">Secrets manager snapshot</td><td style="text-align:left">On every rotation</td><td style="text-align:left">Via secrets manager versioning</td></tr>
+</tbody>
+</table>
+<h2 id="2-retention-periods">2. Retention Periods</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Store</th><th style="text-align:left">Daily Backups</th><th style="text-align:left">Weekly Backups</th><th style="text-align:left">Monthly Backups</th><th style="text-align:left">Annual Backups</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Postgresql</td><td style="text-align:left">30 days</td><td style="text-align:left">90 days</td><td style="text-align:left">1 year</td><td style="text-align:left">7 years (if required)</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">7 days</td><td style="text-align:left">30 days</td><td style="text-align:left">N/A</td><td style="text-align:left">N/A</td></tr>
+<tr><td style="text-align:left">File storage</td><td style="text-align:left">30 days</td><td style="text-align:left">90 days</td><td style="text-align:left">1 year</td><td style="text-align:left">7 years (if required)</td></tr>
+<tr><td style="text-align:left">Audit logs</td><td style="text-align:left">90 days</td><td style="text-align:left">1 year</td><td style="text-align:left">1 year</td><td style="text-align:left">7 years</td></tr>
+</tbody>
+</table>
+<blockquote><strong>PCI DSS Note:</strong> Payment-related data backups must comply with PCI DSS Requirement 3 retention limits. Do not retain cardholder data beyond business need. Encrypted backup media must be tracked and securely destroyed when retention period expires.</blockquote>
+<h3 id="21-retention-exceptions">2.1 Retention Exceptions</h3>
+<ul>
+<li><strong>Legal hold:</strong> Backups may be retained beyond standard periods if required by legal proceedings</li>
+<li><strong>Regulatory requirement:</strong> Industry-specific regulations may mandate longer retention (e.g., HIPAA 6 years, SOX 7 years)</li>
+<li><strong>Data subject request:</strong> GDPR deletion requests apply to backups; establish a process to track and purge from backup rotations</li>
+</ul>
+<h2 id="3-recovery-procedures">3. Recovery Procedures</h2>
+<h3 id="31-postgresql-recovery">3.1 Postgresql Recovery</h3>
+<p><strong>Recovery method:</strong> Point-in-time recovery via WAL replay; pg_restore for logical backups</p>
+<p><strong>Recovery steps:</strong></p>
+<ol>
+<li>Identify the target recovery point (timestamp or backup ID)</li>
+<li>Notify the engineering team and stakeholders</li>
+<li>Restore to a staging/temporary environment first</li>
+<li>Validate data integrity and completeness</li>
+<li>If validated, promote restored data to production</li>
+<li>Verify application connectivity and functionality</li>
+<li>Document the recovery in the incident log</li>
+</ol>
+<h3 id="32-redis-recovery">3.2 Redis Recovery</h3>
+<p><strong>Recovery method:</strong> RDB file restore; AOF replay</p>
+<p><strong>Recovery steps:</strong></p>
+<ol>
+<li>Identify the target recovery point (timestamp or backup ID)</li>
+<li>Notify the engineering team and stakeholders</li>
+<li>Restore to a staging/temporary environment first</li>
+<li>Validate data integrity and completeness</li>
+<li>If validated, promote restored data to production</li>
+<li>Verify application connectivity and functionality</li>
+<li>Document the recovery in the incident log</li>
+</ol>
+<h2 id="4-recovery-testing-schedule">4. Recovery Testing Schedule</h2>
+<p>Regular recovery testing ensures that backups are viable and the team is prepared for data recovery scenarios.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Test Type</th><th style="text-align:left">Frequency</th><th style="text-align:left">Scope</th><th style="text-align:left">Success Criteria</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Backup integrity check</td><td style="text-align:left">Daily (automated)</td><td style="text-align:left">All data stores</td><td style="text-align:left">Backup completes without errors; checksums valid</td></tr>
+<tr><td style="text-align:left">Single-table restore</td><td style="text-align:left">Monthly</td><td style="text-align:left">Each primary database</td><td style="text-align:left">Table restored to staging; data matches source</td></tr>
+<tr><td style="text-align:left">Full database restore</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Each primary database</td><td style="text-align:left">Complete database restored to staging; application functional</td></tr>
+<tr><td style="text-align:left">Point-in-time recovery</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Databases with PITR</td><td style="text-align:left">Restore to specific timestamp; data consistent to that point</td></tr>
+<tr><td style="text-align:left">Cross-region restore</td><td style="text-align:left">Semi-annually</td><td style="text-align:left">All data stores</td><td style="text-align:left">Restore from backup region; acceptable RTO achieved</td></tr>
+<tr><td style="text-align:left">Full disaster recovery</td><td style="text-align:left">Annually</td><td style="text-align:left">All data stores + application</td><td style="text-align:left">Full application operational from backups; RTO/RPO met</td></tr>
+</tbody>
+</table>
+<h3 id="41-test-documentation">4.1 Test Documentation</h3>
+<p>Each recovery test must document:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Date and time of test</li>
+<li><input type="checkbox" disabled> Data store tested</li>
+<li><input type="checkbox" disabled> Backup used (ID / timestamp)</li>
+<li><input type="checkbox" disabled> Recovery time achieved (actual RTO)</li>
+<li><input type="checkbox" disabled> Data loss window (actual RPO)</li>
+<li><input type="checkbox" disabled> Pass/fail result</li>
+<li><input type="checkbox" disabled> Issues encountered and remediation</li>
+<li><input type="checkbox" disabled> Tester name and sign-off</li>
+</ul>
+<h2 id="5-backup-security">5. Backup Security</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Requirement</th><th style="text-align:left">Standard</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Encryption at rest</td><td style="text-align:left">AES-256 for all backup data</td></tr>
+<tr><td style="text-align:left">Encryption in transit</td><td style="text-align:left">TLS 1.2+ for backup transfers</td></tr>
+<tr><td style="text-align:left">Access control</td><td style="text-align:left">Backup access limited to authorized personnel; MFA required</td></tr>
+<tr><td style="text-align:left">Backup separation</td><td style="text-align:left">Backups stored in a separate account/region from production</td></tr>
+<tr><td style="text-align:left">Immutability</td><td style="text-align:left">Object lock / WORM storage for compliance-critical backups</td></tr>
+<tr><td style="text-align:left">Monitoring</td><td style="text-align:left">Alerting on backup failures, unexpected access, or deletion</td></tr>
+</tbody>
+</table>
+<h2 id="6-roles-and-responsibilities">6. Roles and Responsibilities</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Responsibility</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Database Administrator / DevOps</td><td style="text-align:left">Configure and monitor backup jobs; execute restores</td></tr>
+<tr><td style="text-align:left">Engineering Lead</td><td style="text-align:left">Approve recovery procedures; validate test results</td></tr>
+<tr><td style="text-align:left">Security Team</td><td style="text-align:left">Audit backup encryption and access controls</td></tr>
+<tr><td style="text-align:left">Compliance Officer</td><td style="text-align:left">Verify retention periods meet regulatory requirements</td></tr>
+</tbody>
+</table>
+<h2 id="7-policy-review">7. Policy Review</h2>
+<p>This backup policy must be reviewed:</p>
+<ul>
+<li>At minimum <strong>quarterly</strong></li>
+<li>When new data stores are added or removed</li>
+<li>After any data loss incident</li>
+<li>After each recovery test to incorporate lessons learned</li>
+</ul>
+<p>For questions about this policy, contact <strong>[your-email@example.com]</strong>.</p>
+<hr>
+<p><em>This Backup Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>saleor</strong> codebase. Backup schedules and retention periods should be reviewed and customized by your engineering and compliance teams based on actual infrastructure and regulatory requirements.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

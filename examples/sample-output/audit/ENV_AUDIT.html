@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environment Variable Audit — Acme Inc</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Environment Variable Audit</h1>
+      <p class="meta">Acme Inc &middot; Last updated 2026-03-18 &middot; ~2 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-18 — 14 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> Acme Inc <strong>Next Review Date:</strong> 2027-03-18</blockquote>
+<h2 id="security-recommendations">Security Recommendations</h2>
+<ul>
+<li><strong>[CRITICAL]</strong> Public env vars with secret-looking names (exposed to client): NEXT<em>PUBLIC</em>SUPABASE<em>ANON</em>KEY, NEXT<em>PUBLIC</em>POSTHOG_KEY</li>
+</ul>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>OPENAI<em>API</em>KEY</code></td><td style="text-align:left">.env.example, src/app/api/chat/route.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>RESEND<em>API</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>AUTH</em>TOKEN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>PUBLISHABLE</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example, src/app/api/checkout/route.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SUPABASE<em>SERVICE</em>ROLE_KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>DATABASE_URL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="public-client-side">Public / Client-side</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>POSTHOG_HOST</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>POSTHOG_KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SUPABASE<em>ANON</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>SUPABASE_URL</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT<em>PUBLIC</em>URL</code></td><td style="text-align:left">.env.example, src/app/api/checkout/route.ts</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

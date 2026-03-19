@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA FLOW DIAGRAM — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA FLOW DIAGRAM</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="data-flow-diagram">Data Flow Diagram</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> twenty</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</li>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This document provides a visual representation of how personal data flows through the application. The diagram below is rendered using <a href="https://mermaid.js.org/">Mermaid</a> and can be viewed directly on GitHub, GitLab, or any Mermaid-compatible renderer.</blockquote>
+<h2 id="visual-data-flow">Visual Data Flow</h2>
+<pre><code>graph LR
+  User[User] --&gt;|user prompts, conversation history, generated content| _ai_sdk_anthropic[@ai-sdk/anthropic]
+  User[User] --&gt;|user prompts, conversation history, generated content| _ai_sdk_google[@ai-sdk/google]
+  User[User] --&gt;|user prompts, conversation history, generated content| _ai_sdk_openai[@ai-sdk/openai]
+  User[User] --&gt;|uploaded files, file metadata| AWS_S3[AWS S3]
+  User[User] --&gt;|error data, stack traces, user context| Sentry[Sentry]
+  User[User] --&gt;|user prompts, conversation history, generated content| _vercel_ai[@vercel/ai]
+  User[User] --&gt;|user data as defined in schema| Drizzle[Drizzle]
+  User[User] --&gt;|user data via Google APIs, calendar data, email data| googleapis[googleapis]
+  User[User] --&gt;|cached data, session data| ioredis[ioredis]
+  User[User] --&gt;|email addresses, email content| nodemailer[nodemailer]
+  User[User] --&gt;|user prompts, conversation history, generated content| OpenAI[OpenAI]
+  User[User] --&gt;|email, name, OAuth tokens| passport[passport]
+  User[User] --&gt;|email, name, Google profile data| passport_google_oauth20[passport-google-oauth20]
+  User[User] --&gt;|email, name, Microsoft profile data| passport_microsoft[passport-microsoft]
+  User[User] --&gt;|cached data, session data| redis[redis]
+  User[User] --&gt;|payment information, billing address, email| Stripe[Stripe]
+  _ai_sdk_anthropic[@ai-sdk/anthropic] --&gt;|logs| Sentry[Sentry]</code></pre>
+<h2 id="legend">Legend</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Symbol</th><th style="text-align:left">Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>User</strong></td><td style="text-align:left">End user of the application</td></tr>
+<tr><td style="text-align:left"><strong>Arrow labels</strong></td><td style="text-align:left">Types of personal data transmitted</td></tr>
+<tr><td style="text-align:left"><strong>Service nodes</strong></td><td style="text-align:left">Third-party or internal services processing data</td></tr>
+</tbody>
+</table>
+<h2 id="data-flow-details">Data Flow Details</h2>
+<h3 id="collection-points">Collection Points</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Source</th><th style="text-align:left">Data Collected</th><th style="text-align:left">Mechanism</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AI-powered feature usage</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">via @ai-sdk/anthropic</td></tr>
+<tr><td style="text-align:left">AI-powered feature usage</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">via @ai-sdk/google</td></tr>
+<tr><td style="text-align:left">AI-powered feature usage</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">via @ai-sdk/openai</td></tr>
+<tr><td style="text-align:left">AI-powered feature usage</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">via @vercel/ai</td></tr>
+<tr><td style="text-align:left">Email subscription/contact forms</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">via nodemailer</td></tr>
+<tr><td style="text-align:left">AI-powered feature usage</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">via openai</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">email, name, OAuth tokens, session data</td><td style="text-align:left">via passport</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">email, name, Google profile data, OAuth tokens</td><td style="text-align:left">via passport-google-oauth20</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td><td style="text-align:left">via passport-microsoft</td></tr>
+<tr><td style="text-align:left">Payment checkout</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">via stripe</td></tr>
+</tbody>
+</table>
+<h3 id="third-party-data-sharing">Third-Party Data Sharing</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Recipient</th><th style="text-align:left">Category</th><th style="text-align:left">Data Shared</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@sentry/node</td><td style="text-align:left">Error Monitoring</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">payment information, billing address, email, transaction history</td></tr>
+</tbody>
+</table>
+<h2 id="service-inventory">Service Inventory</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Processed</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">OpenAI</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td></tr>
+<tr><td style="text-align:left">AWS S3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td></tr>
+<tr><td style="text-align:left">Sentry</td><td style="text-align:left">monitoring</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td></tr>
+<tr><td style="text-align:left">Drizzle</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, session data</td></tr>
+<tr><td style="text-align:left">passport-google-oauth20</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Google profile data, OAuth tokens</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td></tr>
+<tr><td style="text-align:left">Stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="how-to-use-this-diagram">How to Use This Diagram</h2>
+<ol>
+<li><strong>GitHub/GitLab:</strong> The Mermaid diagram renders automatically in markdown preview</li>
+<li><strong>VS Code:</strong> Install the "Markdown Preview Mermaid Support" extension</li>
+<li><strong>Export:</strong> Use <a href="https://mermaid.live/">Mermaid Live Editor</a> to export as SVG or PNG</li>
+<li><strong>CI/CD:</strong> Use <code>@mermaid-js/mermaid-cli</code> to generate images in your pipeline</li>
+</ol>
+<p>For questions about this data flow diagram, contact [your-email@example.com].</p>
+<hr>
+<p><em>This data flow diagram was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all data flows for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

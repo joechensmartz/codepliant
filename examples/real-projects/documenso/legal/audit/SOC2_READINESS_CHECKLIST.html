@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOC2 READINESS CHECKLIST — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>SOC2 READINESS CHECKLIST</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~12 min read</p>
+    </header>
+    <h1 id="soc-2-type-ii-readiness-checklist">SOC 2 Type II Readiness Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @documenso/root</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Contact:</strong> [your-email@example.com]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Security Policy (<code>SECURITY.md</code>)</li>
+<li>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</li>
+<li>Change Management Policy (<code>CHANGE<em>MANAGEMENT</em>POLICY.md</code>)</li>
+<li>Audit Log Policy (<code>AUDIT<em>LOG</em>POLICY.md</code>)</li>
+</ul>
+<hr>
+<blockquote><strong>Disclaimer:</strong> This checklist is generated based on automated code analysis and is intended as a starting point for SOC 2 Type II readiness. It is not a substitute for a formal SOC 2 audit or professional guidance. Engage a qualified CPA firm for your official SOC 2 examination.</blockquote>
+<h2 id="1-overview">1. Overview</h2>
+<p>This checklist helps [Your Company Name] prepare for a SOC 2 Type II audit by mapping detected services and infrastructure to the five Trust Services Criteria (TSC). Each section contains actionable items tailored to your project's technology stack.</p>
+<p><strong>Detected services:</strong> 13</p>
+<p><strong>Relevant SOC 2 sections:</strong> Processing Integrity (PI1), Confidentiality (C1), Privacy (P1-P8), Security (CC6), Availability (A1)</p>
+<hr>
+<h2 id="2-service-to-control-mapping">2. Service-to-Control Mapping</h2>
+<p>The following table maps each detected service to the applicable SOC 2 Trust Services Criteria:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Detected Service</th><th style="text-align:left">Category</th><th style="text-align:left">Mapped SOC 2 Controls</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/google-vertex</td><td style="text-align:left">AI Service</td><td style="text-align:left">Processing Integrity (PI1), Confidentiality (C1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-ses</td><td style="text-align:left">Email Service</td><td style="text-align:left">Confidentiality (C1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">@google-cloud/kms</td><td style="text-align:left">Other</td><td style="text-align:left">General</td></tr>
+<tr><td style="text-align:left">@simplewebauthn/server</td><td style="text-align:left">Authentication</td><td style="text-align:left">Security (CC6)</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">AI Service</td><td style="text-align:left">Processing Integrity (PI1), Confidentiality (C1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Other</td><td style="text-align:left">General</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">Authentication</td><td style="text-align:left">Security (CC6)</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">Confidentiality (C1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">Authentication</td><td style="text-align:left">Security (CC6)</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">Analytics</td><td style="text-align:left">Processing Integrity (PI1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">Database</td><td style="text-align:left">Confidentiality (C1), Security (CC6)</td></tr>
+<tr><td style="text-align:left">resend</td><td style="text-align:left">Email Service</td><td style="text-align:left">Confidentiality (C1), Privacy (P1-P8)</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">Confidentiality (C1), Security (CC6), Processing Integrity (PI1)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-readiness-checklist">3. Readiness Checklist</h2>
+<h3 id="security-cc6-common-criteria-for-security">Security (CC6) — Common Criteria for Security</h3>
+<p><strong>Objective:</strong> Information and systems are protected against unauthorized access, unauthorized disclosure of information, and damage to systems.</p>
+<h4 id="cc61-logical-and-physical-access-controls">CC6.1 — Logical and Physical Access Controls</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement role-based access control (RBAC) for all systems</li>
+<li><input type="checkbox" disabled> Review access control configuration for: @simplewebauthn/server, next-auth, passport-microsoft</li>
+<li><input type="checkbox" disabled> Enforce multi-factor authentication (MFA) for all user accounts</li>
+<li><input type="checkbox" disabled> Implement session timeout and automatic logout policies</li>
+<li><input type="checkbox" disabled> Document authentication flows and access provisioning/deprovisioning procedures</li>
+<li><input type="checkbox" disabled> Maintain an access control matrix documenting who has access to what</li>
+<li><input type="checkbox" disabled> Review and recertify user access quarterly</li>
+<li><input type="checkbox" disabled> Log all access events and authentication attempts</li>
+</ul>
+<h4 id="cc66-encryption">CC6.6 — Encryption</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce TLS 1.2+ for all data in transit</li>
+<li><input type="checkbox" disabled> Enable encryption at rest for: prisma</li>
+<li><input type="checkbox" disabled> Document encryption standards and key management procedures</li>
+<li><input type="checkbox" disabled> Rotate encryption keys on a defined schedule</li>
+</ul>
+<h4 id="cc68-vulnerability-management">CC6.8 — Vulnerability Management</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Run automated dependency vulnerability scanning (e.g., npm audit, Snyk, Dependabot)</li>
+<li><input type="checkbox" disabled> Conduct periodic penetration testing (at least annually)</li>
+<li><input type="checkbox" disabled> Maintain a vulnerability remediation SLA (critical: 24h, high: 7d, medium: 30d, low: 90d)</li>
+<li><input type="checkbox" disabled> Document and track all identified vulnerabilities to resolution</li>
+</ul>
+<hr>
+<h3 id="availability-a1-availability-for-operations">Availability (A1) — Availability for Operations</h3>
+<p><strong>Objective:</strong> The system is available for operation and use as committed or agreed.</p>
+<h4 id="a11-uptime-monitoring-and-sla">A1.1 — Uptime Monitoring and SLA</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement application monitoring and alerting (e.g., Sentry, Datadog, PagerDuty)</li>
+<li><input type="checkbox" disabled> Define uptime SLA targets (e.g., 99.9% availability)</li>
+<li><input type="checkbox" disabled> Set up real-time health check endpoints</li>
+</ul>
+<h4 id="a12-disaster-recovery-and-business-continuity">A1.2 — Disaster Recovery and Business Continuity</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document a Disaster Recovery Plan (DRP) with defined RTO and RPO</li>
+<li><input type="checkbox" disabled> Test disaster recovery procedures at least annually</li>
+<li><input type="checkbox" disabled> Maintain automated backups with documented retention schedule</li>
+<li><input type="checkbox" disabled> Define and test failover procedures for critical systems</li>
+<li><input type="checkbox" disabled> Document business continuity procedures for extended outages</li>
+<li><input type="checkbox" disabled> Maintain an up-to-date system architecture diagram</li>
+</ul>
+<h4 id="a13-capacity-planning">A1.3 — Capacity Planning</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Monitor resource utilization (CPU, memory, storage, network)</li>
+<li><input type="checkbox" disabled> Set capacity threshold alerts (e.g., 80% utilization triggers review)</li>
+<li><input type="checkbox" disabled> Document scaling procedures (horizontal and vertical)</li>
+<li><input type="checkbox" disabled> Review capacity plans quarterly</li>
+</ul>
+<hr>
+<h3 id="processing-integrity-pi1-system-processing-is-complete-valid-accurate-and-timely">Processing Integrity (PI1) — System Processing is Complete, Valid, Accurate, and Timely</h3>
+<p><strong>Objective:</strong> System processing is complete, valid, accurate, timely, and authorized.</p>
+<h4 id="pi11-data-validation-and-error-handling">PI1.1 — Data Validation and Error Handling</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement input validation on all user-facing endpoints</li>
+<li><input type="checkbox" disabled> Use schema validation for API request and response payloads</li>
+<li><input type="checkbox" disabled> Log and alert on data validation failures</li>
+<li><input type="checkbox" disabled> Implement idempotency controls for payment transactions via: stripe</li>
+<li><input type="checkbox" disabled> Validate transaction amounts and currency codes before processing</li>
+<li><input type="checkbox" disabled> Reconcile payment records daily</li>
+<li><input type="checkbox" disabled> Validate AI model inputs and outputs for: @ai-sdk/google-vertex, @vercel/ai</li>
+<li><input type="checkbox" disabled> Implement guardrails for AI-generated content (safety filters, output validation)</li>
+<li><input type="checkbox" disabled> Log AI processing decisions for auditability</li>
+</ul>
+<h4 id="pi12-error-handling-and-exception-management">PI1.2 — Error Handling and Exception Management</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement structured error handling across all application layers</li>
+<li><input type="checkbox" disabled> Log all unhandled exceptions with sufficient context for investigation</li>
+<li><input type="checkbox" disabled> Define error severity levels and corresponding response procedures</li>
+<li><input type="checkbox" disabled> Monitor error rates and set alerting thresholds</li>
+<li><input type="checkbox" disabled> Implement graceful degradation for non-critical service failures</li>
+</ul>
+<h4 id="pi13-change-management">PI1.3 — Change Management</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Require code review for all production changes</li>
+<li><input type="checkbox" disabled> Maintain a change log or release notes</li>
+<li><input type="checkbox" disabled> Implement automated testing in CI/CD pipelines</li>
+<li><input type="checkbox" disabled> Document rollback procedures for production deployments</li>
+<li><input type="checkbox" disabled> Separate development, staging, and production environments</li>
+</ul>
+<hr>
+<h3 id="confidentiality-c1-protection-of-confidential-information">Confidentiality (C1) — Protection of Confidential Information</h3>
+<p><strong>Objective:</strong> Information designated as confidential is protected as committed or agreed.</p>
+<h4 id="c11-data-classification">C1.1 — Data Classification</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define a data classification policy (Public, Internal, Confidential, Restricted)</li>
+<li><input type="checkbox" disabled> Classify all data stores and label them according to policy</li>
+<li><input type="checkbox" disabled> Train employees on data handling procedures for each classification level</li>
+<li><input type="checkbox" disabled> Review data classifications annually or when new data types are introduced</li>
+</ul>
+<h4 id="c12-encryption-at-rest">C1.2 — Encryption at Rest</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enable transparent data encryption (TDE) or equivalent for: prisma</li>
+<li><input type="checkbox" disabled> Encrypt all backups at rest</li>
+<li><input type="checkbox" disabled> Document which encryption algorithms and key lengths are in use</li>
+<li><input type="checkbox" disabled> Store encryption keys in a dedicated key management service (KMS)</li>
+</ul>
+<h4 id="c13-encryption-in-transit">C1.3 — Encryption in Transit</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce HTTPS/TLS for all external communications</li>
+<li><input type="checkbox" disabled> Use TLS for internal service-to-service communication where feasible</li>
+<li><input type="checkbox" disabled> Disable deprecated TLS versions (TLS 1.0, 1.1)</li>
+<li><input type="checkbox" disabled> Monitor certificate expiration and automate renewal</li>
+</ul>
+<h4 id="c14-pci-dss-alignment">C1.4 — PCI DSS Alignment</h4>
+<p><em>Payment services detected: stripe</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Confirm PCI DSS compliance scope and complete SAQ (Self-Assessment Questionnaire)</li>
+<li><input type="checkbox" disabled> Never store raw credit card numbers — use tokenization via payment processor</li>
+<li><input type="checkbox" disabled> Restrict access to cardholder data to authorized personnel only</li>
+<li><input type="checkbox" disabled> Maintain PCI DSS compliance documentation and evidence</li>
+<li><input type="checkbox" disabled> Conduct quarterly ASV (Approved Scanning Vendor) scans</li>
+</ul>
+<hr>
+<h3 id="privacy-p1-p8-personal-information-protection">Privacy (P1-P8) — Personal Information Protection</h3>
+<p><strong>Objective:</strong> Personal information is collected, used, retained, disclosed, and disposed of in conformity with commitments and criteria.</p>
+<h4 id="p1-notice">P1 — Notice</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Publish a clear and accessible Privacy Policy</li>
+<li><input type="checkbox" disabled> Notify users of data collection purposes before or at the time of collection</li>
+<li><input type="checkbox" disabled> Describe the types of personal information collected and reasons for collection</li>
+<li><input type="checkbox" disabled> Disclose third-party data sharing for: posthog, @ai-sdk/google-vertex, @vercel/ai</li>
+</ul>
+<h4 id="p2-choice-and-consent">P2 — Choice and Consent</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Obtain explicit consent before collecting personal information</li>
+<li><input type="checkbox" disabled> Provide opt-out mechanisms for non-essential data processing</li>
+<li><input type="checkbox" disabled> Maintain consent records with timestamps</li>
+<li><input type="checkbox" disabled> Implement cookie consent banner with granular opt-in/opt-out controls</li>
+</ul>
+<h4 id="p3-collection">P3 — Collection</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Collect only the minimum personal information necessary (data minimization)</li>
+<li><input type="checkbox" disabled> Document the legal basis for each category of personal data collected</li>
+<li><input type="checkbox" disabled> Maintain a Record of Processing Activities (ROPA)</li>
+</ul>
+<h4 id="p4-use-retention-and-disposal">P4 — Use, Retention, and Disposal</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Use personal information only for the purposes disclosed in the privacy notice</li>
+<li><input type="checkbox" disabled> Define and enforce data retention periods per data category</li>
+<li><input type="checkbox" disabled> Implement automated data purge processes for expired retention periods</li>
+<li><input type="checkbox" disabled> Document data disposal procedures (secure deletion, anonymization)</li>
+</ul>
+<h4 id="p5-access">P5 — Access</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Provide individuals with the ability to access their personal information</li>
+<li><input type="checkbox" disabled> Implement a self-service data export feature (e.g., account data download)</li>
+<li><input type="checkbox" disabled> Respond to data subject access requests (DSARs) within regulatory timeframes</li>
+</ul>
+<h4 id="p6-disclosure-and-sharing">P6 — Disclosure and Sharing</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document all third-party sub-processors and data sharing arrangements</li>
+<li><input type="checkbox" disabled> Execute Data Processing Agreements (DPAs) with all sub-processors</li>
+<li><input type="checkbox" disabled> Notify individuals of material changes to data sharing practices</li>
+</ul>
+<h4 id="p7-data-quality">P7 — Data Quality</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Provide mechanisms for individuals to update or correct their personal information</li>
+<li><input type="checkbox" disabled> Validate personal data accuracy at the point of collection</li>
+<li><input type="checkbox" disabled> Periodically review stored personal data for accuracy</li>
+</ul>
+<h4 id="p8-monitoring-and-enforcement">P8 — Monitoring and Enforcement</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Conduct periodic privacy impact assessments (PIAs)</li>
+<li><input type="checkbox" disabled> Monitor for unauthorized access to personal information</li>
+<li><input type="checkbox" disabled> Maintain a privacy incident response procedure</li>
+<li><input type="checkbox" disabled> Train employees on privacy obligations and data handling procedures</li>
+<li><input type="checkbox" disabled> Appoint a privacy owner or Data Protection Officer (DPO)</li>
+</ul>
+<hr>
+<h2 id="4-recommended-audit-timeline">4. Recommended Audit Timeline</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Phase</th><th style="text-align:left">Duration</th><th style="text-align:left">Activities</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Gap Assessment</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">Identify gaps between current state and SOC 2 requirements</td></tr>
+<tr><td style="text-align:left"><strong>Remediation</strong></td><td style="text-align:left">4-12 weeks</td><td style="text-align:left">Implement missing controls and document procedures</td></tr>
+<tr><td style="text-align:left"><strong>Evidence Collection</strong></td><td style="text-align:left">Ongoing (6-12 months)</td><td style="text-align:left">Collect evidence of controls operating effectively over the audit period</td></tr>
+<tr><td style="text-align:left"><strong>Readiness Assessment</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">Internal review to verify all controls are in place and operating</td></tr>
+<tr><td style="text-align:left"><strong>Type II Audit</strong></td><td style="text-align:left">4-8 weeks</td><td style="text-align:left">External auditor examines controls over a minimum 6-month observation period</td></tr>
+<tr><td style="text-align:left"><strong>Report Issuance</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">CPA firm issues the SOC 2 Type II report</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-evidence-collection-guide">5. Evidence Collection Guide</h2>
+<p>For each control area, collect and maintain the following evidence artifacts for your SOC 2 Type II audit:</p>
+<h3 id="security-cc6">Security (CC6)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Evidence Artifact</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Access control matrix</td><td style="text-align:left">Document of who has access to each system</td><td style="text-align:left">Quarterly review</td></tr>
+<tr><td style="text-align:left">MFA enrollment report</td><td style="text-align:left">Proof that MFA is enabled for all users</td><td style="text-align:left">Monthly snapshot</td></tr>
+<tr><td style="text-align:left">Penetration test report</td><td style="text-align:left">Results from external penetration testing</td><td style="text-align:left">Annually</td></tr>
+<tr><td style="text-align:left">Vulnerability scan results</td><td style="text-align:left">Automated scan output showing remediation</td><td style="text-align:left">Monthly</td></tr>
+<tr><td style="text-align:left">Encryption configuration</td><td style="text-align:left">Screenshots/configs showing encryption settings</td><td style="text-align:left">On change</td></tr>
+<tr><td style="text-align:left">Access review records</td><td style="text-align:left">Logs of quarterly access recertification</td><td style="text-align:left">Quarterly</td></tr>
+</tbody>
+</table>
+<h3 id="availability-a1">Availability (A1)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Evidence Artifact</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Uptime reports</td><td style="text-align:left">SLA monitoring dashboard exports</td><td style="text-align:left">Monthly</td></tr>
+<tr><td style="text-align:left">Incident post-mortems</td><td style="text-align:left">Root cause analysis for each outage</td><td style="text-align:left">Per incident</td></tr>
+<tr><td style="text-align:left">DR test results</td><td style="text-align:left">Documentation of disaster recovery tests</td><td style="text-align:left">Annually</td></tr>
+<tr><td style="text-align:left">Backup verification logs</td><td style="text-align:left">Proof that backups complete and are restorable</td><td style="text-align:left">Monthly</td></tr>
+<tr><td style="text-align:left">Capacity planning reviews</td><td style="text-align:left">Resource utilization reports and forecasts</td><td style="text-align:left">Quarterly</td></tr>
+</tbody>
+</table>
+<h3 id="processing-integrity-pi1">Processing Integrity (PI1)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Evidence Artifact</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">CI/CD pipeline configs</td><td style="text-align:left">Build and deployment pipeline definitions</td><td style="text-align:left">On change</td></tr>
+<tr><td style="text-align:left">Code review records</td><td style="text-align:left">Pull request approvals and review comments</td><td style="text-align:left">Per change</td></tr>
+<tr><td style="text-align:left">Test coverage reports</td><td style="text-align:left">Automated test results and coverage metrics</td><td style="text-align:left">Per build</td></tr>
+<tr><td style="text-align:left">Change management log</td><td style="text-align:left">Record of all production changes</td><td style="text-align:left">Continuous</td></tr>
+<tr><td style="text-align:left">Error rate dashboards</td><td style="text-align:left">Application error monitoring summaries</td><td style="text-align:left">Monthly</td></tr>
+</tbody>
+</table>
+<h3 id="confidentiality-c1">Confidentiality (C1)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Evidence Artifact</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Data classification inventory</td><td style="text-align:left">Catalog of data stores with classifications</td><td style="text-align:left">Annually</td></tr>
+<tr><td style="text-align:left">Encryption audit</td><td style="text-align:left">Verification of encryption at rest and in transit</td><td style="text-align:left">Quarterly</td></tr>
+<tr><td style="text-align:left">Key management procedures</td><td style="text-align:left">Documentation of key rotation and storage</td><td style="text-align:left">On change</td></tr>
+<tr><td style="text-align:left">DPA agreements</td><td style="text-align:left">Signed Data Processing Agreements with vendors</td><td style="text-align:left">On onboarding</td></tr>
+<tr><td style="text-align:left">PCI SAQ (if applicable)</td><td style="text-align:left">Completed PCI Self-Assessment Questionnaire</td><td style="text-align:left">Annually</td></tr>
+</tbody>
+</table>
+<h3 id="privacy-p1-p8">Privacy (P1-P8)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Evidence Artifact</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Privacy Policy</td><td style="text-align:left">Published privacy notice</td><td style="text-align:left">On change</td></tr>
+<tr><td style="text-align:left">Consent records</td><td style="text-align:left">Logs of user consent with timestamps</td><td style="text-align:left">Continuous</td></tr>
+<tr><td style="text-align:left">ROPA</td><td style="text-align:left">Record of Processing Activities</td><td style="text-align:left">Annually</td></tr>
+<tr><td style="text-align:left">DSAR response logs</td><td style="text-align:left">Records of data subject access requests handled</td><td style="text-align:left">Per request</td></tr>
+<tr><td style="text-align:left">Privacy impact assessments</td><td style="text-align:left">PIA reports for new features or changes</td><td style="text-align:left">Per project</td></tr>
+<tr><td style="text-align:left">Employee training records</td><td style="text-align:left">Proof of privacy training completion</td><td style="text-align:left">Annually</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-next-steps">6. Next Steps</h2>
+<ol>
+<li><strong>Assign an owner</strong> for each control area listed above.</li>
+<li><strong>Conduct a gap assessment</strong> comparing your current controls to this checklist.</li>
+<li><strong>Prioritize remediation</strong> starting with Security (CC6) and Availability (A1).</li>
+<li><strong>Begin evidence collection</strong> immediately — SOC 2 Type II requires evidence over a 6-12 month observation period.</li>
+<li><strong>Engage an auditor</strong> early to align on scope and expectations.</li>
+</ol>
+<hr>
+<p><em>This SOC 2 Readiness Checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It should be reviewed by a qualified professional before use in audit preparation.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

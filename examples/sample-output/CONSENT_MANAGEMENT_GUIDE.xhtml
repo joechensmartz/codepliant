@@ -1,0 +1,379 @@
+<h1>Consent Management Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Consent Management Implementation Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Company:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Cookie Policy (<code>COOKIE_POLICY.md</code>)</p></li>
+<li><p>Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</p></li>
+</ul>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Purpose:</strong> This guide provides actionable implementation steps for managing user consent</p>
+<p>across all detected services in your project. It covers GDPR, ePrivacy Directive,</p>
+<p>and CCPA requirements.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Legal Basis Classification</h2>
+<p>Based on the services detected in your codebase, here is how each service maps to a legal basis under GDPR Article 6:</p>
+<h3>Consent Required (Article 6(1)(a))</h3>
+<p>These services collect non-essential data and require explicit opt-in consent before activation:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Collected</p></th><th><p>Action Required</p></th></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>user prompts, conversation history, generated content</p></td><td><p>Must not load until user consents</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>user behavior, session recordings, feature flag usage</p></td><td><p>Must not load until user consents</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Legitimate Interest (Article 6(1)(f))</h3>
+<p>These services may operate under legitimate interest with appropriate documentation and user objection mechanism:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Collected</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>error data, stack traces, user context</p></td><td><p>Document in LIA; provide opt-out</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>email addresses, email content</p></td><td><p>Document in LIA; provide opt-out</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Contractual Necessity (Article 6(1)(b))</h3>
+<p>These services are required to fulfill contractual obligations and do not require separate consent:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Collected</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>email, password hash, session data</p></td><td><p>Essential for service delivery</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p>user data as defined in schema</p></td><td><p>Essential for service delivery</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>payment information, billing address, email</p></td><td><p>Essential for service delivery</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>payment information, billing address, email</p></td><td><p>Essential for service delivery</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Cookie Consent Banner Requirements</h2>
+<p>Under the ePrivacy Directive and GDPR, your cookie banner must:</p>
+<ul>
+<li><p><strong>Block non-essential cookies</strong> before consent is given (no pre-ticked boxes)</p></li>
+<li><p><strong>Provide granular choices</strong> (analytics, marketing, functional — not just "accept all")</p></li>
+<li><p><strong>Include a reject-all option</strong> equally prominent as "accept all"</p></li>
+<li><p><strong>Not use dark patterns</strong> (e.g., hiding the reject option, making it harder to decline)</p></li>
+<li><p><strong>Record proof of consent</strong> (timestamp, version, choices made)</p></li>
+<li><p><strong>Allow withdrawal</strong> at any time, as easily as giving consent</p></li>
+<li><p><strong>Re-prompt</strong> when consent purposes change or after 12 months</p></li>
+</ul>
+<h3>Consent Categories for Your Project</h3>
+<p>Based on detected services, configure your consent banner with these categories:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Services</p></th><th><p>Default State</p></th></tr>
+<tr><td><p>Strictly Necessary</p></td><td><p>@supabase/supabase-js, prisma, stripe, stripe-ios</p></td><td><p>Always active (no toggle)</p></td></tr>
+<tr><td><p>Analytics</p></td><td><p>posthog</p></td><td><p>Off until consented</p></td></tr>
+<tr><td><p>AI Services</p></td><td><p>openai</p></td><td><p>Off until consented</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Example: Minimal Cookie Consent Banner</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">html</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[&lt;!-- Cookie Consent Banner --&gt;
+&lt;div id=&quot;cookie-consent&quot; style=&quot;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #1a1a2e; color: #fff; padding: 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 9999; font-family: system-ui, sans-serif;
+&quot;&gt;
+  &lt;div&gt;
+    &lt;p style=&quot;margin: 0 0 0.5rem 0; font-weight: 600;&quot;&gt;We value your privacy&lt;/p&gt;
+    &lt;p style=&quot;margin: 0; font-size: 0.875rem; opacity: 0.9;&quot;&gt;
+      We use cookies to improve your experience. You can customize your preferences.
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;display: flex; gap: 0.5rem; flex-shrink: 0;&quot;&gt;
+    &lt;button onclick=&quot;manageConsent()&quot; style=&quot;
+      background: transparent; color: #fff; border: 1px solid #fff;
+      padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;
+    &quot;&gt;Customize&lt;/button&gt;
+    &lt;button onclick=&quot;rejectAll()&quot; style=&quot;
+      background: transparent; color: #fff; border: 1px solid #fff;
+      padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;
+    &quot;&gt;Reject All&lt;/button&gt;
+    &lt;button onclick=&quot;acceptAll()&quot; style=&quot;
+      background: #4CAF50; color: #fff; border: none;
+      padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;
+    &quot;&gt;Accept All&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function getConsentState() {
+  try {
+    return JSON.parse(localStorage.getItem(&apos;cookie_consent&apos;) || &apos;null&apos;);
+  } catch { return null; }
+}
+
+function saveConsent(choices) {
+  const record = {
+    choices,
+    timestamp: new Date().toISOString(),
+    version: &apos;1.0&apos;,
+  };
+  localStorage.setItem(&apos;cookie_consent&apos;, JSON.stringify(record));
+  document.getElementById(&apos;cookie-consent&apos;).style.display = &apos;none&apos;;
+  applyConsent(choices);
+}
+
+function acceptAll() {
+  saveConsent({ analytics: true, marketing: true, functional: true });
+}
+
+function rejectAll() {
+  saveConsent({ analytics: false, marketing: false, functional: false });
+}
+
+function manageConsent() {
+  // Open a modal with granular toggles per category
+  // Implementation depends on your UI framework
+}
+
+function applyConsent(choices) {
+  if (choices.analytics) {
+    // Load analytics scripts here
+  }
+  if (choices.marketing) {
+    // Load marketing scripts here
+  }
+}
+
+// On page load: check existing consent
+(function() {
+  const existing = getConsentState();
+  if (existing) {
+    document.getElementById(&apos;cookie-consent&apos;).style.display = &apos;none&apos;;
+    applyConsent(existing.choices);
+  }
+})();
+&lt;/script&gt;]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>3. Global Privacy Control (GPC) Signal</h2>
+<p>The <a href="https://globalprivacycontrol.org/">Global Privacy Control</a> is a browser-level signal that indicates a user's privacy preferences. Under CCPA/CPRA, honoring GPC is legally required for California residents. Under GDPR, it serves as a valid objection signal.</p>
+<h3>Implementation</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">javascript</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[// Check for GPC signal on page load
+function checkGPC() {
+  if (navigator.globalPrivacyControl) {
+    // User has opted out via GPC
+    // Treat as: reject analytics + advertising cookies
+    saveConsent({ analytics: false, marketing: false, functional: true });
+    console.log(&apos;[Consent] GPC signal detected — non-essential tracking disabled&apos;);
+    return true;
+  }
+  return false;
+}
+
+// Call before showing consent banner
+if (!checkGPC()) {
+  // Show consent banner if no GPC and no prior consent
+  const existing = getConsentState();
+  if (!existing) {
+    document.getElementById(&apos;cookie-consent&apos;).style.display = &apos;flex&apos;;
+  }
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>4. Service-Specific Consent Patterns</h2>
+<h3>PostHog — Opt-In / Opt-Out</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">javascript</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[import posthog from &apos;posthog-js&apos;;
+
+// Initialize with opt-out by default (GDPR-compliant)
+posthog.init(&apos;YOUR_PROJECT_KEY&apos;, {
+  api_host: &apos;https://app.posthog.com&apos;,
+  opt_out_capturing_by_default: true,  // No tracking until consent
+  persistence: &apos;localStorage&apos;,
+});
+
+// When user gives consent:
+function onAnalyticsConsent() {
+  posthog.opt_in_capturing();
+}
+
+// When user withdraws consent:
+function onAnalyticsRevoke() {
+  posthog.opt_out_capturing();
+  posthog.reset();  // Clear any stored user data
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>5. Consent Storage Recommendations</h2>
+<h3>Where to Store Consent Records</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Method</p></th><th><p>Pros</p></th><th><p>Cons</p></th><th><p>Recommended</p></th></tr>
+<tr><td><p>localStorage</p></td><td><p>Simple, client-side only</p></td><td><p>Lost on clear, not shared across subdomains</p></td><td><p>Development / simple sites</p></td></tr>
+<tr><td><p>First-party cookie</p></td><td><p>Shared across subdomains, server-readable</p></td><td><p>4KB limit, sent with every request</p></td><td><p>Production sites</p></td></tr>
+<tr><td><p>Server-side database</p></td><td><p>Auditable, tamper-proof, survives device changes</p></td><td><p>Requires API endpoint</p></td><td><p>Enterprise / regulated</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Consent Record Schema</h3>
+<p>Store the following data for each consent record:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">json</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[{
+  &quot;userId&quot;: &quot;anonymous-uuid-or-user-id&quot;,
+  &quot;timestamp&quot;: &quot;2026-03-15T10:30:00.000Z&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;choices&quot;: {
+    &quot;analytics&quot;: true,
+    &quot;marketing&quot;: false,
+    &quot;functional&quot;: true,
+    &quot;ai&quot;: false
+  },
+  &quot;gpcDetected&quot;: false,
+  &quot;method&quot;: &quot;banner-click&quot;,
+  &quot;ipCountry&quot;: &quot;DE&quot;
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>Retention</h3>
+<ul>
+<li><p>Keep consent records for the <strong>duration of consent + 3 years</strong> (to demonstrate compliance under GDPR Article 7(1))</p></li>
+<li><p>Update records when the user changes preferences</p></li>
+<li><p>Re-collect consent when purposes change or annually</p></li>
+</ul>
+<h2>6. Consent Withdrawal Process</h2>
+<p>Under GDPR Article 7(3), withdrawing consent must be as easy as giving it.</p>
+<h3>Required Steps</h3>
+<ol>
+<li><p><strong>Provide a persistent link</strong> (footer, settings page, or floating widget) to manage cookie preferences</p></li>
+<li><p><strong>When consent is withdrawn:</strong></p></li>
+</ol>
+<ul>
+<li><p>Stop all non-essential tracking immediately</p></li>
+<li><p>Clear any locally stored tracking identifiers</p></li>
+<li><p>Send a server-side signal to stop processing (if applicable)</p></li>
+<li><p>Update the consent record with the withdrawal timestamp</p></li>
+</ul>
+<h3>Implementation</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">javascript</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[function withdrawConsent(category) {
+  const consent = getConsentState();
+  if (!consent) return;
+
+  consent.choices[category] = false;
+  consent.timestamp = new Date().toISOString();
+  localStorage.setItem(&apos;cookie_consent&apos;, JSON.stringify(consent));
+
+  // Category-specific cleanup
+  switch (category) {
+    case &apos;analytics&apos;:
+      // Clear analytics cookies and local storage
+      document.cookie.split(&apos;;&apos;).forEach(cookie =&gt; {
+        const name = cookie.split(&apos;=&apos;)[0].trim();
+        if (name.startsWith(&apos;_ga&apos;) || name.startsWith(&apos;ph_&apos;) || name.startsWith(&apos;mp_&apos;)) {
+          document.cookie = name + &apos;=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/&apos;;
+        }
+      });
+      // PostHog cleanup
+      if (window.posthog) {
+        window.posthog.opt_out_capturing();
+        window.posthog.reset();
+      }
+      break;
+    case &apos;marketing&apos;:
+      // Clear advertising cookies
+      document.cookie.split(&apos;;&apos;).forEach(cookie =&gt; {
+        const name = cookie.split(&apos;=&apos;)[0].trim();
+        if (name.startsWith(&apos;_fb&apos;) || name.startsWith(&apos;ads_&apos;)) {
+          document.cookie = name + &apos;=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/&apos;;
+        }
+      });
+      break;
+  }
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h2>7. Technical Implementation Checklist</h2>
+<h3>General</h3>
+<ul>
+<li><p>[ ] Cookie consent banner loads before any non-essential scripts</p></li>
+<li><p>[ ] Non-essential scripts are blocked until consent is given</p></li>
+<li><p>[ ] GPC signal (navigator.globalPrivacyControl) is checked on load</p></li>
+<li><p>[ ] Consent record is stored with timestamp, version, and choices</p></li>
+<li><p>[ ] Consent withdrawal is available from every page (footer link or widget)</p></li>
+<li><p>[ ] Consent is re-collected when purposes change</p></li>
+<li><p>[ ] Consent banner is accessible (keyboard navigable, screen reader compatible)</p></li>
+<li><p>[ ] "Reject All" button is equally prominent as "Accept All"</p></li>
+<li><p>[ ] No pre-ticked checkboxes for non-essential categories</p></li>
+</ul>
+<h3>Per-Service Checklist</h3>
+<h4>openai (ai)</h4>
+<ul>
+<li><p>[ ] Script/SDK does not load before consent</p></li>
+<li><p>[ ] Consent category mapped: AI Services</p></li>
+<li><p>[ ] Opt-out mechanism implemented</p></li>
+<li><p>[ ] Data cleared on consent withdrawal</p></li>
+<li><p>[ ] Third-party cookies documented in cookie policy</p></li>
+</ul>
+<h4>posthog (analytics)</h4>
+<ul>
+<li><p>[ ] Script/SDK does not load before consent</p></li>
+<li><p>[ ] Consent category mapped: Analytics</p></li>
+<li><p>[ ] Opt-out mechanism implemented</p></li>
+<li><p>[ ] Data cleared on consent withdrawal</p></li>
+<li><p>[ ] Third-party cookies documented in cookie policy</p></li>
+</ul>
+<h4>@sentry/node (monitoring) — Legitimate Interest</h4>
+<ul>
+<li><p>[ ] Legitimate Interest Assessment (LIA) documented</p></li>
+<li><p>[ ] User objection mechanism provided</p></li>
+<li><p>[ ] Data minimization applied</p></li>
+<li><p>[ ] Processing documented in privacy policy</p></li>
+</ul>
+<h4>resend (email) — Legitimate Interest</h4>
+<ul>
+<li><p>[ ] Legitimate Interest Assessment (LIA) documented</p></li>
+<li><p>[ ] User objection mechanism provided</p></li>
+<li><p>[ ] Data minimization applied</p></li>
+<li><p>[ ] Processing documented in privacy policy</p></li>
+</ul>
+<h2>8. Recommended Consent Management Platforms</h2>
+<p>If you prefer a managed solution over a custom implementation:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Platform</p></th><th><p>Open Source</p></th><th><p>GDPR</p></th><th><p>CCPA</p></th><th><p>GPC Support</p></th><th><p>Notes</p></th></tr>
+<tr><td><p><a href="https://www.cookiebot.com">Cookiebot</a></p></td><td><p>No</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Auto-scans cookies</p></td></tr>
+<tr><td><p><a href="https://www.osano.com">Osano</a></p></td><td><p>No</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Consent + data mapping</p></td></tr>
+<tr><td><p><a href="https://klaro.org">Klaro</a></p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Partial</p></td><td><p>Self-hosted, lightweight</p></td></tr>
+<tr><td><p><a href="https://cookieconsent.orestbida.com">CookieConsent</a></p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Manual</p></td><td><p>Popular open-source option</p></td></tr>
+<tr><td><p><a href="https://www.consentmanager.net">Consent Manager</a></p></td><td><p>No</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>IAB TCF 2.2 support</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>9. Contact</h2>
+<p>For questions about consent management or data processing:</p>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+</ul>
+<hr />
+<p><em>This guide was auto-generated by Codepliant based on code analysis of nextjs-saas-example. It provides implementation guidance only and does not constitute legal advice. Consult with a qualified privacy professional for your specific compliance requirements.</em></p>

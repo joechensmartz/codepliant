@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE TESTING PLAN — medusa</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE TESTING PLAN</h1>
+      <p class="meta">medusa &middot; Last updated 2026-03-18 &middot; ~10 min read</p>
+    </header>
+    <h1 id="compliance-testing-plan">Compliance Testing Plan</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Services in scope:</strong> 11</p>
+<p><strong>Test categories:</strong> Consent Flow, Data Deletion, Access Controls, Breach Notification</p>
+<p>This testing plan verifies that compliance controls are implemented correctly across the [Your Company Name] technology stack. Each test case is mapped to detected services and references applicable regulations (GDPR, CCPA, PCI DSS).</p>
+<hr>
+<h2 id="1-test-plan-overview">1. Test Plan Overview</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Test Cases</th><th style="text-align:left">Priority</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Consent Flow</td><td style="text-align:left">Consent collection, withdrawal, preference persistence</td><td style="text-align:left">Critical</td><td style="text-align:left">Every release</td></tr>
+<tr><td style="text-align:left">Data Deletion</td><td style="text-align:left">DSAR deletion, cascade deletion, verification</td><td style="text-align:left">Critical</td><td style="text-align:left">Monthly</td></tr>
+<tr><td style="text-align:left">Access Controls</td><td style="text-align:left">RBAC enforcement, privilege escalation, API auth</td><td style="text-align:left">High</td><td style="text-align:left">Every release</td></tr>
+<tr><td style="text-align:left">Breach Notification</td><td style="text-align:left">Detection, containment, notification timing</td><td style="text-align:left">High</td><td style="text-align:left">Quarterly drill</td></tr>
+<tr><td style="text-align:left">Data Minimization</td><td style="text-align:left">Collection scope, retention enforcement</td><td style="text-align:left">Medium</td><td style="text-align:left">Quarterly</td></tr>
+<tr><td style="text-align:left">Encryption</td><td style="text-align:left">At-rest verification, in-transit enforcement</td><td style="text-align:left">High</td><td style="text-align:left">Monthly</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-consent-flow-test-cases">2. Consent Flow Test Cases</h2>
+<h3 id="21-consent-collection">2.1 Consent Collection</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">CF-001</td><td style="text-align:left">User visits site for the first time</td><td style="text-align:left">Consent banner displayed before any tracking</td><td style="text-align:left">GDPR Art. 7, ePrivacy</td></tr>
+<tr><td style="text-align:left">CF-002</td><td style="text-align:left">User declines all optional cookies</td><td style="text-align:left">No analytics/advertising scripts loaded</td><td style="text-align:left">GDPR Art. 7</td></tr>
+<tr><td style="text-align:left">CF-003</td><td style="text-align:left">User accepts only necessary cookies</td><td style="text-align:left">Only essential cookies set; analytics blocked</td><td style="text-align:left">ePrivacy Directive</td></tr>
+<tr><td style="text-align:left">CF-004</td><td style="text-align:left">User accepts all cookies</td><td style="text-align:left">All consented services activated</td><td style="text-align:left">GDPR Art. 7</td></tr>
+<tr><td style="text-align:left">CF-005</td><td style="text-align:left">Consent preference stored correctly</td><td style="text-align:left">Consent record includes: timestamp, scope, version</td><td style="text-align:left">GDPR Art. 7(1)</td></tr>
+</tbody>
+</table>
+<h4 id="analytics-specific-consent-tests">Analytics-Specific Consent Tests</h4>
+<p>| CF-A-@SE | <strong>@segment/analytics-next</strong>: Verify no tracking before consent | No network requests to @segment/analytics-next endpoints until consent given | GDPR Art. 7 |</p>
+<p>| CF-A-@SE2 | <strong>@segment/analytics-next</strong>: Verify tracking stops on withdrawal | @segment/analytics-next tracking ceases within 1 page load of withdrawal | GDPR Art. 7(3) |</p>
+<p>| CF-A-POS | <strong>posthog</strong>: Verify no tracking before consent | No network requests to posthog endpoints until consent given | GDPR Art. 7 |</p>
+<p>| CF-A-POS2 | <strong>posthog</strong>: Verify tracking stops on withdrawal | posthog tracking ceases within 1 page load of withdrawal | GDPR Art. 7(3) |</p>
+<h3 id="22-consent-withdrawal">2.2 Consent Withdrawal</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">CW-001</td><td style="text-align:left">User withdraws consent via preference center</td><td style="text-align:left">All non-essential processing stops</td><td style="text-align:left">GDPR Art. 7(3)</td></tr>
+<tr><td style="text-align:left">CW-002</td><td style="text-align:left">Withdrawal is as easy as giving consent</td><td style="text-align:left">Preference center accessible in <=2 clicks from any page</td><td style="text-align:left">GDPR Art. 7(3)</td></tr>
+<tr><td style="text-align:left">CW-003</td><td style="text-align:left">Withdrawal does not affect service core functionality</td><td style="text-align:left">User can still access essential features</td><td style="text-align:left">GDPR Art. 7(4)</td></tr>
+<tr><td style="text-align:left">CW-004</td><td style="text-align:left">Withdrawal propagated to all services</td><td style="text-align:left">All third-party services stop processing within 24h</td><td style="text-align:left">GDPR Art. 7(3)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-data-deletion-test-cases">3. Data Deletion Test Cases</h2>
+<h3 id="31-dsar-deletion-right-to-erasure">3.1 DSAR Deletion (Right to Erasure)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DD-001</td><td style="text-align:left">Submit deletion request via DSAR portal</td><td style="text-align:left">Request acknowledged within 24 hours</td><td style="text-align:left">GDPR Art. 17</td></tr>
+<tr><td style="text-align:left">DD-002</td><td style="text-align:left">Deletion completed within 30-day window</td><td style="text-align:left">All personal data removed from all systems</td><td style="text-align:left">GDPR Art. 12(3)</td></tr>
+<tr><td style="text-align:left">DD-003</td><td style="text-align:left">Deletion confirmation sent to user</td><td style="text-align:left">User receives written confirmation of deletion</td><td style="text-align:left">GDPR Art. 12(1)</td></tr>
+<tr><td style="text-align:left">DD-004</td><td style="text-align:left">Backup deletion within 90 days</td><td style="text-align:left">Personal data purged from backups at next rotation</td><td style="text-align:left">GDPR Art. 17(1)</td></tr>
+</tbody>
+</table>
+<h3 id="32-per-service-deletion-verification">3.2 Per-Service Deletion Verification</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Service</th><th style="text-align:left">Test Case</th><th style="text-align:left">Verification Method</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DD-S-001</td><td style="text-align:left"><strong>@aws-sdk/client-s3</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">List objects by user prefix; expect empty</td></tr>
+<tr><td style="text-align:left">DD-S-002</td><td style="text-align:left"><strong>@segment/analytics-next</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Export user data report; expect no matching records</td></tr>
+<tr><td style="text-align:left">DD-S-003</td><td style="text-align:left"><strong>@sendgrid/mail</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Search mailing lists by email; expect not found</td></tr>
+<tr><td style="text-align:left">DD-S-004</td><td style="text-align:left"><strong>algoliasearch</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Service-specific API query; expect no user data</td></tr>
+<tr><td style="text-align:left">DD-S-005</td><td style="text-align:left"><strong>cookie-parser</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Service-specific API query; expect no user data</td></tr>
+<tr><td style="text-align:left">DD-S-006</td><td style="text-align:left"><strong>express-session</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Service-specific API query; expect no user data</td></tr>
+<tr><td style="text-align:left">DD-S-007</td><td style="text-align:left"><strong>ioredis</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Direct DB query by user ID; expect 0 rows</td></tr>
+<tr><td style="text-align:left">DD-S-008</td><td style="text-align:left"><strong>Multer</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">List objects by user prefix; expect empty</td></tr>
+<tr><td style="text-align:left">DD-S-009</td><td style="text-align:left"><strong>openai</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Query AI logs by user ID; expect no matching entries</td></tr>
+<tr><td style="text-align:left">DD-S-010</td><td style="text-align:left"><strong>posthog</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Export user data report; expect no matching records</td></tr>
+<tr><td style="text-align:left">DD-S-011</td><td style="text-align:left"><strong>stripe</strong></td><td style="text-align:left">Data fully removed after deletion request</td><td style="text-align:left">Query payment records by user ID; expect empty result</td></tr>
+</tbody>
+</table>
+<h3 id="33-cascade-deletion">3.3 Cascade Deletion</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DD-C-001</td><td style="text-align:left">Delete user account</td><td style="text-align:left">Data removed from all 11 detected services</td><td style="text-align:left">GDPR Art. 17</td></tr>
+<tr><td style="text-align:left">DD-C-002</td><td style="text-align:left">Verify no orphaned records</td><td style="text-align:left">Foreign key references cleaned up; no dangling data</td><td style="text-align:left">GDPR Art. 5(1)(e)</td></tr>
+<tr><td style="text-align:left">DD-C-003</td><td style="text-align:left">Verify deletion audit log</td><td style="text-align:left">Deletion event logged with timestamp, scope, operator</td><td style="text-align:left">GDPR Art. 5(2)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-access-control-test-cases">4. Access Control Test Cases</h2>
+<h3 id="41-authentication">4.1 Authentication</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AC-001</td><td style="text-align:left">Attempt access without authentication</td><td style="text-align:left">401 Unauthorized returned</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-002</td><td style="text-align:left">Attempt access with expired token</td><td style="text-align:left">401 Unauthorized; must re-authenticate</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-003</td><td style="text-align:left">Brute-force login (>5 attempts)</td><td style="text-align:left">Account locked after 5 failed attempts</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-004</td><td style="text-align:left">Session timeout after inactivity</td><td style="text-align:left">Session expires after configured timeout</td><td style="text-align:left">GDPR Art. 32</td></tr>
+</tbody>
+</table>
+<h3 id="42-authorization-rbac">4.2 Authorization (RBAC)</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AC-R-001</td><td style="text-align:left">Viewer role attempts write operation</td><td style="text-align:left">403 Forbidden</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-R-002</td><td style="text-align:left">Editor role attempts admin operation</td><td style="text-align:left">403 Forbidden</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-R-003</td><td style="text-align:left">Service account accesses only scoped resources</td><td style="text-align:left">No access to out-of-scope resources</td><td style="text-align:left">GDPR Art. 25</td></tr>
+<tr><td style="text-align:left">AC-R-004</td><td style="text-align:left">Role change propagated immediately</td><td style="text-align:left">Updated permissions effective on next request</td><td style="text-align:left">GDPR Art. 32</td></tr>
+</tbody>
+</table>
+<h3 id="43-api-security">4.3 API Security</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AC-API-001</td><td style="text-align:left">API request without API key</td><td style="text-align:left">401 Unauthorized</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-API-002</td><td style="text-align:left">API request with revoked key</td><td style="text-align:left">401 Unauthorized</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-API-003</td><td style="text-align:left">Rate limit exceeded</td><td style="text-align:left">429 Too Many Requests</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">AC-API-004</td><td style="text-align:left">CORS policy blocks unauthorized origins</td><td style="text-align:left">Preflight fails for non-whitelisted origins</td><td style="text-align:left">GDPR Art. 32</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-breach-notification-test-cases">5. Breach Notification Test Cases</h2>
+<h3 id="51-detection-containment">5.1 Detection & Containment</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">BN-001</td><td style="text-align:left">Simulate unauthorized data access</td><td style="text-align:left">Alert triggered within 15 minutes</td><td style="text-align:left">GDPR Art. 33</td></tr>
+<tr><td style="text-align:left">BN-002</td><td style="text-align:left">Simulate data exfiltration attempt</td><td style="text-align:left">Anomaly detection flags unusual data transfer</td><td style="text-align:left">GDPR Art. 33</td></tr>
+<tr><td style="text-align:left">BN-003</td><td style="text-align:left">Containment procedure executed</td><td style="text-align:left">Affected systems isolated within 1 hour</td><td style="text-align:left">GDPR Art. 33</td></tr>
+<tr><td style="text-align:left">BN-004</td><td style="text-align:left">Incident logged in breach register</td><td style="text-align:left">Breach record includes: nature, scope, impact, actions</td><td style="text-align:left">GDPR Art. 33(5)</td></tr>
+</tbody>
+</table>
+<h3 id="52-notification-timing">5.2 Notification Timing</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">BN-T-001</td><td style="text-align:left">DPA notification within 72 hours</td><td style="text-align:left">Supervisory authority notified within 72h of awareness</td><td style="text-align:left">GDPR Art. 33(1)</td></tr>
+<tr><td style="text-align:left">BN-T-002</td><td style="text-align:left">User notification without undue delay</td><td style="text-align:left">Affected users notified if high risk to rights</td><td style="text-align:left">GDPR Art. 34(1)</td></tr>
+<tr><td style="text-align:left">BN-T-003</td><td style="text-align:left">Notification content completeness</td><td style="text-align:left">Includes: nature, DPO contact, consequences, measures taken</td><td style="text-align:left">GDPR Art. 33(3)</td></tr>
+<tr><td style="text-align:left">BN-T-004</td><td style="text-align:left">Cross-border notification</td><td style="text-align:left">All relevant DPAs notified for multi-jurisdiction breach</td><td style="text-align:left">GDPR Art. 33(1)</td></tr>
+</tbody>
+</table>
+<h3 id="53-post-breach-verification">5.3 Post-Breach Verification</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">Test Case</th><th style="text-align:left">Expected Result</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">BN-P-001</td><td style="text-align:left">Root cause analysis completed</td><td style="text-align:left">RCA document available within 14 days</td><td style="text-align:left">GDPR Art. 33(5)</td></tr>
+<tr><td style="text-align:left">BN-P-002</td><td style="text-align:left">Remediation measures implemented</td><td style="text-align:left">Vulnerability patched; controls strengthened</td><td style="text-align:left">GDPR Art. 32</td></tr>
+<tr><td style="text-align:left">BN-P-003</td><td style="text-align:left">Breach register updated</td><td style="text-align:left">Register includes full timeline and lessons learned</td><td style="text-align:left">GDPR Art. 33(5)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-service-specific-test-matrix">6. Service-Specific Test Matrix</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Consent</th><th style="text-align:left">Deletion</th><th style="text-align:left">Access Control</th><th style="text-align:left">Breach Detection</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>@aws-sdk/client-s3</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td></tr>
+<tr><td style="text-align:left"><strong>@segment/analytics-next</strong></td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>@sendgrid/mail</strong></td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>algoliasearch</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>cookie-parser</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>express-session</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>ioredis</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td></tr>
+<tr><td style="text-align:left"><strong>Multer</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td></tr>
+<tr><td style="text-align:left"><strong>openai</strong></td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>posthog</strong></td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Recommended</td></tr>
+<tr><td style="text-align:left"><strong>stripe</strong></td><td style="text-align:left">N/A</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td><td style="text-align:left">Required</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-test-execution-schedule">7. Test Execution Schedule</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Cadence</th><th style="text-align:left">Tests</th><th style="text-align:left">Owner</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Every release</td><td style="text-align:left">Consent flow, Access control, API security</td><td style="text-align:left">Engineering</td></tr>
+<tr><td style="text-align:left">Monthly</td><td style="text-align:left">Data deletion, Encryption verification</td><td style="text-align:left">Security + Engineering</td></tr>
+<tr><td style="text-align:left">Quarterly</td><td style="text-align:left">Breach notification drill, Data minimization audit</td><td style="text-align:left">Security + Legal</td></tr>
+<tr><td style="text-align:left">Annually</td><td style="text-align:left">Full compliance test suite, Penetration test</td><td style="text-align:left">Security + External auditor</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-test-automation">8. Test Automation</h2>
+<p>Integrate compliance tests into CI/CD:</p>
+<pre><code># .github/workflows/compliance-tests.yml
+name: Compliance Tests
+on: [pull_request]
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm test -- --grep 'compliance'
+      - run: npx codepliant check --ci</code></pre>
+<hr>
+<p><em>This Compliance Testing Plan was auto-generated by Codepliant based on detected services. Test cases should be adapted to your specific implementation. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

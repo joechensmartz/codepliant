@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA FLOW DIAGRAM — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA FLOW DIAGRAM</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="data-flow-diagram">Data Flow Diagram</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @mastodon/mastodon</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</li>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This document provides a visual representation of how personal data flows through the application. The diagram below is rendered using <a href="https://mermaid.js.org/">Mermaid</a> and can be viewed directly on GitHub, GitLab, or any Mermaid-compatible renderer.</blockquote>
+<h2 id="visual-data-flow">Visual Data Flow</h2>
+<pre><code>graph LR
+  User[User] --&gt;|real-time user data, connection metadata, channel subscriptions| ActionCable[ActionCable]
+  User[User] --&gt;|session cookies, session data, CSRF tokens| ActionController__Cookies[ActionController::Cookies]
+  User[User] --&gt;|email addresses, email content| ActionMailer[ActionMailer]
+  User[User] --&gt;|uploaded files, file metadata, storage service credentials| Active_Storage[Active Storage]
+  User[User] --&gt;|user data as defined in schema, timestamps, associations| ActiveRecord[ActiveRecord]
+  User[User] --&gt;|uploaded files, file metadata, storage references| ActiveStorage[ActiveStorage]
+  User[User] --&gt;|uploaded files, file metadata| aws_sdk_s3[aws-sdk-s3]
+  User[User] --&gt;|email, password hash, session data| devise[devise]
+  User[User] --&gt;|cached data, session data| ioredis[ioredis]
+  User[User] --&gt;|email, name, OAuth tokens| omniauth[omniauth]
+  User[User] --&gt;|user data as defined in schema| pg[pg]
+  User[User] --&gt;|application data, user records| PostgreSQL[PostgreSQL]
+  User[User] --&gt;|application data, user records| PostgreSQL__env_[PostgreSQL (env)]
+  User[User] --&gt;|user roles, authorization policies, access control data| pundit[pundit]
+  User[User] --&gt;|IP addresses, request metadata| rack_attack[rack-attack]
+  User[User] --&gt;|email addresses, email content| rails_actionmailer[rails-actionmailer]
+  User[User] --&gt;|user data as defined in schema| rails_activerecord[rails-activerecord]
+  User[User] --&gt;|session cookies, CSRF tokens| rails_sessions[rails-sessions]
+  User[User] --&gt;|cached data, session data| redis[redis]
+  User[User] --&gt;|session data, cache data| Redis[Redis]
+  User[User] --&gt;|job data, user data processed in background jobs| sidekiq[sidekiq]
+  User[User] --&gt;|real-time user data, connection metadata, IP address| ws__WebSocket_[ws (WebSocket)]</code></pre>
+<h2 id="legend">Legend</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Symbol</th><th style="text-align:left">Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>User</strong></td><td style="text-align:left">End user of the application</td></tr>
+<tr><td style="text-align:left"><strong>Arrow labels</strong></td><td style="text-align:left">Types of personal data transmitted</td></tr>
+<tr><td style="text-align:left"><strong>Service nodes</strong></td><td style="text-align:left">Third-party or internal services processing data</td></tr>
+</tbody>
+</table>
+<h2 id="data-flow-details">Data Flow Details</h2>
+<h3 id="collection-points">Collection Points</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Source</th><th style="text-align:left">Data Collected</th><th style="text-align:left">Mechanism</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Email subscription/contact forms</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">via ActionMailer</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">email, password hash, session data, authentication tokens</td><td style="text-align:left">via devise</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">email, name, OAuth tokens, profile data</td><td style="text-align:left">via omniauth</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">user roles, authorization policies, access control data</td><td style="text-align:left">via pundit</td></tr>
+<tr><td style="text-align:left">Email subscription/contact forms</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">via rails-actionmailer</td></tr>
+<tr><td style="text-align:left">User registration/login</td><td style="text-align:left">session cookies, CSRF tokens</td><td style="text-align:left">via rails-sessions</td></tr>
+</tbody>
+</table>
+<h3 id="third-party-data-sharing">Third-Party Data Sharing</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Recipient</th><th style="text-align:left">Category</th><th style="text-align:left">Data Shared</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">real-time user data, connection metadata, channel subscriptions, WebSocket messages</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">session cookies, session data, CSRF tokens</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">IP addresses, request metadata</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">job data, user data processed in background jobs</td></tr>
+<tr><td style="text-align:left">ws (WebSocket)</td><td style="text-align:left">Third-Party Service</td><td style="text-align:left">real-time user data, connection metadata, IP address, WebSocket messages</td></tr>
+</tbody>
+</table>
+<h2 id="service-inventory">Service Inventory</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Processed</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">other</td><td style="text-align:left">real-time user data, connection metadata, channel subscriptions, WebSocket messages</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">other</td><td style="text-align:left">session cookies, session data, CSRF tokens</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">other</td><td style="text-align:left">IP addresses, request metadata</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">other</td><td style="text-align:left">job data, user data processed in background jobs</td></tr>
+<tr><td style="text-align:left">ws (WebSocket)</td><td style="text-align:left">other</td><td style="text-align:left">real-time user data, connection metadata, IP address, WebSocket messages</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata, storage service credentials, potential PII in uploaded content</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata, storage references</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema, timestamps, associations</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">PostgreSQL</td><td style="text-align:left">database</td><td style="text-align:left">application data, user records</td></tr>
+<tr><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">database</td><td style="text-align:left">application data, user records</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">database</td><td style="text-align:left">session data, cache data</td></tr>
+<tr><td style="text-align:left">devise</td><td style="text-align:left">auth</td><td style="text-align:left">email, password hash, session data, authentication tokens</td></tr>
+<tr><td style="text-align:left">omniauth</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, profile data</td></tr>
+<tr><td style="text-align:left">pundit</td><td style="text-align:left">auth</td><td style="text-align:left">user roles, authorization policies, access control data</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">auth</td><td style="text-align:left">session cookies, CSRF tokens</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="how-to-use-this-diagram">How to Use This Diagram</h2>
+<ol>
+<li><strong>GitHub/GitLab:</strong> The Mermaid diagram renders automatically in markdown preview</li>
+<li><strong>VS Code:</strong> Install the "Markdown Preview Mermaid Support" extension</li>
+<li><strong>Export:</strong> Use <a href="https://mermaid.live/">Mermaid Live Editor</a> to export as SVG or PNG</li>
+<li><strong>CI/CD:</strong> Use <code>@mermaid-js/mermaid-cli</code> to generate images in your pipeline</li>
+</ol>
+<p>For questions about this data flow diagram, contact [your-email@example.com].</p>
+<hr>
+<p><em>This data flow diagram was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all data flows for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

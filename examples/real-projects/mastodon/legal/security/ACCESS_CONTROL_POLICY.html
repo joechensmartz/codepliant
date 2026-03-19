@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACCESS CONTROL POLICY — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ACCESS CONTROL POLICY</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~7 min read</p>
+    </header>
+    <h1 id="access-control-policy">Access Control Policy</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @mastodon/mastodon</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Security Policy (<code>SECURITY.md</code>)</li>
+<li>Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</li>
+<li>Audit Log Policy (<code>AUDIT<em>LOG</em>POLICY.md</code>)</li>
+</ul>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This policy establishes access control requirements for the <strong>@mastodon/mastodon</strong> application, including role-based access control (RBAC), authentication standards, password policies, session management, and multi-factor authentication (MFA) requirements. It supports compliance with GDPR Article 32 (security of processing), SOC 2 CC6.1–CC6.3, and ISO 27001 Annex A.9.</p>
+<h2 id="2-scope">2. Scope</h2>
+<p>This policy applies to all users, administrators, and service accounts that access the application, its data, and its infrastructure.</p>
+<h2 id="3-detected-authentication-services">3. Detected Authentication Services</h2>
+<p>The following authentication services were detected in the codebase:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Data Collected</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">devise</td><td style="text-align:left">email, password hash, session data, authentication tokens</td></tr>
+<tr><td style="text-align:left">omniauth</td><td style="text-align:left">email, name, OAuth tokens, profile data</td></tr>
+<tr><td style="text-align:left">pundit</td><td style="text-align:left">user roles, authorization policies, access control data</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">session cookies, CSRF tokens</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-role-based-access-control-rbac">4. Role-Based Access Control (RBAC)</h2>
+<h3 id="41-role-definitions">4.1 Role Definitions</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Description</th><th style="text-align:left">Access Level</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Super Admin</td><td style="text-align:left">Full system access including user management and configuration</td><td style="text-align:left">Full</td></tr>
+<tr><td style="text-align:left">Admin</td><td style="text-align:left">Application administration, user management, content moderation</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Manager</td><td style="text-align:left">Team management, reporting, limited configuration</td><td style="text-align:left">Medium-High</td></tr>
+<tr><td style="text-align:left">User</td><td style="text-align:left">Standard application features, own data management</td><td style="text-align:left">Standard</td></tr>
+<tr><td style="text-align:left">Viewer</td><td style="text-align:left">Read-only access to permitted resources</td><td style="text-align:left">Read-Only</td></tr>
+<tr><td style="text-align:left">API Service</td><td style="text-align:left">Machine-to-machine access via API keys or service tokens</td><td style="text-align:left">Scoped</td></tr>
+</tbody>
+</table>
+<h3 id="42-principle-of-least-privilege">4.2 Principle of Least Privilege</h3>
+<ol>
+<li>All accounts must be assigned the <strong>minimum permissions</strong> required for their function</li>
+<li>Administrative privileges must be granted only when explicitly required and approved</li>
+<li>Service accounts must have <strong>scoped permissions</strong> limited to their specific function</li>
+<li>Elevated privileges must be <strong>time-bounded</strong> and reviewed regularly</li>
+</ol>
+<h3 id="43-access-provisioning">4.3 Access Provisioning</h3>
+<ol>
+<li>Access requests must be submitted through a documented approval process</li>
+<li>New accounts default to the <strong>lowest privilege level</strong> (Viewer or User)</li>
+<li>Privilege escalation requires manager approval and documented justification</li>
+<li>Access must be <strong>revoked immediately</strong> upon role change or employment termination</li>
+</ol>
+<h3 id="44-access-review-schedule">4.4 Access Review Schedule</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Review Type</th><th style="text-align:left">Frequency</th><th style="text-align:left">Responsible Party</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">User access audit</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Security team</td></tr>
+<tr><td style="text-align:left">Admin privilege review</td><td style="text-align:left">Monthly</td><td style="text-align:left">Engineering lead</td></tr>
+<tr><td style="text-align:left">Service account audit</td><td style="text-align:left">Quarterly</td><td style="text-align:left">DevOps team</td></tr>
+<tr><td style="text-align:left">Inactive account cleanup</td><td style="text-align:left">Monthly</td><td style="text-align:left">IT operations</td></tr>
+<tr><td style="text-align:left">Third-party access review</td><td style="text-align:left">Quarterly</td><td style="text-align:left">Security team</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-password-policy">5. Password Policy</h2>
+<h3 id="51-password-requirements">5.1 Password Requirements</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Requirement</th><th style="text-align:left">Standard</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Minimum length</td><td style="text-align:left">12 characters</td></tr>
+<tr><td style="text-align:left">Complexity</td><td style="text-align:left">At least 3 of: uppercase, lowercase, numbers, special characters</td></tr>
+<tr><td style="text-align:left">Maximum age</td><td style="text-align:left">90 days (recommended: no forced rotation if strong + MFA)</td></tr>
+<tr><td style="text-align:left">History</td><td style="text-align:left">Cannot reuse last 12 passwords</td></tr>
+<tr><td style="text-align:left">Lockout threshold</td><td style="text-align:left">5 failed attempts</td></tr>
+<tr><td style="text-align:left">Lockout duration</td><td style="text-align:left">15 minutes (progressive increase)</td></tr>
+</tbody>
+</table>
+<h3 id="52-password-storage">5.2 Password Storage</h3>
+<ol>
+<li>Passwords must be <strong>hashed</strong> using bcrypt, scrypt, or Argon2id (never MD5 or SHA-1)</li>
+<li>A unique <strong>salt</strong> must be generated per password</li>
+<li>Work factor must be set to at least <strong>10 rounds</strong> (bcrypt) or equivalent</li>
+<li>Raw passwords must <strong>never</strong> be logged, stored in plaintext, or transmitted in URLs</li>
+</ol>
+<h3 id="53-password-reset">5.3 Password Reset</h3>
+<ol>
+<li>Password reset links must expire within <strong>1 hour</strong></li>
+<li>Reset tokens must be cryptographically random (minimum 128 bits)</li>
+<li>Previous sessions must be <strong>invalidated</strong> upon password change</li>
+<li>Users must be notified via email when their password is changed</li>
+</ol>
+<hr>
+<h2 id="6-session-management">6. Session Management</h2>
+<h3 id="61-session-configuration">6.1 Session Configuration</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Parameter</th><th style="text-align:left">Requirement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Session timeout (idle)</td><td style="text-align:left">30 minutes</td></tr>
+<tr><td style="text-align:left">Absolute session lifetime</td><td style="text-align:left">24 hours</td></tr>
+<tr><td style="text-align:left">Session token length</td><td style="text-align:left">Minimum 128 bits of entropy</td></tr>
+<tr><td style="text-align:left">Token storage</td><td style="text-align:left">HttpOnly, Secure, SameSite cookies</td></tr>
+<tr><td style="text-align:left">Token transmission</td><td style="text-align:left">HTTPS only (TLS 1.2+)</td></tr>
+</tbody>
+</table>
+<h3 id="62-session-security">6.2 Session Security</h3>
+<ol>
+<li>Session tokens must be <strong>regenerated</strong> after authentication (prevent session fixation)</li>
+<li>All sessions must be <strong>invalidated</strong> on logout</li>
+<li>Users must be able to view and <strong>terminate active sessions</strong></li>
+<li>Concurrent session limits should be enforced for sensitive operations</li>
+<li>Session data must be stored <strong>server-side</strong> (not in client-accessible cookies)</li>
+</ol>
+<h3 id="63-oauth-sso-session-management">6.3 OAuth / SSO Session Management</h3>
+<ol>
+<li>OAuth tokens must be stored securely (encrypted at rest, never in localStorage)</li>
+<li>Refresh tokens must have a <strong>maximum lifetime</strong> and be rotatable</li>
+<li>Token revocation must be supported and enforced on logout</li>
+<li>OAuth scopes must follow the principle of <strong>least privilege</strong></li>
+<li>SSO sessions must respect the IdP's session lifecycle</li>
+</ol>
+<hr>
+<h2 id="7-multi-factor-authentication-mfa">7. Multi-Factor Authentication (MFA)</h2>
+<h3 id="71-mfa-requirements">7.1 MFA Requirements</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">User Type</th><th style="text-align:left">MFA Requirement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Super Admin / Admin</td><td style="text-align:left"><strong>Required</strong> — must be enforced</td></tr>
+<tr><td style="text-align:left">Users with access to PII</td><td style="text-align:left"><strong>Required</strong></td></tr>
+<tr><td style="text-align:left">Standard users</td><td style="text-align:left"><strong>Strongly recommended</strong></td></tr>
+<tr><td style="text-align:left">API / Service accounts</td><td style="text-align:left">API key + IP allowlisting</td></tr>
+</tbody>
+</table>
+<h3 id="72-supported-mfa-methods">7.2 Supported MFA Methods</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Method</th><th style="text-align:left">Security Level</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">TOTP (authenticator app)</td><td style="text-align:left">High</td><td style="text-align:left"><strong>Recommended</strong> — Google Authenticator, Authy, 1Password</td></tr>
+<tr><td style="text-align:left">WebAuthn / Passkeys</td><td style="text-align:left">Very High</td><td style="text-align:left"><strong>Preferred</strong> — hardware security keys, biometrics</td></tr>
+<tr><td style="text-align:left">SMS OTP</td><td style="text-align:left">Medium</td><td style="text-align:left"><strong>Acceptable</strong> — vulnerable to SIM swap; use as fallback only</td></tr>
+<tr><td style="text-align:left">Email OTP</td><td style="text-align:left">Medium</td><td style="text-align:left"><strong>Acceptable</strong> — use as fallback only</td></tr>
+<tr><td style="text-align:left">Push notification</td><td style="text-align:left">High</td><td style="text-align:left"><strong>Recommended</strong> — when supported by auth provider</td></tr>
+</tbody>
+</table>
+<h3 id="73-mfa-implementation-recommendation">7.3 MFA Implementation Recommendation</h3>
+<p>No MFA implementation was detected in the codebase. <strong>It is strongly recommended</strong> to implement MFA, especially for:</p>
+<ol>
+<li>Administrative accounts</li>
+<li>Accounts with access to personal data</li>
+<li>Accounts with access to financial data</li>
+<li>Any account with elevated privileges</li>
+</ol>
+<p>Consider integrating TOTP-based MFA (e.g., via devise) as a first step.</p>
+<hr>
+<h2 id="8-api-service-account-access">8. API & Service Account Access</h2>
+<h3 id="81-api-key-management">8.1 API Key Management</h3>
+<ol>
+<li>API keys must be generated with <strong>sufficient entropy</strong> (minimum 256 bits)</li>
+<li>Keys must be <strong>scoped</strong> to specific operations and resources</li>
+<li>Keys must have an <strong>expiration date</strong> (maximum 1 year)</li>
+<li>Unused keys must be <strong>revoked</strong> after 90 days of inactivity</li>
+<li>API keys must <strong>never</strong> be committed to version control</li>
+</ol>
+<h3 id="82-service-account-standards">8.2 Service Account Standards</h3>
+<ol>
+<li>Service accounts must have a <strong>named owner</strong> (individual or team)</li>
+<li>Service account credentials must be rotated at least <strong>quarterly</strong></li>
+<li>Service accounts must be excluded from interactive login</li>
+<li>Service account activity must be <strong>logged and monitored</strong></li>
+</ol>
+<hr>
+<h2 id="9-access-monitoring-alerting">9. Access Monitoring & Alerting</h2>
+<h3 id="91-events-to-monitor">9.1 Events to Monitor</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Event</th><th style="text-align:left">Alert Priority</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Failed login attempts (5+ within 15 min)</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Successful login from new device/location</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Admin privilege escalation</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">Password change or reset</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">MFA enrollment or removal</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">API key creation or rotation</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">Service account activity outside normal hours</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">Bulk data access or export</td><td style="text-align:left">Critical</td></tr>
+</tbody>
+</table>
+<h3 id="92-response-procedures">9.2 Response Procedures</h3>
+<ol>
+<li>High/Critical alerts must be investigated within <strong>1 hour</strong></li>
+<li>Suspicious accounts must be <strong>temporarily suspended</strong> pending investigation</li>
+<li>Compromised credentials must be <strong>immediately revoked</strong></li>
+<li>Security incidents must follow the incident response plan (see INCIDENT<em>RESPONSE</em>PLAN.md)</li>
+</ol>
+<hr>
+<h2 id="10-policy-review">10. Policy Review</h2>
+<p>This access control policy should be reviewed:</p>
+<ul>
+<li><strong>Quarterly</strong> as part of the security review cycle</li>
+<li><strong>When adding</strong> new authentication services or access patterns</li>
+<li><strong>After a security incident</strong> involving unauthorized access</li>
+<li><strong>When regulatory requirements</strong> change</li>
+</ul>
+<p>For questions about this policy, contact [your-email@example.com].</p>
+<hr>
+<p><em>This Access Control Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

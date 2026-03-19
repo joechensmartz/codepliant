@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Terms of Use — Acme Inc</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>API Terms of Use</h1>
+      <p class="meta">Acme Inc &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="api-terms-of-use">API Terms of Use</h1>
+<p><strong>Effective Date:</strong> 2026-03-18</p>
+<p><strong>Last Updated:</strong> 2026-03-18</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<hr>
+<h2 id="1-acceptance-of-terms">1. Acceptance of Terms</h2>
+<p>By accessing or using the Acme Inc API ("API"), you agree to be bound by these API Terms of Use ("Terms"). If you are using the API on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
+<p>These Terms supplement and are in addition to our <a href="./TERMS<em>OF</em>SERVICE.md">Terms of Service</a> and <a href="./PRIVACY_POLICY.md">Privacy Policy</a>. In case of conflict, these API-specific terms prevail for API usage.</p>
+<h2 id="2-api-access-authentication">2. API Access & Authentication</h2>
+<h3 id="21-api-keys">2.1 API Keys</h3>
+<ul>
+<li>You must register for an API key to access the API</li>
+<li>API keys are confidential and must not be shared or published</li>
+<li>You are responsible for all activity under your API key</li>
+<li>Acme Inc may revoke keys that are compromised or misused</li>
+</ul>
+<h3 id="22-authentication-methods">2.2 Authentication Methods</h3>
+<p>The API supports the following authentication methods:</p>
+<ul>
+<li><strong>@supabase/supabase-js</strong> — integrated authentication provider</li>
+<li><strong>Bearer Token</strong> — include <code>Authorization: Bearer <token></code> in request headers</li>
+<li><strong>API Key</strong> — include <code>X-API-Key: <key></code> in request headers</li>
+</ul>
+<h2 id="3-rate-limits">3. Rate Limits</h2>
+<p>To ensure fair usage and system stability, the following rate limits apply:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Tier</th><th style="text-align:left">Requests/minute</th><th style="text-align:left">Requests/hour</th><th style="text-align:left">Requests/day</th><th style="text-align:left">Burst</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Free</td><td style="text-align:left">60</td><td style="text-align:left">1,000</td><td style="text-align:left">10,000</td><td style="text-align:left">10/sec</td></tr>
+<tr><td style="text-align:left">Standard</td><td style="text-align:left">300</td><td style="text-align:left">10,000</td><td style="text-align:left">100,000</td><td style="text-align:left">50/sec</td></tr>
+<tr><td style="text-align:left">Enterprise</td><td style="text-align:left">Custom</td><td style="text-align:left">Custom</td><td style="text-align:left">Custom</td><td style="text-align:left">Custom</td></tr>
+</tbody>
+</table>
+<h3 id="31-rate-limit-headers">3.1 Rate Limit Headers</h3>
+<p>All API responses include the following headers:</p>
+<pre><code>X-RateLimit-Limit: &lt;max requests per window&gt;
+X-RateLimit-Remaining: &lt;remaining requests in window&gt;
+X-RateLimit-Reset: &lt;UTC epoch timestamp when window resets&gt;
+Retry-After: &lt;seconds to wait (only on 429 responses)&gt;</code></pre>
+<h3 id="32-exceeding-limits">3.2 Exceeding Limits</h3>
+<p>When you exceed rate limits, the API returns HTTP 429 (Too Many Requests). Implement exponential backoff in your integration. Persistent abuse may result in temporary or permanent API access revocation.</p>
+<h2 id="4-usage-restrictions">4. Usage Restrictions</h2>
+<p>You agree NOT to:</p>
+<ul>
+<li>Use the API for any unlawful purpose or in violation of applicable laws</li>
+<li>Reverse-engineer, decompile, or disassemble the API</li>
+<li>Attempt to circumvent rate limits, authentication, or security measures</li>
+<li>Use the API to build a competing product or service</li>
+<li>Redistribute API data to third parties without authorization</li>
+<li>Use automated tools to scrape or bulk-download data beyond API-provided means</li>
+<li>Transmit malware, viruses, or harmful code through the API</li>
+<li>Impersonate other users or misrepresent your identity</li>
+</ul>
+<h3 id="41-ai-specific-restrictions">4.1 AI-Specific Restrictions</h3>
+<p>The API integrates AI services (openai). Additional restrictions apply:</p>
+<ul>
+<li>Do not use AI-generated outputs to create misleading or deceptive content</li>
+<li>AI outputs must not be presented as human-generated without disclosure</li>
+<li>You must comply with the AI providers' acceptable use policies</li>
+<li>Acme Inc does not guarantee the accuracy of AI-generated content</li>
+</ul>
+<h2 id="5-data-handling">5. Data Handling</h2>
+<h3 id="51-data-you-send">5.1 Data You Send</h3>
+<p>You are responsible for ensuring you have the right to transmit any data sent through the API. Do not transmit personal data unless the API endpoint is specifically designed to process it.</p>
+<h3 id="52-data-you-receive">5.2 Data You Receive</h3>
+<p>API responses may contain data subject to our Privacy Policy. You must handle received data in accordance with applicable data protection laws, including GDPR, CCPA, and other relevant regulations.</p>
+<h3 id="53-payment-data">5.3 Payment Data</h3>
+<p>Payment-related API endpoints process sensitive financial data through stripe, stripe-ios. You must comply with PCI DSS requirements and never store raw card data on your servers.</p>
+<h2 id="6-service-level-agreement">6. Service Level Agreement</h2>
+<h3 id="61-availability">6.1 Availability</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Monthly Uptime</td><td style="text-align:left">99.9%</td></tr>
+<tr><td style="text-align:left">API Response Time (p95)</td><td style="text-align:left">< 500ms</td></tr>
+<tr><td style="text-align:left">API Response Time (p99)</td><td style="text-align:left">< 2,000ms</td></tr>
+<tr><td style="text-align:left">Planned Maintenance Window</td><td style="text-align:left">Sundays 02:00-06:00 UTC</td></tr>
+</tbody>
+</table>
+<h3 id="62-incident-response">6.2 Incident Response</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Response Time</th><th style="text-align:left">Resolution Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">P0 — Total outage</td><td style="text-align:left">15 minutes</td><td style="text-align:left">4 hours</td></tr>
+<tr><td style="text-align:left">P1 — Major degradation</td><td style="text-align:left">30 minutes</td><td style="text-align:left">8 hours</td></tr>
+<tr><td style="text-align:left">P2 — Minor degradation</td><td style="text-align:left">2 hours</td><td style="text-align:left">24 hours</td></tr>
+<tr><td style="text-align:left">P3 — Non-critical issue</td><td style="text-align:left">8 hours</td><td style="text-align:left">72 hours</td></tr>
+</tbody>
+</table>
+<h3 id="63-monitoring">6.3 Monitoring</h3>
+<p>API health and performance are monitored via @sentry/node. Status updates are provided at our status page during incidents.</p>
+<h3 id="64-exclusions">6.4 Exclusions</h3>
+<p>SLA does not apply during:</p>
+<ul>
+<li>Scheduled maintenance windows</li>
+<li>Force majeure events</li>
+<li>Issues caused by your integration or network</li>
+<li>Abuse or violation of these Terms</li>
+</ul>
+<h2 id="7-api-versioning-deprecation">7. API Versioning & Deprecation</h2>
+<ul>
+<li>The API is versioned (e.g., <code>/v1/</code>, <code>/v2/</code>)</li>
+<li>We provide <strong>12 months</strong> notice before deprecating an API version</li>
+<li>Breaking changes are only introduced in new major versions</li>
+<li>Deprecated endpoints return a <code>Sunset</code> header with the retirement date</li>
+<li>Migration guides are provided for major version upgrades</li>
+</ul>
+<h2 id="8-intellectual-property">8. Intellectual Property</h2>
+<p>The API, its documentation, and all associated intellectual property are owned by Acme Inc. These Terms grant you a limited, non-exclusive, non-transferable, revocable license to use the API in accordance with these Terms.</p>
+<p>You retain ownership of applications you build using the API. Acme Inc does not claim any rights to your application code.</p>
+<h2 id="9-limitation-of-liability">9. Limitation of Liability</h2>
+<p>THE API IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. ACME INC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE API.</p>
+<p>In no event shall Acme Inc's total liability exceed the fees paid by you for API access in the twelve (12) months preceding the claim.</p>
+<h2 id="10-termination">10. Termination</h2>
+<p>Either party may terminate API access at any time. Acme Inc may immediately suspend or revoke your API access if you violate these Terms. Upon termination:</p>
+<ul>
+<li>You must cease all API usage</li>
+<li>You must delete any cached API data (unless retention is legally required)</li>
+<li>Provisions regarding liability, IP, and dispute resolution survive termination</li>
+</ul>
+<h2 id="11-changes-to-these-terms">11. Changes to These Terms</h2>
+<p>We may update these Terms from time to time. Material changes will be communicated with at least 30 days notice via email or API response headers. Continued use of the API after changes take effect constitutes acceptance.</p>
+<h2 id="12-contact">12. Contact</h2>
+<p>For questions about these API Terms of Use:</p>
+<ul>
+<li><strong>Email:</strong> legal@acme.com</li>
+<li><strong>Website:</strong> https://acme-saas.com</li>
+</ul>
+<hr>
+<p><em>Generated by Codepliant from project analysis. This document should be reviewed by legal counsel before publishing.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

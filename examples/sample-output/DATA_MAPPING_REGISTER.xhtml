@@ -1,0 +1,185 @@
+<h1>Data Mapping Register</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Mapping Register</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Generated:</strong> 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a></p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>This register provides a complete inventory of personal data processing activities</p>
+<p>in compliance with GDPR Article 30 (Records of Processing Activities).</p>
+<h2>1. Data Controller Information</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Data Controller</strong></p></td><td><p>Acme Inc</p></td></tr>
+<tr><td><p><strong>Contact Email</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>Data Protection Officer</strong></p></td><td><p>Jane Mueller</p></td></tr>
+<tr><td><p><strong>DPO Email</strong></p></td><td><p>dpo@acme-saas.com</p></td></tr>
+<tr><td><p><strong>EU Representative</strong></p></td><td><p>Acme EU Compliance GmbH, Friedrichstr. 123, 10117 Berlin</p></td></tr>
+<tr><td><p><strong>Website</strong></p></td><td><p>https://acme-saas.com</p></td></tr>
+<tr><td><p><strong>Register Last Updated</strong></p></td><td><p>2026-03-18</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Data Inventory</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>Data Element</p></th><th><p>Sensitivity</p></th><th><p>Source</p></th><th><p>Storage Location</p></th><th><p>Shared With</p></th><th><p>Lawful Basis</p></th><th><p>Retention</p></th></tr>
+<tr><td><p>1</p></td><td><p>error data</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>@sentry/node (third-party)</p></td><td><p>@sentry/node, posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>2</p></td><td><p>stack traces</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>@sentry/node (third-party)</p></td><td><p>@sentry/node, posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>3</p></td><td><p>user context</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>@sentry/node (third-party)</p></td><td><p>@sentry/node, posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>4</p></td><td><p>device information</p></td><td><p>Indirectly Identifiable</p></td><td><p>Automatic collection (HTTP request)</p></td><td><p>@sentry/node (third-party)</p></td><td><p>@sentry/node, posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>5</p></td><td><p>IP address</p></td><td><p>Directly Identifiable</p></td><td><p>Automatic collection (HTTP request)</p></td><td><p>@sentry/node (third-party)</p></td><td><p>@sentry/node, posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>6</p></td><td><p>email</p></td><td><p>Directly Identifiable</p></td><td><p>User-provided (registration/form)</p></td><td><p>@supabase/supabase-js (third-party)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>7</p></td><td><p>password hash</p></td><td><p>Security Credential</p></td><td><p>Application-collected</p></td><td><p>@supabase/supabase-js (third-party)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>8</p></td><td><p>session data</p></td><td><p>General</p></td><td><p>Automatic collection (cookies/SDK)</p></td><td><p>@supabase/supabase-js (third-party)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>9</p></td><td><p>user metadata</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>@supabase/supabase-js (third-party)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>10</p></td><td><p>user prompts</p></td><td><p>General</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai (third-party)</p></td><td><p>openai</p></td><td><p>Consent / Legitimate interest</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>11</p></td><td><p>conversation history</p></td><td><p>General</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai (third-party)</p></td><td><p>openai</p></td><td><p>Consent / Legitimate interest</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>12</p></td><td><p>generated content</p></td><td><p>General</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai (third-party)</p></td><td><p>openai</p></td><td><p>Consent / Legitimate interest</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>13</p></td><td><p>user behavior</p></td><td><p>General</p></td><td><p>Automatic collection (analytics SDK)</p></td><td><p>posthog (third-party)</p></td><td><p>posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>14</p></td><td><p>session recordings</p></td><td><p>General</p></td><td><p>Automatic collection (cookies/SDK)</p></td><td><p>posthog (third-party)</p></td><td><p>posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>15</p></td><td><p>feature flag usage</p></td><td><p>General</p></td><td><p>Automatic collection (analytics SDK)</p></td><td><p>posthog (third-party)</p></td><td><p>posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>16</p></td><td><p>user data as defined in schema</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>prisma (third-party)</p></td><td><p>prisma</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>17</p></td><td><p>email addresses</p></td><td><p>Directly Identifiable</p></td><td><p>User-provided (registration/form)</p></td><td><p>resend (third-party)</p></td><td><p>resend</p></td><td><p>Contract performance / Consent</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>18</p></td><td><p>email content</p></td><td><p>Directly Identifiable</p></td><td><p>User-provided (registration/form)</p></td><td><p>resend (third-party)</p></td><td><p>resend</p></td><td><p>Contract performance / Consent</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>19</p></td><td><p>payment information</p></td><td><p>Financial</p></td><td><p>User-provided (checkout)</p></td><td><p>stripe (third-party)</p></td><td><p>stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>20</p></td><td><p>billing address</p></td><td><p>Directly Identifiable</p></td><td><p>User-provided (registration/form)</p></td><td><p>stripe (third-party)</p></td><td><p>stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>21</p></td><td><p>transaction history</p></td><td><p>General</p></td><td><p>Application-collected</p></td><td><p>stripe (third-party)</p></td><td><p>stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>22</p></td><td><p>Personal Identity Data</p></td><td><p>General</p></td><td><p>@supabase/supabase-js</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>23</p></td><td><p>Financial Data</p></td><td><p>Financial</p></td><td><p>stripe</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>24</p></td><td><p>Usage & Behavioral Data</p></td><td><p>General</p></td><td><p>posthog</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>25</p></td><td><p>AI Interaction Data</p></td><td><p>General</p></td><td><p>openai</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>26</p></td><td><p>Communication Data</p></td><td><p>General</p></td><td><p>resend</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>27</p></td><td><p>Technical & Diagnostic Data</p></td><td><p>General</p></td><td><p>@sentry/node</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>28</p></td><td><p>Stored User Data</p></td><td><p>General</p></td><td><p>prisma</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>29</p></td><td><p>Contact Information</p></td><td><p>General</p></td><td><p>User.email</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+<tr><td><p>30</p></td><td><p>Authentication Data</p></td><td><p>General</p></td><td><p>User.passwordHash</p></td><td><p>Application database</p></td><td><p>Internal only</p></td><td><p>To be determined</p></td><td><p>365 days</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Data Flow Summary</h2>
+<h3>General</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Element</p></th><th><p>Source</p></th><th><p>Destination</p></th></tr>
+<tr><td><p>error data</p></td><td><p>Application-collected</p></td><td><p>@sentry/node, posthog</p></td></tr>
+<tr><td><p>stack traces</p></td><td><p>Application-collected</p></td><td><p>@sentry/node, posthog</p></td></tr>
+<tr><td><p>user context</p></td><td><p>Application-collected</p></td><td><p>@sentry/node, posthog</p></td></tr>
+<tr><td><p>session data</p></td><td><p>Automatic collection (cookies/SDK)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td></tr>
+<tr><td><p>user metadata</p></td><td><p>Application-collected</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td></tr>
+<tr><td><p>user prompts</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai</p></td></tr>
+<tr><td><p>conversation history</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai</p></td></tr>
+<tr><td><p>generated content</p></td><td><p>User-provided / Application-generated</p></td><td><p>openai</p></td></tr>
+<tr><td><p>user behavior</p></td><td><p>Automatic collection (analytics SDK)</p></td><td><p>posthog</p></td></tr>
+<tr><td><p>session recordings</p></td><td><p>Automatic collection (cookies/SDK)</p></td><td><p>posthog</p></td></tr>
+<tr><td><p>feature flag usage</p></td><td><p>Automatic collection (analytics SDK)</p></td><td><p>posthog</p></td></tr>
+<tr><td><p>user data as defined in schema</p></td><td><p>Application-collected</p></td><td><p>prisma</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>Application-collected</p></td><td><p>stripe, stripe-ios</p></td></tr>
+<tr><td><p>Personal Identity Data</p></td><td><p>@supabase/supabase-js</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Usage & Behavioral Data</p></td><td><p>posthog</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>AI Interaction Data</p></td><td><p>openai</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Communication Data</p></td><td><p>resend</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Technical & Diagnostic Data</p></td><td><p>@sentry/node</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Stored User Data</p></td><td><p>prisma</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Contact Information</p></td><td><p>User.email</p></td><td><p>Application database</p></td></tr>
+<tr><td><p>Authentication Data</p></td><td><p>User.passwordHash</p></td><td><p>Application database</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Indirectly Identifiable</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Element</p></th><th><p>Source</p></th><th><p>Destination</p></th></tr>
+<tr><td><p>device information</p></td><td><p>Automatic collection (HTTP request)</p></td><td><p>@sentry/node, posthog</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Directly Identifiable</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Element</p></th><th><p>Source</p></th><th><p>Destination</p></th></tr>
+<tr><td><p>IP address</p></td><td><p>Automatic collection (HTTP request)</p></td><td><p>@sentry/node, posthog</p></td></tr>
+<tr><td><p>email</p></td><td><p>User-provided (registration/form)</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td></tr>
+<tr><td><p>email addresses</p></td><td><p>User-provided (registration/form)</p></td><td><p>resend</p></td></tr>
+<tr><td><p>email content</p></td><td><p>User-provided (registration/form)</p></td><td><p>resend</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>User-provided (registration/form)</p></td><td><p>stripe, stripe-ios</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Security Credential</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Element</p></th><th><p>Source</p></th><th><p>Destination</p></th></tr>
+<tr><td><p>password hash</p></td><td><p>Application-collected</p></td><td><p>@supabase/supabase-js, stripe, stripe-ios</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Financial</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Element</p></th><th><p>Source</p></th><th><p>Destination</p></th></tr>
+<tr><td><p>payment information</p></td><td><p>User-provided (checkout)</p></td><td><p>stripe, stripe-ios</p></td></tr>
+<tr><td><p>Financial Data</p></td><td><p>stripe</p></td><td><p>Application database</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Third-Party Processors</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Processor</p></th><th><p>Data Shared</p></th><th><p>Purpose</p></th><th><p>DPA Status</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>error data, stack traces, user context, device information, IP address</p></td><td><p>monitoring</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>error data, stack traces, user context, device information, IP address, user behavior, session recordings, feature flag usage</p></td><td><p>analytics</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>email, password hash, session data, user metadata</p></td><td><p>auth</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>email, password hash, session data, user metadata, payment information, billing address, transaction history</p></td><td><p>payment</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>email, password hash, session data, user metadata, payment information, billing address, transaction history</p></td><td><p>payment</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>openai</p></td><td><p>user prompts, conversation history, generated content</p></td><td><p>ai</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>user data as defined in schema</p></td><td><p>database</p></td><td><p>⬜ To be verified</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email addresses, email content</p></td><td><p>email</p></td><td><p>⬜ To be verified</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. International Data Transfers</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Processor</p></th><th><p>Transfer Destination</p></th><th><p>Safeguard Mechanism</p></th><th><p>Status</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>openai</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+<tr><td><p>resend</p></td><td><p>To be verified</p></td><td><p>SCCs / Adequacy Decision</p></td><td><p>⬜ To be assessed</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>6. Retention Schedule</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Category</p></th><th><p>Retention Period</p></th><th><p>Deletion Method</p></th><th><p>Legal Basis for Retention</p></th></tr>
+<tr><td><p>General</p></td><td><p>365 days</p></td><td><p>Automated purge + manual verification</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td></tr>
+<tr><td><p>Indirectly Identifiable</p></td><td><p>365 days</p></td><td><p>Automated purge + manual verification</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td></tr>
+<tr><td><p>Directly Identifiable</p></td><td><p>365 days</p></td><td><p>Automated purge + manual verification</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td></tr>
+<tr><td><p>Security Credential</p></td><td><p>365 days</p></td><td><p>Automated purge + manual verification</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td></tr>
+<tr><td><p>Financial</p></td><td><p>365 days</p></td><td><p>Automated purge + manual verification</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>This data mapping register is generated from automated code analysis and should be reviewed by your Data Protection Officer and legal team. It may not capture all data processing activities, particularly those conducted outside the scanned codebase. This does not constitute legal advice.</em></p>

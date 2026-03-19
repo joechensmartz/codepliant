@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO 27001 CHECKLIST — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ISO 27001 CHECKLIST</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~12 min read</p>
+    </header>
+    <h1 id="iso-27001-compliance-checklist">ISO 27001 Compliance Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> twenty</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Contact:</strong> [your-email@example.com]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</li>
+<li>Risk Register (<code>RISK_REGISTER.md</code>)</li>
+<li>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</li>
+</ul>
+<hr>
+<blockquote><strong>Disclaimer:</strong> This checklist is generated based on automated code analysis and is intended as a starting point for ISO 27001 compliance. It is not a substitute for a formal ISO 27001 certification audit or professional guidance. Engage a qualified certification body for your official assessment.</blockquote>
+<h2 id="1-overview">1. Overview</h2>
+<p>This checklist helps [Your Company Name] prepare for ISO 27001 certification by mapping detected services and infrastructure to the Annex A controls defined in ISO/IEC 27001:2022. Each section contains actionable items tailored to your project's technology stack.</p>
+<p>ISO 27001 requires an Information Security Management System (ISMS) that addresses risks through a combination of organizational, people, physical, and technological controls.</p>
+<p><strong>Detected services:</strong> 16</p>
+<p><strong>Applicable Annex A domains:</strong> Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8), Physical Controls (A.7)</p>
+<hr>
+<h2 id="2-service-to-control-mapping">2. Service-to-Control Mapping</h2>
+<p>The following table maps each detected service to the applicable ISO 27001 Annex A control domains:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Detected Service</th><th style="text-align:left">Category</th><th style="text-align:left">Applicable Annex A Domains</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">AI Service</td><td style="text-align:left">Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">AI Service</td><td style="text-align:left">Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">File Storage</td><td style="text-align:left">Technological Controls (A.8), Organizational Controls (A.5)</td></tr>
+<tr><td style="text-align:left">@sentry/node</td><td style="text-align:left">Error Monitoring</td><td style="text-align:left">Technological Controls (A.8), Organizational Controls (A.5)</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">AI Service</td><td style="text-align:left">Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">drizzle</td><td style="text-align:left">Database</td><td style="text-align:left">Technological Controls (A.8), Organizational Controls (A.5)</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Other</td><td style="text-align:left">General</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">Database</td><td style="text-align:left">Technological Controls (A.8), Organizational Controls (A.5)</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">Organizational Controls (A.5), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">openai</td><td style="text-align:left">AI Service</td><td style="text-align:left">Organizational Controls (A.5), People Controls (A.6), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">Authentication</td><td style="text-align:left">Organizational Controls (A.5), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">passport-google-oauth20</td><td style="text-align:left">Authentication</td><td style="text-align:left">Organizational Controls (A.5), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">Authentication</td><td style="text-align:left">Organizational Controls (A.5), Technological Controls (A.8)</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">Database</td><td style="text-align:left">Technological Controls (A.8), Organizational Controls (A.5)</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">Organizational Controls (A.5), Technological Controls (A.8)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-annex-a-controls-checklist">3. Annex A Controls Checklist</h2>
+<h3 id="a5-organizational-controls">A.5 — Organizational Controls</h3>
+<p><strong>Objective:</strong> Establish management direction and support for information security in accordance with business requirements and relevant laws and regulations.</p>
+<h4 id="a51-policies-for-information-security">A.5.1 — Policies for Information Security</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Establish an Information Security Management System (ISMS) policy</li>
+<li><input type="checkbox" disabled> Define and communicate the scope of the ISMS</li>
+<li><input type="checkbox" disabled> Obtain management commitment and sign-off</li>
+<li><input type="checkbox" disabled> Review information security policies at planned intervals (at least annually)</li>
+</ul>
+<h4 id="a52-information-security-roles-and-responsibilities">A.5.2 — Information Security Roles and Responsibilities</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Assign information security roles and responsibilities</li>
+<li><input type="checkbox" disabled> Appoint an Information Security Officer or equivalent</li>
+<li><input type="checkbox" disabled> Define segregation of duties for critical operations</li>
+<li><input type="checkbox" disabled> Document the organizational security structure</li>
+</ul>
+<h4 id="a510-acceptable-use-of-information-and-assets">A.5.10 — Acceptable Use of Information and Assets</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define acceptable use policies for information assets</li>
+<li><input type="checkbox" disabled> Communicate policies to all employees and contractors</li>
+<li><input type="checkbox" disabled> Include provisions for remote work and BYOD</li>
+</ul>
+<h4 id="a512-classification-of-information">A.5.12 — Classification of Information</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define an information classification scheme (e.g., Public, Internal, Confidential, Restricted)</li>
+<li><input type="checkbox" disabled> Label all information assets according to the classification scheme</li>
+<li><input type="checkbox" disabled> Define handling procedures for each classification level</li>
+</ul>
+<h4 id="a534-privacy-and-protection-of-pii">A.5.34 — Privacy and Protection of PII</h4>
+<p><em>Data-collecting services detected: @ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, openai</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Conduct a Privacy Impact Assessment (PIA/DPIA) for personal data processing</li>
+<li><input type="checkbox" disabled> Maintain a Record of Processing Activities (ROPA)</li>
+<li><input type="checkbox" disabled> Define lawful bases for personal data processing</li>
+<li><input type="checkbox" disabled> Implement data subject rights procedures (access, rectification, erasure)</li>
+</ul>
+<h4 id="a519-information-security-in-supplier-relationships">A.5.19 — Information Security in Supplier Relationships</h4>
+<p><em>Payment services detected: stripe</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Assess information security risks for all supplier relationships</li>
+<li><input type="checkbox" disabled> Include security requirements in supplier agreements</li>
+<li><input type="checkbox" disabled> Monitor and review supplier service delivery</li>
+<li><input type="checkbox" disabled> Maintain a supplier risk register</li>
+</ul>
+<h4 id="a524-information-security-incident-management-planning">A.5.24 — Information Security Incident Management Planning</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define an incident response plan with clear escalation procedures</li>
+<li><input type="checkbox" disabled> Assign incident response roles and responsibilities</li>
+<li><input type="checkbox" disabled> Conduct regular incident response drills</li>
+<li><input type="checkbox" disabled> Maintain an incident register with lessons learned</li>
+</ul>
+<h4 id="a529-information-security-during-disruption">A.5.29 — Information Security During Disruption</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Develop a business continuity plan addressing information security</li>
+<li><input type="checkbox" disabled> Define Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO)</li>
+<li><input type="checkbox" disabled> Test business continuity plans at least annually</li>
+</ul>
+<h4 id="a531-legal-statutory-regulatory-and-contractual-requirements">A.5.31 — Legal, Statutory, Regulatory, and Contractual Requirements</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify all applicable legal, regulatory, and contractual requirements</li>
+<li><input type="checkbox" disabled> Maintain a compliance register with obligation tracking</li>
+<li><input type="checkbox" disabled> Review compliance status at planned intervals</li>
+</ul>
+<hr>
+<h3 id="a6-people-controls">A.6 — People Controls</h3>
+<p><strong>Objective:</strong> Ensure that employees and contractors understand their responsibilities and are suitable for their roles.</p>
+<h4 id="a61-screening">A.6.1 — Screening</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Conduct background checks for all employees with access to sensitive systems</li>
+<li><input type="checkbox" disabled> Verify qualifications and references prior to employment</li>
+<li><input type="checkbox" disabled> Define screening requirements proportionate to classification of information accessed</li>
+</ul>
+<h4 id="a62-terms-and-conditions-of-employment">A.6.2 — Terms and Conditions of Employment</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Include information security responsibilities in employment contracts</li>
+<li><input type="checkbox" disabled> Require non-disclosure agreements (NDAs) for employees and contractors</li>
+<li><input type="checkbox" disabled> Define acceptable use expectations in employment terms</li>
+</ul>
+<h4 id="a63-information-security-awareness-education-and-training">A.6.3 — Information Security Awareness, Education, and Training</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Conduct security awareness training for all employees (at least annually)</li>
+<li><input type="checkbox" disabled> Provide role-specific security training for technical staff</li>
+<li><input type="checkbox" disabled> Track training completion and maintain records</li>
+<li><input type="checkbox" disabled> Include phishing awareness and social engineering exercises</li>
+</ul>
+<h4 id="a64-disciplinary-process">A.6.4 — Disciplinary Process</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define a disciplinary process for information security violations</li>
+<li><input type="checkbox" disabled> Communicate consequences of policy violations to all employees</li>
+</ul>
+<h4 id="a65-responsibilities-after-termination-or-change-of-employment">A.6.5 — Responsibilities After Termination or Change of Employment</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Revoke access to all systems within 24 hours of termination</li>
+<li><input type="checkbox" disabled> Recover company assets (devices, badges, tokens) upon departure</li>
+<li><input type="checkbox" disabled> Remind departing employees of continuing confidentiality obligations</li>
+</ul>
+<hr>
+<h3 id="a7-physical-controls">A.7 — Physical Controls</h3>
+<p><strong>Objective:</strong> Prevent unauthorized physical access, damage, and interference to the organization's information and information processing facilities.</p>
+<h4 id="a71-physical-security-perimeters">A.7.1 — Physical Security Perimeters</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define physical security perimeters for sensitive areas (server rooms, offices)</li>
+<li><input type="checkbox" disabled> Implement access control for secured areas (badge access, biometrics)</li>
+<li><input type="checkbox" disabled> Maintain visitor logs for all secured areas</li>
+</ul>
+<h4 id="a72-physical-entry">A.7.2 — Physical Entry</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Restrict physical entry to authorized personnel only</li>
+<li><input type="checkbox" disabled> Monitor entry points with CCTV or equivalent</li>
+<li><input type="checkbox" disabled> Review physical access rights periodically</li>
+</ul>
+<h4 id="a74-physical-security-monitoring">A.7.4 — Physical Security Monitoring</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement environmental monitoring (temperature, humidity, fire detection)</li>
+<li><input type="checkbox" disabled> Monitor for unauthorized physical access attempts</li>
+<li><input type="checkbox" disabled> Test physical security controls regularly</li>
+</ul>
+<h4 id="a79-security-of-assets-off-premises">A.7.9 — Security of Assets Off-Premises</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define policies for protecting equipment used outside the organization</li>
+<li><input type="checkbox" disabled> Encrypt all portable devices (laptops, USB drives)</li>
+<li><input type="checkbox" disabled> Implement remote wipe capability for mobile devices</li>
+</ul>
+<h4 id="a710-storage-media">A.7.10 — Storage Media</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define procedures for secure disposal of storage media</li>
+<li><input type="checkbox" disabled> Maintain chain-of-custody records for media transfers</li>
+<li><input type="checkbox" disabled> Use secure erasure or physical destruction for decommissioned media</li>
+</ul>
+<hr>
+<h3 id="a8-technological-controls">A.8 — Technological Controls</h3>
+<p><strong>Objective:</strong> Ensure that information security is implemented and operated within the technology environment.</p>
+<h4 id="a81-user-endpoint-devices">A.8.1 — User Endpoint Devices</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define policies for user endpoint devices (laptops, phones)</li>
+<li><input type="checkbox" disabled> Enforce disk encryption on all endpoints</li>
+<li><input type="checkbox" disabled> Implement endpoint detection and response (EDR) solutions</li>
+<li><input type="checkbox" disabled> Manage devices via MDM (Mobile Device Management)</li>
+</ul>
+<h4 id="a82-privileged-access-rights">A.8.2 — Privileged Access Rights</h4>
+<p><em>Authentication services detected: passport, passport-google-oauth20, passport-microsoft</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Restrict privileged access using the principle of least privilege</li>
+<li><input type="checkbox" disabled> Enforce multi-factor authentication (MFA) for all privileged accounts</li>
+<li><input type="checkbox" disabled> Review privileged access rights quarterly</li>
+<li><input type="checkbox" disabled> Log all privileged access activity</li>
+<li><input type="checkbox" disabled> Use just-in-time (JIT) access where possible</li>
+</ul>
+<h4 id="a85-secure-authentication">A.8.5 — Secure Authentication</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce strong password policies (minimum 12 characters, complexity requirements)</li>
+<li><input type="checkbox" disabled> Implement account lockout after repeated failed attempts</li>
+<li><input type="checkbox" disabled> Use secure credential storage (hashing with bcrypt/argon2)</li>
+<li><input type="checkbox" disabled> Protect authentication tokens and session IDs</li>
+</ul>
+<h4 id="a87-protection-against-malware">A.8.7 — Protection Against Malware</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Deploy anti-malware solutions on all endpoints and servers</li>
+<li><input type="checkbox" disabled> Implement application whitelisting where feasible</li>
+<li><input type="checkbox" disabled> Scan all file uploads for malware</li>
+</ul>
+<h4 id="a88-management-of-technical-vulnerabilities">A.8.8 — Management of Technical Vulnerabilities</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Run automated dependency vulnerability scanning (e.g., npm audit, Snyk, Dependabot)</li>
+<li><input type="checkbox" disabled> Conduct periodic penetration testing (at least annually)</li>
+<li><input type="checkbox" disabled> Maintain a vulnerability remediation SLA (critical: 24h, high: 7d, medium: 30d, low: 90d)</li>
+<li><input type="checkbox" disabled> Subscribe to vulnerability notification feeds for all technology in use</li>
+</ul>
+<h4 id="a89-configuration-management">A.8.9 — Configuration Management</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Maintain hardened baseline configurations for all systems</li>
+<li><input type="checkbox" disabled> Automate configuration management (Infrastructure as Code)</li>
+<li><input type="checkbox" disabled> Monitor for configuration drift</li>
+<li><input type="checkbox" disabled> Review and update configurations at planned intervals</li>
+</ul>
+<h4 id="a810-information-deletion">A.8.10 — Information Deletion</h4>
+<p><em>Data storage services detected: drizzle, ioredis, redis, @aws-sdk/client-s3</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define data retention and deletion policies per data category</li>
+<li><input type="checkbox" disabled> Implement automated data purge processes for expired retention periods</li>
+<li><input type="checkbox" disabled> Verify deletion is complete and irreversible (including backups)</li>
+<li><input type="checkbox" disabled> Maintain deletion logs for compliance evidence</li>
+</ul>
+<h4 id="a815-logging">A.8.15 — Logging</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enable logging on all critical systems and applications</li>
+<li><input type="checkbox" disabled> Protect log files from tampering and unauthorized access</li>
+<li><input type="checkbox" disabled> Centralize log collection (SIEM)</li>
+<li><input type="checkbox" disabled> Configure alerting in: @sentry/node</li>
+<li><input type="checkbox" disabled> Define log retention periods (minimum 12 months recommended)</li>
+<li><input type="checkbox" disabled> Review logs regularly for security events</li>
+</ul>
+<h4 id="a820-networks-security">A.8.20 — Networks Security</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Segment networks to isolate sensitive systems</li>
+<li><input type="checkbox" disabled> Implement firewall rules following the principle of least privilege</li>
+<li><input type="checkbox" disabled> Monitor network traffic for anomalies</li>
+<li><input type="checkbox" disabled> Use encrypted channels (TLS 1.2+) for all network communications</li>
+</ul>
+<h4 id="a824-use-of-cryptography">A.8.24 — Use of Cryptography</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce TLS 1.2+ for all data in transit</li>
+<li><input type="checkbox" disabled> Enable encryption at rest for: drizzle, ioredis, redis</li>
+<li><input type="checkbox" disabled> Enable encryption at rest for file storage: @aws-sdk/client-s3</li>
+<li><input type="checkbox" disabled> Document encryption standards and key management procedures</li>
+<li><input type="checkbox" disabled> Store encryption keys in a dedicated key management service (KMS)</li>
+<li><input type="checkbox" disabled> Rotate encryption keys on a defined schedule</li>
+</ul>
+<h4 id="a825-secure-development-life-cycle">A.8.25 — Secure Development Life Cycle</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define a secure software development lifecycle (SSDLC) policy</li>
+<li><input type="checkbox" disabled> Require code review for all production changes</li>
+<li><input type="checkbox" disabled> Implement automated security testing in CI/CD pipelines (SAST, DAST)</li>
+<li><input type="checkbox" disabled> Separate development, staging, and production environments</li>
+<li><input type="checkbox" disabled> Conduct security architecture reviews for significant changes</li>
+</ul>
+<h4 id="a828-secure-coding-ai-specific">A.8.28 — Secure Coding (AI-Specific)</h4>
+<p><em>AI services detected: @ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, openai</em></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Validate AI model inputs and outputs for safety and correctness</li>
+<li><input type="checkbox" disabled> Implement guardrails for AI-generated content (safety filters, output validation)</li>
+<li><input type="checkbox" disabled> Log AI processing decisions for auditability</li>
+<li><input type="checkbox" disabled> Document AI model provenance and training data lineage</li>
+<li><input type="checkbox" disabled> Conduct bias and fairness assessments for AI models</li>
+</ul>
+<hr>
+<h2 id="4-implementation-roadmap">4. Implementation Roadmap</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Phase</th><th style="text-align:left">Duration</th><th style="text-align:left">Activities</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Gap Analysis</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">Assess current controls against ISO 27001 requirements</td></tr>
+<tr><td style="text-align:left"><strong>Risk Assessment</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">Identify, analyze, and evaluate information security risks</td></tr>
+<tr><td style="text-align:left"><strong>ISMS Design</strong></td><td style="text-align:left">4-8 weeks</td><td style="text-align:left">Define ISMS scope, policies, and control objectives</td></tr>
+<tr><td style="text-align:left"><strong>Implementation</strong></td><td style="text-align:left">8-16 weeks</td><td style="text-align:left">Implement controls, procedures, and documentation</td></tr>
+<tr><td style="text-align:left"><strong>Internal Audit</strong></td><td style="text-align:left">2-4 weeks</td><td style="text-align:left">Conduct internal audit to verify ISMS effectiveness</td></tr>
+<tr><td style="text-align:left"><strong>Management Review</strong></td><td style="text-align:left">1-2 weeks</td><td style="text-align:left">Review ISMS performance and approve for certification</td></tr>
+<tr><td style="text-align:left"><strong>Stage 1 Audit</strong></td><td style="text-align:left">1-2 weeks</td><td style="text-align:left">Certification body reviews documentation and readiness</td></tr>
+<tr><td style="text-align:left"><strong>Stage 2 Audit</strong></td><td style="text-align:left">1-2 weeks</td><td style="text-align:left">Certification body verifies implementation and effectiveness</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-statement-of-applicability-soa-template">5. Statement of Applicability (SoA) Template</h2>
+<p>The Statement of Applicability documents which Annex A controls are applicable to your ISMS and the justification for inclusion or exclusion.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Control Domain</th><th style="text-align:left">Applicable</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Organizational Controls (A.5)</td><td style="text-align:left">Yes</td><td style="text-align:left">Relevant services and data processing detected</td></tr>
+<tr><td style="text-align:left">People Controls (A.6)</td><td style="text-align:left">Yes</td><td style="text-align:left">Relevant services and data processing detected</td></tr>
+<tr><td style="text-align:left">Physical Controls (A.7)</td><td style="text-align:left">Yes</td><td style="text-align:left">Relevant services and data processing detected</td></tr>
+<tr><td style="text-align:left">Technological Controls (A.8)</td><td style="text-align:left">Yes</td><td style="text-align:left">Relevant services and data processing detected</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Note:</strong> All Annex A domains should be evaluated regardless of detected services. This template provides a starting point — your organization must assess applicability based on the full risk assessment.</blockquote>
+<hr>
+<h2 id="6-next-steps">6. Next Steps</h2>
+<ol>
+<li><strong>Appoint an ISMS owner</strong> responsible for driving the certification process.</li>
+<li><strong>Define the ISMS scope</strong> — which business units, locations, and systems are included.</li>
+<li><strong>Conduct a risk assessment</strong> to identify threats and vulnerabilities to your information assets.</li>
+<li><strong>Prioritize controls</strong> starting with A.5 (Organizational) and A.8 (Technological) — these have the broadest impact.</li>
+<li><strong>Begin documentation</strong> — ISO 27001 requires documented policies, procedures, and evidence of control operation.</li>
+<li><strong>Engage a certification body</strong> early to align on scope and expectations.</li>
+</ol>
+<hr>
+<p><em>This ISO 27001 Compliance Checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It should be reviewed by a qualified professional before use in certification preparation.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

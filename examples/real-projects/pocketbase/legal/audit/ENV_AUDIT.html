@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — pocketbase</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">pocketbase &middot; Last updated 2026-03-18 &middot; ~4 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 17 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="security-recommendations">Security Recommendations</h2>
+<ul>
+<li><strong>[WARNING]</strong> No .env.example file found. Create one to document required environment variables for new contributors.</li>
+</ul>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>PB<em>ID</em>TOKEN_LEEWAY</code></td><td style="text-align:left">tools/auth/oidc.go</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>BASE_URL</code></td><td style="text-align:left">ui/src/App.svelte, ui/src/components/base/FullPage.svelte, ui/src/components/base/TinyMCE.svelte, ui/src/components/collections/OAuth2Accordion.svelte, ui/src/components/collections/OAuth2ProviderPanel.svelte, ui/src/components/collections/OAuth2ProvidersListPanel.svelte, ui/src/components/records/ExternalAuthsList.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>BACKEND</em>URL</code></td><td style="text-align:left">ui/src/components/records/PageRecordConfirmEmailChange.svelte, ui/src/components/records/PageRecordConfirmPasswordReset.svelte, ui/src/components/records/PageRecordConfirmVerification.svelte, ui/src/utils/ApiClient.js</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>DART</em>SDK_URL</code></td><td style="text-align:left">ui/src/components/base/SdkTabs.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>DOCS</em>URL</code></td><td style="text-align:left">ui/src/components/base/PageWrapper.svelte, ui/src/components/settings/PageCrons.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>JS</em>SDK_URL</code></td><td style="text-align:left">ui/src/components/base/SdkTabs.svelte</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>GOCACHE</code></td><td style="text-align:left">tools/osutils/run.go</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>FILE</em>UPLOAD_DOCS</code></td><td style="text-align:left">ui/src/components/collections/docs/CreateApiDocs.svelte, ui/src/components/collections/docs/UpdateApiDocs.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>FILES</em>DELETE<em>MAX</em>WORKERS</code></td><td style="text-align:left">core/base.go</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>MFA</em>DOCS</code></td><td style="text-align:left">ui/src/components/collections/MFAAccordion.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>OAUTH2</em>EXAMPLE</code></td><td style="text-align:left">ui/src/components/collections/docs/AuthWithOAuth2Docs.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>PROTECTED</em>FILE_DOCS</code></td><td style="text-align:left">ui/src/components/collections/schema/SchemaFieldFile.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB_RELEASES</code></td><td style="text-align:left">ui/src/components/base/PageWrapper.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>RULES</em>SYNTAX_DOCS</code></td><td style="text-align:left">ui/src/components/collections/CollectionRulesTab.svelte</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>THUMBS</em>MAX_WAIT</code></td><td style="text-align:left">apis/file.go</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB<em>THUMBS</em>MAX_WORKERS</code></td><td style="text-align:left">apis/file.go</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PB_VERSION</code></td><td style="text-align:left">ui/src/components/base/PageWrapper.svelte</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>BASE_URL</code></li>
+<li><code>GOCACHE</code></li>
+<li><code>PB<em>BACKEND</em>URL</code></li>
+<li><code>PB<em>DART</em>SDK_URL</code></li>
+<li><code>PB<em>DOCS</em>URL</code></li>
+<li><code>PB<em>FILE</em>UPLOAD_DOCS</code></li>
+<li><code>PB<em>FILES</em>DELETE<em>MAX</em>WORKERS</code></li>
+<li><code>PB<em>ID</em>TOKEN_LEEWAY</code></li>
+<li><code>PB<em>JS</em>SDK_URL</code></li>
+<li><code>PB<em>MFA</em>DOCS</code></li>
+<li><code>PB<em>OAUTH2</em>EXAMPLE</code></li>
+<li><code>PB<em>PROTECTED</em>FILE_DOCS</code></li>
+<li><code>PB_RELEASES</code></li>
+<li><code>PB<em>RULES</em>SYNTAX_DOCS</code></li>
+<li><code>PB<em>THUMBS</em>MAX_WAIT</code></li>
+<li><code>PB<em>THUMBS</em>MAX_WORKERS</code></li>
+<li><code>PB_VERSION</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>16 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 16 hardcoded secret(s) detected in source code: Hardcoded Secret, Hardcoded Password, Private Key (PEM). Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>auth<em>options</em>test.go</code></td><td style="text-align:left">900</td><td style="text-align:left"><code>ClientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>auth<em>options</em>test.go</code></td><td style="text-align:left">910</td><td style="text-align:left"><code>ClientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>auth<em>options</em>test.go</code></td><td style="text-align:left">941</td><td style="text-align:left"><code>ClientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>auth<em>options</em>test.go</code></td><td style="text-align:left">952</td><td style="text-align:left"><code>ClientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">655</td><td style="text-align:left"><code>{Name: "test1", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">656</td><td style="text-align:left"><code>{Name: "test2", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">683</td><td style="text-align:left"><code>{Name: "test1", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">684</td><td style="text-align:left"><code>{Name: "test2", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">711</td><td style="text-align:left"><code>{Name: "test1", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>core/collection<em>model</em>test.go</code></td><td style="text-align:left">712</td><td style="text-align:left"><code>{Name: "test2", ClientId: "[REDACTED]", ClientSecret: "[REDACTED]"},</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>core/field.go</code></td><td style="text-align:left">28</td><td style="text-align:left"><code>FieldNamePassword        = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>core/field_password.go</code></td><td style="text-align:left">22</td><td style="text-align:left"><code>const FieldTypePassword = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>core/mfa_model.go</code></td><td style="text-align:left">13</td><td style="text-align:left"><code>MFAMethodPassword = "password"</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Private Key (PEM)</td><td style="text-align:left"><code>forms/apple<em>client</em>secret<em>create</em>test.go</code></td><td style="text-align:left">56</td><td style="text-align:left"><code>"privateKey": "-----BEGIN PRIVATE KEY----- invalid -----END PRIVATE KEY-----",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>tools/auth/base<em>provider</em>test.go</code></td><td style="text-align:left">213</td><td style="text-align:left"><code>clientSecret: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>tools/auth/base<em>provider</em>test.go</code></td><td style="text-align:left">240</td><td style="text-align:left"><code>clientSecret: "[REDACTED]",</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<h1>Cookie Inventory</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Cookie Inventory</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Cookie Policy (<code>COOKIE_POLICY.md</code>)</p></li>
+<li><p>Consent Management Guide (<code>CONSENT<em>MANAGEMENT</em>GUIDE.md</code>)</p></li>
+</ul>
+<hr />
+<p>This document provides a complete inventory of all cookies and similar tracking technologies used by this application. This inventory is required by the ePrivacy Directive (Directive 2002/58/EC, as amended by Directive 2009/136/EC) and supports GDPR transparency requirements.</p>
+<h2>Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Count</p></th><th><p>Consent Required</p></th></tr>
+<tr><td><p>Strictly Necessary</p></td><td><p>5</p></td><td><p>No (exempt under ePrivacy Directive Art. 5(3))</p></td></tr>
+<tr><td><p>Analytics</p></td><td><p>2</p></td><td><p>Yes</p></td></tr>
+<tr><td><p><strong>Total</strong></p></td><td><p><strong>7</strong></p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Strictly Necessary Cookies</h2>
+<p>These cookies are essential for the application to function and cannot be disabled. They do not require user consent under Article 5(3) of the ePrivacy Directive.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Cookie Name</p></th><th><p>Purpose</p></th><th><p>Duration</p></th><th><p>Provider</p></th></tr>
+<tr><td><p><code>session_id / connect.sid</code></p></td><td><p>Maintains authenticated user session on the server</p></td><td><p>Session or configured expiry</p></td><td><p>First-party</p></td></tr>
+<tr><td><p><code>auth_token / jwt</code></p></td><td><p>Stores authentication token for API authorization</p></td><td><p>Varies (typically 1 hour to 30 days)</p></td><td><p>First-party</p></td></tr>
+<tr><td><p><code>csrf_token / XSRF-TOKEN</code></p></td><td><p>Prevents cross-site request forgery attacks</p></td><td><p>Session</p></td><td><p>First-party</p></td></tr>
+<tr><td><p><code>refresh_token</code></p></td><td><p>Enables silent re-authentication when access token expires</p></td><td><p>30-90 days (varies)</p></td><td><p>First-party</p></td></tr>
+<tr><td><p><code>sb-*-auth-token</code></p></td><td><p>Stores Supabase authentication session token</p></td><td><p>1 hour (refreshed)</p></td><td><p>Supabase Inc</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Analytics Cookies</h2>
+<p>These cookies collect information about how visitors use the application. They require explicit user consent before being set.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Cookie Name</p></th><th><p>Purpose</p></th><th><p>Duration</p></th><th><p>Provider</p></th><th><p>Service</p></th></tr>
+<tr><td><p><code>ph_*</code></p></td><td><p>Identifies unique users for product analytics and session recording</p></td><td><p>1 year</p></td><td><p>PostHog Inc</p></td><td><p>posthog</p></td></tr>
+<tr><td><p><code>distinct_id</code></p></td><td><p>Identifies users across sessions for analytics continuity</p></td><td><p>1 year</p></td><td><p>PostHog Inc</p></td><td><p>posthog</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Detected Services</h2>
+<p>The following services were detected in the codebase that set or use cookies:</p>
+<h3>Authentication Services</h3>
+<ul>
+<li><p><strong>@supabase/supabase-js</strong> — detected in <code>package.json</code>, <code>.env.example</code></p></li>
+</ul>
+<h3>Analytics & Advertising Services</h3>
+<ul>
+<li><p><strong>posthog</strong> — detected in <code>.env.example</code></p></li>
+</ul>
+<h2>Legal Requirements</h2>
+<h3>ePrivacy Directive (EU)</h3>
+<p>Under Article 5(3) of the ePrivacy Directive:</p>
+<ul>
+<li><p><strong>Strictly necessary cookies</strong> may be set without consent (e.g., session cookies, CSRF tokens)</p></li>
+<li><p><strong>All other cookies</strong> require informed, specific, and freely given consent before being set</p></li>
+<li><p>Users must be able to <strong>withdraw consent</strong> as easily as they gave it</p></li>
+<li><p>Consent must be obtained <strong>before</strong> cookies are placed (no implied consent)</p></li>
+</ul>
+<h3>GDPR (EU)</h3>
+<ul>
+<li><p>Cookie consent constitutes processing of personal data under GDPR Article 6(1)(a)</p></li>
+<li><p>Users have the right to know what cookies are used (this inventory)</p></li>
+<li><p>Data collected via cookies is subject to all GDPR rights (access, erasure, portability)</p></li>
+</ul>
+<h3>CCPA/CPRA (California)</h3>
+<ul>
+<li><p>Users must be informed about categories of personal information collected via cookies</p></li>
+<li><p>"Do Not Sell or Share My Personal Information" link must be provided if advertising cookies are used</p></li>
+<li><p>Global Privacy Control (GPC) signals must be honored</p></li>
+</ul>
+<h2>Inventory Maintenance</h2>
+<p>This cookie inventory should be reviewed and updated:</p>
+<ul>
+<li><p>[ ] When adding or removing third-party services</p></li>
+<li><p>[ ] When changing authentication providers</p></li>
+<li><p>[ ] When adding new tracking or analytics tools</p></li>
+<li><p>[ ] At minimum quarterly, or after any significant application change</p></li>
+<li><p>[ ] After any audit finding related to cookies or tracking</p></li>
+</ul>
+<p>For questions about this cookie inventory, contact <strong>legal@acme.com</strong>.</p>
+<hr />
+<p><em>This cookie inventory was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. It should be reviewed by your legal team to ensure completeness and accuracy. Additional cookies may be set by third-party scripts loaded at runtime that are not detectable through static code analysis.</em></p>

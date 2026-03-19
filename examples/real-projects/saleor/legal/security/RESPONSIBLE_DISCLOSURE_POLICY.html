@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESPONSIBLE DISCLOSURE POLICY — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>RESPONSIBLE DISCLOSURE POLICY</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~5 min read</p>
+    </header>
+    <h1 id="responsible-disclosure-policy">Responsible Disclosure Policy</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Effective Date:</strong> 2026-03-16</p>
+<p><strong>Last Updated:</strong> 2026-03-16</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> saleor</p>
+<hr>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>[Your Company Name] takes the security of our systems and user data seriously. We value the security research community and encourage responsible disclosure of any vulnerabilities found in our products and services.</p>
+<p>This policy describes how to report security vulnerabilities to us, what you can expect from us, and what we expect from you.</p>
+<h2 id="2-scope">2. Scope</h2>
+<h3 id="21-in-scope">2.1 In Scope</h3>
+<p>The following assets and services are within the scope of this program:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Asset</th><th style="text-align:left">Type</th><th style="text-align:left">Priority</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">[https://yoursite.com]</td><td style="text-align:left">Web Application</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">[https://yoursite.com]/api/*</td><td style="text-align:left">API Endpoints</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">Authentication system (django-admin, django-sessions)</td><td style="text-align:left">Auth Infrastructure</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">Payment processing (stripe)</td><td style="text-align:left">Payment Infrastructure</td><td style="text-align:left">Critical</td></tr>
+<tr><td style="text-align:left">Data storage (boto3, redis)</td><td style="text-align:left">Data Infrastructure</td><td style="text-align:left">High</td></tr>
+</tbody>
+</table>
+<h3 id="22-out-of-scope">2.2 Out of Scope</h3>
+<p>The following are <strong>not</strong> in scope:</p>
+<ul>
+<li>Third-party services not operated by [Your Company Name]</li>
+<li>Social engineering attacks (phishing, vishing, etc.)</li>
+<li>Physical security attacks</li>
+<li>Denial of service (DoS/DDoS) attacks</li>
+<li>Automated vulnerability scanning that generates excessive traffic</li>
+<li>Issues in third-party dependencies with no demonstrated exploit path</li>
+<li>Clickjacking on pages with no sensitive actions</li>
+<li>Missing security headers without demonstrated impact</li>
+</ul>
+<h2 id="3-how-to-report">3. How to Report</h2>
+<h3 id="31-reporting-channel">3.1 Reporting Channel</h3>
+<p>Send vulnerability reports to: <strong>security@example.com]</strong></p>
+<h3 id="32-required-information">3.2 Required Information</h3>
+<p>Please include the following in your report:</p>
+<ol>
+<li><strong>Description</strong> — Clear description of the vulnerability</li>
+<li><strong>Steps to reproduce</strong> — Detailed steps to reproduce the issue</li>
+<li><strong>Impact assessment</strong> — Your assessment of the potential impact</li>
+<li><strong>Affected component</strong> — URL, API endpoint, or system affected</li>
+<li><strong>Proof of concept</strong> — Screenshots, logs, or code demonstrating the issue</li>
+<li><strong>Your contact information</strong> — Email or secure communication channel</li>
+</ol>
+<h3 id="33-encryption">3.3 Encryption</h3>
+<p>For sensitive reports, we encourage encrypting your communication. Please request our PGP public key by emailing security@example.com] with the subject line "PGP Key Request".</p>
+<h2 id="4-vulnerability-categories">4. Vulnerability Categories</h2>
+<p>We classify vulnerabilities by severity using the CVSS v3.1 framework:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">CVSS Score</th><th style="text-align:left">Examples</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Critical</strong></td><td style="text-align:left">9.0 - 10.0</td><td style="text-align:left">Remote code execution, authentication bypass, SQL injection with data exfiltration</td></tr>
+<tr><td style="text-align:left"><strong>High</strong></td><td style="text-align:left">7.0 - 8.9</td><td style="text-align:left">Privilege escalation, stored XSS with session hijacking, IDOR exposing PII</td></tr>
+<tr><td style="text-align:left"><strong>Medium</strong></td><td style="text-align:left">4.0 - 6.9</td><td style="text-align:left">CSRF on sensitive actions, reflected XSS, information disclosure</td></tr>
+<tr><td style="text-align:left"><strong>Low</strong></td><td style="text-align:left">0.1 - 3.9</td><td style="text-align:left">Verbose error messages, missing rate limiting on non-critical endpoints</td></tr>
+</tbody>
+</table>
+<h3 id="41-priority-areas">4.1 Priority Areas</h3>
+<p>Based on our technology stack, we are particularly interested in:</p>
+<ul>
+<li><strong>Authentication & Authorization</strong> — bypass, privilege escalation, session management flaws (django-admin, django-sessions)</li>
+<li><strong>Payment Security</strong> — transaction manipulation, price tampering, payment data exposure (stripe)</li>
+<li><strong>Data Storage</strong> — injection, unauthorized data access, data leakage (boto3, redis)</li>
+</ul>
+<h2 id="5-safe-harbor">5. Safe Harbor</h2>
+<p>[Your Company Name] supports responsible security research. If you conduct security research in compliance with this policy, we will:</p>
+<ul>
+<li><strong>Not pursue legal action</strong> against you for your research activities</li>
+<li><strong>Not report</strong> your activities to law enforcement, provided you act in good faith</li>
+<li><strong>Work with you</strong> to understand and resolve the issue quickly</li>
+<li><strong>Recognize your contribution</strong> (with your permission) in our security acknowledgments</li>
+</ul>
+<h3 id="51-researcher-obligations">5.1 Researcher Obligations</h3>
+<p>To qualify for safe harbor, you must:</p>
+<ul>
+<li>Act in good faith and avoid privacy violations, data destruction, or service disruption</li>
+<li>Only interact with accounts you own or have explicit permission to test</li>
+<li>Not access, modify, or delete data belonging to other users</li>
+<li>Stop testing and report immediately if you encounter user data</li>
+<li>Not publicly disclose the vulnerability before we have addressed it</li>
+<li>Provide us a reasonable time to fix the issue before any disclosure</li>
+</ul>
+<h2 id="6-response-timeline">6. Response Timeline</h2>
+<p>We commit to the following response timeline:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Stage</th><th style="text-align:left">Timeline</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Acknowledgment</strong></td><td style="text-align:left">Within 24 hours of report receipt</td></tr>
+<tr><td style="text-align:left"><strong>Initial Assessment</strong></td><td style="text-align:left">Within 3 business days</td></tr>
+<tr><td style="text-align:left"><strong>Status Update</strong></td><td style="text-align:left">Every 5 business days during investigation</td></tr>
+<tr><td style="text-align:left"><strong>Resolution Target</strong></td><td style="text-align:left">Critical: 7 days, High: 14 days, Medium: 30 days, Low: 90 days</td></tr>
+<tr><td style="text-align:left"><strong>Disclosure</strong></td><td style="text-align:left">Coordinated disclosure after fix is deployed</td></tr>
+</tbody>
+</table>
+<p>If we need more time to address an issue, we will notify you and provide an updated timeline.</p>
+<h2 id="7-recognition-hall-of-fame">7. Recognition & Hall of Fame</h2>
+<p>With your permission, we will publicly acknowledge your contribution in our security Hall of Fame. Please indicate in your report whether you would like to be credited (and how you'd like to be identified).</p>
+<h2 id="8-contact">8. Contact</h2>
+<ul>
+<li><strong>Security reports:</strong> security@example.com]</li>
+<li><strong>General inquiries:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This policy is based on the <a href="https://disclose.io">disclose.io</a> framework. Generated by Codepliant from project analysis. Review with your security team before publishing.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

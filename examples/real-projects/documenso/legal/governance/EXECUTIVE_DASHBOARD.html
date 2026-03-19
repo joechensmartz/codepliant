@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXECUTIVE DASHBOARD — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>EXECUTIVE DASHBOARD</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~3 min read</p>
+    </header>
+    <h1 id="executive-compliance-dashboard">Executive Compliance Dashboard</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>[Your Company Name]</strong> | Assessment Date: 2026-03-16 | Project: @documenso/root</p>
+<blockquote>One-page compliance overview for executive leadership. This dashboard provides a high-level view of regulatory compliance status, key risks, and upcoming deadlines.</blockquote>
+<h2 id="regulatory-status">Regulatory Status</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Status</th><th style="text-align:left">Regulation</th><th style="text-align:left">Assessment</th><th style="text-align:left">Summary</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">🟡</td><td style="text-align:left"><strong>GDPR</strong></td><td style="text-align:left">Review Needed</td><td style="text-align:left">Data processors detected. Assess whether GDPR applies to your user base.</td></tr>
+<tr><td style="text-align:left">🟡</td><td style="text-align:left"><strong>CCPA</strong></td><td style="text-align:left">Action Required</td><td style="text-align:left">Analytics/advertising services detected. "Do Not Sell" opt-out mechanism required for CA users.</td></tr>
+<tr><td style="text-align:left">🟡</td><td style="text-align:left"><strong>EU AI Act</strong></td><td style="text-align:left">Transparency Required</td><td style="text-align:left">2 AI service(s) detected. Transparency obligations apply under Art. 52.</td></tr>
+<tr><td style="text-align:left">🟡</td><td style="text-align:left"><strong>PCI DSS</strong></td><td style="text-align:left">Compliance Required</td><td style="text-align:left">1 payment service(s) detected (stripe). SAQ completion required.</td></tr>
+<tr><td style="text-align:left">🟢</td><td style="text-align:left"><strong>HIPAA</strong></td><td style="text-align:left">Not Applicable</td><td style="text-align:left">No health data processing indicators detected.</td></tr>
+</tbody>
+</table>
+<h2 id="quick-stats">Quick Stats</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Third-Party Data Processors</td><td style="text-align:left">13</td></tr>
+<tr><td style="text-align:left">Data Categories Collected</td><td style="text-align:left">6</td></tr>
+<tr><td style="text-align:left">Regulations: Action Required</td><td style="text-align:left">4</td></tr>
+<tr><td style="text-align:left">Regulations: Compliant</td><td style="text-align:left">1</td></tr>
+</tbody>
+</table>
+<h2 id="top-risks">Top Risks</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Risk</th><th style="text-align:left">Potential Impact</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left"><strong>Data Breach Across Multiple Processors</strong></td><td style="text-align:left">Up to $7,500 per violation (CCPA)</td><td style="text-align:left">13 third-party data processors increase attack surface. Each processor represents a potential breach vector.</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left"><strong>Non-Compliant AI Deployment</strong></td><td style="text-align:left">Up to EUR 35M or 7% of global turnover (EU AI Act)</td><td style="text-align:left">AI services without proper transparency disclosures and risk assessments.</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left"><strong>Inadequate Cookie/Tracking Consent</strong></td><td style="text-align:left">Up to EUR 20M or 4% of turnover (GDPR ePrivacy)</td><td style="text-align:left">Analytics and advertising trackers detected without verified consent mechanisms.</td></tr>
+</tbody>
+</table>
+<h2 id="upcoming-deadlines">Upcoming Deadlines</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Date</th><th style="text-align:left">Regulation</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2026-06-01</td><td style="text-align:left">General</td><td style="text-align:left">Quarterly privacy policy and terms of service review</td></tr>
+<tr><td style="text-align:left">2026-08-02</td><td style="text-align:left">EU AI Act</td><td style="text-align:left">Full EU AI Act enforcement begins. Ensure AI transparency and risk classification.</td></tr>
+<tr><td style="text-align:left">2026-12-31</td><td style="text-align:left">PCI DSS</td><td style="text-align:left">Complete annual Self-Assessment Questionnaire (SAQ)</td></tr>
+<tr><td style="text-align:left">2027-01-31</td><td style="text-align:left">All</td><td style="text-align:left">Annual compliance review and document refresh</td></tr>
+</tbody>
+</table>
+<h2 id="recommended-actions">Recommended Actions</h2>
+<ol>
+<li><strong>Short-term:</strong> Review 4 regulation(s) requiring action within 90 days</li>
+<li><strong>Ongoing:</strong> Schedule quarterly compliance reviews with legal counsel</li>
+<li><strong>Ongoing:</strong> Maintain all generated compliance documents as services change</li>
+</ol>
+<hr>
+<p><em>Generated by Codepliant v180.0.0 on 2026-03-16. This document should be reviewed by a qualified professional. See also: <a href="COMPLIANCE<em>NOTES.md">Compliance Notes</a>, <a href="RISK</em>REGISTER.md">Risk Register</a>, <a href="COMPLIANCE_TIMELINE.md">Compliance Timeline</a>.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

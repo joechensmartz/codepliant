@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIVACY IMPACT ASSESSMENT — twenty</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>PRIVACY IMPACT ASSESSMENT</h1>
+      <p class="meta">twenty &middot; Last updated 2026-03-18 &middot; ~16 min read</p>
+    </header>
+    <h1 id="privacy-impact-assessment-dpia">Privacy Impact Assessment (DPIA)</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> twenty</p>
+<p><strong>Data Controller:</strong> [Your Company Name]</p>
+<p><strong>Contact:</strong> [your-email@example.com]</p>
+<p><strong>DPO:</strong> [DPO Name] ([dpo@example.com])</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</li>
+<li>Risk Register (<code>RISK_REGISTER.md</code>)</li>
+<li>Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</li>
+</ul>
+<hr>
+<blockquote>This Data Protection Impact Assessment is prepared pursuant to <strong>Article 35 of the General Data Protection Regulation (EU) 2016/679 (GDPR)</strong>. A DPIA is required when data processing is likely to result in a high risk to the rights and freedoms of natural persons, particularly when using new technologies.</blockquote>
+<h2 id="1-description-of-processing">1. Description of Processing</h2>
+<h3 id="11-overview">1.1 Overview</h3>
+<p>This assessment covers the data processing activities of the <strong>twenty</strong> application operated by [Your Company Name]. The following describes the nature, scope, context, and purposes of processing.</p>
+<h3 id="12-services-and-data-processing-activities">1.2 Services and Data Processing Activities</h3>
+<p>The application integrates the following services that process personal data:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Processed</th><th style="text-align:left">Legal Basis</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/anthropic</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Consent / Legitimate interest</td></tr>
+<tr><td style="text-align:left">@ai-sdk/google</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Consent / Legitimate interest</td></tr>
+<tr><td style="text-align:left">@ai-sdk/openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Consent / Legitimate interest</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">@sentry/node</td><td style="text-align:left">monitoring</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td><td style="text-align:left">Legitimate interest</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Consent / Legitimate interest</td></tr>
+<tr><td style="text-align:left">drizzle</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td><td style="text-align:left">Legitimate interest</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">Contractual necessity / Consent</td></tr>
+<tr><td style="text-align:left">openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">Consent / Legitimate interest</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, session data</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">passport-google-oauth20</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Google profile data, OAuth tokens</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">Contractual necessity</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">Contractual necessity</td></tr>
+</tbody>
+</table>
+<h3 id="13-categories-of-personal-data">1.3 Categories of Personal Data</h3>
+<ul>
+<li><strong>Personal Identity Data:</strong> Email addresses, names, profile pictures, and account credentials collected through authentication. names, display names detected in TypeORM/Sequelize model fields: ApiKeyEntity.name, BillingMeterEntity.displayName, BillingProductEntity.name, WorkspaceSSOIdentityProviderEntity.name, WorkspaceEntity.displayName. names detected in Drizzle ORM table fields: labels.name. names, locale/language preferences, first names, last names, display names, usernames detected in GraphQL schema fields: ApiKey.name, ApplicationRegistration.name, UserWorkspace.locale, FullName.firstName, FullName.lastName, WorkspaceMember.name, WorkspaceMember.locale, Agent.name, ApiKeyForRole.name, LogicFunction.name, Field.name, Index.name, Application.name, ViewFieldGroup.name, View.name, Workspace.displayName, User.firstName, User.lastName, User.locale, PageLayout.name, BillingProduct.name, BillingLicensedProduct.name, BillingMeteredProduct.name, SSOConnection.name, AvailableWorkspace.displayName, DeletedWorkspaceMember.name, SSOIdentityProvider.name, PublicWorkspaceData.displayName, PublicApplicationRegistration.name, EditSso.name, WorkspaceNameAndId.displayName, FindAvailableSSOIDP.name, SetupSso.name, NavigationMenuItem.name, ToolIndexEntry.name, Skill.name, FrontComponent.name, ConfigVariable.name, ConfigVariablesGroupData.name, QueueJob.name, UserInfo.firstName, UserInfo.lastName, WorkspaceInfo.name, MarketplaceAppField.name, MarketplaceAppLogicFunction.name, MarketplaceAppFrontComponent.name, MarketplaceApp.name, ConnectionParametersOutput.username, CreatePageLayoutInput.name, UpdatePageLayoutInput.name, UpdatePageLayoutWithTabsInput.name, CreateLogicFunctionFromSourceInput.name, UpdateLogicFunctionFromSourceInputUpdates.name, CreateViewInput.name, UpdateViewInput.name, UpdateViewFieldGroupInputUpdates.name, CreateViewFieldGroupInput.name, UpsertFieldsWidgetGroupInput.name, CreateFrontComponentInput.name, UpdateFrontComponentInputUpdates.name, CreateAgentInput.name, UpdateAgentInput.name, CreateNavigationMenuItemInput.name, UpdateNavigationMenuItemInput.name, CreateApiKeyInput.name, UpdateApiKeyInput.name, CreateFieldInput.name, UpdateFieldInput.name, ActivateWorkspaceInput.displayName, UpdateWorkspaceInput.displayName, CreateApplicationRegistrationInput.name, UpdateApplicationRegistrationPayload.name, SetupOIDCSsoInput.name, SetupSAMLSsoInput.name, CreateSkillInput.name, UpdateSkillInput.name, ConnectionParameters.username, LogicFunctionLogsInput.name. (sources: passport-google-oauth20, passport-microsoft, passport, ApiKeyEntity.name, BillingMeterEntity.displayName, BillingProductEntity.name, WorkspaceSSOIdentityProviderEntity.name, WorkspaceEntity.displayName, labels.name, ApiKey.name, ApplicationRegistration.name, UserWorkspace.locale, FullName.firstName, FullName.lastName, WorkspaceMember.name, WorkspaceMember.locale, Agent.name, ApiKeyForRole.name, LogicFunction.name, Field.name, Index.name, Application.name, ViewFieldGroup.name, View.name, Workspace.displayName, User.firstName, User.lastName, User.locale, PageLayout.name, BillingProduct.name, BillingLicensedProduct.name, BillingMeteredProduct.name, SSOConnection.name, AvailableWorkspace.displayName, DeletedWorkspaceMember.name, SSOIdentityProvider.name, PublicWorkspaceData.displayName, PublicApplicationRegistration.name, EditSso.name, WorkspaceNameAndId.displayName, FindAvailableSSOIDP.name, SetupSso.name, NavigationMenuItem.name, ToolIndexEntry.name, Skill.name, FrontComponent.name, ConfigVariable.name, ConfigVariablesGroupData.name, QueueJob.name, UserInfo.firstName, UserInfo.lastName, WorkspaceInfo.name, MarketplaceAppField.name, MarketplaceAppLogicFunction.name, MarketplaceAppFrontComponent.name, MarketplaceApp.name, ConnectionParametersOutput.username, CreatePageLayoutInput.name, UpdatePageLayoutInput.name, UpdatePageLayoutWithTabsInput.name, CreateLogicFunctionFromSourceInput.name, UpdateLogicFunctionFromSourceInputUpdates.name, CreateViewInput.name, UpdateViewInput.name, UpdateViewFieldGroupInputUpdates.name, CreateViewFieldGroupInput.name, UpsertFieldsWidgetGroupInput.name, CreateFrontComponentInput.name, UpdateFrontComponentInputUpdates.name, CreateAgentInput.name, UpdateAgentInput.name, CreateNavigationMenuItemInput.name, UpdateNavigationMenuItemInput.name, CreateApiKeyInput.name, UpdateApiKeyInput.name, CreateFieldInput.name, UpdateFieldInput.name, ActivateWorkspaceInput.displayName, UpdateWorkspaceInput.displayName, CreateApplicationRegistrationInput.name, UpdateApplicationRegistrationPayload.name, SetupOIDCSsoInput.name, SetupSAMLSsoInput.name, CreateSkillInput.name, UpdateSkillInput.name, ConnectionParameters.username, LogicFunctionLogsInput.name)</li>
+<li><strong>Financial Data:</strong> Payment card information, billing addresses, and transaction history processed through payment providers. (sources: stripe)</li>
+<li><strong>AI Interaction Data:</strong> User prompts, conversation history, and AI-generated content processed through third-party AI services. (sources: openai, @vercel/ai, @ai-sdk/openai, @ai-sdk/anthropic, @ai-sdk/google)</li>
+<li><strong>Communication Data:</strong> Email addresses and email content processed through email service providers. (sources: nodemailer)</li>
+<li><strong>Technical & Diagnostic Data:</strong> Error reports, stack traces, performance data, and user context collected through monitoring tools. (sources: @sentry/node)</li>
+<li><strong>User-Uploaded Content:</strong> Files, images, and documents uploaded by users and stored through cloud storage providers. (sources: @aws-sdk/client-s3)</li>
+<li><strong>Stored User Data:</strong> Persistent user data stored in databases as defined by the application schema. (sources: ioredis, redis, drizzle, Redis (Cache))</li>
+<li><strong>Contact Information:</strong> email addresses detected in TypeORM/Sequelize model fields: AppTokenEntity.email. email addresses detected in GraphQL schema fields: User.email, WorkspaceInvitation.email, ValidatePasswordResetToken.email, UserInfo.email, CreateApprovedAccessDomainInput.email. (sources: AppTokenEntity.email, User.email, WorkspaceInvitation.email, ValidatePasswordResetToken.email, UserInfo.email, CreateApprovedAccessDomainInput.email)</li>
+<li><strong>Authentication Data:</strong> password hashes detected in TypeORM/Sequelize model fields: PostgresCredentialsEntity.passwordHash. passwords detected in GraphQL schema fields: AuthProviders.password, AuthBypassProviders.password, ConnectionParametersOutput.password, PostgresCredentials.password, ConnectionParameters.password. (sources: PostgresCredentialsEntity.passwordHash, AuthProviders.password, AuthBypassProviders.password, ConnectionParametersOutput.password, PostgresCredentials.password, ConnectionParameters.password)</li>
+<li><strong>Location Data:</strong> timezone information, city information, country information, location data detected in GraphQL schema fields: WorkspaceMember.timeZone, AggregateChartConfiguration.timezone, PieChartConfiguration.timezone, LineChartConfiguration.timezone, GaugeChartConfiguration.timezone, BarChartConfiguration.timezone, PlaceDetailsResult.city, PlaceDetailsResult.country, PlaceDetailsResult.location. (sources: WorkspaceMember.timeZone, AggregateChartConfiguration.timezone, PieChartConfiguration.timezone, LineChartConfiguration.timezone, GaugeChartConfiguration.timezone, BarChartConfiguration.timezone, PlaceDetailsResult.city, PlaceDetailsResult.country, PlaceDetailsResult.location)</li>
+</ul>
+<h3 id="14-categories-of-data-subjects">1.4 Categories of Data Subjects</h3>
+<ul>
+<li>End users of the application</li>
+<li>Registered account holders</li>
+<li>Website visitors</li>
+<li>Customers and prospective customers</li>
+</ul>
+<blockquote><strong>Action required:</strong> Review and update the categories of data subjects to reflect your actual processing activities.</blockquote>
+<h2 id="2-necessity-and-proportionality-assessment">2. Necessity and Proportionality Assessment</h2>
+<h3 id="21-lawfulness-of-processing">2.1 Lawfulness of Processing</h3>
+<p>Each data processing activity must have a valid legal basis under Article 6 GDPR:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Processing Activity</th><th style="text-align:left">Legal Basis</th><th style="text-align:left">Justification</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">AI processing via @ai-sdk/anthropic</td><td style="text-align:left">Consent / Legitimate interest</td><td style="text-align:left">Required for AI-powered features; user consent obtained before processing</td></tr>
+<tr><td style="text-align:left">AI processing via @ai-sdk/google</td><td style="text-align:left">Consent / Legitimate interest</td><td style="text-align:left">Required for AI-powered features; user consent obtained before processing</td></tr>
+<tr><td style="text-align:left">AI processing via @ai-sdk/openai</td><td style="text-align:left">Consent / Legitimate interest</td><td style="text-align:left">Required for AI-powered features; user consent obtained before processing</td></tr>
+<tr><td style="text-align:left">File storage via @aws-sdk/client-s3</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to provide file storage features requested by the user</td></tr>
+<tr><td style="text-align:left">Error/performance monitoring via @sentry/node</td><td style="text-align:left">Legitimate interest</td><td style="text-align:left">Legitimate interest in maintaining service reliability and security</td></tr>
+<tr><td style="text-align:left">AI processing via @vercel/ai</td><td style="text-align:left">Consent / Legitimate interest</td><td style="text-align:left">Required for AI-powered features; user consent obtained before processing</td></tr>
+<tr><td style="text-align:left">Data persistence via drizzle</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to persist user data for service delivery</td></tr>
+<tr><td style="text-align:left">Data processing via googleapis</td><td style="text-align:left">Legitimate interest</td><td style="text-align:left">To be documented based on specific use case</td></tr>
+<tr><td style="text-align:left">Data persistence via ioredis</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to persist user data for service delivery</td></tr>
+<tr><td style="text-align:left">Email communications via nodemailer</td><td style="text-align:left">Contractual necessity / Consent</td><td style="text-align:left">Necessary for service communications; marketing requires separate consent</td></tr>
+<tr><td style="text-align:left">AI processing via openai</td><td style="text-align:left">Consent / Legitimate interest</td><td style="text-align:left">Required for AI-powered features; user consent obtained before processing</td></tr>
+<tr><td style="text-align:left">Authentication via passport</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to authenticate and maintain user sessions</td></tr>
+<tr><td style="text-align:left">Authentication via passport-google-oauth20</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to authenticate and maintain user sessions</td></tr>
+<tr><td style="text-align:left">Authentication via passport-microsoft</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to authenticate and maintain user sessions</td></tr>
+<tr><td style="text-align:left">Data persistence via redis</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to persist user data for service delivery</td></tr>
+<tr><td style="text-align:left">Payment processing via stripe</td><td style="text-align:left">Contractual necessity</td><td style="text-align:left">Necessary to process transactions requested by the user</td></tr>
+</tbody>
+</table>
+<h3 id="22-data-minimization">2.2 Data Minimization</h3>
+<p>The following data minimization measures should be verified:</p>
+<p><strong>AI Services:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Only data strictly necessary for the AI feature is transmitted to the provider</li>
+<li><input type="checkbox" disabled> User prompts are not stored beyond the session unless the user explicitly opts in</li>
+<li><input type="checkbox" disabled> No special category data is included in AI requests without explicit consent</li>
+</ul>
+<h3 id="23-proportionality">2.3 Proportionality</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> The processing is necessary to achieve the stated purpose and cannot be achieved by less intrusive means</li>
+<li><input type="checkbox" disabled> The volume of data collected is proportionate to the processing purpose</li>
+<li><input type="checkbox" disabled> Data retention periods are limited to what is strictly necessary</li>
+<li><input type="checkbox" disabled> Data subjects are clearly informed about the processing</li>
+</ul>
+<blockquote><strong>Action required:</strong> Document how each processing activity satisfies the necessity and proportionality requirements. Verify that less privacy-intrusive alternatives have been considered.</blockquote>
+<h2 id="3-risk-assessment">3. Risk Assessment</h2>
+<h3 id="31-methodology">3.1 Methodology</h3>
+<p>Risk is assessed using a <strong>likelihood x impact</strong> matrix. Each data processing activity is scored on two dimensions:</p>
+<p><strong>Likelihood</strong> (probability of harm occurring):</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Score</th><th style="text-align:left">Level</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Unlikely</td><td style="text-align:left">Remote chance of occurrence</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Possible</td><td style="text-align:left">Could occur in some circumstances</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Likely</td><td style="text-align:left">Will probably occur</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Almost Certain</td><td style="text-align:left">Expected to occur in most circumstances</td></tr>
+</tbody>
+</table>
+<p><strong>Impact</strong> (severity of harm to data subjects):</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Score</th><th style="text-align:left">Level</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Negligible</td><td style="text-align:left">Minor inconvenience, easily recoverable</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Limited</td><td style="text-align:left">Some damage, recoverable with effort</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Significant</td><td style="text-align:left">Serious harm, difficult to recover</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Maximum</td><td style="text-align:left">Irreversible or very serious harm</td></tr>
+</tbody>
+</table>
+<p><strong>Risk Rating:</strong> Likelihood x Impact</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Rating</th><th style="text-align:left">Score Range</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Low</td><td style="text-align:left">1-4</td><td style="text-align:left">Accept with standard controls</td></tr>
+<tr><td style="text-align:left">Medium</td><td style="text-align:left">5-8</td><td style="text-align:left">Mitigate with additional controls</td></tr>
+<tr><td style="text-align:left">High</td><td style="text-align:left">9-12</td><td style="text-align:left">Significant mitigation required before processing</td></tr>
+<tr><td style="text-align:left">Critical</td><td style="text-align:left">13-16</td><td style="text-align:left">Must not proceed without DPA consultation and substantial mitigation</td></tr>
+</tbody>
+</table>
+<h3 id="32-risk-assessment-results">3.2 Risk Assessment Results</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Processing Activity</th><th style="text-align:left">Data Processed</th><th style="text-align:left">Likelihood</th><th style="text-align:left">Impact</th><th style="text-align:left">Score</th><th style="text-align:left">Rating</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">AI processing via @ai-sdk/anthropic</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">3 (Likely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">AI processing via @ai-sdk/google</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">3 (Likely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">AI processing via @ai-sdk/openai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">3 (Likely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">File storage via @aws-sdk/client-s3</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">1 (Unlikely)</td><td style="text-align:left">1 (Negligible)</td><td style="text-align:left"><strong>1</strong></td><td style="text-align:left"><strong>Low</strong></td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Error/performance monitoring via @sentry/node</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>4</strong></td><td style="text-align:left"><strong>Low</strong></td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">AI processing via @vercel/ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">3 (Likely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">7</td><td style="text-align:left">Data persistence via drizzle</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">1 (Negligible)</td><td style="text-align:left"><strong>2</strong></td><td style="text-align:left"><strong>Low</strong></td></tr>
+<tr><td style="text-align:left">8</td><td style="text-align:left">Data processing via googleapis</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td><td style="text-align:left">1 (Unlikely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>2</strong></td><td style="text-align:left"><strong>Low</strong></td></tr>
+<tr><td style="text-align:left">9</td><td style="text-align:left">Data persistence via ioredis</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">3 (Significant)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">10</td><td style="text-align:left">Email communications via nodemailer</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>4</strong></td><td style="text-align:left"><strong>Low</strong></td></tr>
+<tr><td style="text-align:left">11</td><td style="text-align:left">AI processing via openai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">3 (Likely)</td><td style="text-align:left">2 (Limited)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">12</td><td style="text-align:left">Authentication via passport</td><td style="text-align:left">email, name, OAuth tokens, session data</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">3 (Significant)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">13</td><td style="text-align:left">Authentication via passport-google-oauth20</td><td style="text-align:left">email, name, Google profile data, OAuth tokens</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">3 (Significant)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">14</td><td style="text-align:left">Authentication via passport-microsoft</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">3 (Significant)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">15</td><td style="text-align:left">Data persistence via redis</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">3 (Significant)</td><td style="text-align:left"><strong>6</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+<tr><td style="text-align:left">16</td><td style="text-align:left">Payment processing via stripe</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">2 (Possible)</td><td style="text-align:left">4 (Maximum)</td><td style="text-align:left"><strong>8</strong></td><td style="text-align:left"><strong>Medium</strong></td></tr>
+</tbody>
+</table>
+<h3 id="33-risk-summary">3.3 Risk Summary</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Rating</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Critical</td><td style="text-align:left">0</td></tr>
+<tr><td style="text-align:left">High</td><td style="text-align:left">0</td></tr>
+<tr><td style="text-align:left">Medium</td><td style="text-align:left">11</td></tr>
+<tr><td style="text-align:left">Low</td><td style="text-align:left">5</td></tr>
+<tr><td style="text-align:left"><strong>Total</strong></td><td style="text-align:left"><strong>16</strong></td></tr>
+</tbody>
+</table>
+<h2 id="4-high-risk-processing-triggers">4. High-Risk Processing Triggers</h2>
+<p>Article 35(3) GDPR and the EDPB Guidelines on DPIAs identify specific types of processing that are likely to result in high risk. The following assessment is based on detected services:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Trigger</th><th style="text-align:left">Status</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Large-Scale Profiling</td><td style="text-align:left"><strong>Not detected</strong></td><td style="text-align:left">Systematic evaluation of personal aspects based on automated processing, including profiling (Art. 35(3)(a))</td></tr>
+<tr><td style="text-align:left">Systematic Monitoring</td><td style="text-align:left"><strong>Not detected</strong></td><td style="text-align:left">Systematic monitoring of a publicly accessible area on a large scale (Art. 35(3)(c))</td></tr>
+<tr><td style="text-align:left">Sensitive / Special Category Data</td><td style="text-align:left"><strong>Not detected</strong></td><td style="text-align:left">Processing of special categories of data on a large scale (Art. 35(3)(b))</td></tr>
+<tr><td style="text-align:left">AI-Powered Decision Making</td><td style="text-align:left"><strong>TRIGGERED</strong></td><td style="text-align:left">Automated decision-making with legal or similarly significant effects, including AI inference and content generation (Art. 22 GDPR)</td></tr>
+</tbody>
+</table>
+<blockquote><strong>1 high-risk trigger(s) detected.</strong> This DPIA is mandatory under Article 35 GDPR.</blockquote>
+<h2 id="5-data-flow-diagram">5. Data Flow Diagram</h2>
+<p>A detailed data flow map showing how personal data is collected, stored, processed, and shared across all integrated services is available in the companion document:</p>
+<blockquote><strong>See <a href="./DATA<em>FLOW</em>MAP.md">DATA<em>FLOW</em>MAP.md</a></strong> for the complete data flow diagram.</blockquote>
+<p>The data flow map covers:</p>
+<ul>
+<li><strong>Collection points:</strong> How and where personal data enters the system</li>
+<li><strong>Storage locations:</strong> Where personal data is persisted</li>
+<li><strong>Sharing / third-party transfers:</strong> Which services receive personal data and for what purpose</li>
+<li><strong>Cross-border transfers:</strong> Data flows outside the EEA</li>
+</ul>
+<h2 id="6-risk-mitigation-measures">6. Risk Mitigation Measures</h2>
+<p>The following mitigation measures are recommended for each category of data processing activity detected in the application:</p>
+<h3 id="61-ai-ai-sdkanthropic-ai-sdkgoogle-ai-sdkopenai-vercelai-openai">6.1 Ai (@ai-sdk/anthropic, @ai-sdk/google, @ai-sdk/openai, @vercel/ai, openai)</h3>
+<p><strong>Current risk rating:</strong> Medium</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement input/output filtering to prevent transmission of unnecessary personal data</li>
+<li><input type="checkbox" disabled> Enable opt-out mechanisms for AI-powered features</li>
+<li><input type="checkbox" disabled> Conduct regular audits of AI provider data handling practices</li>
+<li><input type="checkbox" disabled> Minimize data sent to AI providers (data minimization principle)</li>
+<li><input type="checkbox" disabled> Ensure AI provider DPA is in place with SCCs for international transfers</li>
+<li><input type="checkbox" disabled> Implement human oversight for AI-assisted decisions affecting individuals</li>
+</ul>
+<h3 id="62-storage-aws-sdkclient-s3">6.2 Storage (@aws-sdk/client-s3)</h3>
+<p><strong>Current risk rating:</strong> Low</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Encrypt files at rest and in transit</li>
+<li><input type="checkbox" disabled> Implement access controls on stored files</li>
+<li><input type="checkbox" disabled> Establish data retention and deletion policies for uploaded files</li>
+<li><input type="checkbox" disabled> Scan uploaded files for malware before storage</li>
+</ul>
+<h3 id="63-monitoring-sentrynode">6.3 Monitoring (@sentry/node)</h3>
+<p><strong>Current risk rating:</strong> Low</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Configure PII scrubbing in error reports and stack traces</li>
+<li><input type="checkbox" disabled> Limit user context attached to monitoring events</li>
+<li><input type="checkbox" disabled> Set appropriate data retention periods for monitoring data</li>
+<li><input type="checkbox" disabled> Restrict access to monitoring dashboards to authorized personnel</li>
+</ul>
+<h3 id="64-database-drizzle-ioredis-redis">6.4 Database (drizzle, ioredis, redis)</h3>
+<p><strong>Current risk rating:</strong> Medium</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Encrypt sensitive fields at the application level</li>
+<li><input type="checkbox" disabled> Implement role-based access controls for database access</li>
+<li><input type="checkbox" disabled> Enable audit logging for data access and modifications</li>
+<li><input type="checkbox" disabled> Establish and enforce data retention schedules</li>
+</ul>
+<h3 id="65-other-googleapis">6.5 Other (googleapis)</h3>
+<p><strong>Current risk rating:</strong> Low</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Review data processing activities and apply data minimization</li>
+<li><input type="checkbox" disabled> Ensure appropriate DPAs are in place with the service provider</li>
+<li><input type="checkbox" disabled> Conduct periodic reviews of necessity and proportionality</li>
+</ul>
+<h3 id="66-email-nodemailer">6.6 Email (nodemailer)</h3>
+<p><strong>Current risk rating:</strong> Low</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Use transactional email only for necessary communications</li>
+<li><input type="checkbox" disabled> Implement unsubscribe mechanisms for marketing emails</li>
+<li><input type="checkbox" disabled> Avoid embedding tracking pixels where not strictly necessary</li>
+<li><input type="checkbox" disabled> Ensure email provider DPA is in place</li>
+</ul>
+<h3 id="67-auth-passport-passport-google-oauth20-passport-microsoft">6.7 Auth (passport, passport-google-oauth20, passport-microsoft)</h3>
+<p><strong>Current risk rating:</strong> Medium</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Enforce strong password policies or passwordless authentication</li>
+<li><input type="checkbox" disabled> Implement multi-factor authentication (MFA)</li>
+<li><input type="checkbox" disabled> Minimize profile data collected during registration</li>
+<li><input type="checkbox" disabled> Regularly rotate and securely store OAuth tokens and secrets</li>
+</ul>
+<h3 id="68-payment-stripe">6.8 Payment (stripe)</h3>
+<p><strong>Current risk rating:</strong> Medium</p>
+<p><strong>Recommended measures:</strong></p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Use tokenization to avoid direct handling of payment card data</li>
+<li><input type="checkbox" disabled> Ensure PCI DSS compliance through the payment processor</li>
+<li><input type="checkbox" disabled> Limit stored payment data to transaction references only</li>
+<li><input type="checkbox" disabled> Implement strong authentication for payment-related actions</li>
+</ul>
+<h2 id="7-consultation-requirements">7. Consultation Requirements</h2>
+<h3 id="71-data-protection-authority-consultation-art-36-gdpr">7.1 Data Protection Authority Consultation (Art. 36 GDPR)</h3>
+<p>Under Article 36 GDPR, the controller must consult the supervisory authority prior to processing where a DPIA indicates that the processing would result in a high risk in the absence of measures taken by the controller to mitigate the risk.</p>
+<p><strong>Consultation required:</strong> <strong>Not at this time</strong> — Based on the current risk assessment, the identified risks can be mitigated through the measures outlined in this DPIA. However, this should be re-evaluated if processing activities change.</p>
+<h3 id="72-internal-consultation">7.2 Internal Consultation</h3>
+<p>Regardless of DPA consultation requirements, the following internal stakeholders should review this DPIA:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Data Protection Officer</li>
+<li><input type="checkbox" disabled> Legal / Compliance team</li>
+<li><input type="checkbox" disabled> Engineering / Development team</li>
+<li><input type="checkbox" disabled> Information Security team</li>
+<li><input type="checkbox" disabled> Product Management</li>
+</ul>
+<h2 id="8-review-and-monitoring">8. Review and Monitoring</h2>
+<h3 id="81-review-schedule">8.1 Review Schedule</h3>
+<p>This DPIA must be reviewed:</p>
+<ul>
+<li><strong>At least annually</strong>, or</li>
+<li>When there is a <strong>significant change</strong> in processing operations, including:</li>
+<li>New services or data processors added</li>
+<li>Changes in the type or volume of data processed</li>
+<li>New purposes for processing</li>
+<li>Changes in the technical or organizational measures</li>
+<li>Security incidents involving personal data</li>
+</ul>
+<h3 id="82-version-history">8.2 Version History</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Version</th><th style="text-align:left">Date</th><th style="text-align:left">Author</th><th style="text-align:left">Changes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1.0</td><td style="text-align:left">2026-03-16</td><td style="text-align:left">Auto-generated</td><td style="text-align:left">Initial DPIA based on code analysis</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Action required:</strong> Maintain this version history as the DPIA is reviewed and updated.</blockquote>
+<h2 id="9-approval-and-sign-off">9. Approval and Sign-Off</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Name</th><th style="text-align:left">Signature</th><th style="text-align:left">Date</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Data Controller</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td></tr>
+<tr><td style="text-align:left">Data Protection Officer</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td></tr>
+<tr><td style="text-align:left">IT / Security Lead</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td></tr>
+<tr><td style="text-align:left">Legal / Compliance</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong><strong><em></strong></em>_</td><td style="text-align:left"><strong><em></strong><strong></em></strong></td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This Privacy Impact Assessment was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. This document is a starting point and must be reviewed, completed, and approved by qualified personnel including your Data Protection Officer and legal counsel to ensure compliance with GDPR Article 35 and other applicable regulations. It does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

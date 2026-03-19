@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHANGE MANAGEMENT POLICY — chatwoot</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>CHANGE MANAGEMENT POLICY</h1>
+      <p class="meta">chatwoot &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="change-management-policy">Change Management Policy</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @chatwoot/chatwoot</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Security Policy (<code>SECURITY.md</code>)</li>
+<li>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</li>
+<li>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</li>
+</ul>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This policy establishes the change management process for the <strong>@chatwoot/chatwoot</strong> application. It defines requirements for code review, testing, deployment approval, rollback procedures, and change documentation. It supports compliance with SOC 2 CC8.1 (Change Management), ISO 27001 Annex A.12.1.2, and GDPR Article 32 (security of processing).</p>
+<h2 id="2-scope">2. Scope</h2>
+<p>This policy applies to all changes to:</p>
+<ul>
+<li>Application source code</li>
+<li>Infrastructure configuration</li>
+<li>Database schemas and migrations</li>
+<li>Third-party service integrations</li>
+<li>Environment variables and secrets</li>
+<li>CI/CD pipeline configurations</li>
+</ul>
+<hr>
+<h2 id="3-detected-cicd-infrastructure">3. Detected CI/CD Infrastructure</h2>
+<p>The following CI/CD platforms and tools were detected in the project:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Platform</th><th style="text-align:left">Config File</th><th style="text-align:left">Capabilities</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Git</td><td style="text-align:left">.git</td><td style="text-align:left">Version control, Commit history, Branch management, GitHub integration, Pull request workflow</td></tr>
+<tr><td style="text-align:left">GitHub Actions</td><td style="text-align:left">.github/workflows</td><td style="text-align:left">Automated workflows, PR checks, Deployment pipelines, Branch protection integration</td></tr>
+<tr><td style="text-align:left">CircleCI</td><td style="text-align:left">.circleci/config.yml</td><td style="text-align:left">Workflow orchestration, Parallel testing, Docker layer caching, Approval jobs</td></tr>
+<tr><td style="text-align:left">Docker</td><td style="text-align:left">docker-compose.yaml</td><td style="text-align:left">Container builds, Multi-stage builds, Service orchestration</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-change-categories">4. Change Categories</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Description</th><th style="text-align:left">Approval Required</th><th style="text-align:left">Examples</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Standard</td><td style="text-align:left">Routine changes following established procedures</td><td style="text-align:left">Peer review</td><td style="text-align:left">Bug fixes, minor UI changes, dependency updates</td></tr>
+<tr><td style="text-align:left">Normal</td><td style="text-align:left">Changes requiring additional review and testing</td><td style="text-align:left">Lead + peer review</td><td style="text-align:left">New features, API changes, schema migrations</td></tr>
+<tr><td style="text-align:left">Emergency</td><td style="text-align:left">Critical fixes for production incidents</td><td style="text-align:left">Post-deployment review</td><td style="text-align:left">Security patches, data breach mitigation, service outages</td></tr>
+<tr><td style="text-align:left">Major</td><td style="text-align:left">Significant architectural or infrastructure changes</td><td style="text-align:left">CTO/VP Engineering + team lead</td><td style="text-align:left">Database migrations, service rewrites, infrastructure changes</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-code-review-requirements">5. Code Review Requirements</h2>
+<h3 id="51-review-standards">5.1 Review Standards</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Requirement</th><th style="text-align:left">Standard</th><th style="text-align:left">Applies To</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Minimum reviewers</td><td style="text-align:left">1 peer reviewer</td><td style="text-align:left">All changes</td></tr>
+<tr><td style="text-align:left">Additional reviewers</td><td style="text-align:left">2 reviewers</td><td style="text-align:left">Changes to auth, payment, PII handling</td></tr>
+<tr><td style="text-align:left">Review response time</td><td style="text-align:left">Within 1 business day</td><td style="text-align:left">Standard changes</td></tr>
+<tr><td style="text-align:left">Review response time</td><td style="text-align:left">Within 4 hours</td><td style="text-align:left">Emergency changes</td></tr>
+</tbody>
+</table>
+<h3 id="52-review-checklist">5.2 Review Checklist</h3>
+<p>Every code review must verify:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Code follows project coding standards and patterns</li>
+<li><input type="checkbox" disabled> Unit tests cover new functionality and edge cases</li>
+<li><input type="checkbox" disabled> No hardcoded secrets, credentials, or PII in code</li>
+<li><input type="checkbox" disabled> Database migrations are reversible</li>
+<li><input type="checkbox" disabled> API changes maintain backward compatibility (or are versioned)</li>
+<li><input type="checkbox" disabled> Error handling is comprehensive (no swallowed exceptions)</li>
+<li><input type="checkbox" disabled> Logging does not include sensitive data (passwords, tokens, PII)</li>
+<li><input type="checkbox" disabled> Dependencies are from trusted sources with acceptable licenses</li>
+<li><input type="checkbox" disabled> Payment-related changes comply with PCI DSS requirements</li>
+<li><input type="checkbox" disabled> No credit card data is logged or stored in plaintext</li>
+<li><input type="checkbox" disabled> AI model changes include updated model cards and disclosures</li>
+<li><input type="checkbox" disabled> AI input/output handling follows data minimization principles</li>
+<li><input type="checkbox" disabled> Authentication changes follow OWASP guidelines</li>
+<li><input type="checkbox" disabled> Session management changes maintain security properties</li>
+</ul>
+<h3 id="53-automated-checks">5.3 Automated Checks</h3>
+<p>The following automated checks should gate all pull requests:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Check</th><th style="text-align:left">Purpose</th><th style="text-align:left">Required to Pass</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Unit tests</td><td style="text-align:left">Prevent regressions</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Integration tests</td><td style="text-align:left">Verify system behavior</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Linting</td><td style="text-align:left">Code quality and style</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Type checking</td><td style="text-align:left">Type safety</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Security scanning</td><td style="text-align:left">Vulnerability detection</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">License compliance</td><td style="text-align:left">Open source license audit</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left">Build verification</td><td style="text-align:left">Compilation success</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-deployment-approval-process">6. Deployment Approval Process</h2>
+<h3 id="61-approval-matrix">6.1 Approval Matrix</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Change Category</th><th style="text-align:left">Approvers</th><th style="text-align:left">Environment</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Standard</td><td style="text-align:left">Automated (CI passes)</td><td style="text-align:left">Staging, then Production</td></tr>
+<tr><td style="text-align:left">Normal</td><td style="text-align:left">Team lead approval</td><td style="text-align:left">Staging, then Production</td></tr>
+<tr><td style="text-align:left">Emergency</td><td style="text-align:left">Any senior engineer (post-review within 24h)</td><td style="text-align:left">Direct to Production</td></tr>
+<tr><td style="text-align:left">Major</td><td style="text-align:left">CTO/VP Engineering + affected team leads</td><td style="text-align:left">Staging (extended soak), then Production</td></tr>
+</tbody>
+</table>
+<h3 id="62-deployment-steps">6.2 Deployment Steps</h3>
+<ol>
+<li><strong>Pre-deployment</strong></li>
+</ol>
+<ul>
+<li>All automated checks pass (CI green)</li>
+<li>Code review approved by required reviewers</li>
+<li>Deployment plan documented (for Normal/Major changes)</li>
+<li>Rollback plan verified</li>
+</ul>
+<ol>
+<li><strong>Staging deployment</strong></li>
+</ol>
+<ul>
+<li>Deploy to staging environment</li>
+<li>Run smoke tests and integration tests</li>
+<li>Verify no performance regressions</li>
+<li>Minimum soak time: 1 hour (Standard), 24 hours (Normal), 48 hours (Major)</li>
+</ul>
+<ol>
+<li><strong>Production deployment</strong></li>
+</ol>
+<ul>
+<li>Deploy during approved maintenance window (or progressively via canary/blue-green)</li>
+<li>Monitor error rates, latency, and key metrics</li>
+<li>Verify health checks pass</li>
+<li>Confirm no user-facing regressions</li>
+</ul>
+<ol>
+<li><strong>Post-deployment</strong></li>
+</ol>
+<ul>
+<li>Update change log</li>
+<li>Notify stakeholders</li>
+<li>Monitor for 1 hour minimum post-deploy</li>
+</ul>
+<hr>
+<h2 id="7-rollback-procedures">7. Rollback Procedures</h2>
+<h3 id="71-rollback-triggers">7.1 Rollback Triggers</h3>
+<p>A rollback must be initiated when:</p>
+<ul>
+<li>Error rate increases by more than <strong>5x</strong> baseline</li>
+<li>Response time increases by more than <strong>3x</strong> baseline</li>
+<li>Any <strong>data integrity</strong> issue is detected</li>
+<li>Any <strong>security vulnerability</strong> is discovered in the deployed change</li>
+<li>Core user flows are <strong>broken</strong> (login, checkout, data access)</li>
+</ul>
+<h3 id="72-rollback-process">7.2 Rollback Process</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Step</th><th style="text-align:left">Action</th><th style="text-align:left">Responsible</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Confirm rollback decision</td><td style="text-align:left">On-call engineer + team lead</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Initiate rollback (revert deployment)</td><td style="text-align:left">On-call engineer</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Verify rollback success (health checks, smoke tests)</td><td style="text-align:left">On-call engineer</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Notify stakeholders</td><td style="text-align:left">Engineering lead</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Create post-mortem ticket</td><td style="text-align:left">Engineering lead</td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">Root cause analysis within 48 hours</td><td style="text-align:left">Responsible team</td></tr>
+</tbody>
+</table>
+<h3 id="73-rollback-methods">7.3 Rollback Methods</h3>
+<ul>
+<li><strong>Git revert:</strong> Create a revert commit and deploy through normal pipeline</li>
+<li><strong>Database rollback:</strong> Execute reverse migration scripts (must be tested pre-deployment)</li>
+<li><strong>Feature flag:</strong> Disable feature flag to hide change without code rollback</li>
+</ul>
+<hr>
+<h2 id="8-change-log-requirements">8. Change Log Requirements</h2>
+<h3 id="81-required-documentation">8.1 Required Documentation</h3>
+<p>Every change must be documented with:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Change ID</td><td style="text-align:left">Unique identifier</td><td style="text-align:left">CHG-2026-0042</td></tr>
+<tr><td style="text-align:left">Date</td><td style="text-align:left">Date of deployment</td><td style="text-align:left">2026-03-15</td></tr>
+<tr><td style="text-align:left">Author</td><td style="text-align:left">Who made the change</td><td style="text-align:left">jane@company.com</td></tr>
+<tr><td style="text-align:left">Category</td><td style="text-align:left">Standard / Normal / Emergency / Major</td><td style="text-align:left">Normal</td></tr>
+<tr><td style="text-align:left">Description</td><td style="text-align:left">What changed and why</td><td style="text-align:left">Added subscription billing via Stripe</td></tr>
+<tr><td style="text-align:left">Impact</td><td style="text-align:left">Systems, services, or data affected</td><td style="text-align:left">Payment flow, user billing data</td></tr>
+<tr><td style="text-align:left">Approver</td><td style="text-align:left">Who approved the change</td><td style="text-align:left">john@company.com</td></tr>
+<tr><td style="text-align:left">Rollback plan</td><td style="text-align:left">How to undo if needed</td><td style="text-align:left">Revert PR #123, run migration down</td></tr>
+<tr><td style="text-align:left">Status</td><td style="text-align:left">Planned / In Progress / Completed / Rolled Back</td><td style="text-align:left">Completed</td></tr>
+</tbody>
+</table>
+<h3 id="82-change-log-format">8.2 Change Log Format</h3>
+<p>Maintain a <code>CHANGELOG.md</code> in the repository root using <a href="https://keepachangelog.com/">Keep a Changelog</a> format:</p>
+<pre><code>## [1.2.0] - 2026-03-15
+### Added
+- Subscription billing via Stripe
+### Changed
+- Updated user profile API to include billing status
+### Fixed
+- Session timeout not respecting configured duration</code></pre>
+<hr>
+<h2 id="9-compliance-requirements">9. Compliance Requirements</h2>
+<h3 id="91-audit-trail">9.1 Audit Trail</h3>
+<ol>
+<li>All changes must be traceable through version control commits</li>
+<li>Deployment logs must be retained for a minimum of <strong>1 year</strong></li>
+<li>Approval records must be preserved (PR reviews, deployment approvals)</li>
+<li>Emergency changes must have <strong>retroactive review</strong> within 24 hours</li>
+</ol>
+<h3 id="92-separation-of-duties">9.2 Separation of Duties</h3>
+<ol>
+<li>The person who writes code should <strong>not</strong> be the sole person who approves it</li>
+<li>Production deployment access should be <strong>limited</strong> to authorized personnel</li>
+<li>Database migration execution should require <strong>separate approval</strong> from code changes</li>
+</ol>
+<h3 id="93-regulatory-alignment">9.3 Regulatory Alignment</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Regulation</th><th style="text-align:left">Change Management Requirement</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">SOC 2 CC8.1</td><td style="text-align:left">Changes are authorized, designed, developed, configured, documented, tested, approved, and implemented</td></tr>
+<tr><td style="text-align:left">ISO 27001 A.12.1.2</td><td style="text-align:left">Change management procedures for information processing facilities</td></tr>
+<tr><td style="text-align:left">GDPR Art. 32</td><td style="text-align:left">Appropriate technical measures including ability to restore availability after incidents</td></tr>
+<tr><td style="text-align:left">PCI DSS 6.5</td><td style="text-align:left">Address common coding vulnerabilities in software development processes</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-policy-review">10. Policy Review</h2>
+<p>This change management policy should be reviewed:</p>
+<ul>
+<li><strong>Quarterly</strong> as part of the security and compliance review cycle</li>
+<li><strong>When CI/CD infrastructure changes</strong> (new platforms, tools, or workflows)</li>
+<li><strong>After a failed deployment</strong> or rollback to identify process gaps</li>
+<li><strong>When regulatory requirements</strong> change</li>
+</ul>
+<p>For questions about this policy, contact [your-email@example.com].</p>
+<hr>
+<p><em>This Change Management Policy was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Review and verify all entries for accuracy. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

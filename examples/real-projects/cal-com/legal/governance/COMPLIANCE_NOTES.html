@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE NOTES — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE NOTES</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="compliance-notes">Compliance Notes</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> calcom-monorepo</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Compliance Timeline (<code>COMPLIANCE_TIMELINE.md</code>)</li>
+<li>Annual Review Checklist (<code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code>)</li>
+<li>Regulatory Updates (<code>REGULATORY_UPDATES.md</code>)</li>
+</ul>
+<hr>
+<p>This document provides an overview of privacy and data protection regulations that may apply to your project based on the services detected in your codebase and your configured jurisdictions.</p>
+<blockquote><strong>Disclaimer:</strong> This is not legal advice. Consult qualified legal counsel to determine your specific compliance obligations.</blockquote>
+<h2 id="1-detected-services-summary">1. Detected Services Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Collected</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Other</td><td style="text-align:left">contact information, email addresses, names</td></tr>
+<tr><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Error Monitoring</td><td style="text-align:left">error data, stack traces, user context</td></tr>
+<tr><td style="text-align:left">@upstash/redis</td><td style="text-align:left">Database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">Google Analytics</td><td style="text-align:left">Analytics</td><td style="text-align:left">page views, user behavior, device information</td></tr>
+<tr><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Analytics</td><td style="text-align:left">page views, user behavior, custom events</td></tr>
+<tr><td style="text-align:left">google-auth-library</td><td style="text-align:left">Authentication</td><td style="text-align:left">OAuth tokens, Google profile data, email</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Other</td><td style="text-align:left">user data via Google APIs, calendar data, email data</td></tr>
+<tr><td style="text-align:left">intercom</td><td style="text-align:left">Other</td><td style="text-align:left">user profiles, email, name</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">Database</td><td style="text-align:left">cached data, session data</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">Authentication</td><td style="text-align:left">email, name, profile picture</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Email Service</td><td style="text-align:left">email addresses, email content</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">Authentication</td><td style="text-align:left">email, name, OAuth tokens</td></tr>
+<tr><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Analytics</td><td style="text-align:left">page views, referrer data, device information</td></tr>
+<tr><td style="text-align:left">PostgreSQL</td><td style="text-align:left">Database</td><td style="text-align:left">application data, user records</td></tr>
+<tr><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">Database</td><td style="text-align:left">application data, user records</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">Analytics</td><td style="text-align:left">user behavior, session recordings, feature flag usage</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">Database</td><td style="text-align:left">user data as defined in schema</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">Database</td><td style="text-align:left">session data, cache data</td></tr>
+<tr><td style="text-align:left">Redis (env)</td><td style="text-align:left">Database</td><td style="text-align:left">session data, cache data</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment Processing</td><td style="text-align:left">payment information, billing address, email</td></tr>
+<tr><td style="text-align:left">twilio</td><td style="text-align:left">Other</td><td style="text-align:left">phone numbers, SMS message content, voice call metadata</td></tr>
+<tr><td style="text-align:left">web-push</td><td style="text-align:left">Other</td><td style="text-align:left">push subscription endpoints, device tokens, notification content</td></tr>
+</tbody>
+</table>
+<h2 id="2-general-data-protection-regulation-gdpr">2. General Data Protection Regulation (GDPR)</h2>
+<p><strong>Applies to:</strong> Processing of personal data of individuals in the EU/EEA</p>
+<p><strong>Enforcement date:</strong> May 25, 2018</p>
+<p><strong>Maximum fine:</strong> EUR 20 million or 4% of annual global turnover</p>
+<h3 id="key-requirements">Key Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Identify a lawful basis for each processing activity (Art. 6)</li>
+<li><input type="checkbox" disabled> Provide a privacy notice covering all Art. 13 requirements</li>
+<li><input type="checkbox" disabled> Implement data subject rights procedures (access, rectification, erasure, portability, objection, restriction)</li>
+<li><input type="checkbox" disabled> Maintain a Record of Processing Activities (Art. 30)</li>
+<li><input type="checkbox" disabled> Conduct Data Protection Impact Assessments where required (Art. 35)</li>
+<li><input type="checkbox" disabled> Ensure appropriate technical and organisational security measures (Art. 32)</li>
+<li><input type="checkbox" disabled> Implement transfer safeguards (SCCs/DPF) for 7 US-based service(s)</li>
+<li><input type="checkbox" disabled> Implement cookie consent mechanism (ePrivacy Directive)</li>
+<li><input type="checkbox" disabled> Appoint a Data Protection Officer if required (Art. 37)</li>
+<li><input type="checkbox" disabled> Establish data breach notification procedures (72-hour requirement, Art. 33)</li>
+</ul>
+<h2 id="3-california-consumer-privacy-act-ccpacpra">3. California Consumer Privacy Act (CCPA/CPRA)</h2>
+<p><strong>Applies to:</strong> Businesses that collect personal information of California residents</p>
+<p><strong>Enforcement date:</strong> January 1, 2020 (CCPA); January 1, 2023 (CPRA amendments)</p>
+<p><strong>Maximum fine:</strong> $7,500 per intentional violation</p>
+<h3 id="key-requirements">Key Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Provide a "Do Not Sell or Share My Personal Information" link</li>
+<li><input type="checkbox" disabled> Disclose categories of personal information collected and purposes</li>
+<li><input type="checkbox" disabled> Honor opt-out requests within 15 business days</li>
+<li><input type="checkbox" disabled> Respond to consumer requests within 45 days</li>
+<li><input type="checkbox" disabled> Provide at least two methods for consumers to submit requests</li>
+<li><input type="checkbox" disabled> Include CCPA-specific disclosures in your privacy policy</li>
+<li><input type="checkbox" disabled> Honor Global Privacy Control (GPC) signals</li>
+<li><input type="checkbox" disabled> Review analytics service data sharing — may constitute "sale" or "sharing" under CCPA</li>
+<li><input type="checkbox" disabled> Ensure payment processors have appropriate data processing agreements</li>
+</ul>
+<h2 id="4-eprivacy-directive-200258ec">4. ePrivacy Directive (2002/58/EC)</h2>
+<p><strong>Applies to:</strong> Any service that uses cookies or similar tracking technologies for users in the EU/EEA</p>
+<p><strong>Key article:</strong> Article 5(3) — prior opt-in consent for non-essential cookies</p>
+<p><strong>Enforcement:</strong> National data protection authorities (e.g., CNIL fined SHEIN EUR 150M in 2026)</p>
+<h3 id="key-requirements">Key Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Obtain prior opt-in consent before setting non-essential cookies</li>
+<li><input type="checkbox" disabled> Provide granular cookie consent controls (accept analytics but reject marketing)</li>
+<li><input type="checkbox" disabled> Ensure equal access to service regardless of cookie consent decision</li>
+<li><input type="checkbox" disabled> Make consent withdrawal as easy as giving consent</li>
+<li><input type="checkbox" disabled> Document and store consent records</li>
+<li><input type="checkbox" disabled> Implement complete consent signaling from banner through CMP to all tracking tools</li>
+<li><input type="checkbox" disabled> Classify detected analytics cookies and ensure each requires consent</li>
+</ul>
+<blockquote>See the generated <strong>Cookie Policy</strong> document for details on detected cookies and tracking technologies.</blockquote>
+<h2 id="5-payment-card-industry-data-security-standard-pci-dss">5. Payment Card Industry Data Security Standard (PCI DSS)</h2>
+<p><strong>Applies to:</strong> Any entity that stores, processes, or transmits cardholder data</p>
+<p><strong>Current version:</strong> PCI DSS v4.0.1 (mandatory March 31, 2025)</p>
+<p><strong>Enforcement:</strong> Payment card brands (Visa, Mastercard, etc.) via acquiring banks</p>
+<h3 id="key-requirements">Key Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Complete the appropriate Self-Assessment Questionnaire (SAQ) — likely SAQ A or SAQ A-EP</li>
+<li><input type="checkbox" disabled> Install and maintain network security controls (Req. 1)</li>
+<li><input type="checkbox" disabled> Apply secure configurations to all system components (Req. 2)</li>
+<li><input type="checkbox" disabled> Protect stored account data with strong cryptography (Req. 3)</li>
+<li><input type="checkbox" disabled> Encrypt cardholder data over open, public networks (Req. 4)</li>
+<li><input type="checkbox" disabled> Protect systems and networks from malicious software (Req. 5)</li>
+<li><input type="checkbox" disabled> Develop and maintain secure systems and software (Req. 6)</li>
+<li><input type="checkbox" disabled> Restrict access to cardholder data by business need-to-know (Req. 7)</li>
+<li><input type="checkbox" disabled> Log and monitor all access to cardholder data (Req. 10)</li>
+<li><input type="checkbox" disabled> Regularly test security systems and processes (Req. 11)</li>
+<li><input type="checkbox" disabled> Maintain an information security policy (Req. 12)</li>
+</ul>
+<h2 id="6-infrastructure-considerations">6. Infrastructure Considerations</h2>
+<p>Codepliant detected infrastructure configuration files (Dockerfiles, docker-compose, Kubernetes manifests) that have compliance implications.</p>
+<h3 id="key-requirements">Key Requirements</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document data stored in persistent volumes and define retention periods</li>
+<li><input type="checkbox" disabled> Implement backup and disaster recovery procedures for persistent data</li>
+<li><input type="checkbox" disabled> Ensure persistent data is encrypted at rest where required by regulation</li>
+<li><input type="checkbox" disabled> Maintain an inventory of all infrastructure services and their data flows</li>
+</ul>
+<h2 id="7-recommended-next-steps">7. Recommended Next Steps</h2>
+<ol>
+<li>Review all generated compliance documents with qualified legal counsel</li>
+<li>Complete the checklist items marked above for each applicable regulation</li>
+<li>Implement technical measures (consent management, data subject request handling)</li>
+<li>Train relevant staff on data protection obligations</li>
+<li>Set up regular compliance reviews (recommended: quarterly)</li>
+<li>Re-run Codepliant after adding or removing services to keep documents current</li>
+</ol>
+<hr>
+<p><em>This compliance notes document was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is for informational purposes only and does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

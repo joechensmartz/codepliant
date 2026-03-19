@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIVACY BY DESIGN CHECKLIST — chatwoot</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>PRIVACY BY DESIGN CHECKLIST</h1>
+      <p class="meta">chatwoot &middot; Last updated 2026-03-18 &middot; ~10 min read</p>
+    </header>
+    <h1 id="privacy-by-design-checklist">Privacy by Design Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Legal basis:</strong> GDPR Article 25 — Data Protection by Design and by Default</p>
+<p>This checklist implements the requirements of GDPR Article 25, which mandates that data protection is integrated into processing activities and business practices from the design stage through the lifecycle. Each item has been tailored to the services detected in the [Your Company Name] codebase.</p>
+<h2 id="1-data-minimization-article-51c">1. Data Minimization (Article 5(1)(c))</h2>
+<p>Ensure that only data which is necessary for each specific purpose is collected and processed.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Review each data collection point to verify necessity</li>
+<li><input type="checkbox" disabled> Document the purpose for each category of personal data collected</li>
+<li><input type="checkbox" disabled> Remove any data fields that are not strictly necessary</li>
+<li><input type="checkbox" disabled> Implement default settings that collect the minimum data required</li>
+<li><input type="checkbox" disabled> Only collect profile data essential for authentication (avoid optional fields by default)</li>
+<li><input type="checkbox" disabled> Limit OAuth scopes to the minimum required</li>
+<li><input type="checkbox" disabled> Configure analytics to anonymize IP addresses</li>
+<li><input type="checkbox" disabled> Disable user-level tracking where aggregate data suffices</li>
+<li><input type="checkbox" disabled> Set analytics data retention to the shortest period needed</li>
+<li><input type="checkbox" disabled> Limit advertising pixel data collection to conversion events only</li>
+<li><input type="checkbox" disabled> Disable enhanced matching unless explicitly required and consented to</li>
+<li><input type="checkbox" disabled> Only store email addresses necessary for transactional communications</li>
+<li><input type="checkbox" disabled> Implement unsubscribe mechanisms for all marketing communications</li>
+<li><input type="checkbox" disabled> Strip PII from error reports before sending to monitoring services</li>
+<li><input type="checkbox" disabled> Configure user context in error tracking to use anonymized identifiers</li>
+</ul>
+<h2 id="2-purpose-limitation-article-51b">2. Purpose Limitation (Article 5(1)(b))</h2>
+<p>Data must be collected for specified, explicit, and legitimate purposes.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document the lawful basis for each processing activity</li>
+<li><input type="checkbox" disabled> Ensure data is not repurposed without additional consent</li>
+<li><input type="checkbox" disabled> Maintain a Record of Processing Activities (ROPA)</li>
+<li><input type="checkbox" disabled> Document the specific purpose for AI data processing</li>
+<li><input type="checkbox" disabled> Ensure AI training data usage is explicitly authorized</li>
+<li><input type="checkbox" disabled> Obtain explicit consent before using personal data for model training</li>
+<li><input type="checkbox" disabled> Limit payment data usage to transaction processing and fraud prevention</li>
+<li><input type="checkbox" disabled> Do not use payment data for marketing or profiling</li>
+</ul>
+<h2 id="3-storage-limitation-article-51e">3. Storage Limitation (Article 5(1)(e))</h2>
+<p>Personal data should be kept only as long as necessary for its purpose.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Define retention periods for each category of personal data</li>
+<li><input type="checkbox" disabled> Implement automated data deletion/anonymization after retention period</li>
+<li><input type="checkbox" disabled> Document retention justification for any data kept beyond 3 years</li>
+<li><input type="checkbox" disabled> Implement soft-delete with scheduled hard-delete for database records</li>
+<li><input type="checkbox" disabled> Set up automated database cleanup jobs for expired data</li>
+<li><input type="checkbox" disabled> Configure object lifecycle policies for cloud storage buckets</li>
+<li><input type="checkbox" disabled> Implement automated expiration for user-uploaded content</li>
+</ul>
+<h2 id="4-integrity-confidentiality-article-51f">4. Integrity & Confidentiality (Article 5(1)(f))</h2>
+<p>Personal data must be processed with appropriate security measures.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Encrypt personal data at rest (AES-256 or equivalent)</li>
+<li><input type="checkbox" disabled> Encrypt personal data in transit (TLS 1.2+)</li>
+<li><input type="checkbox" disabled> Implement role-based access controls (RBAC)</li>
+<li><input type="checkbox" disabled> Maintain audit logs for personal data access</li>
+<li><input type="checkbox" disabled> Conduct regular security assessments and penetration tests</li>
+<li><input type="checkbox" disabled> Use strong password hashing (bcrypt, Argon2, or scrypt)</li>
+<li><input type="checkbox" disabled> Implement session timeout and automatic logout</li>
+<li><input type="checkbox" disabled> Enable multi-factor authentication where available</li>
+<li><input type="checkbox" disabled> Maintain PCI DSS compliance for payment data handling</li>
+<li><input type="checkbox" disabled> Use tokenization for stored payment methods</li>
+</ul>
+<h2 id="5-transparency-articles-12-14">5. Transparency (Articles 12-14)</h2>
+<p>Data subjects must be informed about data processing in a clear and accessible manner.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Publish a clear and accessible Privacy Policy</li>
+<li><input type="checkbox" disabled> Provide layered privacy notices (short + detailed)</li>
+<li><input type="checkbox" disabled> Inform users about their rights at the point of data collection</li>
+<li><input type="checkbox" disabled> Maintain an up-to-date list of sub-processors</li>
+<li><input type="checkbox" disabled> Disclose use of AI/automated decision-making (Article 22)</li>
+<li><input type="checkbox" disabled> Provide meaningful information about the logic of automated decisions</li>
+<li><input type="checkbox" disabled> Implement a cookie consent banner with granular controls</li>
+<li><input type="checkbox" disabled> Provide a clear Cookie Policy listing all tracking technologies</li>
+</ul>
+<h2 id="6-data-subject-rights-articles-15-22">6. Data Subject Rights (Articles 15-22)</h2>
+<p>Systems must be designed to facilitate the exercise of data subject rights.</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Implement mechanisms for data access requests (Article 15)</li>
+<li><input type="checkbox" disabled> Support data rectification (Article 16)</li>
+<li><input type="checkbox" disabled> Support data erasure / right to be forgotten (Article 17)</li>
+<li><input type="checkbox" disabled> Support data portability in machine-readable format (Article 20)</li>
+<li><input type="checkbox" disabled> Implement right to restriction of processing (Article 18)</li>
+<li><input type="checkbox" disabled> Enable right to object to processing (Article 21)</li>
+<li><input type="checkbox" disabled> Respond to all DSARs within 30 days</li>
+<li><input type="checkbox" disabled> Implement right not to be subject to automated decision-making (Article 22)</li>
+<li><input type="checkbox" disabled> Provide human review option for AI-driven decisions with legal effects</li>
+</ul>
+<h2 id="7-privacy-enhancing-technologies-pets-recommendations">7. Privacy-Enhancing Technologies (PETs) Recommendations</h2>
+<p>Based on the detected services and data processing activities, the following privacy-enhancing technologies are recommended:</p>
+<h3 id="general">General</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Pseudonymization</strong>: Replace direct identifiers with pseudonyms in processing pipelines</li>
+<li><input type="checkbox" disabled> <strong>Data masking</strong>: Mask PII in non-production environments</li>
+<li><input type="checkbox" disabled> <strong>Access logging</strong>: Implement comprehensive audit trails for data access</li>
+</ul>
+<h3 id="analytics-tracking">Analytics & Tracking</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Differential privacy</strong>: Add noise to analytics datasets to prevent re-identification</li>
+<li><input type="checkbox" disabled> <strong>K-anonymity</strong>: Ensure analytics cohorts contain at least k individuals</li>
+<li><input type="checkbox" disabled> <strong>Server-side analytics</strong>: Process analytics events server-side to reduce client data exposure</li>
+<li><input type="checkbox" disabled> <strong>IP anonymization</strong>: Truncate IP addresses before storage</li>
+</ul>
+<h3 id="authentication-identity">Authentication & Identity</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Zero-knowledge proofs</strong>: Consider ZKP for age/credential verification without revealing details</li>
+<li><input type="checkbox" disabled> <strong>Secure enclaves</strong>: Process sensitive auth data in trusted execution environments</li>
+<li><input type="checkbox" disabled> <strong>Token-based sessions</strong>: Use short-lived, rotating tokens instead of persistent sessions</li>
+</ul>
+<h3 id="ai-machine-learning">AI & Machine Learning</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Federated learning</strong>: Train models without centralizing personal data</li>
+<li><input type="checkbox" disabled> <strong>On-device processing</strong>: Process sensitive data locally where possible</li>
+<li><input type="checkbox" disabled> <strong>Synthetic data</strong>: Use synthetic datasets for model development and testing</li>
+<li><input type="checkbox" disabled> <strong>Model explainability</strong>: Implement interpretability tools for automated decisions</li>
+</ul>
+<h3 id="payment-processing">Payment Processing</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Tokenization</strong>: Replace card data with non-reversible tokens</li>
+<li><input type="checkbox" disabled> <strong>Point-to-point encryption (P2PE)</strong>: Encrypt card data from capture to processing</li>
+</ul>
+<h3 id="data-storage">Data Storage</h3>
+<ul class="checklist">
+<li><input type="checkbox" disabled> <strong>Encryption at rest</strong>: Use envelope encryption with key rotation</li>
+<li><input type="checkbox" disabled> <strong>Field-level encryption</strong>: Encrypt individual PII fields in the database</li>
+<li><input type="checkbox" disabled> <strong>Secure deletion</strong>: Use cryptographic erasure for data deletion guarantees</li>
+</ul>
+<h2 id="8-detected-services-privacy-assessment">8. Detected Services — Privacy Assessment</h2>
+<p>The following services were detected in the codebase. Each requires a privacy impact evaluation:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Processed</th><th style="text-align:left">Privacy Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@amplitude/analytics-browser</td><td style="text-align:left">analytics</td><td style="text-align:left">user behavior, device information, session data</td><td style="text-align:left">Consent mechanism; IP anonymization; retention review</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">Encryption review; lifecycle policies; access controls</td></tr>
+<tr><td style="text-align:left">@twilio/voice-sdk</td><td style="text-align:left">other</td><td style="text-align:left">phone numbers, voice call metadata, call recordings, device information</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+<tr><td style="text-align:left">ActionCable</td><td style="text-align:left">other</td><td style="text-align:left">real-time user data, connection metadata, channel subscriptions, WebSocket messages</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+<tr><td style="text-align:left">ActionController::Cookies</td><td style="text-align:left">other</td><td style="text-align:left">session cookies, session data, CSRF tokens</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+<tr><td style="text-align:left">ActionMailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">Consent/opt-out mechanism; DPA with provider; retention policy</td></tr>
+<tr><td style="text-align:left">Active Storage</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata, storage service credentials, potential PII in uploaded content</td><td style="text-align:left">Encryption review; lifecycle policies; access controls</td></tr>
+<tr><td style="text-align:left">ActiveRecord</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema, timestamps, associations</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">ActiveStorage</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata, storage references</td><td style="text-align:left">Encryption review; lifecycle policies; access controls</td></tr>
+<tr><td style="text-align:left">aws-sdk-s3</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">Encryption review; lifecycle policies; access controls</td></tr>
+<tr><td style="text-align:left">devise</td><td style="text-align:left">auth</td><td style="text-align:left">email, password hash, session data, authentication tokens</td><td style="text-align:left">Minimize data collected; secure credential storage; session management</td></tr>
+<tr><td style="text-align:left">google-cloud-storage</td><td style="text-align:left">storage</td><td style="text-align:left">uploaded files, file metadata</td><td style="text-align:left">Encryption review; lifecycle policies; access controls</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">MailHog</td><td style="text-align:left">email</td><td style="text-align:left">email content</td><td style="text-align:left">Consent/opt-out mechanism; DPA with provider; retention policy</td></tr>
+<tr><td style="text-align:left">Meta Pixel</td><td style="text-align:left">advertising</td><td style="text-align:left">page views, conversion events, user behavior, device information</td><td style="text-align:left">Explicit consent required; cookie policy; data sharing transparency</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">Consent/opt-out mechanism; DPA with provider; retention policy</td></tr>
+<tr><td style="text-align:left">omniauth</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, profile data</td><td style="text-align:left">Minimize data collected; secure credential storage; session management</td></tr>
+<tr><td style="text-align:left">pg</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">database</td><td style="text-align:left">application data, user records</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">pundit</td><td style="text-align:left">auth</td><td style="text-align:left">user roles, authorization policies, access control data</td><td style="text-align:left">Minimize data collected; secure credential storage; session management</td></tr>
+<tr><td style="text-align:left">rack-attack</td><td style="text-align:left">other</td><td style="text-align:left">IP addresses, request metadata</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+<tr><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">Consent/opt-out mechanism; DPA with provider; retention policy</td></tr>
+<tr><td style="text-align:left">rails-activerecord</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">rails-sessions</td><td style="text-align:left">auth</td><td style="text-align:left">session cookies, CSRF tokens</td><td style="text-align:left">Minimize data collected; secure credential storage; session management</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">database</td><td style="text-align:left">session data, cache data</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">Redis (env)</td><td style="text-align:left">database</td><td style="text-align:left">session data, cache data</td><td style="text-align:left">Encryption at rest; access controls; backup encryption</td></tr>
+<tr><td style="text-align:left">ruby-openai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">DPIA required; document AI decision logic; assess bias risks</td></tr>
+<tr><td style="text-align:left">sentry-ruby</td><td style="text-align:left">monitoring</td><td style="text-align:left">error data, stack traces, user context, device information</td><td style="text-align:left">PII scrubbing in error reports; retention limits; access controls</td></tr>
+<tr><td style="text-align:left">sidekiq</td><td style="text-align:left">other</td><td style="text-align:left">job data, user data processed in background jobs</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">PCI DSS compliance; DPA with processor; tokenization review</td></tr>
+<tr><td style="text-align:left">twilio-ruby</td><td style="text-align:left">other</td><td style="text-align:left">phone numbers, SMS message content, voice call metadata</td><td style="text-align:left">Review data processing scope; assess DPA requirements</td></tr>
+</tbody>
+</table>
+<h2 id="9-review-schedule">9. Review Schedule</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Activity</th><th style="text-align:left">Frequency</th><th style="text-align:left">Responsible</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Privacy by Design checklist review</td><td style="text-align:left">Quarterly</td><td style="text-align:left">DPO / Privacy Team</td></tr>
+<tr><td style="text-align:left">Data minimization audit</td><td style="text-align:left">Semi-annually</td><td style="text-align:left">Engineering Lead</td></tr>
+<tr><td style="text-align:left">PET effectiveness assessment</td><td style="text-align:left">Annually</td><td style="text-align:left">Security Team</td></tr>
+<tr><td style="text-align:left">DPIA update for new processing</td><td style="text-align:left">Before launch</td><td style="text-align:left">DPO / Privacy Team</td></tr>
+<tr><td style="text-align:left">Sub-processor review</td><td style="text-align:left">Annually</td><td style="text-align:left">Legal / Procurement</td></tr>
+</tbody>
+</table>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Impact Assessment (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</li>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+</ul>
+<hr>
+<p><em>This checklist was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on detected services and data processing activities. It should be reviewed and adapted by your Data Protection Officer or legal counsel. This document does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENV AUDIT — formbricks</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>ENV AUDIT</h1>
+      <p class="meta">formbricks &middot; Last updated 2026-03-18 &middot; ~7 min read</p>
+    </header>
+    <h1 id="environment-variable-audit">Environment Variable Audit</h1>
+<blockquote>Generated on 2026-03-16 — 101 variable(s) detected. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="api-key-secret">API Key / Secret</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>AZUREAD<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BREVO<em>API</em>KEY</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHATWOOT<em>WEBSITE</em>TOKEN</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CRON_SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENCRYPTION_KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, apps/web/lib/utils/logger-helpers.test.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ENTERPRISE<em>LICENSE</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GITHUB_SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>SHEETS</em>CLIENT_SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LINGODOTDEV<em>API</em>KEY</code></td><td style="text-align:left">.env.example</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXTAUTH_SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NOTION<em>OAUTH</em>CLIENT_SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>CLIENT</em>SECRET</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PASSWORD<em>RESET</em>DISABLED</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>POSTHOG_KEY</code></td><td style="text-align:left">apps/web/next.config.mjs, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RECAPTCHA<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RECAPTCHA<em>SITE</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>ACCESS</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY<em>AUTH</em>TOKEN</code></td><td style="text-align:left">apps/web/next.config.mjs</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SLACK<em>CLIENT</em>SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PASSWORD</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>PUBLISHABLE</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>SECRET</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>STRIPE<em>WEBHOOK</em>SECRET</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TURNSTILE<em>SECRET</em>KEY</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>TURNSTILE<em>SITE</em>KEY</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>UNSPLASH<em>ACCESS</em>KEY</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="database">Database</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>DATABASE_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/database/src/client.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>REDIS_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/cache/src/client.test.ts, packages/cache/src/client.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SAML<em>DATABASE</em>URL</code></td><td style="text-align:left">apps/web/lib/env.ts, packages/database/src/scripts/create-saml-database.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h3 id="service-config">Service Config</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ASSET<em>PREFIX</em>URL</code></td><td style="text-align:left">apps/web/next.config.mjs</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CHATWOOT<em>BASE</em>URL</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>SHEETS</em>REDIRECT_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IMPRINT_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXTAUTH_URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.mjs, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>OTEL<em>EXPORTER</em>OTLP_ENDPOINT</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, apps/web/instrumentation.ts, packages/logger/src/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PRIVACY_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PROMETHEUS<em>EXPORTER</em>PORT</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PUBLIC_URL</code></td><td style="text-align:left">apps/web/app/middleware/domain-utils.test.ts, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>ENDPOINT</em>URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_HOST</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP_PORT</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>TERMS_URL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERCEL_URL</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>WEBAPP_URL</code></td><td style="text-align:left">.env.example, apps/web/next.config.mjs, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Found In</th><th style="text-align:left">Has Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>AIRTABLE<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ALLOW_SEED</code></td><td style="text-align:left">packages/database/src/seed.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>ANALYZE</code></td><td style="text-align:left">packages/surveys/vite.config.mts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUDIT<em>LOG</em>ENABLED</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUDIT<em>LOG</em>GET<em>USER</em>IP</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTH<em>SKIP</em>INVITE<em>FOR</em>SSO</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AUTH<em>SSO</em>DEFAULT<em>TEAM</em>ID</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZUREAD<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>AZUREAD<em>TENANT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BASE_PATH</code></td><td style="text-align:left">apps/web/next.config.mjs</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BREVO<em>LIST</em>ID</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>BUILD_UMD</code></td><td style="text-align:left">packages/surveys/vite.config.mts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CI</code></td><td style="text-align:left">playwright.config.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>DEBUG</code></td><td style="text-align:left">apps/web/lib/env.ts, packages/database/src/client.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>E2E_TESTING</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>AUTH</em>DISABLED</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>EMAIL<em>VERIFICATION</em>DISABLED</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>ENVIRONMENT</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, apps/web/lib/env.ts, packages/logger/src/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GITHUB_ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>GOOGLE<em>SHEETS</em>CLIENT_ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HTTP_PROXY</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>HTTPS_PROXY</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IMPRINT_ADDRESS</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>INVITE_DISABLED</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>IS<em>FORMBRICKS</em>CLOUD</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>LOG_LEVEL</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/logger/src/logger.test.ts, packages/logger/src/logger.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>MAIL_FROM</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>MAIL<em>FROM</em>NAME</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>NEXT_PHASE</code></td><td style="text-align:left">apps/web/modules/ee/license-check/lib/license.test.ts, apps/web/modules/ee/license-check/lib/license.ts, packages/logger/src/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NEXT_RUNTIME</code></td><td style="text-align:left">apps/web/instrumentation.ts, packages/logger/src/logger.test.ts, packages/logger/src/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NODE_ENV</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, apps/web/next.config.mjs, apps/web/sentry.server.config.ts, apps/web/app/error.tsx, apps/web/app/global-error.tsx, apps/web/app/posthog/PostHogIdentify.tsx, apps/web/lib/constants.ts, apps/web/lib/env.ts, apps/web/modules/ee/license-check/lib/license.ts, apps/web/modules/survey/components/template-list/index.tsx, apps/web/modules/ui/components/survey/index.tsx, packages/database/src/client.ts, packages/database/src/seed.ts, packages/logger/src/logger.test.ts, packages/logger/src/logger.ts, packages/surveys/vite.config.mts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NOTION<em>OAUTH</em>CLIENT_ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>CLIENT</em>ID</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>DISPLAY</em>NAME</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC_ISSUER</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OIDC<em>SIGNING</em>ALGORITHM</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OTEL<em>SERVICE</em>NAME</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, packages/logger/src/logger.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OTEL<em>TRACES</em>SAMPLER</code></td><td style="text-align:left">apps/web/instrumentation-node.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>OTEL<em>TRACES</em>SAMPLER_ARG</code></td><td style="text-align:left">apps/web/instrumentation-node.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>PROMETHEUS_ENABLED</code></td><td style="text-align:left">apps/web/instrumentation-node.ts, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>RATE<em>LIMITING</em>DISABLED</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>BUCKET</em>NAME</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>S3<em>FORCE</em>PATH_STYLE</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>S3_REGION</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts, packages/storage/src/constants.test.ts, packages/storage/src/constants.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_DSN</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SENTRY_ENVIRONMENT</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SESSION<em>MAX</em>AGE</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SLACK<em>CLIENT</em>ID</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP_AUTHENTICATED</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>REJECT</em>UNAUTHORIZED_TLS</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SMTP<em>SECURE</em>ENABLED</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>SMTP_USER</code></td><td style="text-align:left">.env.example, apps/web/lib/env.ts</td><td style="text-align:left">Yes</td></tr>
+<tr><td style="text-align:left"><code>USER<em>MANAGEMENT</em>MINIMUM_ROLE</code></td><td style="text-align:left">apps/web/lib/env.ts</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>VERSION</code></td><td style="text-align:left">packages/js-core/vite.config.ts</td><td style="text-align:left">No</td></tr>
+</tbody>
+</table>
+<h2 id="missing-documentation">Missing Documentation</h2>
+<p>The following variables are used but not listed in <code>.env.example</code>:</p>
+<ul>
+<li><code>ALLOW_SEED</code></li>
+<li><code>ANALYZE</code></li>
+<li><code>ASSET<em>PREFIX</em>URL</code></li>
+<li><code>AUDIT<em>LOG</em>ENABLED</code></li>
+<li><code>AUDIT<em>LOG</em>GET<em>USER</em>IP</code></li>
+<li><code>AUTH<em>SKIP</em>INVITE<em>FOR</em>SSO</code></li>
+<li><code>AUTH<em>SSO</em>DEFAULT<em>TEAM</em>ID</code></li>
+<li><code>BASE_PATH</code></li>
+<li><code>BREVO<em>API</em>KEY</code></li>
+<li><code>BREVO<em>LIST</em>ID</code></li>
+<li><code>BUILD_UMD</code></li>
+<li><code>CHATWOOT<em>BASE</em>URL</code></li>
+<li><code>CHATWOOT<em>WEBSITE</em>TOKEN</code></li>
+<li><code>CI</code></li>
+<li><code>DEBUG</code></li>
+<li><code>E2E_TESTING</code></li>
+<li><code>EMAIL<em>AUTH</em>DISABLED</code></li>
+<li><code>ENVIRONMENT</code></li>
+<li><code>HTTP_PROXY</code></li>
+<li><code>HTTPS_PROXY</code></li>
+<li><code>INVITE_DISABLED</code></li>
+<li><code>IS<em>FORMBRICKS</em>CLOUD</code></li>
+<li><code>NEXT_PHASE</code></li>
+<li><code>NEXT_RUNTIME</code></li>
+<li><code>NODE_ENV</code></li>
+<li><code>OIDC<em>CLIENT</em>ID</code></li>
+<li><code>OIDC<em>CLIENT</em>SECRET</code></li>
+<li><code>OIDC<em>DISPLAY</em>NAME</code></li>
+<li><code>OIDC_ISSUER</code></li>
+<li><code>OIDC<em>SIGNING</em>ALGORITHM</code></li>
+<li><code>OTEL<em>EXPORTER</em>OTLP_ENDPOINT</code></li>
+<li><code>OTEL<em>SERVICE</em>NAME</code></li>
+<li><code>OTEL<em>TRACES</em>SAMPLER</code></li>
+<li><code>OTEL<em>TRACES</em>SAMPLER_ARG</code></li>
+<li><code>POSTHOG_KEY</code></li>
+<li><code>PROMETHEUS_ENABLED</code></li>
+<li><code>PROMETHEUS<em>EXPORTER</em>PORT</code></li>
+<li><code>PUBLIC_URL</code></li>
+<li><code>RATE<em>LIMITING</em>DISABLED</code></li>
+<li><code>SAML<em>DATABASE</em>URL</code></li>
+<li><code>SENTRY<em>AUTH</em>TOKEN</code></li>
+<li><code>SENTRY_DSN</code></li>
+<li><code>SENTRY_ENVIRONMENT</code></li>
+<li><code>SESSION<em>MAX</em>AGE</code></li>
+<li><code>SMTP_AUTHENTICATED</code></li>
+<li><code>SMTP<em>REJECT</em>UNAUTHORIZED_TLS</code></li>
+<li><code>TURNSTILE<em>SECRET</em>KEY</code></li>
+<li><code>TURNSTILE<em>SITE</em>KEY</code></li>
+<li><code>USER<em>MANAGEMENT</em>MINIMUM_ROLE</code></li>
+<li><code>VERCEL_URL</code></li>
+<li><code>VERSION</code></li>
+</ul>
+<h2 id="hardcoded-secrets-detected">Hardcoded Secrets Detected</h2>
+<blockquote><strong>11 potential secret(s)</strong> found in source code. These should be moved to environment variables.</blockquote>
+<ul>
+<li><strong>[CRITICAL]</strong> 11 hardcoded secret(s) detected in source code: Hardcoded Secret, Hardcoded Password. Move these to environment variables immediately.</li>
+<li><strong>[CRITICAL]</strong> Hardcoded secrets can be extracted from version control history even after removal. Rotate any exposed credentials immediately.</li>
+</ul>
+<table>
+<thead>
+<tr><th style="text-align:left">Severity</th><th style="text-align:left">Type</th><th style="text-align:left">File</th><th style="text-align:left">Line</th><th style="text-align:left">Snippet</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">192</td><td style="text-align:left"><code>GITHUB_SECRET: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">194</td><td style="text-align:left"><code>GOOGLE<em>CLIENT</em>SECRET: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">196</td><td style="text-align:left"><code>AZUREAD<em>CLIENT</em>SECRET: "test-azure",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">201</td><td style="text-align:left"><code>OIDC<em>CLIENT</em>SECRET: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">229</td><td style="text-align:left"><code>BREVO<em>API</em>KEY: "[REDACTED]",</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/vitestSetup.ts</code></td><td style="text-align:left">237</td><td style="text-align:left"><code>SMTP_PASSWORD: "[REDACTED]", //NOSONAR ignore rule for test setup</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Secret</td><td style="text-align:left"><code>apps/web/modules/api/v2/management/lib/tests/<strong>mocks</strong>/api-key.mock.ts</code></td><td style="text-align:left">1</td><td style="text-align:left"><code>export const apiKey = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>apps/web/playwright/utils/mock.ts</code></td><td style="text-align:left">1</td><td style="text-align:left"><code>const MOCK_PASSWORD = "[REDACTED]";</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/database/src/seed/constants.ts</code></td><td style="text-align:left">16</td><td style="text-align:left"><code>ADMIN: { email: "admin@formbricks.com", password: "Password#123" },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/database/src/seed/constants.ts</code></td><td style="text-align:left">17</td><td style="text-align:left"><code>MANAGER: { email: "manager@formbricks.com", password: "Password#123" },</code></td></tr>
+<tr><td style="text-align:left">HIGH</td><td style="text-align:left">Hardcoded Password</td><td style="text-align:left"><code>packages/database/src/seed/constants.ts</code></td><td style="text-align:left">18</td><td style="text-align:left"><code>MEMBER: { email: "member@formbricks.com", password: "Password#123" },</code></td></tr>
+</tbody>
+</table>
+<h3 id="remediation-steps">Remediation Steps</h3>
+<ol>
+<li>Move all secrets to environment variables (<code>.env.local</code> or your secrets manager)</li>
+<li>Rotate any credentials that have been committed to version control</li>
+<li>Add <code>.env</code> and <code>.env.local</code> to <code>.gitignore</code></li>
+<li>Consider using a secrets manager (AWS Secrets Manager, HashiCorp Vault, Doppler)</li>
+<li>Run <code>git log --all --full-history -S '<secret>'</code> to check if secrets exist in git history</li>
+</ol>
+<hr>
+<p><em>This audit was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a>. It is not a substitute for a professional security review.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

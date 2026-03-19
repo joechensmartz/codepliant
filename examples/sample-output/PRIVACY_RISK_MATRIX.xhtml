@@ -1,0 +1,208 @@
+<h1>Privacy Risk Matrix</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Privacy Risk Matrix</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Generated:</strong> 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a></p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>This document provides a visual risk assessment of all detected data processing activities,</p>
+<p>scored by likelihood and impact, with specific mitigation actions for each risk.</p>
+<h2>Executive Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Count</p></th><th><p>Action Required</p></th></tr>
+<tr><td><p>🔴 Critical</p></td><td><p>3</p></td><td><p>Immediate remediation — escalate to leadership</p></td></tr>
+<tr><td><p>🟠 High</p></td><td><p>3</p></td><td><p>Address within 30 days</p></td></tr>
+<tr><td><p>🟡 Medium</p></td><td><p>1</p></td><td><p>Address within 90 days</p></td></tr>
+<tr><td><p><strong>Total</strong></p></td><td><p><strong>7</strong></p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Visual Risk Matrix</h2>
+<p>Each cell shows the risk IDs that fall at that likelihood/impact intersection.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Likelihood \ Impact</p></th><th><p>1 - Negligible</p></th><th><p>2 - Minor</p></th><th><p>3 - Moderate</p></th><th><p>4 - Major</p></th><th><p>5 - Severe</p></th></tr>
+<tr><td><p><strong>5</strong> - Almost Certain</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr>
+<tr><td><p><strong>4</strong> - Likely</p></td><td><p>—</p></td><td><p>—</p></td><td><p>🟠PR-001</p></td><td><p>🔴PR-004, 🔴PR-007</p></td><td><p>—</p></td></tr>
+<tr><td><p><strong>3</strong> - Possible</p></td><td><p>—</p></td><td><p>—</p></td><td><p>🟡PR-006</p></td><td><p>🟠PR-005</p></td><td><p>🔴PR-002</p></td></tr>
+<tr><td><p><strong>2</strong> - Unlikely</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>🟠PR-003</p></td></tr>
+<tr><td><p><strong>1</strong> - Rare</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Scoring Legend</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Score Range</p></th><th><p>Level</p></th><th><p>Color</p></th></tr>
+<tr><td><p>15–25</p></td><td><p>Critical</p></td><td><p>🔴</p></td></tr>
+<tr><td><p>10–14</p></td><td><p>High</p></td><td><p>🟠</p></td></tr>
+<tr><td><p>5–9</p></td><td><p>Medium</p></td><td><p>🟡</p></td></tr>
+<tr><td><p>1–4</p></td><td><p>Low</p></td><td><p>🟢</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Risk Register</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>ID</p></th><th><p>Processing Activity</p></th><th><p>Likelihood</p></th><th><p>Impact</p></th><th><p>Score</p></th><th><p>Level</p></th><th><p>Services</p></th></tr>
+<tr><td><p>PR-004</p></td><td><p>AI/ML data processing and model inference</p></td><td><p>4 (Likely)</p></td><td><p>4 (Major)</p></td><td><p>16</p></td><td><p>🔴 Critical</p></td><td><p>openai</p></td></tr>
+<tr><td><p>PR-007</p></td><td><p>International data transfers to third-party processors</p></td><td><p>4 (Likely)</p></td><td><p>4 (Major)</p></td><td><p>16</p></td><td><p>🔴 Critical</p></td><td><p>@sentry/node, @supabase/supabase-js, openai, posthog, prisma, resend, stripe, stripe-ios</p></td></tr>
+<tr><td><p>PR-002</p></td><td><p>User authentication and identity management</p></td><td><p>3 (Possible)</p></td><td><p>5 (Severe)</p></td><td><p>15</p></td><td><p>🔴 Critical</p></td><td><p>@supabase/supabase-js</p></td></tr>
+<tr><td><p>PR-001</p></td><td><p>User behavior tracking and analytics</p></td><td><p>4 (Likely)</p></td><td><p>3 (Moderate)</p></td><td><p>12</p></td><td><p>🟠 High</p></td><td><p>posthog</p></td></tr>
+<tr><td><p>PR-005</p></td><td><p>Persistent data storage and retrieval</p></td><td><p>3 (Possible)</p></td><td><p>4 (Major)</p></td><td><p>12</p></td><td><p>🟠 High</p></td><td><p>prisma</p></td></tr>
+<tr><td><p>PR-003</p></td><td><p>Payment processing and financial data handling</p></td><td><p>2 (Unlikely)</p></td><td><p>5 (Severe)</p></td><td><p>10</p></td><td><p>🟠 High</p></td><td><p>stripe, stripe-ios</p></td></tr>
+<tr><td><p>PR-006</p></td><td><p>Email communications and marketing</p></td><td><p>3 (Possible)</p></td><td><p>3 (Moderate)</p></td><td><p>9</p></td><td><p>🟡 Medium</p></td><td><p>resend</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Risk Details and Mitigations</h2>
+<h3>PR-004: AI/ML data processing and model inference 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (16/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> openai</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>user prompts</p></li>
+<li><p>generated outputs</p></li>
+<li><p>training data</p></li>
+<li><p>usage patterns</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Implement data minimization — send only necessary data to AI services</p></li>
+<li><p>[ ] Review AI provider data retention and training policies</p></li>
+<li><p>[ ] Add opt-out for AI features that process personal data</p></li>
+<li><p>[ ] Conduct AI-specific DPIA under GDPR Art. 35</p></li>
+<li><p>[ ] Implement human oversight for high-risk AI decisions</p></li>
+<li><p>[ ] Log all AI processing for audit trail</p></li>
+</ul>
+<h3>PR-007: International data transfers to third-party processors 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (16/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> @sentry/node, @supabase/supabase-js, openai, posthog, prisma, resend, stripe, stripe-ios</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>all personal data shared with external services</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Execute Data Processing Agreements (DPAs) with all processors</p></li>
+<li><p>[ ] Verify Standard Contractual Clauses (SCCs) are in place</p></li>
+<li><p>[ ] Conduct Transfer Impact Assessments for non-EU transfers</p></li>
+<li><p>[ ] Monitor processor compliance with agreed safeguards</p></li>
+<li><p>[ ] Maintain an up-to-date sub-processor register</p></li>
+</ul>
+<h3>PR-002: User authentication and identity management 🔴</h3>
+<p><strong>Risk Level:</strong> Critical (15/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 5/5 (Severe)</p>
+<p><strong>Affected Services:</strong> @supabase/supabase-js</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>email addresses</p></li>
+<li><p>passwords/hashes</p></li>
+<li><p>OAuth tokens</p></li>
+<li><p>session data</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Enforce bcrypt/argon2 password hashing with sufficient rounds</p></li>
+<li><p>[ ] Implement MFA for all user accounts</p></li>
+<li><p>[ ] Set session timeout and token rotation policies</p></li>
+<li><p>[ ] Monitor for credential stuffing attacks</p></li>
+<li><p>[ ] Implement account lockout after failed attempts</p></li>
+</ul>
+<h3>PR-001: User behavior tracking and analytics 🟠</h3>
+<p><strong>Risk Level:</strong> High (12/25)</p>
+<p><strong>Likelihood:</strong> 4/5 (Likely)</p>
+<p><strong>Impact:</strong> 3/5 (Moderate)</p>
+<p><strong>Affected Services:</strong> posthog</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>IP addresses</p></li>
+<li><p>device fingerprints</p></li>
+<li><p>browsing history</p></li>
+<li><p>click patterns</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Implement cookie consent management platform (CMP)</p></li>
+<li><p>[ ] Anonymize IP addresses before storage</p></li>
+<li><p>[ ] Set data retention limits (max 26 months for GA4)</p></li>
+<li><p>[ ] Provide opt-out mechanism in privacy settings</p></li>
+<li><p>[ ] Conduct regular audit of tracked events</p></li>
+</ul>
+<h3>PR-005: Persistent data storage and retrieval 🟠</h3>
+<p><strong>Risk Level:</strong> High (12/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 4/5 (Major)</p>
+<p><strong>Affected Services:</strong> prisma</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>user profiles</p></li>
+<li><p>application data</p></li>
+<li><p>metadata</p></li>
+<li><p>logs</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Enable encryption at rest for all database instances</p></li>
+<li><p>[ ] Implement field-level encryption for sensitive columns</p></li>
+<li><p>[ ] Enforce least-privilege access controls</p></li>
+<li><p>[ ] Enable audit logging for data access</p></li>
+<li><p>[ ] Implement automated backup with tested recovery</p></li>
+<li><p>[ ] Set data retention schedules with automated deletion</p></li>
+</ul>
+<h3>PR-003: Payment processing and financial data handling 🟠</h3>
+<p><strong>Risk Level:</strong> High (10/25)</p>
+<p><strong>Likelihood:</strong> 2/5 (Unlikely)</p>
+<p><strong>Impact:</strong> 5/5 (Severe)</p>
+<p><strong>Affected Services:</strong> stripe, stripe-ios</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>credit card tokens</p></li>
+<li><p>billing addresses</p></li>
+<li><p>transaction history</p></li>
+<li><p>financial identifiers</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Use PCI DSS compliant payment processor with tokenization</p></li>
+<li><p>[ ] Never store raw card numbers — use hosted payment forms</p></li>
+<li><p>[ ] Implement fraud detection and monitoring</p></li>
+<li><p>[ ] Conduct annual PCI compliance self-assessment</p></li>
+<li><p>[ ] Encrypt all financial data at rest and in transit</p></li>
+</ul>
+<h3>PR-006: Email communications and marketing 🟡</h3>
+<p><strong>Risk Level:</strong> Medium (9/25)</p>
+<p><strong>Likelihood:</strong> 3/5 (Possible)</p>
+<p><strong>Impact:</strong> 3/5 (Moderate)</p>
+<p><strong>Affected Services:</strong> resend</p>
+<p><strong>Data Types at Risk:</strong></p>
+<ul>
+<li><p>email addresses</p></li>
+<li><p>communication content</p></li>
+<li><p>engagement metrics</p></li>
+</ul>
+<p><strong>Required Mitigations:</strong></p>
+<ul>
+<li><p>[ ] Implement double opt-in for marketing emails</p></li>
+<li><p>[ ] Provide one-click unsubscribe in all communications</p></li>
+<li><p>[ ] Maintain suppression lists across all email services</p></li>
+<li><p>[ ] Encrypt email content containing personal data</p></li>
+<li><p>[ ] Audit email service provider DPAs annually</p></li>
+</ul>
+<hr />
+<p><em>This privacy risk matrix is generated from automated code analysis and should be reviewed by qualified privacy and legal professionals. Risk scores are indicative and should be validated against your organization's specific risk appetite and context. This does not constitute legal advice.</em></p>

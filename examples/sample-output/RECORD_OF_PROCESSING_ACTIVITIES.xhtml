@@ -1,0 +1,134 @@
+<h1>Record of Processing Activities</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Record of Processing Activities</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Acme Inc</strong> — GDPR Article 30 Record of Processing Activities</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>></p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Generated on 2026-03-18 by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a></p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Controller Information</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Data Controller</strong></p></td><td><p>Acme Inc</p></td></tr>
+<tr><td><p><strong>Contact Email</strong></p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p><strong>Data Protection Officer</strong></p></td><td><p>Jane Mueller</p></td></tr>
+<tr><td><p><strong>DPO Email</strong></p></td><td><p>dpo@acme-saas.com</p></td></tr>
+<tr><td><p><strong>EU Representative</strong></p></td><td><p>Acme EU Compliance GmbH, Friedrichstr. 123, 10117 Berlin</p></td></tr>
+<tr><td><p><strong>Website</strong></p></td><td><p>https://acme-saas.com</p></td></tr>
+<tr><td><p><strong>Record Last Updated</strong></p></td><td><p>2026-03-18</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Processing Activities</h2>
+<p>The following processing activities have been identified through automated code analysis:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>Processing Activity</p></th><th><p>Purpose</p></th><th><p>Categories of Data Subjects</p></th><th><p>Categories of Personal Data</p></th><th><p>Recipients</p></th><th><p>Lawful Basis</p></th><th><p>Retention Period</p></th></tr>
+<tr><td><p>1</p></td><td><p>User Authentication</p></td><td><p>Account creation, login, and session management</p></td><td><p>Registered Users</p></td><td><p>Email, name, profile data, session tokens, OAuth tokens</p></td><td><p>@supabase/supabase-js</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>[Define retention period]</p></td></tr>
+<tr><td><p>2</p></td><td><p>Usage Analytics</p></td><td><p>Product improvement, user behavior analysis, performance monitoring</p></td><td><p>Website Visitors, Registered Users</p></td><td><p>Page views, click events, device info, IP address, session data</p></td><td><p>posthog</p></td><td><p>Legitimate interest (Art. 6(1)(f)) or Consent (Art. 6(1)(a))</p></td><td><p>[Define retention period]</p></td></tr>
+<tr><td><p>3</p></td><td><p>Payment Processing</p></td><td><p>Processing purchases, subscriptions, and refunds</p></td><td><p>Customers</p></td><td><p>Payment card data, billing address, transaction history, email</p></td><td><p>stripe, stripe-ios</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>As required by tax/accounting regulations</p></td></tr>
+<tr><td><p>4</p></td><td><p>Email Communications</p></td><td><p>Transactional emails, notifications, and marketing communications</p></td><td><p>Registered Users, Customers</p></td><td><p>Email addresses, email content, delivery status</p></td><td><p>resend</p></td><td><p>Contract performance (Art. 6(1)(b)) / Consent for marketing (Art. 6(1)(a))</p></td><td><p>[Define retention period]</p></td></tr>
+<tr><td><p>5</p></td><td><p>AI Processing</p></td><td><p>AI-powered features, content generation, automated analysis</p></td><td><p>Registered Users</p></td><td><p>User prompts, conversation history, generated content</p></td><td><p>openai</p></td><td><p>Consent (Art. 6(1)(a)) or Contract performance (Art. 6(1)(b))</p></td><td><p>[Define retention period]</p></td></tr>
+<tr><td><p>6</p></td><td><p>Error Monitoring</p></td><td><p>Application error tracking, performance monitoring, debugging</p></td><td><p>Registered Users, Website Visitors</p></td><td><p>Error data, stack traces, user context, device information, IP address</p></td><td><p>@sentry/node</p></td><td><p>Legitimate interest (Art. 6(1)(f))</p></td><td><p>[Define retention period]</p></td></tr>
+<tr><td><p>7</p></td><td><p>Data Storage</p></td><td><p>Persistent storage of user data as defined by application schema</p></td><td><p>Registered Users, Customers</p></td><td><p>User data as defined in database schema</p></td><td><p>prisma (self-hosted or managed)</p></td><td><p>Contract performance (Art. 6(1)(b))</p></td><td><p>[Define retention period]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Categories of Data Subjects</h2>
+<p>The following categories of data subjects have been identified:</p>
+<ul>
+<li><p><strong>Registered Users</strong> — Individuals who create an account on the platform</p></li>
+<li><p><strong>Website Visitors</strong> — Individuals who visit the website or use the application</p></li>
+<li><p><strong>Customers</strong> — Individuals who purchase products or services</p></li>
+<li><p><strong>Data Subjects</strong> — Any individual whose personal data is processed through the application</p></li>
+</ul>
+<h2>4. International Data Transfers</h2>
+<p>The following third-party services may involve international data transfers:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Transfer Mechanism</p></th><th><p>Safeguards</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>Standard Contractual Clauses (SCCs)</p></td><td><p>[Verify with provider]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. Technical and Organizational Measures</h2>
+<p>Under GDPR Article 32, the following measures are implemented to ensure data security:</p>
+<ul>
+<li><p>[ ] Encryption of personal data in transit (TLS/SSL)</p></li>
+<li><p>[ ] Encryption of personal data at rest</p></li>
+<li><p>[ ] Access control and authentication mechanisms</p></li>
+<li><p>[ ] Regular security assessments and penetration testing</p></li>
+<li><p>[ ] Data backup and disaster recovery procedures</p></li>
+<li><p>[ ] Employee training on data protection</p></li>
+<li><p>[ ] Incident response procedures</p></li>
+<li><p>[ ] Data minimization practices</p></li>
+<li><p>[ ] Pseudonymization where appropriate</p></li>
+<li><p>[ ] Regular review of processing activities</p></li>
+</ul>
+<h2>6. Data Protection Impact Assessment (DPIA) Requirements</h2>
+<p>Based on the detected processing activities, a DPIA is <strong>likely required</strong> under GDPR Article 35:</p>
+<ul>
+<li><p>AI/automated decision-making services detected</p></li>
+<li><p>Systematic monitoring/profiling through analytics services detected</p></li>
+</ul>
+<p>A separate DPIA document should be prepared for high-risk processing activities.</p>
+<h2>7. Review Schedule</h2>
+<p>This record must be reviewed and updated:</p>
+<ul>
+<li><p><strong>Annually</strong> — At minimum, a full review of all processing activities</p></li>
+<li><p><strong>On change</strong> — When new processing activities are introduced</p></li>
+<li><p><strong>On incident</strong> — Following any data breach or security incident</p></li>
+<li><p><strong>On request</strong> — When requested by a supervisory authority</p></li>
+</ul>
+<h2>Review Notes</h2>
+<h3>What a lawyer should check</h3>
+<ul>
+<li><p>Verify all processing activities are documented</p></li>
+<li><p>Confirm lawful basis for each activity</p></li>
+<li><p>Check data transfer mechanisms are accurate</p></li>
+<li><p>Validate retention periods</p></li>
+<li><p>Ensure all data subject categories are covered</p></li>
+</ul>
+<h3>Auto-generated vs. needs human input</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Section</p></th><th><p>Status</p></th><th><p>Confidence</p></th></tr>
+<tr><td><p>Processing activities</p></td><td><p>Auto-detected from code</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Lawful basis assignments</p></td><td><p>Auto-assigned defaults</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Transfer mechanisms</p></td><td><p>Template defaults (SCCs)</p></td><td><p>Low</p></td></tr>
+<tr><td><p>Retention periods</p></td><td><p>Placeholder — needs input</p></td><td><p>N/A</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</p></li>
+<li><p>Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</p></li>
+<li><p>Transfer Impact Assessment (<code>TRANSFER<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This Record of Processing Activities was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on code analysis. It should be reviewed by your Data Protection Officer and legal counsel to ensure completeness and accuracy. This document is required under GDPR Article 30 for controllers processing personal data.</em></p>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGULATORY MAPPING MATRIX — formbricks</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>REGULATORY MAPPING MATRIX</h1>
+      <p class="meta">formbricks &middot; Last updated 2026-03-18 &middot; ~6 min read</p>
+    </header>
+    <h1 id="regulatory-mapping-matrix">Regulatory Mapping Matrix</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<p>This matrix maps each detected third-party service to applicable regulations. Use this to understand the regulatory landscape for your technology stack and prioritize compliance efforts accordingly.</p>
+<h2 id="legend">Legend</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Symbol</th><th style="text-align:left">Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>YES</strong></td><td style="text-align:left">Regulation applies to this service</td></tr>
+<tr><td style="text-align:left"><strong>?</strong></td><td style="text-align:left">May apply — requires manual assessment</td></tr>
+<tr><td style="text-align:left"><strong>—</strong></td><td style="text-align:left">Not applicable based on current analysis</td></tr>
+</tbody>
+</table>
+<h2 id="service-to-regulation-matrix">Service-to-Regulation Matrix</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">GDPR</th><th style="text-align:left">CCPA</th><th style="text-align:left">EU AI Act</th><th style="text-align:left">PCI DSS</th><th style="text-align:left">HIPAA</th><th style="text-align:left">SOC 2</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">storage</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">?</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">monitoring</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">?</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">auth</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">analytics</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">database</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">?</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">—</td><td style="text-align:left">?</td><td style="text-align:left">YES</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">YES</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">YES</td><td style="text-align:left">—</td><td style="text-align:left">YES</td></tr>
+</tbody>
+</table>
+<h2 id="regulation-coverage-summary">Regulation Coverage Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Regulation</th><th style="text-align:left">Services Affected</th><th style="text-align:left">Coverage %</th><th style="text-align:left">Priority</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">GDPR</td><td style="text-align:left">10/10</td><td style="text-align:left">100%</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">CCPA</td><td style="text-align:left">6/10</td><td style="text-align:left">60%</td><td style="text-align:left">High</td></tr>
+<tr><td style="text-align:left">EU AI Act</td><td style="text-align:left">0/10</td><td style="text-align:left">0%</td><td style="text-align:left">Low</td></tr>
+<tr><td style="text-align:left">PCI DSS</td><td style="text-align:left">1/10</td><td style="text-align:left">10%</td><td style="text-align:left">Medium</td></tr>
+<tr><td style="text-align:left">HIPAA</td><td style="text-align:left">0/10 (+4 pending)</td><td style="text-align:left">0%</td><td style="text-align:left">Low</td></tr>
+<tr><td style="text-align:left">SOC 2</td><td style="text-align:left">9/10</td><td style="text-align:left">90%</td><td style="text-align:left">High</td></tr>
+</tbody>
+</table>
+<h2 id="detailed-assessment-by-regulation">Detailed Assessment by Regulation</h2>
+<h3 id="gdpr">GDPR</h3>
+<p><strong>Applicable services:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Reason</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">May store personal data</td></tr>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">May store personal data</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">Processes personal data</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">May store personal data</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Processes personal data</td></tr>
+</tbody>
+</table>
+<h3 id="ccpa">CCPA</h3>
+<p><strong>Applicable services:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Reason</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Processes California consumer personal information</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">Processes California consumer personal information</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">Collects consumer identity information</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">Processes consumer contact information</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">Collects/shares consumer information for commercial purposes</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Processes California consumer personal information</td></tr>
+</tbody>
+</table>
+<h3 id="eu-ai-act">EU AI Act</h3>
+<p>No services identified as subject to EU AI Act requirements.</p>
+<h3 id="pci-dss">PCI DSS</h3>
+<p><strong>Applicable services:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Reason</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment processing — PCI DSS applies</td></tr>
+</tbody>
+</table>
+<h3 id="hipaa">HIPAA</h3>
+<p><strong>Requires manual assessment:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Reason</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">May apply if storing PHI — requires manual assessment</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">May apply if storing PHI — requires manual assessment</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">May apply if storing PHI — requires manual assessment</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">May apply if storing PHI — requires manual assessment</td></tr>
+</tbody>
+</table>
+<h3 id="soc-2">SOC 2</h3>
+<p><strong>Applicable services:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Reason</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@aws-sdk/client-s3</td><td style="text-align:left">storage service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">monitoring service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">auth service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">Processes customer data — relevant to SOC 2 privacy criteria</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">database service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">redis</td><td style="text-align:left">database service relevant to SOC 2 Trust Service Criteria</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">Payment service — relevant to SOC 2 confidentiality criteria</td></tr>
+</tbody>
+</table>
+<h2 id="category-heatmap">Category Heatmap</h2>
+<p>Regulatory exposure by service category:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left"># Services</th><th style="text-align:left">GDPR</th><th style="text-align:left">CCPA</th><th style="text-align:left">AI Act</th><th style="text-align:left">PCI</th><th style="text-align:left">HIPAA</th><th style="text-align:left">SOC 2</th><th style="text-align:left">Regulatory Exposure</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">storage</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">33% (Low)</td></tr>
+<tr><td style="text-align:left">monitoring</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">50% (Medium)</td></tr>
+<tr><td style="text-align:left">other</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">33% (Low)</td></tr>
+<tr><td style="text-align:left">database</td><td style="text-align:left">3</td><td style="text-align:left">3</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">3</td><td style="text-align:left">33% (Low)</td></tr>
+<tr><td style="text-align:left">auth</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">50% (Medium)</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">50% (Medium)</td></tr>
+<tr><td style="text-align:left">analytics</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">50% (Medium)</td></tr>
+<tr><td style="text-align:left">payment</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">0</td><td style="text-align:left">1</td><td style="text-align:left">67% (Medium)</td></tr>
+</tbody>
+</table>
+<h2 id="recommendations">Recommendations</h2>
+<ol>
+<li><strong>GDPR:</strong> 10 service(s) process personal data. Ensure DPAs are in place, lawful basis is documented, and DSAR handling procedures are established.</li>
+<li><strong>CCPA:</strong> 6 service(s) process consumer information. Ensure "Do Not Sell" mechanisms are implemented and privacy notice is updated.</li>
+<li><strong>PCI DSS:</strong> 1 payment service(s) detected. Verify PCI compliance of payment processors and minimize cardholder data exposure.</li>
+<li><strong>SOC 2:</strong> Review Trust Service Criteria (Security, Availability, Processing Integrity, Confidentiality, Privacy) against all applicable services.</li>
+</ol>
+<hr>
+<p><em>This regulatory mapping matrix was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>formbricks</strong> codebase. Applicability assessments are based on service categories and detected data types. Consult legal counsel to confirm regulatory obligations for your specific jurisdiction and use case.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

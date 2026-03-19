@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA MINIMIZATION CHECKLIST — saleor</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA MINIMIZATION CHECKLIST</h1>
+      <p class="meta">saleor &middot; Last updated 2026-03-18 &middot; ~7 min read</p>
+    </header>
+    <h1 id="data-minimization-checklist">Data Minimization Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> saleor</p>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This checklist implements the <strong>data minimization principle</strong> under GDPR Article 5(1)(c):</p>
+<blockquote><em>"Personal data shall be adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed."</em></blockquote>
+<p>For each detected service, this document identifies what data is collected, whether it is actually needed, and provides actionable recommendations for reducing unnecessary data collection.</p>
+<blockquote><strong>Disclaimer:</strong> This is not legal advice. Consult qualified legal counsel and your Data Protection Officer to confirm data processing activities are lawful and necessary.</blockquote>
+<h2 id="2-per-service-data-analysis">2. Per-Service Data Analysis</h2>
+<h3 id="boto3-storage">boto3 (Storage)</h3>
+<p><strong>Declared data collection:</strong> uploaded files, file metadata</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">Yes</td><td style="text-align:left">User content storage</td><td style="text-align:left">Implement file expiration for unused content; enforce size limits</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">Yes</td><td style="text-align:left">File management</td><td style="text-align:left">Delete metadata when files are deleted; do not retain orphaned metadata</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for boto3 functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for boto3 functionality</td></tr>
+</tbody>
+</table>
+<h3 id="django-channels-other">Django Channels (Other)</h3>
+<p><strong>Declared data collection:</strong> real-time user data, connection metadata, channel group data, WebSocket messages</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">real-time user data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Django Channels functionality</td></tr>
+<tr><td style="text-align:left">connection metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Django Channels functionality</td></tr>
+<tr><td style="text-align:left">channel group data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Django Channels functionality</td></tr>
+<tr><td style="text-align:left">WebSocket messages</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Django Channels functionality</td></tr>
+</tbody>
+</table>
+<h3 id="django-admin-auth">django-admin (Auth)</h3>
+<p><strong>Declared data collection:</strong> admin panel access, staff user accounts</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">admin panel access</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for django-admin functionality</td></tr>
+<tr><td style="text-align:left">staff user accounts</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for django-admin functionality</td></tr>
+</tbody>
+</table>
+<h3 id="django-sessions-auth">django-sessions (Auth)</h3>
+<p><strong>Declared data collection:</strong> session cookies, CSRF tokens</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">session cookies</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for django-sessions functionality</td></tr>
+<tr><td style="text-align:left">CSRF tokens</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for django-sessions functionality</td></tr>
+</tbody>
+</table>
+<h3 id="redis-database">redis (Database)</h3>
+<p><strong>Declared data collection:</strong> cached data, session data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for redis functionality</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for redis functionality</td></tr>
+</tbody>
+</table>
+<h3 id="stripe-payment">stripe (Payment)</h3>
+<p><strong>Declared data collection:</strong> payment information, billing address, email, transaction history</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">payment_info</td><td style="text-align:left">Yes</td><td style="text-align:left">Required for payment processing</td><td style="text-align:left">Tokenize via payment processor; never store raw card data</td></tr>
+<tr><td style="text-align:left">billing_address</td><td style="text-align:left">Yes</td><td style="text-align:left">Required for tax/invoicing</td><td style="text-align:left">Collect only what is required by tax jurisdiction</td></tr>
+<tr><td style="text-align:left">transaction_history</td><td style="text-align:left">Yes</td><td style="text-align:left">Legal/tax retention requirement</td><td style="text-align:left">Enforce 7-year retention limit; auto-delete after</td></tr>
+<tr><td style="text-align:left">customer_email</td><td style="text-align:left">Yes</td><td style="text-align:left">Transaction receipts</td><td style="text-align:left">Use for transactional email only; do not repurpose for marketing without consent</td></tr>
+<tr><td style="text-align:left">payment information</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for stripe functionality</td></tr>
+<tr><td style="text-align:left">billing address</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for stripe functionality</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for stripe functionality</td></tr>
+<tr><td style="text-align:left">transaction history</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for stripe functionality</td></tr>
+</tbody>
+</table>
+<h2 id="3-data-reduction-opportunities">3. Data Reduction Opportunities</h2>
+<p>The following 2 data field(s) are collected but <strong>may not be necessary</strong> for core service delivery:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Data Field</th><th style="text-align:left">Service</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">login_history</td><td style="text-align:left">django-admin</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">login_history</td><td style="text-align:left">django-sessions</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Action required:</strong> For each item above, determine whether (a) the data can be eliminated entirely, (b) the data can be anonymized or aggregated, or (c) there is a legitimate business justification that should be documented.</blockquote>
+<h2 id="4-summary">4. Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Services analyzed</td><td style="text-align:left">6</td></tr>
+<tr><td style="text-align:left">Total data fields assessed</td><td style="text-align:left">33</td></tr>
+<tr><td style="text-align:left">Fields likely needed</td><td style="text-align:left">31</td></tr>
+<tr><td style="text-align:left">Fields potentially unnecessary</td><td style="text-align:left">2</td></tr>
+<tr><td style="text-align:left">Potential data reduction</td><td style="text-align:left">6%</td></tr>
+</tbody>
+</table>
+<h2 id="5-gdpr-article-51c-compliance-checklist">5. GDPR Article 5(1)(c) Compliance Checklist</h2>
+<p>Use this checklist to verify your data minimization posture:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> All collected data has a documented, specific purpose</li>
+<li><input type="checkbox" disabled> No data is collected "just in case" or for future undefined use</li>
+<li><input type="checkbox" disabled> Data fields are limited to what is strictly necessary for each purpose</li>
+<li><input type="checkbox" disabled> Pseudonymization or anonymization is used where possible</li>
+<li><input type="checkbox" disabled> Data retention periods are defined and enforced for all fields</li>
+<li><input type="checkbox" disabled> Regular reviews are conducted to identify and remove unnecessary data</li>
+<li><input type="checkbox" disabled> Third-party services are configured to collect only required data</li>
+<li><input type="checkbox" disabled> Default settings favor minimal data collection (privacy by default)</li>
+<li><input type="checkbox" disabled> Data collection forms only request essential information</li>
+<li><input type="checkbox" disabled> Analytics and tracking are proportionate to business needs</li>
+</ul>
+<h2 id="6-practical-steps-for-data-reduction">6. Practical Steps for Data Reduction</h2>
+<ol>
+<li><strong>Audit each field</strong> — For every data field in the tables above, ask: "Would the service break without this data?"</li>
+<li><strong>Eliminate unnecessary collection</strong> — Remove fields that are not essential for the stated purpose</li>
+<li><strong>Anonymize where possible</strong> — Replace identifiable data with pseudonyms or aggregates</li>
+<li><strong>Shorten retention</strong> — Reduce how long data is kept; implement automatic deletion</li>
+<li><strong>Minimize third-party sharing</strong> — Configure services to send only required fields</li>
+<li><strong>Review regularly</strong> — Re-run this checklist quarterly and after adding new services</li>
+</ol>
+<h2 id="7-related-documents">7. Related Documents</h2>
+<ul>
+<li><strong>DATA_DICTIONARY.md</strong> — Complete catalog of all data fields</li>
+<li><strong>DATA<em>RETENTION</em>POLICY.md</strong> — Retention schedules and deletion procedures</li>
+<li><strong>PRIVACY_POLICY.md</strong> — Public disclosure of data collection practices</li>
+<li><strong>LAWFUL<em>BASIS</em>ASSESSMENT.md</strong> — Legal basis for each processing activity</li>
+<li><strong>RECORD<em>OF</em>PROCESSING.md</strong> — GDPR Art. 30 processing activities register</li>
+<li><strong>CONSENT<em>MANAGEMENT</em>GUIDE.md</strong> — Consent collection and management procedures</li>
+</ul>
+<p>For questions about this checklist, contact [your-email@example.com].</p>
+<hr>
+<p><em>This data minimization checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is for informational purposes only and does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

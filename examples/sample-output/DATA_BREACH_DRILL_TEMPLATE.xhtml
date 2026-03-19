@@ -1,0 +1,333 @@
+<h1>Data Breach Response Drill Template</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Breach Response Drill Template</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<hr />
+<p>This document provides a tabletop exercise template for testing your organization's data breach response capabilities. Regular drills ensure your incident response team can execute effectively under pressure and identify gaps in your response procedures before a real incident occurs.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Recommended frequency:</strong> Conduct at least one tabletop exercise annually (GDPR best practice) and within 30 days of any significant infrastructure change.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Exercise Overview</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Exercise type</strong></p></td><td><p>Tabletop exercise (discussion-based)</p></td></tr>
+<tr><td><p><strong>Duration</strong></p></td><td><p>2-3 hours</p></td></tr>
+<tr><td><p><strong>Facilitator</strong></p></td><td><p>[Appointed facilitator — should NOT be the Incident Commander]</p></td></tr>
+<tr><td><p><strong>Date</strong></p></td><td><p>[SCHEDULED DATE]</p></td></tr>
+<tr><td><p><strong>Location</strong></p></td><td><p>[MEETING ROOM / VIDEO CALL LINK]</p></td></tr>
+<tr><td><p><strong>DPO</strong></p></td><td><p>Jane Mueller (dpo@acme-saas.com)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>1.1 Exercise Objectives</h3>
+<ul>
+<li><p>[ ] Test the Incident Response Plan end-to-end</p></li>
+<li><p>[ ] Validate notification procedures and timelines (72-hour GDPR deadline)</p></li>
+<li><p>[ ] Practice cross-functional communication and decision-making</p></li>
+<li><p>[ ] Identify gaps in tools, processes, and documentation</p></li>
+<li><p>[ ] Test escalation paths and authority delegation</p></li>
+<li><p>[ ] Evaluate containment and evidence preservation capabilities</p></li>
+</ul>
+<h2>2. Roles and Participants</h2>
+<p>All roles should be assigned BEFORE the exercise begins. Each participant should have a printed copy of the Incident Response Plan.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Participant</p></th><th><p>Responsibilities During Exercise</p></th></tr>
+<tr><td><p><strong>Incident Commander</strong></p></td><td><p>[NAME]</p></td><td><p>Leads response, makes escalation decisions, coordinates all teams</p></td></tr>
+<tr><td><p><strong>Technical Lead</strong></p></td><td><p>[NAME]</p></td><td><p>Investigates root cause, proposes containment measures, preserves evidence</p></td></tr>
+<tr><td><p><strong>Data Protection Officer</strong></p></td><td><p>Jane Mueller</p></td><td><p>Assesses GDPR obligations, drafts authority notifications, advises on data subject rights</p></td></tr>
+<tr><td><p><strong>Legal Counsel</strong></p></td><td><p>[NAME]</p></td><td><p>Advises on legal obligations, notification requirements, liability exposure</p></td></tr>
+<tr><td><p><strong>Communications Lead</strong></p></td><td><p>[NAME]</p></td><td><p>Drafts external communications, manages media/customer inquiries</p></td></tr>
+<tr><td><p><strong>Executive Sponsor</strong></p></td><td><p>[NAME]</p></td><td><p>Authorizes resource allocation, approves external notifications</p></td></tr>
+<tr><td><p><strong>IT Security</strong></p></td><td><p>[NAME]</p></td><td><p>Performs forensic analysis, implements technical containment</p></td></tr>
+<tr><td><p><strong>Customer Support Lead</strong></p></td><td><p>[NAME]</p></td><td><p>Prepares customer-facing FAQ, handles individual inquiries</p></td></tr>
+<tr><td><p><strong>Observer/Evaluator</strong></p></td><td><p>[NAME]</p></td><td><p>Documents performance, timing, and gaps (does not participate in response)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Drill Scenarios</h2>
+<p>Choose one or more scenarios for the exercise. Scenarios are tailored to the services and data types detected in your project.</p>
+<h3>Scenario 1: Credential Stuffing Attack</h3>
+<p><strong>Severity:</strong> High</p>
+<p><strong>Setup:</strong> Your monitoring system alerts that an unusually high number of failed login attempts have occurred over the past 6 hours, with a 3% success rate. Approximately 2,500 accounts have been accessed using credentials obtained from a third-party breach.</p>
+<p><strong>Data at risk:</strong></p>
+<ul>
+<li><p>User credentials (email/password combinations)</p></li>
+<li><p>Session tokens and authentication cookies</p></li>
+<li><p>User profile information (names, email addresses)</p></li>
+<li><p>Stored payment methods (last 4 digits, billing addresses)</p></li>
+<li><p>Account activity history</p></li>
+</ul>
+<p><strong>Injects (reveal at timed intervals):</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Time</p></th><th><p>Inject</p></th></tr>
+<tr><td><p>T+15min</p></td><td><p>A security researcher contacts you via responsible disclosure email about the attack</p></td></tr>
+<tr><td><p>T+30min</p></td><td><p>Affected users start posting on social media about unauthorized access</p></td></tr>
+<tr><td><p>T+45min</p></td><td><p>A journalist emails your press contact asking for comment</p></td></tr>
+<tr><td><p>T+60min</p></td><td><p>You discover the attackers exported personal data from 150 accounts</p></td></tr>
+<tr><td><p>T+75min</p></td><td><p>Three users report unauthorized charges on their payment methods</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Scenario 2: Exposed Database / Storage Bucket</h3>
+<p><strong>Severity:</strong> Critical</p>
+<p><strong>Setup:</strong> A security researcher reports via your responsible disclosure program that a database backup or storage bucket containing production data is publicly accessible. The exposure has been active for approximately 14 days. The researcher provides evidence including sample records.</p>
+<p><strong>Data at risk:</strong></p>
+<ul>
+<li><p>error data</p></li>
+<li><p>stack traces</p></li>
+<li><p>user context</p></li>
+<li><p>device information</p></li>
+<li><p>IP address</p></li>
+<li><p>email</p></li>
+<li><p>password hash</p></li>
+<li><p>session data</p></li>
+<li><p>user metadata</p></li>
+<li><p>user prompts</p></li>
+<li><p>conversation history</p></li>
+<li><p>generated content</p></li>
+<li><p>user behavior</p></li>
+<li><p>session recordings</p></li>
+<li><p>feature flag usage</p></li>
+<li><p>user data as defined in schema</p></li>
+<li><p>email addresses</p></li>
+<li><p>email content</p></li>
+<li><p>payment information</p></li>
+<li><p>billing address</p></li>
+<li><p>transaction history</p></li>
+</ul>
+<p><strong>Injects:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Time</p></th><th><p>Inject</p></th></tr>
+<tr><td><p>T+15min</p></td><td><p>Shodan/Censys logs confirm the resource has been indexed by search engines</p></td></tr>
+<tr><td><p>T+30min</p></td><td><p>Analysis reveals the data includes records from EU residents</p></td></tr>
+<tr><td><p>T+45min</p></td><td><p>A tech blog publishes a story about the exposure (no company named yet)</p></td></tr>
+<tr><td><p>T+60min</p></td><td><p>Your CEO asks for a status update and projected impact assessment</p></td></tr>
+<tr><td><p>T+90min</p></td><td><p>The blog updates their article naming your company</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Scenario 3: AI System Data Leak</h3>
+<p><strong>Severity:</strong> High</p>
+<p><strong>Setup:</strong> A customer reports that your AI-powered feature is occasionally including personal data from other users in its responses. Investigation reveals a prompt injection vulnerability that allows extraction of conversation context from other sessions.</p>
+<p><strong>Data at risk:</strong></p>
+<ul>
+<li><p>User prompts and conversation history</p></li>
+<li><p>Personal data shared in AI interactions</p></li>
+<li><p>Potentially sensitive business information processed by AI</p></li>
+</ul>
+<p><strong>Injects:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Time</p></th><th><p>Inject</p></th></tr>
+<tr><td><p>T+15min</p></td><td><p>A proof-of-concept exploit is shared on a security forum</p></td></tr>
+<tr><td><p>T+30min</p></td><td><p>You estimate ~500 users may have had data exposed through cross-session leakage</p></td></tr>
+<tr><td><p>T+45min</p></td><td><p>A researcher demonstrates the exploit can extract data from enterprise customer accounts</p></td></tr>
+<tr><td><p>T+60min</p></td><td><p>An enterprise customer's legal team contacts you demanding information</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Scenario 4: Supply Chain Compromise</h3>
+<p><strong>Severity:</strong> Critical</p>
+<p><strong>Setup:</strong> A widely-used npm package in your dependency tree has been compromised. The malicious version exfiltrates environment variables (including API keys and database credentials) to an external server. Your CI/CD pipeline installed the compromised version 3 days ago.</p>
+<p><strong>Data at risk:</strong></p>
+<ul>
+<li><p>API keys and secrets from environment variables</p></li>
+<li><p>Database credentials (potential access to all stored data)</p></li>
+<li><p>Third-party service credentials</p></li>
+<li><p>Any data accessible via compromised credentials</p></li>
+</ul>
+<p><strong>Injects:</strong></p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Time</p></th><th><p>Inject</p></th></tr>
+<tr><td><p>T+15min</p></td><td><p>npm advisory confirms the compromise affecting your exact version range</p></td></tr>
+<tr><td><p>T+30min</p></td><td><p>Logs show outbound connections to an unknown IP from production servers</p></td></tr>
+<tr><td><p>T+45min</p></td><td><p>You cannot determine with certainty whether database data was accessed</p></td></tr>
+<tr><td><p>T+60min</p></td><td><p>A second compromised package is discovered in the same dependency tree</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Exercise Timeline</h2>
+<p>The exercise follows the standard incident response phases. The facilitator controls the pace and introduces injects at appropriate moments.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Phase</p></th><th><p>Duration</p></th><th><p>Activities</p></th></tr>
+<tr><td><p><strong>Briefing</strong></p></td><td><p>15 min</p></td><td><p>Facilitator sets the scene, distributes scenario, confirms roles</p></td></tr>
+<tr><td><p><strong>Phase 1: Detection & Analysis</strong></p></td><td><p>30 min</p></td><td><p>Initial triage, severity assessment, evidence collection, scope determination</p></td></tr>
+<tr><td><p><strong>Phase 2: Containment</strong></p></td><td><p>30 min</p></td><td><p>Immediate containment actions, communication plan, authority notification assessment</p></td></tr>
+<tr><td><p><strong>Phase 3: Eradication & Recovery</strong></p></td><td><p>30 min</p></td><td><p>Root cause elimination, system restoration, monitoring enhancement</p></td></tr>
+<tr><td><p><strong>Phase 4: Notification</strong></p></td><td><p>20 min</p></td><td><p>Draft notifications (authority, individuals), legal review, communication approval</p></td></tr>
+<tr><td><p><strong>Phase 5: Post-Incident</strong></p></td><td><p>15 min</p></td><td><p>Lessons learned, action items, documentation review</p></td></tr>
+<tr><td><p><strong>Debrief</strong></p></td><td><p>20 min</p></td><td><p>Evaluator shares observations, team discussion, improvement planning</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. Discussion Questions by Phase</h2>
+<h3>Phase 1: Detection & Analysis</h3>
+<ul>
+<li><p>How was the breach detected? Could it have been detected earlier?</p></li>
+<li><p>What monitoring and alerting tools are available? Were they effective?</p></li>
+<li><p>How do you determine the scope of the breach (which data, how many records, which users)?</p></li>
+<li><p>What evidence needs to be preserved, and how do you ensure chain of custody?</p></li>
+<li><p>Who needs to be notified internally at this stage?</p></li>
+</ul>
+<h3>Phase 2: Containment</h3>
+<ul>
+<li><p>What immediate technical actions can contain the breach?</p></li>
+<li><p>How do you balance containment speed vs. preserving forensic evidence?</p></li>
+<li><p>Who has the authority to take systems offline if needed?</p></li>
+<li><p>How do you communicate with the team during an active incident?</p></li>
+<li><p>What is the impact of containment measures on business operations?</p></li>
+</ul>
+<h3>Phase 3: Eradication & Recovery</h3>
+<ul>
+<li><p>How do you confirm the root cause has been eliminated?</p></li>
+<li><p>What is the recovery sequence for affected systems?</p></li>
+<li><p>How do you verify system integrity before bringing services back online?</p></li>
+<li><p>What enhanced monitoring should be in place during recovery?</p></li>
+</ul>
+<h3>Phase 4: Notification</h3>
+<ul>
+<li><p>Does this breach meet the GDPR 72-hour notification threshold?</p></li>
+<li><p>Which supervisory authorities need to be notified?</p></li>
+<li><p>Does this breach require individual notification to affected data subjects (GDPR Art. 34)?</p></li>
+<li><p>What US state notification requirements apply?</p></li>
+<li><p>Who drafts, reviews, and approves external notifications?</p></li>
+<li><p>How do you handle media inquiries during this period?</p></li>
+</ul>
+<h3>Phase 5: Post-Incident</h3>
+<ul>
+<li><p>What went well during the response?</p></li>
+<li><p>What gaps or delays were identified?</p></li>
+<li><p>What process improvements are needed?</p></li>
+<li><p>What technical controls should be added or enhanced?</p></li>
+<li><p>How should the Incident Response Plan be updated?</p></li>
+</ul>
+<h2>6. Evaluation Criteria</h2>
+<p>The Observer/Evaluator should assess the team's performance against the following criteria:</p>
+<h3>6.1 Scoring Rubric</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Excellent (4)</p></th><th><p>Good (3)</p></th><th><p>Adequate (2)</p></th><th><p>Needs Improvement (1)</p></th></tr>
+<tr><td><p><strong>Detection speed</strong></p></td><td><p>Immediate recognition and triage</p></td><td><p>Recognized within 10 min</p></td><td><p>Recognized within 20 min</p></td><td><p>Took >20 min or missed indicators</p></td></tr>
+<tr><td><p><strong>Severity assessment</strong></p></td><td><p>Accurate, with clear justification</p></td><td><p>Mostly accurate</p></td><td><p>Partially accurate</p></td><td><p>Inaccurate or not assessed</p></td></tr>
+<tr><td><p><strong>Containment actions</strong></p></td><td><p>Swift, comprehensive, evidence-preserving</p></td><td><p>Timely with minor gaps</p></td><td><p>Slow but eventually effective</p></td><td><p>Ineffective or evidence-destroying</p></td></tr>
+<tr><td><p><strong>Communication</strong></p></td><td><p>Clear, timely, all stakeholders informed</p></td><td><p>Mostly clear and timely</p></td><td><p>Some delays or confusion</p></td><td><p>Major communication failures</p></td></tr>
+<tr><td><p><strong>Notification compliance</strong></p></td><td><p>72-hour timeline met, all required parties identified</p></td><td><p>Timeline met with minor gaps</p></td><td><p>Timeline awareness but execution delays</p></td><td><p>Timeline missed or requirements unknown</p></td></tr>
+<tr><td><p><strong>Documentation</strong></p></td><td><p>Comprehensive real-time logging</p></td><td><p>Good documentation with minor gaps</p></td><td><p>Partial documentation</p></td><td><p>Little or no documentation</p></td></tr>
+<tr><td><p><strong>Decision-making</strong></p></td><td><p>Clear authority, rapid decisions</p></td><td><p>Good decisions with minor delays</p></td><td><p>Decisions made but slowly</p></td><td><p>Unclear authority, decision paralysis</p></td></tr>
+<tr><td><p><strong>Role clarity</strong></p></td><td><p>Everyone knew their role and executed it</p></td><td><p>Most roles clear</p></td><td><p>Some role confusion</p></td><td><p>Significant role confusion</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>6.2 Evaluation Scorecard</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Criterion</p></th><th><p>Score (1-4)</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Detection speed</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Severity assessment</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Containment actions</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Communication</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Notification compliance</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Documentation</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Decision-making</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p>Role clarity</p></td><td><p>[SCORE]</p></td><td><p>[NOTES]</p></td></tr>
+<tr><td><p><strong>Total</strong></p></td><td><p><strong>[TOTAL]/32</strong></p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Rating scale:</strong></p>
+<ul>
+<li><p>28-32: Excellent — team is well-prepared</p></li>
+<li><p>21-27: Good — minor improvements needed</p></li>
+<li><p>14-20: Adequate — significant improvement areas identified</p></li>
+<li><p>8-13: Needs improvement — major gaps in response capability</p></li>
+</ul>
+<h2>7. After-Action Review Template</h2>
+<p>Complete this section within 48 hours of the drill exercise.</p>
+<h3>7.1 Exercise Summary</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Details</p></th></tr>
+<tr><td><p><strong>Exercise date</strong></p></td><td><p>[DATE]</p></td></tr>
+<tr><td><p><strong>Scenario used</strong></p></td><td><p>[SCENARIO NAME]</p></td></tr>
+<tr><td><p><strong>Participants</strong></p></td><td><p>[LIST]</p></td></tr>
+<tr><td><p><strong>Overall score</strong></p></td><td><p>[TOTAL]/32</p></td></tr>
+<tr><td><p><strong>Facilitator</strong></p></td><td><p>[NAME]</p></td></tr>
+<tr><td><p><strong>Evaluator</strong></p></td><td><p>[NAME]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.2 Strengths Identified</h3>
+<ol>
+<li><p>[STRENGTH 1]</p></li>
+<li><p>[STRENGTH 2]</p></li>
+<li><p>[STRENGTH 3]</p></li>
+</ol>
+<h3>7.3 Gaps and Improvement Areas</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Gap</p></th><th><p>Impact</p></th><th><p>Priority</p></th><th><p>Action Item</p></th><th><p>Owner</p></th><th><p>Deadline</p></th></tr>
+<tr><td><p>[GAP 1]</p></td><td><p>[IMPACT]</p></td><td><p>[HIGH/MED/LOW]</p></td><td><p>[ACTION]</p></td><td><p>[NAME]</p></td><td><p>[DATE]</p></td></tr>
+<tr><td><p>[GAP 2]</p></td><td><p>[IMPACT]</p></td><td><p>[HIGH/MED/LOW]</p></td><td><p>[ACTION]</p></td><td><p>[NAME]</p></td><td><p>[DATE]</p></td></tr>
+<tr><td><p>[GAP 3]</p></td><td><p>[IMPACT]</p></td><td><p>[HIGH/MED/LOW]</p></td><td><p>[ACTION]</p></td><td><p>[NAME]</p></td><td><p>[DATE]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>7.4 Process Updates Required</h3>
+<ul>
+<li><p>[ ] Update Incident Response Plan with lessons learned</p></li>
+<li><p>[ ] Update Data Breach Notification Templates based on drill findings</p></li>
+<li><p>[ ] Update contact lists and escalation paths</p></li>
+<li><p>[ ] Schedule follow-up training for identified skill gaps</p></li>
+<li><p>[ ] Schedule next drill exercise: [DATE]</p></li>
+</ul>
+<h2>8. Pre-Drill Preparation Checklist</h2>
+<p>Complete these items before conducting the exercise:</p>
+<ul>
+<li><p>[ ] Select scenario and customize for current infrastructure</p></li>
+<li><p>[ ] Assign all roles and confirm participant availability</p></li>
+<li><p>[ ] Book meeting room / set up video call</p></li>
+<li><p>[ ] Print copies of Incident Response Plan for all participants</p></li>
+<li><p>[ ] Print copies of Data Breach Notification Templates</p></li>
+<li><p>[ ] Prepare inject cards (scenario updates at timed intervals)</p></li>
+<li><p>[ ] Brief the facilitator and evaluator on their roles</p></li>
+<li><p>[ ] Prepare evaluation scorecards</p></li>
+<li><p>[ ] Set up a timer visible to all participants</p></li>
+<li><p>[ ] Confirm all participants have access to necessary tools and documentation</p></li>
+</ul>
+<h2>9. Contact</h2>
+<p>For questions about this drill template or to schedule an exercise:</p>
+<ul>
+<li><p><strong>Data Protection Officer:</strong> Jane Mueller (dpo@acme-saas.com)</p></li>
+<li><p><strong>General inquiries:</strong> legal@acme.com</p></li>
+</ul>
+<hr />
+<p><em>This Data Breach Response Drill Template was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>nextjs-saas-example</strong> codebase. Scenarios are tailored to the detected services and data types but should be reviewed and customized by your security and legal teams before use.</em></p>

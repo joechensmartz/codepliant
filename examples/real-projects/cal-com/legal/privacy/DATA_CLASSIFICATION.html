@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA CLASSIFICATION — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA CLASSIFICATION</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~14 min read</p>
+    </header>
+    <h1 id="data-classification-report">Data Classification Report</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Project:</strong> calcom-monorepo</p>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<p><strong>Classification Standard:</strong> GDPR (General Data Protection Regulation)</p>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</li>
+<li>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</li>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+</ul>
+<hr>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Sensitivity Level</th><th style="text-align:left">Count</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Special Category (Art. 9)</td><td style="text-align:left">2</td><td style="text-align:left">Health, biometric, genetic, racial, political, religious, sexual orientation, trade union</td></tr>
+<tr><td style="text-align:left">High</td><td style="text-align:left">16</td><td style="text-align:left">Financial (PCI), government ID (SSN), authentication credentials</td></tr>
+<tr><td style="text-align:left">Medium</td><td style="text-align:left">21</td><td style="text-align:left">Contact info (email, phone), identity (name, DOB), location</td></tr>
+<tr><td style="text-align:left">Low</td><td style="text-align:left">75</td><td style="text-align:left">Behavioral (analytics), technical (IP, device info), preferences</td></tr>
+</tbody>
+</table>
+<p><strong>Total classified fields:</strong> 114</p>
+<hr>
+<h2 id="detailed-classification">Detailed Classification</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Source</th><th style="text-align:left">Sensitivity</th><th style="text-align:left">GDPR Category</th><th style="text-align:left">Retention</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">stack traces</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Special Category (Art. 9)</td><td style="text-align:left">Racial/ethnic origin (Art. 9)</td><td style="text-align:left">Delete when no longer necessary; max 1 year</td></tr>
+<tr><td style="text-align:left">Error reports, stack traces, performance data, and user context collected through monitoring tools.</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Special Category (Art. 9)</td><td style="text-align:left">Racial/ethnic origin (Art. 9)</td><td style="text-align:left">Delete when no longer necessary; max 1 year</td></tr>
+<tr><td style="text-align:left">OAuth tokens</td><td style="text-align:left">google-auth-library</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">OAuth tokens</td><td style="text-align:left">next-auth</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">OAuth tokens</td><td style="text-align:left">passport</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">payment information</td><td style="text-align:left">stripe</td><td style="text-align:left">High</td><td style="text-align:left">Financial — payment data</td><td style="text-align:left">7 years (tax/legal compliance)</td></tr>
+<tr><td style="text-align:left">billing address</td><td style="text-align:left">stripe</td><td style="text-align:left">High</td><td style="text-align:left">Financial — payment data</td><td style="text-align:left">7 years (tax/legal compliance)</td></tr>
+<tr><td style="text-align:left">transaction history</td><td style="text-align:left">stripe</td><td style="text-align:left">High</td><td style="text-align:left">Financial — payment data</td><td style="text-align:left">7 years (tax/legal compliance)</td></tr>
+<tr><td style="text-align:left">Email addresses, names, profile pictures, and account credentials collected through authentication.</td><td style="text-align:left">next-auth</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">Email addresses, names, profile pictures, and account credentials collected through authentication.</td><td style="text-align:left">google-auth-library</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">Email addresses, names, profile pictures, and account credentials collected through authentication.</td><td style="text-align:left">passport</td><td style="text-align:left">High</td><td style="text-align:left">Authentication credential</td><td style="text-align:left">Until account deletion; rotate regularly</td></tr>
+<tr><td style="text-align:left">Payment card information, billing addresses, and transaction history processed through payment providers.</td><td style="text-align:left">stripe</td><td style="text-align:left">High</td><td style="text-align:left">Financial — payment data</td><td style="text-align:left">7 years (tax/legal compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/features/_router.ts</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/viewer/eventTypes/_router.ts</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/viewer/featureOptIn/_router.ts</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/viewer/feedback/_router.ts</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/viewer/insights/_router.ts</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</td><td style="text-align:left">packages/trpc/server/routers/viewer/pbac/_router.tsx</td><td style="text-align:left">High</td><td style="text-align:left">Government identifier — tax</td><td style="text-align:left">7 years (tax compliance)</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">phone numbers</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — phone</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email content</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">location data</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Medium</td><td style="text-align:left">Location data</td><td style="text-align:left">26 months max</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">google-auth-library</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email data</td><td style="text-align:left">googleapis</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">intercom</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">name</td><td style="text-align:left">intercom</td><td style="text-align:left">Medium</td><td style="text-align:left">Personal identity — name</td><td style="text-align:left">Until account deletion</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">next-auth</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">name</td><td style="text-align:left">next-auth</td><td style="text-align:left">Medium</td><td style="text-align:left">Personal identity — name</td><td style="text-align:left">Until account deletion</td></tr>
+<tr><td style="text-align:left">profile picture</td><td style="text-align:left">next-auth</td><td style="text-align:left">Medium</td><td style="text-align:left">Personal identity — image</td><td style="text-align:left">Until account deletion</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">nodemailer</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email content</td><td style="text-align:left">nodemailer</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">passport</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">name</td><td style="text-align:left">passport</td><td style="text-align:left">Medium</td><td style="text-align:left">Personal identity — name</td><td style="text-align:left">Until account deletion</td></tr>
+<tr><td style="text-align:left">email</td><td style="text-align:left">stripe</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">phone numbers</td><td style="text-align:left">twilio</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — phone</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">SMS message content</td><td style="text-align:left">twilio</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — phone</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">Email addresses and email content processed through email service providers.</td><td style="text-align:left">nodemailer</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">Email addresses and email content processed through email service providers.</td><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">Medium</td><td style="text-align:left">Contact — email</td><td style="text-align:left">Until account deletion or consent withdrawal</td></tr>
+<tr><td style="text-align:left">contact information</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">names</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">company data</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">deal information</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">engagement history</td><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">error data</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — diagnostics</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">user context</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">IP address</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">performance profiles</td><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — diagnostics</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">@upstash/redis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">@upstash/redis</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">page views</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">IP address</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">page views</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">custom events</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">third-party tag data</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Google profile data</td><td style="text-align:left">google-auth-library</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user data via Google APIs</td><td style="text-align:left">googleapis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">calendar data</td><td style="text-align:left">googleapis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">profile information</td><td style="text-align:left">googleapis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user profiles</td><td style="text-align:left">intercom</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">conversations</td><td style="text-align:left">intercom</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">intercom</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">company data</td><td style="text-align:left">intercom</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">next-auth</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">passport</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">page views</td><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">referrer data</td><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — marketing</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">application data</td><td style="text-align:left">PostgreSQL</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user records</td><td style="text-align:left">PostgreSQL</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">application data</td><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user records</td><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">user behavior</td><td style="text-align:left">posthog</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">session recordings</td><td style="text-align:left">posthog</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">feature flag usage</td><td style="text-align:left">posthog</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">device information</td><td style="text-align:left">posthog</td><td style="text-align:left">Low</td><td style="text-align:left">Technical — device/network</td><td style="text-align:left">90 days</td></tr>
+<tr><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">prisma</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Redis</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">cache data</td><td style="text-align:left">Redis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Redis (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">cache data</td><td style="text-align:left">Redis (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">voice call metadata</td><td style="text-align:left">twilio</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">call recordings</td><td style="text-align:left">twilio</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">push subscription endpoints</td><td style="text-align:left">web-push</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">device tokens</td><td style="text-align:left">web-push</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">notification content</td><td style="text-align:left">web-push</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">posthog</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">Google Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">ioredis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">@upstash/redis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">prisma</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">Redis (env)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">PostgreSQL</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">Redis</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">Redis (Cache)</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">lru-cache</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">@prisma/extension-accelerate</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">category:Personal Identity Data</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Financial Data</td><td style="text-align:left">category:Financial Data</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">category:Usage & Behavioral Data</td><td style="text-align:left">Low</td><td style="text-align:left">Behavioral — analytics</td><td style="text-align:left">26 months</td></tr>
+<tr><td style="text-align:left">Communication Data</td><td style="text-align:left">category:Communication Data</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Technical & Diagnostic Data</td><td style="text-align:left">category:Technical & Diagnostic Data</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">category:Stored User Data</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+<tr><td style="text-align:left">API Data Collection</td><td style="text-align:left">category:API Data Collection</td><td style="text-align:left">Low</td><td style="text-align:left">Unclassified data</td><td style="text-align:left">Review and define retention policy</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="recommendations">Recommendations</h2>
+<h3 id="special-category-data-art-9-2-fields">Special Category Data (Art. 9) — 2 field(s)</h3>
+<ul>
+<li><strong>Explicit consent required</strong> (Art. 9(2)(a)): Standard consent is not sufficient; obtain explicit, informed consent for each specific purpose</li>
+<li><strong>Data Protection Impact Assessment (DPIA)</strong> required under Art. 35 before processing</li>
+<li><strong>Appoint a Data Protection Officer (DPO)</strong> if processing special categories at scale</li>
+<li><strong>Encryption at rest and in transit</strong> is mandatory; consider additional access controls</li>
+<li><strong>Minimize collection</strong>: Only collect what is strictly necessary for the stated purpose</li>
+<li><strong>Audit logging</strong>: Maintain detailed access logs for all special category data</li>
+</ul>
+<h3 id="high-sensitivity-data-16-fields">High Sensitivity Data — 16 field(s)</h3>
+<ul>
+<li><strong>Encrypt at rest and in transit</strong> using industry-standard algorithms (AES-256, TLS 1.2+)</li>
+<li><strong>Tokenize payment data</strong> — never store raw card numbers (PCI DSS requirement)</li>
+<li><strong>Hash credentials</strong> with bcrypt, scrypt, or Argon2; never store plaintext passwords</li>
+<li><strong>Limit access</strong> to personnel with a business need; implement role-based access control</li>
+<li><strong>Retain per regulatory requirements</strong> (e.g., 7 years for financial records)</li>
+<li><strong>Regular security audits</strong> and penetration testing recommended</li>
+</ul>
+<h3 id="medium-sensitivity-data-21-fields">Medium Sensitivity Data — 21 field(s)</h3>
+<ul>
+<li><strong>Encrypt in transit</strong> (TLS 1.2+); encrypt at rest where feasible</li>
+<li><strong>Obtain clear consent</strong> before collection; provide opt-out mechanisms</li>
+<li><strong>Allow user access and deletion</strong> per GDPR Art. 15-17 (right of access, rectification, erasure)</li>
+<li><strong>Pseudonymize</strong> where possible to reduce risk</li>
+<li><strong>Define clear retention periods</strong> and automate data deletion</li>
+</ul>
+<h3 id="low-sensitivity-data-75-fields">Low Sensitivity Data — 75 field(s)</h3>
+<ul>
+<li><strong>Encrypt in transit</strong> (TLS 1.2+)</li>
+<li><strong>Anonymize or aggregate</strong> analytics data where possible</li>
+<li><strong>Honor Do Not Track / Global Privacy Control</strong> signals</li>
+<li><strong>Set appropriate retention periods</strong> (typically 90 days for logs, 26 months for analytics)</li>
+<li><strong>Disclose in privacy policy</strong> even for low-sensitivity data</li>
+</ul>
+<hr>
+<p><em>This classification is auto-generated based on code analysis. It should be reviewed by your legal and security teams. Data classification may change as your application evolves — re-run this scan regularly.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

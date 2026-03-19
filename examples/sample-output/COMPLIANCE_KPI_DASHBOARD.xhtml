@@ -1,0 +1,537 @@
+<h1>Compliance KPI Dashboard</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance KPI Dashboard</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organisation:</strong> Acme Inc</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Services Monitored:</strong> 8</p>
+<p><strong>Generated:</strong> 2026-03-18</p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>This dashboard defines Key Performance Indicators (KPIs) for measuring the effectiveness of your compliance program. Regular measurement and reporting against these KPIs demonstrates accountability under GDPR, supports SOC 2 monitoring requirements, and aligns with ISO 27001 performance evaluation (Clause 9).</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>KPI Overview</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>ID</p></th><th><p>KPI</p></th><th><p>Target</p></th><th><p>Frequency</p></th><th><p>Regulation</p></th></tr>
+<tr><td><p>KPI-01</p></td><td><p>DSAR Response Time</p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p>Monthly</p></td><td><p>GDPR Art. 12(3), CCPA §1798.130</p></td></tr>
+<tr><td><p>KPI-02</p></td><td><p>DSAR Completion Rate</p></td><td><p>> 98%</p></td><td><p>Monthly</p></td><td><p>GDPR Art. 12(3)</p></td></tr>
+<tr><td><p>KPI-03</p></td><td><p>Breach Notification Speed</p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p>Quarterly</p></td><td><p>GDPR Art. 33, NIS2 Art. 23</p></td></tr>
+<tr><td><p>KPI-04</p></td><td><p>Security Training Completion</p></td><td><p>> 95%</p></td><td><p>Quarterly</p></td><td><p>ISO 27001 A.6.3, SOC 2 CC1.4</p></td></tr>
+<tr><td><p>KPI-05</p></td><td><p>Privacy Training Completion</p></td><td><p>> 95%</p></td><td><p>Quarterly</p></td><td><p>GDPR Art. 39(1)(b)</p></td></tr>
+<tr><td><p>KPI-06</p></td><td><p>Vendor Risk Assessment Completion</p></td><td><p>> 90%</p></td><td><p>Quarterly</p></td><td><p>GDPR Art. 28, SOC 2 CC9.2</p></td></tr>
+<tr><td><p>KPI-07</p></td><td><p>Policy Document Freshness</p></td><td><p>> 90%</p></td><td><p>Quarterly</p></td><td><p>ISO 27001 7.5, SOC 2 CC1.3</p></td></tr>
+<tr><td><p>KPI-08</p></td><td><p>Consent Collection Rate</p></td><td><p>> 99%</p></td><td><p>Monthly</p></td><td><p>GDPR Art. 7, ePrivacy Directive</p></td></tr>
+<tr><td><p>KPI-09</p></td><td><p>Incident Response Time</p></td><td><p>< 60 minutes</p></td><td><p>Monthly</p></td><td><p>ISO 27001 A.5.24, NIST CSF RS.RP-1</p></td></tr>
+<tr><td><p>KPI-10</p></td><td><p>Vulnerability Remediation Time</p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p>Monthly</p></td><td><p>SOC 2 CC7.1, ISO 27001 A.8.8</p></td></tr>
+<tr><td><p>KPI-11</p></td><td><p>Data Retention Compliance</p></td><td><p>> 95%</p></td><td><p>Quarterly</p></td><td><p>GDPR Art. 5(1)(e), CCPA</p></td></tr>
+<tr><td><p>KPI-12</p></td><td><p>Access Review Completion</p></td><td><p>> 95%</p></td><td><p>Quarterly</p></td><td><p>SOC 2 CC6.1, ISO 27001 A.5.18</p></td></tr>
+<tr><td><p>KPI-AI-01</p></td><td><p>AI Model Accuracy</p></td><td><p>> 90% (application-specific)</p></td><td><p>Monthly</p></td><td><p>EU AI Act Art. 15</p></td></tr>
+<tr><td><p>KPI-AI-02</p></td><td><p>AI Bias Audit Frequency</p></td><td><p>> 1 per quarter</p></td><td><p>Quarterly</p></td><td><p>EU AI Act Art. 9, Colorado AI Act</p></td></tr>
+<tr><td><p>KPI-AI-03</p></td><td><p>AI Incident Rate</p></td><td><p>< 5 per 1000</p></td><td><p>Monthly</p></td><td><p>EU AI Act Art. 62</p></td></tr>
+<tr><td><p>KPI-AI-04</p></td><td><p>Prompt Injection Block Rate</p></td><td><p>> 95%</p></td><td><p>Monthly</p></td><td><p>EU AI Act Art. 15, OWASP LLM01</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Core Compliance KPIs</h2>
+<h3>KPI-01: DSAR Response Time</h3>
+<p><strong>Description:</strong> Average time to respond to Data Subject Access Requests from receipt to fulfilment</p>
+<p><strong>Metric:</strong> Days</p>
+<p><strong>Target:</strong> < 25 days (GDPR allows 30)</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 12(3), CCPA §1798.130</p>
+<p><strong>Formula:</strong> <code>Sum of response times / Number of DSARs completed</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-02: DSAR Completion Rate</h3>
+<p><strong>Description:</strong> Percentage of DSARs completed within the statutory deadline</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 98%</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 12(3)</p>
+<p><strong>Formula:</strong> <code>(DSARs completed on time / Total DSARs received) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 98%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 98%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 98%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-03: Breach Notification Speed</h3>
+<p><strong>Description:</strong> Time from breach detection to supervisory authority notification</p>
+<p><strong>Metric:</strong> Hours</p>
+<p><strong>Target:</strong> < 48 hours (GDPR requires 72)</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 33, NIS2 Art. 23</p>
+<p><strong>Formula:</strong> <code>Time of notification - Time of detection</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-04: Security Training Completion</h3>
+<p><strong>Description:</strong> Percentage of employees who completed mandatory security awareness training</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 A.6.3, SOC 2 CC1.4</p>
+<p><strong>Formula:</strong> <code>(Employees completed training / Total employees) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-05: Privacy Training Completion</h3>
+<p><strong>Description:</strong> Percentage of relevant staff who completed data protection training</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 39(1)(b)</p>
+<p><strong>Formula:</strong> <code>(Staff completed privacy training / Total relevant staff) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-06: Vendor Risk Assessment Completion</h3>
+<p><strong>Description:</strong> Percentage of active vendors with completed risk assessments</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 90%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 28, SOC 2 CC9.2</p>
+<p><strong>Formula:</strong> <code>(Vendors assessed / Total active vendors) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-07: Policy Document Freshness</h3>
+<p><strong>Description:</strong> Percentage of compliance documents reviewed within the past 12 months</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 90%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 7.5, SOC 2 CC1.3</p>
+<p><strong>Formula:</strong> <code>(Documents reviewed in last 12 months / Total documents) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-08: Consent Collection Rate</h3>
+<p><strong>Description:</strong> Percentage of data processing activities with valid consent records</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 99%</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 7, ePrivacy Directive</p>
+<p><strong>Formula:</strong> <code>(Processing activities with consent / Consent-required activities) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 99%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 99%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 99%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-09: Incident Response Time</h3>
+<p><strong>Description:</strong> Average time from security incident detection to initial response</p>
+<p><strong>Metric:</strong> Minutes</p>
+<p><strong>Target:</strong> < 60 minutes</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 A.5.24, NIST CSF RS.RP-1</p>
+<p><strong>Formula:</strong> <code>Sum of response times / Number of incidents</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>< 60 minutes</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>< 60 minutes</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>< 60 minutes</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-10: Vulnerability Remediation Time</h3>
+<p><strong>Description:</strong> Average time to remediate identified security vulnerabilities</p>
+<p><strong>Metric:</strong> Days</p>
+<p><strong>Target:</strong> Critical: < 1 day, High: < 7 days, Medium: < 30 days</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> SOC 2 CC7.1, ISO 27001 A.8.8</p>
+<p><strong>Formula:</strong> <code>Sum of remediation times / Number of vulnerabilities</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-11: Data Retention Compliance</h3>
+<p><strong>Description:</strong> Percentage of data stores compliant with defined retention schedules</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 5(1)(e), CCPA</p>
+<p><strong>Formula:</strong> <code>(Compliant data stores / Total data stores) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-12: Access Review Completion</h3>
+<p><strong>Description:</strong> Percentage of user access reviews completed on schedule</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> SOC 2 CC6.1, ISO 27001 A.5.18</p>
+<p><strong>Formula:</strong> <code>(Access reviews completed / Scheduled reviews) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>AI-Specific KPIs</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>The following KPIs are included because AI services were detected in your application: openai</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-AI-01: AI Model Accuracy</h3>
+<p><strong>Description:</strong> Measured accuracy of AI model outputs against ground truth</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 90% (application-specific)</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> EU AI Act Art. 15</p>
+<p><strong>Formula:</strong> <code>(Correct predictions / Total predictions) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 90% (application-specific)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 90% (application-specific)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 90% (application-specific)</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-AI-02: AI Bias Audit Frequency</h3>
+<p><strong>Description:</strong> Number of bias audits conducted on AI systems</p>
+<p><strong>Metric:</strong> Count</p>
+<p><strong>Target:</strong> > 1 per quarter</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> EU AI Act Art. 9, Colorado AI Act</p>
+<p><strong>Formula:</strong> <code>Count of completed bias audits in period</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 1 per quarter</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 1 per quarter</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 1 per quarter</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-AI-03: AI Incident Rate</h3>
+<p><strong>Description:</strong> Number of AI-related incidents (hallucinations, bias events, safety triggers)</p>
+<p><strong>Metric:</strong> Count per 1000 interactions</p>
+<p><strong>Target:</strong> < 5 per 1000</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> EU AI Act Art. 62</p>
+<p><strong>Formula:</strong> <code>(AI incidents / Total AI interactions) × 1000</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>< 5 per 1000</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>< 5 per 1000</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>< 5 per 1000</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>KPI-AI-04: Prompt Injection Block Rate</h3>
+<p><strong>Description:</strong> Percentage of prompt injection attempts successfully blocked</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> EU AI Act Art. 15, OWASP LLM01</p>
+<p><strong>Formula:</strong> <code>(Blocked injection attempts / Total injection attempts) × 100</code></p>
+<h4>Tracking Template</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Period</p></th><th><p>Actual</p></th><th><p>Target</p></th><th><p>Status</p></th><th><p>Trend</p></th><th><p>Notes</p></th></tr>
+<tr><td><p>Month 1</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 2</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+<tr><td><p>Month 3</p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td><td><p>—</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Monthly Reporting Template</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Copy this template each month to track your compliance KPIs.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Month: <strong><em></strong><strong></em></strong> Year: <strong><em></strong><strong></em></strong></h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>KPI</p></th><th><p>Target</p></th><th><p>Actual</p></th><th><p>Status</p></th><th><p>Action Required</p></th></tr>
+<tr><td><p>1</p></td><td><p>DSAR Response Time</p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>2</p></td><td><p>DSAR Completion Rate</p></td><td><p>> 98%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>3</p></td><td><p>Consent Collection Rate</p></td><td><p>> 99%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>4</p></td><td><p>Incident Response Time</p></td><td><p>< 60 minutes</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>5</p></td><td><p>Vulnerability Remediation Time</p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>6</p></td><td><p>AI Model Accuracy</p></td><td><p>> 90% (application-specific)</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>7</p></td><td><p>AI Incident Rate</p></td><td><p>< 5 per 1000</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>8</p></td><td><p>Prompt Injection Block Rate</p></td><td><p>> 95%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Monthly Summary:</strong></p>
+<ul>
+<li><p>Total KPIs meeting target: <em>_</em> / 8</p></li>
+<li><p>KPIs trending up: <em>_</em></p></li>
+<li><p>KPIs trending down: <em>_</em></p></li>
+<li><p>Action items for next month:</p></li>
+</ul>
+<ol>
+<li><p><em>_</em></p></li>
+<li><p><em>_</em></p></li>
+<li><p><em>_</em></p></li>
+</ol>
+<p><strong>Reported by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2>Quarterly Reporting Template</h2>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>Copy this template each quarter to track quarterly KPIs and provide management reporting.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Quarter: Q<strong> Year: </strong><strong><em></strong></em>__</h3>
+<h4>Quarterly KPIs</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>KPI</p></th><th><p>Target</p></th><th><p>Actual</p></th><th><p>Status</p></th><th><p>Trend vs Last Quarter</p></th></tr>
+<tr><td><p>1</p></td><td><p>Breach Notification Speed</p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>2</p></td><td><p>Security Training Completion</p></td><td><p>> 95%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>3</p></td><td><p>Privacy Training Completion</p></td><td><p>> 95%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>4</p></td><td><p>Vendor Risk Assessment Completion</p></td><td><p>> 90%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>5</p></td><td><p>Policy Document Freshness</p></td><td><p>> 90%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>6</p></td><td><p>Data Retention Compliance</p></td><td><p>> 95%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>7</p></td><td><p>Access Review Completion</p></td><td><p>> 95%</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+<tr><td><p>8</p></td><td><p>AI Bias Audit Frequency</p></td><td><p>> 1 per quarter</p></td><td><p><em>_</em></p></td><td><p>⬜</p></td><td><p></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Monthly KPI Trend (Quarter)</h4>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>KPI</p></th><th><p>Month 1</p></th><th><p>Month 2</p></th><th><p>Month 3</p></th><th><p>Quarter Avg</p></th><th><p>Target</p></th></tr>
+<tr><td><p>DSAR Response Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 25 days (GDPR allows 30)</p></td></tr>
+<tr><td><p>DSAR Completion Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 98%</p></td></tr>
+<tr><td><p>Consent Collection Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 99%</p></td></tr>
+<tr><td><p>Incident Response Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 60 minutes</p></td></tr>
+<tr><td><p>Vulnerability Remediation Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td></tr>
+<tr><td><p>AI Model Accuracy</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 90% (application-specific)</p></td></tr>
+<tr><td><p>AI Incident Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 5 per 1000</p></td></tr>
+<tr><td><p>Prompt Injection Block Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h4>Quarterly Executive Summary</h4>
+<ul>
+<li><p><strong>Overall compliance posture:</strong> ⬜ Green / ⬜ Amber / ⬜ Red</p></li>
+<li><p><strong>KPIs meeting target:</strong> <strong><em> / 16 (</strong></em>%)</p></li>
+<li><p><strong>Key achievements this quarter:</strong></p></li>
+</ul>
+<ol>
+<li><p><em>_</em></p></li>
+<li><p><em>_</em></p></li>
+</ol>
+<ul>
+<li><p><strong>Key risks and concerns:</strong></p></li>
+</ul>
+<ol>
+<li><p><em>_</em></p></li>
+<li><p><em>_</em></p></li>
+</ol>
+<ul>
+<li><p><strong>Budget utilisation:</strong> <em>_</em>% of quarterly allocation</p></li>
+<li><p><strong>Recommended actions for next quarter:</strong></p></li>
+</ul>
+<ol>
+<li><p><em>_</em></p></li>
+<li><p><em>_</em></p></li>
+</ol>
+<p><strong>Reviewed by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2>Annual KPI Review</h2>
+<h3>Year-over-Year Comparison</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>KPI</p></th><th><p>Q1</p></th><th><p>Q2</p></th><th><p>Q3</p></th><th><p>Q4</p></th><th><p>Annual Avg</p></th><th><p>Target</p></th><th><p>Status</p></th></tr>
+<tr><td><p>DSAR Response Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 25 days (GDPR allows 30)</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>DSAR Completion Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 98%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Breach Notification Speed</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 48 hours (GDPR requires 72)</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Security Training Completion</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Privacy Training Completion</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Vendor Risk Assessment Completion</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Policy Document Freshness</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 90%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Consent Collection Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 99%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Incident Response Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 60 minutes</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Vulnerability Remediation Time</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>Critical: < 1 day, High: < 7 days, Medium: < 30 days</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Data Retention Compliance</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Access Review Completion</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>AI Model Accuracy</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 90% (application-specific)</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>AI Bias Audit Frequency</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 1 per quarter</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>AI Incident Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>< 5 per 1000</p></td><td><p>⬜</p></td></tr>
+<tr><td><p>Prompt Injection Block Rate</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td><td><p>> 95%</p></td><td><p>⬜</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Annual Compliance Program Score</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Weight</p></th><th><p>Score (1-5)</p></th><th><p>Weighted Score</p></th></tr>
+<tr><td><p>Data Subject Rights</p></td><td><p>20%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>Incident Response</p></td><td><p>20%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>Vendor Management</p></td><td><p>15%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>Training & Awareness</p></td><td><p>15%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>Documentation</p></td><td><p>15%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>Technical Controls</p></td><td><p>15%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p>AI Governance</p></td><td><p>10%</p></td><td><p><em>_</em></p></td><td><p><em>_</em></p></td></tr>
+<tr><td><p><strong>Total</strong></p></td><td><p><strong>100%</strong></p></td><td><p></p></td><td><p><strong><em>_</em></strong></p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Score Guide:</strong> 1 = Not Implemented, 2 = Ad Hoc, 3 = Defined, 4 = Managed, 5 = Optimised</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Dashboard Implementation Guide</h2>
+<h3>Recommended Dashboard Tools</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Tool</p></th><th><p>Type</p></th><th><p>Cost</p></th><th><p>Integration</p></th></tr>
+<tr><td><p>Google Sheets</p></td><td><p>Spreadsheet</p></td><td><p>Free</p></td><td><p>Manual entry</p></td></tr>
+<tr><td><p>Notion</p></td><td><p>Wiki/Database</p></td><td><p>Free-$10/user</p></td><td><p>Manual entry</p></td></tr>
+<tr><td><p>Grafana</p></td><td><p>Dashboard</p></td><td><p>Free (OSS)</p></td><td><p>API integration</p></td></tr>
+<tr><td><p>Power BI</p></td><td><p>BI Platform</p></td><td><p>$10/user</p></td><td><p>API integration</p></td></tr>
+<tr><td><p>Datadog</p></td><td><p>Monitoring</p></td><td><p>$15/host</p></td><td><p>Automated</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Data Collection Automation</h3>
+<p>Where possible, automate KPI data collection:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Example: Run Codepliant scan as a KPI data source
+codepliant scan /path/to/project --json &gt; compliance-scan-$(date +%Y-%m-%d).json
+
+# Extract compliance score
+codepliant score /path/to/project --json | jq &apos;.score&apos;
+
+# Count generated documents vs recommended
+codepliant completeness /path/to/project --json]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>Alert Thresholds</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>KPI</p></th><th><p>Warning Threshold</p></th><th><p>Critical Threshold</p></th><th><p>Action</p></th></tr>
+<tr><td><p>DSAR Response Time</p></td><td><p>> 20 days</p></td><td><p>> 27 days</p></td><td><p>Escalate to DPO</p></td></tr>
+<tr><td><p>Breach Notification</p></td><td><p>> 48 hours</p></td><td><p>> 60 hours</p></td><td><p>Emergency response</p></td></tr>
+<tr><td><p>Training Completion</p></td><td><p>< 90%</p></td><td><p>< 80%</p></td><td><p>Mandatory training push</p></td></tr>
+<tr><td><p>Vendor Assessment</p></td><td><p>< 85%</p></td><td><p>< 75%</p></td><td><p>Vendor review sprint</p></td></tr>
+<tr><td><p>Vulnerability Remediation</p></td><td><p>> SLA</p></td><td><p>> 2× SLA</p></td><td><p>Security escalation</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Contact</h2>
+<p>For questions about compliance KPIs:</p>
+<ul>
+<li><p><strong>Email:</strong> legal@acme.com</p></li>
+<li><p><strong>Data Protection Officer:</strong> dpo@acme-saas.com</p></li>
+</ul>
+<hr />
+<p><em>This Compliance KPI Dashboard was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. KPI targets are based on regulatory requirements and industry best practices. Adjust targets to match your organisation's risk appetite, regulatory obligations, and operational capacity. This document should be reviewed by your compliance team.</em></p>

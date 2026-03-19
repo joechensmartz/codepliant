@@ -1,0 +1,130 @@
+<h1>Data Classification Report</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Classification Report</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Company:</strong> Acme Inc</p>
+<p><strong>Generated:</strong> 2026-03-18</p>
+<p><strong>Classification Standard:</strong> GDPR (General Data Protection Regulation)</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</p></li>
+<li><p>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</p></li>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<h2>Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Sensitivity Level</p></th><th><p>Count</p></th><th><p>Description</p></th></tr>
+<tr><td><p>Special Category (Art. 9)</p></td><td><p>2</p></td><td><p>Health, biometric, genetic, racial, political, religious, sexual orientation, trade union</p></td></tr>
+<tr><td><p>High</p></td><td><p>12</p></td><td><p>Financial (PCI), government ID (SSN), authentication credentials</p></td></tr>
+<tr><td><p>Medium</p></td><td><p>8</p></td><td><p>Contact info (email, phone), identity (name, DOB), location</p></td></tr>
+<tr><td><p>Low</p></td><td><p>26</p></td><td><p>Behavioral (analytics), technical (IP, device info), preferences</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Total classified fields:</strong> 48</p>
+<hr />
+<h2>Detailed Classification</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Source</p></th><th><p>Sensitivity</p></th><th><p>GDPR Category</p></th><th><p>Retention</p></th></tr>
+<tr><td><p>stack traces</p></td><td><p>@sentry/node</p></td><td><p>Special Category (Art. 9)</p></td><td><p>Racial/ethnic origin (Art. 9)</p></td><td><p>Delete when no longer necessary; max 1 year</p></td></tr>
+<tr><td><p>Error reports, stack traces, performance data, and user context collected through monitoring tools.</p></td><td><p>@sentry/node</p></td><td><p>Special Category (Art. 9)</p></td><td><p>Racial/ethnic origin (Art. 9)</p></td><td><p>Delete when no longer necessary; max 1 year</p></td></tr>
+<tr><td><p>password hash</p></td><td><p>@supabase/supabase-js</p></td><td><p>High</p></td><td><p>Authentication credential</p></td><td><p>Until account deletion; rotate regularly</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>stripe</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>stripe</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>stripe</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>stripe-ios</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>stripe-ios</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>stripe-ios</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>Email addresses, names, profile pictures, and account credentials collected through authentication. names detected in Prisma schema fields: User.name.</p></td><td><p>@supabase/supabase-js</p></td><td><p>High</p></td><td><p>Authentication credential</p></td><td><p>Until account deletion; rotate regularly</p></td></tr>
+<tr><td><p>Email addresses, names, profile pictures, and account credentials collected through authentication. names detected in Prisma schema fields: User.name.</p></td><td><p>User.name</p></td><td><p>High</p></td><td><p>Authentication credential</p></td><td><p>Until account deletion; rotate regularly</p></td></tr>
+<tr><td><p>Payment card information, billing addresses, and transaction history processed through payment providers.</p></td><td><p>stripe</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>Payment card information, billing addresses, and transaction history processed through payment providers.</p></td><td><p>stripe-ios</p></td><td><p>High</p></td><td><p>Financial — payment data</p></td><td><p>7 years (tax/legal compliance)</p></td></tr>
+<tr><td><p>password hashes detected in Prisma schema fields: User.passwordHash.</p></td><td><p>User.passwordHash</p></td><td><p>High</p></td><td><p>Authentication credential</p></td><td><p>Until account deletion; rotate regularly</p></td></tr>
+<tr><td><p>email</p></td><td><p>@supabase/supabase-js</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email addresses</p></td><td><p>resend</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email content</p></td><td><p>resend</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email</p></td><td><p>stripe</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email</p></td><td><p>stripe-ios</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>Email addresses and email content processed through email service providers.</p></td><td><p>resend</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email addresses, phone numbers detected in Prisma schema fields: User.email, User.phone.</p></td><td><p>User.email</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>email addresses, phone numbers detected in Prisma schema fields: User.email, User.phone.</p></td><td><p>User.phone</p></td><td><p>Medium</p></td><td><p>Contact — email</p></td><td><p>Until account deletion or consent withdrawal</p></td></tr>
+<tr><td><p>error data</p></td><td><p>@sentry/node</p></td><td><p>Low</p></td><td><p>Technical — diagnostics</p></td><td><p>90 days</p></td></tr>
+<tr><td><p>user context</p></td><td><p>@sentry/node</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>device information</p></td><td><p>@sentry/node</p></td><td><p>Low</p></td><td><p>Technical — device/network</p></td><td><p>90 days</p></td></tr>
+<tr><td><p>IP address</p></td><td><p>@sentry/node</p></td><td><p>Low</p></td><td><p>Technical — device/network</p></td><td><p>90 days</p></td></tr>
+<tr><td><p>session data</p></td><td><p>@supabase/supabase-js</p></td><td><p>Low</p></td><td><p>Behavioral — analytics</p></td><td><p>26 months</p></td></tr>
+<tr><td><p>user metadata</p></td><td><p>@supabase/supabase-js</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>user prompts</p></td><td><p>openai</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>conversation history</p></td><td><p>openai</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>generated content</p></td><td><p>openai</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>user behavior</p></td><td><p>posthog</p></td><td><p>Low</p></td><td><p>Behavioral — analytics</p></td><td><p>26 months</p></td></tr>
+<tr><td><p>session recordings</p></td><td><p>posthog</p></td><td><p>Low</p></td><td><p>Behavioral — analytics</p></td><td><p>26 months</p></td></tr>
+<tr><td><p>feature flag usage</p></td><td><p>posthog</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>device information</p></td><td><p>posthog</p></td><td><p>Low</p></td><td><p>Technical — device/network</p></td><td><p>90 days</p></td></tr>
+<tr><td><p>user data as defined in schema</p></td><td><p>prisma</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Usage & Behavioral Data</p></td><td><p>posthog</p></td><td><p>Low</p></td><td><p>Behavioral — analytics</p></td><td><p>26 months</p></td></tr>
+<tr><td><p>AI Interaction Data</p></td><td><p>openai</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Stored User Data</p></td><td><p>prisma</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Personal Identity Data</p></td><td><p>category:Personal Identity Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Financial Data</p></td><td><p>category:Financial Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Usage & Behavioral Data</p></td><td><p>category:Usage & Behavioral Data</p></td><td><p>Low</p></td><td><p>Behavioral — analytics</p></td><td><p>26 months</p></td></tr>
+<tr><td><p>AI Interaction Data</p></td><td><p>category:AI Interaction Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Communication Data</p></td><td><p>category:Communication Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Technical & Diagnostic Data</p></td><td><p>category:Technical & Diagnostic Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Stored User Data</p></td><td><p>category:Stored User Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Contact Information</p></td><td><p>category:Contact Information</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+<tr><td><p>Authentication Data</p></td><td><p>category:Authentication Data</p></td><td><p>Low</p></td><td><p>Unclassified data</p></td><td><p>Review and define retention policy</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Recommendations</h2>
+<h3>Special Category Data (Art. 9) — 2 field(s)</h3>
+<ul>
+<li><p><strong>Explicit consent required</strong> (Art. 9(2)(a)): Standard consent is not sufficient; obtain explicit, informed consent for each specific purpose</p></li>
+<li><p><strong>Data Protection Impact Assessment (DPIA)</strong> required under Art. 35 before processing</p></li>
+<li><p><strong>Appoint a Data Protection Officer (DPO)</strong> if processing special categories at scale</p></li>
+<li><p><strong>Encryption at rest and in transit</strong> is mandatory; consider additional access controls</p></li>
+<li><p><strong>Minimize collection</strong>: Only collect what is strictly necessary for the stated purpose</p></li>
+<li><p><strong>Audit logging</strong>: Maintain detailed access logs for all special category data</p></li>
+</ul>
+<h3>High Sensitivity Data — 12 field(s)</h3>
+<ul>
+<li><p><strong>Encrypt at rest and in transit</strong> using industry-standard algorithms (AES-256, TLS 1.2+)</p></li>
+<li><p><strong>Tokenize payment data</strong> — never store raw card numbers (PCI DSS requirement)</p></li>
+<li><p><strong>Hash credentials</strong> with bcrypt, scrypt, or Argon2; never store plaintext passwords</p></li>
+<li><p><strong>Limit access</strong> to personnel with a business need; implement role-based access control</p></li>
+<li><p><strong>Retain per regulatory requirements</strong> (e.g., 7 years for financial records)</p></li>
+<li><p><strong>Regular security audits</strong> and penetration testing recommended</p></li>
+</ul>
+<h3>Medium Sensitivity Data — 8 field(s)</h3>
+<ul>
+<li><p><strong>Encrypt in transit</strong> (TLS 1.2+); encrypt at rest where feasible</p></li>
+<li><p><strong>Obtain clear consent</strong> before collection; provide opt-out mechanisms</p></li>
+<li><p><strong>Allow user access and deletion</strong> per GDPR Art. 15-17 (right of access, rectification, erasure)</p></li>
+<li><p><strong>Pseudonymize</strong> where possible to reduce risk</p></li>
+<li><p><strong>Define clear retention periods</strong> and automate data deletion</p></li>
+</ul>
+<h3>Low Sensitivity Data — 26 field(s)</h3>
+<ul>
+<li><p><strong>Encrypt in transit</strong> (TLS 1.2+)</p></li>
+<li><p><strong>Anonymize or aggregate</strong> analytics data where possible</p></li>
+<li><p><strong>Honor Do Not Track / Global Privacy Control</strong> signals</p></li>
+<li><p><strong>Set appropriate retention periods</strong> (typically 90 days for logs, 26 months for analytics)</p></li>
+<li><p><strong>Disclose in privacy policy</strong> even for low-sensitivity data</p></li>
+</ul>
+<hr />
+<p><em>This classification is auto-generated based on code analysis. It should be reviewed by your legal and security teams. Data classification may change as your application evolves — re-run this scan regularly.</em></p>

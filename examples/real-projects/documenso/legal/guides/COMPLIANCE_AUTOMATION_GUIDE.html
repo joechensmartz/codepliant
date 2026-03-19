@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE AUTOMATION GUIDE — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE AUTOMATION GUIDE</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="compliance-automation-guide">Compliance Automation Guide</h1>
+<blockquote><strong>Automate compliance for [Your Company Name] with Codepliant.</strong> Never ship non-compliant code again. <strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><em>Generated on 2026-03-16 | 13 services detected</em></p>
+<hr>
+<h2 id="1-overview">1. Overview</h2>
+<p>Manual compliance is slow, error-prone, and expensive. This guide shows how to:</p>
+<ol>
+<li><strong>Integrate Codepliant into CI/CD</strong> — Block PRs that introduce new services without updated docs</li>
+<li><strong>Schedule periodic scans</strong> — Catch drift between code and compliance docs</li>
+<li><strong>Set up webhook alerts</strong> — Get notified when compliance status changes</li>
+<li><strong>Keep docs evergreen</strong> — Best practices for maintaining compliance over time</li>
+</ol>
+<p><strong>Time to set up:</strong> ~30 minutes</p>
+<p><strong>ROI:</strong> Save 4-8 hours per week on manual compliance reviews</p>
+<hr>
+<h2 id="2-cicd-integration">2. CI/CD Integration</h2>
+<h3 id="21-github-actions">2.1 GitHub Actions</h3>
+<p>Add this workflow to <code>.github/workflows/compliance.yml</code>:</p>
+<pre><code>name: Compliance Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Codepliant
+        run: npm install -g codepliant
+
+      - name: Scan for compliance
+        run: codepliant check . --json &gt; compliance-result.json
+
+      - name: Validate existing docs
+        run: codepliant validate .
+
+      - name: Check for drift
+        run: |
+          codepliant diff .
+          if [ $? -ne 0 ]; then
+            echo &quot;::warning::Compliance documents are out of date&quot;
+          fi
+
+      - name: Upload compliance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report
+          path: compliance-result.json</code></pre>
+<h3 id="22-gitlab-ci">2.2 GitLab CI</h3>
+<p>Add to <code>.gitlab-ci.yml</code>:</p>
+<pre><code>compliance:
+  stage: test
+  image: node:20
+  script:
+    - npm install -g codepliant
+    - codepliant check . --json &gt; compliance-result.json
+    - codepliant validate .
+    - codepliant diff .
+  artifacts:
+    when: always
+    paths:
+      - compliance-result.json
+    expire_in: 30 days
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == &quot;main&quot;</code></pre>
+<h3 id="23-circleci">2.3 CircleCI</h3>
+<p>Add to <code>.circleci/config.yml</code>:</p>
+<pre><code>version: 2.1
+
+jobs:
+  compliance:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run:
+          name: Install Codepliant
+          command: npm install -g codepliant
+      - run:
+          name: Compliance check
+          command: codepliant check . --json &gt; compliance-result.json
+      - run:
+          name: Validate docs
+          command: codepliant validate .
+      - store_artifacts:
+          path: compliance-result.json
+
+workflows:
+  main:
+    jobs:
+      - compliance</code></pre>
+<h3 id="24-pre-commit-hook">2.4 Pre-commit Hook</h3>
+<p>Catch compliance issues before they even reach CI:</p>
+<pre><code># Install the pre-commit hook
+codepliant hook install
+
+# Or manually add to .husky/pre-commit or lefthook.yml:
+codepliant check . --quiet</code></pre>
+<p>The pre-commit hook will:</p>
+<ul>
+<li>Run a quick scan (~2 seconds)</li>
+<li>Block commits that add new services without updating docs</li>
+<li>Show actionable fix suggestions</li>
+</ul>
+<hr>
+<h2 id="3-scheduled-scanning-cron">3. Scheduled Scanning (Cron)</h2>
+<h3 id="31-using-codepliants-built-in-scheduler">3.1 Using Codepliant's Built-in Scheduler</h3>
+<pre><code># Schedule weekly scans
+codepliant schedule install --frequency weekly
+
+# Schedule daily scans (recommended for regulated industries)
+codepliant schedule install --frequency daily
+
+# Check schedule status
+codepliant schedule status
+
+# Remove scheduled scans
+codepliant schedule uninstall</code></pre>
+<h3 id="32-custom-cron-setup">3.2 Custom Cron Setup</h3>
+<p>For more control, use crontab directly:</p>
+<pre><code># Edit crontab
+crontab -e
+
+# Weekly scan every Monday at 9am
+0 9 * * 1 cd /path/to/project &amp;&amp; codepliant go . --quiet --format json 2&gt;&amp;1 | tee /var/log/codepliant-scan.log
+
+# Daily drift check at 8am
+0 8 * * * cd /path/to/project &amp;&amp; codepliant diff . --json &gt; /tmp/compliance-diff.json 2&gt;&amp;1</code></pre>
+<h3 id="33-github-actions-scheduled-workflow">3.3 GitHub Actions Scheduled Workflow</h3>
+<pre><code>name: Scheduled Compliance Scan
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Codepliant
+        run: npm install -g codepliant
+
+      - name: Full compliance scan
+        run: codepliant go . --format json --quiet
+
+      - name: Generate report
+        run: codepliant report . --format html
+
+      - name: Check for drift
+        id: drift
+        run: |
+          OUTPUT=$(codepliant diff . 2&gt;&amp;1)
+          if echo &quot;$OUTPUT&quot; | grep -q &quot;changes detected&quot;; then
+            echo &quot;drift=true&quot; &gt;&gt; $GITHUB_OUTPUT
+            echo &quot;$OUTPUT&quot;
+          else
+            echo &quot;drift=false&quot; &gt;&gt; $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue if drift detected
+        if: steps.drift.outputs.drift == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Compliance docs out of date',
+              body: 'Scheduled compliance scan detected drift between code and compliance documents. Run `codepliant update` to fix.',
+              labels: ['compliance', 'automated']
+            });</code></pre>
+<hr>
+<h2 id="4-webhook-alerts">4. Webhook Alerts</h2>
+<h3 id="41-slack-notifications">4.1 Slack Notifications</h3>
+<pre><code># Send compliance status to Slack
+codepliant notify --webhook https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+# Include in CI/CD:
+codepliant go . --quiet &amp;&amp; \
+  codepliant notify --webhook $SLACK_WEBHOOK_URL</code></pre>
+<h3 id="42-email-alerts">4.2 Email Alerts</h3>
+<pre><code># Configure email notifications
+codepliant notify --email compliance-team@[yourcompanyname].com
+
+# Or use the compliance summary email generator:
+# The COMPLIANCE_SUMMARY_EMAIL.md is auto-generated and can be sent via your mail system</code></pre>
+<h3 id="43-custom-webhook-integration">4.3 Custom Webhook Integration</h3>
+<pre><code># Generic webhook (works with Zapier, n8n, Make, etc.)
+codepliant notify --webhook https://your-webhook-endpoint.com/compliance
+
+# The webhook payload looks like:
+# {
+#   &quot;project&quot;: &quot;@documenso/root&quot;,
+#   &quot;services_detected&quot;: 13,
+#   &quot;compliance_score&quot;: 85,
+#   &quot;documents_generated&quot;: 25,
+#   &quot;drift_detected&quot;: false,
+#   &quot;timestamp&quot;: &quot;2026-03-16T09:00:00Z&quot;
+# }</code></pre>
+<h3 id="44-pagerduty-critical-compliance-failures">4.4 PagerDuty (Critical Compliance Failures)</h3>
+<p>For payment-processing environments where compliance failures are critical:</p>
+<pre><code># In your CI/CD pipeline:
+- name: Compliance gate
+  run: |
+    SCORE=$(codepliant count . --json | jq '.compliance_score')
+    if [ &quot;$SCORE&quot; -lt 70 ]; then
+      curl -X POST https://events.pagerduty.com/v2/enqueue \
+        -H &quot;Content-Type: application/json&quot; \
+        -d '{
+          &quot;routing_key&quot;: &quot;'$PD_ROUTING_KEY'&quot;,
+          &quot;event_action&quot;: &quot;trigger&quot;,
+          &quot;payload&quot;: {
+            &quot;summary&quot;: &quot;Compliance score dropped below 70%&quot;,
+            &quot;severity&quot;: &quot;critical&quot;,
+            &quot;source&quot;: &quot;codepliant&quot;
+          }
+        }'
+      exit 1
+    fi</code></pre>
+<hr>
+<h2 id="5-automation-best-practices">5. Automation Best Practices</h2>
+<h3 id="51-keep-docs-in-sync-with-code">5.1 Keep Docs in Sync with Code</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Practice</th><th style="text-align:left">How</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Pre-commit scan</td><td style="text-align:left"><code>codepliant hook install</code></td><td style="text-align:left">Every commit</td></tr>
+<tr><td style="text-align:left">CI/CD gate</td><td style="text-align:left">Block PRs with compliance drift</td><td style="text-align:left">Every PR</td></tr>
+<tr><td style="text-align:left">Scheduled full scan</td><td style="text-align:left"><code>codepliant schedule install --frequency weekly</code></td><td style="text-align:left">Weekly</td></tr>
+<tr><td style="text-align:left">Quarterly review</td><td style="text-align:left"><code>codepliant report . --format pdf</code></td><td style="text-align:left">Quarterly</td></tr>
+</tbody>
+</table>
+<h3 id="52-version-control-your-compliance-docs">5.2 Version Control Your Compliance Docs</h3>
+<pre><code># Always commit compliance docs alongside code changes
+git add legal/
+git commit -m &quot;chore: update compliance docs for new service integration&quot;</code></pre>
+<p><strong>Why?</strong> Git history provides an audit trail showing when compliance docs were updated and by whom — valuable for audits.</p>
+<h3 id="53-automate-document-regeneration">5.3 Automate Document Regeneration</h3>
+<pre><code># In your CI/CD pipeline, auto-regenerate and commit:
+codepliant update .
+git diff --quiet legal/ || {
+  git add legal/
+  git commit -m &quot;chore(compliance): auto-update compliance documents&quot;
+  git push
+}</code></pre>
+<h3 id="54-monitor-for-new-services">5.4 Monitor for New Services</h3>
+<p>When a developer adds a new dependency that processes user data:</p>
+<ol>
+<li><strong>Pre-commit hook</strong> catches it immediately</li>
+<li><strong>CI/CD check</strong> blocks the PR</li>
+<li><strong>Developer runs</strong> <code>codepliant update</code> to regenerate docs</li>
+<li><strong>PR includes</strong> both code change and updated compliance docs</li>
+</ol>
+<h3 id="55-compliance-score-tracking">5.5 Compliance Score Tracking</h3>
+<p>Track your compliance score over time:</p>
+<pre><code># Output score as JSON for tracking
+codepliant count . --json | jq '.compliance_score'
+
+# Store in a time-series database or spreadsheet
+DATE=$(date +%Y-%m-%d)
+SCORE=$(codepliant count . --json | jq '.compliance_score')
+echo &quot;$DATE,$SCORE&quot; &gt;&gt; compliance-score-history.csv</code></pre>
+<h3 id="56-multi-project-monorepo-setup">5.6 Multi-Project (Monorepo) Setup</h3>
+<pre><code># Scan all projects under a directory
+codepliant scan-all /path/to/monorepo
+
+# Generate docs for all projects
+codepliant generate-all /path/to/monorepo
+
+# Compare compliance across projects
+codepliant compare /path/to/project-a /path/to/project-b</code></pre>
+<hr>
+<h2 id="6-recommended-automation-pipeline">6. Recommended Automation Pipeline</h2>
+<pre><code>Developer writes code
+        │
+        ▼
+  ┌─────────────┐
+  │ Pre-commit   │  codepliant check (2 sec)
+  │ hook         │  Blocks if new service without docs
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ CI/CD        │  codepliant validate + diff
+  │ pipeline     │  Blocks PR if docs are stale
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Auto-update  │  codepliant update (on main branch merge)
+  │ on merge     │  Regenerate + commit docs
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Weekly scan  │  codepliant go --format json
+  │ (cron)       │  Full scan + report
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Notify       │  Slack/email/webhook
+  │ stakeholders │  Score, drift, action items
+  └─────────────┘</code></pre>
+<hr>
+<h2 id="7-compliance-as-code-maturity-model">7. Compliance as Code Maturity Model</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Level</th><th style="text-align:left">Description</th><th style="text-align:left">Automation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Level 0</strong></td><td style="text-align:left">No compliance docs</td><td style="text-align:left">None</td></tr>
+<tr><td style="text-align:left"><strong>Level 1</strong></td><td style="text-align:left">Manual docs, occasionally updated</td><td style="text-align:left"><code>codepliant go</code> run manually</td></tr>
+<tr><td style="text-align:left"><strong>Level 2</strong></td><td style="text-align:left">Docs in version control</td><td style="text-align:left">Pre-commit hook installed</td></tr>
+<tr><td style="text-align:left"><strong>Level 3</strong></td><td style="text-align:left">CI/CD compliance gate</td><td style="text-align:left">PRs blocked without updated docs</td></tr>
+<tr><td style="text-align:left"><strong>Level 4</strong></td><td style="text-align:left">Fully automated pipeline</td><td style="text-align:left">Scheduled scans + auto-regeneration + alerts</td></tr>
+<tr><td style="text-align:left"><strong>Level 5</strong></td><td style="text-align:left">Continuous compliance</td><td style="text-align:left">Real-time monitoring + dashboards + audit trail</td></tr>
+</tbody>
+</table>
+<p><strong>Your current level based on 13 detected services:</strong> You need Level 4+ automation</p>
+<hr>
+<h2 id="8-troubleshooting">8. Troubleshooting</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Issue</th><th style="text-align:left">Solution</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">CI scan takes too long</td><td style="text-align:left">Use <code>codepliant check</code> (fast) instead of <code>codepliant go</code> (full)</td></tr>
+<tr><td style="text-align:left">False positives in drift</td><td style="text-align:left">Add stable sections to <code>.codepliantrc.json</code> ignore list</td></tr>
+<tr><td style="text-align:left">Pre-commit hook too slow</td><td style="text-align:left">Use <code>codepliant check --quiet</code> for minimal output</td></tr>
+<tr><td style="text-align:left">Monorepo scan misses projects</td><td style="text-align:left">Use <code>codepliant scan-all</code> with explicit root path</td></tr>
+<tr><td style="text-align:left">Score fluctuates</td><td style="text-align:left">Pin Codepliant version in CI (<code>npm install -g codepliant@2026</code>)</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-environment-variables-for-cicd">9. Environment Variables for CI/CD</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Variable</th><th style="text-align:left">Purpose</th><th style="text-align:left">Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>CODEPLIANT_OUTPUT</code></td><td style="text-align:left">Override output directory</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CODEPLIANT_FORMAT</code></td><td style="text-align:left">Default output format</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>CODEPLIANT_QUIET</code></td><td style="text-align:left">Suppress output (<code>1</code> or <code>true</code>)</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>NO_COLOR</code></td><td style="text-align:left">Disable colored output</td><td style="text-align:left">No</td></tr>
+<tr><td style="text-align:left"><code>SLACK<em>WEBHOOK</em>URL</code></td><td style="text-align:left">Slack notification endpoint</td><td style="text-align:left">For alerts</td></tr>
+<tr><td style="text-align:left"><code>CODEPLIANT_LICENSE</code></td><td style="text-align:left">Pro/Team license key</td><td style="text-align:left">For premium features</td></tr>
+</tbody>
+</table>
+<hr>
+<p><em>This guide was auto-generated by Codepliant based on analysis of 13 services in your codebase. Customize the CI/CD examples for your specific setup.</em></p>
+<hr>
+<blockquote><strong>Disclaimer:</strong> This guide provides automation recommendations based on code analysis. Review and adapt the configurations to your specific infrastructure and compliance requirements.</blockquote>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

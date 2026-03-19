@@ -1,0 +1,168 @@
+<h1>Privacy by Design Checklist</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Privacy by Design Checklist</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Legal basis:</strong> GDPR Article 25 — Data Protection by Design and by Default</p>
+<p>This checklist implements the requirements of GDPR Article 25, which mandates that data protection is integrated into processing activities and business practices from the design stage through the lifecycle. Each item has been tailored to the services detected in the Acme Inc codebase.</p>
+<h2>1. Data Minimization (Article 5(1)(c))</h2>
+<p>Ensure that only data which is necessary for each specific purpose is collected and processed.</p>
+<ul>
+<li><p>[ ] Review each data collection point to verify necessity</p></li>
+<li><p>[ ] Document the purpose for each category of personal data collected</p></li>
+<li><p>[ ] Remove any data fields that are not strictly necessary</p></li>
+<li><p>[ ] Implement default settings that collect the minimum data required</p></li>
+<li><p>[ ] Only collect profile data essential for authentication (avoid optional fields by default)</p></li>
+<li><p>[ ] Limit OAuth scopes to the minimum required</p></li>
+<li><p>[ ] Configure analytics to anonymize IP addresses</p></li>
+<li><p>[ ] Disable user-level tracking where aggregate data suffices</p></li>
+<li><p>[ ] Set analytics data retention to the shortest period needed</p></li>
+<li><p>[ ] Only store email addresses necessary for transactional communications</p></li>
+<li><p>[ ] Implement unsubscribe mechanisms for all marketing communications</p></li>
+<li><p>[ ] Strip PII from error reports before sending to monitoring services</p></li>
+<li><p>[ ] Configure user context in error tracking to use anonymized identifiers</p></li>
+</ul>
+<h2>2. Purpose Limitation (Article 5(1)(b))</h2>
+<p>Data must be collected for specified, explicit, and legitimate purposes.</p>
+<ul>
+<li><p>[ ] Document the lawful basis for each processing activity</p></li>
+<li><p>[ ] Ensure data is not repurposed without additional consent</p></li>
+<li><p>[ ] Maintain a Record of Processing Activities (ROPA)</p></li>
+<li><p>[ ] Document the specific purpose for AI data processing</p></li>
+<li><p>[ ] Ensure AI training data usage is explicitly authorized</p></li>
+<li><p>[ ] Obtain explicit consent before using personal data for model training</p></li>
+<li><p>[ ] Limit payment data usage to transaction processing and fraud prevention</p></li>
+<li><p>[ ] Do not use payment data for marketing or profiling</p></li>
+</ul>
+<h2>3. Storage Limitation (Article 5(1)(e))</h2>
+<p>Personal data should be kept only as long as necessary for its purpose.</p>
+<ul>
+<li><p>[ ] Define retention periods for each category of personal data</p></li>
+<li><p>[ ] Implement automated data deletion/anonymization after retention period</p></li>
+<li><p>[ ] Document retention justification for any data kept beyond 3 years</p></li>
+<li><p>[ ] Implement soft-delete with scheduled hard-delete for database records</p></li>
+<li><p>[ ] Set up automated database cleanup jobs for expired data</p></li>
+</ul>
+<h2>4. Integrity & Confidentiality (Article 5(1)(f))</h2>
+<p>Personal data must be processed with appropriate security measures.</p>
+<ul>
+<li><p>[ ] Encrypt personal data at rest (AES-256 or equivalent)</p></li>
+<li><p>[ ] Encrypt personal data in transit (TLS 1.2+)</p></li>
+<li><p>[ ] Implement role-based access controls (RBAC)</p></li>
+<li><p>[ ] Maintain audit logs for personal data access</p></li>
+<li><p>[ ] Conduct regular security assessments and penetration tests</p></li>
+<li><p>[ ] Use strong password hashing (bcrypt, Argon2, or scrypt)</p></li>
+<li><p>[ ] Implement session timeout and automatic logout</p></li>
+<li><p>[ ] Enable multi-factor authentication where available</p></li>
+<li><p>[ ] Maintain PCI DSS compliance for payment data handling</p></li>
+<li><p>[ ] Use tokenization for stored payment methods</p></li>
+</ul>
+<h2>5. Transparency (Articles 12-14)</h2>
+<p>Data subjects must be informed about data processing in a clear and accessible manner.</p>
+<ul>
+<li><p>[ ] Publish a clear and accessible Privacy Policy</p></li>
+<li><p>[ ] Provide layered privacy notices (short + detailed)</p></li>
+<li><p>[ ] Inform users about their rights at the point of data collection</p></li>
+<li><p>[ ] Maintain an up-to-date list of sub-processors</p></li>
+<li><p>[ ] Disclose use of AI/automated decision-making (Article 22)</p></li>
+<li><p>[ ] Provide meaningful information about the logic of automated decisions</p></li>
+<li><p>[ ] Implement a cookie consent banner with granular controls</p></li>
+<li><p>[ ] Provide a clear Cookie Policy listing all tracking technologies</p></li>
+</ul>
+<h2>6. Data Subject Rights (Articles 15-22)</h2>
+<p>Systems must be designed to facilitate the exercise of data subject rights.</p>
+<ul>
+<li><p>[ ] Implement mechanisms for data access requests (Article 15)</p></li>
+<li><p>[ ] Support data rectification (Article 16)</p></li>
+<li><p>[ ] Support data erasure / right to be forgotten (Article 17)</p></li>
+<li><p>[ ] Support data portability in machine-readable format (Article 20)</p></li>
+<li><p>[ ] Implement right to restriction of processing (Article 18)</p></li>
+<li><p>[ ] Enable right to object to processing (Article 21)</p></li>
+<li><p>[ ] Respond to all DSARs within 30 days</p></li>
+<li><p>[ ] Implement right not to be subject to automated decision-making (Article 22)</p></li>
+<li><p>[ ] Provide human review option for AI-driven decisions with legal effects</p></li>
+</ul>
+<h2>7. Privacy-Enhancing Technologies (PETs) Recommendations</h2>
+<p>Based on the detected services and data processing activities, the following privacy-enhancing technologies are recommended:</p>
+<h3>General</h3>
+<ul>
+<li><p>[ ] <strong>Pseudonymization</strong>: Replace direct identifiers with pseudonyms in processing pipelines</p></li>
+<li><p>[ ] <strong>Data masking</strong>: Mask PII in non-production environments</p></li>
+<li><p>[ ] <strong>Access logging</strong>: Implement comprehensive audit trails for data access</p></li>
+</ul>
+<h3>Analytics & Tracking</h3>
+<ul>
+<li><p>[ ] <strong>Differential privacy</strong>: Add noise to analytics datasets to prevent re-identification</p></li>
+<li><p>[ ] <strong>K-anonymity</strong>: Ensure analytics cohorts contain at least k individuals</p></li>
+<li><p>[ ] <strong>Server-side analytics</strong>: Process analytics events server-side to reduce client data exposure</p></li>
+<li><p>[ ] <strong>IP anonymization</strong>: Truncate IP addresses before storage</p></li>
+</ul>
+<h3>Authentication & Identity</h3>
+<ul>
+<li><p>[ ] <strong>Zero-knowledge proofs</strong>: Consider ZKP for age/credential verification without revealing details</p></li>
+<li><p>[ ] <strong>Secure enclaves</strong>: Process sensitive auth data in trusted execution environments</p></li>
+<li><p>[ ] <strong>Token-based sessions</strong>: Use short-lived, rotating tokens instead of persistent sessions</p></li>
+</ul>
+<h3>AI & Machine Learning</h3>
+<ul>
+<li><p>[ ] <strong>Federated learning</strong>: Train models without centralizing personal data</p></li>
+<li><p>[ ] <strong>On-device processing</strong>: Process sensitive data locally where possible</p></li>
+<li><p>[ ] <strong>Synthetic data</strong>: Use synthetic datasets for model development and testing</p></li>
+<li><p>[ ] <strong>Model explainability</strong>: Implement interpretability tools for automated decisions</p></li>
+</ul>
+<h3>Payment Processing</h3>
+<ul>
+<li><p>[ ] <strong>Tokenization</strong>: Replace card data with non-reversible tokens</p></li>
+<li><p>[ ] <strong>Point-to-point encryption (P2PE)</strong>: Encrypt card data from capture to processing</p></li>
+</ul>
+<h3>Data Storage</h3>
+<ul>
+<li><p>[ ] <strong>Encryption at rest</strong>: Use envelope encryption with key rotation</p></li>
+<li><p>[ ] <strong>Field-level encryption</strong>: Encrypt individual PII fields in the database</p></li>
+<li><p>[ ] <strong>Secure deletion</strong>: Use cryptographic erasure for data deletion guarantees</p></li>
+</ul>
+<h2>8. Detected Services — Privacy Assessment</h2>
+<p>The following services were detected in the codebase. Each requires a privacy impact evaluation:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Processed</p></th><th><p>Privacy Action Required</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>monitoring</p></td><td><p>error data, stack traces, user context, device information, IP address</p></td><td><p>PII scrubbing in error reports; retention limits; access controls</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>auth</p></td><td><p>email, password hash, session data, user metadata</p></td><td><p>Minimize data collected; secure credential storage; session management</p></td></tr>
+<tr><td><p>openai</p></td><td><p>ai</p></td><td><p>user prompts, conversation history, generated content</p></td><td><p>DPIA required; document AI decision logic; assess bias risks</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>analytics</p></td><td><p>user behavior, session recordings, feature flag usage, device information</p></td><td><p>Consent mechanism; IP anonymization; retention review</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>database</p></td><td><p>user data as defined in schema</p></td><td><p>Encryption at rest; access controls; backup encryption</p></td></tr>
+<tr><td><p>resend</p></td><td><p>email</p></td><td><p>email addresses, email content</p></td><td><p>Consent/opt-out mechanism; DPA with provider; retention policy</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>payment</p></td><td><p>payment information, billing address, email, transaction history</p></td><td><p>PCI DSS compliance; DPA with processor; tokenization review</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>payment</p></td><td><p>payment information, billing address, email, transaction history</p></td><td><p>PCI DSS compliance; DPA with processor; tokenization review</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>9. Review Schedule</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Activity</p></th><th><p>Frequency</p></th><th><p>Responsible</p></th></tr>
+<tr><td><p>Privacy by Design checklist review</p></td><td><p>Quarterly</p></td><td><p>DPO / Privacy Team</p></td></tr>
+<tr><td><p>Data minimization audit</p></td><td><p>Semi-annually</p></td><td><p>Engineering Lead</p></td></tr>
+<tr><td><p>PET effectiveness assessment</p></td><td><p>Annually</p></td><td><p>Security Team</p></td></tr>
+<tr><td><p>DPIA update for new processing</p></td><td><p>Before launch</p></td><td><p>DPO / Privacy Team</p></td></tr>
+<tr><td><p>Sub-processor review</p></td><td><p>Annually</p></td><td><p>Legal / Procurement</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Privacy Impact Assessment (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+</ul>
+<hr />
+<p><em>This checklist was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on detected services and data processing activities. It should be reviewed and adapted by your Data Protection Officer or legal counsel. This document does not constitute legal advice.</em></p>

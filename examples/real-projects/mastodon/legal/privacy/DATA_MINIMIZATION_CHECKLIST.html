@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA MINIMIZATION CHECKLIST — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DATA MINIMIZATION CHECKLIST</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~16 min read</p>
+    </header>
+    <h1 id="data-minimization-checklist">Data Minimization Checklist</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Company:</strong> [Your Company Name]</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @mastodon/mastodon</p>
+<hr>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This checklist implements the <strong>data minimization principle</strong> under GDPR Article 5(1)(c):</p>
+<blockquote><em>"Personal data shall be adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed."</em></blockquote>
+<p>For each detected service, this document identifies what data is collected, whether it is actually needed, and provides actionable recommendations for reducing unnecessary data collection.</p>
+<blockquote><strong>Disclaimer:</strong> This is not legal advice. Consult qualified legal counsel and your Data Protection Officer to confirm data processing activities are lawful and necessary.</blockquote>
+<h2 id="2-per-service-data-analysis">2. Per-Service Data Analysis</h2>
+<h3 id="actioncable-other">ActionCable (Other)</h3>
+<p><strong>Declared data collection:</strong> real-time user data, connection metadata, channel subscriptions, WebSocket messages</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">real-time user data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionCable functionality</td></tr>
+<tr><td style="text-align:left">connection metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionCable functionality</td></tr>
+<tr><td style="text-align:left">channel subscriptions</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionCable functionality</td></tr>
+<tr><td style="text-align:left">WebSocket messages</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionCable functionality</td></tr>
+</tbody>
+</table>
+<h3 id="actioncontrollercookies-other">ActionController::Cookies (Other)</h3>
+<p><strong>Declared data collection:</strong> session cookies, session data, CSRF tokens</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">session cookies</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionController::Cookies functionality</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionController::Cookies functionality</td></tr>
+<tr><td style="text-align:left">CSRF tokens</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionController::Cookies functionality</td></tr>
+</tbody>
+</table>
+<h3 id="actionmailer-email">ActionMailer (Email)</h3>
+<p><strong>Declared data collection:</strong> email addresses, email content</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email_address</td><td style="text-align:left">Yes</td><td style="text-align:left">Email delivery</td><td style="text-align:left">Remove from lists on unsubscribe; honor deletion requests</td></tr>
+<tr><td style="text-align:left">email_content</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Delivery logs</td><td style="text-align:left">Do not retain email body after delivery confirmation; delete logs after 90 days</td></tr>
+<tr><td style="text-align:left">open_tracking</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Marketing metrics</td><td style="text-align:left">Consider removing tracking pixels; they are not essential and raise privacy concerns</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionMailer functionality</td></tr>
+<tr><td style="text-align:left">email content</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActionMailer functionality</td></tr>
+</tbody>
+</table>
+<h3 id="active-storage-storage">Active Storage (Storage)</h3>
+<p><strong>Declared data collection:</strong> uploaded files, file metadata, storage service credentials, potential PII in uploaded content</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">Yes</td><td style="text-align:left">User content storage</td><td style="text-align:left">Implement file expiration for unused content; enforce size limits</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">Yes</td><td style="text-align:left">File management</td><td style="text-align:left">Delete metadata when files are deleted; do not retain orphaned metadata</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Active Storage functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Active Storage functionality</td></tr>
+<tr><td style="text-align:left">storage service credentials</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Active Storage functionality</td></tr>
+<tr><td style="text-align:left">potential PII in uploaded content</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Active Storage functionality</td></tr>
+</tbody>
+</table>
+<h3 id="activerecord-database">ActiveRecord (Database)</h3>
+<p><strong>Declared data collection:</strong> user data as defined in schema, timestamps, associations</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveRecord functionality</td></tr>
+<tr><td style="text-align:left">timestamps</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveRecord functionality</td></tr>
+<tr><td style="text-align:left">associations</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveRecord functionality</td></tr>
+</tbody>
+</table>
+<h3 id="activestorage-storage">ActiveStorage (Storage)</h3>
+<p><strong>Declared data collection:</strong> uploaded files, file metadata, storage references</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">Yes</td><td style="text-align:left">User content storage</td><td style="text-align:left">Implement file expiration for unused content; enforce size limits</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">Yes</td><td style="text-align:left">File management</td><td style="text-align:left">Delete metadata when files are deleted; do not retain orphaned metadata</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveStorage functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveStorage functionality</td></tr>
+<tr><td style="text-align:left">storage references</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ActiveStorage functionality</td></tr>
+</tbody>
+</table>
+<h3 id="aws-sdk-s3-storage">aws-sdk-s3 (Storage)</h3>
+<p><strong>Declared data collection:</strong> uploaded files, file metadata</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">uploaded_files</td><td style="text-align:left">Yes</td><td style="text-align:left">User content storage</td><td style="text-align:left">Implement file expiration for unused content; enforce size limits</td></tr>
+<tr><td style="text-align:left">file_metadata</td><td style="text-align:left">Yes</td><td style="text-align:left">File management</td><td style="text-align:left">Delete metadata when files are deleted; do not retain orphaned metadata</td></tr>
+<tr><td style="text-align:left">uploaded files</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for aws-sdk-s3 functionality</td></tr>
+<tr><td style="text-align:left">file metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for aws-sdk-s3 functionality</td></tr>
+</tbody>
+</table>
+<h3 id="devise-auth">devise (Auth)</h3>
+<p><strong>Declared data collection:</strong> email, password hash, session data, authentication tokens</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">password hash</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for devise functionality</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for devise functionality</td></tr>
+<tr><td style="text-align:left">authentication tokens</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for devise functionality</td></tr>
+</tbody>
+</table>
+<h3 id="ioredis-database">ioredis (Database)</h3>
+<p><strong>Declared data collection:</strong> cached data, session data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ioredis functionality</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ioredis functionality</td></tr>
+</tbody>
+</table>
+<h3 id="omniauth-auth">omniauth (Auth)</h3>
+<p><strong>Declared data collection:</strong> email, name, OAuth tokens, profile data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">name</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for omniauth functionality</td></tr>
+<tr><td style="text-align:left">OAuth tokens</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for omniauth functionality</td></tr>
+<tr><td style="text-align:left">profile data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for omniauth functionality</td></tr>
+</tbody>
+</table>
+<h3 id="pg-database">pg (Database)</h3>
+<p><strong>Declared data collection:</strong> user data as defined in schema</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for pg functionality</td></tr>
+</tbody>
+</table>
+<h3 id="postgresql-database">PostgreSQL (Database)</h3>
+<p><strong>Declared data collection:</strong> application data, user records</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">application data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for PostgreSQL functionality</td></tr>
+<tr><td style="text-align:left">user records</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for PostgreSQL functionality</td></tr>
+</tbody>
+</table>
+<h3 id="postgresql-env-database">PostgreSQL (env) (Database)</h3>
+<p><strong>Declared data collection:</strong> application data, user records</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">application data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for PostgreSQL (env) functionality</td></tr>
+<tr><td style="text-align:left">user records</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for PostgreSQL (env) functionality</td></tr>
+</tbody>
+</table>
+<h3 id="pundit-auth">pundit (Auth)</h3>
+<p><strong>Declared data collection:</strong> user roles, authorization policies, access control data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">user roles</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for pundit functionality</td></tr>
+<tr><td style="text-align:left">authorization policies</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for pundit functionality</td></tr>
+<tr><td style="text-align:left">access control data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for pundit functionality</td></tr>
+</tbody>
+</table>
+<h3 id="rack-attack-other">rack-attack (Other)</h3>
+<p><strong>Declared data collection:</strong> IP addresses, request metadata</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">IP addresses</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rack-attack functionality</td></tr>
+<tr><td style="text-align:left">request metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rack-attack functionality</td></tr>
+</tbody>
+</table>
+<h3 id="rails-actionmailer-email">rails-actionmailer (Email)</h3>
+<p><strong>Declared data collection:</strong> email addresses, email content</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email_address</td><td style="text-align:left">Yes</td><td style="text-align:left">Email delivery</td><td style="text-align:left">Remove from lists on unsubscribe; honor deletion requests</td></tr>
+<tr><td style="text-align:left">email_content</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Delivery logs</td><td style="text-align:left">Do not retain email body after delivery confirmation; delete logs after 90 days</td></tr>
+<tr><td style="text-align:left">open_tracking</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Marketing metrics</td><td style="text-align:left">Consider removing tracking pixels; they are not essential and raise privacy concerns</td></tr>
+<tr><td style="text-align:left">email addresses</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rails-actionmailer functionality</td></tr>
+<tr><td style="text-align:left">email content</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rails-actionmailer functionality</td></tr>
+</tbody>
+</table>
+<h3 id="rails-activerecord-database">rails-activerecord (Database)</h3>
+<p><strong>Declared data collection:</strong> user data as defined in schema</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rails-activerecord functionality</td></tr>
+</tbody>
+</table>
+<h3 id="rails-sessions-auth">rails-sessions (Auth)</h3>
+<p><strong>Declared data collection:</strong> session cookies, CSRF tokens</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">email</td><td style="text-align:left">Yes</td><td style="text-align:left">Account identification and communication</td><td style="text-align:left">Essential — ensure proper encryption at rest</td></tr>
+<tr><td style="text-align:left">password_hash</td><td style="text-align:left">Yes</td><td style="text-align:left">User authentication</td><td style="text-align:left">Use strong hashing (bcrypt/argon2); never store plaintext</td></tr>
+<tr><td style="text-align:left">session_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Session management</td><td style="text-align:left">Short-lived tokens; auto-expire and rotate</td></tr>
+<tr><td style="text-align:left">login_history</td><td style="text-align:left"><strong>No</strong></td><td style="text-align:left">Security auditing</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">oauth_token</td><td style="text-align:left">Yes</td><td style="text-align:left">Third-party authentication</td><td style="text-align:left">Store securely; revoke on account deletion</td></tr>
+<tr><td style="text-align:left">session cookies</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rails-sessions functionality</td></tr>
+<tr><td style="text-align:left">CSRF tokens</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for rails-sessions functionality</td></tr>
+</tbody>
+</table>
+<h3 id="redis-database">redis (Database)</h3>
+<p><strong>Declared data collection:</strong> cached data, session data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">cached data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for redis functionality</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for redis functionality</td></tr>
+</tbody>
+</table>
+<h3 id="redis-database">Redis (Database)</h3>
+<p><strong>Declared data collection:</strong> session data, cache data</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">user_data</td><td style="text-align:left">Yes</td><td style="text-align:left">Core application functionality</td><td style="text-align:left">Audit each field — only store what the application actually uses</td></tr>
+<tr><td style="text-align:left">session data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Redis functionality</td></tr>
+<tr><td style="text-align:left">cache data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for Redis functionality</td></tr>
+</tbody>
+</table>
+<h3 id="sidekiq-other">sidekiq (Other)</h3>
+<p><strong>Declared data collection:</strong> job data, user data processed in background jobs</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">job data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for sidekiq functionality</td></tr>
+<tr><td style="text-align:left">user data processed in background jobs</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for sidekiq functionality</td></tr>
+</tbody>
+</table>
+<h3 id="ws-websocket-other">ws (WebSocket) (Other)</h3>
+<p><strong>Declared data collection:</strong> real-time user data, connection metadata, IP address, WebSocket messages</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Field</th><th style="text-align:left">Likely Needed?</th><th style="text-align:left">Justification</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">real-time user data</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ws (WebSocket) functionality</td></tr>
+<tr><td style="text-align:left">connection metadata</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ws (WebSocket) functionality</td></tr>
+<tr><td style="text-align:left">IP address</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ws (WebSocket) functionality</td></tr>
+<tr><td style="text-align:left">WebSocket messages</td><td style="text-align:left">Review needed</td><td style="text-align:left">Detected via scan</td><td style="text-align:left">Assess whether this data is necessary for ws (WebSocket) functionality</td></tr>
+</tbody>
+</table>
+<h2 id="3-data-reduction-opportunities">3. Data Reduction Opportunities</h2>
+<p>The following 8 data field(s) are collected but <strong>may not be necessary</strong> for core service delivery:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">Data Field</th><th style="text-align:left">Service</th><th style="text-align:left">Recommendation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">email_content</td><td style="text-align:left">ActionMailer</td><td style="text-align:left">Do not retain email body after delivery confirmation; delete logs after 90 days</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">open_tracking</td><td style="text-align:left">ActionMailer</td><td style="text-align:left">Consider removing tracking pixels; they are not essential and raise privacy concerns</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">login_history</td><td style="text-align:left">devise</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">login_history</td><td style="text-align:left">omniauth</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">login_history</td><td style="text-align:left">pundit</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">email_content</td><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Do not retain email body after delivery confirmation; delete logs after 90 days</td></tr>
+<tr><td style="text-align:left">7</td><td style="text-align:left">open_tracking</td><td style="text-align:left">rails-actionmailer</td><td style="text-align:left">Consider removing tracking pixels; they are not essential and raise privacy concerns</td></tr>
+<tr><td style="text-align:left">8</td><td style="text-align:left">login_history</td><td style="text-align:left">rails-sessions</td><td style="text-align:left">Retain for 90 days max; anonymize after</td></tr>
+</tbody>
+</table>
+<blockquote><strong>Action required:</strong> For each item above, determine whether (a) the data can be eliminated entirely, (b) the data can be anonymized or aggregated, or (c) there is a legitimate business justification that should be documented.</blockquote>
+<h2 id="4-summary">4. Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Services analyzed</td><td style="text-align:left">22</td></tr>
+<tr><td style="text-align:left">Total data fields assessed</td><td style="text-align:left">94</td></tr>
+<tr><td style="text-align:left">Fields likely needed</td><td style="text-align:left">86</td></tr>
+<tr><td style="text-align:left">Fields potentially unnecessary</td><td style="text-align:left">8</td></tr>
+<tr><td style="text-align:left">Potential data reduction</td><td style="text-align:left">9%</td></tr>
+</tbody>
+</table>
+<h2 id="5-gdpr-article-51c-compliance-checklist">5. GDPR Article 5(1)(c) Compliance Checklist</h2>
+<p>Use this checklist to verify your data minimization posture:</p>
+<ul class="checklist">
+<li><input type="checkbox" disabled> All collected data has a documented, specific purpose</li>
+<li><input type="checkbox" disabled> No data is collected "just in case" or for future undefined use</li>
+<li><input type="checkbox" disabled> Data fields are limited to what is strictly necessary for each purpose</li>
+<li><input type="checkbox" disabled> Pseudonymization or anonymization is used where possible</li>
+<li><input type="checkbox" disabled> Data retention periods are defined and enforced for all fields</li>
+<li><input type="checkbox" disabled> Regular reviews are conducted to identify and remove unnecessary data</li>
+<li><input type="checkbox" disabled> Third-party services are configured to collect only required data</li>
+<li><input type="checkbox" disabled> Default settings favor minimal data collection (privacy by default)</li>
+<li><input type="checkbox" disabled> Data collection forms only request essential information</li>
+<li><input type="checkbox" disabled> Analytics and tracking are proportionate to business needs</li>
+</ul>
+<h2 id="6-practical-steps-for-data-reduction">6. Practical Steps for Data Reduction</h2>
+<ol>
+<li><strong>Audit each field</strong> — For every data field in the tables above, ask: "Would the service break without this data?"</li>
+<li><strong>Eliminate unnecessary collection</strong> — Remove fields that are not essential for the stated purpose</li>
+<li><strong>Anonymize where possible</strong> — Replace identifiable data with pseudonyms or aggregates</li>
+<li><strong>Shorten retention</strong> — Reduce how long data is kept; implement automatic deletion</li>
+<li><strong>Minimize third-party sharing</strong> — Configure services to send only required fields</li>
+<li><strong>Review regularly</strong> — Re-run this checklist quarterly and after adding new services</li>
+</ol>
+<h2 id="7-related-documents">7. Related Documents</h2>
+<ul>
+<li><strong>DATA_DICTIONARY.md</strong> — Complete catalog of all data fields</li>
+<li><strong>DATA<em>RETENTION</em>POLICY.md</strong> — Retention schedules and deletion procedures</li>
+<li><strong>PRIVACY_POLICY.md</strong> — Public disclosure of data collection practices</li>
+<li><strong>LAWFUL<em>BASIS</em>ASSESSMENT.md</strong> — Legal basis for each processing activity</li>
+<li><strong>RECORD<em>OF</em>PROCESSING.md</strong> — GDPR Art. 30 processing activities register</li>
+<li><strong>CONSENT<em>MANAGEMENT</em>GUIDE.md</strong> — Consent collection and management procedures</li>
+</ul>
+<p>For questions about this checklist, contact [your-email@example.com].</p>
+<hr>
+<p><em>This data minimization checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is for informational purposes only and does not constitute legal advice.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

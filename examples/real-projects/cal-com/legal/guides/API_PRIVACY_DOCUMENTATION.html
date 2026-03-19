@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API PRIVACY DOCUMENTATION — cal-com</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>API PRIVACY DOCUMENTATION</h1>
+      <p class="meta">cal-com &middot; Last updated 2026-03-18 &middot; ~16 min read</p>
+    </header>
+    <h1 id="api-privacy-documentation">API Privacy Documentation</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> calcom-monorepo</p>
+<p>This document maps API endpoints to the types of personal data they process, providing transparency for privacy compliance. Each endpoint is linked to the relevant section of the Privacy Policy.</p>
+<p>For questions about API data handling, contact [your-email@example.com].</p>
+<h2 id="overview">Overview</h2>
+<p>20 API endpoint(s) accepting user data via MUTATION, QUERY requests. Data fields collected: autoOptIn, color, eventTypeIds, feature, featureId, includeSystemRolesOnly, isAll, name, permissions, roleId, routingFormId, slug, surveyId, teamId, userId.</p>
+<p>Total API endpoints detected: <strong>37</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Endpoints accepting user data</td><td style="text-align:left">20</td></tr>
+<tr><td style="text-align:left">Write endpoints (POST/PUT/PATCH/DELETE)</td><td style="text-align:left">33</td></tr>
+<tr><td style="text-align:left">Read-only endpoints (GET/QUERY)</td><td style="text-align:left">4</td></tr>
+</tbody>
+</table>
+<h2 id="endpoint-summary">Endpoint Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Endpoint</th><th style="text-align:left">Method</th><th style="text-align:left">Data Fields</th><th style="text-align:left">Privacy Category</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>/api/api-keys/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/attendees/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">bookingId, email, name, timeZone</td><td style="text-align:left">Other, Contact, Identity</td></tr>
+<tr><td style="text-align:left"><code>/api/availabilities/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/booking-references/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">bookingId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/bookings/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">userId, eventTypeId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/credential-sync/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/credential-sync/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/custom-inputs/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">options</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/custom-inputs/[id]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/destination-calendars/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">userId, eventTypeId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/event-types/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">userId, teamId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/invites/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">teamId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/memberships/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">teamId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/memberships/[id]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">role</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/schedules/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">userId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/schedules/[id]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">userId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/selected-calendars/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/selected-calendars/[id]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/teams/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">ownerId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/users/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/users/[userId]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">role, hideBranding, defaultScheduleId, avatarUrl, email</td><td style="text-align:left">Other, Contact</td></tr>
+<tr><td style="text-align:left"><code>/api/webhooks/_post</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/webhooks/[id]/_patch</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/compliance/download</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/csrf</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/ip</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/support/conversation</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/video/recording</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/get-inbound-dynamic-variables</code></td><td style="text-align:left">POST</td><td style="text-align:left">llm<em>id, from</em>number, to_number</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/book/event</code></td><td style="text-align:left">POST</td><td style="text-align:left">eventTypeId</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/book/instant-event</code></td><td style="text-align:left">POST</td><td style="text-align:left">creationSource</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/book/recurring-event</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/router</code></td><td style="text-align:left">POST</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/twilio/webhook</code></td><td style="text-align:left">POST</td><td style="text-align:left">MessageStatus, To, SmsSid</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/getToken</code></td><td style="text-align:left">POST</td><td style="text-align:left">calcomUserId, appSlug</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/managed-user</code></td><td style="text-align:left">POST</td><td style="text-align:left">data</td><td style="text-align:left">Other</td></tr>
+<tr><td style="text-align:left"><code>/api/oauth2-user</code></td><td style="text-align:left">POST</td><td style="text-align:left">email, authorizationCode</td><td style="text-align:left">Contact, Other</td></tr>
+</tbody>
+</table>
+<h2 id="privacy-policy-mapping">Privacy Policy Mapping</h2>
+<p>The following table maps data categories collected through the API to the corresponding sections in your Privacy Policy.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Category</th><th style="text-align:left">Privacy Policy Section</th><th style="text-align:left">Legal Basis (GDPR)</th><th style="text-align:left">Retention</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Other</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Contact</td><td style="text-align:left">Personal Information We Collect</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account + [X] days</td></tr>
+<tr><td style="text-align:left">Identity</td><td style="text-align:left">Personal Information We Collect</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account + [X] days</td></tr>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">Personal Information We Collect</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account + [X] days</td></tr>
+<tr><td style="text-align:left">Financial Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">Automatically Collected Information</td><td style="text-align:left">Legitimate interest (Art. 6(1)(f))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Communication Data</td><td style="text-align:left">Communications</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Technical & Diagnostic Data</td><td style="text-align:left">Automatically Collected Information</td><td style="text-align:left">Legitimate interest (Art. 6(1)(f))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">API Data Collection</td><td style="text-align:left">Information You Provide via API</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account</td></tr>
+</tbody>
+</table>
+<h2 id="detailed-endpoint-documentation">Detailed Endpoint Documentation</h2>
+<h3 id="post-apiapi-keys_post"><code>POST /api/api-keys/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/api-keys/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/api-keys/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiattendees_post"><code>POST /api/attendees/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/attendees/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/attendees/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">bookingId, email, name, timeZone</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other, Contact, Identity</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>bookingId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>email</code></td><td style="text-align:left">Contact</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>name</code></td><td style="text-align:left">Identity</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>timeZone</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiavailabilities_post"><code>POST /api/availabilities/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/availabilities/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/availabilities/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apibooking-references_post"><code>POST /api/booking-references/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/booking-references/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/booking-references/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">bookingId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>bookingId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apibookings_post"><code>POST /api/bookings/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/bookings/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/bookings/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">userId, eventTypeId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>userId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>eventTypeId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apicredential-sync_patch"><code>POST /api/credential-sync/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/credential-sync/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/credential-sync/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apicredential-sync_post"><code>POST /api/credential-sync/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/credential-sync/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/credential-sync/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apicustom-inputs_post"><code>POST /api/custom-inputs/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/custom-inputs/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/custom-inputs/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">options</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>options</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apicustom-inputsid_patch"><code>POST /api/custom-inputs/[id]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/custom-inputs/[id]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/custom-inputs/[id]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apidestination-calendars_post"><code>POST /api/destination-calendars/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/destination-calendars/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/destination-calendars/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">userId, eventTypeId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>userId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>eventTypeId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apievent-types_post"><code>POST /api/event-types/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/event-types/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/event-types/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">userId, teamId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>userId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>teamId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiinvites_post"><code>POST /api/invites/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/invites/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/invites/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">teamId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>teamId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apimemberships_post"><code>POST /api/memberships/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/memberships/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/memberships/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">teamId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>teamId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apimembershipsid_patch"><code>POST /api/memberships/[id]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/memberships/[id]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/memberships/[id]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">role</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>role</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apischedules_post"><code>POST /api/schedules/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/schedules/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/schedules/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">userId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>userId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apischedulesid_patch"><code>POST /api/schedules/[id]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/schedules/[id]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/schedules/[id]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">userId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>userId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiselected-calendars_post"><code>POST /api/selected-calendars/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/selected-calendars/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/selected-calendars/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiselected-calendarsid_patch"><code>POST /api/selected-calendars/[id]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/selected-calendars/[id]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/selected-calendars/[id]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiteams_post"><code>POST /api/teams/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/teams/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/teams/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">ownerId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>ownerId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiusers_post"><code>POST /api/users/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/users/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/users/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiusersuserid_patch"><code>POST /api/users/[userId]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/users/[userId]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/users/[userId]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">role, hideBranding, defaultScheduleId, avatarUrl, email</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other, Contact</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>role</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>hideBranding</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>defaultScheduleId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>avatarUrl</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>email</code></td><td style="text-align:left">Contact</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiwebhooks_post"><code>POST /api/webhooks/_post</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/webhooks/_post.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/webhooks/_post</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiwebhooksid_patch"><code>POST /api/webhooks/[id]/_patch</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/api/v1/pages/api/webhooks/[id]/_patch.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/webhooks/[id]/_patch</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apicompliancedownload"><code>GET /api/compliance/download</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/app/api/compliance/download/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/compliance/download</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apicsrf"><code>GET /api/csrf</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/app/api/csrf/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/csrf</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apiip"><code>GET /api/ip</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/app/api/ip/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/ip</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apisupportconversation"><code>POST /api/support/conversation</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/app/api/support/conversation/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/support/conversation</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apivideorecording"><code>GET /api/video/recording</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/app/api/video/recording/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/video/recording</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apiget-inbound-dynamic-variables"><code>POST /api/get-inbound-dynamic-variables</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/get-inbound-dynamic-variables.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/get-inbound-dynamic-variables</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">llm<em>id, from</em>number, to_number</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>llm_id</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>from_number</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>to_number</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apibookevent"><code>POST /api/book/event</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/book/event.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/book/event</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">eventTypeId</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>eventTypeId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apibookinstant-event"><code>POST /api/book/instant-event</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/book/instant-event.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/book/instant-event</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">creationSource</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>creationSource</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apibookrecurring-event"><code>POST /api/book/recurring-event</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/book/recurring-event.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/book/recurring-event</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apirouter"><code>POST /api/router</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/router/index.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/router</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="post-apitwiliowebhook"><code>POST /api/twilio/webhook</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/web/pages/api/twilio/webhook.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/twilio/webhook</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">MessageStatus, To, SmsSid</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>MessageStatus</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>To</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>SmsSid</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apigettoken"><code>POST /api/getToken</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>example-apps/credential-sync/pages/api/getToken.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/getToken</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">calcomUserId, appSlug</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>calcomUserId</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>appSlug</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apimanaged-user"><code>POST /api/managed-user</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/platform/examples/base/src/pages/api/managed-user.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/managed-user</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">data</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>data</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h3 id="post-apioauth2-user"><code>POST /api/oauth2-user</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>packages/platform/examples/base/src/pages/api/oauth2-user.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">POST</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/oauth2-user</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">email, authorizationCode</td></tr>
+<tr><td style="text-align:left"><strong>Privacy categories</strong></td><td style="text-align:left">Contact, Other</td></tr>
+</tbody>
+</table>
+<p><strong>Data fields detail:</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Field</th><th style="text-align:left">Category</th><th style="text-align:left">Required</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>email</code></td><td style="text-align:left">Contact</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left"><code>authorizationCode</code></td><td style="text-align:left">Other</td><td style="text-align:left">[YES/NO]</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h2 id="api-data-flow-to-third-party-services">API Data Flow to Third-Party Services</h2>
+<p>The following third-party services may receive data submitted through the API.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Shared</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@hubspot/api-client</td><td style="text-align:left">other</td><td style="text-align:left">contact information, email addresses, names, phone numbers, company data, deal information, engagement history</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@sendgrid/mail</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@sentry/nextjs</td><td style="text-align:left">monitoring</td><td style="text-align:left">error data, stack traces, user context, device information, IP address, performance profiles</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@upstash/redis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">Google Analytics</td><td style="text-align:left">analytics</td><td style="text-align:left">page views, user behavior, device information, IP address, location data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">Google Tag Manager</td><td style="text-align:left">analytics</td><td style="text-align:left">page views, user behavior, custom events, device information, third-party tag data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">google-auth-library</td><td style="text-align:left">auth</td><td style="text-align:left">OAuth tokens, Google profile data, email</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">intercom</td><td style="text-align:left">other</td><td style="text-align:left">user profiles, email, name, conversations, user behavior, company data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">ioredis</td><td style="text-align:left">database</td><td style="text-align:left">cached data, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, profile picture, OAuth tokens, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">passport</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, OAuth tokens, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">Plausible Analytics</td><td style="text-align:left">analytics</td><td style="text-align:left">page views, referrer data, device information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">PostgreSQL</td><td style="text-align:left">database</td><td style="text-align:left">application data, user records</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">PostgreSQL (env)</td><td style="text-align:left">database</td><td style="text-align:left">application data, user records</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">analytics</td><td style="text-align:left">user behavior, session recordings, feature flag usage, device information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">Redis</td><td style="text-align:left">database</td><td style="text-align:left">session data, cache data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">Redis (env)</td><td style="text-align:left">database</td><td style="text-align:left">session data, cache data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">twilio</td><td style="text-align:left">other</td><td style="text-align:left">phone numbers, SMS message content, voice call metadata, call recordings</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">web-push</td><td style="text-align:left">other</td><td style="text-align:left">push subscription endpoints, device tokens, notification content</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h2 id="recommendations">Recommendations</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document the purpose and legal basis for each data field collected</li>
+<li><input type="checkbox" disabled> Implement input validation on all endpoints accepting user data</li>
+<li><input type="checkbox" disabled> Add rate limiting to prevent abuse of data-accepting endpoints</li>
+<li><input type="checkbox" disabled> Ensure authentication is required for all endpoints accessing personal data</li>
+<li><input type="checkbox" disabled> Implement field-level encryption for sensitive data (SSN, financial data)</li>
+<li><input type="checkbox" disabled> Add API versioning to manage privacy-impacting changes</li>
+<li><input type="checkbox" disabled> Log all data access for audit trail purposes</li>
+<li><input type="checkbox" disabled> Document data retention periods for each endpoint's data</li>
+</ul>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</li>
+</ul>
+<hr>
+<p><em>This API privacy documentation was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>calcom-monorepo</strong> codebase. It should be reviewed by your engineering and legal teams to ensure accuracy and completeness. Fields marked with brackets require manual input.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

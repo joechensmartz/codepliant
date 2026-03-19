@@ -1778,7 +1778,7 @@ complete -F _codepliant codepliant
   return null;
 }
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
 
   // Initialize color support before anything prints
@@ -2267,7 +2267,11 @@ function main() {
         process.exit(0);
       }
 
-      const result = runScanAndGenerate(absProjectPath, absOutputDir, quiet, jsonOutput, outputFormat, verbose, jurisdictionsFlag ? { jurisdictions: jurisdictionsFlag } : undefined);
+      const result = await runScanAndGenerate(absProjectPath, absOutputDir, quiet, jsonOutput, outputFormat, verbose, {
+        ...(jurisdictionsFlag ? { jurisdictions: jurisdictionsFlag } : {}),
+        ...(companyNameFlag ? { companyName: companyNameFlag } : {}),
+        ...(contactEmailFlag ? { contactEmail: contactEmailFlag } : {}),
+      });
 
       if (watchMode) {
         startWatchMode(absProjectPath, absOutputDir, quiet, result, outputFormat);
@@ -2620,7 +2624,7 @@ function main() {
     }
 
     if (command === "update") {
-      runUpdate(absProjectPath, absOutputDir, quiet, jsonOutput, formatFlag, verbose);
+      await runUpdate(absProjectPath, absOutputDir, quiet, jsonOutput, formatFlag, verbose);
       return;
     }
 
@@ -2812,19 +2816,25 @@ function printConfigWarnings(config: CodepliantConfig): void {
   }
 }
 
-function runScanAndGenerate(
+async function runScanAndGenerate(
   absProjectPath: string,
   absOutputDir: string,
   quiet: boolean,
   jsonOutput: boolean,
   outputFormat: OutputFormat = "markdown",
   verbose: boolean = false,
-  overrides?: { jurisdictions?: string[] },
-): ScanResult {
+  overrides?: { jurisdictions?: string[]; companyName?: string; contactEmail?: string },
+): Promise<ScanResult> {
   // Load config and plugins
   const config = loadConfig(absProjectPath);
   if (overrides?.jurisdictions) {
     config.jurisdictions = overrides.jurisdictions;
+  }
+  if (overrides?.companyName) {
+    config.companyName = overrides.companyName;
+  }
+  if (overrides?.contactEmail) {
+    config.contactEmail = overrides.contactEmail;
   }
 
   if (!quiet && !jsonOutput) {
@@ -2862,7 +2872,7 @@ function runScanAndGenerate(
   // Track changes before writing
   const diff = diffDocuments(docs, absOutputDir, outputFormat);
 
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, result);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, result);
 
   // Write changelog if anything changed
   const changelogPath = appendChangelog(absOutputDir, diff);
@@ -3098,7 +3108,7 @@ function startWatchMode(
 
   function handleChange() {
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
+    debounceTimer = setTimeout(async () => {
       debounceTimer = null;
       try {
         const timestamp = new Date().toLocaleTimeString();
@@ -3131,7 +3141,7 @@ function startWatchMode(
         if (changed) {
           const config = loadConfig(absProjectPath);
           const docs = generateDocuments(newResult, config);
-          const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, newResult);
+          const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, newResult);
           console.log(
             `  ${GREEN()}${BOLD()}Regenerated ${writtenFiles.length} document(s)${RESET()}`
           );
@@ -3475,7 +3485,7 @@ async function runInit(projectPath: string) {
 
   const reloadedConfig = loadConfig(absProjectPath);
   const docs = generateDocuments(result, reloadedConfig);
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, format, reloadedConfig, result);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, format, reloadedConfig, result);
 
   for (const file of writtenFiles) {
     const relPath = path.relative(absProjectPath, file);
@@ -3611,7 +3621,7 @@ async function runInitFromEnv(projectPath: string) {
 
   const reloadedConfig = loadConfig(absProjectPath);
   const docs = generateDocuments(result, reloadedConfig);
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, format, reloadedConfig, result);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, format, reloadedConfig, result);
 
   for (const file of writtenFiles) {
     const relPath = path.relative(absProjectPath, file);
@@ -3710,7 +3720,7 @@ async function runPdfSingle(args: string[], quiet: boolean) {
   // Check if puppeteer is available
   let puppeteer: any;
   try {
-    puppeteer = await import("puppeteer");
+    puppeteer = await (Function('return import("puppeteer")')() as Promise<any>);
   } catch {
     // puppeteer not installed — show install instructions
     console.error(`${RED()}[CP073] Puppeteer is not installed.${RESET()}\n`);
@@ -5343,7 +5353,7 @@ function runDiff(
 
 // --- `codepliant update` command ---
 
-function runUpdate(
+async function runUpdate(
   absProjectPath: string,
   absOutputDir: string,
   quiet: boolean,
@@ -5428,7 +5438,7 @@ function runUpdate(
     console.log(`\n${BOLD()}Step 3: Writing updated documents...${RESET()}\n`);
   }
 
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, result);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, outputFormat, config, result);
 
   // Append changelog
   const changelogPath = appendChangelog(absOutputDir, diffDocuments(docs, absOutputDir, outputFormat));
@@ -6325,7 +6335,7 @@ function runScanAll(
 
 // --- `codepliant generate-all` command ---
 
-function runGenerateAll(
+async function runGenerateAll(
   absRootPath: string,
   absOutputDir: string,
   quiet: boolean,
@@ -6385,7 +6395,7 @@ function runGenerateAll(
       // Write to a per-project subdirectory under the output dir
       const safeName = project.name.replace(/[^a-zA-Z0-9_-]/g, "-").replace(/-+/g, "-");
       const projectOutputDir = path.join(absOutputDir, safeName);
-      const writtenFiles = writeDocumentsInFormat(docs, projectOutputDir, outputFormat, config, scanResult);
+      const writtenFiles = await writeDocumentsInFormat(docs, projectOutputDir, outputFormat, config, scanResult);
 
       const durationMs = Date.now() - startTime;
       results.push({ project, scanResult, docsGenerated: writtenFiles.length, outputDir: projectOutputDir, durationMs });
@@ -6679,7 +6689,7 @@ async function runWizard(
   // Write documents
   const absOutputDir = path.resolve(absProjectPath, outputDir);
   const outputFormat = formatFlag || getOutputFormat(wizardConfig);
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, outputFormat, wizardConfig, filteredResult);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, outputFormat, wizardConfig, filteredResult);
 
   // Write changelog
   const diff = diffDocuments(docs, absOutputDir);
@@ -8137,7 +8147,7 @@ async function runOnboard(projectPath: string) {
   const genSpinner = startSpinner("Generating compliance documents");
   const reloadedConfig = loadConfig(absProjectPath);
   const docs = generateDocuments(result, reloadedConfig);
-  const writtenFiles = writeDocumentsInFormat(docs, absOutputDir, "markdown", reloadedConfig, result);
+  const writtenFiles = await writeDocumentsInFormat(docs, absOutputDir, "markdown", reloadedConfig, result);
   genSpinner.stop(true);
 
   console.log(`    ${DIM()}Generated ${writtenFiles.length} document(s)${RESET()}\n`);
@@ -11153,4 +11163,7 @@ function runSnapshot(
   process.exit(0);
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

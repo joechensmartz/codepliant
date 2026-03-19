@@ -1,0 +1,451 @@
+<h1>Compliance Automation Guide</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance Automation Guide</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Automate compliance for Acme Inc with Codepliant.</strong></p>
+<p>Never ship non-compliant code again.</p>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><em>Generated on 2026-03-18 | 8 services detected</em></p>
+<hr />
+<h2>1. Overview</h2>
+<p>Manual compliance is slow, error-prone, and expensive. This guide shows how to:</p>
+<ol>
+<li><p><strong>Integrate Codepliant into CI/CD</strong> — Block PRs that introduce new services without updated docs</p></li>
+<li><p><strong>Schedule periodic scans</strong> — Catch drift between code and compliance docs</p></li>
+<li><p><strong>Set up webhook alerts</strong> — Get notified when compliance status changes</p></li>
+<li><p><strong>Keep docs evergreen</strong> — Best practices for maintaining compliance over time</p></li>
+</ol>
+<p><strong>Time to set up:</strong> ~30 minutes</p>
+<p><strong>ROI:</strong> Save 4-8 hours per week on manual compliance reviews</p>
+<hr />
+<h2>2. CI/CD Integration</h2>
+<h3>2.1 GitHub Actions</h3>
+<p>Add this workflow to <code>.github/workflows/compliance.yml</code>:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[name: Compliance Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: &apos;20&apos;
+
+      - name: Install Codepliant
+        run: npm install -g codepliant
+
+      - name: Scan for compliance
+        run: codepliant check . --json &gt; compliance-result.json
+
+      - name: Validate existing docs
+        run: codepliant validate .
+
+      - name: Check for drift
+        run: |
+          codepliant diff .
+          if [ $? -ne 0 ]; then
+            echo &quot;::warning::Compliance documents are out of date&quot;
+          fi
+
+      - name: Upload compliance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report
+          path: compliance-result.json]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>2.2 GitLab CI</h3>
+<p>Add to <code>.gitlab-ci.yml</code>:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[compliance:
+  stage: test
+  image: node:20
+  script:
+    - npm install -g codepliant
+    - codepliant check . --json &gt; compliance-result.json
+    - codepliant validate .
+    - codepliant diff .
+  artifacts:
+    when: always
+    paths:
+      - compliance-result.json
+    expire_in: 30 days
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == &quot;main&quot;]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>2.3 CircleCI</h3>
+<p>Add to <code>.circleci/config.yml</code>:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[version: 2.1
+
+jobs:
+  compliance:
+    docker:
+      - image: cimg/node:20.0
+    steps:
+      - checkout
+      - run:
+          name: Install Codepliant
+          command: npm install -g codepliant
+      - run:
+          name: Compliance check
+          command: codepliant check . --json &gt; compliance-result.json
+      - run:
+          name: Validate docs
+          command: codepliant validate .
+      - store_artifacts:
+          path: compliance-result.json
+
+workflows:
+  main:
+    jobs:
+      - compliance]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>2.4 Pre-commit Hook</h3>
+<p>Catch compliance issues before they even reach CI:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Install the pre-commit hook
+codepliant hook install
+
+# Or manually add to .husky/pre-commit or lefthook.yml:
+codepliant check . --quiet]]></ac:plain-text-body>
+</ac:structured-macro>
+<p>The pre-commit hook will:</p>
+<ul>
+<li><p>Run a quick scan (~2 seconds)</p></li>
+<li><p>Block commits that add new services without updating docs</p></li>
+<li><p>Show actionable fix suggestions</p></li>
+</ul>
+<hr />
+<h2>3. Scheduled Scanning (Cron)</h2>
+<h3>3.1 Using Codepliant's Built-in Scheduler</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Schedule weekly scans
+codepliant schedule install --frequency weekly
+
+# Schedule daily scans (recommended for regulated industries)
+codepliant schedule install --frequency daily
+
+# Check schedule status
+codepliant schedule status
+
+# Remove scheduled scans
+codepliant schedule uninstall]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.2 Custom Cron Setup</h3>
+<p>For more control, use crontab directly:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Edit crontab
+crontab -e
+
+# Weekly scan every Monday at 9am
+0 9 * * 1 cd /path/to/project &amp;&amp; codepliant go . --quiet --format json 2&gt;&amp;1 | tee /var/log/codepliant-scan.log
+
+# Daily drift check at 8am
+0 8 * * * cd /path/to/project &amp;&amp; codepliant diff . --json &gt; /tmp/compliance-diff.json 2&gt;&amp;1]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>3.3 GitHub Actions Scheduled Workflow</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[name: Scheduled Compliance Scan
+
+on:
+  schedule:
+    - cron: &apos;0 9 * * 1&apos;  # Every Monday at 9am UTC
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: &apos;20&apos;
+
+      - name: Install Codepliant
+        run: npm install -g codepliant
+
+      - name: Full compliance scan
+        run: codepliant go . --format json --quiet
+
+      - name: Generate report
+        run: codepliant report . --format html
+
+      - name: Check for drift
+        id: drift
+        run: |
+          OUTPUT=$(codepliant diff . 2&gt;&amp;1)
+          if echo &quot;$OUTPUT&quot; | grep -q &quot;changes detected&quot;; then
+            echo &quot;drift=true&quot; &gt;&gt; $GITHUB_OUTPUT
+            echo &quot;$OUTPUT&quot;
+          else
+            echo &quot;drift=false&quot; &gt;&gt; $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue if drift detected
+        if: steps.drift.outputs.drift == &apos;true&apos;
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: &apos;Compliance docs out of date&apos;,
+              body: &apos;Scheduled compliance scan detected drift between code and compliance documents. Run `codepliant update` to fix.&apos;,
+              labels: [&apos;compliance&apos;, &apos;automated&apos;]
+            });]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>4. Webhook Alerts</h2>
+<h3>4.1 Slack Notifications</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Send compliance status to Slack
+codepliant notify --webhook https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+# Include in CI/CD:
+codepliant go . --quiet &amp;&amp; \
+  codepliant notify --webhook $SLACK_WEBHOOK_URL]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.2 Email Alerts</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Configure email notifications
+codepliant notify --email compliance-team@acmeinc.com
+
+# Or use the compliance summary email generator:
+# The COMPLIANCE_SUMMARY_EMAIL.md is auto-generated and can be sent via your mail system]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.3 Custom Webhook Integration</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Generic webhook (works with Zapier, n8n, Make, etc.)
+codepliant notify --webhook https://your-webhook-endpoint.com/compliance
+
+# The webhook payload looks like:
+# {
+#   &quot;project&quot;: &quot;nextjs-saas-example&quot;,
+#   &quot;services_detected&quot;: 8,
+#   &quot;compliance_score&quot;: 85,
+#   &quot;documents_generated&quot;: 25,
+#   &quot;drift_detected&quot;: false,
+#   &quot;timestamp&quot;: &quot;2026-03-18T09:00:00Z&quot;
+# }]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>4.4 PagerDuty (Critical Compliance Failures)</h3>
+<p>For payment-processing environments where compliance failures are critical:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">yaml</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# In your CI/CD pipeline:
+- name: Compliance gate
+  run: |
+    SCORE=$(codepliant count . --json | jq &apos;.compliance_score&apos;)
+    if [ &quot;$SCORE&quot; -lt 70 ]; then
+      curl -X POST https://events.pagerduty.com/v2/enqueue \
+        -H &quot;Content-Type: application/json&quot; \
+        -d &apos;{
+          &quot;routing_key&quot;: &quot;&apos;$PD_ROUTING_KEY&apos;&quot;,
+          &quot;event_action&quot;: &quot;trigger&quot;,
+          &quot;payload&quot;: {
+            &quot;summary&quot;: &quot;Compliance score dropped below 70%&quot;,
+            &quot;severity&quot;: &quot;critical&quot;,
+            &quot;source&quot;: &quot;codepliant&quot;
+          }
+        }&apos;
+      exit 1
+    fi]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>5. Automation Best Practices</h2>
+<h3>5.1 Keep Docs in Sync with Code</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Practice</p></th><th><p>How</p></th><th><p>Frequency</p></th></tr>
+<tr><td><p>Pre-commit scan</p></td><td><p><code>codepliant hook install</code></p></td><td><p>Every commit</p></td></tr>
+<tr><td><p>CI/CD gate</p></td><td><p>Block PRs with compliance drift</p></td><td><p>Every PR</p></td></tr>
+<tr><td><p>Scheduled full scan</p></td><td><p><code>codepliant schedule install --frequency weekly</code></p></td><td><p>Weekly</p></td></tr>
+<tr><td><p>Quarterly review</p></td><td><p><code>codepliant report . --format pdf</code></p></td><td><p>Quarterly</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>5.2 Version Control Your Compliance Docs</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Always commit compliance docs alongside code changes
+git add legal/
+git commit -m &quot;chore: update compliance docs for new service integration&quot;]]></ac:plain-text-body>
+</ac:structured-macro>
+<p><strong>Why?</strong> Git history provides an audit trail showing when compliance docs were updated and by whom — valuable for audits.</p>
+<h3>5.3 Automate Document Regeneration</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# In your CI/CD pipeline, auto-regenerate and commit:
+codepliant update .
+git diff --quiet legal/ || {
+  git add legal/
+  git commit -m &quot;chore(compliance): auto-update compliance documents&quot;
+  git push
+}]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>5.4 Monitor for New Services</h3>
+<p>When a developer adds a new dependency that processes user data:</p>
+<ol>
+<li><p><strong>Pre-commit hook</strong> catches it immediately</p></li>
+<li><p><strong>CI/CD check</strong> blocks the PR</p></li>
+<li><p><strong>Developer runs</strong> <code>codepliant update</code> to regenerate docs</p></li>
+<li><p><strong>PR includes</strong> both code change and updated compliance docs</p></li>
+</ol>
+<h3>5.5 Compliance Score Tracking</h3>
+<p>Track your compliance score over time:</p>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Output score as JSON for tracking
+codepliant count . --json | jq &apos;.compliance_score&apos;
+
+# Store in a time-series database or spreadsheet
+DATE=$(date +%Y-%m-%d)
+SCORE=$(codepliant count . --json | jq &apos;.compliance_score&apos;)
+echo &quot;$DATE,$SCORE&quot; &gt;&gt; compliance-score-history.csv]]></ac:plain-text-body>
+</ac:structured-macro>
+<h3>5.6 Multi-Project (Monorepo) Setup</h3>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">bash</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[# Scan all projects under a directory
+codepliant scan-all /path/to/monorepo
+
+# Generate docs for all projects
+codepliant generate-all /path/to/monorepo
+
+# Compare compliance across projects
+codepliant compare /path/to/project-a /path/to/project-b]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>6. Recommended Automation Pipeline</h2>
+<ac:structured-macro ac:name="code">
+<ac:parameter ac:name="language">text</ac:parameter>
+<ac:parameter ac:name="linenumbers">true</ac:parameter>
+<ac:plain-text-body><![CDATA[Developer writes code
+        │
+        ▼
+  ┌─────────────┐
+  │ Pre-commit   │  codepliant check (2 sec)
+  │ hook         │  Blocks if new service without docs
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ CI/CD        │  codepliant validate + diff
+  │ pipeline     │  Blocks PR if docs are stale
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Auto-update  │  codepliant update (on main branch merge)
+  │ on merge     │  Regenerate + commit docs
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Weekly scan  │  codepliant go --format json
+  │ (cron)       │  Full scan + report
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────┐
+  │ Notify       │  Slack/email/webhook
+  │ stakeholders │  Score, drift, action items
+  └─────────────┘]]></ac:plain-text-body>
+</ac:structured-macro>
+<hr />
+<h2>7. Compliance as Code Maturity Model</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Level</p></th><th><p>Description</p></th><th><p>Automation</p></th></tr>
+<tr><td><p><strong>Level 0</strong></p></td><td><p>No compliance docs</p></td><td><p>None</p></td></tr>
+<tr><td><p><strong>Level 1</strong></p></td><td><p>Manual docs, occasionally updated</p></td><td><p><code>codepliant go</code> run manually</p></td></tr>
+<tr><td><p><strong>Level 2</strong></p></td><td><p>Docs in version control</p></td><td><p>Pre-commit hook installed</p></td></tr>
+<tr><td><p><strong>Level 3</strong></p></td><td><p>CI/CD compliance gate</p></td><td><p>PRs blocked without updated docs</p></td></tr>
+<tr><td><p><strong>Level 4</strong></p></td><td><p>Fully automated pipeline</p></td><td><p>Scheduled scans + auto-regeneration + alerts</p></td></tr>
+<tr><td><p><strong>Level 5</strong></p></td><td><p>Continuous compliance</p></td><td><p>Real-time monitoring + dashboards + audit trail</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Your current level based on 8 detected services:</strong> Target Level 3-4</p>
+<hr />
+<h2>8. Troubleshooting</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Issue</p></th><th><p>Solution</p></th></tr>
+<tr><td><p>CI scan takes too long</p></td><td><p>Use <code>codepliant check</code> (fast) instead of <code>codepliant go</code> (full)</p></td></tr>
+<tr><td><p>False positives in drift</p></td><td><p>Add stable sections to <code>.codepliantrc.json</code> ignore list</p></td></tr>
+<tr><td><p>Pre-commit hook too slow</p></td><td><p>Use <code>codepliant check --quiet</code> for minimal output</p></td></tr>
+<tr><td><p>Monorepo scan misses projects</p></td><td><p>Use <code>codepliant scan-all</code> with explicit root path</p></td></tr>
+<tr><td><p>Score fluctuates</p></td><td><p>Pin Codepliant version in CI (<code>npm install -g codepliant@2026</code>)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>9. Environment Variables for CI/CD</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Variable</p></th><th><p>Purpose</p></th><th><p>Required</p></th></tr>
+<tr><td><p><code>CODEPLIANT_OUTPUT</code></p></td><td><p>Override output directory</p></td><td><p>No</p></td></tr>
+<tr><td><p><code>CODEPLIANT_FORMAT</code></p></td><td><p>Default output format</p></td><td><p>No</p></td></tr>
+<tr><td><p><code>CODEPLIANT_QUIET</code></p></td><td><p>Suppress output (<code>1</code> or <code>true</code>)</p></td><td><p>No</p></td></tr>
+<tr><td><p><code>NO_COLOR</code></p></td><td><p>Disable colored output</p></td><td><p>No</p></td></tr>
+<tr><td><p><code>SLACK<em>WEBHOOK</em>URL</code></p></td><td><p>Slack notification endpoint</p></td><td><p>For alerts</p></td></tr>
+<tr><td><p><code>CODEPLIANT_LICENSE</code></p></td><td><p>Pro/Team license key</p></td><td><p>For premium features</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>This guide was auto-generated by Codepliant based on analysis of 8 services in your codebase. Customize the CI/CD examples for your specific setup.</em></p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Disclaimer:</strong> This guide provides automation recommendations based on code analysis. Review and adapt the configurations to your specific infrastructure and compliance requirements.</p>
+</ac:rich-text-body>
+</ac:structured-macro>

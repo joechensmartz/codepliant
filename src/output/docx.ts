@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as zlib from "zlib";
-import type { GeneratedDocument } from "../generator/index.js";
+import { type GeneratedDocument, getDocumentCategory } from "../generator/index.js";
 import type { CodepliantConfig } from "../config.js";
 
 /**
@@ -390,9 +390,20 @@ export function writeDocx(
   const writtenFiles: string[] = [];
 
   for (const doc of docs) {
+    // Skip non-Markdown files (e.g., .json config files)
+    if (!doc.filename.endsWith(".md")) continue;
+
+    const category = doc.category || getDocumentCategory(doc.filename);
+    let targetDir = outputDir;
+    if (category) {
+      targetDir = path.join(outputDir, category);
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+    }
     const docxBuffer = generateDocx(doc.content);
     const filename = doc.filename.replace(/\.md$/, ".docx");
-    const filePath = path.join(outputDir, filename);
+    const filePath = path.join(targetDir, filename);
     fs.writeFileSync(filePath, docxBuffer);
     writtenFiles.push(filePath);
   }

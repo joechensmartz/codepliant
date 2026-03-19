@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API PRIVACY DOCUMENTATION — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>API PRIVACY DOCUMENTATION</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="api-privacy-documentation">API Privacy Documentation</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> @documenso/root</p>
+<p>This document maps API endpoints to the types of personal data they process, providing transparency for privacy compliance. Each endpoint is linked to the relevant section of the Privacy Policy.</p>
+<p>For questions about API data handling, contact [your-email@example.com].</p>
+<h2 id="overview">Overview</h2>
+<p>Total API endpoints detected: <strong>25</strong></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Metric</th><th style="text-align:left">Count</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Endpoints accepting user data</td><td style="text-align:left">0</td></tr>
+<tr><td style="text-align:left">Write endpoints (POST/PUT/PATCH/DELETE)</td><td style="text-align:left">0</td></tr>
+<tr><td style="text-align:left">Read-only endpoints (GET/QUERY)</td><td style="text-align:left">25</td></tr>
+</tbody>
+</table>
+<h2 id="endpoint-summary">Endpoint Summary</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Endpoint</th><th style="text-align:left">Method</th><th style="text-align:left">Data Fields</th><th style="text-align:left">Privacy Category</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><code>/llms-full.txt</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/llms.mdx/docs/[[...slug]]</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/llms.txt</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/og/docs/[...slug]</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/route.ts</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/community</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/community/total-forks</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/community/total-issues</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/community/total-prs</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/community/total-stars</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/github</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/github/forks</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/github/issues</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/github/prs</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/github/stars</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/completed-documents</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/new-users</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/signer-conversion</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/total-completed-documents</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/total-customers</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/total-signer-conversion</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/growth/total-users</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/v2/openapi.json</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left"><code>/api/v2-beta/openapi.json</code></td><td style="text-align:left">GET</td><td style="text-align:left">—</td><td style="text-align:left">—</td></tr>
+</tbody>
+</table>
+<h2 id="privacy-policy-mapping">Privacy Policy Mapping</h2>
+<p>The following table maps data categories collected through the API to the corresponding sections in your Privacy Policy.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Data Category</th><th style="text-align:left">Privacy Policy Section</th><th style="text-align:left">Legal Basis (GDPR)</th><th style="text-align:left">Retention</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Personal Identity Data</td><td style="text-align:left">Personal Information We Collect</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">Duration of account + [X] days</td></tr>
+<tr><td style="text-align:left">Financial Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+<tr><td style="text-align:left">Usage & Behavioral Data</td><td style="text-align:left">Automatically Collected Information</td><td style="text-align:left">Legitimate interest (Art. 6(1)(f))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">AI Interaction Data</td><td style="text-align:left">AI and Automated Processing</td><td style="text-align:left">Contractual necessity / Consent</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Communication Data</td><td style="text-align:left">Communications</td><td style="text-align:left">Contractual necessity (Art. 6(1)(b))</td><td style="text-align:left">[X] days</td></tr>
+<tr><td style="text-align:left">Stored User Data</td><td style="text-align:left">[Map to relevant section]</td><td style="text-align:left">[Determine legal basis]</td><td style="text-align:left">[Define retention period]</td></tr>
+</tbody>
+</table>
+<h2 id="detailed-endpoint-documentation">Detailed Endpoint Documentation</h2>
+<h3 id="get-llms-fulltxt"><code>GET /llms-full.txt</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/docs/src/app/llms-full.txt/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/llms-full.txt</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-llmsmdxdocsslug"><code>GET /llms.mdx/docs/[[...slug]]</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/docs/src/app/llms.mdx/docs/[[...slug]]/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/llms.mdx/docs/[[...slug]]</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-llmstxt"><code>GET /llms.txt</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/docs/src/app/llms.txt/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/llms.txt</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-ogdocsslug"><code>GET /og/docs/[...slug]</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/docs/src/app/og/docs/[...slug]/route.tsx</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/og/docs/[...slug]</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-routets"><code>GET /route.ts</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-community"><code>GET /community</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/community/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/community</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-communitytotal-forks"><code>GET /community/total-forks</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/community/total-forks/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/community/total-forks</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-communitytotal-issues"><code>GET /community/total-issues</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/community/total-issues/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/community/total-issues</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-communitytotal-prs"><code>GET /community/total-prs</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/community/total-prs/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/community/total-prs</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-communitytotal-stars"><code>GET /community/total-stars</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/community/total-stars/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/community/total-stars</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-github"><code>GET /github</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/github/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/github</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-githubforks"><code>GET /github/forks</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/github/forks/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/github/forks</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-githubissues"><code>GET /github/issues</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/github/issues/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/github/issues</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-githubprs"><code>GET /github/prs</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/github/prs/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/github/prs</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-githubstars"><code>GET /github/stars</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/github/stars/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/github/stars</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growth"><code>GET /growth</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthcompleted-documents"><code>GET /growth/completed-documents</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/completed-documents/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/completed-documents</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthnew-users"><code>GET /growth/new-users</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/new-users/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/new-users</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthsigner-conversion"><code>GET /growth/signer-conversion</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/signer-conversion/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/signer-conversion</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthtotal-completed-documents"><code>GET /growth/total-completed-documents</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/total-completed-documents/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/total-completed-documents</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthtotal-customers"><code>GET /growth/total-customers</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/total-customers/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/total-customers</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthtotal-signer-conversion"><code>GET /growth/total-signer-conversion</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/total-signer-conversion/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/total-signer-conversion</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-growthtotal-users"><code>GET /growth/total-users</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/openpage-api/app/growth/total-users/route.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/growth/total-users</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apiv2openapijson"><code>GET /api/v2/openapi.json</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/remix/server/router.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/v2/openapi.json</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h3 id="get-apiv2-betaopenapijson"><code>GET /api/v2-beta/openapi.json</code></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Property</th><th style="text-align:left">Value</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>File</strong></td><td style="text-align:left"><code>apps/remix/server/router.ts</code></td></tr>
+<tr><td style="text-align:left"><strong>Method</strong></td><td style="text-align:left">GET</td></tr>
+<tr><td style="text-align:left"><strong>Route</strong></td><td style="text-align:left"><code>/api/v2-beta/openapi.json</code></td></tr>
+<tr><td style="text-align:left"><strong>Data fields</strong></td><td style="text-align:left">None detected</td></tr>
+</tbody>
+</table>
+<h2 id="api-data-flow-to-third-party-services">API Data Flow to Third-Party Services</h2>
+<p>The following third-party services may receive data submitted through the API.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Service</th><th style="text-align:left">Category</th><th style="text-align:left">Data Shared</th><th style="text-align:left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">@ai-sdk/google-vertex</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@aws-sdk/client-ses</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content, uploaded files, file metadata</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@google-cloud/kms</td><td style="text-align:left">other</td><td style="text-align:left">encryption keys, key metadata</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@simplewebauthn/server</td><td style="text-align:left">auth</td><td style="text-align:left">biometric authentication data, device attestation, credential IDs</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">@vercel/ai</td><td style="text-align:left">ai</td><td style="text-align:left">user prompts, conversation history, generated content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">googleapis</td><td style="text-align:left">other</td><td style="text-align:left">user data via Google APIs, calendar data, email data, profile information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">next-auth</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, profile picture, OAuth tokens, session data</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">nodemailer</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">passport-microsoft</td><td style="text-align:left">auth</td><td style="text-align:left">email, name, Microsoft profile data, OAuth tokens</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">posthog</td><td style="text-align:left">analytics</td><td style="text-align:left">user behavior, session recordings, feature flag usage, device information</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">prisma</td><td style="text-align:left">database</td><td style="text-align:left">user data as defined in schema</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">resend</td><td style="text-align:left">email</td><td style="text-align:left">email addresses, email content</td><td style="text-align:left">[Describe purpose]</td></tr>
+<tr><td style="text-align:left">stripe</td><td style="text-align:left">payment</td><td style="text-align:left">payment information, billing address, email, transaction history</td><td style="text-align:left">[Describe purpose]</td></tr>
+</tbody>
+</table>
+<h2 id="recommendations">Recommendations</h2>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Document the purpose and legal basis for each data field collected</li>
+<li><input type="checkbox" disabled> Implement input validation on all endpoints accepting user data</li>
+<li><input type="checkbox" disabled> Add rate limiting to prevent abuse of data-accepting endpoints</li>
+<li><input type="checkbox" disabled> Ensure authentication is required for all endpoints accessing personal data</li>
+<li><input type="checkbox" disabled> Implement field-level encryption for sensitive data (SSN, financial data)</li>
+<li><input type="checkbox" disabled> Add API versioning to manage privacy-impacting changes</li>
+<li><input type="checkbox" disabled> Log all data access for audit trail purposes</li>
+<li><input type="checkbox" disabled> Document data retention periods for each endpoint's data</li>
+</ul>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</li>
+</ul>
+<hr>
+<p><em>This API privacy documentation was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>@documenso/root</strong> codebase. It should be reviewed by your engineering and legal teams to ensure accuracy and completeness. Fields marked with brackets require manual input.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

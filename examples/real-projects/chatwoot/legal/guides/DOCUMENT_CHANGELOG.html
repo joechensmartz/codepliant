@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOCUMENT CHANGELOG — chatwoot</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DOCUMENT CHANGELOG</h1>
+      <p class="meta">chatwoot &middot; Last updated 2026-03-18 &middot; ~9 min read</p>
+    </header>
+    <h1 id="document-changelog">Document Changelog</h1>
+<p>Track of changes between document generations.</p>
+<h2 id="2026-03-16-190948-utc">2026-03-16 19:09:48 UTC</h2>
+<h3 id="-privacy-policy-privacy_policymd">[+] Privacy Policy (<code>PRIVACY_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 42 section(s)</li>
+</ul>
+<h3 id="-terms-of-service-terms_of_servicemd">[+] Terms of Service (<code>TERMS<em>OF</em>SERVICE.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-security-policy-securitymd">[+] Security Policy (<code>SECURITY.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-incident-response-plan-incident_response_planmd">[+] Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-ai-disclosure-ai_disclosuremd">[+] AI Disclosure (<code>AI_DISCLOSURE.md</code>)</h3>
+<ul>
+<li>New document with 26 section(s)</li>
+</ul>
+<h3 id="-ai-act-compliance-checklist-ai_act_checklistmd">[+] AI Act Compliance Checklist (<code>AI<em>ACT</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 8 section(s)</li>
+</ul>
+<h3 id="-ai-model-card-ai_model_cardmd">[+] AI Model Card (<code>AI<em>MODEL</em>CARD.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-cookie-policy-cookie_policymd">[+] Cookie Policy (<code>COOKIE_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-consent-management-guide-consent_management_guidemd">[+] Consent Management Guide (<code>CONSENT<em>MANAGEMENT</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 25 section(s)</li>
+</ul>
+<h3 id="-data-processing-agreement-data_processing_agreementmd">[+] Data Processing Agreement (<code>DATA<em>PROCESSING</em>AGREEMENT.md</code>)</h3>
+<ul>
+<li>New document with 19 section(s)</li>
+</ul>
+<h3 id="-sub-processor-list-subprocessor_listmd">[+] Sub-Processor List (<code>SUBPROCESSOR_LIST.md</code>)</h3>
+<ul>
+<li>New document with 6 section(s)</li>
+</ul>
+<h3 id="-data-retention-policy-data_retention_policymd">[+] Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-dsar-handling-guide-dsar_handling_guidemd">[+] DSAR Handling Guide (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 62 section(s)</li>
+</ul>
+<h3 id="-vendor-contacts-directory-vendor_contactsmd">[+] Vendor Contacts Directory (<code>VENDOR_CONTACTS.md</code>)</h3>
+<ul>
+<li>New document with 37 section(s)</li>
+</ul>
+<h3 id="-data-flow-map-data_flow_mapmd">[+] Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</h3>
+<ul>
+<li>New document with 6 section(s)</li>
+</ul>
+<h3 id="-compliance-notes-compliance_notesmd">[+] Compliance Notes (<code>COMPLIANCE_NOTES.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-compliance-timeline-compliance_timelinemd">[+] Compliance Timeline (<code>COMPLIANCE_TIMELINE.md</code>)</h3>
+<ul>
+<li>New document with 15 section(s)</li>
+</ul>
+<h3 id="-soc-2-readiness-checklist-soc2_readiness_checklistmd">[+] SOC 2 Readiness Checklist (<code>SOC2<em>READINESS</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-iso-27001-compliance-checklist-iso_27001_checklistmd">[+] ISO 27001 Compliance Checklist (<code>ISO<em>27001</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-third-party-risk-assessment-third_party_risk_assessmentmd">[+] Third-Party Risk Assessment (<code>THIRD<em>PARTY</em>RISK_ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 40 section(s)</li>
+</ul>
+<h3 id="-privacy-impact-assessment-privacy_impact_assessmentmd">[+] Privacy Impact Assessment (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 37 section(s)</li>
+</ul>
+<h3 id="-environment-variable-audit-env_auditmd">[+] Environment Variable Audit (<code>ENV_AUDIT.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-data-classification-report-data_classificationmd">[+] Data Classification Report (<code>DATA_CLASSIFICATION.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-dependency-vulnerability-scan-vulnerability_scanmd">[+] Dependency Vulnerability Scan (<code>VULNERABILITY_SCAN.md</code>)</h3>
+<ul>
+<li>New document with 2 section(s)</li>
+</ul>
+<h3 id="-regulatory-updates-regulatory_updatesmd">[+] Regulatory Updates (<code>REGULATORY_UPDATES.md</code>)</h3>
+<ul>
+<li>New document with 24 section(s)</li>
+</ul>
+<h3 id="-transparency-report-transparency_reportmd">[+] Transparency Report (<code>TRANSPARENCY_REPORT.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-acceptable-use-policy-acceptable_use_policymd">[+] Acceptable Use Policy (<code>ACCEPTABLE<em>USE</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 19 section(s)</li>
+</ul>
+<h3 id="-refund-policy-refund_policymd">[+] Refund Policy (<code>REFUND_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-service-level-agreement-service_level_agreementmd">[+] Service Level Agreement (<code>SERVICE<em>LEVEL</em>AGREEMENT.md</code>)</h3>
+<ul>
+<li>New document with 25 section(s)</li>
+</ul>
+<h3 id="-data-flow-diagram-data_flow_diagrammd">[+] Data Flow Diagram (<code>DATA<em>FLOW</em>DIAGRAM.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-audit-log-policy-audit_log_policymd">[+] Audit Log Policy (<code>AUDIT<em>LOG</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-acceptable-ai-use-policy-acceptable_ai_use_policymd">[+] Acceptable AI Use Policy (<code>ACCEPTABLE<em>AI</em>USE_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 24 section(s)</li>
+</ul>
+<h3 id="-risk-register-risk_registermd">[+] Risk Register (<code>RISK_REGISTER.md</code>)</h3>
+<ul>
+<li>New document with 15 section(s)</li>
+</ul>
+<h3 id="-license-compliance-report-license_compliancemd">[+] License Compliance Report (<code>LICENSE_COMPLIANCE.md</code>)</h3>
+<ul>
+<li>New document with 5 section(s)</li>
+</ul>
+<h3 id="-record-of-processing-activities-record_of_processing_activitiesmd">[+] Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-data-dictionary-data_dictionarymd">[+] Data Dictionary (<code>DATA_DICTIONARY.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-access-control-policy-access_control_policymd">[+] Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 29 section(s)</li>
+</ul>
+<h3 id="-change-management-policy-change_management_policymd">[+] Change Management Policy (<code>CHANGE<em>MANAGEMENT</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 29 section(s)</li>
+</ul>
+<h3 id="-data-breach-notification-templates-data_breach_notification_templatemd">[+] Data Breach Notification Templates (<code>DATA<em>BREACH</em>NOTIFICATION_TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 11 section(s)</li>
+</ul>
+<h3 id="-vendor-security-questionnaire-vendor_security_questionnairemd">[+] Vendor Security Questionnaire (<code>VENDOR<em>SECURITY</em>QUESTIONNAIRE.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-supplier-code-of-conduct-supplier_code_of_conductmd">[+] Supplier Code of Conduct (<code>SUPPLIER<em>CODE</em>OF_CONDUCT.md</code>)</h3>
+<ul>
+<li>New document with 20 section(s)</li>
+</ul>
+<h3 id="-privacy-by-design-checklist-privacy_by_design_checklistmd">[+] Privacy by Design Checklist (<code>PRIVACY<em>BY</em>DESIGN_CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-penetration-test-scope-pentest_scopemd">[+] Penetration Test Scope (<code>PENTEST_SCOPE.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-cookie-inventory-cookie_inventorymd">[+] Cookie Inventory (<code>COOKIE_INVENTORY.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-ai-governance-framework-ai_governance_frameworkmd">[+] AI Governance Framework (<code>AI<em>GOVERNANCE</em>FRAMEWORK.md</code>)</h3>
+<ul>
+<li>New document with 37 section(s)</li>
+</ul>
+<h3 id="-business-continuity-plan-business_continuity_planmd">[+] Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-encryption-policy-encryption_policymd">[+] Encryption Policy (<code>ENCRYPTION_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-backup-policy-backup_policymd">[+] Backup Policy (<code>BACKUP_POLICY.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-disaster-recovery-plan-disaster_recovery_planmd">[+] Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-information-security-policy-information_security_policymd">[+] Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 10 section(s)</li>
+</ul>
+<h3 id="-data-subject-categories-data_subject_categoriesmd">[+] Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</h3>
+<ul>
+<li>New document with 5 section(s)</li>
+</ul>
+<h3 id="-lawful-basis-assessment-lawful_basis_assessmentmd">[+] Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 29 section(s)</li>
+</ul>
+<h3 id="-annual-review-checklist-annual_review_checklistmd">[+] Annual Review Checklist (<code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-sub-processor-change-notification-subprocessor_change_notificationmd">[+] Sub-Processor Change Notification (<code>SUBPROCESSOR<em>CHANGE</em>NOTIFICATION.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-data-protection-policy-data_protection_policymd">[+] Data Protection Policy (<code>DATA<em>PROTECTION</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 26 section(s)</li>
+</ul>
+<h3 id="-media-consent-form-media_consent_formmd">[+] Media Consent Form (<code>MEDIA<em>CONSENT</em>FORM.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-responsible-disclosure-policy-responsible_disclosure_policymd">[+] Responsible Disclosure Policy (<code>RESPONSIBLE<em>DISCLOSURE</em>POLICY.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-api-terms-of-use-api_terms_of_usemd">[+] API Terms of Use (<code>API<em>TERMS</em>OF_USE.md</code>)</h3>
+<ul>
+<li>New document with 25 section(s)</li>
+</ul>
+<h3 id="-open-source-notice-open_source_noticemd">[+] Open Source Notice (<code>OPEN<em>SOURCE</em>NOTICE.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-third-party-cookie-notice-third_party_cookie_noticemd">[+] Third-Party Cookie Notice (<code>THIRD<em>PARTY</em>COOKIE_NOTICE.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-data-portability-guide-data_portability_guidemd">[+] Data Portability Guide (<code>DATA<em>PORTABILITY</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 10 section(s)</li>
+</ul>
+<h3 id="-ai-training-data-notice-ai_training_data_noticemd">[+] AI Training Data Notice (<code>AI<em>TRAINING</em>DATA_NOTICE.md</code>)</h3>
+<ul>
+<li>New document with 8 section(s)</li>
+</ul>
+<h3 id="-employee-handbook-privacy-section-employee_handbook_privacy_sectionmd">[+] Employee Handbook Privacy Section (<code>EMPLOYEE<em>HANDBOOK</em>PRIVACY_SECTION.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-vendor-onboarding-checklist-vendor_onboarding_checklistmd">[+] Vendor Onboarding Checklist (<code>VENDOR<em>ONBOARDING</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-executive-dashboard-executive_dashboardmd">[+] Executive Dashboard (<code>EXECUTIVE_DASHBOARD.md</code>)</h3>
+<ul>
+<li>New document with 6 section(s)</li>
+</ul>
+<h3 id="-privacy-notice-short-privacy_notice_shortmd">[+] Privacy Notice (Short) (<code>PRIVACY<em>NOTICE</em>SHORT.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-cookie-consent-configuration-cookie_consent_configjson">[+] Cookie Consent Configuration (<code>COOKIE<em>CONSENT</em>CONFIG.json</code>)</h3>
+<ul>
+<li>New document</li>
+</ul>
+<h3 id="-quick-start-compliance-guide-quick_start_compliance_guidemd">[+] Quick Start Compliance Guide (<code>QUICK<em>START</em>COMPLIANCE_GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 20 section(s)</li>
+</ul>
+<h3 id="-compliance-roadmap-compliance_roadmapmd">[+] Compliance Roadmap (<code>COMPLIANCE_ROADMAP.md</code>)</h3>
+<ul>
+<li>New document with 22 section(s)</li>
+</ul>
+<h3 id="-privacy-dashboard-configuration-privacy_dashboard_configjson">[+] Privacy Dashboard Configuration (<code>PRIVACY<em>DASHBOARD</em>CONFIG.json</code>)</h3>
+<ul>
+<li>New document with 1 section(s)</li>
+</ul>
+<h3 id="-dpo-handbook-dpo_handbookmd">[+] DPO Handbook (<code>DPO_HANDBOOK.md</code>)</h3>
+<ul>
+<li>New document with 24 section(s)</li>
+</ul>
+<h3 id="-incident-communication-templates-incident_communication_templatesmd">[+] Incident Communication Templates (<code>INCIDENT<em>COMMUNICATION</em>TEMPLATES.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-training-record-training_recordmd">[+] Training Record (<code>TRAINING_RECORD.md</code>)</h3>
+<ul>
+<li>New document with 19 section(s)</li>
+</ul>
+<h3 id="-consent-record-template-consent_record_templatemd">[+] Consent Record Template (<code>CONSENT<em>RECORD</em>TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-data-deletion-procedures-data_deletion_proceduresmd">[+] Data Deletion Procedures (<code>DATA<em>DELETION</em>PROCEDURES.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-security-awareness-program-security_awareness_programmd">[+] Security Awareness Program (<code>SECURITY<em>AWARENESS</em>PROGRAM.md</code>)</h3>
+<ul>
+<li>New document with 22 section(s)</li>
+</ul>
+<h3 id="-privacy-risk-matrix-privacy_risk_matrixmd">[+] Privacy Risk Matrix (<code>PRIVACY<em>RISK</em>MATRIX.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-data-mapping-register-data_mapping_registermd">[+] Data Mapping Register (<code>DATA<em>MAPPING</em>REGISTER.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-ai-ethics-statement-ai_ethics_statementmd">[+] AI Ethics Statement (<code>AI<em>ETHICS</em>STATEMENT.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-data-breach-response-drill-template-data_breach_drill_templatemd">[+] Data Breach Response Drill Template (<code>DATA<em>BREACH</em>DRILL_TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 26 section(s)</li>
+</ul>
+<h3 id="-regulatory-correspondence-log-regulatory_correspondence_logmd">[+] Regulatory Correspondence Log (<code>REGULATORY<em>CORRESPONDENCE</em>LOG.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-privacy-policy-changelog-privacy_policy_changelogmd">[+] Privacy Policy Changelog (<code>PRIVACY<em>POLICY</em>CHANGELOG.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-privacy-program-charter-privacy_program_chartermd">[+] Privacy Program Charter (<code>PRIVACY<em>PROGRAM</em>CHARTER.md</code>)</h3>
+<ul>
+<li>New document with 25 section(s)</li>
+</ul>
+<h3 id="-third-party-due-diligence-template-third_party_due_diligence_templatemd">[+] Third-Party Due Diligence Template (<code>THIRD<em>PARTY</em>DUE<em>DILIGENCE</em>TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-compliance-maturity-model-compliance_maturity_modelmd">[+] Compliance Maturity Model (<code>COMPLIANCE<em>MATURITY</em>MODEL.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-compliance-summary-email-compliance_summary_emailmd">[+] Compliance Summary Email (<code>COMPLIANCE<em>SUMMARY</em>EMAIL.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-vendor-exit-plan-vendor_exit_planmd">[+] Vendor Exit Plan (<code>VENDOR<em>EXIT</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 41 section(s)</li>
+</ul>
+<h3 id="-privacy-policy-comparison-privacy_policy_comparisonmd">[+] Privacy Policy Comparison (<code>PRIVACY<em>POLICY</em>COMPARISON.md</code>)</h3>
+<ul>
+<li>New document with 20 section(s)</li>
+</ul>
+<h3 id="-ai-impact-assessment-ai_impact_assessmentmd">[+] AI Impact Assessment (<code>AI<em>IMPACT</em>ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-cross-border-transfer-map-cross_border_transfer_mapmd">[+] Cross-Border Transfer Map (<code>CROSS<em>BORDER</em>TRANSFER_MAP.md</code>)</h3>
+<ul>
+<li>New document with 37 section(s)</li>
+</ul>
+<h3 id="-compliance-gap-analysis-compliance_gap_analysismd">[+] Compliance Gap Analysis (<code>COMPLIANCE<em>GAP</em>ANALYSIS.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-key-person-risk-assessment-key_person_risk_assessmentmd">[+] Key Person Risk Assessment (<code>KEY<em>PERSON</em>RISK_ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-regulatory-readiness-scorecard-regulatory_readiness_scorecardmd">[+] Regulatory Readiness Scorecard (<code>REGULATORY<em>READINESS</em>SCORECARD.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-data-lifecycle-diagram-data_lifecycle_diagrammd">[+] Data Lifecycle Diagram (<code>DATA<em>LIFECYCLE</em>DIAGRAM.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-compliance-budget-template-compliance_budget_templatemd">[+] Compliance Budget Template (<code>COMPLIANCE<em>BUDGET</em>TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-incident-severity-matrix-incident_severity_matrixmd">[+] Incident Severity Matrix (<code>INCIDENT<em>SEVERITY</em>MATRIX.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-data-subject-rights-portal-data_subject_rights_portalmd">[+] Data Subject Rights Portal (<code>DATA<em>SUBJECT</em>RIGHTS_PORTAL.md</code>)</h3>
+<ul>
+<li>New document with 30 section(s)</li>
+</ul>
+<h3 id="-compliance-automation-guide-compliance_automation_guidemd">[+] Compliance Automation Guide (<code>COMPLIANCE<em>AUTOMATION</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 59 section(s)</li>
+</ul>
+<h3 id="-compliance-oath-compliance_oathmd">[+] Compliance Oath (<code>COMPLIANCE_OATH.md</code>)</h3>
+<ul>
+<li>New document with 22 section(s)</li>
+</ul>
+<h3 id="-privacy-impact-register-privacy_impact_registermd">[+] Privacy Impact Register (<code>PRIVACY<em>IMPACT</em>REGISTER.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-ai-red-team-guide-ai_red_team_guidemd">[+] AI Red Team Guide (<code>AI<em>RED</em>TEAM_GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 30 section(s)</li>
+</ul>
+<h3 id="-compliance-kpi-dashboard-compliance_kpi_dashboardmd">[+] Compliance KPI Dashboard (<code>COMPLIANCE<em>KPI</em>DASHBOARD.md</code>)</h3>
+<ul>
+<li>New document with 35 section(s)</li>
+</ul>
+<h3 id="-data-retention-schedule-visual-data_retention_schedule_visualmd">[+] Data Retention Schedule Visual (<code>DATA<em>RETENTION</em>SCHEDULE_VISUAL.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-compliance-communication-plan-compliance_communication_planmd">[+] Compliance Communication Plan (<code>COMPLIANCE<em>COMMUNICATION</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-compliance-glossary-compliance_glossarymd">[+] Compliance Glossary (<code>COMPLIANCE_GLOSSARY.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-vendor-risk-tier-assessment-vendor_risk_tier_assessmentmd">[+] Vendor Risk Tier Assessment (<code>VENDOR<em>RISK</em>TIER_ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 20 section(s)</li>
+</ul>
+<h3 id="-compliance-scorecard-compliance_scorecardmd">[+] Compliance Scorecard (<code>COMPLIANCE_SCORECARD.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-dsar-log-template-dsar_log_templatemd">[+] DSAR Log Template (<code>DSAR<em>LOG</em>TEMPLATE.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-compliance-faq-compliance_faqmd">[+] Compliance FAQ (<code>COMPLIANCE_FAQ.md</code>)</h3>
+<ul>
+<li>New document with 47 section(s)</li>
+</ul>
+<h3 id="-privacy-program-roadmap-privacy_roadmapmd">[+] Privacy Program Roadmap (<code>PRIVACY_ROADMAP.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-executive-briefing-executive_briefingmd">[+] Executive Briefing (<code>EXECUTIVE_BRIEFING.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-ai-supply-chain-risk-assessment-ai_supply_chain_riskmd">[+] AI Supply Chain Risk Assessment (<code>AI<em>SUPPLY</em>CHAIN_RISK.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-compliance-onboarding-guide-compliance_onboarding_guidemd">[+] Compliance Onboarding Guide (<code>COMPLIANCE<em>ONBOARDING</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 18 section(s)</li>
+</ul>
+<h3 id="-data-processing-inventory-data_processing_inventorymd">[+] Data Processing Inventory (<code>DATA<em>PROCESSING</em>INVENTORY.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-compliance-policy-index-compliance_policy_indexmd">[+] Compliance Policy Index (<code>COMPLIANCE<em>POLICY</em>INDEX.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-compliance-digest-compliance_digestmd">[+] Compliance Digest (<code>COMPLIANCE_DIGEST.md</code>)</h3>
+<ul>
+<li>New document with 14 section(s)</li>
+</ul>
+<h3 id="-privacy-notice-app-privacy_notice_appmd">[+] Privacy Notice (App) (<code>PRIVACY<em>NOTICE</em>APP.md</code>)</h3>
+<ul>
+<li>New document with 9 section(s)</li>
+</ul>
+<h3 id="-compliance-maturity-assessment-compliance_maturity_assessmentmd">[+] Compliance Maturity Assessment (<code>COMPLIANCE<em>MATURITY</em>ASSESSMENT.md</code>)</h3>
+<ul>
+<li>New document with 12 section(s)</li>
+</ul>
+<h3 id="-regulatory-mapping-matrix-regulatory_mapping_matrixmd">[+] Regulatory Mapping Matrix (<code>REGULATORY<em>MAPPING</em>MATRIX.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+<h3 id="-compliance-calendar-compliance_calendarmd">[+] Compliance Calendar (<code>COMPLIANCE_CALENDAR.md</code>)</h3>
+<ul>
+<li>New document with 24 section(s)</li>
+</ul>
+<h3 id="-data-minimization-checklist-data_minimization_checklistmd">[+] Data Minimization Checklist (<code>DATA<em>MINIMIZATION</em>CHECKLIST.md</code>)</h3>
+<ul>
+<li>New document with 40 section(s)</li>
+</ul>
+<h3 id="-compliance-board-report-compliance_board_reportmd">[+] Compliance Board Report (<code>COMPLIANCE<em>BOARD</em>REPORT.md</code>)</h3>
+<ul>
+<li>New document with 20 section(s)</li>
+</ul>
+<h3 id="-privacy-notice-deutsch-privacy_notice_demd">[+] Privacy Notice (Deutsch) (<code>PRIVACY<em>NOTICE</em>DE.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-privacy-notice-franais-privacy_notice_frmd">[+] Privacy Notice (Français) (<code>PRIVACY<em>NOTICE</em>FR.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-privacy-notice-espaol-privacy_notice_esmd">[+] Privacy Notice (Español) (<code>PRIVACY<em>NOTICE</em>ES.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-privacy-engineering-guide-privacy_engineering_guidemd">[+] Privacy Engineering Guide (<code>PRIVACY<em>ENGINEERING</em>GUIDE.md</code>)</h3>
+<ul>
+<li>New document with 22 section(s)</li>
+</ul>
+<h3 id="-compliance-testing-plan-compliance_testing_planmd">[+] Compliance Testing Plan (<code>COMPLIANCE<em>TESTING</em>PLAN.md</code>)</h3>
+<ul>
+<li>New document with 21 section(s)</li>
+</ul>
+<h3 id="-compliance-investment-case-compliance_investment_casemd">[+] Compliance Investment Case (<code>COMPLIANCE<em>INVESTMENT</em>CASE.md</code>)</h3>
+<ul>
+<li>New document with 29 section(s)</li>
+</ul>
+<h3 id="-vendor-compliance-tracker-vendor_compliance_trackermd">[+] Vendor Compliance Tracker (<code>VENDOR<em>COMPLIANCE</em>TRACKER.md</code>)</h3>
+<ul>
+<li>New document with 16 section(s)</li>
+</ul>
+<h3 id="-privacy-metrics-dashboard-privacy_metrics_dashboardmd">[+] Privacy Metrics Dashboard (<code>PRIVACY<em>METRICS</em>DASHBOARD.md</code>)</h3>
+<ul>
+<li>New document with 27 section(s)</li>
+</ul>
+<h3 id="-compliance-evidence-log-compliance_evidence_logmd">[+] Compliance Evidence Log (<code>COMPLIANCE<em>EVIDENCE</em>LOG.md</code>)</h3>
+<ul>
+<li>New document with 7 section(s)</li>
+</ul>
+<h3 id="-privacy-impact-screening-privacy_impact_screeningmd">[+] Privacy Impact Screening (<code>PRIVACY<em>IMPACT</em>SCREENING.md</code>)</h3>
+<ul>
+<li>New document with 17 section(s)</li>
+</ul>
+<h3 id="-compliance-certificate-compliance_certificatemd">[+] Compliance Certificate (<code>COMPLIANCE_CERTIFICATE.md</code>)</h3>
+<ul>
+<li>New document with 13 section(s)</li>
+</ul>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

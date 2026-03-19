@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE KPI DASHBOARD — formbricks</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE KPI DASHBOARD</h1>
+      <p class="meta">formbricks &middot; Last updated 2026-03-18 &middot; ~14 min read</p>
+    </header>
+    <h1 id="compliance-kpi-dashboard">Compliance KPI Dashboard</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organisation:</strong> [Your Company Name]</p>
+<p><strong>Project:</strong> formbricks</p>
+<p><strong>Services Monitored:</strong> 10</p>
+<p><strong>Generated:</strong> 2026-03-16</p>
+<hr>
+<blockquote>This dashboard defines Key Performance Indicators (KPIs) for measuring the effectiveness of your compliance program. Regular measurement and reporting against these KPIs demonstrates accountability under GDPR, supports SOC 2 monitoring requirements, and aligns with ISO 27001 performance evaluation (Clause 9).</blockquote>
+<h2 id="kpi-overview">KPI Overview</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">ID</th><th style="text-align:left">KPI</th><th style="text-align:left">Target</th><th style="text-align:left">Frequency</th><th style="text-align:left">Regulation</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">KPI-01</td><td style="text-align:left">DSAR Response Time</td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left">Monthly</td><td style="text-align:left">GDPR Art. 12(3), CCPA §1798.130</td></tr>
+<tr><td style="text-align:left">KPI-02</td><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left">> 98%</td><td style="text-align:left">Monthly</td><td style="text-align:left">GDPR Art. 12(3)</td></tr>
+<tr><td style="text-align:left">KPI-03</td><td style="text-align:left">Breach Notification Speed</td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left">Quarterly</td><td style="text-align:left">GDPR Art. 33, NIS2 Art. 23</td></tr>
+<tr><td style="text-align:left">KPI-04</td><td style="text-align:left">Security Training Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">ISO 27001 A.6.3, SOC 2 CC1.4</td></tr>
+<tr><td style="text-align:left">KPI-05</td><td style="text-align:left">Privacy Training Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">GDPR Art. 39(1)(b)</td></tr>
+<tr><td style="text-align:left">KPI-06</td><td style="text-align:left">Vendor Risk Assessment Completion</td><td style="text-align:left">> 90%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">GDPR Art. 28, SOC 2 CC9.2</td></tr>
+<tr><td style="text-align:left">KPI-07</td><td style="text-align:left">Policy Document Freshness</td><td style="text-align:left">> 90%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">ISO 27001 7.5, SOC 2 CC1.3</td></tr>
+<tr><td style="text-align:left">KPI-08</td><td style="text-align:left">Consent Collection Rate</td><td style="text-align:left">> 99%</td><td style="text-align:left">Monthly</td><td style="text-align:left">GDPR Art. 7, ePrivacy Directive</td></tr>
+<tr><td style="text-align:left">KPI-09</td><td style="text-align:left">Incident Response Time</td><td style="text-align:left">< 60 minutes</td><td style="text-align:left">Monthly</td><td style="text-align:left">ISO 27001 A.5.24, NIST CSF RS.RP-1</td></tr>
+<tr><td style="text-align:left">KPI-10</td><td style="text-align:left">Vulnerability Remediation Time</td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left">Monthly</td><td style="text-align:left">SOC 2 CC7.1, ISO 27001 A.8.8</td></tr>
+<tr><td style="text-align:left">KPI-11</td><td style="text-align:left">Data Retention Compliance</td><td style="text-align:left">> 95%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">GDPR Art. 5(1)(e), CCPA</td></tr>
+<tr><td style="text-align:left">KPI-12</td><td style="text-align:left">Access Review Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left">Quarterly</td><td style="text-align:left">SOC 2 CC6.1, ISO 27001 A.5.18</td></tr>
+</tbody>
+</table>
+<h2 id="core-compliance-kpis">Core Compliance KPIs</h2>
+<h3 id="kpi-01-dsar-response-time">KPI-01: DSAR Response Time</h3>
+<p><strong>Description:</strong> Average time to respond to Data Subject Access Requests from receipt to fulfilment</p>
+<p><strong>Metric:</strong> Days</p>
+<p><strong>Target:</strong> < 25 days (GDPR allows 30)</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 12(3), CCPA §1798.130</p>
+<p><strong>Formula:</strong> <code>Sum of response times / Number of DSARs completed</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-02-dsar-completion-rate">KPI-02: DSAR Completion Rate</h3>
+<p><strong>Description:</strong> Percentage of DSARs completed within the statutory deadline</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 98%</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 12(3)</p>
+<p><strong>Formula:</strong> <code>(DSARs completed on time / Total DSARs received) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 98%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 98%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 98%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-03-breach-notification-speed">KPI-03: Breach Notification Speed</h3>
+<p><strong>Description:</strong> Time from breach detection to supervisory authority notification</p>
+<p><strong>Metric:</strong> Hours</p>
+<p><strong>Target:</strong> < 48 hours (GDPR requires 72)</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 33, NIS2 Art. 23</p>
+<p><strong>Formula:</strong> <code>Time of notification - Time of detection</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-04-security-training-completion">KPI-04: Security Training Completion</h3>
+<p><strong>Description:</strong> Percentage of employees who completed mandatory security awareness training</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 A.6.3, SOC 2 CC1.4</p>
+<p><strong>Formula:</strong> <code>(Employees completed training / Total employees) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-05-privacy-training-completion">KPI-05: Privacy Training Completion</h3>
+<p><strong>Description:</strong> Percentage of relevant staff who completed data protection training</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 39(1)(b)</p>
+<p><strong>Formula:</strong> <code>(Staff completed privacy training / Total relevant staff) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-06-vendor-risk-assessment-completion">KPI-06: Vendor Risk Assessment Completion</h3>
+<p><strong>Description:</strong> Percentage of active vendors with completed risk assessments</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 90%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 28, SOC 2 CC9.2</p>
+<p><strong>Formula:</strong> <code>(Vendors assessed / Total active vendors) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-07-policy-document-freshness">KPI-07: Policy Document Freshness</h3>
+<p><strong>Description:</strong> Percentage of compliance documents reviewed within the past 12 months</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 90%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 7.5, SOC 2 CC1.3</p>
+<p><strong>Formula:</strong> <code>(Documents reviewed in last 12 months / Total documents) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-08-consent-collection-rate">KPI-08: Consent Collection Rate</h3>
+<p><strong>Description:</strong> Percentage of data processing activities with valid consent records</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 99%</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 7, ePrivacy Directive</p>
+<p><strong>Formula:</strong> <code>(Processing activities with consent / Consent-required activities) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 99%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 99%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 99%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-09-incident-response-time">KPI-09: Incident Response Time</h3>
+<p><strong>Description:</strong> Average time from security incident detection to initial response</p>
+<p><strong>Metric:</strong> Minutes</p>
+<p><strong>Target:</strong> < 60 minutes</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> ISO 27001 A.5.24, NIST CSF RS.RP-1</p>
+<p><strong>Formula:</strong> <code>Sum of response times / Number of incidents</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 60 minutes</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 60 minutes</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 60 minutes</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-10-vulnerability-remediation-time">KPI-10: Vulnerability Remediation Time</h3>
+<p><strong>Description:</strong> Average time to remediate identified security vulnerabilities</p>
+<p><strong>Metric:</strong> Days</p>
+<p><strong>Target:</strong> Critical: < 1 day, High: < 7 days, Medium: < 30 days</p>
+<p><strong>Measurement Frequency:</strong> Monthly</p>
+<p><strong>Regulatory Basis:</strong> SOC 2 CC7.1, ISO 27001 A.8.8</p>
+<p><strong>Formula:</strong> <code>Sum of remediation times / Number of vulnerabilities</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-11-data-retention-compliance">KPI-11: Data Retention Compliance</h3>
+<p><strong>Description:</strong> Percentage of data stores compliant with defined retention schedules</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> GDPR Art. 5(1)(e), CCPA</p>
+<p><strong>Formula:</strong> <code>(Compliant data stores / Total data stores) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h3 id="kpi-12-access-review-completion">KPI-12: Access Review Completion</h3>
+<p><strong>Description:</strong> Percentage of user access reviews completed on schedule</p>
+<p><strong>Metric:</strong> Percentage</p>
+<p><strong>Target:</strong> > 95%</p>
+<p><strong>Measurement Frequency:</strong> Quarterly</p>
+<p><strong>Regulatory Basis:</strong> SOC 2 CC6.1, ISO 27001 A.5.18</p>
+<p><strong>Formula:</strong> <code>(Access reviews completed / Scheduled reviews) × 100</code></p>
+<h4 id="tracking-template">Tracking Template</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">Period</th><th style="text-align:left">Actual</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th><th style="text-align:left">Trend</th><th style="text-align:left">Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Month 1</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 2</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">Month 3</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td><td style="text-align:left">—</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h2 id="monthly-reporting-template">Monthly Reporting Template</h2>
+<blockquote>Copy this template each month to track your compliance KPIs.</blockquote>
+<h3 id="month-__________-year-__________">Month: <strong><em></strong><strong></em></strong> Year: <strong><em></strong><strong></em></strong></h3>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">KPI</th><th style="text-align:left">Target</th><th style="text-align:left">Actual</th><th style="text-align:left">Status</th><th style="text-align:left">Action Required</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">DSAR Response Time</td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left">> 98%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Consent Collection Rate</td><td style="text-align:left">> 99%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Incident Response Time</td><td style="text-align:left">< 60 minutes</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Vulnerability Remediation Time</td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<p><strong>Monthly Summary:</strong></p>
+<ul>
+<li>Total KPIs meeting target: <em>_</em> / 5</li>
+<li>KPIs trending up: <em>_</em></li>
+<li>KPIs trending down: <em>_</em></li>
+<li>Action items for next month:</li>
+</ul>
+<ol>
+<li><em>_</em></li>
+<li><em>_</em></li>
+<li><em>_</em></li>
+</ol>
+<p><strong>Reported by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2 id="quarterly-reporting-template">Quarterly Reporting Template</h2>
+<blockquote>Copy this template each quarter to track quarterly KPIs and provide management reporting.</blockquote>
+<h3 id="quarter-q__-year-__________">Quarter: Q<strong> Year: </strong><strong><em></strong></em>__</h3>
+<h4 id="quarterly-kpis">Quarterly KPIs</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">#</th><th style="text-align:left">KPI</th><th style="text-align:left">Target</th><th style="text-align:left">Actual</th><th style="text-align:left">Status</th><th style="text-align:left">Trend vs Last Quarter</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">Breach Notification Speed</td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">Security Training Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">Privacy Training Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">Vendor Risk Assessment Completion</td><td style="text-align:left">> 90%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">5</td><td style="text-align:left">Policy Document Freshness</td><td style="text-align:left">> 90%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">6</td><td style="text-align:left">Data Retention Compliance</td><td style="text-align:left">> 95%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+<tr><td style="text-align:left">7</td><td style="text-align:left">Access Review Completion</td><td style="text-align:left">> 95%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left">⬜</td><td style="text-align:left"></td></tr>
+</tbody>
+</table>
+<h4 id="monthly-kpi-trend-quarter">Monthly KPI Trend (Quarter)</h4>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Month 1</th><th style="text-align:left">Month 2</th><th style="text-align:left">Month 3</th><th style="text-align:left">Quarter Avg</th><th style="text-align:left">Target</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR Response Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 25 days (GDPR allows 30)</td></tr>
+<tr><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 98%</td></tr>
+<tr><td style="text-align:left">Consent Collection Rate</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 99%</td></tr>
+<tr><td style="text-align:left">Incident Response Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 60 minutes</td></tr>
+<tr><td style="text-align:left">Vulnerability Remediation Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td></tr>
+</tbody>
+</table>
+<h4 id="quarterly-executive-summary">Quarterly Executive Summary</h4>
+<ul>
+<li><strong>Overall compliance posture:</strong> ⬜ Green / ⬜ Amber / ⬜ Red</li>
+<li><strong>KPIs meeting target:</strong> <strong><em> / 12 (</strong></em>%)</li>
+<li><strong>Key achievements this quarter:</strong></li>
+</ul>
+<ol>
+<li><em>_</em></li>
+<li><em>_</em></li>
+</ol>
+<ul>
+<li><strong>Key risks and concerns:</strong></li>
+</ul>
+<ol>
+<li><em>_</em></li>
+<li><em>_</em></li>
+</ol>
+<ul>
+<li><strong>Budget utilisation:</strong> <em>_</em>% of quarterly allocation</li>
+<li><strong>Recommended actions for next quarter:</strong></li>
+</ul>
+<ol>
+<li><em>_</em></li>
+<li><em>_</em></li>
+</ol>
+<p><strong>Reviewed by:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<p><strong>Date:</strong> <strong><em></strong><strong></em></strong><strong>_</strong></p>
+<h2 id="annual-kpi-review">Annual KPI Review</h2>
+<h3 id="year-over-year-comparison">Year-over-Year Comparison</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Q1</th><th style="text-align:left">Q2</th><th style="text-align:left">Q3</th><th style="text-align:left">Q4</th><th style="text-align:left">Annual Avg</th><th style="text-align:left">Target</th><th style="text-align:left">Status</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR Response Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 25 days (GDPR allows 30)</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">DSAR Completion Rate</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 98%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Breach Notification Speed</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 48 hours (GDPR requires 72)</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Security Training Completion</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Privacy Training Completion</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Vendor Risk Assessment Completion</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Policy Document Freshness</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 90%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Consent Collection Rate</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 99%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Incident Response Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">< 60 minutes</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Vulnerability Remediation Time</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">Critical: < 1 day, High: < 7 days, Medium: < 30 days</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Data Retention Compliance</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td></tr>
+<tr><td style="text-align:left">Access Review Completion</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td><td style="text-align:left">> 95%</td><td style="text-align:left">⬜</td></tr>
+</tbody>
+</table>
+<h3 id="annual-compliance-program-score">Annual Compliance Program Score</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Category</th><th style="text-align:left">Weight</th><th style="text-align:left">Score (1-5)</th><th style="text-align:left">Weighted Score</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Data Subject Rights</td><td style="text-align:left">20%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Incident Response</td><td style="text-align:left">20%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Vendor Management</td><td style="text-align:left">15%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Training & Awareness</td><td style="text-align:left">15%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Documentation</td><td style="text-align:left">15%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left">Technical Controls</td><td style="text-align:left">15%</td><td style="text-align:left"><em>_</em></td><td style="text-align:left"><em>_</em></td></tr>
+<tr><td style="text-align:left"><strong>Total</strong></td><td style="text-align:left"><strong>100%</strong></td><td style="text-align:left"></td><td style="text-align:left"><strong><em>_</em></strong></td></tr>
+</tbody>
+</table>
+<blockquote><strong>Score Guide:</strong> 1 = Not Implemented, 2 = Ad Hoc, 3 = Defined, 4 = Managed, 5 = Optimised</blockquote>
+<h2 id="dashboard-implementation-guide">Dashboard Implementation Guide</h2>
+<h3 id="recommended-dashboard-tools">Recommended Dashboard Tools</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Tool</th><th style="text-align:left">Type</th><th style="text-align:left">Cost</th><th style="text-align:left">Integration</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Google Sheets</td><td style="text-align:left">Spreadsheet</td><td style="text-align:left">Free</td><td style="text-align:left">Manual entry</td></tr>
+<tr><td style="text-align:left">Notion</td><td style="text-align:left">Wiki/Database</td><td style="text-align:left">Free-$10/user</td><td style="text-align:left">Manual entry</td></tr>
+<tr><td style="text-align:left">Grafana</td><td style="text-align:left">Dashboard</td><td style="text-align:left">Free (OSS)</td><td style="text-align:left">API integration</td></tr>
+<tr><td style="text-align:left">Power BI</td><td style="text-align:left">BI Platform</td><td style="text-align:left">$10/user</td><td style="text-align:left">API integration</td></tr>
+<tr><td style="text-align:left">Datadog</td><td style="text-align:left">Monitoring</td><td style="text-align:left">$15/host</td><td style="text-align:left">Automated</td></tr>
+</tbody>
+</table>
+<h3 id="data-collection-automation">Data Collection Automation</h3>
+<p>Where possible, automate KPI data collection:</p>
+<pre><code># Example: Run Codepliant scan as a KPI data source
+codepliant scan /path/to/project --json &gt; compliance-scan-$(date +%Y-%m-%d).json
+
+# Extract compliance score
+codepliant score /path/to/project --json | jq '.score'
+
+# Count generated documents vs recommended
+codepliant completeness /path/to/project --json</code></pre>
+<h3 id="alert-thresholds">Alert Thresholds</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">KPI</th><th style="text-align:left">Warning Threshold</th><th style="text-align:left">Critical Threshold</th><th style="text-align:left">Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">DSAR Response Time</td><td style="text-align:left">> 20 days</td><td style="text-align:left">> 27 days</td><td style="text-align:left">Escalate to DPO</td></tr>
+<tr><td style="text-align:left">Breach Notification</td><td style="text-align:left">> 48 hours</td><td style="text-align:left">> 60 hours</td><td style="text-align:left">Emergency response</td></tr>
+<tr><td style="text-align:left">Training Completion</td><td style="text-align:left">< 90%</td><td style="text-align:left">< 80%</td><td style="text-align:left">Mandatory training push</td></tr>
+<tr><td style="text-align:left">Vendor Assessment</td><td style="text-align:left">< 85%</td><td style="text-align:left">< 75%</td><td style="text-align:left">Vendor review sprint</td></tr>
+<tr><td style="text-align:left">Vulnerability Remediation</td><td style="text-align:left">> SLA</td><td style="text-align:left">> 2× SLA</td><td style="text-align:left">Security escalation</td></tr>
+</tbody>
+</table>
+<h2 id="contact">Contact</h2>
+<p>For questions about compliance KPIs:</p>
+<ul>
+<li><strong>Email:</strong> [your-email@example.com]</li>
+</ul>
+<hr>
+<p><em>This Compliance KPI Dashboard was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. KPI targets are based on regulatory requirements and industry best practices. Adjust targets to match your organisation's risk appetite, regulatory obligations, and operational capacity. This document should be reviewed by your compliance team.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

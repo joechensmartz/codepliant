@@ -1,0 +1,188 @@
+<h1>Vendor Onboarding Checklist</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Vendor Onboarding Checklist</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Effective Date:</strong> 2026-03-18</p>
+<p><strong>Last Updated:</strong> 2026-03-18</p>
+<p><strong>Document Owner:</strong> Jane Mueller (dpo@acme-saas.com)</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>This checklist must be completed before onboarding any new third-party vendor that will process, store, or have access to Acme Inc data. The checklist covers legal, security, privacy, and operational requirements. Each item must be marked complete and signed off before vendor access is provisioned.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Current Vendor Inventory</h2>
+<p>The following third-party vendors were detected in the codebase and are subject to ongoing vendor management:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>Vendor</p></th><th><p>Category</p></th><th><p>Risk Tier</p></th><th><p>Data Classification</p></th></tr>
+<tr><td><p>1</p></td><td><p>@sentry/node</p></td><td><p>Error Monitoring</p></td><td><p>Medium</p></td><td><p>Internal — collects error logs, stack traces, device metadata</p></td></tr>
+<tr><td><p>2</p></td><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>High</p></td><td><p>Confidential — processes authentication credentials, identity data</p></td></tr>
+<tr><td><p>3</p></td><td><p>openai</p></td><td><p>AI Service</p></td><td><p>Critical</p></td><td><p>Confidential — may process user content, prompts, PII</p></td></tr>
+<tr><td><p>4</p></td><td><p>posthog</p></td><td><p>Analytics</p></td><td><p>Medium</p></td><td><p>Internal — collects behavioral data, device info, IP addresses</p></td></tr>
+<tr><td><p>5</p></td><td><p>prisma</p></td><td><p>Database</p></td><td><p>High</p></td><td><p>Confidential — stores application data, potentially all data categories</p></td></tr>
+<tr><td><p>6</p></td><td><p>resend</p></td><td><p>Email Service</p></td><td><p>Medium</p></td><td><p>Confidential — processes email addresses, message content</p></td></tr>
+<tr><td><p>7</p></td><td><p>stripe</p></td><td><p>Payment Processing</p></td><td><p>Critical</p></td><td><p>Restricted — processes payment card data, financial PII</p></td></tr>
+<tr><td><p>8</p></td><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>Critical</p></td><td><p>Restricted — processes payment card data, financial PII</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Total vendors:</strong> 8 | <strong>Critical/High risk:</strong> 5</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>1. Pre-Engagement Assessment</h2>
+<p>Complete before initiating any vendor relationship.</p>
+<ul>
+<li><p>[ ] <strong>Business justification</strong> — Document why this vendor is needed and what alternatives were evaluated</p></li>
+<li><p>[ ] <strong>Data inventory</strong> — Identify exactly what data the vendor will access, process, or store</p></li>
+<li><p>[ ] <strong>Data classification</strong> — Classify all data the vendor will handle (Public / Internal / Confidential / Restricted)</p></li>
+<li><p>[ ] <strong>Risk tier assignment</strong> — Assign vendor risk tier based on data sensitivity:</p></li>
+<li><p><strong>Critical</strong> — Processes restricted data (payment, health, credentials)</p></li>
+<li><p><strong>High</strong> — Processes confidential data (PII, authentication, stored files)</p></li>
+<li><p><strong>Medium</strong> — Processes internal data (analytics, logs, behavioral data)</p></li>
+<li><p><strong>Low</strong> — Processes only public data</p></li>
+<li><p>[ ] <strong>Regulatory check</strong> — Identify applicable regulations (GDPR, CCPA, PCI DSS, HIPAA, SOC 2)</p></li>
+<li><p>[ ] <strong>Budget approval</strong> — Obtain financial approval for the vendor engagement</p></li>
+</ul>
+<h2>2. Security Assessment</h2>
+<p>Complete for all Medium, High, and Critical risk vendors.</p>
+<h3>2.1 Vendor Security Posture</h3>
+<ul>
+<li><p>[ ] <strong>Security certifications</strong> — Request and verify (check all that apply):</p></li>
+<li><p>[ ] SOC 2 Type II report (current year)</p></li>
+<li><p>[ ] ISO 27001 certification</p></li>
+<li><p>[ ] PCI DSS compliance (if processing payment data)</p></li>
+<li><p>[ ] HIPAA BAA (if processing health data)</p></li>
+<li><p>[ ] CSA STAR certification (if cloud service)</p></li>
+<li><p>[ ] <strong>Penetration test report</strong> — Request most recent pentest results (must be within 12 months)</p></li>
+<li><p>[ ] <strong>Vulnerability management</strong> — Confirm vendor has a documented vulnerability management program</p></li>
+<li><p>[ ] <strong>Incident response plan</strong> — Confirm vendor has a documented incident response plan</p></li>
+<li><p>[ ] <strong>Insurance</strong> — Verify vendor carries cyber liability insurance (minimum coverage: $[AMOUNT])</p></li>
+</ul>
+<h3>2.2 Technical Security Controls</h3>
+<ul>
+<li><p>[ ] <strong>Encryption at rest</strong> — Confirm data is encrypted at rest (AES-256 or equivalent)</p></li>
+<li><p>[ ] <strong>Encryption in transit</strong> — Confirm TLS 1.2+ for all data transmission</p></li>
+<li><p>[ ] <strong>Access controls</strong> — Confirm role-based access control (RBAC) and principle of least privilege</p></li>
+<li><p>[ ] <strong>MFA</strong> — Confirm multi-factor authentication is available and enforced for admin access</p></li>
+<li><p>[ ] <strong>Audit logging</strong> — Confirm vendor logs access to Acme Inc data and provides audit logs on request</p></li>
+<li><p>[ ] <strong>Data isolation</strong> — Confirm Acme Inc data is logically or physically isolated from other customers</p></li>
+<li><p>[ ] <strong>Backup & recovery</strong> — Confirm vendor backup procedures and recovery time objectives (RTO/RPO)</p></li>
+</ul>
+<h2>3. Data Processing Agreement (DPA)</h2>
+<p>Required for all vendors that process personal data on behalf of Acme Inc.</p>
+<ul>
+<li><p>[ ] <strong>DPA executed</strong> — Signed Data Processing Agreement covering:</p></li>
+<li><p>[ ] Subject matter and duration of processing</p></li>
+<li><p>[ ] Nature and purpose of processing</p></li>
+<li><p>[ ] Types of personal data processed</p></li>
+<li><p>[ ] Categories of data subjects</p></li>
+<li><p>[ ] Obligations and rights of the controller</p></li>
+<li><p>[ ] Sub-processor notification requirements</p></li>
+<li><p>[ ] Data deletion/return upon termination</p></li>
+<li><p>[ ] <strong>Standard Contractual Clauses (SCCs)</strong> — If vendor processes data outside the EEA, SCCs or equivalent transfer mechanism must be in place</p></li>
+<li><p>[ ] <strong>Transfer Impact Assessment</strong> — Completed for any EU-to-non-EU data transfers</p></li>
+<li><p>[ ] <strong>Sub-processor list</strong> — Obtained and reviewed the vendor's current sub-processor list</p></li>
+<li><p>[ ] <strong>Sub-processor change notification</strong> — Vendor agrees to notify Acme Inc of sub-processor changes with [30] days' advance notice</p></li>
+</ul>
+<h3>3.1 DPA Contact Information</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Field</p></th><th><p>Value</p></th></tr>
+<tr><td><p>Acme Inc DPO</p></td><td><p>Jane Mueller (dpo@acme-saas.com)</p></td></tr>
+<tr><td><p>Acme Inc legal contact</p></td><td><p>legal@acme.com</p></td></tr>
+<tr><td><p>Vendor DPA contact</p></td><td><p>[VENDOR DPA CONTACT]</p></td></tr>
+<tr><td><p>DPA execution date</p></td><td><p>[DATE]</p></td></tr>
+<tr><td><p>DPA renewal date</p></td><td><p>[DATE]</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Privacy & Compliance Review</h2>
+<ul>
+<li><p>[ ] <strong>Privacy policy review</strong> — Reviewed vendor's public privacy policy for compatibility with Acme Inc's commitments</p></li>
+<li><p>[ ] <strong>Data retention</strong> — Confirmed vendor's data retention periods align with Acme Inc's Data Retention Policy</p></li>
+<li><p>[ ] <strong>Data subject rights</strong> — Confirmed vendor can support DSAR fulfillment (access, deletion, portability) within required timelines</p></li>
+<li><p>[ ] <strong>Cookie/tracking compliance</strong> — If vendor sets cookies or tracking pixels, confirmed compliance with ePrivacy Directive</p></li>
+<li><p>[ ] <strong>Children's data</strong> — If applicable, confirmed vendor is COPPA/Age Verification compliant</p></li>
+<li><p>[ ] <strong>Consent management</strong> — Confirmed vendor respects user consent preferences (opt-in/opt-out)</p></li>
+<li><p>[ ] <strong>AI/ML transparency</strong> — If vendor uses AI/ML, confirmed:</p></li>
+<li><p>[ ] No training on Acme Inc customer data without explicit consent</p></li>
+<li><p>[ ] Transparent about AI decision-making processes</p></li>
+<li><p>[ ] Compliant with EU AI Act requirements (if applicable)</p></li>
+</ul>
+<h2>5. Operational Requirements</h2>
+<ul>
+<li><p>[ ] <strong>SLA agreement</strong> — Service Level Agreement executed covering:</p></li>
+<li><p>[ ] Uptime commitment (e.g., 99.9%)</p></li>
+<li><p>[ ] Response time for support tickets</p></li>
+<li><p>[ ] Planned maintenance notification windows</p></li>
+<li><p>[ ] Incident notification timeline (must be ≤ 72 hours for data breaches)</p></li>
+<li><p>[ ] <strong>Integration documentation</strong> — Technical integration guide reviewed by engineering team</p></li>
+<li><p>[ ] <strong>API security</strong> — API keys, OAuth tokens, or other credentials are:</p></li>
+<li><p>[ ] Stored in environment variables (never hardcoded)</p></li>
+<li><p>[ ] Rotated on a defined schedule</p></li>
+<li><p>[ ] Scoped to minimum required permissions</p></li>
+<li><p>[ ] <strong>Exit strategy</strong> — Documented plan for vendor termination including:</p></li>
+<li><p>[ ] Data export process and format</p></li>
+<li><p>[ ] Data deletion confirmation procedure</p></li>
+<li><p>[ ] Timeline for complete data removal</p></li>
+<li><p>[ ] Alternative vendor identified</p></li>
+</ul>
+<h2>6. Approval & Sign-off</h2>
+<p>All approvals must be obtained before vendor access is provisioned.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Role</p></th><th><p>Name</p></th><th><p>Approved</p></th><th><p>Date</p></th><th><p>Signature</p></th></tr>
+<tr><td><p><strong>Engineering Lead</strong></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td><td><p>[ ] Yes / [ ] No</p></td><td><p><strong><em></strong></em></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td></tr>
+<tr><td><p><strong>Security/IT</strong></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td><td><p>[ ] Yes / [ ] No</p></td><td><p><strong><em></strong></em></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td></tr>
+<tr><td><p><strong>Legal/Privacy</strong></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td><td><p>[ ] Yes / [ ] No</p></td><td><p><strong><em></strong></em></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td></tr>
+<tr><td><p><strong>Data Protection Officer</strong></p></td><td><p>Jane Mueller</p></td><td><p>[ ] Yes / [ ] No</p></td><td><p><strong><em></strong></em></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td></tr>
+<tr><td><p><strong>Budget Owner</strong></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td><td><p>[ ] Yes / [ ] No</p></td><td><p><strong><em></strong></em></p></td><td><p><strong><em></strong><strong></em></strong>__</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Conditions / Notes</h3>
+<p><em>[Document any conditions, exceptions, or notes from the approval process]</em></p>
+<h2>7. Ongoing Vendor Monitoring</h2>
+<p>After onboarding, vendors are subject to periodic review:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Review Activity</p></th><th><p>Frequency</p></th><th><p>Responsible</p></th></tr>
+<tr><td><p>Security certification renewal check</p></td><td><p>Annual</p></td><td><p>Security/IT</p></td></tr>
+<tr><td><p>DPA review and update</p></td><td><p>Annual</p></td><td><p>Legal/Privacy</p></td></tr>
+<tr><td><p>Sub-processor list review</p></td><td><p>Quarterly</p></td><td><p>DPO</p></td></tr>
+<tr><td><p>Access audit (who has access to what)</p></td><td><p>Quarterly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>SLA performance review</p></td><td><p>Quarterly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Penetration test report review</p></td><td><p>Annual</p></td><td><p>Security/IT</p></td></tr>
+<tr><td><p>Data classification review</p></td><td><p>Annual</p></td><td><p>DPO</p></td></tr>
+<tr><td><p>Full vendor risk reassessment</p></td><td><p>Annual</p></td><td><p>DPO + Security</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>Vendor Removal Triggers</h3>
+<p>A vendor should be flagged for removal or replacement if:</p>
+<ul>
+<li><p>Security certification lapses or is revoked</p></li>
+<li><p>Data breach occurs with inadequate response</p></li>
+<li><p>SLA commitments are repeatedly missed</p></li>
+<li><p>Vendor fails to support DSAR fulfillment</p></li>
+<li><p>Sub-processor changes introduce unacceptable risk</p></li>
+<li><p>Vendor is acquired by an entity in a jurisdiction with inadequate data protection</p></li>
+</ul>
+<hr />
+<p><em>This Vendor Onboarding Checklist was auto-generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on a scan of the project's codebase. It should be reviewed by your legal and procurement teams before use.</em></p>

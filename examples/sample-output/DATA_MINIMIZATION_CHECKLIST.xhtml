@@ -1,0 +1,230 @@
+<h1>Data Minimization Checklist</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Data Minimization Checklist</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Company:</strong> Acme Inc</p>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<hr />
+<h2>1. Purpose</h2>
+<p>This checklist implements the <strong>data minimization principle</strong> under GDPR Article 5(1)(c):</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><em>"Personal data shall be adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed."</em></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p>For each detected service, this document identifies what data is collected, whether it is actually needed, and provides actionable recommendations for reducing unnecessary data collection.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Disclaimer:</strong> This is not legal advice. Consult qualified legal counsel and your Data Protection Officer to confirm data processing activities are lawful and necessary.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Per-Service Data Analysis</h2>
+<h3>@sentry/node (Monitoring)</h3>
+<p><strong>Declared data collection:</strong> error data, stack traces, user context, device information, IP address</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>error_data</p></td><td><p>Yes</p></td><td><p>Error tracking and debugging</p></td><td><p>Strip PII from error reports before sending to monitoring service</p></td></tr>
+<tr><td><p>stack_traces</p></td><td><p>Yes</p></td><td><p>Debugging</p></td><td><p>Ensure no sensitive data (passwords, tokens) appears in stack traces</p></td></tr>
+<tr><td><p>user_context</p></td><td><p><strong>No</strong></p></td><td><p>Error context for debugging</p></td><td><p>Use anonymized user IDs; do not send full user profiles</p></td></tr>
+<tr><td><p>ip_address</p></td><td><p><strong>No</strong></p></td><td><p>Error context</p></td><td><p>Truncate or hash IP addresses in error reports</p></td></tr>
+<tr><td><p>error data</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @sentry/node functionality</p></td></tr>
+<tr><td><p>stack traces</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @sentry/node functionality</p></td></tr>
+<tr><td><p>user context</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @sentry/node functionality</p></td></tr>
+<tr><td><p>device information</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @sentry/node functionality</p></td></tr>
+<tr><td><p>IP address</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @sentry/node functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>@supabase/supabase-js (Auth)</h3>
+<p><strong>Declared data collection:</strong> email, password hash, session data, user metadata</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>email</p></td><td><p>Yes</p></td><td><p>Account identification and communication</p></td><td><p>Essential — ensure proper encryption at rest</p></td></tr>
+<tr><td><p>password_hash</p></td><td><p>Yes</p></td><td><p>User authentication</p></td><td><p>Use strong hashing (bcrypt/argon2); never store plaintext</p></td></tr>
+<tr><td><p>session_token</p></td><td><p>Yes</p></td><td><p>Session management</p></td><td><p>Short-lived tokens; auto-expire and rotate</p></td></tr>
+<tr><td><p>login_history</p></td><td><p><strong>No</strong></p></td><td><p>Security auditing</p></td><td><p>Retain for 90 days max; anonymize after</p></td></tr>
+<tr><td><p>oauth_token</p></td><td><p>Yes</p></td><td><p>Third-party authentication</p></td><td><p>Store securely; revoke on account deletion</p></td></tr>
+<tr><td><p>password hash</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @supabase/supabase-js functionality</p></td></tr>
+<tr><td><p>session data</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @supabase/supabase-js functionality</p></td></tr>
+<tr><td><p>user metadata</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for @supabase/supabase-js functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>openai (Ai)</h3>
+<p><strong>Declared data collection:</strong> user prompts, conversation history, generated content</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>user_prompts</p></td><td><p>Yes</p></td><td><p>Required for AI feature delivery</p></td><td><p>Delete after processing; do not retain beyond 30 days for logs</p></td></tr>
+<tr><td><p>conversation_history</p></td><td><p><strong>No</strong></p></td><td><p>Used for context continuity but may not be essential</p></td><td><p>Allow users to opt out; implement automatic expiration (30 days max)</p></td></tr>
+<tr><td><p>generated_content</p></td><td><p><strong>No</strong></p></td><td><p>AI output retained for user convenience</p></td><td><p>Let users delete on demand; do not use for model training without consent</p></td></tr>
+<tr><td><p>model<em>usage</em>metadata</p></td><td><p><strong>No</strong></p></td><td><p>Used for analytics and billing</p></td><td><p>Aggregate and anonymize; delete individual records after 90 days</p></td></tr>
+<tr><td><p>user prompts</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for openai functionality</p></td></tr>
+<tr><td><p>conversation history</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for openai functionality</p></td></tr>
+<tr><td><p>generated content</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for openai functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>posthog (Analytics)</h3>
+<p><strong>Declared data collection:</strong> user behavior, session recordings, feature flag usage, device information</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>page_views</p></td><td><p><strong>No</strong></p></td><td><p>Product analytics — useful but not essential for service delivery</p></td><td><p>Use privacy-preserving analytics (e.g., aggregate counts); limit retention to 26 months</p></td></tr>
+<tr><td><p>user_behavior</p></td><td><p><strong>No</strong></p></td><td><p>UX optimization — not essential for core service</p></td><td><p>Anonymize user identifiers; consider server-side analytics</p></td></tr>
+<tr><td><p>device_info</p></td><td><p><strong>No</strong></p></td><td><p>Compatibility analytics</p></td><td><p>Collect browser/OS only; do not fingerprint devices</p></td></tr>
+<tr><td><p>ip_address</p></td><td><p><strong>No</strong></p></td><td><p>Geolocation and fraud prevention</p></td><td><p>Truncate IP addresses (last octet); delete raw IPs after 90 days</p></td></tr>
+<tr><td><p>user behavior</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for posthog functionality</p></td></tr>
+<tr><td><p>session recordings</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for posthog functionality</p></td></tr>
+<tr><td><p>feature flag usage</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for posthog functionality</p></td></tr>
+<tr><td><p>device information</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for posthog functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>prisma (Database)</h3>
+<p><strong>Declared data collection:</strong> user data as defined in schema</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>user_data</p></td><td><p>Yes</p></td><td><p>Core application functionality</p></td><td><p>Audit each field — only store what the application actually uses</p></td></tr>
+<tr><td><p>user data as defined in schema</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for prisma functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>resend (Email)</h3>
+<p><strong>Declared data collection:</strong> email addresses, email content</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>email_address</p></td><td><p>Yes</p></td><td><p>Email delivery</p></td><td><p>Remove from lists on unsubscribe; honor deletion requests</p></td></tr>
+<tr><td><p>email_content</p></td><td><p><strong>No</strong></p></td><td><p>Delivery logs</p></td><td><p>Do not retain email body after delivery confirmation; delete logs after 90 days</p></td></tr>
+<tr><td><p>open_tracking</p></td><td><p><strong>No</strong></p></td><td><p>Marketing metrics</p></td><td><p>Consider removing tracking pixels; they are not essential and raise privacy concerns</p></td></tr>
+<tr><td><p>email addresses</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for resend functionality</p></td></tr>
+<tr><td><p>email content</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for resend functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>stripe (Payment)</h3>
+<p><strong>Declared data collection:</strong> payment information, billing address, email, transaction history</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>payment_info</p></td><td><p>Yes</p></td><td><p>Required for payment processing</p></td><td><p>Tokenize via payment processor; never store raw card data</p></td></tr>
+<tr><td><p>billing_address</p></td><td><p>Yes</p></td><td><p>Required for tax/invoicing</p></td><td><p>Collect only what is required by tax jurisdiction</p></td></tr>
+<tr><td><p>transaction_history</p></td><td><p>Yes</p></td><td><p>Legal/tax retention requirement</p></td><td><p>Enforce 7-year retention limit; auto-delete after</p></td></tr>
+<tr><td><p>customer_email</p></td><td><p>Yes</p></td><td><p>Transaction receipts</p></td><td><p>Use for transactional email only; do not repurpose for marketing without consent</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe functionality</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe functionality</p></td></tr>
+<tr><td><p>email</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe functionality</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h3>stripe-ios (Payment)</h3>
+<p><strong>Declared data collection:</strong> payment information, billing address, email, transaction history</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Data Field</p></th><th><p>Likely Needed?</p></th><th><p>Justification</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>payment_info</p></td><td><p>Yes</p></td><td><p>Required for payment processing</p></td><td><p>Tokenize via payment processor; never store raw card data</p></td></tr>
+<tr><td><p>billing_address</p></td><td><p>Yes</p></td><td><p>Required for tax/invoicing</p></td><td><p>Collect only what is required by tax jurisdiction</p></td></tr>
+<tr><td><p>transaction_history</p></td><td><p>Yes</p></td><td><p>Legal/tax retention requirement</p></td><td><p>Enforce 7-year retention limit; auto-delete after</p></td></tr>
+<tr><td><p>customer_email</p></td><td><p>Yes</p></td><td><p>Transaction receipts</p></td><td><p>Use for transactional email only; do not repurpose for marketing without consent</p></td></tr>
+<tr><td><p>payment information</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe-ios functionality</p></td></tr>
+<tr><td><p>billing address</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe-ios functionality</p></td></tr>
+<tr><td><p>email</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe-ios functionality</p></td></tr>
+<tr><td><p>transaction history</p></td><td><p>Review needed</p></td><td><p>Detected via scan</p></td><td><p>Assess whether this data is necessary for stripe-ios functionality</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>3. Data Reduction Opportunities</h2>
+<p>The following 12 data field(s) are collected but <strong>may not be necessary</strong> for core service delivery:</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>#</p></th><th><p>Data Field</p></th><th><p>Service</p></th><th><p>Recommendation</p></th></tr>
+<tr><td><p>1</p></td><td><p>user_context</p></td><td><p>@sentry/node</p></td><td><p>Use anonymized user IDs; do not send full user profiles</p></td></tr>
+<tr><td><p>2</p></td><td><p>ip_address</p></td><td><p>@sentry/node</p></td><td><p>Truncate or hash IP addresses in error reports</p></td></tr>
+<tr><td><p>3</p></td><td><p>login_history</p></td><td><p>@supabase/supabase-js</p></td><td><p>Retain for 90 days max; anonymize after</p></td></tr>
+<tr><td><p>4</p></td><td><p>conversation_history</p></td><td><p>openai</p></td><td><p>Allow users to opt out; implement automatic expiration (30 days max)</p></td></tr>
+<tr><td><p>5</p></td><td><p>generated_content</p></td><td><p>openai</p></td><td><p>Let users delete on demand; do not use for model training without consent</p></td></tr>
+<tr><td><p>6</p></td><td><p>model<em>usage</em>metadata</p></td><td><p>openai</p></td><td><p>Aggregate and anonymize; delete individual records after 90 days</p></td></tr>
+<tr><td><p>7</p></td><td><p>page_views</p></td><td><p>posthog</p></td><td><p>Use privacy-preserving analytics (e.g., aggregate counts); limit retention to 26 months</p></td></tr>
+<tr><td><p>8</p></td><td><p>user_behavior</p></td><td><p>posthog</p></td><td><p>Anonymize user identifiers; consider server-side analytics</p></td></tr>
+<tr><td><p>9</p></td><td><p>device_info</p></td><td><p>posthog</p></td><td><p>Collect browser/OS only; do not fingerprint devices</p></td></tr>
+<tr><td><p>10</p></td><td><p>ip_address</p></td><td><p>posthog</p></td><td><p>Truncate IP addresses (last octet); delete raw IPs after 90 days</p></td></tr>
+<tr><td><p>11</p></td><td><p>email_content</p></td><td><p>resend</p></td><td><p>Do not retain email body after delivery confirmation; delete logs after 90 days</p></td></tr>
+<tr><td><p>12</p></td><td><p>open_tracking</p></td><td><p>resend</p></td><td><p>Consider removing tracking pixels; they are not essential and raise privacy concerns</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Action required:</strong> For each item above, determine whether (a) the data can be eliminated entirely, (b) the data can be anonymized or aggregated, or (c) there is a legitimate business justification that should be documented.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Metric</p></th><th><p>Value</p></th></tr>
+<tr><td><p>Services analyzed</p></td><td><p>8</p></td></tr>
+<tr><td><p>Total data fields assessed</p></td><td><p>55</p></td></tr>
+<tr><td><p>Fields likely needed</p></td><td><p>43</p></td></tr>
+<tr><td><p>Fields potentially unnecessary</p></td><td><p>12</p></td></tr>
+<tr><td><p>Potential data reduction</p></td><td><p>22%</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. GDPR Article 5(1)(c) Compliance Checklist</h2>
+<p>Use this checklist to verify your data minimization posture:</p>
+<ul>
+<li><p>[ ] All collected data has a documented, specific purpose</p></li>
+<li><p>[ ] No data is collected "just in case" or for future undefined use</p></li>
+<li><p>[ ] Data fields are limited to what is strictly necessary for each purpose</p></li>
+<li><p>[ ] Pseudonymization or anonymization is used where possible</p></li>
+<li><p>[ ] Data retention periods are defined and enforced for all fields</p></li>
+<li><p>[ ] Regular reviews are conducted to identify and remove unnecessary data</p></li>
+<li><p>[ ] Third-party services are configured to collect only required data</p></li>
+<li><p>[ ] Default settings favor minimal data collection (privacy by default)</p></li>
+<li><p>[ ] Data collection forms only request essential information</p></li>
+<li><p>[ ] Analytics and tracking are proportionate to business needs</p></li>
+</ul>
+<h2>6. Practical Steps for Data Reduction</h2>
+<ol>
+<li><p><strong>Audit each field</strong> — For every data field in the tables above, ask: "Would the service break without this data?"</p></li>
+<li><p><strong>Eliminate unnecessary collection</strong> — Remove fields that are not essential for the stated purpose</p></li>
+<li><p><strong>Anonymize where possible</strong> — Replace identifiable data with pseudonyms or aggregates</p></li>
+<li><p><strong>Shorten retention</strong> — Reduce how long data is kept; implement automatic deletion</p></li>
+<li><p><strong>Minimize third-party sharing</strong> — Configure services to send only required fields</p></li>
+<li><p><strong>Review regularly</strong> — Re-run this checklist quarterly and after adding new services</p></li>
+</ol>
+<h2>7. Related Documents</h2>
+<ul>
+<li><p><strong>DATA_DICTIONARY.md</strong> — Complete catalog of all data fields</p></li>
+<li><p><strong>DATA<em>RETENTION</em>POLICY.md</strong> — Retention schedules and deletion procedures</p></li>
+<li><p><strong>PRIVACY_POLICY.md</strong> — Public disclosure of data collection practices</p></li>
+<li><p><strong>LAWFUL<em>BASIS</em>ASSESSMENT.md</strong> — Legal basis for each processing activity</p></li>
+<li><p><strong>RECORD<em>OF</em>PROCESSING.md</strong> — GDPR Art. 30 processing activities register</p></li>
+<li><p><strong>CONSENT<em>MANAGEMENT</em>GUIDE.md</strong> — Consent collection and management procedures</p></li>
+</ul>
+<p>For questions about this checklist, contact legal@acme.com.</p>
+<hr />
+<p><em>This data minimization checklist was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is for informational purposes only and does not constitute legal advice.</em></p>

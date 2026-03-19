@@ -1,0 +1,194 @@
+<h1>Compliance Summary Email</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance Summary — Acme Inc</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Date:</strong> 2026-03-18</p>
+<p><strong>Prepared by:</strong> Jane Mueller (dpo@acme-saas.com)</p>
+<p><strong>Contact:</strong> legal@acme.com</p>
+<p><strong>Report type:</strong> Periodic Compliance Status Update</p>
+<hr />
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>This document is formatted as an email-ready compliance summary for distribution to stakeholders, board members, and executive leadership.</strong></p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Executive Summary</h2>
+<p>Acme Inc currently operates <strong>8 third-party service(s)</strong> that process user data. A total of <strong>83 compliance document(s)</strong> have been generated covering all applicable regulatory requirements.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Metric</p></th><th><p>Value</p></th></tr>
+<tr><td><p>Overall Compliance Grade</p></td><td><p><strong>A</strong> (Green)</p></td></tr>
+<tr><td><p>Critical Document Coverage</p></td><td><p>100%</p></td></tr>
+<tr><td><p>Services Detected</p></td><td><p>8</p></td></tr>
+<tr><td><p>Documents Generated</p></td><td><p>83</p></td></tr>
+<tr><td><p>Applicable Jurisdictions</p></td><td><p>EU, US-CA, US-VA, UK</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Service Inventory</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Category</p></th><th><p>Count</p></th><th><p>Services</p></th></tr>
+<tr><td><p>Ai</p></td><td><p>1</p></td><td><p>openai</p></td></tr>
+<tr><td><p>Analytics</p></td><td><p>1</p></td><td><p>posthog</p></td></tr>
+<tr><td><p>Auth</p></td><td><p>1</p></td><td><p>@supabase/supabase-js</p></td></tr>
+<tr><td><p>Database</p></td><td><p>1</p></td><td><p>prisma</p></td></tr>
+<tr><td><p>Email</p></td><td><p>1</p></td><td><p>resend</p></td></tr>
+<tr><td><p>Monitoring</p></td><td><p>1</p></td><td><p>@sentry/node</p></td></tr>
+<tr><td><p>Payment</p></td><td><p>2</p></td><td><p>stripe, stripe-ios</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Key Risks</h2>
+<ol>
+<li><p><strong>AI/ML Services Detected</strong> (openai): EU AI Act Art. 50 transparency obligations apply. AI Disclosure document required.</p></li>
+<li><p><strong>Payment Processing</strong> (stripe, stripe-ios): PCI DSS compliance required. Data Processing Agreement must list payment sub-processors.</p></li>
+<li><p><strong>Analytics/Monitoring</strong> (@sentry/node, posthog): Cookie consent and tracking disclosure required under GDPR/ePrivacy.</p></li>
+</ol>
+<hr />
+<h2>Action Items</h2>
+<ul>
+<li><p>[ ] Review all generated compliance documents for accuracy</p></li>
+<li><p>[ ] Have legal counsel approve Privacy Policy and Terms of Service</p></li>
+<li><p>[ ] Review AI Disclosure document for EU AI Act Art. 50 compliance before August 2, 2026 deadline</p></li>
+<li><p>[ ] Verify PCI DSS compliance and DPA coverage for payment processors</p></li>
+<li><p>[ ] Schedule quarterly compliance review cadence</p></li>
+<li><p>[ ] Distribute this summary to all stakeholders and board members</p></li>
+</ul>
+<hr />
+<h2>Regulatory Coverage</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Regulation</p></th><th><p>Status</p></th><th><p>Key Documents</p></th></tr>
+<tr><td><p>GDPR (EU)</p></td><td><p>Covered</p></td><td><p>Privacy Policy, DPA, DSAR Guide, Record of Processing</p></td></tr>
+<tr><td><p>CCPA (California)</p></td><td><p>Covered</p></td><td><p>Privacy Policy (CCPA section), Data Deletion Procedures</p></td></tr>
+<tr><td><p>EU AI Act</p></td><td><p>Covered</p></td><td><p>AI Disclosure, AI Model Card, AI Governance Framework</p></td></tr>
+<tr><td><p>ePrivacy (Cookies)</p></td><td><p>Covered</p></td><td><p>Cookie Policy, Cookie Inventory, Consent Guide</p></td></tr>
+<tr><td><p>PCI DSS</p></td><td><p>Partial</p></td><td><p>Security Policy, Encryption Policy, Access Control</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<h2>Document Inventory</h2>
+<p>The following compliance documents have been generated:</p>
+<ul>
+<li><p>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</p></li>
+<li><p>Terms of Service (<code>TERMS<em>OF</em>SERVICE.md</code>)</p></li>
+<li><p>Security Policy (<code>SECURITY.md</code>)</p></li>
+<li><p>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</p></li>
+<li><p>AI Disclosure (<code>AI_DISCLOSURE.md</code>)</p></li>
+<li><p>AI Act Compliance Checklist (<code>AI<em>ACT</em>CHECKLIST.md</code>)</p></li>
+<li><p>AI Model Card (<code>AI<em>MODEL</em>CARD.md</code>)</p></li>
+<li><p>Cookie Policy (<code>COOKIE_POLICY.md</code>)</p></li>
+<li><p>Consent Management Guide (<code>CONSENT<em>MANAGEMENT</em>GUIDE.md</code>)</p></li>
+<li><p>Data Processing Agreement (<code>DATA<em>PROCESSING</em>AGREEMENT.md</code>)</p></li>
+<li><p>Sub-Processor List (<code>SUBPROCESSOR_LIST.md</code>)</p></li>
+<li><p>Data Retention Policy (<code>DATA<em>RETENTION</em>POLICY.md</code>)</p></li>
+<li><p>DSAR Handling Guide (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</p></li>
+<li><p>Vendor Contacts Directory (<code>VENDOR_CONTACTS.md</code>)</p></li>
+<li><p>Data Flow Map (<code>DATA<em>FLOW</em>MAP.md</code>)</p></li>
+<li><p>Compliance Notes (<code>COMPLIANCE_NOTES.md</code>)</p></li>
+<li><p>Compliance Timeline (<code>COMPLIANCE_TIMELINE.md</code>)</p></li>
+<li><p>SOC 2 Readiness Checklist (<code>SOC2<em>READINESS</em>CHECKLIST.md</code>)</p></li>
+<li><p>ISO 27001 Compliance Checklist (<code>ISO<em>27001</em>CHECKLIST.md</code>)</p></li>
+<li><p>Third-Party Risk Assessment (<code>THIRD<em>PARTY</em>RISK_ASSESSMENT.md</code>)</p></li>
+<li><p>Privacy Impact Assessment (<code>PRIVACY<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Environment Variable Audit (<code>ENV_AUDIT.md</code>)</p></li>
+<li><p>Data Classification Report (<code>DATA_CLASSIFICATION.md</code>)</p></li>
+<li><p>Dependency Vulnerability Scan (<code>VULNERABILITY_SCAN.md</code>)</p></li>
+<li><p>Transparency Report (<code>TRANSPARENCY_REPORT.md</code>)</p></li>
+<li><p>Acceptable Use Policy (<code>ACCEPTABLE<em>USE</em>POLICY.md</code>)</p></li>
+<li><p>Refund Policy (<code>REFUND_POLICY.md</code>)</p></li>
+<li><p>Service Level Agreement (<code>SERVICE<em>LEVEL</em>AGREEMENT.md</code>)</p></li>
+<li><p>Data Flow Diagram (<code>DATA<em>FLOW</em>DIAGRAM.md</code>)</p></li>
+<li><p>Audit Log Policy (<code>AUDIT<em>LOG</em>POLICY.md</code>)</p></li>
+<li><p>Acceptable AI Use Policy (<code>ACCEPTABLE<em>AI</em>USE_POLICY.md</code>)</p></li>
+<li><p>Risk Register (<code>RISK_REGISTER.md</code>)</p></li>
+<li><p>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</p></li>
+<li><p>Transfer Impact Assessment (<code>TRANSFER<em>IMPACT</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Data Dictionary (<code>DATA_DICTIONARY.md</code>)</p></li>
+<li><p>Access Control Policy (<code>ACCESS<em>CONTROL</em>POLICY.md</code>)</p></li>
+<li><p>Change Management Policy (<code>CHANGE<em>MANAGEMENT</em>POLICY.md</code>)</p></li>
+<li><p>Data Breach Notification Templates (<code>DATA<em>BREACH</em>NOTIFICATION_TEMPLATE.md</code>)</p></li>
+<li><p>Vendor Security Questionnaire (<code>VENDOR<em>SECURITY</em>QUESTIONNAIRE.md</code>)</p></li>
+<li><p>API Privacy Documentation (<code>API<em>PRIVACY</em>DOCUMENTATION.md</code>)</p></li>
+<li><p>Supplier Code of Conduct (<code>SUPPLIER<em>CODE</em>OF_CONDUCT.md</code>)</p></li>
+<li><p>Privacy by Design Checklist (<code>PRIVACY<em>BY</em>DESIGN_CHECKLIST.md</code>)</p></li>
+<li><p>Penetration Test Scope (<code>PENTEST_SCOPE.md</code>)</p></li>
+<li><p>Cookie Inventory (<code>COOKIE_INVENTORY.md</code>)</p></li>
+<li><p>AI Governance Framework (<code>AI<em>GOVERNANCE</em>FRAMEWORK.md</code>)</p></li>
+<li><p>Business Continuity Plan (<code>BUSINESS<em>CONTINUITY</em>PLAN.md</code>)</p></li>
+<li><p>Encryption Policy (<code>ENCRYPTION_POLICY.md</code>)</p></li>
+<li><p>Backup Policy (<code>BACKUP_POLICY.md</code>)</p></li>
+<li><p>Disaster Recovery Plan (<code>DISASTER<em>RECOVERY</em>PLAN.md</code>)</p></li>
+<li><p>Information Security Policy (<code>INFORMATION<em>SECURITY</em>POLICY.md</code>)</p></li>
+<li><p>Data Subject Categories (<code>DATA<em>SUBJECT</em>CATEGORIES.md</code>)</p></li>
+<li><p>Lawful Basis Assessment (<code>LAWFUL<em>BASIS</em>ASSESSMENT.md</code>)</p></li>
+<li><p>Annual Review Checklist (<code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code>)</p></li>
+<li><p>Sub-Processor Change Notification (<code>SUBPROCESSOR<em>CHANGE</em>NOTIFICATION.md</code>)</p></li>
+<li><p>Data Protection Policy (<code>DATA<em>PROTECTION</em>POLICY.md</code>)</p></li>
+<li><p>Responsible Disclosure Policy (<code>RESPONSIBLE<em>DISCLOSURE</em>POLICY.md</code>)</p></li>
+<li><p>API Terms of Use (<code>API<em>TERMS</em>OF_USE.md</code>)</p></li>
+<li><p>Third-Party Cookie Notice (<code>THIRD<em>PARTY</em>COOKIE_NOTICE.md</code>)</p></li>
+<li><p>Data Portability Guide (<code>DATA<em>PORTABILITY</em>GUIDE.md</code>)</p></li>
+<li><p>AI Training Data Notice (<code>AI<em>TRAINING</em>DATA_NOTICE.md</code>)</p></li>
+<li><p>Employee Handbook Privacy Section (<code>EMPLOYEE<em>HANDBOOK</em>PRIVACY_SECTION.md</code>)</p></li>
+<li><p>Vendor Onboarding Checklist (<code>VENDOR<em>ONBOARDING</em>CHECKLIST.md</code>)</p></li>
+<li><p>Executive Dashboard (<code>EXECUTIVE_DASHBOARD.md</code>)</p></li>
+<li><p>Privacy Notice (Short) (<code>PRIVACY<em>NOTICE</em>SHORT.md</code>)</p></li>
+<li><p>Cookie Consent Configuration (<code>COOKIE<em>CONSENT</em>CONFIG.json</code>)</p></li>
+<li><p>Quick Start Compliance Guide (<code>QUICK<em>START</em>COMPLIANCE_GUIDE.md</code>)</p></li>
+<li><p>Compliance Roadmap (<code>COMPLIANCE_ROADMAP.md</code>)</p></li>
+<li><p>Privacy Dashboard Configuration (<code>PRIVACY<em>DASHBOARD</em>CONFIG.json</code>)</p></li>
+<li><p>DPO Handbook (<code>DPO_HANDBOOK.md</code>)</p></li>
+<li><p>Incident Communication Templates (<code>INCIDENT<em>COMMUNICATION</em>TEMPLATES.md</code>)</p></li>
+<li><p>Training Record (<code>TRAINING_RECORD.md</code>)</p></li>
+<li><p>Consent Record Template (<code>CONSENT<em>RECORD</em>TEMPLATE.md</code>)</p></li>
+<li><p>Data Deletion Procedures (<code>DATA<em>DELETION</em>PROCEDURES.md</code>)</p></li>
+<li><p>Security Awareness Program (<code>SECURITY<em>AWARENESS</em>PROGRAM.md</code>)</p></li>
+<li><p>Privacy Risk Matrix (<code>PRIVACY<em>RISK</em>MATRIX.md</code>)</p></li>
+<li><p>Data Mapping Register (<code>DATA<em>MAPPING</em>REGISTER.md</code>)</p></li>
+<li><p>AI Ethics Statement (<code>AI<em>ETHICS</em>STATEMENT.md</code>)</p></li>
+<li><p>Data Breach Response Drill Template (<code>DATA<em>BREACH</em>DRILL_TEMPLATE.md</code>)</p></li>
+<li><p>Regulatory Correspondence Log (<code>REGULATORY<em>CORRESPONDENCE</em>LOG.md</code>)</p></li>
+<li><p>Privacy Policy Changelog (<code>PRIVACY<em>POLICY</em>CHANGELOG.md</code>)</p></li>
+<li><p>Privacy Program Charter (<code>PRIVACY<em>PROGRAM</em>CHARTER.md</code>)</p></li>
+<li><p>Third-Party Due Diligence Template (<code>THIRD<em>PARTY</em>DUE<em>DILIGENCE</em>TEMPLATE.md</code>)</p></li>
+<li><p>Compliance Maturity Model (<code>COMPLIANCE<em>MATURITY</em>MODEL.md</code>)</p></li>
+</ul>
+<hr />
+<h2>Next Steps</h2>
+<ol>
+<li><p><strong>Immediate (this week):</strong> Review and approve critical documents (Privacy Policy, Terms of Service, Security Policy)</p></li>
+<li><p><strong>Short-term (30 days):</strong> Complete legal review of all generated documents</p></li>
+<li><p><strong>Medium-term (90 days):</strong> Implement consent management, DSAR handling procedures, and incident response testing</p></li>
+<li><p><strong>Ongoing:</strong> Schedule quarterly compliance reviews and document updates</p></li>
+</ol>
+<hr />
+<h2>Distribution List</h2>
+<p>This summary should be distributed to:</p>
+<ul>
+<li><p>[ ] CEO / Founder</p></li>
+<li><p>[ ] CTO / VP Engineering</p></li>
+<li><p>[ ] General Counsel / Legal</p></li>
+<li><p>[ ] Data Protection Officer</p></li>
+<li><p>[ ] Board of Directors</p></li>
+<li><p>[ ] CISO / Security Lead</p></li>
+<li><p>[ ] VP Product</p></li>
+</ul>
+<hr />
+<p><em>Generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> on 2026-03-18. This is an automated compliance summary based on code analysis. It should be reviewed by qualified legal counsel before distribution.</em></p>
+<p><em>Report generated from analysis of 8 service(s) across 7 categories.</em></p>

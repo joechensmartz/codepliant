@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPO HANDBOOK — mastodon</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>DPO HANDBOOK</h1>
+      <p class="meta">mastodon &middot; Last updated 2026-03-18 &middot; ~8 min read</p>
+    </header>
+    <h1 id="data-protection-officer-handbook">Data Protection Officer Handbook</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<p><strong>DPO:</strong> [Data Protection Officer Name] ([dpo@example.com])</p>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p>This handbook outlines the responsibilities, reporting structure, and operational procedures for the Data Protection Officer (DPO) at <strong>[Your Company Name]</strong>, in accordance with GDPR Articles 37-39.</p>
+<h2 id="1-role-and-appointment-gdpr-art-37">1. Role and Appointment (GDPR Art. 37)</h2>
+<h3 id="11-when-a-dpo-is-required">1.1 When a DPO Is Required</h3>
+<p>A DPO must be designated when:</p>
+<ul>
+<li>The processing is carried out by a public authority or body</li>
+<li>Core activities require regular and systematic monitoring of data subjects at scale</li>
+<li>Core activities involve large-scale processing of special categories of data</li>
+</ul>
+<p><strong>Assessment for [Your Company Name]:</strong> A DPO is likely <strong>mandatory</strong> based on:</p>
+<ul>
+<li>22 third-party data processors detected (systematic processing at scale)</li>
+</ul>
+<h3 id="12-appointment-requirements">1.2 Appointment Requirements</h3>
+<p>The DPO must:</p>
+<ul>
+<li>Be appointed based on <strong>professional qualities</strong>, in particular expert knowledge of data protection law and practices</li>
+<li>Be either a staff member or engaged under a service contract</li>
+<li>Be provided with resources necessary to carry out their tasks</li>
+<li>Be given access to personal data and processing operations</li>
+<li>Not be dismissed or penalized for performing their DPO tasks</li>
+</ul>
+<h2 id="2-position-and-independence-gdpr-art-38">2. Position and Independence (GDPR Art. 38)</h2>
+<h3 id="21-reporting-structure">2.1 Reporting Structure</h3>
+<pre><code>┌─────────────────────┐
+│   Board / CEO       │
+│   (Direct report)   │
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│   DPO               │
+│   [Data Protection  │
+└─────────┬───────────┘
+          │
+    ┌─────┼─────┐
+    ▼     ▼     ▼
+  Legal  IT  Business
+  Team   Team  Units</code></pre>
+<h3 id="22-independence-requirements">2.2 Independence Requirements</h3>
+<ul>
+<li>The DPO <strong>reports directly</strong> to the highest level of management</li>
+<li>The DPO shall <strong>not receive instructions</strong> regarding the exercise of their tasks</li>
+<li>The DPO shall <strong>not be dismissed or penalized</strong> for performing their duties</li>
+<li>The DPO may fulfill other tasks, provided they do not result in a <strong>conflict of interest</strong></li>
+</ul>
+<h3 id="23-conflict-of-interest">2.3 Conflict of Interest</h3>
+<p>The DPO must <strong>not</strong> simultaneously hold any of these roles:</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Why It Conflicts</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">CEO / Managing Director</td><td style="text-align:left">Determines purposes of processing</td></tr>
+<tr><td style="text-align:left">CFO</td><td style="text-align:left">Determines financial data processing</td></tr>
+<tr><td style="text-align:left">Head of Marketing</td><td style="text-align:left">Decides on marketing data usage</td></tr>
+<tr><td style="text-align:left">Head of HR</td><td style="text-align:left">Decides on employee data processing</td></tr>
+<tr><td style="text-align:left">Head of IT</td><td style="text-align:left">Implements technical processing decisions</td></tr>
+</tbody>
+</table>
+<h2 id="3-tasks-and-responsibilities-gdpr-art-39">3. Tasks and Responsibilities (GDPR Art. 39)</h2>
+<h3 id="31-core-tasks">3.1 Core Tasks</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Task</th><th style="text-align:left">Description</th><th style="text-align:left">Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>Inform and advise</strong></td><td style="text-align:left">Advise the organization and employees on data protection obligations</td><td style="text-align:left">Ongoing</td></tr>
+<tr><td style="text-align:left"><strong>Monitor compliance</strong></td><td style="text-align:left">Oversee compliance with GDPR and internal policies</td><td style="text-align:left">Continuous</td></tr>
+<tr><td style="text-align:left"><strong>Training</strong></td><td style="text-align:left">Organize staff awareness and training programs</td><td style="text-align:left">Quarterly</td></tr>
+<tr><td style="text-align:left"><strong>DPIA oversight</strong></td><td style="text-align:left">Advise on Data Protection Impact Assessments</td><td style="text-align:left">Per project</td></tr>
+<tr><td style="text-align:left"><strong>Supervisory authority</strong></td><td style="text-align:left">Act as contact point for the supervisory authority</td><td style="text-align:left">As needed</td></tr>
+<tr><td style="text-align:left"><strong>Data subject requests</strong></td><td style="text-align:left">Oversee DSAR handling process</td><td style="text-align:left">As received</td></tr>
+<tr><td style="text-align:left"><strong>Breach management</strong></td><td style="text-align:left">Coordinate breach notification procedures</td><td style="text-align:left">As needed</td></tr>
+<tr><td style="text-align:left"><strong>Records maintenance</strong></td><td style="text-align:left">Maintain records of processing activities (Art. 30)</td><td style="text-align:left">Quarterly review</td></tr>
+</tbody>
+</table>
+<h3 id="32-operational-checklist">3.2 Operational Checklist</h3>
+<h4 id="daily">Daily</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Review incoming DSAR requests</li>
+<li><input type="checkbox" disabled> Monitor security incident alerts for potential data breaches</li>
+<li><input type="checkbox" disabled> Check DPO email inbox for data subject inquiries</li>
+</ul>
+<h4 id="weekly">Weekly</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Review new vendor/service integrations for data protection implications</li>
+<li><input type="checkbox" disabled> Check DSAR response deadlines (30-day timer)</li>
+<li><input type="checkbox" disabled> Review any pending consent changes or policy updates</li>
+</ul>
+<h4 id="monthly">Monthly</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Update Record of Processing Activities if changes occurred</li>
+<li><input type="checkbox" disabled> Review sub-processor list for additions or changes</li>
+<li><input type="checkbox" disabled> Assess any new processing activities for DPIA necessity</li>
+<li><input type="checkbox" disabled> Report compliance status to management</li>
+</ul>
+<h4 id="quarterly">Quarterly</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Conduct staff data protection awareness training</li>
+<li><input type="checkbox" disabled> Review and update privacy policies and notices</li>
+<li><input type="checkbox" disabled> Audit consent management mechanisms</li>
+<li><input type="checkbox" disabled> Review data retention and deletion practices</li>
+<li><input type="checkbox" disabled> Update risk register and mitigation measures</li>
+</ul>
+<h4 id="annually">Annually</h4>
+<ul class="checklist">
+<li><input type="checkbox" disabled> Comprehensive compliance audit</li>
+<li><input type="checkbox" disabled> Review and update DPIAs for existing high-risk processing</li>
+<li><input type="checkbox" disabled> Update transfer impact assessments</li>
+<li><input type="checkbox" disabled> Submit annual report to board/management</li>
+<li><input type="checkbox" disabled> Review and renew DPA agreements with processors</li>
+</ul>
+<h2 id="4-escalation-procedures">4. Escalation Procedures</h2>
+<h3 id="41-escalation-matrix">4.1 Escalation Matrix</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Situation</th><th style="text-align:left">Escalation Level</th><th style="text-align:left">Timeline</th><th style="text-align:left">Action</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Routine DSAR</td><td style="text-align:left">DPO handles directly</td><td style="text-align:left">30 days max</td><td style="text-align:left">Process and respond</td></tr>
+<tr><td style="text-align:left">Complex DSAR (multiple systems)</td><td style="text-align:left">DPO + IT Lead</td><td style="text-align:left">30 days max</td><td style="text-align:left">Coordinate data retrieval</td></tr>
+<tr><td style="text-align:left">Minor data incident (no breach)</td><td style="text-align:left">DPO + IT Security</td><td style="text-align:left">24 hours assessment</td><td style="text-align:left">Investigate and document</td></tr>
+<tr><td style="text-align:left">Confirmed data breach</td><td style="text-align:left">DPO + CEO + Legal</td><td style="text-align:left">72 hours to authority</td><td style="text-align:left">Notify authority, assess user notification</td></tr>
+<tr><td style="text-align:left">Regulatory inquiry</td><td style="text-align:left">DPO + Legal Counsel</td><td style="text-align:left">Immediate</td><td style="text-align:left">Cooperate and respond</td></tr>
+<tr><td style="text-align:left">DPO advice rejected by management</td><td style="text-align:left">DPO documents in writing</td><td style="text-align:left">Record immediately</td><td style="text-align:left">Formal written objection</td></tr>
+</tbody>
+</table>
+<h3 id="42-data-breach-escalation">4.2 Data Breach Escalation</h3>
+<pre><code>Incident Detected
+       │
+       ▼
+┌──────────────────┐    No    ┌──────────────┐
+│ Personal data    │────────▶│ IT Security  │
+│ involved?        │         │ handles      │
+└────────┬─────────┘         └──────────────┘
+    Yes  │
+         ▼
+┌──────────────────┐
+│ DPO notified     │
+│ (within 1 hour)  │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐    Low   ┌──────────────┐
+│ Risk to rights   │────────▶│ Document     │
+│ and freedoms?    │         │ internally   │
+└────────┬─────────┘         └──────────────┘
+   High  │
+         ▼
+┌──────────────────┐
+│ Notify authority │
+│ within 72 hours  │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ Notify affected  │
+│ individuals      │
+└──────────────────┘</code></pre>
+<h2 id="5-dsar-handling-process">5. DSAR Handling Process</h2>
+<h3 id="51-response-timeline">5.1 Response Timeline</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Step</th><th style="text-align:left">Deadline</th><th style="text-align:left">Responsible</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Request received</td><td style="text-align:left">Day 0</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Identity verification</td><td style="text-align:left">Day 1-3</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Scope assessment</td><td style="text-align:left">Day 3-5</td><td style="text-align:left">DPO</td></tr>
+<tr><td style="text-align:left">Data collection from systems</td><td style="text-align:left">Day 5-20</td><td style="text-align:left">DPO + IT</td></tr>
+<tr><td style="text-align:left">Review and redaction</td><td style="text-align:left">Day 20-25</td><td style="text-align:left">DPO + Legal</td></tr>
+<tr><td style="text-align:left">Response to data subject</td><td style="text-align:left">Day 25-30 (max)</td><td style="text-align:left">DPO</td></tr>
+</tbody>
+</table>
+<h3 id="52-systems-to-query-22-detected">5.2 Systems to Query (22 detected)</h3>
+<ul>
+<li><strong>ActionCable</strong> (other): real-time user data, connection metadata, channel subscriptions</li>
+<li><strong>ActionController::Cookies</strong> (other): session cookies, session data, CSRF tokens</li>
+<li><strong>ActionMailer</strong> (email): email addresses, email content</li>
+<li><strong>Active Storage</strong> (storage): uploaded files, file metadata, storage service credentials</li>
+<li><strong>ActiveRecord</strong> (database): user data as defined in schema, timestamps, associations</li>
+<li><strong>ActiveStorage</strong> (storage): uploaded files, file metadata, storage references</li>
+<li><strong>aws-sdk-s3</strong> (storage): uploaded files, file metadata</li>
+<li><strong>devise</strong> (auth): email, password hash, session data</li>
+<li><strong>ioredis</strong> (database): cached data, session data</li>
+<li><strong>omniauth</strong> (auth): email, name, OAuth tokens</li>
+<li><strong>pg</strong> (database): user data as defined in schema</li>
+<li><strong>PostgreSQL</strong> (database): application data, user records</li>
+<li><strong>PostgreSQL (env)</strong> (database): application data, user records</li>
+<li><strong>pundit</strong> (auth): user roles, authorization policies, access control data</li>
+<li><strong>rack-attack</strong> (other): IP addresses, request metadata</li>
+<li><strong>rails-actionmailer</strong> (email): email addresses, email content</li>
+<li><strong>rails-activerecord</strong> (database): user data as defined in schema</li>
+<li><strong>rails-sessions</strong> (auth): session cookies, CSRF tokens</li>
+<li><strong>redis</strong> (database): cached data, session data</li>
+<li><strong>Redis</strong> (database): session data, cache data</li>
+<li><strong>sidekiq</strong> (other): job data, user data processed in background jobs</li>
+<li><strong>ws (WebSocket)</strong> (other): real-time user data, connection metadata, IP address</li>
+</ul>
+<h2 id="6-key-contacts-and-resources">6. Key Contacts and Resources</h2>
+<h3 id="internal-contacts">Internal Contacts</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Role</th><th style="text-align:left">Name</th><th style="text-align:left">Email</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">Data Protection Officer</td><td style="text-align:left">[Data Protection Officer Name]</td><td style="text-align:left">[dpo@example.com]</td></tr>
+<tr><td style="text-align:left">General Contact</td><td style="text-align:left">[Name]</td><td style="text-align:left">[your-email@example.com]</td></tr>
+<tr><td style="text-align:left">Legal Counsel</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td></tr>
+<tr><td style="text-align:left">IT Security Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td></tr>
+<tr><td style="text-align:left">HR Lead</td><td style="text-align:left">[Name]</td><td style="text-align:left">[email]</td></tr>
+</tbody>
+</table>
+<h3 id="supervisory-authorities">Supervisory Authorities</h3>
+<table>
+<thead>
+<tr><th style="text-align:left">Authority</th><th style="text-align:left">Jurisdiction</th><th style="text-align:left">Website</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">[Your lead authority]</td><td style="text-align:left">[Country]</td><td style="text-align:left">[URL]</td></tr>
+<tr><td style="text-align:left">ICO</td><td style="text-align:left">United Kingdom</td><td style="text-align:left">https://ico.org.uk</td></tr>
+<tr><td style="text-align:left">CNIL</td><td style="text-align:left">France</td><td style="text-align:left">https://www.cnil.fr</td></tr>
+<tr><td style="text-align:left">BfDI</td><td style="text-align:left">Germany</td><td style="text-align:left">https://www.bfdi.bund.de</td></tr>
+<tr><td style="text-align:left">DPC</td><td style="text-align:left">Ireland</td><td style="text-align:left">https://www.dataprotection.ie</td></tr>
+</tbody>
+</table>
+<h3 id="key-regulations">Key Regulations</h3>
+<ul>
+<li><strong>GDPR</strong> — General Data Protection Regulation (EU) 2016/679</li>
+<li><strong>ePrivacy Directive</strong> — Directive 2002/58/EC (cookies, electronic communications)</li>
+</ul>
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li>Privacy Policy (<code>PRIVACY_POLICY.md</code>)</li>
+<li>Record of Processing Activities (<code>RECORD<em>OF</em>PROCESSING_ACTIVITIES.md</code>)</li>
+<li>DSAR Handling Guide (<code>DSAR<em>HANDLING</em>GUIDE.md</code>)</li>
+<li>Incident Response Plan (<code>INCIDENT<em>RESPONSE</em>PLAN.md</code>)</li>
+<li>Data Protection Policy (<code>DATA<em>PROTECTION</em>POLICY.md</code>)</li>
+<li>Annual Review Checklist (<code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code>)</li>
+</ul>
+<hr>
+<p><em>This DPO Handbook was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on an automated scan of the <strong>@mastodon/mastodon</strong> codebase. It should be reviewed and customized by your legal team and appointed DPO before adoption.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<h1>Compliance Notes</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>Compliance Notes</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Company:</strong> Acme Inc</p>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<h2>Related Documents</h2>
+<ul>
+<li><p>Compliance Timeline (<code>COMPLIANCE_TIMELINE.md</code>)</p></li>
+<li><p>Annual Review Checklist (<code>ANNUAL<em>REVIEW</em>CHECKLIST.md</code>)</p></li>
+<li><p>Regulatory Updates (<code>REGULATORY_UPDATES.md</code>)</p></li>
+</ul>
+<hr />
+<p>This document provides an overview of privacy and data protection regulations that may apply to your project based on the services detected in your codebase and your configured jurisdictions.</p>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Disclaimer:</strong> This is not legal advice. Consult qualified legal counsel to determine your specific compliance obligations.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>1. Detected Services Summary</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Service</p></th><th><p>Category</p></th><th><p>Data Collected</p></th></tr>
+<tr><td><p>@sentry/node</p></td><td><p>Error Monitoring</p></td><td><p>error data, stack traces, user context</p></td></tr>
+<tr><td><p>@supabase/supabase-js</p></td><td><p>Authentication</p></td><td><p>email, password hash, session data</p></td></tr>
+<tr><td><p>openai</p></td><td><p>AI Service</p></td><td><p>user prompts, conversation history, generated content</p></td></tr>
+<tr><td><p>posthog</p></td><td><p>Analytics</p></td><td><p>user behavior, session recordings, feature flag usage</p></td></tr>
+<tr><td><p>prisma</p></td><td><p>Database</p></td><td><p>user data as defined in schema</p></td></tr>
+<tr><td><p>resend</p></td><td><p>Email Service</p></td><td><p>email addresses, email content</p></td></tr>
+<tr><td><p>stripe</p></td><td><p>Payment Processing</p></td><td><p>payment information, billing address, email</p></td></tr>
+<tr><td><p>stripe-ios</p></td><td><p>Payment Processing</p></td><td><p>payment information, billing address, email</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. California Consumer Privacy Act (CCPA/CPRA)</h2>
+<p><strong>Applies to:</strong> Businesses that collect personal information of California residents</p>
+<p><strong>Enforcement date:</strong> January 1, 2020 (CCPA); January 1, 2023 (CPRA amendments)</p>
+<p><strong>Maximum fine:</strong> $7,500 per intentional violation</p>
+<h3>Key Requirements</h3>
+<ul>
+<li><p>[ ] Provide a "Do Not Sell or Share My Personal Information" link</p></li>
+<li><p>[ ] Disclose categories of personal information collected and purposes</p></li>
+<li><p>[ ] Honor opt-out requests within 15 business days</p></li>
+<li><p>[ ] Respond to consumer requests within 45 days</p></li>
+<li><p>[ ] Provide at least two methods for consumers to submit requests</p></li>
+<li><p>[ ] Include CCPA-specific disclosures in your privacy policy</p></li>
+<li><p>[ ] Honor Global Privacy Control (GPC) signals</p></li>
+<li><p>[ ] Review analytics service data sharing — may constitute "sale" or "sharing" under CCPA</p></li>
+<li><p>[ ] Ensure payment processors have appropriate data processing agreements</p></li>
+</ul>
+<h2>3. ePrivacy Directive (2002/58/EC)</h2>
+<p><strong>Applies to:</strong> Any service that uses cookies or similar tracking technologies for users in the EU/EEA</p>
+<p><strong>Key article:</strong> Article 5(3) — prior opt-in consent for non-essential cookies</p>
+<p><strong>Enforcement:</strong> National data protection authorities (e.g., CNIL fined SHEIN EUR 150M in 2026)</p>
+<h3>Key Requirements</h3>
+<ul>
+<li><p>[ ] Obtain prior opt-in consent before setting non-essential cookies</p></li>
+<li><p>[ ] Provide granular cookie consent controls (accept analytics but reject marketing)</p></li>
+<li><p>[ ] Ensure equal access to service regardless of cookie consent decision</p></li>
+<li><p>[ ] Make consent withdrawal as easy as giving consent</p></li>
+<li><p>[ ] Document and store consent records</p></li>
+<li><p>[ ] Implement complete consent signaling from banner through CMP to all tracking tools</p></li>
+<li><p>[ ] Classify detected analytics cookies and ensure each requires consent</p></li>
+</ul>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>See the generated <strong>Cookie Policy</strong> document for details on detected cookies and tracking technologies.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>4. EU AI Act (Regulation 2024/1689)</h2>
+<p><strong>Applies to:</strong> Providers and deployers of AI systems in the EU</p>
+<p><strong>Transparency obligations enforcement:</strong> August 2, 2026</p>
+<p><strong>Maximum fine:</strong> EUR 35 million or 7% of annual global turnover</p>
+<h3>Key Requirements for Deployers</h3>
+<ul>
+<li><p>[ ] Classify AI systems by risk level (minimal, limited, high, unacceptable)</p></li>
+<li><p>[ ] Provide transparency disclosures per Article 50</p></li>
+<li><p>[ ] Implement human oversight measures</p></li>
+<li><p>[ ] Mark AI-generated content in machine-readable format (Art. 50(2))</p></li>
+<li><p>[ ] Maintain documentation of AI system usage</p></li>
+</ul>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p>See the generated <strong>AI Disclosure</strong> and <strong>AI Act Compliance Checklist</strong> documents for detailed requirements.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>5. Payment Card Industry Data Security Standard (PCI DSS)</h2>
+<p><strong>Applies to:</strong> Any entity that stores, processes, or transmits cardholder data</p>
+<p><strong>Current version:</strong> PCI DSS v4.0.1 (mandatory March 31, 2025)</p>
+<p><strong>Enforcement:</strong> Payment card brands (Visa, Mastercard, etc.) via acquiring banks</p>
+<h3>Key Requirements</h3>
+<ul>
+<li><p>[ ] Complete the appropriate Self-Assessment Questionnaire (SAQ) — likely SAQ A or SAQ A-EP</p></li>
+<li><p>[ ] Install and maintain network security controls (Req. 1)</p></li>
+<li><p>[ ] Apply secure configurations to all system components (Req. 2)</p></li>
+<li><p>[ ] Protect stored account data with strong cryptography (Req. 3)</p></li>
+<li><p>[ ] Encrypt cardholder data over open, public networks (Req. 4)</p></li>
+<li><p>[ ] Protect systems and networks from malicious software (Req. 5)</p></li>
+<li><p>[ ] Develop and maintain secure systems and software (Req. 6)</p></li>
+<li><p>[ ] Restrict access to cardholder data by business need-to-know (Req. 7)</p></li>
+<li><p>[ ] Log and monitor all access to cardholder data (Req. 10)</p></li>
+<li><p>[ ] Regularly test security systems and processes (Req. 11)</p></li>
+<li><p>[ ] Maintain an information security policy (Req. 12)</p></li>
+</ul>
+<h2>6. Recommended Next Steps</h2>
+<ol>
+<li><p>Review all generated compliance documents with qualified legal counsel</p></li>
+<li><p>Complete the checklist items marked above for each applicable regulation</p></li>
+<li><p>Implement technical measures (consent management, data subject request handling)</p></li>
+<li><p>Train relevant staff on data protection obligations</p></li>
+<li><p>Set up regular compliance reviews (recommended: quarterly)</p></li>
+<li><p>Re-run Codepliant after adding or removing services to keep documents current</p></li>
+</ol>
+<hr />
+<p><em>This compliance notes document was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. It is for informational purposes only and does not constitute legal advice.</em></p>

@@ -1,0 +1,185 @@
+<h1>AI Supply Chain Risk Assessment</h1>
+<p><em>Acme Inc — Last updated: 2026-03-18</em></p>
+<hr />
+<h1>AI Supply Chain Risk Assessment</h1>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>Document Version:</strong> 1.0</p>
+<p><strong>Document Owner:</strong> Acme Inc</p>
+<p><strong>Next Review Date:</strong> 2027-03-18</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Organization:</strong> Acme Inc</p>
+<p><strong>Last updated:</strong> 2026-03-18</p>
+<p><strong>Project:</strong> nextjs-saas-example</p>
+<p><strong>Overall Supply Chain Risk:</strong> High</p>
+<hr />
+<p>This document assesses the business continuity risks arising from <strong>Acme Inc's</strong> dependencies on third-party AI service providers. It identifies single points of failure, pricing risks, migration paths, and contingency plans aligned with <strong>NIST AI RMF</strong> (Govern 1.6), <strong>EU AI Act</strong> (Art. 16(f)), and <strong>ISO/IEC 42001</strong> supply chain management requirements.</p>
+<h2>1. Executive Summary</h2>
+<p>Acme Inc currently depends on <strong>1 AI service(s)</strong> from <strong>1 provider(s)</strong> for core product functionality. This creates supply chain dependencies that must be actively managed.</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Metric</p></th><th><p>Value</p></th></tr>
+<tr><td><p>AI Services Detected</p></td><td><p>1</p></td></tr>
+<tr><td><p>Unique Providers</p></td><td><p>1</p></td></tr>
+<tr><td><p>Overall Risk Level</p></td><td><p><strong>High</strong></p></td></tr>
+<tr><td><p>Single-Provider Dependency</p></td><td><p>Yes (CRITICAL)</p></td></tr>
+<tr><td><p>Estimated Monthly AI Spend</p></td><td><p>$100–$5,000</p></td></tr>
+<tr><td><p>Migration Plans Documented</p></td><td><p>See Section 4</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<ac:structured-macro ac:name="info">
+<ac:rich-text-body>
+<p><strong>WARNING:</strong> All AI functionality depends on a single provider (OpenAI). A provider outage, pricing change, or API deprecation would affect 100% of AI features. Diversification is strongly recommended.</p>
+</ac:rich-text-body>
+</ac:structured-macro>
+<h2>2. Provider Risk Profiles</h2>
+<h3>OpenAI</h3>
+<p><strong>Detected as:</strong> openai</p>
+<p><strong>Data sent:</strong> user prompts, conversation history, generated content</p>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Risk Factor</p></th><th><p>Assessment</p></th></tr>
+<tr><td><p>Provider Tier</p></td><td><p>Major</p></td></tr>
+<tr><td><p>Headquarters</p></td><td><p>United States (San Francisco, CA)</p></td></tr>
+<tr><td><p>Lock-In Risk</p></td><td><p>High</p></td></tr>
+<tr><td><p>API Stability Risk</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Pricing Model</p></td><td><p>Per-token usage-based, tiered rate limits</p></td></tr>
+<tr><td><p>Migration Complexity</p></td><td><p>Medium</p></td></tr>
+<tr><td><p>Data Residency</p></td><td><p>US, EU (Azure OpenAI)</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Known Risk Factors:</strong></p>
+<ul>
+<li><p>Model deprecation cycles (GPT-3.5 → GPT-4 migration required)</p></li>
+<li><p>Rate limit changes without advance notice</p></li>
+<li><p>Pricing increases on flagship models</p></li>
+</ul>
+<p><strong>Alternatives:</strong></p>
+<ul>
+<li><p>Anthropic (Claude)</p></li>
+<li><p>Google (Gemini)</p></li>
+<li><p>Mistral AI</p></li>
+<li><p>Cohere</p></li>
+<li><p>Meta (Llama, self-hosted)</p></li>
+</ul>
+<h2>3. Risk Scenarios</h2>
+<h3>Scenario A: Provider Outage (Hours to Days)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Impact Area</p></th><th><p>Details</p></th></tr>
+<tr><td><p>Affected Features</p></td><td><p>All AI-powered functionality</p></td></tr>
+<tr><td><p>User Impact</p></td><td><p>Complete loss of AI functionality</p></td></tr>
+<tr><td><p>Revenue Impact</p></td><td><p>Depends on AI feature criticality to user retention</p></td></tr>
+<tr><td><p>Estimated Recovery</p></td><td><p>Automatic when provider restores service</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li><p>Implement circuit breakers with graceful degradation</p></li>
+<li><p>Cache recent AI responses for read-heavy features</p></li>
+<li><p>Display user-friendly fallback states</p></li>
+<li><p>Monitor provider status pages and set up alerts</p></li>
+</ul>
+<h3>Scenario B: Pricing Increase (30–90 Days Notice)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Impact Area</p></th><th><p>Details</p></th></tr>
+<tr><td><p>Estimated Current Spend</p></td><td><p>$100–$5,000 /month</p></td></tr>
+<tr><td><p>Impact of 2x Price Increase</p></td><td><p>May require feature repricing or margin reduction</p></td></tr>
+<tr><td><p>Impact of 5x Price Increase</p></td><td><p>Likely requires provider migration or feature removal</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li><p>Negotiate enterprise contracts with price caps</p></li>
+<li><p>Maintain abstraction layer to enable provider switching</p></li>
+<li><p>Budget 20% contingency for AI costs</p></li>
+<li><p>Evaluate self-hosted alternatives for high-volume use cases</p></li>
+</ul>
+<h3>Scenario C: API Deprecation (3–12 Months Notice)</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Impact Area</p></th><th><p>Details</p></th></tr>
+<tr><td><p>Engineering Effort</p></td><td><p>2–8 weeks depending on abstraction quality</p></td></tr>
+<tr><td><p>Testing Required</p></td><td><p>Full regression + output quality validation</p></td></tr>
+<tr><td><p>Data Migration</p></td><td><p>Prompt templates, fine-tuning data, evaluation sets</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li><p>Use provider-agnostic abstraction layer (e.g., LiteLLM, LangChain)</p></li>
+<li><p>Maintain model evaluation benchmarks for quality comparison</p></li>
+<li><p>Document all prompt engineering and fine-tuning assets</p></li>
+</ul>
+<h3>Scenario D: Provider Shutdown or Acquisition</h3>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Impact Area</p></th><th><p>Details</p></th></tr>
+<tr><td><p>Notice Period</p></td><td><p>May be as short as 30 days</p></td></tr>
+<tr><td><p>Data Retrieval</p></td><td><p>Must ensure all training data and fine-tuned models are exported</p></td></tr>
+<tr><td><p>Migration Timeline</p></td><td><p>4–12 weeks for full migration</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<p><strong>Mitigation:</strong></p>
+<ul>
+<li><p>Never store unique training data exclusively with a provider</p></li>
+<li><p>Maintain local copies of all fine-tuning datasets</p></li>
+<li><p>Pre-qualify at least one alternative provider per AI capability</p></li>
+</ul>
+<h2>4. Migration Playbook</h2>
+<p>For each AI provider, the following migration strategy should be maintained:</p>
+<h3>Migrating Away from OpenAI</h3>
+<p><strong>Complexity:</strong> Medium</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p><strong>Evaluate alternatives:</strong> Anthropic (Claude), Google (Gemini), Mistral AI</p></li>
+<li><p><strong>Abstract the integration:</strong> Ensure all AI calls go through an abstraction layer</p></li>
+<li><p><strong>Benchmark quality:</strong> Run evaluation suite against alternative providers</p></li>
+<li><p><strong>Migrate prompts:</strong> Adapt prompt templates for new provider's strengths</p></li>
+<li><p><strong>Parallel testing:</strong> Run both providers in shadow mode for 1–2 weeks</p></li>
+<li><p><strong>Gradual rollout:</strong> Shift 10% → 50% → 100% of traffic</p></li>
+<li><p><strong>Monitor quality:</strong> Track output quality metrics post-migration</p></li>
+</ol>
+<p><strong>Estimated Timeline:</strong> 3–6 weeks</p>
+<h2>5. Recommendations</h2>
+<ol>
+<li><p>Implement a provider-agnostic AI abstraction layer to reduce switching costs</p></li>
+<li><p><strong>CRITICAL:</strong> Diversify beyond OpenAI — evaluate at least one alternative for each AI capability</p></li>
+<li><p>Establish AI cost budgets with alerts at 80% and 100% thresholds</p></li>
+<li><p>Maintain a model evaluation benchmark suite for rapid provider comparison</p></li>
+<li><p>Negotiate enterprise agreements with SLA guarantees and price caps</p></li>
+<li><p>Store all training data, fine-tuning datasets, and prompt libraries locally</p></li>
+<li><p>Add circuit breakers and graceful degradation for all AI features</p></li>
+<li><p>Monitor provider changelogs and deprecation notices weekly</p></li>
+<li><p>Conduct annual AI supply chain risk review</p></li>
+</ol>
+<h2>6. Ongoing Monitoring Checklist</h2>
+<ac:structured-macro ac:name="table">
+<ac:rich-text-body>
+<table><tbody>
+<tr><th><p>Check</p></th><th><p>Frequency</p></th><th><p>Owner</p></th></tr>
+<tr><td><p>Review provider status page and uptime</p></td><td><p>Weekly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Check for API deprecation notices</p></td><td><p>Weekly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Review AI cost trends</p></td><td><p>Monthly</p></td><td><p>Finance / Engineering</p></td></tr>
+<tr><td><p>Test failover to alternative provider</p></td><td><p>Quarterly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Update migration playbooks</p></td><td><p>Quarterly</p></td><td><p>Engineering</p></td></tr>
+<tr><td><p>Full supply chain risk reassessment</p></td><td><p>Annually</p></td><td><p>CTO / CISO</p></td></tr>
+<tr><td><p>Benchmark output quality across providers</p></td><td><p>Semi-annually</p></td><td><p>ML / Product</p></td></tr>
+</tbody></table>
+</ac:rich-text-body>
+</ac:structured-macro>
+<hr />
+<p><em>Generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> on 2026-03-18. This is an automated risk assessment based on code analysis. Provider profiles are based on publicly available information and should be verified against current provider terms and conditions. This document should be reviewed by qualified risk management and legal counsel.</em></p>

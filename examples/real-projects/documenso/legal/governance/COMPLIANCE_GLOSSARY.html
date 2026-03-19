@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPLIANCE GLOSSARY — documenso</title>
+  <style>
+    :root {
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --bg: #fff;
+      --bg-alt: #f5f5f7;
+      --accent: #0066cc;
+      --border: #d2d2d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --bg: #000;
+        --bg-alt: #1d1d1f;
+        --accent: #2997ff;
+        --border: #424245;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px; line-height: 1.47059; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 680px; margin: 0 auto; padding: 80px 24px 120px; }
+    .page-header { margin-bottom: 48px; }
+    .page-header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .page-header .meta { font-size: 14px; color: var(--text-secondary); }
+    h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 16px; }
+    h2 { font-size: 28px; line-height: 1.14; font-weight: 700; letter-spacing: -0.01em; margin-top: 56px; margin-bottom: 12px; }
+    h3 { font-size: 21px; line-height: 1.19; font-weight: 600; margin-top: 40px; margin-bottom: 8px; }
+    h4 { font-size: 17px; line-height: 1.47; font-weight: 600; margin-top: 32px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    strong { font-weight: 600; } ul, ol { margin: 8px 0 16px 24px; } li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid var(--border); padding-left: 20px; color: var(--text-secondary); margin: 16px 0; }
+    pre { background: var(--bg-alt); border-radius: 8px; padding: 16px 20px; overflow-x: auto; margin: 16px 0; font-size: 14px; line-height: 1.5; }
+    code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+    :not(pre) > code { background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; }
+    pre code { background: none; padding: 0; border-radius: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 16px 0; }
+    th { text-align: left; font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    ul.checklist { list-style: none; margin-left: 0; } ul.checklist li { padding-left: 4px; }
+    .footer { margin-top: 80px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 600px) { .page { padding: 48px 20px 80px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    @media print {
+      body { font-family: Georgia, "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; }
+      .page { max-width: 100%; padding: 0; } .footer { display: none; } a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>COMPLIANCE GLOSSARY</h1>
+      <p class="meta">documenso &middot; Last updated 2026-03-18 &middot; ~14 min read</p>
+    </header>
+    <h1 id="compliance-glossary">Compliance Glossary</h1>
+<blockquote><strong>Document Version:</strong> 1.0 <strong>Document Owner:</strong> [Your Company Name] <strong>Next Review Date:</strong> 2027-03-16</blockquote>
+<p><strong>Last updated:</strong> 2026-03-16</p>
+<p><strong>Project:</strong> @documenso/root</p>
+<p><strong>Organization:</strong> [Your Company Name]</p>
+<hr>
+<blockquote>This glossary defines compliance and data protection terms used throughout the compliance documentation generated for <strong>@documenso/root</strong>. Terms are sourced from GDPR, CCPA/CPRA, EU AI Act, SOC 2, ISO 27001, PCI DSS, HIPAA, and general data protection standards.</blockquote>
+<p><em>58 terms defined based on 13 detected services.</em></p>
+<hr>
+<h2 id="abbreviations-quick-reference">Abbreviations Quick Reference</h2>
+<table>
+<thead>
+<tr><th style="text-align:left">Abbreviation</th><th style="text-align:left">Full Term</th><th style="text-align:left">Source</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><strong>BCRs</strong></td><td style="text-align:left">Binding Corporate Rules</td><td style="text-align:left">GDPR Art. 47</td></tr>
+<tr><td style="text-align:left"><strong>BAA</strong></td><td style="text-align:left">Business Associate Agreement</td><td style="text-align:left">HIPAA §164.502(e), §164.504(e)</td></tr>
+<tr><td style="text-align:left"><strong>CCPA</strong></td><td style="text-align:left">California Consumer Privacy Act</td><td style="text-align:left">CCPA §1798.100-199</td></tr>
+<tr><td style="text-align:left"><strong>CPRA</strong></td><td style="text-align:left">California Privacy Rights Act</td><td style="text-align:left">CPRA (Proposition 24)</td></tr>
+<tr><td style="text-align:left"><strong>CDE</strong></td><td style="text-align:left">Cardholder Data Environment</td><td style="text-align:left">PCI DSS v4.0</td></tr>
+<tr><td style="text-align:left"><strong>DPA</strong></td><td style="text-align:left">Data Processing Agreement</td><td style="text-align:left">GDPR Art. 28</td></tr>
+<tr><td style="text-align:left"><strong>DPIA</strong></td><td style="text-align:left">Data Protection Impact Assessment</td><td style="text-align:left">GDPR Art. 35</td></tr>
+<tr><td style="text-align:left"><strong>DPO</strong></td><td style="text-align:left">Data Protection Officer</td><td style="text-align:left">GDPR Art. 37-39</td></tr>
+<tr><td style="text-align:left"><strong>DSAR</strong></td><td style="text-align:left">Data Subject Access Request</td><td style="text-align:left">GDPR Art. 15-22</td></tr>
+<tr><td style="text-align:left"><strong>DNS</strong></td><td style="text-align:left">Do Not Sell or Share</td><td style="text-align:left">CCPA §1798.120, CPRA</td></tr>
+<tr><td style="text-align:left"><strong>EU AI Act</strong></td><td style="text-align:left">EU Artificial Intelligence Act</td><td style="text-align:left">EU AI Act (Regulation 2024/1689)</td></tr>
+<tr><td style="text-align:left"><strong>HIPAA</strong></td><td style="text-align:left">Health Insurance Portability and Accountability Act</td><td style="text-align:left">HIPAA (45 CFR Parts 160, 164)</td></tr>
+<tr><td style="text-align:left"><strong>HITL</strong></td><td style="text-align:left">Human-in-the-Loop</td><td style="text-align:left">EU AI Act Art. 14</td></tr>
+<tr><td style="text-align:left"><strong>IRP</strong></td><td style="text-align:left">Incident Response Plan</td><td style="text-align:left">NIST SP 800-61 / GDPR Art. 33</td></tr>
+<tr><td style="text-align:left"><strong>ISMS</strong></td><td style="text-align:left">Information Security Management System</td><td style="text-align:left">ISO/IEC 27001:2022</td></tr>
+<tr><td style="text-align:left"><strong>LI</strong></td><td style="text-align:left">Legitimate Interest</td><td style="text-align:left">GDPR Art. 6(1)(f)</td></tr>
+<tr><td style="text-align:left"><strong>MFA</strong></td><td style="text-align:left">Multi-Factor Authentication</td><td style="text-align:left">NIST SP 800-63B</td></tr>
+<tr><td style="text-align:left"><strong>PCI DSS</strong></td><td style="text-align:left">Payment Card Industry Data Security Standard</td><td style="text-align:left">PCI SSC, PCI DSS v4.0</td></tr>
+<tr><td style="text-align:left"><strong>PD</strong></td><td style="text-align:left">Personal Data</td><td style="text-align:left">GDPR Art. 4(1)</td></tr>
+<tr><td style="text-align:left"><strong>PoLP</strong></td><td style="text-align:left">Principle of Least Privilege</td><td style="text-align:left">NIST SP 800-53 / ISO 27001 A.9.4</td></tr>
+<tr><td style="text-align:left"><strong>PbD</strong></td><td style="text-align:left">Privacy by Design</td><td style="text-align:left">GDPR Art. 25</td></tr>
+<tr><td style="text-align:left"><strong>PIA</strong></td><td style="text-align:left">Privacy Impact Assessment</td><td style="text-align:left">GDPR Art. 35 / ISO 29134</td></tr>
+<tr><td style="text-align:left"><strong>PHI</strong></td><td style="text-align:left">Protected Health Information</td><td style="text-align:left">HIPAA §160.103</td></tr>
+<tr><td style="text-align:left"><strong>ROPA</strong></td><td style="text-align:left">Record of Processing Activities</td><td style="text-align:left">GDPR Art. 30</td></tr>
+<tr><td style="text-align:left"><strong>RTBF</strong></td><td style="text-align:left">Right to Erasure</td><td style="text-align:left">GDPR Art. 17</td></tr>
+<tr><td style="text-align:left"><strong>RTP</strong></td><td style="text-align:left">Risk Treatment Plan</td><td style="text-align:left">ISO/IEC 27001:2022 §6.1.3</td></tr>
+<tr><td style="text-align:left"><strong>RBAC</strong></td><td style="text-align:left">Role-Based Access Control</td><td style="text-align:left">NIST SP 800-162 / ISO 27001 A.9</td></tr>
+<tr><td style="text-align:left"><strong>SCCs</strong></td><td style="text-align:left">Standard Contractual Clauses</td><td style="text-align:left">GDPR Art. 46(2)(c)</td></tr>
+<tr><td style="text-align:left"><strong>SoA</strong></td><td style="text-align:left">Statement of Applicability</td><td style="text-align:left">ISO/IEC 27001:2022 §6.1.3</td></tr>
+<tr><td style="text-align:left"><strong>SA / DPA</strong></td><td style="text-align:left">Supervisory Authority</td><td style="text-align:left">GDPR Art. 51</td></tr>
+<tr><td style="text-align:left"><strong>TSC</strong></td><td style="text-align:left">Trust Services Criteria</td><td style="text-align:left">AICPA TSP Section 100</td></tr>
+<tr><td style="text-align:left"><strong>VRA</strong></td><td style="text-align:left">Vendor Risk Assessment</td><td style="text-align:left">ISO 27001 Annex A.15 / NIST CSF</td></tr>
+<tr><td style="text-align:left"><strong>ZTA</strong></td><td style="text-align:left">Zero Trust Architecture</td><td style="text-align:left">NIST SP 800-207</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="full-glossary">Full Glossary</h2>
+<h3 id="a">A</h3>
+<p><strong>AI Model Card</strong></p>
+<blockquote>A standardized document describing an AI model's intended use, performance metrics, limitations, training data, and ethical considerations. <em>Source: EU AI Act Art. 53 / Mitchell et al. 2019</em></blockquote>
+<p><strong>AI Risk Assessment</strong></p>
+<blockquote>A systematic evaluation of the potential risks and harms of an AI system to health, safety, and fundamental rights, including bias, discrimination, and privacy impacts. <em>Source: EU AI Act Art. 9</em></blockquote>
+<p><strong>Algorithmic Transparency</strong></p>
+<blockquote>The principle that organizations should provide clear information about how automated decision-making systems work, what data they use, and how they reach their conclusions. <em>Source: EU AI Act Art. 13-14</em></blockquote>
+<h3 id="b">B</h3>
+<p><strong>Binding Corporate Rules (BCRs)</strong></p>
+<blockquote>Internal policies adopted by multinational companies to allow intra-group transfers of personal data outside the EU/EEA, approved by a supervisory authority. <em>Source: GDPR Art. 47</em></blockquote>
+<p><strong>Breach Notification</strong></p>
+<blockquote>The obligation to report personal data breaches to the supervisory authority within 72 hours of becoming aware, and to affected data subjects without undue delay when the breach poses a high risk. <em>Source: GDPR Art. 33-34</em></blockquote>
+<p><strong>Business Associate Agreement (BAA)</strong></p>
+<blockquote>A contract between a HIPAA-covered entity and a business associate that establishes the permitted uses and disclosures of protected health information. <em>Source: HIPAA §164.502(e), §164.504(e)</em></blockquote>
+<h3 id="c">C</h3>
+<p><strong>California Consumer Privacy Act (CCPA)</strong></p>
+<blockquote>A California state law granting consumers the right to know what personal information is collected, to delete it, to opt out of its sale, and to non-discrimination for exercising these rights. <em>Source: CCPA §1798.100-199</em></blockquote>
+<p><strong>California Privacy Rights Act (CPRA)</strong></p>
+<blockquote>An amendment to CCPA that strengthens consumer privacy rights, creates the California Privacy Protection Agency (CPPA), and introduces the concept of 'sensitive personal information.' <em>Source: CPRA (Proposition 24)</em></blockquote>
+<p><strong>Cardholder Data Environment (CDE)</strong></p>
+<blockquote>The network segment where payment card data is stored, processed, or transmitted, plus any connected systems that could affect its security. <em>Source: PCI DSS v4.0</em></blockquote>
+<p><strong>Consent</strong></p>
+<blockquote>A freely given, specific, informed, and unambiguous indication of the data subject's wishes by which they agree to the processing of their personal data. <em>Source: GDPR Art. 4(11), Art. 7</em></blockquote>
+<h3 id="d">D</h3>
+<p><strong>Data Breach</strong></p>
+<blockquote>A security incident leading to the accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data. <em>Source: GDPR Art. 4(12)</em></blockquote>
+<p><strong>Data Controller</strong></p>
+<blockquote>The entity that determines the purposes and means of processing personal data. The controller bears primary responsibility for compliance. <em>Source: GDPR Art. 4(7)</em></blockquote>
+<p><strong>Data Minimisation</strong></p>
+<blockquote>The principle that personal data collected must be adequate, relevant, and limited to what is necessary for the purposes of processing. <em>Source: GDPR Art. 5(1)(c)</em></blockquote>
+<p><strong>Data Processing Agreement (DPA)</strong></p>
+<blockquote>A legally binding contract between a data controller and data processor that governs the processing of personal data, including security measures, sub-processing, and data subject rights. <em>Source: GDPR Art. 28</em></blockquote>
+<p><strong>Data Processor</strong></p>
+<blockquote>An entity that processes personal data on behalf of the controller. Processors must act only on the controller's documented instructions. <em>Source: GDPR Art. 4(8)</em></blockquote>
+<p><strong>Data Protection Impact Assessment (DPIA)</strong></p>
+<blockquote>A systematic assessment of the necessity, proportionality, and risks of data processing operations, required before processing likely to result in high risk to individuals. <em>Source: GDPR Art. 35</em></blockquote>
+<p><strong>Data Protection Officer (DPO)</strong></p>
+<blockquote>An independent expert appointed to oversee data protection strategy and compliance. Required for public authorities and organizations conducting large-scale systematic monitoring. <em>Source: GDPR Art. 37-39</em></blockquote>
+<p><strong>Data Retention Policy</strong></p>
+<blockquote>A policy defining how long different categories of data are stored, the criteria for retention periods, and the procedures for secure deletion or anonymisation when retention periods expire. <em>Source: GDPR Art. 5(1)(e), Art. 13(2)(a)</em></blockquote>
+<p><strong>Data Subject Access Request (DSAR)</strong></p>
+<blockquote>A request made by an individual to obtain confirmation of whether their personal data is being processed, access to that data, and supplementary information about the processing. <em>Source: GDPR Art. 15-22</em></blockquote>
+<p><strong>Do Not Sell or Share (DNS)</strong></p>
+<blockquote>A consumer's right under CCPA/CPRA to direct a business not to sell or share their personal information with third parties. <em>Source: CCPA §1798.120, CPRA</em></blockquote>
+<h3 id="e">E</h3>
+<p><strong>Encryption at Rest</strong></p>
+<blockquote>Cryptographic protection applied to data while it is stored (on disk, in databases, backups), preventing unauthorized access even if storage media is compromised. <em>Source: NIST SP 800-111 / GDPR Art. 32</em></blockquote>
+<p><strong>Encryption in Transit</strong></p>
+<blockquote>Cryptographic protection applied to data while it is being transmitted over networks (TLS/HTTPS), preventing interception or tampering. <em>Source: NIST SP 800-52 / GDPR Art. 32</em></blockquote>
+<p><strong>EU Artificial Intelligence Act (EU AI Act)</strong></p>
+<blockquote>The European Union regulation establishing a risk-based framework for AI systems, categorizing them into unacceptable, high, limited, and minimal risk tiers with corresponding obligations. <em>Source: EU AI Act (Regulation 2024/1689)</em></blockquote>
+<h3 id="h">H</h3>
+<p><strong>Health Insurance Portability and Accountability Act (HIPAA)</strong></p>
+<blockquote>A US federal law establishing standards for protecting sensitive patient health information from disclosure without patient consent or knowledge. <em>Source: HIPAA (45 CFR Parts 160, 164)</em></blockquote>
+<p><strong>High-Risk AI System</strong></p>
+<blockquote>An AI system used in areas such as biometrics, critical infrastructure, employment, credit scoring, or law enforcement that must meet strict requirements for risk management, data governance, transparency, and human oversight. <em>Source: EU AI Act Art. 6, Annex III</em></blockquote>
+<p><strong>Human-in-the-Loop (HITL)</strong></p>
+<blockquote>A system design where human oversight is required before, during, or after an AI system's decision is applied, especially for high-risk AI systems. <em>Source: EU AI Act Art. 14</em></blockquote>
+<h3 id="i">I</h3>
+<p><strong>Incident Response Plan (IRP)</strong></p>
+<blockquote>A documented set of procedures for detecting, containing, analyzing, remediating, and reporting security incidents, including data breaches. <em>Source: NIST SP 800-61 / GDPR Art. 33</em></blockquote>
+<p><strong>Information Security Management System (ISMS)</strong></p>
+<blockquote>A systematic framework of policies, procedures, and controls to manage information security risks and protect the confidentiality, integrity, and availability of information assets. <em>Source: ISO/IEC 27001:2022</em></blockquote>
+<h3 id="l">L</h3>
+<p><strong>Lawful Basis</strong></p>
+<blockquote>One of six legal grounds under GDPR that must be established before processing personal data: consent, contract, legal obligation, vital interests, public task, or legitimate interests. <em>Source: GDPR Art. 6</em></blockquote>
+<p><strong>Legitimate Interest (LI)</strong></p>
+<blockquote>A lawful basis for processing where the controller's or a third party's interests are balanced against the data subject's rights and freedoms. <em>Source: GDPR Art. 6(1)(f)</em></blockquote>
+<h3 id="m">M</h3>
+<p><strong>Multi-Factor Authentication (MFA)</strong></p>
+<blockquote>An authentication method requiring two or more independent verification factors: something you know (password), something you have (device), or something you are (biometric). <em>Source: NIST SP 800-63B</em></blockquote>
+<h3 id="p">P</h3>
+<p><strong>Payment Card Industry Data Security Standard (PCI DSS)</strong></p>
+<blockquote>A set of security standards for organizations that handle credit card information, requiring secure network architecture, cardholder data protection, vulnerability management, access control, and monitoring. <em>Source: PCI SSC, PCI DSS v4.0</em></blockquote>
+<p><strong>Personal Data (PD)</strong></p>
+<blockquote>Any information relating to an identified or identifiable natural person ('data subject'), including names, emails, IP addresses, location data, and online identifiers. <em>Source: GDPR Art. 4(1)</em></blockquote>
+<p><strong>Principle of Least Privilege (PoLP)</strong></p>
+<blockquote>The security principle that users and systems should be granted only the minimum level of access necessary to perform their required functions. <em>Source: NIST SP 800-53 / ISO 27001 A.9.4</em></blockquote>
+<p><strong>Privacy by Default</strong></p>
+<blockquote>The requirement that, by default, only personal data necessary for each specific purpose is processed, including limiting collection, processing extent, storage period, and accessibility. <em>Source: GDPR Art. 25(2)</em></blockquote>
+<p><strong>Privacy by Design (PbD)</strong></p>
+<blockquote>The principle that data protection should be integrated into system design and business practices from the outset, rather than added retrospectively. <em>Source: GDPR Art. 25</em></blockquote>
+<p><strong>Privacy Impact Assessment (PIA)</strong></p>
+<blockquote>A broader risk assessment examining how a project or system may affect the privacy of individuals. Often used interchangeably with DPIA but may be conducted earlier in the project lifecycle. <em>Source: GDPR Art. 35 / ISO 29134</em></blockquote>
+<p><strong>Protected Health Information (PHI)</strong></p>
+<blockquote>Any individually identifiable health information held or transmitted by a covered entity or business associate, in any form or medium. <em>Source: HIPAA §160.103</em></blockquote>
+<p><strong>Pseudonymisation</strong></p>
+<blockquote>Processing personal data so it can no longer be attributed to a specific data subject without additional information, provided that additional information is kept separately. <em>Source: GDPR Art. 4(5)</em></blockquote>
+<p><strong>Purpose Limitation</strong></p>
+<blockquote>The principle that personal data must be collected for specified, explicit, and legitimate purposes and not further processed in a manner incompatible with those purposes. <em>Source: GDPR Art. 5(1)(b)</em></blockquote>
+<h3 id="r">R</h3>
+<p><strong>Record of Processing Activities (ROPA)</strong></p>
+<blockquote>A documented register of all processing activities carried out by the controller or processor, including purposes, data categories, recipients, retention periods, and security measures. <em>Source: GDPR Art. 30</em></blockquote>
+<p><strong>Right to Data Portability</strong></p>
+<blockquote>The right of data subjects to receive their personal data in a structured, commonly used, and machine-readable format, and to transmit it to another controller. <em>Source: GDPR Art. 20</em></blockquote>
+<p><strong>Right to Erasure (RTBF)</strong></p>
+<blockquote>The right of data subjects to have their personal data deleted when it is no longer necessary, consent is withdrawn, or processing is unlawful. Also known as the 'right to be forgotten.' <em>Source: GDPR Art. 17</em></blockquote>
+<p><strong>Risk Treatment Plan (RTP)</strong></p>
+<blockquote>A document defining the actions, resources, responsibilities, and timelines for addressing identified information security risks. <em>Source: ISO/IEC 27001:2022 §6.1.3</em></blockquote>
+<p><strong>Role-Based Access Control (RBAC)</strong></p>
+<blockquote>An access control method where permissions are assigned to roles rather than individual users, ensuring users only have access necessary for their job function. <em>Source: NIST SP 800-162 / ISO 27001 A.9</em></blockquote>
+<h3 id="s">S</h3>
+<p><strong>Sale of Personal Information</strong></p>
+<blockquote>Under CCPA/CPRA, selling, renting, releasing, disclosing, or otherwise communicating a consumer's personal information to a third party for monetary or other valuable consideration. <em>Source: CCPA §1798.140(ad)</em></blockquote>
+<p><strong>SOC 2 Type I</strong></p>
+<blockquote>A report on the design and implementation of an organization's controls relevant to security, availability, processing integrity, confidentiality, or privacy at a specific point in time. <em>Source: AICPA TSP Section 100</em></blockquote>
+<p><strong>SOC 2 Type II</strong></p>
+<blockquote>A report on the design, implementation, and operating effectiveness of controls over a specified period of time (typically 6-12 months). <em>Source: AICPA TSP Section 100</em></blockquote>
+<p><strong>Special Category Data</strong></p>
+<blockquote>Sensitive personal data revealing racial/ethnic origin, political opinions, religious beliefs, trade union membership, genetic data, biometric data, health data, or sexual orientation. Processing is prohibited except under specific conditions. <em>Source: GDPR Art. 9</em></blockquote>
+<p><strong>Standard Contractual Clauses (SCCs)</strong></p>
+<blockquote>Pre-approved contractual terms adopted by the European Commission to ensure adequate safeguards for personal data transferred outside the EU/EEA. <em>Source: GDPR Art. 46(2)(c)</em></blockquote>
+<p><strong>Statement of Applicability (SoA)</strong></p>
+<blockquote>A document that identifies which ISO 27001 Annex A controls are applicable to the organization and justifies any exclusions. <em>Source: ISO/IEC 27001:2022 §6.1.3</em></blockquote>
+<p><strong>Storage Limitation</strong></p>
+<blockquote>The principle that personal data must be kept for no longer than necessary for the purposes of processing. <em>Source: GDPR Art. 5(1)(e)</em></blockquote>
+<p><strong>Sub-Processor</strong></p>
+<blockquote>A third-party entity engaged by a data processor to carry out specific processing activities on behalf of the data controller. The processor must obtain authorization before engaging sub-processors. <em>Source: GDPR Art. 28(2)</em></blockquote>
+<p><strong>Supervisory Authority (SA / DPA)</strong></p>
+<blockquote>An independent public authority established by an EU member state to monitor the application of data protection law (e.g., CNIL in France, ICO in the UK). <em>Source: GDPR Art. 51</em></blockquote>
+<h3 id="t">T</h3>
+<p><strong>Tokenisation</strong></p>
+<blockquote>The process of substituting sensitive data (such as credit card numbers) with a non-sensitive equivalent (token) that has no exploitable value. <em>Source: PCI DSS / NIST</em></blockquote>
+<p><strong>Trust Services Criteria (TSC)</strong></p>
+<blockquote>Five categories — Security, Availability, Processing Integrity, Confidentiality, and Privacy — used to evaluate an organization's controls in a SOC 2 audit. <em>Source: AICPA TSP Section 100</em></blockquote>
+<h3 id="v">V</h3>
+<p><strong>Vendor Risk Assessment (VRA)</strong></p>
+<blockquote>A systematic evaluation of the security, privacy, and compliance risks posed by third-party vendors and service providers before and during engagement. <em>Source: ISO 27001 Annex A.15 / NIST CSF</em></blockquote>
+<h3 id="z">Z</h3>
+<p><strong>Zero Trust Architecture (ZTA)</strong></p>
+<blockquote>A security model based on the principle 'never trust, always verify' where no user, device, or network is inherently trusted, and continuous verification is required. <em>Source: NIST SP 800-207</em></blockquote>
+<hr>
+<h2 id="applicable-regulatory-frameworks">Applicable Regulatory Frameworks</h2>
+<p>The following regulatory frameworks may apply to <strong>@documenso/root</strong> based on the detected services and data processing activities:</p>
+<ul>
+<li><strong>GDPR</strong> — General Data Protection Regulation (EU/EEA) — Applies to processing of personal data of EU residents</li>
+<li><strong>CCPA/CPRA</strong> — California Consumer Privacy Act / California Privacy Rights Act — Applies to businesses handling California residents' data</li>
+<li><strong>EU AI Act</strong> — European Union Artificial Intelligence Act — Risk-based framework for AI systems operating in or affecting the EU market</li>
+<li><strong>PCI DSS</strong> — Payment Card Industry Data Security Standard — Required for all entities that store, process, or transmit cardholder data</li>
+<li><strong>SOC 2</strong> — Service Organization Control 2 — Trust-based audit framework for service providers storing customer data in the cloud</li>
+<li><strong>ISO 27001</strong> — International standard for information security management systems (ISMS)</li>
+<li><strong>HIPAA</strong> — Health Insurance Portability and Accountability Act — Required for entities handling protected health information (PHI)</li>
+</ul>
+<hr>
+<h2 id="how-to-use-this-glossary">How to Use This Glossary</h2>
+<ol>
+<li><strong>During document review</strong> — Reference this glossary when reviewing any generated compliance document to ensure consistent understanding of terms</li>
+<li><strong>Onboarding</strong> — Share with new team members joining the compliance or engineering team</li>
+<li><strong>Stakeholder communication</strong> — Use as a reference when explaining compliance obligations to non-technical stakeholders</li>
+<li><strong>Audit preparation</strong> — Provide to auditors alongside your compliance documentation to demonstrate organizational awareness</li>
+</ol>
+<hr>
+<h2 id="maintaining-this-glossary">Maintaining This Glossary</h2>
+<ul>
+<li><strong>Review frequency:</strong> Annually, or whenever new regulations come into effect</li>
+<li><strong>Ownership:</strong> Data Protection Officer / Compliance Team</li>
+<li><strong>Update process:</strong> Re-run Codepliant to regenerate from current codebase; new terms are added automatically when new service categories are detected</li>
+</ul>
+<hr>
+<p><em>This glossary was generated by <a href="https://github.com/joechensmartz/codepliant">Codepliant</a> based on automated code analysis. Definitions are based on official regulatory texts and industry standards. Consult qualified legal counsel for authoritative interpretations.</em></p>
+    <footer class="footer">Generated by Codepliant</footer>
+  </div>
+</body>
+</html>

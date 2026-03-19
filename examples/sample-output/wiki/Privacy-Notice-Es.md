@@ -1,0 +1,56 @@
+> **Document Version:** 1.0  
+> **Document Owner:** Acme Inc  
+> **Next Review Date:** 2027-03-18
+
+
+**Última actualización:** 2026-03-18
+
+> Este es un aviso de privacidad simplificado. Para la política de privacidad completa, consulte la [Privacy Policy](./PRIVACY_POLICY.md) (en inglés).
+
+---
+
+## Qué datos recopilamos
+
+- Correo electrónico e información de cuenta al registrarse o iniciar sesión
+- Datos de pago para compras (procesados de forma segura)
+- Datos de uso (páginas visitadas, funciones utilizadas)
+- Contenido proporcionado a funciones de IA (textos, archivos)
+- Información técnica como tipo de dispositivo e informes de errores
+- Correo electrónico para notificaciones de cuenta
+
+## Por qué recopilamos datos
+
+- Proporcionar y operar nuestro servicio
+- Procesar pagos
+- Comprender patrones de uso y mejorar el producto
+- Proporcionar funciones de IA que usted utiliza
+- Detectar y resolver problemas técnicos
+
+## Con quién compartimos sus datos
+
+- Proveedores de servicios: @sentry/node, @supabase/supabase-js, openai, posthog, prisma +3
+- Autoridades judiciales, solo cuando la ley lo requiera
+
+**Nunca** vendemos sus datos personales.
+
+## Sus derechos
+
+- Solicitar acceso a sus datos
+- Descargar una copia de sus datos
+- Solicitar la eliminación de sus datos
+- Oponerse al tratamiento no esencial
+- Rectificar sus datos personales
+
+## Contacto
+
+**legal@acme.com**
+
+## Más información
+
+- [Privacy Policy](./PRIVACY_POLICY.md) — Política de privacidad completa (en inglés)
+- [Terms of Service](./TERMS_OF_SERVICE.md)
+- [Security Policy](./SECURITY.md)
+
+---
+
+> **Aviso:** Este aviso de privacidad fue generado automáticamente por Codepliant a partir del análisis del código fuente. Debe ser revisado por un asesor legal cualificado.
