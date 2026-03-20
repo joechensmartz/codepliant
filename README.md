@@ -34,7 +34,7 @@ ls legal/
 
 **That's it.** No signup. No API key. No config file. Runs locally in under 1 second. Your code never leaves your machine.
 
-Want to customize? See [Configuration](#configuration). Want HTML/PDF? Run `codepliant go --format html`.
+Want to customize? See [Configuration](#configuration). Need HTML, PDF, or DOCX? Use our [cloud service](https://www.codepliant.site/pricing).
 
 ---
 
@@ -83,7 +83,7 @@ legal/
 └── guides/      Quick Start Guide, Automation Guide
 ```
 
-**123+ documents total.** Each one is personalized to your detected services, data fields, and infrastructure.
+**138+ documents total.** Each one is personalized to your detected services, data fields, and infrastructure.
 
 [Browse example output from cal.com (23 services detected) →](./examples/real-projects/cal-com/legal/)
 
@@ -137,7 +137,7 @@ legal/
 | "Do you collect email addresses?" — *I think so?* | Reads `email: String @unique` from your Prisma schema |
 | "Do you use AI?" — *Yes but what do I disclose?* | Detects OpenAI + Anthropic, generates Art. 50 disclosure |
 | "List your sub-processors" — *Uhh...* | Finds Stripe, Sentry, Resend — generates the full list |
-| 30 minutes of forms → generic template | 30 seconds → 123+ documents tailored to your code |
+| 30 minutes of forms → generic template | 30 seconds → 138+ documents tailored to your code |
 
 ---
 
@@ -162,9 +162,8 @@ Each project includes the full generated `legal/` directory — [browse them on 
 ## All commands
 
 ```bash
-npx codepliant go                  # Generate all compliance documents
-npx codepliant go --format html    # HTML compliance page for your website
-npx codepliant go --format pdf     # PDF output
+npx codepliant go                  # Generate Markdown compliance documents
+npx codepliant go --format json    # JSON scan output
 npx codepliant scan                # Just scan, no files generated
 npx codepliant init                # Interactive setup (.codepliantrc.json)
 npx codepliant check               # Check if docs are up to date
@@ -193,7 +192,7 @@ Create `.codepliantrc.json` in your project root:
   with:
     fail-on-missing: true    # Fail if required docs are missing
     comment-on-pr: true      # Post compliance summary on PRs
-    format: markdown          # markdown, html, pdf, json
+    format: markdown          # markdown or json (free CLI)
 ```
 
 Outputs `services-count`, `documents-count`, and `compliance-score` for use in subsequent steps.
@@ -206,7 +205,9 @@ Outputs `services-count`, `documents-count`, and `compliance-score` for use in s
 
 ### Output formats
 
-Markdown (default), HTML, PDF, JSON, DOCX, Notion, Confluence, GitHub Pages, cookie consent banner, embeddable widget — [see all formats →](./examples/sample-output/)
+**Free CLI:** Markdown (default), JSON
+
+**Cloud service** ([codepliant.site/pricing](https://www.codepliant.site/pricing)): HTML, PDF, DOCX, Notion, Confluence — all 4 formats per document, organized in per-document folders. [See example output →](./examples/sample-output/)
 
 ---
 
@@ -228,7 +229,7 @@ The output is written to `assets/demo.gif`.
 
 - [Example Output](./examples/sample-output/) — all output formats
 - [Real Project Scans](./examples/real-projects/) — 10 open-source projects with full generated docs
-- [Document Type Reference](./docs/document-types.md) — why each of the 123+ documents exists
+- [Document Type Reference](./docs/document-types.md) — why each of the 138+ documents exists
 - [Contributing](./CONTRIBUTING.md)
 - [Changelog](./CHANGELOG.md)
 
